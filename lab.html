@@ -66,6 +66,14 @@ details.tbl summary span{font-weight:400;color:var(--ink-3);margin-left:auto}
 .x{border:0;background:none;color:var(--ink-3);cursor:pointer;padding:4px 10px;font-size:14px}
 .x:hover{color:var(--margin)}
 .muted{padding:8px 12px;color:var(--ink-3);font-size:12.5px}
+.item.nv{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.item.nv span{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+.item.nv.loaded span{color:var(--blue)}
+.nv-foot{padding:6px 12px 8px;font-size:11.5px;color:var(--ink-3);border-top:1px solid var(--rule)}
+.recipe-note .nvp{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.recipe-note .nvp button{font:500 12px var(--f-body);border:1px solid var(--rule);background:var(--sheet);color:var(--ink);border-radius:999px;padding:3px 10px;cursor:pointer}
+.recipe-note .nvp button:hover{border-color:var(--blue);color:var(--blue)}
+.recipe-note .miss{color:var(--ink-2);font-size:12px}
 main{display:grid;gap:14px;min-width:0;align-content:start}
 main > *,.layout > *{min-width:0}
 .tabs{display:flex;gap:4px}
@@ -154,6 +162,7 @@ tbody tr:hover td{background-color:color-mix(in srgb,var(--blue-soft) 55%,var(--
   <aside>
     <div class="box"><h2>Recipes <small>your waiver ideas</small></h2><div class="list" id="recipes"><div class="muted">Loading…</div></div></div>
     <div class="box"><h2>Saved <small>this browser</small></h2><div class="list" id="saved"></div></div>
+    <div class="box"><h2>nflverse <small>live · click to open</small></h2><div class="list" id="nv"><div class="muted">Loading…</div></div><div class="nv-foot" id="nv-foot"></div></div>
     <div class="box"><h2>Tables <small>click a column to insert</small></h2><div id="tables"><div class="muted">Loading…</div></div></div>
   </aside>
 
@@ -197,7 +206,8 @@ const store={get(k,d){try{const v=localStorage.getItem('nfls-'+k);return v==null
 const setStatus=(t,cls)=>{$('#status').textContent=t;$('#dot').className='dot '+(cls||'')};
 
 const TABLES={avail:'Every offensive player and defense with their status in your selected league: fa / mine / taken',players:'One row per offensive player per game',teams:'One row per team per game, offense + defense',schedule:'One row per game, with Vegas lines',games_long:'Schedule with one row per team (team / opp / implied)',meta:'Season, last completed week, next week'};
-let conn, SCHEMA={}, RECIPES=[], META, NAMES=new Map(), ROST=null, LG=null;
+let conn, DB, READY='', SCHEMA={}, RECIPES=[], META, NAMES=new Map(), ROST=null, LG=null;
+const CORE=new Set(Object.keys(TABLES));
 /* league availability: fill the availability table, then re-badge the current results */
 async function applyLeague(lg){
   LG=lg;ROST=null;if(!conn)return;
@@ -217,6 +227,93 @@ function playerCol(){if(!ROST)return null;const {cols,rows,num}=RES;
     if(/^player_id$/i.test(c))return {c,key:v=>v}}
   return null}
 
+/* ---------- nflverse datasets: parquet copies on this site, loaded on demand ---------- */
+let NV={datasets:{},unavailable:{}},LASTNV=null;const NVTABLE={};const NVLOADING=new Map();
+const fmtN=n=>n>=1000?(n/1000).toFixed(n>=10000?0:1)+'k':String(n);
+async function initNV(){
+  try{const r=await fetch('data/lab/index.json',{cache:'no-cache'});if(r.ok)NV=await r.json()}catch(e){}
+  for(const [id,d] of Object.entries(NV.datasets||{}))NVTABLE[d.table]=id;
+  drawNV();
+}
+function drawNV(){
+  const ds=Object.entries(NV.datasets||{});
+  if(!ds.length){$('#nv').innerHTML='<div class="muted">Shows up after the next data refresh.</div>';$('#nv-foot').textContent='';return}
+  $('#nv').innerHTML=ds.map(([id,d])=>`<button class="item nv${SCHEMA[d.table]?' loaded':''}" data-nv="${id}" title="${esc(d.fn+' → table '+d.table+' · '+d.scope)}">${esc(d.name)}<span>${SCHEMA[d.table]?'✓ ':''}${fmtN(d.rows)}</span></button>`).join('');
+  const u=NV.updated?new Date(NV.updated):null;
+  $('#nv-foot').textContent=u?`Refreshed ${u.toLocaleString(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})} · updates on its own`:'';
+  $('#nv').onclick=e=>{const b=e.target.closest('[data-nv]');if(b)openDataset(b.dataset.nv)};
+}
+async function loadDataset(id){
+  const d=NV.datasets[id];if(!d)throw new Error(`No copy of ${id} on the site yet`);
+  if(SCHEMA[d.table])return;
+  if(NVLOADING.has(id))return NVLOADING.get(id);
+  const job=(async()=>{
+    setStatus(`Loading ${d.name} (${(d.bytes/1e6).toFixed(1)} MB)…`);
+    const r=await fetch('data/lab/'+id+'.csv.gz',{cache:'no-cache'});if(!r.ok)throw new Error(`${d.name}: ${r.status}`);
+    const buf=new Uint8Array(await r.arrayBuffer());
+    // gzipped CSV; unzip here unless the server already did
+    const text=buf[0]===0x1f&&buf[1]===0x8b?await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text():new TextDecoder().decode(buf);
+    await DB.registerFileText(id+'.csv',text);
+    await conn.query(`CREATE OR REPLACE TABLE ${d.table} AS SELECT * FROM read_csv('${id}.csv', header=true, sample_size=-1)`);
+    await DB.dropFile(id+'.csv').catch(()=>{});
+    SCHEMA[d.table]=(await conn.query(`DESCRIBE ${d.table}`)).toArray().map(x=>({name:x.column_name,type:String(x.column_type)}));
+    TABLES[d.table]=`${d.name} (${d.fn}): ${d.scope}`;LASTNV=d.table;
+    drawTables();drawNV();drawPivot();setStatus(READY,'ok');
+  })();
+  NVLOADING.set(id,job);
+  try{await job}catch(e){setStatus('Could not load '+d.name+': '+e.message,'err');throw e}finally{NVLOADING.delete(id)}
+}
+/* any query that names a dataset table loads it first, so recipes, saved queries and Ask can use them */
+async function ensureTablesFor(sql){
+  const need=Object.keys(NVTABLE).filter(t=>!SCHEMA[t]&&new RegExp('\\b'+t+'\\b','i').test(sql));
+  for(const t of need)await loadDataset(NVTABLE[t]);
+}
+const NAMEC=['player_display_name','full_name','player_name','pfr_player_name','display_name','player','merge_name','name','official_name','team_name'];
+const TEAMC=['team','recent_team','posteam','club_code','team_abbr','tm'];
+function pickedSQL(id,fields){
+  const d=NV.datasets[id];const names=SCHEMA[d.table].map(c=>c.name);const has=new Set(names);
+  const want=[...new Set(fields)];const got=want.filter(f=>has.has(f));const miss=want.filter(f=>!has.has(f));
+  const ctx=[];const first=l=>l.find(c=>has.has(c));
+  for(const c of [first(NAMEC),has.has('position')?'position':null,first(TEAMC),has.has('season')&&!has.has('week')?'season':null,has.has('week')?'week':null,has.has('play_id')?'game_id':null,has.has('play_id')?'play_id':null])
+    if(c&&!got.includes(c)&&!ctx.includes(c))ctx.push(c);
+  const sel=got.length?[...ctx,...got]:['*'];
+  const num=got.find(f=>isNum((SCHEMA[d.table].find(c=>c.name===f)||{}).type||''));
+  const ord=[has.has('week')?'week DESC':null,num?qi(num)+' DESC NULLS LAST':null].filter(Boolean);
+  const sql=`-- ${d.name}: your Guide picks (${d.scope})\nSELECT ${sel.map(c=>c==='*'?c:qi(c)).join(',\n       ')}\nFROM ${d.table}${ord.length?`\nORDER BY ${ord.join(', ')}`:''}\nLIMIT 500;`;
+  return {sql,got,miss};
+}
+let PICKS=null;
+async function openDataset(id,fields){
+  const d=NV.datasets[id];
+  if(!d){$('#note').hidden=false;$('#note').innerHTML=`<div><b>${esc(id)}</b><br>${esc((NV.unavailable||{})[id]||"This dataset isn't on the site yet. It shows up after the next data refresh.")}</div>`;showTab('sql');return}
+  try{await loadDataset(id)}catch(e){return}
+  let sql,note;
+  if(fields&&fields.length){
+    const r=pickedSQL(id,fields);sql=r.sql;
+    const others=PICKS?Object.keys(PICKS).filter(k=>k!==id):[];
+    note=`<div><b>${esc(d.name)} · ${r.got.length} pick${r.got.length===1?'':'s'}</b><br>${esc(d.scope)}. Table <code>${esc(d.table)}</code>. Edit the query, or build a pivot on it.${r.miss.length?`<div class="miss">Not in the data right now: ${r.miss.map(esc).join(', ')}</div>`:''}${others.length?`<div class="nvp">${others.map(k=>`<button data-nvp="${esc(k)}">${esc((NV.datasets[k]||{name:k}).name)} (${PICKS[k].length})</button>`).join('')}</div>`:''}</div>`;
+  }else{
+    sql=`-- ${d.name} (${d.fn}): ${d.scope}\nSELECT *\nFROM ${d.table}\nLIMIT 200;`;
+    note=`<div><b>${esc(d.name)}</b><br>${esc(d.scope)}, ${d.rows.toLocaleString()} rows × ${d.cols} columns. Table <code>${esc(d.table)}</code>. Its columns are under Tables, and it's in the pivot builder now.</div>`;
+  }
+  $('#sql').value=sql;$('#note').hidden=false;$('#note').innerHTML=note;$('#save-name').value='';markActive('');showTab('sql');
+  $('#note').onclick=e=>{const b=e.target.closest('[data-nvp]');if(b)openDataset(b.dataset.nvp,PICKS[b.dataset.nvp])};
+  await run(d.name);
+}
+/* lab.html#ds=pfr_rush opens a dataset; lab.html#picks=… comes from the Guide's "Open in Lab" */
+async function openFromHash(){
+  const h=new URLSearchParams(location.hash.slice(1));
+  if(h.has('picks')){
+    try{PICKS=JSON.parse(h.get('picks'))}catch(e){PICKS=null}
+    if(!PICKS||!Object.keys(PICKS).length)return false;
+    const order=Object.keys(PICKS).sort((a,b)=>(!!NV.datasets[b]-!!NV.datasets[a])||PICKS[b].length-PICKS[a].length);
+    PICKS=Object.fromEntries(order.map(k=>[k,PICKS[k]]));
+    await openDataset(order[0],PICKS[order[0]]);return true;
+  }
+  if(h.has('ds')){PICKS=null;await openDataset(h.get('ds'));return true}
+  return false;
+}
+
 /* ---------- boot ---------- */
 async function boot(){
   try{
@@ -225,7 +322,7 @@ async function boot(){
     const wurl=URL.createObjectURL(new Blob([`importScripts("${bundle.mainWorker}");`],{type:'text/javascript'}));
     const db=new duckdb.AsyncDuckDB(new duckdb.VoidLogger(),new Worker(wurl));
     await db.instantiate(bundle.mainModule,bundle.pthreadWorker);URL.revokeObjectURL(wurl);
-    conn=await db.connect();
+    conn=await db.connect();DB=db;
     setStatus('Loading season data…');
     const get=n=>fetch('data/site/'+n,{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(n+' '+r.status);return r.json()});
     const [p,t,s,m,initSql,recTxt]=await Promise.all([get('players.json'),get('teams.json'),get('schedule.json'),get('meta.json'),
@@ -253,10 +350,13 @@ async function boot(){
     for(const tname of Object.keys(TABLES)){const r=await conn.query(`DESCRIBE ${tname}`);SCHEMA[tname]=r.toArray().map(x=>({name:x.column_name,type:String(x.column_type)}))}
     RECIPES=parseRecipes(recTxt);
     $('#upd').textContent=`${m.season} · thru Wk ${m.last_completed_week}`;
-    setStatus(`Ready. ${p.rows.toLocaleString()} player-games, ${t.rows} team-games, ${s.rows} games loaded. Week ${m.next_week} is next.`,'ok');
+    READY=`Ready. ${p.rows.toLocaleString()} player-games, ${t.rows} team-games, ${s.rows} games loaded. Week ${m.next_week} is next.`;setStatus(READY,'ok');
+    if(!TABLES[pv.table])pv.table='players';
     $('#run').disabled=false;hookLeague();initAsk();
     drawTables();drawRecipes();drawSaved();drawPivot();
-    const first=store.get('lastRecipe','dst_pressure');const r=RECIPES.find(x=>x.id===first)||RECIPES[0];if(r)loadRecipe(r,false);
+    await initNV();
+    if(!(await openFromHash())){const first=store.get('lastRecipe','dst_pressure');const r=RECIPES.find(x=>x.id===first)||RECIPES[0];if(r)loadRecipe(r,false)}
+    addEventListener('hashchange',()=>openFromHash());
   }catch(e){console.error(e);setStatus('Could not start: '+e.message,'err')}
 }
 function parseRecipes(txt){
@@ -268,7 +368,7 @@ function parseRecipes(txt){
 /* ---------- sidebar ---------- */
 const isNum=t=>/INT|DOUBLE|FLOAT|DECIMAL|REAL|BIGINT/i.test(t);
 function drawTables(){
-  $('#tables').innerHTML=Object.entries(TABLES).map(([t,d])=>`<details class="tbl" ${t==='players'?'open':''}><summary title="${esc(d)}">${t}<span>${SCHEMA[t].length}</span></summary>
+  $('#tables').innerHTML=Object.entries(TABLES).map(([t,d])=>`<details class="tbl" ${t==='players'||t===LASTNV?'open':''}><summary title="${esc(d)}">${t}<span>${SCHEMA[t].length}</span></summary>
     <div class="cols">${SCHEMA[t].map(c=>`<button class="col ${isNum(c.type)?'n':''}" data-ins="${esc(c.name)}" title="${esc(c.type)}">${esc(c.name)}</button>`).join('')}</div></details>`).join('');
   $('#tables').onclick=e=>{const b=e.target.closest('[data-ins]');if(!b)return;showTab('sql');insertAtCursor($('#sql'),b.dataset.ins)};
 }
@@ -337,7 +437,7 @@ function parseAnswer(text){
 const READONLY=sql=>/^\s*(with|select)\b/i.test(sql)&&!/\b(create|insert|update|delete|attach|copy|pragma|install|load|drop|alter|detach|export|import)\b/i.test(sql);
 const askCode=()=>{try{return localStorage.getItem('nfls-askcode')||''}catch(e){return ''}};
 let lastAsk=null;
-function schemaText(){return Object.entries(SCHEMA).map(([t,cols])=>`${t} (${TABLES[t]||''}): ${cols.map(c=>c.name+' '+c.type.replace('VARCHAR','TEXT')).join(', ')}`).join('\n')}
+function schemaText(){return Object.entries(SCHEMA).filter(([t])=>CORE.has(t)||NVTABLE[t]).map(([t,cols])=>`${t} (${TABLES[t]||''}): ${cols.map(c=>c.name+' '+c.type.replace('VARCHAR','TEXT')).join(', ')}`).join('\n')}
 function askContext(){return `Season ${META.season}. Last completed week ${META.last_completed_week}; next week ${META.next_week}. League selected: ${LG?LG.name+' ('+LG.teams+' teams, PPR)':'none (avail.status is NULL, so ignore availability)'}.`}
 function initAsk(){
   $('#ask-ex').innerHTML='<span class="kbd" style="align-self:center">Try:</span>'+EXAMPLES.map(e=>`<button type="button">${esc(e)}</button>`).join('');
@@ -436,6 +536,7 @@ async function run(title){
   if(!conn)return;const sql=$('#sql').value.trim();if(!sql)return;lastTitle=title||'Query';
   $('#run').disabled=true;const t0=performance.now();
   try{
+    await ensureTablesFor(sql);
     const r=await conn.query(sql);
     const fields=r.schema.fields;const cols=fields.map(f=>f.name);
     const rows=r.toArray().map(row=>{const o=row.toJSON();for(const k in o){let v=toJS(o[k]);if(v instanceof Date)v=v.toISOString().slice(0,10);else if(v!=null&&typeof v==='object')v=String(v);o[k]=v}return o});

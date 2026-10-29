@@ -35,11 +35,14 @@ jobs:
       - name: Pull nflverse data
         run: python scripts/update_data.py
 
+      - name: Build Lab datasets + Guide previews
+        run: python scripts/build_lab_data.py
+
       - name: Commit site data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
-          git add data/site
+          git add data/site data/lab
           if git diff --cached --quiet; then
             echo "No changes to site data"
           else
