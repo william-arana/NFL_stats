@@ -89,6 +89,11 @@ def nfl_com() -> list[dict]:
         title = clean(h.group(1), 200) if h else (chunks[0] if chunks else "")
         title = re.sub(r"^(NEWS|VIDEO|ANALYSIS|FANTASY)[.:\s]+", "", title).strip()
         summary = next((c for c in chunks if c != title and len(c) > 40), "")
+        # NFL.com sometimes gives "Headline. Teaser…" as one string: split at the first sentence break
+        # after a headline-length stretch (skips initials like "T.J." and suffixes like "Jr.")
+        m2 = re.search(r"^(.{30,160}?[^A-Z.\s](?<!\bJr)(?<!\bSr)(?<!\bSt)(?<!\bvs)(?<!\bNo))\.\s+(?=[A-Z])(.{25,})$", title)
+        if m2:
+            title, summary = m2.group(1), summary or m2.group(2)
         if len(title) < 20 or link in seen:
             continue
         seen.add(link)
