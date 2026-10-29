@@ -102,6 +102,13 @@
   },true);
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
 
+  /* phones: narrow the frozen name column while the table is scrolled sideways (see site.css) */
+  const phone=window.matchMedia('(max-width:640px)');let lockUntil=0;
+  document.addEventListener('scroll',e=>{const el=e.target;if(!phone.matches||!el||!el.classList||!el.classList.contains('tablewrap')||!el.querySelector('td.stick'))return;
+    if(Date.now()<lockUntil)return;const x=el.scrollLeft,narrow=el.classList.contains('narrow');
+    if(!narrow&&x>24){el.classList.add('narrow');lockUntil=Date.now()+300}
+    else if(narrow&&x<=1){el.classList.remove('narrow');lockUntil=Date.now()+300}
+  },true);
   window.NFLS={leagueUrl,badge,plink,setTheme,loadLeagues,getLeague,rosterStatus,onLeague(cb){listeners.push(cb);if(leagueCfg)cb(getLeague())}};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
 })();

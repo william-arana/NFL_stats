@@ -72,12 +72,14 @@ a.av{text-decoration:none}a.av:hover{text-decoration:underline}
 .pmenu small{display:block;font-size:11px;color:var(--ink-3)}
 .navtools select optgroup{font-weight:600}
 
-/* phones: keep the frozen name column narrow so the stats get the room */
+/* phones: the frozen name column starts full width; once you swipe toward the stats it shrinks to
+   ~a third of the screen (front of the name stays visible) and opens back up at the left edge.
+   site.js toggles .narrow on the scrolling .tablewrap. */
 @media (max-width:640px){
-  .tablewrap th.stick,.tablewrap td.stick{white-space:normal;width:34vw;min-width:34vw;max-width:34vw;font-size:12.5px;line-height:1.25;padding-left:8px;padding-right:6px;word-break:break-word}
-  .tablewrap td.stick .pname{font-size:12.5px;text-align:left}
-  .tablewrap td.stick .pos,.tablewrap td.stick .av,.tablewrap td.stick .inj{font-size:9.5px}
-  .tablewrap td.stick .av{margin-left:3px}
-  .tablewrap td.stick .plink{width:18px;height:18px;margin-left:2px}
   .tablewrap .rank{width:22px;padding-left:4px;padding-right:2px}
+  .tablewrap.narrow th.stick,.tablewrap.narrow td.stick{width:34vw;min-width:34vw;max-width:34vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;box-shadow:6px 0 8px -6px rgba(11,21,40,.35)}
+  .tablewrap.narrow td.stick{padding-right:8px}
+  .tablewrap.narrow td.stick > :not(.pname){display:none}
+  .tablewrap.narrow td.stick .pname{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tablewrap.narrow tr.log td.stick > *{display:inline}
 }
