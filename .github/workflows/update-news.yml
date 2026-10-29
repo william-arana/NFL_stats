@@ -1,0 +1,36 @@
+name: Update news
+
+# Home page sidebar: hourly from ~6 AM to 11 PM Pacific (13:00–06:00 UTC), plus manual runs.
+on:
+  schedule:
+    - cron: "23 13-23 * * *"
+    - cron: "23 0-6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python scripts/update_news.py
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add data/site/news.json
+          if git diff --cached --quiet; then echo "No news changes"; else
+            git commit -m "Update news ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git pull --rebase && git push
+          fi
