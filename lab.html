@@ -278,6 +278,38 @@ const pv=store.get('pivot',{table:'players',groups:['player_display_name','posit
 /* ---------- Ask (Claude via the Cloudflare Worker) ---------- */
 const ASK_URL='https://nfl-stats-ask.znktc4grbk.workers.dev/';
 const EXAMPLES=['Available offensive players on the Raiders most likely to do well against their matchup this week','Free agent RBs whose snap share went up the last 3 weeks','Which defenses allow the most PPR points to tight ends?','My players with a tough matchup this week','QBs sacked the most per game and their next opponent'];
+const RULES=`You write one DuckDB SQL query for a fantasy football analysis page.
+Answer in exactly this format and nothing else:
+<sql>
+the query
+</sql>
+<explanation>one or two plain sentences on what the query does and any assumption you made</explanation>
+Rules:
+- Read-only: a single SELECT (CTEs allowed). Never CREATE, INSERT, UPDATE, DELETE, ATTACH, COPY, PRAGMA, INSTALL, LOAD, DROP or ALTER.
+- Use only the tables and columns in the schema. Do not invent columns.
+- "Available", "free agent", "on waivers" = avail.status = 'fa'. "My team"/"my players" = avail.status = 'mine'. avail has one row per player (player_id, player_display_name, position, team) and per defense (player_id 'DEF:XX', position 'DEF').
+- "This week", "next game", "matchup" = games_long WHERE week = (SELECT next_week FROM meta). games_long has one row per team: team, opp, is_home, implied (team's Vegas implied points), opp_implied, spread_line, total_line.
+- Matchup strength for a player = PPR points per game the opponent defense allows to that position: from players, group by opponent_team and position, sum(fantasy_points_ppr) / count(DISTINCT week). Turn it into a z-score with window functions (PARTITION BY position) when ranking.
+- Recent form = last 3 weeks: week > (SELECT last_completed_week FROM meta) - 3.
+- players has one row per player per game. Aggregate per player with avg()/sum() and use arg_max(team, week) for a player's current team.
+- Default scoring is PPR (fantasy_points_ppr). xfp = expected PPR points from usage; xfp_diff = actual minus expected.
+- offense_pct, target_share and air_yards_share are fractions (0.62 = 62%); multiply by 100 when showing percents.
+- teams has one row per team per game (offense plus what its defense allowed: points_against, yards_allowed, def_sacks, def_pressures, pressures_allowed, dst_pts, ...).
+- Team codes are NFL abbreviations: LV Raiders, KC Chiefs, LA Rams, LAC Chargers, SF 49ers, NE Patriots, NO Saints, NYJ Jets, NYG Giants, JAX Jaguars, WAS Commanders, TB Buccaneers, GB Packers, ARI Cardinals.
+- "Offensive players" = positions QB, RB, WR, TE.
+- Round decimals to 1–2 places, use readable snake_case column names, put the player or team name first, ORDER BY the most useful column, LIMIT 50 unless asked otherwise.`;
+/* read Claude's answer: <sql> tags first, then a sql code fence, then JSON, then bare SQL */
+function parseAnswer(text){
+  let sql=null,exp='';const t=String(text||'');
+  let m=t.match(/<sql>([\s\S]*?)<\/sql>/i);if(m)sql=m[1];
+  if(!sql){m=t.match(/"sql"\s*:\s*"([\s\S]*?)"\s*,\s*"explanation"/);if(m)sql=m[1].replace(/\\n/g,'\n').replace(/\\"/g,'"')}
+  if(!sql){m=t.match(/```(?:sql)?[ \t]*\n([\s\S]*?)```/i);if(m&&/^\s*(with|select)\b/i.test(m[1]))sql=m[1]}
+  if(!sql){m=t.match(/\b(WITH|SELECT)\b[\s\S]*/i);if(m)sql=m[0]}
+  const e=t.match(/<explanation>([\s\S]*?)<\/explanation>/i)||t.match(/"explanation"\s*:\s*"([\s\S]*?)"/);if(e)exp=e[1].trim();
+  if(sql){sql=sql.trim().replace(/;\s*$/,'');}
+  return {sql,exp};
+}
+const READONLY=sql=>/^\s*(with|select)\b/i.test(sql)&&!/\b(create|insert|update|delete|attach|copy|pragma|install|load|drop|alter|detach|export|import)\b/i.test(sql);
 const askCode=()=>{try{return localStorage.getItem('nfls-askcode')||''}catch(e){return ''}};
 let lastAsk=null;
 function schemaText(){return Object.entries(SCHEMA).map(([t,cols])=>`${t} (${TABLES[t]||''}): ${cols.map(c=>c.name+' '+c.type.replace('VARCHAR','TEXT')).join(', ')}`).join('\n')}
@@ -297,10 +329,15 @@ async function ask(q,fix){
   $('#ask-go').disabled=true;setAskMeta(`<span><span class="spin"></span>${fix?'Asking Claude to fix the query…':'Writing a query…'}</span>`);
   const question=fix?`${q}\n\nYour previous query failed.\nQuery:\n${fix.sql}\nError: ${fix.error}\nReturn a corrected query.`:q;
   try{
-    const r=await fetch(ASK_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Passcode':askCode()},body:JSON.stringify({question,schema:schemaText(),context:askContext()})});
+    const r=await fetch(ASK_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Passcode':askCode()},body:JSON.stringify({question,system:`${RULES}\n\nSCHEMA (table (what it is): columns with types)\n${schemaText()}\n\nCONTEXT\n${askContext()}`})});
     const j=await r.json().catch(()=>({error:'Bad response from the Worker ('+r.status+')'}));
     if(r.status===401){try{localStorage.removeItem('nfls-askcode')}catch(e){}$('#ask-pass').hidden=false;throw new Error('Wrong passcode. Re-enter it.')}
-    if(!r.ok||!j.sql)throw new Error(j.error||('Worker error '+r.status));
+    if(!r.ok)throw new Error(j.error||('Worker error '+r.status));
+    if(j.text==null)throw new Error(j.error||'The Cloudflare Worker is still the old version. Paste the new worker/ask-worker.js into Cloudflare and Deploy.');
+    const a=parseAnswer(j.text);
+    if(!a.sql)throw new Error("Claude didn't return a query. Its reply started: "+j.text.slice(0,160));
+    if(!READONLY(a.sql))throw new Error('Claude returned something other than a read-only query, so it was blocked. Try rewording.');
+    j.sql=a.sql;j.explanation=a.exp;
     lastAsk={q,sql:j.sql};
     $('#sql').value=j.sql;$('#note').hidden=false;$('#note').innerHTML=`<div><b>Ask: ${esc(q)}</b><br>${esc(j.explanation||'')}</div>`;$('#save-name').value=q.slice(0,60);
     markActive('');showTab('sql');
