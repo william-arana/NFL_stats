@@ -1,0 +1,57 @@
+name: Update data
+
+# Tuesday = full refresh after Monday Night Football.
+# Thursday + Sunday mornings = pick up new injury reports before games.
+# Times are UTC (15:17 UTC = 8:17 AM Pacific during daylight time).
+on:
+  schedule:
+    - cron: "17 15 * * 2"   # Tue
+    - cron: "17 21 * * 4"   # Thu, before TNF
+    - cron: "17 15 * * 0"   # Sun, before early games
+  workflow_dispatch:         # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Pull nflverse data
+        run: python scripts/update_data.py
+
+      - name: Commit site data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add data/site
+          if git diff --cached --quiet; then
+            echo "No changes to site data"
+          else
+            git commit -m "Update data ($(date -u +%Y-%m-%d))"
+            git push
+          fi
+
+      - name: Publish workbook + CSVs to the data-latest release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view data-latest >/dev/null 2>&1 || \
+            gh release create data-latest --title "Latest data" \
+              --notes "Overwritten on every refresh. master.xlsx has every dataset as a tab; CSVs are one file per dataset."
+          gh release upload data-latest data/latest/master.xlsx data/latest/csv/*.csv --clobber

@@ -4,12 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>nflverse Field Guide</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-html,body{margin:0}
-:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 img{max-width:100%}
 code{font-family:var(--f-mono);font-size:.92em}
 /* Layout: legal-pad scouting binder — ink-blue rules, red margin line, circled picks like hand notes. Sticky toolbar, sidebar index + field lists. */
@@ -143,12 +141,17 @@ mark{background:var(--gold-soft);color:inherit;border-radius:2px}
 </style>
 </head>
 <body>
+<header class="sitenav"><div class="wrap">
+  <a class="brand" href="./">NFL<span>_</span>stats</a>
+  <nav aria-label="Site"><a href="./" aria-current="page">Guide</a><a href="stats.html">Stats</a><span>Lab<small>soon</small></span><span>Waivers<small>soon</small></span></nav>
+  <span class="upd" id="upd"></span>
+</div></header>
 
 
 <header class="top"><div class="wrap">
   <div class="eyebrow">Data catalog · nflverse · for the fantasy master sheet</div>
   <h1>nflverse <span>Field Guide</span></h1>
-  <p class="lede">Every dataset nflverse publishes and every column in it, sorted by stat category. Click the circle next to any stat to pick it. Your picks build a list you can copy and paste back to Claude to build the spreadsheet tabs.</p>
+  <p class="lede">Every dataset nflverse publishes and every column in it, sorted by stat category. Click the circle next to any stat to pick it. Your picks build a list you can copy and paste back to Claude to add to the Stats board or the master workbook.</p>
   <div class="stats" id="stats"></div>
 </div></header>
 
@@ -215,7 +218,7 @@ const hl=(s,q)=>{s=esc(s);if(!q)return s;const i=s.toLowerCase().indexOf(q);retu
 const dsById=Object.fromEntries(DS.map(d=>[d.id,d]));
 const total=DS.reduce((a,d)=>a+d.fields.length,0);
 const keyCount=DS.reduce((a,d)=>a+d.fields.filter(f=>f.k).length,0);
-document.getElementById('stats').innerHTML=`<span><b>${DS.length}</b>datasets</span><span><b>${total.toLocaleString()}</b>columns</span><span><b>${CATS.length}</b>stat categories</span><span><b>${keyCount}</b>flagged essential</span><span><b>Wk 7</b>2026 data loaded as of ${AS_OF}</span>`;
+document.getElementById('stats').innerHTML=`<span><b>${DS.length}</b>datasets</span><span><b>${total.toLocaleString()}</b>columns</span><span><b>${CATS.length}</b>stat categories</span><span><b>${keyCount}</b>flagged essential</span><span><b>${DS.reduce((a,d)=>a+(d.tier===1?1:0),0)}</b>essential datasets</span>`;
 
 // timeline
 (function(){
@@ -332,6 +335,7 @@ document.getElementById('copy').onclick=()=>{const txt=document.getElementById('
   try{navigator.clipboard.writeText(txt).then(()=>done('Copied. Paste it to Claude.'),()=>{selectOut();done('Selected. Press Ctrl/Cmd+C.')})}catch(err){selectOut();done('Selected. Press Ctrl/Cmd+C.')}};
 function selectOut(){const r=document.createRange();r.selectNodeContents(document.getElementById('out'));const s=getSelection();s.removeAllRanges();s.addRange(r)}
 setView(state.view);render();
+fetch('data/site/meta.json',{cache:'no-cache'}).then(r=>r.json()).then(m=>{const u=document.getElementById('upd');if(u)u.textContent=`${m.season} · thru Wk ${m.last_completed_week}`}).catch(()=>{});
 })();
 </script>
 

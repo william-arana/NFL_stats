@@ -1,0 +1,44 @@
+/* Shared tokens + nav for every NFL_stats page.
+   Layout: legal-pad scouting binder — ink-blue, red margin rule, circled marks like hand notes. */
+:root{
+  --paper:#fbfcfe; --sheet:#ffffff; --rule:#dfe6f2; --ink:#16213a; --ink-2:#4b5875; --ink-3:#7a86a0;
+  --blue:#1d4fd8; --blue-soft:#e6edfd; --margin:#d6453d; --margin-soft:#fbe9e7; --gold:#a96d00; --gold-soft:#fdf2db;
+  --good:#15803d; --bad:#c2410c;
+  --heat:29,79,216;
+  --nav-bg:#16213a; --nav-fg:#f2f5fb;
+  --shadow:0 1px 0 rgba(22,33,58,.06);
+  --f-display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0e1422; --sheet:#141b2c; --rule:#24304a; --ink:#e7ecf6; --ink-2:#a9b4cc; --ink-3:#7783a0;
+  --blue:#7ea2ff; --blue-soft:#1b2a4f; --margin:#ff7b70; --margin-soft:#3a1d1f; --gold:#f2b84b; --gold-soft:#33280f;
+  --good:#4ade80; --bad:#fb923c; --heat:126,162,255; --nav-bg:#070b14; --nav-fg:#e7ecf6; --shadow:none; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0e1422; --sheet:#141b2c; --rule:#24304a; --ink:#e7ecf6; --ink-2:#a9b4cc; --ink-3:#7783a0;
+  --blue:#7ea2ff; --blue-soft:#1b2a4f; --margin:#ff7b70; --margin-soft:#3a1d1f; --gold:#f2b84b; --gold-soft:#33280f;
+  --good:#4ade80; --bad:#fb923c; --heat:126,162,255; --nav-bg:#070b14; --nav-fg:#e7ecf6; --shadow:none; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.5;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+code{font-family:var(--f-mono);font-size:.92em}
+a{color:var(--blue)}
+input:focus-visible,button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+
+/* site nav */
+.sitenav{background:var(--nav-bg);color:var(--nav-fg)}
+.sitenav .wrap{display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap;padding-block:8px}
+.sitenav .brand{font-family:var(--f-display);font-weight:800;font-size:20px;letter-spacing:.02em;text-transform:uppercase;color:var(--nav-fg);text-decoration:none;margin-right:6px}
+.sitenav .brand span{color:var(--margin)}
+.sitenav nav{display:flex;gap:2px;flex-wrap:wrap}
+.sitenav nav a,.sitenav nav span{font:500 13px var(--f-body);color:color-mix(in srgb,var(--nav-fg) 75%,transparent);text-decoration:none;padding:5px 10px;border-radius:5px}
+.sitenav nav a:hover{color:var(--nav-fg);background:color-mix(in srgb,var(--nav-fg) 12%,transparent)}
+.sitenav nav a[aria-current="page"]{color:var(--nav-fg);background:color-mix(in srgb,var(--nav-fg) 16%,transparent)}
+.sitenav nav span{opacity:.5;cursor:default}
+.sitenav nav span small{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;margin-left:4px}
+.sitenav .upd{margin-left:auto;font-family:var(--f-mono);font-size:11px;color:color-mix(in srgb,var(--nav-fg) 60%,transparent)}
