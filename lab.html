@@ -33,6 +33,7 @@
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js" defer></script>
+<script src="assets/glossary.js" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -596,8 +597,9 @@ function drawResults(){
     <label class="chk" for="r-heat"><input type="checkbox" id="r-heat" ${rs.heat?'checked':''}>Shading</label>
     <select id="r-chart" aria-label="Chart type"><option value="none">No chart</option><option value="bar" ${rs.chart==='bar'?'selected':''}>Bar chart</option><option value="scatter" ${rs.chart==='scatter'?'selected':''}>Scatter</option><option value="line" ${rs.chart==='line'?'selected':''}>Line</option></select>
     <button class="btn" id="r-csv">Download CSV</button></div>
+  ${rows.length?'<div class="muted" style="padding:6px 16px;border-bottom:1px solid var(--rule)">Tap an underlined column name for what it means; tap the rest of the header to sort.</div>':''}
   ${rs.chart!=='none'&&numCols.length?`<div class="chart"><div class="line">${rs.chart==='bar'||rs.chart==='line'?'Label':'X'} <select id="c-x">${(rs.chart==='scatter'?numCols:cols).map(c=>`<option ${c===rs.x?'selected':''}>${esc(c)}</option>`).join('')}</select> Y <select id="c-y">${numCols.map(c=>`<option ${c===rs.y?'selected':''}>${esc(c)}</option>`).join('')}</select>${rs.chart==='bar'?'<span class="kbd">top 25 by Y</span>':''}</div><div id="c-svg"></div></div>`:''}
-  ${rows.length?`<div class="tablewrap"><table><thead><tr><th class="t">#</th>${cols.map((c,i)=>`<th class="${num[i]?'':'t'}" data-c="${esc(c)}" ${rs.sort===c?`aria-sort="${rs.dir<0?'descending':'ascending'}"`:''}>${esc(c)}</th>`).join('')}</tr></thead><tbody>${
+  ${rows.length?`<div class="tablewrap"><table><thead><tr><th class="t">#</th>${cols.map((c,i)=>`<th class="${num[i]?'':'t'}" data-c="${esc(c)}" ${rs.sort===c?`aria-sort="${rs.dir<0?'descending':'ascending'}"`:''}>${window.NFLSGloss?NFLSGloss.label(c,c):esc(c)}</th>`).join('')}</tr></thead><tbody>${
     data.slice(0,LIM).map((r,j)=>`<tr><td class="i t">${j+1}</td>${cols.map((c,i)=>{const v=r[c];const a=heat[c]&&typeof v==='number'?heat[c](v):0;return `<td class="${num[i]?'':'t'} ${a?'heat':''} ${typeof v==='number'&&v<0?'neg':''}" ${a?`style="--a:${a.toFixed(3)}"`:''}>${pc&&c===pc.c&&v!=null?`<span class="${stOf(r)==='fa'?'name-fa':''}">${fmtv(v,DEC[c])}</span>${NFLS.plink(pc.key(v),v)}${NFLS.badge(stOf(r),ROST.league,v)}`:(NAMES.has(v)?`${fmtv(v,DEC[c])}${NFLS.plink(NAMES.get(v),v)}`:fmtv(v,DEC[c]))}</td>`}).join('')}</tr>`).join('')}</tbody></table></div>${rows.length>LIM?`<div class="muted">Showing ${LIM} of ${rows.length}. Download CSV for everything.</div>`:''}`:'<div class="empty">The query ran but returned no rows.</div>'}`;
   if($('#r-fa'))$('#r-fa').onchange=e=>{rs.faOnly=e.target.checked;drawResults()};
   $('#r-heat').onchange=e=>{rs.heat=e.target.checked;store.set('labHeat',rs.heat);drawResults()};
@@ -633,6 +635,7 @@ function drawChart(data){
   el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(Y)} chart">${g}<line class="grid" x1="${L}" x2="${W-R}" y1="${sy(0)}" y2="${sy(0)}" style="stroke:var(--ink-3)"/>${body}</svg>`;
 }
 boot();
+(function glWait(){if(!window.NFLSGloss)return setTimeout(glWait,100);NFLSGloss.ready.then(()=>{if(RES.cols.length)drawResults()})})();
 </script>
 </body>
 </html>

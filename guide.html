@@ -405,6 +405,9 @@ document.getElementById('clear').onclick=e=>{if(!armed){armed=true;e.target.text
 document.getElementById('copy').onclick=()=>{const txt=document.getElementById('out').textContent;const done=m=>document.getElementById('toast').textContent=m;
   try{navigator.clipboard.writeText(txt).then(()=>done('Copied. Paste it to Claude.'),()=>{selectOut();done('Selected. Press Ctrl/Cmd+C.')})}catch(err){selectOut();done('Selected. Press Ctrl/Cmd+C.')}};
 function selectOut(){const r=document.createRange();r.selectNodeContents(document.getElementById('out'));const s=getSelection();s.removeAllRanges();s.addRange(r)}
+/* guide.html#q=carries (from the stat descriptions on Stats / Lab / Trade) pre-fills the search */
+function fromHash(){const h=new URLSearchParams(location.hash.slice(1));if(h.has('q')){const v=h.get('q');const i=document.getElementById('q');i.value=v;state.q=v.trim().toLowerCase()}}
+fromHash();addEventListener('hashchange',()=>{fromHash();render()});
 setView(state.view);render();
 fetch('data/site/meta.json',{cache:'no-cache'}).then(r=>r.json()).then(m=>{const u=document.getElementById('upd');if(u)u.textContent=`${m.season} · thru Wk ${m.last_completed_week}`}).catch(()=>{});
 })();

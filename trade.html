@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js" defer></script>
 <script src="assets/cards.js" defer></script>
+<script src="assets/glossary.js" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -166,6 +167,7 @@ td.wkdiv,th.wkdiv{border-left:2px solid var(--ink-3)}
 (function(){
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const gl=(k,l,tip)=>window.NFLSGloss?NFLSGloss.label(k,l,tip):esc(l);
 const num=v=>typeof v==='number'&&isFinite(v);
 const mean=a=>{const b=a.filter(num);return b.length?b.reduce((x,y)=>x+y,0)/b.length:null};
 const ord=n=>n+(['th','st','nd','rd'][(n%100>10&&n%100<14)?0:Math.min(n%10,4)%4]||'th');
@@ -261,10 +263,10 @@ function draw(){
       <span class="seg" id="sc">${Object.entries(C.SCORING).map(([k,v])=>`<button data-v="${k}" aria-pressed="${C.scoring()===k}">${v.label}</button>`).join('')}</span>
       <button class="btn" id="copy">Copy for Claude</button><span class="toast" id="toast"></span></div>
       <div class="verdict">
-        <div><span>Points per game</span>${diff('fpg')}<small>A ${f1(S(A,'fpg'))} · B ${f1(S(B,'fpg'))}</small></div>
-        <div><span>Last 3 weeks / game</span>${diff('l3')}<small>A ${f1(S(A,'l3'))} · B ${f1(S(B,'l3'))}</small></div>
-        <div><span>Expected pts L3 (xFP)</span>${diff('xfp3')}<small>usage-based, PPR</small></div>
-        <div><span>Rest of season</span>${diff('ros',0)}<small>FP/g × games left through Wk ${LAST_WEEK}</small></div>
+        <div><span>${gl('fpg','Points per game')}</span>${diff('fpg')}<small>A ${f1(S(A,'fpg'))} · B ${f1(S(B,'fpg'))}</small></div>
+        <div><span>${gl('l3','Last 3 weeks / game')}</span>${diff('l3')}<small>A ${f1(S(A,'l3'))} · B ${f1(S(B,'l3'))}</small></div>
+        <div><span>${gl('xfp3','Expected pts L3 (xFP)')}</span>${diff('xfp3')}<small>usage-based, PPR</small></div>
+        <div><span>${gl('ros','Rest of season')}</span>${diff('ros',0)}<small>FP/g × games left through Wk ${LAST_WEEK}</small></div>
       </div></section>`;
   }
   if(all.length){
@@ -293,7 +295,7 @@ function compareTable(all,A,B){
   const tot=(L,s)=>{const S=k=>L.reduce((a,x)=>a+(num(x[k])?x[k]:0),0);return `<tr class="stot" data-s="${s}"><td class="l stick">Side ${s.toUpperCase()} total</td><td></td><td></td><td></td><td>${f1(S('fpg'))}</td><td>${f1(S('l3'))}</td><td>${f1(S('xfp3'))}</td>${'<td></td>'.repeat(7)}<td>${Math.round(S('ros'))}</td><td></td></tr>`};
   const grp=(L,s)=>L.length?`<tr class="grp" style="--sc:var(--${s==='a'?'blue':'margin'})"><td colspan="${cols.length+4}"><b>Side ${s.toUpperCase()}</b></td></tr>${L.map(x=>row({...x,s})).join('')}${tot(L,s)}`:'';
   return `<section class="box"><div class="box-h"><h2>Side by side</h2><span class="hint">Shading ranks each column among these players: darker = higher</span></div>
-    <div class="tablewrap"><table><thead><tr><th class="l stick">Player</th><th class="l">Wk ${nw}</th><th class="l">Bye</th>${cols.map(([k,l,,,tip])=>`<th ${tip?`title="${esc(tip)}"`:''}>${l}</th>`).join('')}<th class="l">Rostered by</th></tr></thead>
+    <div class="tablewrap"><table><thead><tr><th class="l stick">Player</th><th class="l">Wk ${nw}</th><th class="l">Bye</th>${cols.map(([k,l,,,tip])=>`<th>${gl(k,l,tip)}</th>`).join('')}<th class="l">Rostered by</th></tr></thead>
     <tbody>${grp(A,'a')}${grp(B,'b')}</tbody></table></div>
     <div class="foot"><span>L3 = last 3 weeks. xFP = expected PPR points from usage (targets, carries, where on the field). ROS pts = points per game × games left through Week ${LAST_WEEK}; it doesn't adjust for matchups, so check ROS SoS alongside it.</span><span>ROS SoS: 1st = easiest remaining schedule. Players use PPR points allowed to their position; D/ST uses opponents' points scored per game.</span></div></section>`;
 }
