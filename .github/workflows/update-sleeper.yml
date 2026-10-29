@@ -1,0 +1,40 @@
+name: Update Sleeper rosters
+
+# Roster snapshot for the Waivers page and the free-agent badges.
+# The site also tries Sleeper live in the browser; this is the fallback.
+# 13:43 / 19:43 / 01:43 UTC ≈ 6:43 AM, 12:43 PM, 6:43 PM Pacific.
+on:
+  schedule:
+    - cron: "43 13 * * *"
+    - cron: "43 19 * * *"
+    - cron: "43 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  sleeper:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python scripts/update_sleeper.py
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add data/site/leagues.json data/site/sleeper_map.json
+          if git diff --cached --quiet; then echo "No roster changes"; else
+            git commit -m "Update Sleeper rosters ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git pull --rebase && git push
+          fi

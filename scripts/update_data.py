@@ -170,7 +170,7 @@ def main() -> None:
     tcols = ["team", "opponent_team", "week", "attempts", "completions", "passing_yards", "passing_tds",
              "passing_interceptions", "sacks_suffered", "passing_epa", "carries", "rushing_yards", "rushing_tds",
              "rushing_epa", "def_sacks", "def_qb_hits", "def_interceptions", "fumble_recovery_opp", "def_tds",
-             "def_safeties", "special_teams_tds", "def_fg_blocks", "def_punt_blocks", "def_pat_blocks"]
+             "def_safeties", "special_teams_tds", "def_fg_blocks", "def_punt_blocks", "def_pat_blocks", "def_fumbles_forced"]
     t = tw.select([c for c in tcols if c in tw.columns])
     if games is not None:
         g = games.filter(pl.col("home_score").is_not_null())
@@ -187,6 +187,14 @@ def main() -> None:
         t = t.join(pdf.filter(pl.col("game_type") == "REG").group_by("team", pl.col("week").cast(pl.Int32))
                    .agg(pl.col("def_pressures").sum().alias("def_pressures"), pl.col("def_times_blitzed").sum().alias("def_blitzes")),
                    on=["team", "week"], how="left")
+    if pr is not None:
+        # team-level line play: yards before contact is mostly the O-line's doing
+        t = t.join(pr.filter(pl.col("game_type") == "REG").group_by("team", pl.col("week").cast(pl.Int32))
+                   .agg(pl.col("carries").sum().alias("pfr_carries"),
+                        pl.col("rushing_yards_before_contact").sum().alias("ybc"),
+                        pl.col("rushing_yards_after_contact").sum().alias("yac_rush"),
+                        pl.col("rushing_broken_tackles").sum().alias("broken_tackles")),
+                   on=["team", "week"], how="left")
     t = t.with_columns((pl.col("passing_yards") + pl.col("rushing_yards")).alias("total_yards"))
     opp = t.select(pl.col("team").alias("opponent_team"), "week",
                    pl.col("total_yards").alias("yards_allowed"), pl.col("passing_yards").alias("pass_yards_allowed"),
@@ -196,7 +204,10 @@ def main() -> None:
     pa = pl.col("points_against")
     pa_pts = (pl.when(pa == 0).then(10).when(pa <= 6).then(7).when(pa <= 13).then(4).when(pa <= 20).then(1)
               .when(pa <= 27).then(0).when(pa <= 34).then(-1).otherwise(-4))
+    # Sleeper D/ST scoring used in both leagues: sack 1, INT 2, fumble rec 2, forced fumble 1, TD 6,
+    # safety 2, blocked kick 2, points-allowed tiers. Return yards / yards allowed aren't scored.
     t = t.with_columns((pl.col("def_sacks") + 2 * pl.col("def_interceptions") + 2 * pl.col("fumble_recovery_opp")
+                        + pl.col("def_fumbles_forced").fill_null(0)
                         + 6 * (pl.col("def_tds") + pl.col("special_teams_tds")) + 2 * pl.col("def_safeties")
                         + 2 * (pl.col("def_fg_blocks") + pl.col("def_punt_blocks") + pl.col("def_pat_blocks")) + pa_pts
                         ).alias("dst_pts"))
@@ -208,6 +219,36 @@ def main() -> None:
     # nflverse spread_line is from the home team's view: positive = home favored
     sch = sch.with_columns(((pl.col("total_line") + pl.col("spread_line")) / 2).alias("home_implied"),
                            ((pl.col("total_line") - pl.col("spread_line")) / 2).alias("away_implied"))
+
+    # Defenders (season to date): coverage weak spots + top pass rushers, per team
+    defenders = None
+    if pdf is not None:
+        d = pdf.filter(pl.col("game_type") == "REG")
+        if players is not None:
+            d = d.join(players.select(pl.col("pfr_id").alias("pfr_player_id"), pl.col("position").alias("pos")).drop_nulls().unique("pfr_player_id"),
+                       on="pfr_player_id", how="left")
+        else:
+            d = d.with_columns(pl.lit(None).alias("pos"))
+        defenders = (d.group_by("pfr_player_id").agg(
+                pl.col("pfr_player_name").last().alias("name"), pl.col("pos").last(),
+                pl.col("team").sort_by("week").last().alias("team"), pl.len().alias("g"),
+                pl.col("def_targets").sum().alias("tgt"), pl.col("def_completions_allowed").sum().alias("cmp"),
+                pl.col("def_yards_allowed").sum().alias("yds"), pl.col("def_receiving_td_allowed").sum().alias("td"),
+                pl.col("def_ints").sum().alias("int"), pl.col("def_pressures").sum().alias("prs"),
+                pl.col("def_sacks").sum().alias("sk"), pl.col("def_times_hitqb").sum().alias("hits"),
+                pl.col("def_missed_tackles").sum().alias("mtkl"), pl.col("def_tackles_combined").sum().alias("tkl"))
+            .with_columns(
+                # NFL passer rating formula with targets as attempts
+                pl.when(pl.col("tgt") > 0).then(
+                    (pl.min_horizontal(pl.max_horizontal(((pl.col("cmp") / pl.col("tgt")) - 0.3) * 5, 0), 2.375)
+                     + pl.min_horizontal(pl.max_horizontal(((pl.col("yds") / pl.col("tgt")) - 3) * 0.25, 0), 2.375)
+                     + pl.min_horizontal(pl.max_horizontal((pl.col("td") / pl.col("tgt")) * 20, 0), 2.375)
+                     + pl.min_horizontal(pl.max_horizontal(2.375 - (pl.col("int") / pl.col("tgt")) * 25, 0), 2.375)) / 6 * 100
+                ).alias("rating"))
+            .filter((pl.col("tgt") > 0) | (pl.col("prs") > 0))
+            .drop("pfr_player_id"))
+        (SITE_DIR / "defenders.json").write_text(json.dumps(to_columns_json(defenders), separators=(",", ":")))
+        log(f"defenders: {defenders.height}")
 
     meta = {"season": season, "last_completed_week": last_week, "next_week": last_week + 1,
             "updated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),

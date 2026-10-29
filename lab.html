@@ -6,7 +6,9 @@
 <title>NFL Stats Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -98,8 +100,9 @@ tbody tr:hover td{background-color:color-mix(in srgb,var(--blue-soft) 55%,var(--
 <body>
 <header class="sitenav"><div class="wrap">
   <a class="brand" href="./">NFL<span>_</span>stats</a>
-  <nav aria-label="Site"><a href="./">Guide</a><a href="stats.html">Stats</a><a href="lab.html" aria-current="page">Lab</a><span>Waivers<small>soon</small></span></nav>
+  <nav aria-label="Site"><a href="./">Guide</a><a href="stats.html">Stats</a><a href="lab.html" aria-current="page">Lab</a><a href="waivers.html">Waivers</a></nav>
   <span class="upd" id="upd"></span>
+  <div class="navtools" id="navtools"></div>
 </div></header>
 
 <header class="top"><div class="wrap">

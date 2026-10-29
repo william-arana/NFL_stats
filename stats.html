@@ -6,7 +6,9 @@
 <title>NFL Stats Board</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -77,14 +79,35 @@ tr.log td.l{padding-left:26px;font-family:var(--f-mono)}
 .g .fav{color:var(--blue)}
 .g .meta{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11.5px;color:var(--ink-3);border-top:1px dashed var(--rule);padding-top:6px}
 .loading{padding:60px 16px;text-align:center;color:var(--ink-3);font-family:var(--f-mono)}
+.opp{font:inherit;font-size:12.5px;border:0;background:none;padding:1px 3px;margin:-1px -3px;border-radius:4px;color:var(--ink);cursor:pointer;text-decoration:underline dotted color-mix(in srgb,var(--ink-3) 70%,transparent);text-underline-offset:3px}
+.opp:hover,.opp[aria-expanded="true"]{background:var(--blue-soft);color:var(--blue)}
+.mrk{display:inline-block;min-width:24px;font-family:var(--f-mono);font-size:10px;padding:0 4px;border-radius:3px;margin-left:4px;text-align:center}
+.mrk.good{background:var(--good-soft);color:var(--good)}.mrk.bad{background:var(--margin-soft);color:var(--margin)}.mrk.mid{background:var(--head);color:var(--ink-2)}
+.pop{position:absolute;z-index:50;width:min(380px,calc(100vw - 24px));background:var(--sheet);border:1px solid var(--rule);border-radius:8px;box-shadow:0 12px 32px rgba(11,21,40,.22);font-size:12.5px}
+.pop h3{margin:0;font-family:var(--f-display);font-size:22px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:baseline;padding:10px 14px 8px;border-bottom:1px solid var(--rule);background:var(--head);border-radius:8px 8px 0 0}
+.pop h3 small{font-family:var(--f-mono);font-size:11px;color:var(--ink-2);text-transform:none}
+.pop section{padding:8px 14px;border-bottom:1px solid var(--rule)}
+.pop section:last-child{border-bottom:0}
+.pop h4{margin:0 0 5px;font-family:var(--f-mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.pop table{font-size:12px}
+.pop td,.pop th{padding:3px 6px;position:static;border-bottom:1px solid var(--rule);background:none!important}
+.pop tr:last-child td{border-bottom:0}
+.pop .dvp{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.pop .dvp div{background:var(--paper);border-radius:5px;padding:6px 8px;text-align:center}
+.pop .dvp b{display:block;font-family:var(--f-display);font-size:20px;line-height:1.1}
+.pop .dvp span{font-family:var(--f-mono);font-size:10px;color:var(--ink-3)}
+.pop .note{font-size:11px;color:var(--ink-3)}
+.pop .close{position:absolute;top:8px;right:8px;border:0;background:none;color:var(--ink-3);font-size:16px;cursor:pointer;display:none}
+@media (max-width:640px){.pop .close{display:block}.pop h3{padding-right:34px}}
 @media (max-width:640px){.ctl input[type=search]{width:140px}}
 </style>
 </head>
 <body>
 <header class="sitenav"><div class="wrap">
   <a class="brand" href="./">NFL<span>_</span>stats</a>
-  <nav aria-label="Site"><a href="./">Guide</a><a href="stats.html" aria-current="page">Stats</a><a href="lab.html">Lab</a><span>Waivers<small>soon</small></span></nav>
+  <nav aria-label="Site"><a href="./">Guide</a><a href="stats.html" aria-current="page">Stats</a><a href="lab.html">Lab</a><a href="waivers.html">Waivers</a></nav>
   <span class="upd" id="upd"></span>
+  <div class="navtools" id="navtools"></div>
 </div></header>
 
 <header class="top"><div class="wrap">
@@ -109,9 +132,14 @@ const rows=j=>{const out=new Array(j.rows);for(let i=0;i<j.rows;i++){const r={};
 const num=v=>typeof v==='number'&&isFinite(v);
 const div=(a,b)=>b?a/b:null;
 
-let P,T,G,META,INJ;
-Promise.all(['players','teams','schedule','meta'].map(n=>fetch('data/site/'+n+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(n);return r.json()})))
-.then(([p,t,g,m])=>{P=rows(p);T=rows(t);G=rows(g);META=m;INJ=m.injuries||{};
+let P,T,G,META,INJ,DEF=[],ROST=null;
+/* league availability: re-draw the current tab when the league changes */
+function hookLeague(){if(!window.NFLS)return setTimeout(hookLeague,50);NFLS.onLeague(lg=>{ROST=null;if(!lg){if(P)route();return}NFLS.rosterStatus(lg.id).then(r=>{ROST=r;if(P)route()})})}
+hookLeague();
+const avail=id=>ROST?ROST.status(id):null;
+function avBadge(id){const s=avail(id);if(s==='fa')return '<span class="av fa" title="Free agent in '+esc(ROST.league.name)+'">FA</span>';if(s==='mine')return '<span class="av mine" title="On your team">MINE</span>';return ''}
+Promise.all(['players','teams','schedule','meta'].map(n=>fetch('data/site/'+n+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(n);return r.json()})).concat([fetch('data/site/defenders.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null)]))
+.then(([p,t,g,m,dj])=>{P=rows(p);T=rows(t);G=rows(g);META=m;INJ=m.injuries||{};DEF=dj?rows(dj):[];
   const d=new Date(m.updated_utc.replace('Z',':00Z'));
   $('#upd').textContent=`${m.season} · thru Wk ${m.last_completed_week} · updated ${d.toLocaleDateString(undefined,{month:'short',day:'numeric'})}`;
   route();
@@ -138,6 +166,61 @@ function downloadCSV(name,cols,rows){
   const blob=new Blob([head+'\n'+body],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
 }
 function sortRows(rows,k,dir){return rows.sort((a,b)=>{const x=a[k],y=b[k];const nx=x==null||(typeof x==='number'&&!isFinite(x)),ny=y==null||(typeof y==='number'&&!isFinite(y));if(nx&&ny)return 0;if(nx)return 1;if(ny)return -1;if(typeof x==='string')return dir*x.localeCompare(y);return dir*(x-y)})}
+
+/* ---------- opponent profile (season to date) ---------- */
+let _dvp=null;
+function dvpSeason(){ // PPR allowed per game by position + ranks (1 = gives up the most)
+  if(_dvp)return _dvp;const games={},pts={};
+  for(const r of P){const d=r.opponent_team;(games[d]=games[d]||new Set()).add(r.week);pts[d]=pts[d]||{QB:0,RB:0,WR:0,TE:0};if(num(r.fantasy_points_ppr))pts[d][r.position]+=r.fantasy_points_ppr}
+  const out={};for(const t in pts){out[t]={g:games[t].size};for(const p of ['QB','RB','WR','TE'])out[t][p]={v:pts[t][p]/games[t].size}}
+  for(const p of ['QB','RB','WR','TE'])Object.keys(out).sort((a,b)=>out[b][p].v-out[a][p].v).forEach((t,i)=>out[t][p].rk=i+1);
+  return _dvp=out;
+}
+function nextOppOf(team){const nw=META.next_week;for(const g of G)if(g.week===nw){if(g.home_team===team)return {opp:g.away_team,at:false};if(g.away_team===team)return {opp:g.home_team,at:true}}return null}
+function rkClass(rk,n){return rk<=8?'good':rk>n-8?'bad':'mid'}
+function oppBtn(team,label,pos){const d=dvpSeason()[team];const rk=d&&pos&&d[pos]?d[pos].rk:null;const n=Object.keys(dvpSeason()).length;
+  return `<button class="opp" data-opp="${team}" data-pos="${pos||''}" aria-expanded="false">${label}</button>${rk?`<span class="mrk ${rkClass(rk,n)}" title="${team} allows the ${ord(rk)}-most PPR points to ${pos}s">${ord(rk)}</span>`:''}`}
+const ord=n=>n+(['th','st','nd','rd'][(n%100>10&&n%100<14)?0:Math.min(n%10,4)%4]||'th');
+function teamDefense(team){
+  const rowsT=T.filter(r=>r.team===team);const n=rowsT.length||1;const sum=k=>rowsT.reduce((a,r)=>a+(num(r[k])?r[k]:0),0);
+  const per=k=>sum(k)/n;
+  const all=[...new Set(T.map(r=>r.team))].map(t=>{const rr=T.filter(r=>r.team===t),m=rr.length||1,s=k=>rr.reduce((a,r)=>a+(num(r[k])?r[k]:0),0)/m;return {t,pa:s('points_against'),ya:s('yards_allowed'),pr:s('def_pressures'),sk:s('def_sacks'),tk:s('def_interceptions')+s('fumble_recovery_opp'),dst:s('dst_pts')}});
+  const rank=(k,desc)=>[...all].sort((a,b)=>desc?b[k]-a[k]:a[k]-b[k]).findIndex(x=>x.t===team)+1;
+  const w=rowsT.filter(r=>num(r.points_for));const rec=`${w.filter(r=>r.points_for>r.points_against).length}-${w.filter(r=>r.points_for<r.points_against).length}`;
+  return {rec,g:rowsT.length,pa:per('points_against'),ya:per('yards_allowed'),pya:per('pass_yards_allowed'),rya:per('rush_yards_allowed'),pr:per('def_pressures'),sk:per('def_sacks'),tk:per('def_interceptions')+per('fumble_recovery_opp'),dst:per('dst_pts'),
+    rk:{pa:rank('pa',false),ya:rank('ya',false),pr:rank('pr',true),sk:rank('sk',true),tk:rank('tk',true),dst:rank('dst',true)},n:all.length};
+}
+function popHTML(team,pos){
+  const d=dvpSeason()[team],td=teamDefense(team),n=Object.keys(dvpSeason()).length;
+  const cov=DEF.filter(x=>x.team===team&&x.tgt>=8).sort((a,b)=>b.yds-a.yds).slice(0,4);
+  const rush=DEF.filter(x=>x.team===team&&x.prs>0).sort((a,b)=>b.prs-a.prs).slice(0,3);
+  const nx=nextOppOf(team);
+  const cell=(p)=>`<div style="${p===pos?'box-shadow:inset 0 0 0 2px var(--blue)':''}"><span>${p}</span><b>${d?d[p].v.toFixed(1):'–'}</b><span class="mrk ${d?rkClass(d[p].rk,n):'mid'}">${d?ord(d[p].rk):''}</span></div>`;
+  const rk=(r,label)=>`<span class="mrk ${rkClass(r,td.n)}" title="${label}">${ord(r)}</span>`;
+  return `<button class="close" aria-label="Close">×</button><h3>${team} defense<small>${td.rec} · ${td.g} games${nx?` · Wk ${META.next_week} ${nx.at?'@':'vs'} ${nx.opp}`:''}</small></h3>
+  <section><h4>PPR points allowed per game · rank (1st = gives up most)</h4><div class="dvp">${['QB','RB','WR','TE'].map(cell).join('')}</div></section>
+  <section><h4>Team defense per game</h4><table><tbody>
+    <tr><td class="l">Points allowed</td><td>${td.pa.toFixed(1)}</td><td>${rk(td.rk.pa,'1st = fewest allowed')}</td><td class="l">Pressures</td><td>${td.pr.toFixed(1)}</td><td>${rk(td.rk.pr,'1st = most')}</td></tr>
+    <tr><td class="l">Yards allowed</td><td>${td.ya.toFixed(0)}</td><td>${rk(td.rk.ya,'1st = fewest allowed')}</td><td class="l">Sacks</td><td>${td.sk.toFixed(1)}</td><td>${rk(td.rk.sk,'1st = most')}</td></tr>
+    <tr><td class="l">Pass / rush yds</td><td>${td.pya.toFixed(0)} / ${td.rya.toFixed(0)}</td><td></td><td class="l">Takeaways</td><td>${td.tk.toFixed(1)}</td><td>${rk(td.rk.tk,'1st = most')}</td></tr>
+    <tr><td class="l">D/ST points</td><td>${td.dst.toFixed(1)}</td><td>${rk(td.rk.dst,'1st = most')}</td><td></td><td></td><td></td></tr>
+  </tbody></table><div class="note">Defense ranks: green = strong defense (tough matchup), red = weak.</div></section>
+  ${cov.length?`<section><h4>Coverage: most yards allowed</h4><table><thead><tr><th class="l">Defender</th><th>Tgt</th><th>Yds</th><th>TD</th><th>Rtg</th></tr></thead><tbody>${cov.map(x=>`<tr><td class="l">${esc(x.name)} <span class="pos">${esc(x.pos||'')}</span></td><td>${x.tgt}</td><td>${x.yds}</td><td>${x.td}</td><td>${num(x.rating)?x.rating.toFixed(0):'–'}</td></tr>`).join('')}</tbody></table></section>`:''}
+  ${rush.length?`<section><h4>Pass rush leaders</h4><table><tbody>${rush.map(x=>`<tr><td class="l">${esc(x.name)} <span class="pos">${esc(x.pos||'')}</span></td><td>${x.prs} pressures</td><td>${x.sk} sacks</td></tr>`).join('')}</tbody></table></section>`:''}`;
+}
+let popEl=null,popBtn=null;
+function closePop(){if(popEl){popEl.remove();popEl=null}if(popBtn){popBtn.setAttribute('aria-expanded','false');popBtn=null}}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.opp');
+  if(b){e.stopPropagation();if(popBtn===b){closePop();return}closePop();popBtn=b;b.setAttribute('aria-expanded','true');
+    popEl=document.createElement('div');popEl.className='pop';popEl.setAttribute('role','dialog');popEl.innerHTML=popHTML(b.dataset.opp,b.dataset.pos);document.body.appendChild(popEl);
+    const r=b.getBoundingClientRect(),w=popEl.offsetWidth,h=popEl.offsetHeight;let left=r.left+window.scrollX;left=Math.min(left,window.scrollX+document.documentElement.clientWidth-w-12);left=Math.max(window.scrollX+12,left);
+    let top=r.bottom+window.scrollY+6;if(r.bottom+h+12>window.innerHeight&&r.top-h-6>0)top=r.top+window.scrollY-h-6;
+    popEl.style.left=left+'px';popEl.style.top=top+'px';popEl.querySelector('.close').onclick=closePop;return}
+  if(popEl&&!popEl.contains(e.target))closePop();
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePop()});
+window.addEventListener('hashchange',closePop);
 
 /* ---------- PLAYERS ---------- */
 const SCORING={ppr:{k:'fantasy_points_ppr',label:'PPR'},half:{k:'fantasy_points_half',label:'Half'},std:{k:'fantasy_points',label:'Std'}};
@@ -173,7 +256,7 @@ const PSETS={
 };
 const SUMK=['completions','attempts','passing_yards','passing_tds','passing_interceptions','sacks_suffered','passing_air_yards','passing_epa','carries','rushing_yards','rushing_tds','rushing_first_downs','rushing_epa','targets','receptions','receiving_yards','receiving_tds','receiving_air_yards','receiving_yards_after_catch','receiving_first_downs','receiving_epa','rushing_fumbles_lost','receiving_fumbles_lost','sack_fumbles_lost','fantasy_points','fantasy_points_ppr','fantasy_points_half','offense_snaps','xfp','xfp_diff','qb_pressured','qb_blitzed','ybc','yac_rush','broken_tackles'];
 const MEANK=['target_share','air_yards_share','wopr','racr','offense_pct','passing_cpoe'];
-const ps={pos:store.get('pos','ALL'),team:'ALL',w0:1,w1:null,mode:store.get('mode','pg'),scoring:store.get('scoring','ppr'),set:store.get('set','fantasy'),q:'',minG:store.get('minG',2),sort:null,dir:-1,open:new Set(),heat:store.get('heat',true)};
+const ps={av:'all',pos:store.get('pos','ALL'),team:'ALL',w0:1,w1:null,mode:store.get('mode','pg'),scoring:store.get('scoring','ppr'),set:store.get('set','fantasy'),q:'',minG:store.get('minG',2),sort:null,dir:-1,open:new Set(),heat:store.get('heat',true)};
 function aggPlayers(){
   const s=SCORING[ps.scoring].k,w0=ps.w0,w1=ps.w1;const by=new Map();
   for(const r of P){if(r.week<w0||r.week>w1)continue;if(ps.pos!=='ALL'&&r.position!==ps.pos)continue;if(ps.team!=='ALL'&&r.team!==ps.team)continue;
@@ -184,8 +267,10 @@ function aggPlayers(){
   const out=[];const q=ps.q;
   for(const a of by.values()){
     if(a.g<ps.minG)continue;if(q&&!a.name.toLowerCase().includes(q))continue;
+    if(ROST&&ps.av!=='all'&&avail(a.id)!==ps.av)continue;
     for(const k of MEANK)a[k]=a._n[k]?a[k]/a._n[k]:null;
     for(const k of ['offense_snaps','xfp','xfp_diff','qb_pressured','ybc'])if(!a.logs.some(l=>num(l[k])))a[k]=null;
+    {const n=nextOppOf(a.team);a.next=n?n.opp:'zzz'}
     a.fp=a[s];a.tds=a.passing_tds+a.rushing_tds+a.receiving_tds;a.opps=a.carries+a.targets;a.fum=a.rushing_fumbles_lost+a.receiving_fumbles_lost+a.sack_fumbles_lost;
     a.catch=div(a.receptions,a.targets);a.adot=div(a.receiving_air_yards,a.targets);a.ypc=div(a.rushing_yards,a.carries);
     a.ybc_att=a.ybc==null?null:div(a.ybc,a.carries);a.yac_att=a.ybc==null?null:div(a.yac_rush,a.carries);
@@ -215,12 +300,13 @@ function Players(){
     <div class="ctl"><span>Scoring</span><div class="seg" id="p-sc">${Object.entries(SCORING).map(([k,v])=>`<button data-v="${k}" aria-pressed="${ps.scoring===k}">${v.label}</button>`).join('')}</div></div>
     <div class="ctl"><span>Min games</span><input type="number" id="p-min" min="1" max="17" value="${ps.minG}"></div>
     <div class="ctl"><span>Player</span><input type="search" id="p-q" placeholder="Search name" value="${esc(ps.q)}"></div>
+    ${ROST?`<div class="ctl"><span>${esc(ROST.league.name)}</span><div class="seg" id="p-av"><button data-v="all" aria-pressed="${ps.av==='all'}">Everyone</button><button data-v="fa" aria-pressed="${ps.av==='fa'}">Free agents</button><button data-v="mine" aria-pressed="${ps.av==='mine'}">My team</button></div></div>`:''}
   </div>
   <div class="sets"><span class="lbl">Columns</span>${Object.entries(PSETS).map(([k,v])=>`<button class="chip" data-set="${k}" aria-pressed="${ps.set===k}">${v.label}</button>`).join('')}
     <span class="spacer"></span><label class="chk" for="p-heat"><input type="checkbox" id="p-heat" ${ps.heat?'checked':''}>Shading</label><button class="btn" id="p-csv">Download CSV</button></div>
   <div class="summary" id="p-sum"></div>
   <div class="tablewrap"><table id="p-tbl"></table></div>
-  <div class="foot"><span>Click a player for their game log.</span><span>xFP and PPR − xFP use PPR scoring regardless of the toggle.</span><span>Pressure, YBC and broken tackles come from PFR advanced stats.</span></div>`;
+  <div class="foot"><span>Click a player for their game log. Click an opponent for that defense's season profile.</span><span>The colored rank next to an opponent is how many PPR points they allow to that position: green = top-8 most allowed (good matchup), red = bottom-8.</span>${ROST?`<span><span class="av fa">FA</span> = free agent in ${esc(ROST.league.name)} (${ROST.source==="live"?"live from Sleeper":"as of "+new Date(ROST.updated).toLocaleString(undefined,{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})})</span>`:""}<span>xFP and PPR − xFP use PPR scoring regardless of the toggle.</span><span>Pressure, YBC and broken tackles come from PFR advanced stats.</span></div>`;
   const re=()=>{store.set('pos',ps.pos);store.set('mode',ps.mode);store.set('scoring',ps.scoring);store.set('set',ps.set);store.set('minG',ps.minG);store.set('heat',ps.heat);drawPlayers()};
   $('#p-pos').onclick=e=>{const b=e.target.closest('button');if(!b)return;ps.pos=b.dataset.v;$('#p-pos').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));re()};
   $('#p-mode').onclick=e=>{const b=e.target.closest('button');if(!b)return;ps.mode=b.dataset.v;$('#p-mode').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));re()};
@@ -229,6 +315,7 @@ function Players(){
   $('#p-w0').onchange=e=>{ps.w0=+e.target.value;if(ps.w0>ps.w1){ps.w1=ps.w0;$('#p-w1').value=ps.w1}re()};
   $('#p-w1').onchange=e=>{ps.w1=+e.target.value;if(ps.w1<ps.w0){ps.w0=ps.w1;$('#p-w0').value=ps.w0}re()};
   $('#p-min').oninput=e=>{ps.minG=Math.max(1,+e.target.value||1);re()};
+  if($('#p-av'))$('#p-av').onclick=e=>{const b=e.target.closest('button');if(!b)return;ps.av=b.dataset.v;$('#p-av').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));drawPlayers()};
   let t;$('#p-q').oninput=e=>{clearTimeout(t);t=setTimeout(()=>{ps.q=e.target.value.trim().toLowerCase();re()},120)};
   document.querySelector('.sets').onclick=e=>{const b=e.target.closest('[data-set]');if(!b)return;ps.set=b.dataset.set;ps.sort=null;document.querySelectorAll('[data-set]').forEach(x=>x.setAttribute('aria-pressed',x===b));re()};
   $('#p-heat').onchange=e=>{ps.heat=e.target.checked;re()};
@@ -241,11 +328,11 @@ function drawPlayers(){
   const heat=ps.heat?heatAlpha(data,set.cols):{};
   const lbl=ps.mode==='pg'?'per game':'totals';
   $('#p-sum').innerHTML=`<span><b>${data.length}</b> players</span><span>Weeks <b>${ps.w0}–${ps.w1}</b>, ${lbl}</span><span>Sorted by <b>${esc((set.cols.find(c=>c.k===sk)||{label:sk}).label)}</b></span>`;
-  const th=`<thead><tr><th class="rank">#</th><th class="l stick" data-k="name">Player</th><th class="l" data-k="team">Team</th><th data-k="g">G</th>${set.cols.map(c=>`<th data-k="${c.k}" ${c.tip?`title="${esc(c.tip)}"`:''} ${c.spark?'class="l"':''} ${sk===c.k?`aria-sort="${ps.dir<0?'descending':'ascending'}"`:''}>${esc(c.label)}</th>`).join('')}</tr></thead>`;
+  const th=`<thead><tr><th class="rank">#</th><th class="l stick" data-k="name">Player</th><th class="l" data-k="team">Team</th><th class="l" data-k="next" title="Week ${META.next_week} opponent">Wk ${META.next_week}</th><th data-k="g">G</th>${set.cols.map(c=>`<th data-k="${c.k}" ${c.tip?`title="${esc(c.tip)}"`:''} ${c.spark?'class="l"':''} ${sk===c.k?`aria-sort="${ps.dir<0?'descending':'ascending'}"`:''}>${esc(c.label)}</th>`).join('')}</tr></thead>`;
   const LIM=400;let body='';
   data.slice(0,LIM).forEach((a,i)=>{
     const inj=INJ[a.id];
-    body+=`<tr data-id="${a.id}" class="${ps.open.has(a.id)?'open':''}"><td class="rank">${i+1}</td><td class="l stick"><button class="pname" data-id="${a.id}">${esc(a.name)}</button> <span class="pos">${a.pos}</span>${inj?`<span class="inj" title="${esc(inj[1])} (Wk ${inj[2]} report)">${esc(inj[0].replace('Practice: ',''))}</span>`:''}</td><td class="l">${a.team}</td><td>${a.g}</td>${
+    body+=`<tr data-id="${a.id}" class="${ps.open.has(a.id)?'open':''}"><td class="rank">${i+1}</td><td class="l stick"><button class="pname ${avail(a.id)==='fa'?'name-fa':''}" data-id="${a.id}">${esc(a.name)}</button> <span class="pos">${a.pos}</span>${avBadge(a.id)}${inj?`<span class="inj" title="${esc(inj[1])} (Wk ${inj[2]} report)">${esc(inj[0].replace('Practice: ',''))}</span>`:''}</td><td class="l">${a.team}</td><td class="l">${(()=>{const n=nextOppOf(a.team);return n?oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,a.pos):'<span class="pos">bye</span>'})()}</td><td>${a.g}</td>${
       set.cols.map(c=>{if(c.spark)return `<td class="l">${spark(a)}</td>`;const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;
         const cls=c.diff?(num(v)?(v>0?'pos-d':v<0?'neg-d':''):''):'';
         return `<td class="${al?'heat':''} ${cls}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${c.diff&&num(v)&&v>0?'+':''}${fmt(v,c.d)}</td>`}).join('')}</tr>`;
@@ -253,22 +340,23 @@ function drawPlayers(){
       const logs=[...a.logs].sort((x,y)=>x.week-y.week);
       for(const l of logs){const r=Object.assign({},l);r.fp=l[SCORING[ps.scoring].k];r.tds=(l.passing_tds||0)+(l.rushing_tds||0)+(l.receiving_tds||0);r.opps=(l.carries||0)+(l.targets||0);r.fum=(l.rushing_fumbles_lost||0)+(l.receiving_fumbles_lost||0)+(l.sack_fumbles_lost||0);
         r.catch=div(l.receptions,l.targets);r.adot=div(l.receiving_air_yards,l.targets);r.ypc=div(l.rushing_yards,l.carries);r.ybc_att=num(l.ybc)?div(l.ybc,l.carries):null;r.yac_att=num(l.yac_rush)?div(l.yac_rush,l.carries):null;r.press_pct=num(l.qb_pressured)?div(l.qb_pressured,l.attempts+l.sacks_suffered):null;r.ypa=div(l.passing_yards,l.attempts);
-        body+=`<tr class="log"><td></td><td class="l stick">Wk ${l.week} ${l.team===l.opponent_team?'':'vs '+l.opponent_team}</td><td class="l"></td><td></td>${set.cols.map(c=>c.spark?'<td></td>':`<td>${fmt(r[c.k],c.d==='%'||c.d==='%1'?c.d:(typeof c.d==='number'?Math.min(c.d,2):0))}</td>`).join('')}</tr>`}
+        body+=`<tr class="log"><td></td><td class="l stick">Wk ${l.week} ${oppBtn(l.opponent_team,'vs '+l.opponent_team,a.pos)}</td><td class="l"></td><td></td><td></td>${set.cols.map(c=>c.spark?'<td></td>':`<td>${fmt(r[c.k],c.d==='%'||c.d==='%1'?c.d:(typeof c.d==='number'?Math.min(c.d,2):0))}</td>`).join('')}</tr>`}
     }
   });
   $('#p-tbl').innerHTML=data.length?th+'<tbody>'+body+'</tbody>':'<tbody><tr><td class="empty">No players match. Lower "Min games" or clear the search.</td></tr></tbody>';
   if(data.length>LIM)$('#p-sum').innerHTML+=`<span>Showing top ${LIM}. Filter or download CSV for all.</span>`;
-  $('#p-tbl').onclick=e=>{const h=e.target.closest('th[data-k]');if(h){const k=h.dataset.k;if(k==='trend')return;if(ps.sort===k||(!ps.sort&&k===set.cols[0].k))ps.dir*=-1;else{ps.sort=k;ps.dir=(k==='name'||k==='team')?1:-1}drawPlayers();return}
+  $('#p-tbl').onclick=e=>{const h=e.target.closest('th[data-k]');if(h){const k=h.dataset.k;if(k==='trend')return;if(ps.sort===k||(!ps.sort&&k===set.cols[0].k))ps.dir*=-1;else{ps.sort=k;ps.dir=(k==='name'||k==='team'||k==='next')?1:-1}drawPlayers();return}
     const n=e.target.closest('.pname');if(n){const id=n.dataset.id;ps.open.has(id)?ps.open.delete(id):ps.open.add(id);drawPlayers()}};
 }
 
 /* ---------- TEAMS ---------- */
 const TSETS={
   offense:{label:'Offense',cols:[{k:'points_for',label:'Pts',d:1,heat:1},{k:'total_yards',label:'Yds',d:1,heat:1},{k:'passing_yards',label:'Pass yds',d:1,heat:1},{k:'rushing_yards',label:'Rush yds',d:1,heat:1},{k:'attempts',label:'Pass att',d:1,heat:1},{k:'carries',label:'Rush att',d:1,heat:1},{k:'pass_rate',label:'Pass %',d:'%',heat:1,calc:1,tip:'Pass attempts ÷ (pass + rush attempts)'},{k:'epa_play',label:'EPA/play',d:3,heat:1,calc:1},{k:'tds',label:'Off TD',d:1,heat:1}]},
-  defense:{label:'Defense & D/ST',cols:[{k:'dst_pts',label:'D/ST pts',d:1,heat:1,tip:'Sleeper default D/ST scoring, approximate'},{k:'points_against',label:'Pts allowed',d:1,heat:1,invert:1},{k:'yards_allowed',label:'Yds allowed',d:1,heat:1,invert:1},{k:'pass_yards_allowed',label:'Pass yds alw',d:1,heat:1,invert:1},{k:'rush_yards_allowed',label:'Rush yds alw',d:1,heat:1,invert:1},{k:'def_sacks',label:'Sacks',d:1,heat:1},{k:'def_interceptions',label:'INT',d:1,heat:1},{k:'fumble_recovery_opp',label:'Fum rec',d:1,heat:1},{k:'takeaways',label:'Takeaways',d:1,heat:1},{k:'epa_allowed',label:'EPA allowed',d:1,heat:1,invert:1}]},
+  defense:{label:'Defense & D/ST',cols:[{k:'dst_pts',label:'D/ST pts',d:1,heat:1,tip:'Your Sleeper D/ST scoring: sack 1, INT 2, fumble rec 2, forced fumble 1, TD 6, safety 2, blocked kick 2, plus points-allowed tiers'},{k:'points_against',label:'Pts allowed',d:1,heat:1,invert:1},{k:'yards_allowed',label:'Yds allowed',d:1,heat:1,invert:1},{k:'pass_yards_allowed',label:'Pass yds alw',d:1,heat:1,invert:1},{k:'rush_yards_allowed',label:'Rush yds alw',d:1,heat:1,invert:1},{k:'def_sacks',label:'Sacks',d:1,heat:1},{k:'def_interceptions',label:'INT',d:1,heat:1},{k:'fumble_recovery_opp',label:'Fum rec',d:1,heat:1},{k:'takeaways',label:'Takeaways',d:1,heat:1},{k:'epa_allowed',label:'EPA allowed',d:1,heat:1,invert:1}]},
+  oline:{label:'O-line',cols:[{k:'press_alw_pct',label:'Pressure % allowed',d:'%',heat:1,invert:1,calc:1,tip:'QB pressured ÷ dropbacks (PFR). The best single pass-blocking number available'},{k:'sack_alw_pct',label:'Sack % allowed',d:'%1',heat:1,invert:1,calc:1},{k:'pressures_allowed',label:'Pressures allowed',d:1,heat:1,invert:1},{k:'sacks_suffered',label:'Sacks allowed',d:1,heat:1,invert:1},{k:'ybc_att',label:'YBC/carry',d:2,heat:1,calc:1,tip:'Yards before contact per carry: how much room the line creates (PFR)'},{k:'ypc',label:'Yds/carry',d:2,heat:1,calc:1},{k:'rush_epa_play',label:'Rush EPA/play',d:3,heat:1,calc:1},{k:'carries',label:'Carries',d:1,heat:1}]},
   rush:{label:'Pass rush matchup',cols:[{k:'def_pressures',label:'Pressures',d:1,heat:1,tip:'Sum of defender pressures (PFR)'},{k:'def_sacks',label:'Sacks',d:1,heat:1},{k:'def_qb_hits',label:'QB hits',d:1,heat:1},{k:'def_blitzes',label:'Blitzes',d:1,heat:1},{k:'pressures_allowed',label:'Pressures allowed',d:1,heat:1,invert:1,tip:'Times their QBs were pressured (PFR)'},{k:'sacks_suffered',label:'Sacks allowed',d:1,heat:1,invert:1},{k:'press_alw_pct',label:'Pressure % allowed',d:'%',heat:1,invert:1,calc:1,tip:'Pressures allowed ÷ dropbacks'},{k:'sack_alw_pct',label:'Sack % allowed',d:'%1',heat:1,invert:1,calc:1}]}
 };
-const TSUM=['points_for','points_against','total_yards','passing_yards','rushing_yards','attempts','carries','sacks_suffered','passing_epa','rushing_epa','passing_tds','rushing_tds','def_sacks','def_qb_hits','def_interceptions','fumble_recovery_opp','def_tds','dst_pts','yards_allowed','pass_yards_allowed','rush_yards_allowed','epa_allowed','pressures_allowed','def_pressures','def_blitzes'];
+const TSUM=['ybc','pfr_carries','def_fumbles_forced','points_for','points_against','total_yards','passing_yards','rushing_yards','attempts','carries','sacks_suffered','passing_epa','rushing_epa','passing_tds','rushing_tds','def_sacks','def_qb_hits','def_interceptions','fumble_recovery_opp','def_tds','dst_pts','yards_allowed','pass_yards_allowed','rush_yards_allowed','epa_allowed','pressures_allowed','def_pressures','def_blitzes'];
 const ts={set:store.get('tset','defense'),mode:'pg',w0:1,w1:null,sort:null,dir:-1,heat:store.get('heat',true)};
 function Teams(){
   const weeks=[...new Set(T.map(r=>r.week))].sort((a,b)=>a-b);if(ts.w1==null)ts.w1=weeks[weeks.length-1];
@@ -294,7 +382,7 @@ function drawTeams(){
     a.rec=`${a.w}-${a.l}${a.t?'-'+a.t:''}`;a.next=no[a.team]||'bye';
     a.pass_rate=div(a.attempts,a.attempts+a.carries);a.epa_play=div(a.passing_epa+a.rushing_epa,a.attempts+a.carries+a.sacks_suffered);
     a.tds=a.passing_tds+a.rushing_tds;a.takeaways=a.def_interceptions+a.fumble_recovery_opp;
-    a.press_alw_pct=div(a.pressures_allowed,a.attempts+a.sacks_suffered);a.sack_alw_pct=div(a.sacks_suffered,a.attempts+a.sacks_suffered);
+    a.press_alw_pct=div(a.pressures_allowed,a.attempts+a.sacks_suffered);a.ybc_att=div(a.ybc,a.pfr_carries);a.ypc=div(a.rushing_yards,a.carries);a.rush_epa_play=div(a.rushing_epa,a.carries);a.sack_alw_pct=div(a.sacks_suffered,a.attempts+a.sacks_suffered);
     if(ts.mode==='pg')for(const k of [...TSUM,'tds','takeaways'])a[k]=a[k]/a.g;return a});
   const sk=ts.sort||set.cols[0].k;sortRows(data,sk,ts.dir);window._trows=data;
   const heat=ts.heat?heatAlpha(data,set.cols):{};

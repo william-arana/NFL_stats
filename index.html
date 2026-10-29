@@ -6,25 +6,13 @@
 <title>nflverse Field Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
 <style>
 img{max-width:100%}
 code{font-family:var(--f-mono);font-size:.92em}
 /* Layout: legal-pad scouting binder — ink-blue rules, red margin line, circled picks like hand notes. Sticky toolbar, sidebar index + field lists. */
-:root{
-  --paper:#fbfcfe; --sheet:#ffffff; --rule:#dfe6f2; --ink:#16213a; --ink-2:#4b5875; --ink-3:#7a86a0;
-  --blue:#1d4fd8; --blue-soft:#e6edfd; --margin:#d6453d; --margin-soft:#fbe9e7; --gold:#a96d00; --gold-soft:#fdf2db;
-  --shadow:0 1px 0 rgba(22,33,58,.06);
-  --f-display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
-  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#0e1422; --sheet:#141b2c; --rule:#24304a; --ink:#e7ecf6; --ink-2:#a9b4cc; --ink-3:#7783a0;
-  --blue:#7ea2ff; --blue-soft:#1b2a4f; --margin:#ff7b70; --margin-soft:#3a1d1f; --gold:#f2b84b; --gold-soft:#33280f; --shadow:none; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --paper:#0e1422; --sheet:#141b2c; --rule:#24304a; --ink:#e7ecf6; --ink-2:#a9b4cc; --ink-3:#7783a0;
-  --blue:#7ea2ff; --blue-soft:#1b2a4f; --margin:#ff7b70; --margin-soft:#3a1d1f; --gold:#f2b84b; --gold-soft:#33280f; --shadow:none; color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.5}
@@ -143,8 +131,9 @@ mark{background:var(--gold-soft);color:inherit;border-radius:2px}
 <body>
 <header class="sitenav"><div class="wrap">
   <a class="brand" href="./">NFL<span>_</span>stats</a>
-  <nav aria-label="Site"><a href="./" aria-current="page">Guide</a><a href="stats.html">Stats</a><a href="lab.html">Lab</a><span>Waivers<small>soon</small></span></nav>
+  <nav aria-label="Site"><a href="./" aria-current="page">Guide</a><a href="stats.html">Stats</a><a href="lab.html">Lab</a><a href="waivers.html">Waivers</a></nav>
   <span class="upd" id="upd"></span>
+  <div class="navtools" id="navtools"></div>
 </div></header>
 
 

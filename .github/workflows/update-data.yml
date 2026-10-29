@@ -44,7 +44,7 @@ jobs:
             echo "No changes to site data"
           else
             git commit -m "Update data ($(date -u +%Y-%m-%d))"
-            git push
+            git pull --rebase && git push
           fi
 
       - name: Publish workbook + CSVs to the data-latest release

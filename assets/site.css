@@ -1,25 +1,22 @@
 /* Shared tokens + nav for every NFL_stats page.
    Layout: legal-pad scouting binder — ink-blue, red margin rule, circled marks like hand notes. */
+/* Light is the default; dark only when the toggle sets data-theme="dark". */
 :root{
-  --paper:#fbfcfe; --sheet:#ffffff; --rule:#dfe6f2; --ink:#16213a; --ink-2:#4b5875; --ink-3:#7a86a0;
-  --blue:#1d4fd8; --blue-soft:#e6edfd; --margin:#d6453d; --margin-soft:#fbe9e7; --gold:#a96d00; --gold-soft:#fdf2db;
-  --good:#15803d; --bad:#c2410c;
-  --heat:29,79,216;
-  --nav-bg:#16213a; --nav-fg:#f2f5fb;
-  --shadow:0 1px 0 rgba(22,33,58,.06);
+  --paper:#e9edf4; --sheet:#ffffff; --head:#dfe5ef; --stripe:#f5f7fb; --rule:#c3cddd; --ink:#0b1528; --ink-2:#35425c; --ink-3:#5a6782;
+  --blue:#1544c4; --blue-soft:#dce6fd; --margin:#c6342c; --margin-soft:#fde3df; --gold:#855400; --gold-soft:#fbebc6;
+  --good:#11702f; --good-soft:#dcf3e3; --bad:#b33a06;
+  --heat:21,68,196;
+  --nav-bg:#0f1b33; --nav-fg:#f4f7fc;
+  --shadow:0 1px 2px rgba(11,21,40,.08);
   --f-display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
   --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   color-scheme:light;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#0e1422; --sheet:#141b2c; --rule:#24304a; --ink:#e7ecf6; --ink-2:#a9b4cc; --ink-3:#7783a0;
-  --blue:#7ea2ff; --blue-soft:#1b2a4f; --margin:#ff7b70; --margin-soft:#3a1d1f; --gold:#f2b84b; --gold-soft:#33280f;
-  --good:#4ade80; --bad:#fb923c; --heat:126,162,255; --nav-bg:#070b14; --nav-fg:#e7ecf6; --shadow:none; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --paper:#0e1422; --sheet:#141b2c; --rule:#24304a; --ink:#e7ecf6; --ink-2:#a9b4cc; --ink-3:#7783a0;
-  --blue:#7ea2ff; --blue-soft:#1b2a4f; --margin:#ff7b70; --margin-soft:#3a1d1f; --gold:#f2b84b; --gold-soft:#33280f;
-  --good:#4ade80; --bad:#fb923c; --heat:126,162,255; --nav-bg:#070b14; --nav-fg:#e7ecf6; --shadow:none; color-scheme:dark}
+  --paper:#070b15; --sheet:#111a2c; --head:#19243d; --stripe:#152035; --rule:#2f3e5e; --ink:#f4f7fc; --ink-2:#c6cfe2; --ink-3:#919db8;
+  --blue:#8fb0ff; --blue-soft:#1c2c56; --margin:#ff847a; --margin-soft:#3d1c1f; --gold:#f5c056; --gold-soft:#372a0c;
+  --good:#5ee08f; --good-soft:#10331f; --bad:#ffa15c; --heat:120,160,255; --nav-bg:#03060d; --nav-fg:#eef2fa; --shadow:none; color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{margin:0}
@@ -42,3 +39,21 @@ input:focus-visible,button:focus-visible,select:focus-visible,a:focus-visible{ou
 .sitenav nav span{opacity:.5;cursor:default}
 .sitenav nav span small{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;margin-left:4px}
 .sitenav .upd{margin-left:auto;font-family:var(--f-mono);font-size:11px;color:color-mix(in srgb,var(--nav-fg) 60%,transparent)}
+.navtools{display:flex;gap:8px;align-items:center;margin-left:4px}
+.navtools select{font:500 12.5px var(--f-body);padding:4px 8px;border-radius:5px;border:1px solid color-mix(in srgb,var(--nav-fg) 30%,transparent);background:color-mix(in srgb,var(--nav-fg) 10%,var(--nav-bg));color:var(--nav-fg)}
+.navtools .theme{font:500 12.5px var(--f-body);display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:5px;border:1px solid color-mix(in srgb,var(--nav-fg) 30%,transparent);background:none;color:var(--nav-fg);cursor:pointer}
+.navtools .theme:hover{background:color-mix(in srgb,var(--nav-fg) 12%,transparent)}
+.navtools .theme svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.navtools label{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:color-mix(in srgb,var(--nav-fg) 60%,transparent)}
+@media (max-width:640px){.sitenav .upd{display:none}.navtools{margin-left:auto}}
+
+/* shared data-table look: shaded header, zebra rows */
+.tablewrap th{background:var(--head)!important;color:var(--ink)}
+.tablewrap tbody tr:nth-child(even) > td{background-color:var(--stripe)}
+.tablewrap tbody tr:nth-child(even) > td.stick{background-color:var(--stripe)}
+
+/* availability badges */
+.av{display:inline-block;font-family:var(--f-mono);font-size:10px;font-weight:500;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:1px;letter-spacing:.02em}
+.av.fa{background:var(--good-soft);color:var(--good)}
+.av.mine{background:var(--blue-soft);color:var(--blue)}
+.name-fa{color:var(--good)!important}
