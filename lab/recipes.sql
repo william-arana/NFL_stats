@@ -147,3 +147,26 @@ FROM games_long g JOIN teams t ON t.team = g.team
 WHERE g.week = (SELECT next_week FROM meta)
 GROUP BY g.team, g.opp, g.is_home, g.implied, g.spread_line, g.total_line
 ORDER BY implied_pts DESC;
+
+-- @recipe available_matchups
+-- @title Free agents with soft matchups this week
+-- @blurb Uses the avail table (your selected league). Available RB/WR/TE who are getting used, ranked by recent expected points (z-score, counts double) plus half of how many points their next opponent allows to their position (z-score). Add a team filter like AND a.team = 'LV' to narrow it.
+WITH dvp AS (
+  SELECT opponent_team AS defense, position, sum(fantasy_points_ppr) / count(DISTINCT week) AS allowed
+  FROM players GROUP BY ALL),
+dz AS (SELECT *, (allowed - avg(allowed) OVER (PARTITION BY position)) / stddev_samp(allowed) OVER (PARTITION BY position) AS matchup_z FROM dvp),
+recent AS (
+  SELECT player_id, avg(xfp) AS xfp_l3, avg(fantasy_points_ppr) AS ppr_l3, avg(offense_pct) AS snap_l3
+  FROM players WHERE week > (SELECT last_completed_week FROM meta) - 3 GROUP BY player_id)
+SELECT a.player_display_name AS player, a.position, a.team, g.opp AS next_opp,
+  round(r.xfp_l3,1) AS xfp_l3, round(r.ppr_l3,1) AS ppr_l3, round(r.snap_l3*100) AS snap_pct_l3,
+  round(dz.matchup_z,2) AS matchup_z,
+  round((r.xfp_l3 - avg(r.xfp_l3) OVER (PARTITION BY a.position)) / stddev_samp(r.xfp_l3) OVER (PARTITION BY a.position)
+        + 0.5 * dz.matchup_z, 2) AS pickup_score
+FROM avail a
+JOIN recent r USING (player_id)
+JOIN games_long g ON g.team = a.team AND g.week = (SELECT next_week FROM meta)
+JOIN dz ON dz.defense = g.opp AND dz.position = a.position
+WHERE coalesce(a.status, 'fa') = 'fa' AND a.position IN ('RB','WR','TE') AND r.snap_l3 >= 0.3
+ORDER BY pickup_score DESC
+LIMIT 40;

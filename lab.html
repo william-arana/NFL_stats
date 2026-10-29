@@ -148,8 +148,26 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const store={get(k,d){try{const v=localStorage.getItem('nfls-'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('nfls-'+k,JSON.stringify(v))}catch(e){}}};
 const setStatus=(t,cls)=>{$('#status').textContent=t;$('#dot').className='dot '+(cls||'')};
 
-const TABLES={players:'One row per offensive player per game',teams:'One row per team per game, offense + defense',schedule:'One row per game, with Vegas lines',games_long:'Schedule with one row per team (team / opp / implied)',meta:'Season, last completed week, next week'};
-let conn, SCHEMA={}, RECIPES=[], META;
+const TABLES={avail:'Every offensive player and defense with their status in your selected league: fa / mine / taken',players:'One row per offensive player per game',teams:'One row per team per game, offense + defense',schedule:'One row per game, with Vegas lines',games_long:'Schedule with one row per team (team / opp / implied)',meta:'Season, last completed week, next week'};
+let conn, SCHEMA={}, RECIPES=[], META, NAMES=new Map(), ROST=null, LG=null;
+/* league availability: fill the availability table, then re-badge the current results */
+async function applyLeague(lg){
+  LG=lg;ROST=null;if(!conn)return;
+  await conn.query('DELETE FROM availability');await conn.query('DELETE FROM league_info');
+  if(lg){ROST=await NFLS.rosterStatus(lg.id);
+    if(ROST){const vals=[...ROST.map.entries()].map(([k,v])=>`('${k.replace(/'/g,"''")}','${v.status}','${String(v.team).replace(/'/g,"''")}')`);
+      if(vals.length)await conn.query('INSERT INTO availability VALUES '+vals.join(','));
+      await conn.query(`INSERT INTO league_info VALUES ('${lg.name.replace(/'/g,"''")}','${lg.id}')`)}}
+  if(RES.cols.length)drawResults();
+}
+function hookLeague(){if(!window.NFLS)return setTimeout(hookLeague,50);NFLS.onLeague(lg=>{applyLeague(lg)})}
+/* figure out which result column holds players (or defenses) so rows can show FA / MINE */
+function playerCol(){if(!ROST)return null;const {cols,rows,num}=RES;
+  for(let i=0;i<cols.length;i++){if(num[i])continue;const c=cols[i];const vs=rows.slice(0,50).map(r=>r[c]).filter(v=>v!=null);if(!vs.length)continue;
+    if(vs.filter(v=>NAMES.has(v)).length>=vs.length*.5)return {c,key:v=>NAMES.get(v)};
+    if(/^(defense|faces_defense|dst|def)$/i.test(c)&&vs.every(v=>/^[A-Z]{2,3}$/.test(v)))return {c,key:v=>'DEF:'+v};
+    if(/^player_id$/i.test(c))return {c,key:v=>v}}
+  return null}
 
 /* ---------- boot ---------- */
 async function boot(){
@@ -172,11 +190,23 @@ async function boot(){
     }
     await conn.query(`CREATE TABLE meta AS SELECT ${+m.season} AS season, ${+m.last_completed_week} AS last_completed_week, ${+m.next_week} AS next_week`);
     await conn.query(initSql);
+    await conn.query('CREATE TABLE availability(player_id VARCHAR, status VARCHAR, fantasy_team VARCHAR)');await conn.query('CREATE TABLE league_info(name VARCHAR, id VARCHAR)');
+    await conn.query(`CREATE VIEW avail AS
+        SELECT p.player_id, p.player_display_name, p.position, p.team,
+               CASE WHEN (SELECT count(*) FROM league_info) = 0 THEN NULL ELSE coalesce(a.status, 'fa') END AS status,
+               a.fantasy_team, (SELECT name FROM league_info) AS league
+        FROM (SELECT player_id, arg_max(player_display_name, week) AS player_display_name, arg_max(position, week) AS position, arg_max(team, week) AS team FROM players GROUP BY player_id) p
+        LEFT JOIN availability a USING (player_id)
+        UNION ALL
+        SELECT 'DEF:' || t.team, t.team || ' D/ST', 'DEF', t.team,
+               CASE WHEN (SELECT count(*) FROM league_info) = 0 THEN NULL ELSE coalesce(a.status, 'fa') END, a.fantasy_team, (SELECT name FROM league_info)
+        FROM (SELECT DISTINCT team FROM teams) t LEFT JOIN availability a ON a.player_id = 'DEF:' || t.team`);
+    {const r=await conn.query('SELECT player_id, arg_max(player_display_name, week) AS n FROM players GROUP BY player_id');for(const x of r.toArray()){NAMES.set(x.n,x.player_id)}}
     for(const tname of Object.keys(TABLES)){const r=await conn.query(`DESCRIBE ${tname}`);SCHEMA[tname]=r.toArray().map(x=>({name:x.column_name,type:String(x.column_type)}))}
     RECIPES=parseRecipes(recTxt);
     $('#upd').textContent=`${m.season} · thru Wk ${m.last_completed_week}`;
     setStatus(`Ready. ${p.rows.toLocaleString()} player-games, ${t.rows} team-games, ${s.rows} games loaded. Week ${m.next_week} is next.`,'ok');
-    $('#run').disabled=false;
+    $('#run').disabled=false;hookLeague();
     drawTables();drawRecipes();drawSaved();drawPivot();
     const first=store.get('lastRecipe','dst_pressure');const r=RECIPES.find(x=>x.id===first)||RECIPES[0];if(r)loadRecipe(r,false);
   }catch(e){console.error(e);setStatus('Could not start: '+e.message,'err')}
@@ -285,18 +315,22 @@ function colDec(c){const vals=RES.rows.map(r=>r[c]).filter(v=>typeof v==='number
 function fmtv(v,d){if(v==null)return '<span style="color:var(--ink-3)">–</span>';if(typeof v==='number')return v.toFixed(d??2);if(typeof v==='boolean')return v?'yes':'no';return esc(v)}
 function drawResults(){
   const {cols,rows,num}=RES;let data=rows.slice();
+  const pc=playerCol();const stOf=r=>pc&&r[pc.c]!=null?ROST.status(pc.key(r[pc.c])):null;
+  if(pc&&rs.faOnly)data=data.filter(r=>stOf(r)==='fa');
   if(rs.sort){const i=cols.indexOf(rs.sort);data.sort((a,b)=>{const x=a[rs.sort],y=b[rs.sort];if(x==null)return 1;if(y==null)return -1;return typeof x==='number'?rs.dir*(x-y):rs.dir*String(x).localeCompare(String(y))})}
   const heat={};if(rs.heat)cols.forEach((c,i)=>{if(!num[i])return;const vals=rows.map(r=>r[c]).filter(v=>typeof v==='number').sort((a,b)=>a-b);if(vals.length<3||vals[0]===vals[vals.length-1])return;heat[c]=v=>{let lo=0,hi=vals.length;while(lo<hi){const m=(lo+hi)>>1;vals[m]<v?lo=m+1:hi=m}return lo/(vals.length-1)*.5}});
   const LIM=1000;const DEC={};cols.forEach((c,i)=>{if(num[i])DEC[c]=colDec(c)});
   const numCols=cols.filter((c,i)=>num[i]),txtCols=cols.filter((c,i)=>!num[i]);
   if(!rs.x)rs.x=txtCols[0]||cols[0];if(!rs.y)rs.y=numCols[numCols.length-1]||numCols[0];
-  $('#results').innerHTML=`<div class="res-h"><span class="meta"><b>${esc(lastTitle)}</b> · <b>${rows.length.toLocaleString()}</b> rows · ${RES.ms.toFixed(0)} ms</span><span style="flex:1"></span>
+  $('#results').innerHTML=`<div class="res-h"><span class="meta"><b>${esc(lastTitle)}</b> · <b>${data.length.toLocaleString()}</b>${data.length!==rows.length?` of ${rows.length.toLocaleString()}`:''} rows · ${RES.ms.toFixed(0)} ms</span><span style="flex:1"></span>
+    ${pc?`<label class="chk" for="r-fa"><input type="checkbox" id="r-fa" ${rs.faOnly?'checked':''}>Free agents only (${esc(ROST.league.name)})</label>`:''}
     <label class="chk" for="r-heat"><input type="checkbox" id="r-heat" ${rs.heat?'checked':''}>Shading</label>
     <select id="r-chart" aria-label="Chart type"><option value="none">No chart</option><option value="bar" ${rs.chart==='bar'?'selected':''}>Bar chart</option><option value="scatter" ${rs.chart==='scatter'?'selected':''}>Scatter</option><option value="line" ${rs.chart==='line'?'selected':''}>Line</option></select>
     <button class="btn" id="r-csv">Download CSV</button></div>
   ${rs.chart!=='none'&&numCols.length?`<div class="chart"><div class="line">${rs.chart==='bar'||rs.chart==='line'?'Label':'X'} <select id="c-x">${(rs.chart==='scatter'?numCols:cols).map(c=>`<option ${c===rs.x?'selected':''}>${esc(c)}</option>`).join('')}</select> Y <select id="c-y">${numCols.map(c=>`<option ${c===rs.y?'selected':''}>${esc(c)}</option>`).join('')}</select>${rs.chart==='bar'?'<span class="kbd">top 25 by Y</span>':''}</div><div id="c-svg"></div></div>`:''}
   ${rows.length?`<div class="tablewrap"><table><thead><tr><th class="t">#</th>${cols.map((c,i)=>`<th class="${num[i]?'':'t'}" data-c="${esc(c)}" ${rs.sort===c?`aria-sort="${rs.dir<0?'descending':'ascending'}"`:''}>${esc(c)}</th>`).join('')}</tr></thead><tbody>${
-    data.slice(0,LIM).map((r,j)=>`<tr><td class="i t">${j+1}</td>${cols.map((c,i)=>{const v=r[c];const a=heat[c]&&typeof v==='number'?heat[c](v):0;return `<td class="${num[i]?'':'t'} ${a?'heat':''} ${typeof v==='number'&&v<0?'neg':''}" ${a?`style="--a:${a.toFixed(3)}"`:''}>${fmtv(v,DEC[c])}</td>`}).join('')}</tr>`).join('')}</tbody></table></div>${rows.length>LIM?`<div class="muted">Showing ${LIM} of ${rows.length}. Download CSV for everything.</div>`:''}`:'<div class="empty">The query ran but returned no rows.</div>'}`;
+    data.slice(0,LIM).map((r,j)=>`<tr><td class="i t">${j+1}</td>${cols.map((c,i)=>{const v=r[c];const a=heat[c]&&typeof v==='number'?heat[c](v):0;return `<td class="${num[i]?'':'t'} ${a?'heat':''} ${typeof v==='number'&&v<0?'neg':''}" ${a?`style="--a:${a.toFixed(3)}"`:''}>${pc&&c===pc.c&&v!=null?`<span class="${stOf(r)==='fa'?'name-fa':''}">${fmtv(v,DEC[c])}</span>${NFLS.badge(stOf(r),ROST.league,v)}`:fmtv(v,DEC[c])}</td>`}).join('')}</tr>`).join('')}</tbody></table></div>${rows.length>LIM?`<div class="muted">Showing ${LIM} of ${rows.length}. Download CSV for everything.</div>`:''}`:'<div class="empty">The query ran but returned no rows.</div>'}`;
+  if($('#r-fa'))$('#r-fa').onchange=e=>{rs.faOnly=e.target.checked;drawResults()};
   $('#r-heat').onchange=e=>{rs.heat=e.target.checked;store.set('labHeat',rs.heat);drawResults()};
   $('#r-chart').onchange=e=>{rs.chart=e.target.value;store.set('labChart',rs.chart);rs.x=null;drawResults()};
   $('#r-csv').onclick=()=>{const out=[cols.join(',')].concat(data.map(r=>cols.map(c=>{const v=r[c];if(v==null)return '';if(typeof v==='number')return String(v);return '"'+String(v).replace(/"/g,'""')+'"'}).join(','))).join('\n');

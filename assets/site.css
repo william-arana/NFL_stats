@@ -2,7 +2,7 @@
    Layout: legal-pad scouting binder — ink-blue, red margin rule, circled marks like hand notes. */
 /* Light is the default; dark only when the toggle sets data-theme="dark". */
 :root{
-  --paper:#e9edf4; --sheet:#ffffff; --head:#dfe5ef; --stripe:#f5f7fb; --rule:#c3cddd; --ink:#0b1528; --ink-2:#35425c; --ink-3:#5a6782;
+  --paper:#f1f4f8; --sheet:#ffffff; --head:#e7ecf3; --stripe:#f7f9fc; --rule:#c3cddd; --ink:#0b1528; --ink-2:#35425c; --ink-3:#5a6782;
   --blue:#1544c4; --blue-soft:#dce6fd; --margin:#c6342c; --margin-soft:#fde3df; --gold:#855400; --gold-soft:#fbebc6;
   --good:#11702f; --good-soft:#dcf3e3; --bad:#b33a06;
   --heat:21,68,196;
@@ -56,4 +56,5 @@ input:focus-visible,button:focus-visible,select:focus-visible,a:focus-visible{ou
 .av{display:inline-block;font-family:var(--f-mono);font-size:10px;font-weight:500;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:1px;letter-spacing:.02em}
 .av.fa{background:var(--good-soft);color:var(--good)}
 .av.mine{background:var(--blue-soft);color:var(--blue)}
+a.av{text-decoration:none}a.av:hover{text-decoration:underline}
 .name-fa{color:var(--good)!important}

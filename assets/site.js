@@ -50,6 +50,11 @@
       listeners.forEach(f=>f(getLeague()));
     });
   }
-  window.NFLS={setTheme,loadLeagues,getLeague,rosterStatus,onLeague(cb){listeners.push(cb);if(leagueCfg)cb(getLeague())}};
+  /* Sleeper has no public per-player page, so badges open the league; search the player there. */
+  function leagueUrl(lg){return lg?`https://sleeper.com/leagues/${lg.id}`:'#'}
+  function badge(status,lg,name){if(!status||!lg)return '';const t=status==='fa'?'FA':status==='mine'?'MINE':'';if(!t)return '';
+    const tip=status==='fa'?`Free agent in ${lg.name}. Opens ${lg.name} on Sleeper`:`On your ${lg.name} team. Opens Sleeper`;
+    return `<a class="av ${status}" href="${leagueUrl(lg)}" target="_blank" rel="noopener" title="${tip}${name?' (search '+String(name).replace(/"/g,'')+')':''}">${t}</a>`}
+  window.NFLS={leagueUrl,badge,setTheme,loadLeagues,getLeague,rosterStatus,onLeague(cb){listeners.push(cb);if(leagueCfg)cb(getLeague())}};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
 })();

@@ -137,7 +137,7 @@ let P,T,G,META,INJ,DEF=[],ROST=null;
 function hookLeague(){if(!window.NFLS)return setTimeout(hookLeague,50);NFLS.onLeague(lg=>{ROST=null;if(!lg){if(P)route();return}NFLS.rosterStatus(lg.id).then(r=>{ROST=r;if(P)route()})})}
 hookLeague();
 const avail=id=>ROST?ROST.status(id):null;
-function avBadge(id){const s=avail(id);if(s==='fa')return '<span class="av fa" title="Free agent in '+esc(ROST.league.name)+'">FA</span>';if(s==='mine')return '<span class="av mine" title="On your team">MINE</span>';return ''}
+function avBadge(id,name){const s=avail(id);return (s==='fa'||s==='mine')?NFLS.badge(s,ROST.league,name):''}
 Promise.all(['players','teams','schedule','meta'].map(n=>fetch('data/site/'+n+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(n);return r.json()})).concat([fetch('data/site/defenders.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null)]))
 .then(([p,t,g,m,dj])=>{P=rows(p);T=rows(t);G=rows(g);META=m;INJ=m.injuries||{};DEF=dj?rows(dj):[];
   const d=new Date(m.updated_utc.replace('Z',':00Z'));
@@ -332,7 +332,7 @@ function drawPlayers(){
   const LIM=400;let body='';
   data.slice(0,LIM).forEach((a,i)=>{
     const inj=INJ[a.id];
-    body+=`<tr data-id="${a.id}" class="${ps.open.has(a.id)?'open':''}"><td class="rank">${i+1}</td><td class="l stick"><button class="pname ${avail(a.id)==='fa'?'name-fa':''}" data-id="${a.id}">${esc(a.name)}</button> <span class="pos">${a.pos}</span>${avBadge(a.id)}${inj?`<span class="inj" title="${esc(inj[1])} (Wk ${inj[2]} report)">${esc(inj[0].replace('Practice: ',''))}</span>`:''}</td><td class="l">${a.team}</td><td class="l">${(()=>{const n=nextOppOf(a.team);return n?oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,a.pos):'<span class="pos">bye</span>'})()}</td><td>${a.g}</td>${
+    body+=`<tr data-id="${a.id}" class="${ps.open.has(a.id)?'open':''}"><td class="rank">${i+1}</td><td class="l stick"><button class="pname ${avail(a.id)==='fa'?'name-fa':''}" data-id="${a.id}">${esc(a.name)}</button> <span class="pos">${a.pos}</span>${avBadge(a.id,a.name)}${inj?`<span class="inj" title="${esc(inj[1])} (Wk ${inj[2]} report)">${esc(inj[0].replace('Practice: ',''))}</span>`:''}</td><td class="l">${a.team}</td><td class="l">${(()=>{const n=nextOppOf(a.team);return n?oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,a.pos):'<span class="pos">bye</span>'})()}</td><td>${a.g}</td>${
       set.cols.map(c=>{if(c.spark)return `<td class="l">${spark(a)}</td>`;const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;
         const cls=c.diff?(num(v)?(v>0?'pos-d':v<0?'neg-d':''):''):'';
         return `<td class="${al?'heat':''} ${cls}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${c.diff&&num(v)&&v>0?'+':''}${fmt(v,c.d)}</td>`}).join('')}</tr>`;
