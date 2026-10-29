@@ -82,12 +82,17 @@ def nfl_com() -> list[dict]:
     for m in re.finditer(r'<a[^>]+href="((?:https://www\.nfl\.com)?/news/(?!series/)[a-z0-9-]+)"[^>]*>(.*?)</a>', page, re.S | re.I):
         href, inner = m.group(1), m.group(2)
         link = href if href.startswith("http") else "https://www.nfl.com" + href
+        # a card's text comes as separate chunks: a label ("NEWS"), the headline, then a teaser
+        chunks = [clean(c, 400) for c in re.split(r"<[^>]+>", inner)]
+        chunks = [c for c in chunks if c and not re.fullmatch(r"(NEWS|VIDEO|ANALYSIS|FANTASY|PODCAST|[A-Z ]{2,12})\.?", c)]
         h = re.search(r"<h\d[^>]*>(.*?)</h\d>", inner, re.S)
-        title = clean(h.group(1) if h else inner, 200)
+        title = clean(h.group(1), 200) if h else (chunks[0] if chunks else "")
+        title = re.sub(r"^(NEWS|VIDEO|ANALYSIS|FANTASY)[.:\s]+", "", title).strip()
+        summary = next((c for c in chunks if c != title and len(c) > 40), "")
         if len(title) < 20 or link in seen:
             continue
         seen.add(link)
-        out.append({"title": title, "link": link, "published": None, "summary": ""})
+        out.append({"title": title[:200], "link": link, "published": None, "summary": clean(summary)})
     return out[:MAX]
 
 

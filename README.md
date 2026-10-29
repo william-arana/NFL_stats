@@ -6,7 +6,8 @@ My fantasy football stats lab: NFL data from [nflverse](https://github.com/nflve
 
 | Page | What it does |
 |---|---|
-| [Guide](https://william-arana.github.io/NFL_stats/) | Every nflverse dataset and all ~1,500 columns, by dataset or stat category. Pick stats and copy the list. |
+| [Home](https://william-arana.github.io/NFL_stats/) | Next kickoff, top waiver add, best D/ST stream, highest implied total, links to every page, live headlines + fantasy news + Sleeper trending adds. |
+| [Guide](https://william-arana.github.io/NFL_stats/guide.html) | Every nflverse dataset and all ~1,500 columns, by dataset or stat category. Pick stats and copy the list. |
 | [Stats](https://william-arana.github.io/NFL_stats/stats.html) | Players (fantasy / receiving / rushing / passing, per game or totals, any week range, game logs), Teams (offense, defense & D/ST, pass rush matchup), Defense vs position, Schedule & Vegas lines. |
 | [Lab](https://william-arana.github.io/NFL_stats/lab.html) | Build your own tables in the browser: point-and-click pivots, a SQL editor (DuckDB), 8 waiver recipes, charts, CSV export, saved queries. |
 | [Waivers](https://william-arana.github.io/NFL_stats/waivers.html) | Free agents in the selected Sleeper league ranked by a waiver score (recent xFP, PPR, snap/touch trends, matchup), my roster with likeliest drops, and D/ST streamers. |
@@ -55,7 +56,9 @@ Load it to a sheet. Each Tuesday, hit **Data → Refresh All**. Google Sheets: `
 
 | Path | What it is |
 |---|---|
-| `index.html`, `stats.html`, `lab.html` | Site pages |
+| `index.html` | Home: hero with this week's quick hits, page cards, quick links, news rail |
+| `guide.html`, `stats.html`, `lab.html`, `waivers.html` | Site pages |
+| `scripts/update_news.py` | Hourly headlines (NFL.com, ESPN, PFT, CBS), RotoWire player news, Sleeper trending adds → `data/site/news.json` |
 | `lab/recipes.sql` | Lab recipes. Add your own: a `-- @recipe id` line, `-- @title`, `-- @blurb`, then the SQL. |
 | `lab/init.sql` | Views created when the Lab loads (`games_long`) |
 | `assets/site.css` | Shared colors, fonts, nav |
