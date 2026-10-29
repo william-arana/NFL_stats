@@ -4,9 +4,8 @@
    Pages that already loaded the season files can hand them over with NFLSCards.provide({P,T,G,META,DEF}),
    otherwise the card loads them itself the first time it opens.
    News: the site's own archive (data/site/news/<id>.json, built 3x a day by update_player_news.py), merged
-   with ESPN's live per-player feed (straight from ESPN, or through the Cloudflare Worker if the browser can't). */
+   with the live per-player feeds from Sleeper (RotoWire, FantasyPros, RotoBaller) and ESPN, read straight from the browser. */
 (function(){
-  const WORKER='https://nfl-stats-ask.znktc4grbk.workers.dev/';
   const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const num=v=>typeof v==='number'&&isFinite(v);
   const mean=a=>{const b=a.filter(num);return b.length?b.reduce((x,y)=>x+y,0)/b.length:null};
@@ -90,26 +89,33 @@
     return {...td,team,l3:mean(rec.map(r=>r.dst_pts)),best:Math.max(0,...td.rows.map(r=>r.dst_pts||0)),sd:(()=>{const v=td.rows.map(r=>r.dst_pts).filter(num);const m=mean(v);return v.length>1?Math.sqrt(mean(v.map(x=>(x-m)**2))):null})()}}
 
   /* ---------- news ---------- */
-  const NEWS={};let live=null; // live: null = untested, 'direct' | 'worker' | false
+  const NEWS={};
   function clean(s,n){s=String(s||'').replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/&#39;|&rsquo;/g,"'").replace(/&quot;|&ldquo;|&rdquo;/g,'"').replace(/\s+/g,' ').trim();return s.length<=n?s:s.slice(0,n-1).replace(/\s+\S*$/,'')+'…'}
   function espnItems(feed){return (feed||[]).map(a=>{const h=clean(a.headline,220);if(!h)return null;const l=a.links||{};const url=(l.web&&l.web.href)||(l.mobile&&l.mobile.href)||null;
     const st=a.story||'';const s=clean(st&&st.length<1200?st:(a.description||st),600);const kind=String(a.type||'').toLowerCase();
     return {h,s:s===h?'':s,d:a.published||a.lastModified||null,src:/rotowire/i.test(a.byline||'')?'RotoWire via ESPN':(kind.includes('headline')?'ESPN fantasy':'ESPN'),url}}).filter(Boolean)}
   async function getJSON(u,ms){const c=new AbortController();const t=setTimeout(()=>c.abort(),ms);try{const r=await fetch(u,{signal:c.signal});if(!r.ok)throw new Error(r.status);return await r.json()}finally{clearTimeout(t)}}
-  async function liveNews(espn){
-    if(!espn||live===false)return {items:[],via:null};
-    const direct=`https://site.api.espn.com/apis/fantasy/v2/games/ffl/news/players?playerId=${encodeURIComponent(espn)}&limit=50`,viaW=`${WORKER}news?espn=${encodeURIComponent(espn)}`;
-    const order=live==='direct'?[['direct',direct]]:live==='worker'?[['worker',viaW]]:[['direct',direct],['worker',viaW]];
-    for(const [mode,u] of order){try{const j=await getJSON(u,7000);live=mode;return {items:espnItems(j.feed),via:mode}}catch(e){}}
-    if(live==null)live=false;return {items:[],via:null};
+  const SLP_SRC={rotowire:'RotoWire',fantasy_pros:'FantasyPros',rotoballer:'RotoBaller'};
+  function sleeperItems(arr){return (arr||[]).map(a=>{const m=a.metadata||{};const h=clean(String(m.title||'').replace(/^.{3,40}? - /,''),220);if(!h)return null;
+    return {h,s:clean([m.description,m.analysis].filter(Boolean).join(' '),700),d:a.published?new Date(a.published).toISOString():null,src:SLP_SRC[a.source]||String(a.source||'').replace(/_/g,' '),url:m.url||null}}).filter(Boolean)}
+  let SMAPP=null;const sleeperId=g=>(SMAPP||(SMAPP=fetch('data/site/sleeper_map.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{map:{}}).then(j=>{const inv={};for(const [s,x] of Object.entries(j.map||{}))inv[x]=s;return inv}).catch(()=>({})))).then(inv=>inv[g]);
+  /* live feeds, straight from the browser (both send Access-Control-Allow-Origin: *) */
+  async function liveNews(g){
+    const out={items:[],via:[]};
+    const espn=D.IDS[g];
+    const jobs=[
+      espn?getJSON(`https://site.api.espn.com/apis/fantasy/v2/games/ffl/news/players?playerId=${encodeURIComponent(espn)}&limit=50`,7000).then(j=>{out.items.push(...espnItems(j.feed));out.via.push('ESPN')}).catch(()=>{}):null,
+      sleeperId(g).then(sid=>sid?getJSON(`https://api.sleeper.app/players/nfl/${encodeURIComponent(sid)}/news?limit=50`,7000):null).then(j=>{if(j){out.items.push(...sleeperItems(j));out.via.push('Sleeper')}}).catch(()=>{})
+    ].filter(Boolean);
+    await Promise.all(jobs);return out;
   }
-  const nkey=it=>(it.url||'').split('?')[0].replace(/\/+$/,'').toLowerCase()||it.h.toLowerCase().replace(/\W/g,'');
+  const nkey=it=>it.h.toLowerCase().replace(/\W/g,'').slice(0,80);
   /* key = gsis id or "DEF:XX". Resolves {items (newest first), archived: n, live: 'direct'|'worker'|null} */
   function newsFor(key){
     if(NEWS[key])return NEWS[key];
     const isDef=key.startsWith('DEF:');
     const arch=fetch('data/site/news/'+key.replace(':','_')+'.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
-    const lv=isDef?Promise.resolve({items:[],via:null}):load().then(()=>liveNews(D.IDS[key]));
+    const lv=isDef?Promise.resolve({items:[],via:[]}):load().then(()=>liveNews(key));
     return NEWS[key]=Promise.all([arch,lv]).then(([a,l])=>{const by=new Map();for(const it of [...(a&&a.items||[]),...l.items])by.set(nkey(it),{...by.get(nkey(it)),...it});
       const items=[...by.values()].sort((x,y)=>String(y.d||'').localeCompare(String(x.d||'')));return {items,archived:a?a.items.length:0,live:l.via,updated:a&&a.updated_utc}});
   }
@@ -122,7 +128,7 @@
     return `<ul class="news">${show.map(it=>{const fresh=it.d&&(Date.now()-new Date(it.d))<3*864e5;return `<li class="${fresh?'new':''}">${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.h)}</a>`:`<b>${esc(it.h)}</b>`}${it.s?`<p>${esc(it.s)}</p>`:''}<small>${esc(it.src||'')}${it.d?' · '+esc(fmtDate(it.d)):''}</small></li>`}).join('')}</ul>
       ${!all&&n.items.length>show.length?`<button type="button" class="more" data-more>Show all ${n.items.length} stories (back to ${esc(fmtDate(oldest).split(' · ')[0])})</button>`:''}`;
   }
-  function newsSrc(n){const p=[];if(n.live)p.push('ESPN live');if(n.archived)p.push(`site archive (${n.archived})`);return p.length?p.join(' + '):'site archive'}
+  function newsSrc(n){const p=[];if(n.live&&n.live.length)p.push(n.live.join(' + ')+' live');if(n.archived)p.push(`site archive (${n.archived})`);return p.length?p.join(' + '):'site archive'}
 
   /* ---------- card HTML ---------- */
   const f1=v=>num(v)?v.toFixed(1):'–',f0=v=>num(v)?v.toFixed(0):'–',pct=v=>num(v)?Math.round(v*100)+'%':'–';

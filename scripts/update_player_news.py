@@ -7,7 +7,8 @@ Who gets a file: everyone rostered in a tracked Sleeper league, Sleeper's trendi
 fantasy scorers this season, so the Trade page has news for anyone worth trading for.
 
 Sources (each optional; a failure just leaves the old items in place):
-  - ESPN fantasy player news: up to 50 stories per player (often back to the previous offseason)
+  - Sleeper player news (RotoWire, FantasyPros, RotoBaller): the newest 10 per player, ~2-3 weeks
+  - ESPN fantasy player news: the newest ~8 per player (RotoWire blurbs + ESPN stories)
   - ESPN team news: up to 50 stories per team (for D/ST cards)
   - RotoWire's player-news RSS already saved in data/site/news.json, matched by name
 
@@ -100,8 +101,30 @@ def espn_team(team_id: str) -> list[dict]:
     return espn_items(j.get("articles"))
 
 
+SLEEPER_SRC = {"rotowire": "RotoWire", "fantasy_pros": "FantasyPros", "rotoballer": "RotoBaller"}
+
+
+def sleeper_items(arr) -> list[dict]:
+    out = []
+    for a in arr or []:
+        m = a.get("metadata") or {}
+        h = clean(re.sub(r"^.{3,40}? - ", "", m.get("title") or ""), 220)
+        if not h:
+            continue
+        s = clean(" ".join(x for x in [m.get("description"), m.get("analysis")] if x), 700)
+        d = datetime.fromtimestamp(a["published"] / 1000, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ") if a.get("published") else None
+        src = a.get("source") or ""
+        out.append({"h": h, "s": s, "d": d, "src": SLEEPER_SRC.get(src, src.replace("_", " ").title()), "url": m.get("url")})
+    return out
+
+
+def sleeper_player(sid: str) -> list[dict]:
+    return sleeper_items(get_json(f"https://api.sleeper.app/players/nfl/{sid}/news?limit=50"))
+
+
 def key(it: dict) -> str:
-    return (it.get("url") or "").split("?")[0].rstrip("/").lower() or re.sub(r"\W", "", it["h"].lower())
+    # headline, not URL: RotoWire links every blurb to the same player page
+    return re.sub(r"\W", "", it["h"].lower())[:80]
 
 
 def merge(old: list[dict], new: list[dict]) -> list[dict]:
@@ -174,6 +197,13 @@ def main() -> None:
     except Exception as e:  # noqa: BLE001
         print(f"[pnews] sleeper directory failed: {e}")
 
+    sleeper_ids: dict[str, str] = {}
+    try:
+        sm = json.loads((SITE / "sleeper_map.json").read_text())["map"]
+        sleeper_ids = {g: sid for sid, g in sm.items()}
+    except Exception:  # noqa: BLE001
+        pass
+
     # RotoWire blurbs already pulled by update_news.py ("Name: headline")
     rw: dict[str, list[dict]] = {}
     try:
@@ -190,6 +220,15 @@ def main() -> None:
     changed = fails = 0
     for i, g in enumerate(sorted(want)):
         new = list(rw.get(norm(names.get(g, "")), []))
+        sid = sleeper_ids.get(g)
+        if sid:
+            try:
+                new += sleeper_player(sid)
+            except Exception as ex:  # noqa: BLE001
+                fails += 1
+                if fails <= 5:
+                    print(f"[pnews] sleeper {names.get(g, g)}: {ex}")
+            time.sleep(0.08)
         e = ids.get(g)
         if e:
             try:
@@ -201,7 +240,7 @@ def main() -> None:
             time.sleep(0.12)
         if new or (OUT / f"{g}.json").exists():
             changed += save(g, names.get(g, g), new)
-    print(f"[pnews] players: {len(want)} checked, {changed} files changed, {fails} ESPN failures")
+    print(f"[pnews] players: {len(want)} checked, {changed} files changed, {fails} fetch failures")
 
     # defenses: every team (D/ST streamers are usually unrostered)
     try:

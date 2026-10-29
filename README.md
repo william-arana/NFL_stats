@@ -13,7 +13,7 @@ My fantasy football stats lab: NFL data from [nflverse](https://github.com/nflve
 | [Waivers](https://william-arana.github.io/NFL_stats/waivers.html) | Free agents in the selected Sleeper league ranked by a waiver score (recent xFP, PPR, snap/touch trends, matchup), my roster with likeliest drops, and D/ST streamers. |
 | [Trade](https://william-arana.github.io/NFL_stats/trade.html) | Two-sided trade comparison: pick players/defenses from any league roster or search, then compare FP/g, last 3, xFP, usage, weekly scores, rest-of-season schedule and news. Shareable link; "Copy for Claude" summary. |
 
-**Player & defense cards:** click any player or D/ST name (Waivers, Trade, Home trending, Stats opponents/teams) for weekly fantasy points, season stats, game log and news (`assets/cards.js`). News = the site's archive (`data/site/news/`, built by `scripts/update_player_news.py` 3× a day with the Sleeper job; grows all season) + ESPN's live per-player feed (direct, or via the Worker's free `GET /news` route).
+**Player & defense cards:** click any player or D/ST name (Waivers, Trade, Home trending, Stats opponents/teams) for weekly fantasy points, season stats, game log and news (`assets/cards.js`). News = the site's archive (`data/site/news/`, built by `scripts/update_player_news.py` 3× a day with the Sleeper job; grows all season) + the live per-player feeds from Sleeper (`api.sleeper.app/players/nfl/<id>/news`: RotoWire, FantasyPros, RotoBaller, newest 10) and ESPN (fantasy player news, newest ~8), both read straight from the browser.
 
 ## Leagues & theme
 
