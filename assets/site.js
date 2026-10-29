@@ -73,7 +73,7 @@
 
   /* "open player" link: small icon after a name; opens a menu with Sleeper, ESPN and copy-name */
   let IDS=null;const idsP=()=>IDS?Promise.resolve(IDS):fetch('data/site/ids.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).catch(()=>({})).then(j=>IDS=j);
-  function plink(id,name){if(!id||!name)return '';return `<button type="button" class="plink" data-pid="${esc(id)}" data-pname="${esc(name)}" aria-label="Open ${esc(name)} on Sleeper or ESPN" title="Open on Sleeper / ESPN">${EXT}</button>`}
+  function plink(id,name){if(!id||!name)return '';return `<button type="button" class="plink" data-pid="${esc(id)}" data-pname="${esc(name)}" aria-label="Open ${esc(name)} on Sleeper or ESPN" title="Sleeper / ESPN"><span class="slp" aria-hidden="true"></span></button>`}
   let menu=null,menuBtn=null;
   function closeMenu(){if(menu){menu.remove();menu=null}if(menuBtn){menuBtn.setAttribute('aria-expanded','false');menuBtn=null}}
   function copy(t){try{return navigator.clipboard.writeText(t)}catch(e){return Promise.reject(e)}}
