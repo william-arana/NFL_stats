@@ -8,7 +8,7 @@ My fantasy football stats lab: NFL data from [nflverse](https://github.com/nflve
 |---|---|
 | [Guide](https://william-arana.github.io/NFL_stats/) | Every nflverse dataset and all ~1,500 columns, by dataset or stat category. Pick stats and copy the list. |
 | [Stats](https://william-arana.github.io/NFL_stats/stats.html) | Players (fantasy / receiving / rushing / passing, per game or totals, any week range, game logs), Teams (offense, defense & D/ST, pass rush matchup), Defense vs position, Schedule & Vegas lines. |
-| Lab | *Coming:* build your own tables and pivots in the browser (DuckDB). |
+| [Lab](https://william-arana.github.io/NFL_stats/lab.html) | Build your own tables in the browser: point-and-click pivots, a SQL editor (DuckDB), 8 waiver recipes, charts, CSV export, saved queries. |
 | Waivers | *Coming:* models ranked against players available in my Sleeper leagues. |
 
 ## Data refresh
@@ -34,11 +34,23 @@ https://github.com/william-arana/NFL_stats/releases/download/data-latest/player_
 
 Load it to a sheet. Each Tuesday, hit **Data → Refresh All**. Google Sheets: `=IMPORTDATA("<same url>")`.
 
+## Lab tables
+
+| Table | One row per | Notes |
+|---|---|---|
+| `players` | offensive player per game | box score + snap % + expected points (`xfp`, `xfp_diff`) + PFR pressure/contact stats |
+| `teams` | team per game | offense, defense, D/ST points, pressures made/allowed, yards & EPA allowed |
+| `schedule` | game | Vegas spread/total, implied totals, weather, rest |
+| `games_long` | team per game | schedule flipped so every team has its own row: `team`, `opp`, `implied`, `opp_implied` |
+| `meta` | — | `season`, `last_completed_week`, `next_week` |
+
 ## Repo layout
 
 | Path | What it is |
 |---|---|
-| `index.html`, `stats.html` | Site pages |
+| `index.html`, `stats.html`, `lab.html` | Site pages |
+| `lab/recipes.sql` | Lab recipes. Add your own: a `-- @recipe id` line, `-- @title`, `-- @blurb`, then the SQL. |
+| `lab/init.sql` | Views created when the Lab loads (`games_long`) |
 | `assets/site.css` | Shared colors, fonts, nav |
 | `data/site/` | Compact JSON the Stats page reads (players, teams, schedule, meta + injuries) |
 | `data/catalog.json` | Catalog behind the Guide |
@@ -51,7 +63,7 @@ Run locally: `pip install -r requirements.txt && python scripts/update_data.py`,
 
 1. ~~Map everything nflverse offers~~ (Guide)
 2. ~~Weekly data pipeline + Stats board + Excel hookup~~
-3. Lab: in-browser pivots and stats (DuckDB)
+3. ~~Lab: in-browser pivots and stats (DuckDB)~~
 4. Sleeper league join → Waivers board
 5. Models: D/ST pressure matchups, usage risers, expected vs. actual points; backtest weekly
 6. Team news and press conference signals; Claude built into the site

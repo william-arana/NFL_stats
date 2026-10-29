@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>NFL Stats Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
+h1 span{color:var(--blue)}
+.lede{max-width:74ch;color:var(--ink-2);margin:0}
+.status{font-family:var(--f-mono);font-size:12px;color:var(--ink-3);margin-top:10px;display:flex;gap:8px;align-items:center}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.dot.ok{background:var(--good)}.dot.err{background:var(--margin)}
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px;padding-block:18px 60px}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+aside{display:grid;gap:14px;align-content:start}
+.box{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;box-shadow:var(--shadow)}
+.box h2{font-family:var(--f-display);font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.03em;margin:0;padding:10px 12px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:baseline}
+.box h2 small{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);text-transform:none;letter-spacing:0;font-weight:400}
+.list{max-height:320px;overflow:auto;padding:4px 0}
+.item{display:block;width:100%;text-align:left;border:0;background:none;font:inherit;color:var(--ink);padding:6px 12px;cursor:pointer;border-radius:0}
+.item:hover{background:var(--blue-soft)}
+.item small{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.35;margin-top:1px}
+.item.on{background:var(--blue-soft);box-shadow:inset 3px 0 0 var(--blue)}
+details.tbl summary{cursor:pointer;padding:6px 12px;font-weight:600;font-family:var(--f-mono);font-size:12.5px;list-style:none;display:flex;justify-content:space-between}
+details.tbl summary::-webkit-details-marker{display:none}
+details.tbl summary::before{content:"▸";margin-right:6px;color:var(--ink-3)}
+details.tbl[open] summary::before{content:"▾"}
+details.tbl summary span{font-weight:400;color:var(--ink-3);margin-left:auto}
+.cols{display:flex;flex-wrap:wrap;gap:3px;padding:2px 12px 10px}
+.col{font-family:var(--f-mono);font-size:11px;padding:1px 6px;border:1px solid var(--rule);border-radius:3px;background:var(--paper);color:var(--ink-2);cursor:pointer}
+.col:hover{border-color:var(--blue);color:var(--blue)}
+.col.n{color:var(--ink)}
+.saved-row{display:flex;align-items:center}
+.saved-row .item{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.x{border:0;background:none;color:var(--ink-3);cursor:pointer;padding:4px 10px;font-size:14px}
+.x:hover{color:var(--margin)}
+.muted{padding:8px 12px;color:var(--ink-3);font-size:12.5px}
+main{display:grid;gap:14px;min-width:0;align-content:start}
+main > *,.layout > *{min-width:0}
+.tabs{display:flex;gap:4px}
+.tabs button{font:600 13px var(--f-body);padding:8px 14px;border-radius:6px 6px 0 0;border:1px solid var(--rule);border-bottom:0;background:var(--paper);color:var(--ink-2);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--sheet);color:var(--ink);box-shadow:inset 0 3px 0 var(--margin)}
+.editor{border-radius:0 6px 6px 6px}
+.pv{display:grid;gap:12px;padding:14px 16px}
+.pv-row{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px;align-items:start}
+@media (max-width:600px){.pv-row{grid-template-columns:1fr}}
+.pv-row > label{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding-top:7px}
+.pv-row .hint{font-size:12px;color:var(--ink-3)}
+.line{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+select,input[type=text],input[type=number]{font:inherit;font-size:13px;padding:5px 8px;border:1px solid var(--rule);border-radius:6px;background:var(--paper);color:var(--ink);min-width:0;max-width:100%}
+.pill{display:inline-flex;align-items:center;gap:4px;font-family:var(--f-mono);font-size:12px;padding:3px 4px 3px 9px;border-radius:999px;background:var(--blue-soft);color:var(--blue)}
+.pill button{border:0;background:none;color:inherit;cursor:pointer;font-size:13px;padding:0 4px}
+.stack{display:grid;gap:6px}
+.btn{font:600 12.5px var(--f-body);border-radius:6px;padding:6px 12px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--ink)}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:var(--sheet)}
+.btn.ghost{background:none}
+.btn:disabled{opacity:.5;cursor:default}
+.sqlwrap{padding:12px 16px;display:grid;gap:10px}
+.recipe-note{background:var(--gold-soft);color:var(--ink);border-radius:6px;padding:9px 12px;font-size:13px;display:flex;gap:8px}
+.recipe-note b{font-family:var(--f-display);font-size:15px;text-transform:uppercase;letter-spacing:.02em}
+textarea{width:100%;min-height:220px;resize:vertical;font-family:var(--f-mono);font-size:12.5px;line-height:1.55;padding:10px 12px;border:1px solid var(--rule);border-radius:6px;background:var(--paper);color:var(--ink);tab-size:2}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bar .sp{flex:1}
+.kbd{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.err{color:var(--margin);font-family:var(--f-mono);font-size:12.5px;white-space:pre-wrap;padding:10px 16px}
+.res-h{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--rule)}
+.res-h .meta{font-size:12.5px;color:var(--ink-3)}
+.res-h .meta b{color:var(--ink)}
+.chk{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-2);cursor:pointer}
+.chk input{accent-color:var(--blue);margin:0}
+.tablewrap{overflow:auto;max-height:62vh}
+table{border-collapse:separate;border-spacing:0;width:100%;font-variant-numeric:tabular-nums;font-size:13px}
+th,td{padding:5px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;text-align:right}
+th{position:sticky;top:0;background:var(--sheet);font:600 11.5px var(--f-body);color:var(--ink-2);cursor:pointer;border-bottom:1.5px solid var(--ink-3);z-index:1}
+th[aria-sort]{color:var(--blue)}
+th[aria-sort="descending"]::after{content:" ▾"}th[aria-sort="ascending"]::after{content:" ▴"}
+td.t,th.t{text-align:left}
+td.i{color:var(--ink-3);font-family:var(--f-mono);font-size:11px}
+td.heat{background-image:linear-gradient(rgba(var(--heat),var(--a,0)),rgba(var(--heat),var(--a,0)))}
+td.neg{color:var(--bad)}
+tbody tr:hover td{background-color:color-mix(in srgb,var(--blue-soft) 55%,var(--sheet))}
+.chart{padding:12px 16px;border-top:1px solid var(--rule);display:grid;gap:10px}
+.chart svg{width:100%;height:auto;display:block}
+.chart text{fill:var(--ink-2);font-family:var(--f-mono);font-size:10.5px}
+.chart .grid{stroke:var(--rule)}
+.chart .mk{fill:var(--blue)}
+.chart .ln{fill:none;stroke:var(--blue);stroke-width:2}
+.chart .lbl{fill:var(--ink);font-family:var(--f-body);font-size:11px}
+.empty{padding:36px 16px;text-align:center;color:var(--ink-3)}
+.savebar{display:flex;gap:6px;align-items:center}
+</style>
+</head>
+<body>
+<header class="sitenav"><div class="wrap">
+  <a class="brand" href="./">NFL<span>_</span>stats</a>
+  <nav aria-label="Site"><a href="./">Guide</a><a href="stats.html">Stats</a><a href="lab.html" aria-current="page">Lab</a><span>Waivers<small>soon</small></span></nav>
+  <span class="upd" id="upd"></span>
+</div></header>
+
+<header class="top"><div class="wrap">
+  <h1>Stats <span>Lab</span></h1>
+  <p class="lede">Build your own tables and run stats on this season's data, all inside your browser. Start from a recipe on the left, click together a pivot, or write SQL. Every result can be sorted, shaded, charted and downloaded.</p>
+  <div class="status"><span class="dot" id="dot"></span><span id="status">Starting the database…</span></div>
+</div></header>
+
+<div class="wrap layout">
+  <aside>
+    <div class="box"><h2>Recipes <small>your waiver ideas</small></h2><div class="list" id="recipes"><div class="muted">Loading…</div></div></div>
+    <div class="box"><h2>Saved <small>this browser</small></h2><div class="list" id="saved"></div></div>
+    <div class="box"><h2>Tables <small>click a column to insert</small></h2><div id="tables"><div class="muted">Loading…</div></div></div>
+  </aside>
+
+  <main>
+    <div>
+      <div class="tabs" role="tablist">
+        <button role="tab" id="tab-pv" aria-selected="true">Pivot builder</button>
+        <button role="tab" id="tab-sql" aria-selected="false">SQL</button>
+      </div>
+      <div class="box editor">
+        <div id="pane-pv" class="pv"></div>
+        <div id="pane-sql" class="sqlwrap" hidden>
+          <div class="recipe-note" id="note" hidden></div>
+          <textarea id="sql" spellcheck="false" aria-label="SQL query"></textarea>
+          <div class="bar">
+            <button class="btn primary" id="run" disabled>Run</button><span class="kbd">Ctrl/⌘ + Enter</span>
+            <span class="sp"></span>
+            <div class="savebar"><input type="text" id="save-name" placeholder="Name this query" aria-label="Query name"><button class="btn" id="save">Save</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box" id="results"><div class="empty">Pick a recipe or build a pivot to see results here.</div></div>
+  </main>
+</div>
+
+<script type="module">
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem('nfls-'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('nfls-'+k,JSON.stringify(v))}catch(e){}}};
+const setStatus=(t,cls)=>{$('#status').textContent=t;$('#dot').className='dot '+(cls||'')};
+
+const TABLES={players:'One row per offensive player per game',teams:'One row per team per game, offense + defense',schedule:'One row per game, with Vegas lines',games_long:'Schedule with one row per team (team / opp / implied)',meta:'Season, last completed week, next week'};
+let conn, SCHEMA={}, RECIPES=[], META;
+
+/* ---------- boot ---------- */
+async function boot(){
+  try{
+    const duckdb=await import('https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.32.0/+esm');
+    const bundle=await duckdb.selectBundle(duckdb.getJsDelivrBundles());
+    const wurl=URL.createObjectURL(new Blob([`importScripts("${bundle.mainWorker}");`],{type:'text/javascript'}));
+    const db=new duckdb.AsyncDuckDB(new duckdb.VoidLogger(),new Worker(wurl));
+    await db.instantiate(bundle.mainModule,bundle.pthreadWorker);URL.revokeObjectURL(wurl);
+    conn=await db.connect();
+    setStatus('Loading season data…');
+    const get=n=>fetch('data/site/'+n,{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(n+' '+r.status);return r.json()});
+    const [p,t,s,m,initSql,recTxt]=await Promise.all([get('players.json'),get('teams.json'),get('schedule.json'),get('meta.json'),
+      fetch('lab/init.sql').then(r=>r.text()),fetch('lab/recipes.sql').then(r=>r.text())]);
+    META=m;
+    for(const [name,j] of [['players',p],['teams',t],['schedule',s]]){
+      const rows=new Array(j.rows);for(let i=0;i<j.rows;i++){const r={};for(const c of j.cols)r[c]=j.data[c][i];rows[i]=r}
+      await db.registerFileText(name+'.json',JSON.stringify(rows));
+      await conn.insertJSONFromPath(name+'.json',{name});
+    }
+    await conn.query(`CREATE TABLE meta AS SELECT ${+m.season} AS season, ${+m.last_completed_week} AS last_completed_week, ${+m.next_week} AS next_week`);
+    await conn.query(initSql);
+    for(const tname of Object.keys(TABLES)){const r=await conn.query(`DESCRIBE ${tname}`);SCHEMA[tname]=r.toArray().map(x=>({name:x.column_name,type:String(x.column_type)}))}
+    RECIPES=parseRecipes(recTxt);
+    $('#upd').textContent=`${m.season} · thru Wk ${m.last_completed_week}`;
+    setStatus(`Ready. ${p.rows.toLocaleString()} player-games, ${t.rows} team-games, ${s.rows} games loaded. Week ${m.next_week} is next.`,'ok');
+    $('#run').disabled=false;
+    drawTables();drawRecipes();drawSaved();drawPivot();
+    const first=store.get('lastRecipe','dst_pressure');const r=RECIPES.find(x=>x.id===first)||RECIPES[0];if(r)loadRecipe(r,false);
+  }catch(e){console.error(e);setStatus('Could not start: '+e.message,'err')}
+}
+function parseRecipes(txt){
+  return txt.split(/^-- @recipe /m).slice(1).map(b=>{const lines=b.split('\n');const id=lines[0].trim();const meta={};const body=[];
+    for(const l of lines.slice(1)){const m=l.match(/^-- @(\w+) (.*)$/);if(m)meta[m[1]]=m[2];else body.push(l)}
+    return {id,title:meta.title||id,blurb:meta.blurb||'',sql:body.join('\n').trim()}});
+}
+
+/* ---------- sidebar ---------- */
+const isNum=t=>/INT|DOUBLE|FLOAT|DECIMAL|REAL|BIGINT/i.test(t);
+function drawTables(){
+  $('#tables').innerHTML=Object.entries(TABLES).map(([t,d])=>`<details class="tbl" ${t==='players'?'open':''}><summary title="${esc(d)}">${t}<span>${SCHEMA[t].length}</span></summary>
+    <div class="cols">${SCHEMA[t].map(c=>`<button class="col ${isNum(c.type)?'n':''}" data-ins="${esc(c.name)}" title="${esc(c.type)}">${esc(c.name)}</button>`).join('')}</div></details>`).join('');
+  $('#tables').onclick=e=>{const b=e.target.closest('[data-ins]');if(!b)return;showTab('sql');insertAtCursor($('#sql'),b.dataset.ins)};
+}
+function insertAtCursor(ta,txt){const s=ta.selectionStart,e=ta.selectionEnd;ta.setRangeText(txt,s,e,'end');ta.focus()}
+function drawRecipes(){
+  $('#recipes').innerHTML=RECIPES.map(r=>`<button class="item" data-r="${r.id}">${esc(r.title)}</button>`).join('');
+  $('#recipes').onclick=e=>{const b=e.target.closest('[data-r]');if(!b)return;loadRecipe(RECIPES.find(r=>r.id===b.dataset.r),true)};
+}
+function markActive(id){document.querySelectorAll('#recipes .item,#saved .item').forEach(x=>x.classList.toggle('on',x.dataset.r===id||x.dataset.s===id))}
+function loadRecipe(r,switchTab){
+  store.set('lastRecipe',r.id);$('#sql').value=r.sql;$('#note').hidden=false;$('#note').innerHTML=`<div><b>${esc(r.title)}</b><br>${esc(r.blurb)}</div>`;
+  $('#save-name').value='';markActive(r.id);if(switchTab)showTab('sql');run(r.title);
+}
+function drawSaved(){
+  const s=store.get('saved',[]);
+  $('#saved').innerHTML=s.length?s.map((q,i)=>`<div class="saved-row"><button class="item" data-s="saved-${i}" data-i="${i}" title="${esc(q.name)}">${esc(q.name)}</button><button class="x" data-del="${i}" aria-label="Delete ${esc(q.name)}">×</button></div>`).join(''):'<div class="muted">Queries you save show up here.</div>';
+  $('#saved').onclick=e=>{const d=e.target.closest('[data-del]');const list=store.get('saved',[]);
+    if(d){const i=+d.dataset.del;if(d.dataset.armed){list.splice(i,1);store.set('saved',list);drawSaved()}else{d.dataset.armed=1;d.textContent='delete?';setTimeout(()=>{if(d.isConnected){delete d.dataset.armed;d.textContent='×'}},2500)}return}
+    const b=e.target.closest('[data-i]');if(!b)return;const q=list[+b.dataset.i];$('#sql').value=q.sql;$('#note').hidden=true;$('#save-name').value=q.name;markActive('saved-'+b.dataset.i);showTab('sql');run(q.name)};
+}
+$('#save').onclick=()=>{const name=$('#save-name').value.trim()||('Query '+new Date().toLocaleString());const list=store.get('saved',[]);const i=list.findIndex(q=>q.name===name);const q={name,sql:$('#sql').value};if(i>=0)list[i]=q;else list.push(q);store.set('saved',list);drawSaved();$('#save').textContent='Saved';setTimeout(()=>$('#save').textContent='Save',1500)};
+
+/* ---------- tabs ---------- */
+function showTab(t){$('#tab-pv').setAttribute('aria-selected',t==='pv');$('#tab-sql').setAttribute('aria-selected',t==='sql');$('#pane-pv').hidden=t!=='pv';$('#pane-sql').hidden=t!=='sql'}
+$('#tab-pv').onclick=()=>showTab('pv');$('#tab-sql').onclick=()=>showTab('sql');
+
+/* ---------- pivot builder ---------- */
+const AGGS=[['avg','Average'],['sum','Sum'],['count','Count'],['min','Min'],['max','Max'],['median','Median'],['stddev_samp','Std dev']];
+const OPS=[['=','='],['!=','≠'],['>','>'],['>=','≥'],['<','<'],['<=','≤'],['in','is one of'],['contains','contains']];
+const pv=store.get('pivot',{table:'players',groups:['player_display_name','position'],pivot:'',values:[{agg:'avg',col:'fantasy_points_ppr'},{agg:'avg',col:'xfp'},{agg:'avg',col:'offense_pct'}],filters:[{col:'position',op:'in',val:'RB, WR, TE'}],minN:3,limit:100});
+const qi=s=>'"'+String(s).replace(/"/g,'""')+'"';
+function drawPivot(){
+  const cols=SCHEMA[pv.table]||[];const opt=(sel,filt)=>cols.filter(c=>!filt||filt(c)).map(c=>`<option ${c.name===sel?'selected':''}>${esc(c.name)}</option>`).join('');
+  $('#pane-pv').innerHTML=`
+  <div class="pv-row"><label for="pv-t">Table</label><div class="line"><select id="pv-t">${Object.keys(TABLES).filter(t=>t!=='meta').map(t=>`<option ${t===pv.table?'selected':''}>${t}</option>`).join('')}</select><span class="hint">${esc(TABLES[pv.table])}</span></div></div>
+  <div class="pv-row"><label>Rows</label><div class="line">${pv.groups.map((g,i)=>`<span class="pill">${esc(g)}<button data-rg="${i}" aria-label="Remove ${esc(g)}">×</button></span>`).join('')}<select id="pv-addg"><option value="">+ group by…</option>${opt('',c=>!pv.groups.includes(c.name))}</select></div></div>
+  <div class="pv-row"><label for="pv-p">Columns</label><div class="line"><select id="pv-p"><option value="">(none)</option>${opt(pv.pivot,c=>!isNum(c.type)||/week/.test(c.name))}</select><span class="hint">Spread one field across columns, like week. Uses the first value below.</span></div></div>
+  <div class="pv-row"><label>Values</label><div class="stack">${pv.values.map((v,i)=>`<div class="line"><select data-va="${i}">${AGGS.map(([k,l])=>`<option value="${k}" ${k===v.agg?'selected':''}>${l}</option>`).join('')}</select> of <select data-vc="${i}">${opt(v.col,c=>isNum(c.type)||v.agg==='count')}</select><button class="btn ghost" data-rv="${i}" aria-label="Remove value">×</button></div>`).join('')}<div><button class="btn ghost" id="pv-addv">+ value</button></div></div></div>
+  <div class="pv-row"><label>Filters</label><div class="stack">${pv.filters.map((f,i)=>`<div class="line"><select data-fc="${i}">${opt(f.col)}</select><select data-fo="${i}">${OPS.map(([k,l])=>`<option value="${k}" ${k===f.op?'selected':''}>${l}</option>`).join('')}</select><input type="text" data-fv="${i}" value="${esc(f.val)}" placeholder="value" size="12"><button class="btn ghost" data-rf="${i}" aria-label="Remove filter">×</button></div>`).join('')}<div><button class="btn ghost" id="pv-addf">+ filter</button></div></div></div>
+  <div class="pv-row"><label for="pv-min">Options</label><div class="line">Only groups with at least <input type="number" id="pv-min" min="1" value="${pv.minN}" style="width:60px"> rows · show <input type="number" id="pv-lim" min="1" value="${pv.limit}" style="width:70px"> results</div></div>
+  <div class="pv-row"><span></span><div class="line"><button class="btn primary" id="pv-run">Build &amp; run</button><button class="btn" id="pv-sql">Open as SQL</button></div></div>`;
+  const P=$('#pane-pv');const save=()=>store.set('pivot',pv);
+  $('#pv-t').onchange=e=>{pv.table=e.target.value;const names=SCHEMA[pv.table].map(c=>c.name);pv.groups=pv.groups.filter(g=>names.includes(g));pv.values=pv.values.filter(v=>names.includes(v.col));if(!pv.values.length){const n=SCHEMA[pv.table].find(c=>isNum(c.type));pv.values=[{agg:'avg',col:n.name}]}pv.filters=pv.filters.filter(f=>names.includes(f.col));if(!names.includes(pv.pivot))pv.pivot='';save();drawPivot()};
+  $('#pv-addg').onchange=e=>{if(e.target.value){pv.groups.push(e.target.value);save();drawPivot()}};
+  $('#pv-p').onchange=e=>{pv.pivot=e.target.value;save()};
+  $('#pv-addv').onclick=()=>{pv.values.push({agg:'avg',col:SCHEMA[pv.table].find(c=>isNum(c.type)).name});save();drawPivot()};
+  $('#pv-addf').onclick=()=>{pv.filters.push({col:SCHEMA[pv.table][0].name,op:'=',val:''});save();drawPivot()};
+  $('#pv-min').oninput=e=>{pv.minN=Math.max(1,+e.target.value||1);save()};
+  $('#pv-lim').oninput=e=>{pv.limit=Math.max(1,+e.target.value||100);save()};
+  P.onclick=e=>{const t=e.target;if(t.dataset.rg!=null){pv.groups.splice(+t.dataset.rg,1);save();drawPivot()}else if(t.dataset.rv!=null){pv.values.splice(+t.dataset.rv,1);save();drawPivot()}else if(t.dataset.rf!=null){pv.filters.splice(+t.dataset.rf,1);save();drawPivot()}};
+  P.onchange=e=>{const t=e.target;if(t.dataset.va!=null){pv.values[+t.dataset.va].agg=t.value;save();drawPivot()}else if(t.dataset.vc!=null){pv.values[+t.dataset.vc].col=t.value;save()}else if(t.dataset.fc!=null){pv.filters[+t.dataset.fc].col=t.value;save()}else if(t.dataset.fo!=null){pv.filters[+t.dataset.fo].op=t.value;save()}};
+  P.oninput=e=>{const t=e.target;if(t.dataset.fv!=null){pv.filters[+t.dataset.fv].val=t.value;save()}};
+  $('#pv-run').onclick=()=>{$('#sql').value=pivotSQL();$('#note').hidden=true;markActive('');run('Pivot')};
+  $('#pv-sql').onclick=()=>{$('#sql').value=pivotSQL();$('#note').hidden=true;markActive('');showTab('sql')};
+}
+function lit(col,v){const c=SCHEMA[pv.table].find(x=>x.name===col);v=String(v).trim();if(c&&isNum(c.type)&&v!==''&&!isNaN(+v))return String(+v);if(/^(true|false)$/i.test(v)&&c&&/BOOL/i.test(c.type))return v.toUpperCase();return "'"+v.replace(/'/g,"''")+"'"}
+function pivotSQL(){
+  const where=pv.filters.filter(f=>f.val!==''&&f.col).map(f=>{const c=qi(f.col);
+    if(f.op==='in')return `${c} IN (${f.val.split(',').map(x=>lit(f.col,x)).join(', ')})`;
+    if(f.op==='contains')return `${c}::VARCHAR ILIKE ${lit('',`%${f.val}%`)}`;return `${c} ${f.op} ${lit(f.col,f.val)}`});
+  const vexpr=v=>v.agg==='count'?`count(${qi(v.col)})`:`round(${v.agg}(${qi(v.col)}), 3)`;
+  const vname=v=>`${v.agg==='stddev_samp'?'sd':v.agg}_${v.col}`;
+  const W=where.length?`\nWHERE ${where.join('\n  AND ')}`:'';
+  const H=pv.minN>1?`\nHAVING count(*) >= ${pv.minN}`:'';
+  if(pv.pivot&&pv.values.length){
+    const v=pv.values[0];
+    return `-- ${pv.groups.join(', ')||'all'} × ${pv.pivot}: ${vname(v)}\nPIVOT (\n  SELECT ${[...pv.groups,pv.pivot].map(qi).join(', ')}, ${qi(v.col)}\n  FROM ${pv.table}${W}\n)\nON ${qi(pv.pivot)}\nUSING ${v.agg==='count'?'count':v.agg}(${qi(v.col)})${pv.groups.length?`\nGROUP BY ${pv.groups.map(qi).join(', ')}`:''}\nLIMIT ${pv.limit};`;
+  }
+  const sel=[...pv.groups.map(qi),'count(*) AS n',...pv.values.map(v=>`${vexpr(v)} AS ${qi(vname(v))}`)];
+  return `SELECT ${sel.join(',\n       ')}\nFROM ${pv.table}${W}${pv.groups.length?`\nGROUP BY ${pv.groups.map(qi).join(', ')}`:''}${pv.groups.length?H:''}\nORDER BY ${pv.values.length?qi(vname(pv.values[0])):'n'} DESC NULLS LAST\nLIMIT ${pv.limit};`;
+}
+
+/* ---------- run + results ---------- */
+let RES={cols:[],rows:[],types:[]},rs={sort:null,dir:-1,heat:store.get('labHeat',true),chart:store.get('labChart','none'),x:null,y:null},lastTitle='';
+const toJS=v=>typeof v==='bigint'?Number(v):(v&&typeof v==='object'&&'valueOf' in v&&typeof v.valueOf()==='bigint')?Number(v.valueOf()):v;
+async function run(title){
+  if(!conn)return;const sql=$('#sql').value.trim();if(!sql)return;lastTitle=title||'Query';
+  $('#run').disabled=true;const t0=performance.now();
+  try{
+    const r=await conn.query(sql);
+    const fields=r.schema.fields;const cols=fields.map(f=>f.name);
+    const rows=r.toArray().map(row=>{const o=row.toJSON();for(const k in o){let v=toJS(o[k]);if(v instanceof Date)v=v.toISOString().slice(0,10);else if(v!=null&&typeof v==='object')v=String(v);o[k]=v}return o});
+    RES={cols,rows,ms:performance.now()-t0,num:cols.map(c=>rows.some(r=>typeof r[c]==='number')&&rows.every(r=>r[c]==null||typeof r[c]==='number'))};
+    rs.sort=null;rs.x=null;rs.y=null;drawResults();
+  }catch(e){$('#results').innerHTML=`<div class="res-h"><span class="meta"><b>${esc(lastTitle)}</b> didn't run</span></div><div class="err">${esc(e.message)}</div>`}
+  finally{$('#run').disabled=false}
+}
+$('#run').onclick=()=>run($('#save-name').value||'Query');
+$('#sql').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();run($('#save-name').value||'Query')}if(e.key==='Tab'&&!e.shiftKey){e.preventDefault();insertAtCursor(e.target,'  ')}});
+
+function colDec(c){const vals=RES.rows.map(r=>r[c]).filter(v=>typeof v==='number');if(vals.every(Number.isInteger))return 0;const m=Math.max(...vals.map(Math.abs));const dec=v=>{const s=String(v);const i=s.indexOf('.');return i<0?0:s.length-i-1};const maxd=Math.max(...vals.map(dec));return Math.min(maxd,m>=100?0:m>=10?1:2)}
+function fmtv(v,d){if(v==null)return '<span style="color:var(--ink-3)">–</span>';if(typeof v==='number')return v.toFixed(d??2);if(typeof v==='boolean')return v?'yes':'no';return esc(v)}
+function drawResults(){
+  const {cols,rows,num}=RES;let data=rows.slice();
+  if(rs.sort){const i=cols.indexOf(rs.sort);data.sort((a,b)=>{const x=a[rs.sort],y=b[rs.sort];if(x==null)return 1;if(y==null)return -1;return typeof x==='number'?rs.dir*(x-y):rs.dir*String(x).localeCompare(String(y))})}
+  const heat={};if(rs.heat)cols.forEach((c,i)=>{if(!num[i])return;const vals=rows.map(r=>r[c]).filter(v=>typeof v==='number').sort((a,b)=>a-b);if(vals.length<3||vals[0]===vals[vals.length-1])return;heat[c]=v=>{let lo=0,hi=vals.length;while(lo<hi){const m=(lo+hi)>>1;vals[m]<v?lo=m+1:hi=m}return lo/(vals.length-1)*.5}});
+  const LIM=1000;const DEC={};cols.forEach((c,i)=>{if(num[i])DEC[c]=colDec(c)});
+  const numCols=cols.filter((c,i)=>num[i]),txtCols=cols.filter((c,i)=>!num[i]);
+  if(!rs.x)rs.x=txtCols[0]||cols[0];if(!rs.y)rs.y=numCols[numCols.length-1]||numCols[0];
+  $('#results').innerHTML=`<div class="res-h"><span class="meta"><b>${esc(lastTitle)}</b> · <b>${rows.length.toLocaleString()}</b> rows · ${RES.ms.toFixed(0)} ms</span><span style="flex:1"></span>
+    <label class="chk" for="r-heat"><input type="checkbox" id="r-heat" ${rs.heat?'checked':''}>Shading</label>
+    <select id="r-chart" aria-label="Chart type"><option value="none">No chart</option><option value="bar" ${rs.chart==='bar'?'selected':''}>Bar chart</option><option value="scatter" ${rs.chart==='scatter'?'selected':''}>Scatter</option><option value="line" ${rs.chart==='line'?'selected':''}>Line</option></select>
+    <button class="btn" id="r-csv">Download CSV</button></div>
+  ${rs.chart!=='none'&&numCols.length?`<div class="chart"><div class="line">${rs.chart==='bar'||rs.chart==='line'?'Label':'X'} <select id="c-x">${(rs.chart==='scatter'?numCols:cols).map(c=>`<option ${c===rs.x?'selected':''}>${esc(c)}</option>`).join('')}</select> Y <select id="c-y">${numCols.map(c=>`<option ${c===rs.y?'selected':''}>${esc(c)}</option>`).join('')}</select>${rs.chart==='bar'?'<span class="kbd">top 25 by Y</span>':''}</div><div id="c-svg"></div></div>`:''}
+  ${rows.length?`<div class="tablewrap"><table><thead><tr><th class="t">#</th>${cols.map((c,i)=>`<th class="${num[i]?'':'t'}" data-c="${esc(c)}" ${rs.sort===c?`aria-sort="${rs.dir<0?'descending':'ascending'}"`:''}>${esc(c)}</th>`).join('')}</tr></thead><tbody>${
+    data.slice(0,LIM).map((r,j)=>`<tr><td class="i t">${j+1}</td>${cols.map((c,i)=>{const v=r[c];const a=heat[c]&&typeof v==='number'?heat[c](v):0;return `<td class="${num[i]?'':'t'} ${a?'heat':''} ${typeof v==='number'&&v<0?'neg':''}" ${a?`style="--a:${a.toFixed(3)}"`:''}>${fmtv(v,DEC[c])}</td>`}).join('')}</tr>`).join('')}</tbody></table></div>${rows.length>LIM?`<div class="muted">Showing ${LIM} of ${rows.length}. Download CSV for everything.</div>`:''}`:'<div class="empty">The query ran but returned no rows.</div>'}`;
+  $('#r-heat').onchange=e=>{rs.heat=e.target.checked;store.set('labHeat',rs.heat);drawResults()};
+  $('#r-chart').onchange=e=>{rs.chart=e.target.value;store.set('labChart',rs.chart);rs.x=null;drawResults()};
+  $('#r-csv').onclick=()=>{const out=[cols.join(',')].concat(data.map(r=>cols.map(c=>{const v=r[c];if(v==null)return '';if(typeof v==='number')return String(v);return '"'+String(v).replace(/"/g,'""')+'"'}).join(','))).join('\n');
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([out],{type:'text/csv'}));a.download=(lastTitle||'query').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'')+'.csv';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)};
+  const th=$('#results thead');if(th)th.onclick=e=>{const h=e.target.closest('th[data-c]');if(!h)return;const c=h.dataset.c;if(rs.sort===c)rs.dir*=-1;else{rs.sort=c;rs.dir=RES.num[cols.indexOf(c)]?-1:1}drawResults()};
+  if($('#c-x')){$('#c-x').onchange=e=>{rs.x=e.target.value;drawChart(data)};$('#c-y').onchange=e=>{rs.y=e.target.value;drawChart(data)};
+    if(rs.chart==='scatter'&&!numCols.includes(rs.x))rs.x=numCols[0];drawChart(data)}
+}
+function nice(lo,hi,n=5){if(lo===hi){lo-=1;hi+=1}const step=Math.pow(10,Math.floor(Math.log10((hi-lo)/n)));const s=[1,2,2.5,5,10].map(m=>m*step).find(s=>(hi-lo)/s<=n)||step*10;const a=Math.floor(lo/s)*s,b=Math.ceil(hi/s)*s;const t=[];for(let v=a;v<=b+s/2;v+=s)t.push(+v.toFixed(10));return t}
+function drawChart(data){
+  const el=$('#c-svg');if(!el)return;const X=rs.x,Y=rs.y;const W=760,H=320,L=56,R=16,T=12,B=rs.chart==='scatter'?36:80;
+  let pts=data.filter(r=>typeof r[Y]==='number');
+  if(rs.chart==='bar')pts=[...pts].sort((a,b)=>b[Y]-a[Y]).slice(0,25);
+  if(!pts.length){el.innerHTML='<div class="muted">Nothing to chart for that column.</div>';return}
+  const ys=pts.map(r=>r[Y]);const yt=nice(Math.min(0,...ys),Math.max(0,...ys));const y0=yt[0],y1=yt[yt.length-1];const sy=v=>T+(H-T-B)*(1-(v-y0)/(y1-y0));
+  let g=yt.map(v=>`<line class="grid" x1="${L}" x2="${W-R}" y1="${sy(v)}" y2="${sy(v)}"/><text x="${L-6}" y="${sy(v)+3.5}" text-anchor="end">${+v.toFixed(2)}</text>`).join('');
+  let body='';
+  if(rs.chart==='scatter'){
+    const xs=pts.map(r=>r[X]).filter(v=>typeof v==='number');if(!xs.length){el.innerHTML='<div class="muted">Pick a numeric X.</div>';return}
+    const xt=nice(Math.min(...xs),Math.max(...xs));const x0=xt[0],x1=xt[xt.length-1];const sx=v=>L+(W-L-R)*(v-x0)/(x1-x0);
+    g+=xt.map(v=>`<text x="${sx(v)}" y="${H-B+16}" text-anchor="middle">${+v.toFixed(2)}</text>`).join('')+`<text x="${(L+W-R)/2}" y="${H-4}" text-anchor="middle">${esc(X)}</text>`;
+    const lab=RES.cols.find((c,i)=>!RES.num[i]);
+    const top=new Set([...pts].sort((a,b)=>b[Y]-a[Y]).slice(0,6));
+    body=pts.filter(r=>typeof r[X]==='number').map(r=>`<circle class="mk" cx="${sx(r[X]).toFixed(1)}" cy="${sy(r[Y]).toFixed(1)}" r="3.5" opacity=".75"><title>${esc(lab?r[lab]+': ':'')}${X} ${r[X]}, ${Y} ${r[Y]}</title></circle>${lab&&top.has(r)?(sx(r[X])>W*.7?`<text class="lbl" x="${(sx(r[X])-6).toFixed(1)}" y="${(sy(r[Y])-6).toFixed(1)}" text-anchor="end">${esc(r[lab])}</text>`:`<text class="lbl" x="${(sx(r[X])+6).toFixed(1)}" y="${(sy(r[Y])-6).toFixed(1)}">${esc(r[lab])}</text>`):''}`).join('');
+  }else{
+    const n=pts.length,bw=(W-L-R)/n;const cx=i=>L+bw*i+bw/2;
+    g+=pts.map((r,i)=>`<text transform="translate(${cx(i).toFixed(1)},${H-B+10}) rotate(-45)" text-anchor="end">${esc(String(r[X]).slice(0,18))}</text>`).join('');
+    if(rs.chart==='bar')body=pts.map((r,i)=>{const y=sy(Math.max(0,r[Y])),h=Math.abs(sy(r[Y])-sy(0));return `<rect class="mk" x="${(cx(i)-bw*.35).toFixed(1)}" y="${y.toFixed(1)}" width="${(bw*.7).toFixed(1)}" height="${Math.max(1,h).toFixed(1)}" rx="2"><title>${esc(r[X])}: ${r[Y]}</title></rect>`}).join('');
+    else body=`<path class="ln" d="${pts.map((r,i)=>(i?'L':'M')+cx(i).toFixed(1)+' '+sy(r[Y]).toFixed(1)).join('')}"/>`+pts.map((r,i)=>`<circle class="mk" cx="${cx(i).toFixed(1)}" cy="${sy(r[Y]).toFixed(1)}" r="3"><title>${esc(r[X])}: ${r[Y]}</title></circle>`).join('');
+  }
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(Y)} chart">${g}<line class="grid" x1="${L}" x2="${W-R}" y1="${sy(0)}" y2="${sy(0)}" style="stroke:var(--ink-3)"/>${body}</svg>`;
+}
+boot();
+</script>
+</body>
+</html>
