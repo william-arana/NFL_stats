@@ -20,15 +20,16 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{margin:0}
+html{background:var(--nav-bg)}
 body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.5;
-  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+  padding-bottom:env(safe-area-inset-bottom,0px)}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 code{font-family:var(--f-mono);font-size:.92em}
 a{color:var(--blue)}
 input:focus-visible,button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
 
 /* site nav */
-.sitenav{background:var(--nav-bg);color:var(--nav-fg)}
+.sitenav{background:var(--nav-bg);color:var(--nav-fg);padding-top:env(safe-area-inset-top,0px)}
 .sitenav .wrap{display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap;padding-block:8px}
 .sitenav .brand{font-family:var(--f-display);font-weight:800;font-size:20px;letter-spacing:.02em;text-transform:uppercase;color:var(--nav-fg);text-decoration:none;margin-right:6px}
 .sitenav .brand span{color:var(--margin)}
@@ -70,3 +71,13 @@ a.av{text-decoration:none}a.av:hover{text-decoration:underline}
 .pmenu a:hover,.pmenu button:hover{background:var(--blue-soft);color:var(--blue)}
 .pmenu small{display:block;font-size:11px;color:var(--ink-3)}
 .navtools select optgroup{font-weight:600}
+
+/* phones: keep the frozen name column narrow so the stats get the room */
+@media (max-width:640px){
+  .tablewrap th.stick,.tablewrap td.stick{white-space:normal;width:34vw;min-width:34vw;max-width:34vw;font-size:12.5px;line-height:1.25;padding-left:8px;padding-right:6px;word-break:break-word}
+  .tablewrap td.stick .pname{font-size:12.5px;text-align:left}
+  .tablewrap td.stick .pos,.tablewrap td.stick .av,.tablewrap td.stick .inj{font-size:9.5px}
+  .tablewrap td.stick .av{margin-left:3px}
+  .tablewrap td.stick .plink{width:18px;height:18px;margin-left:2px}
+  .tablewrap .rank{width:22px;padding-left:4px;padding-right:2px}
+}
