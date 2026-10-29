@@ -11,6 +11,9 @@ My fantasy football stats lab: NFL data from [nflverse](https://github.com/nflve
 | [Stats](https://william-arana.github.io/NFL_stats/stats.html) | Players (fantasy / receiving / rushing / passing, per game or totals, any week range, game logs), Teams (offense, defense & D/ST, pass rush matchup), Defense vs position, Schedule & Vegas lines. |
 | [Lab](https://william-arana.github.io/NFL_stats/lab.html) | Build your own tables in the browser: point-and-click pivots, a SQL editor (DuckDB), 8 waiver recipes, charts, CSV export, saved queries. |
 | [Waivers](https://william-arana.github.io/NFL_stats/waivers.html) | Free agents in the selected Sleeper league ranked by a waiver score (recent xFP, PPR, snap/touch trends, matchup), my roster with likeliest drops, and D/ST streamers. |
+| [Trade](https://william-arana.github.io/NFL_stats/trade.html) | Two-sided trade comparison: pick players/defenses from any league roster or search, then compare FP/g, last 3, xFP, usage, weekly scores, rest-of-season schedule and news. Shareable link; "Copy for Claude" summary. |
+
+**Player & defense cards:** click any player or D/ST name (Waivers, Trade, Home trending, Stats opponents/teams) for weekly fantasy points, season stats, game log and news (`assets/cards.js`). News = the site's archive (`data/site/news/`, built by `scripts/update_player_news.py` 3× a day with the Sleeper job; grows all season) + ESPN's live per-player feed (direct, or via the Worker's free `GET /news` route).
 
 ## Leagues & theme
 
@@ -64,6 +67,9 @@ Load it to a sheet. Each Tuesday, hit **Data → Refresh All**. Google Sheets: `
 | `assets/site.css` | Shared colors, fonts, nav |
 | `data/site/` | Compact JSON the site reads: players, teams, schedule, defenders, meta + injuries, Sleeper rosters + id map |
 | `assets/site.js` | Theme toggle, league picker, Sleeper roster lookups |
+| `assets/cards.js` | Clickable player + defense cards (stats, game log, news) on every page |
+| `scripts/update_player_news.py` | Per-player / per-defense news archive → `data/site/news/*.json` |
+| `trade.html` | Trade analyzer |
 | `scripts/update_sleeper.py` | Sleeper rosters → `data/site/leagues.json`, `sleeper_map.json` |
 | `data/catalog.json` | Catalog behind the Guide |
 | `scripts/update_data.py` | Weekly data pull → CSVs, master.xlsx, site JSON |

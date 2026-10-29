@@ -33,6 +33,7 @@
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js" defer></script>
+<script src="assets/cards.js" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -107,29 +108,13 @@ tr.log td.l{padding-left:26px;font-family:var(--f-mono)}
 .opp:hover,.opp[aria-expanded="true"]{background:var(--blue-soft);color:var(--blue)}
 .mrk{display:inline-block;min-width:24px;font-family:var(--f-mono);font-size:10px;padding:0 4px;border-radius:3px;margin-left:4px;text-align:center}
 .mrk.good{background:var(--good-soft);color:var(--good)}.mrk.bad{background:var(--margin-soft);color:var(--margin)}.mrk.mid{background:var(--head);color:var(--ink-2)}
-.pop{position:absolute;z-index:50;width:min(380px,calc(100vw - 24px));background:var(--sheet);border:1px solid var(--rule);border-radius:8px;box-shadow:0 12px 32px rgba(11,21,40,.22);font-size:12.5px}
-.pop h3{margin:0;font-family:var(--f-display);font-size:22px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:baseline;padding:10px 14px 8px;border-bottom:1px solid var(--rule);background:var(--head);border-radius:8px 8px 0 0}
-.pop h3 small{font-family:var(--f-mono);font-size:11px;color:var(--ink-2);text-transform:none}
-.pop section{padding:8px 14px;border-bottom:1px solid var(--rule)}
-.pop section:last-child{border-bottom:0}
-.pop h4{margin:0 0 5px;font-family:var(--f-mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
-.pop table{font-size:12px}
-.pop td,.pop th{padding:3px 6px;position:static;border-bottom:1px solid var(--rule);background:none!important}
-.pop tr:last-child td{border-bottom:0}
-.pop .dvp{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.pop .dvp div{background:var(--paper);border-radius:5px;padding:6px 8px;text-align:center}
-.pop .dvp b{display:block;font-family:var(--f-display);font-size:20px;line-height:1.1}
-.pop .dvp span{font-family:var(--f-mono);font-size:10px;color:var(--ink-3)}
-.pop .note{font-size:11px;color:var(--ink-3)}
-.pop .close{position:absolute;top:8px;right:8px;border:0;background:none;color:var(--ink-3);font-size:16px;cursor:pointer;display:none}
-@media (max-width:640px){.pop .close{display:block}.pop h3{padding-right:34px}}
-@media (max-width:640px){.ctl input[type=search]{width:140px}}
+@media (max-width:640px){@media (max-width:640px){.ctl input[type=search]{width:140px}}
 </style>
 </head>
 <body>
 <header class="sitenav"><div class="wrap">
   <a class="brand" href="./" title="Home">NFL<span>_</span>stats</a>
-  <nav aria-label="Site"><a href="./">Home</a><a href="guide.html">Guide</a><a href="stats.html" aria-current="page">Stats</a><a href="lab.html">Lab</a><a href="waivers.html">Waivers</a></nav>
+  <nav aria-label="Site"><a href="./">Home</a><a href="guide.html">Guide</a><a href="stats.html" aria-current="page">Stats</a><a href="lab.html">Lab</a><a href="waivers.html">Waivers</a><a href="trade.html">Trade</a></nav>
   <span class="upd" id="upd"></span>
   <div class="navtools" id="navtools"></div>
 </div></header>
@@ -163,7 +148,7 @@ hookLeague();
 const avail=id=>ROST?ROST.status(id):null;
 function avBadge(id,name){const s=avail(id);return (s==='fa'||s==='mine')?NFLS.badge(s,ROST.league,name):''}
 Promise.all(['players','teams','schedule','meta'].map(n=>fetch('data/site/'+n+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(n);return r.json()})).concat([fetch('data/site/defenders.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null)]))
-.then(([p,t,g,m,dj])=>{P=rows(p);T=rows(t);G=rows(g);META=m;INJ=m.injuries||{};DEF=dj?rows(dj):[];
+.then(([p,t,g,m,dj])=>{P=rows(p);T=rows(t);G=rows(g);META=m;INJ=m.injuries||{};DEF=dj?rows(dj):[];(function give(){if(!window.NFLSCards)return setTimeout(give,50);NFLSCards.provide({P,T,G,META,INJ,DEF})})();
   const d=new Date(m.updated_utc.replace('Z',':00Z'));
   $('#upd').textContent=`${m.season} · thru Wk ${m.last_completed_week} · updated ${d.toLocaleDateString(undefined,{month:'short',day:'numeric'})}`;
   route();
@@ -205,46 +190,7 @@ function rkClass(rk,n){return rk<=8?'good':rk>n-8?'bad':'mid'}
 function oppBtn(team,label,pos){const d=dvpSeason()[team];const rk=d&&pos&&d[pos]?d[pos].rk:null;const n=Object.keys(dvpSeason()).length;
   return `<button class="opp" data-opp="${team}" data-pos="${pos||''}" aria-expanded="false">${label}</button>${rk?`<span class="mrk ${rkClass(rk,n)}" title="${team} allows the ${ord(rk)}-most PPR points to ${pos}s">${ord(rk)}</span>`:''}`}
 const ord=n=>n+(['th','st','nd','rd'][(n%100>10&&n%100<14)?0:Math.min(n%10,4)%4]||'th');
-function teamDefense(team){
-  const rowsT=T.filter(r=>r.team===team);const n=rowsT.length||1;const sum=k=>rowsT.reduce((a,r)=>a+(num(r[k])?r[k]:0),0);
-  const per=k=>sum(k)/n;
-  const all=[...new Set(T.map(r=>r.team))].map(t=>{const rr=T.filter(r=>r.team===t),m=rr.length||1,s=k=>rr.reduce((a,r)=>a+(num(r[k])?r[k]:0),0)/m;return {t,pa:s('points_against'),ya:s('yards_allowed'),pr:s('def_pressures'),sk:s('def_sacks'),tk:s('def_interceptions')+s('fumble_recovery_opp'),dst:s('dst_pts')}});
-  const rank=(k,desc)=>[...all].sort((a,b)=>desc?b[k]-a[k]:a[k]-b[k]).findIndex(x=>x.t===team)+1;
-  const w=rowsT.filter(r=>num(r.points_for));const rec=`${w.filter(r=>r.points_for>r.points_against).length}-${w.filter(r=>r.points_for<r.points_against).length}`;
-  return {rec,g:rowsT.length,pa:per('points_against'),ya:per('yards_allowed'),pya:per('pass_yards_allowed'),rya:per('rush_yards_allowed'),pr:per('def_pressures'),sk:per('def_sacks'),tk:per('def_interceptions')+per('fumble_recovery_opp'),dst:per('dst_pts'),
-    rk:{pa:rank('pa',false),ya:rank('ya',false),pr:rank('pr',true),sk:rank('sk',true),tk:rank('tk',true),dst:rank('dst',true)},n:all.length};
-}
-function popHTML(team,pos){
-  const d=dvpSeason()[team],td=teamDefense(team),n=Object.keys(dvpSeason()).length;
-  const cov=DEF.filter(x=>x.team===team&&x.tgt>=8).sort((a,b)=>b.yds-a.yds).slice(0,4);
-  const rush=DEF.filter(x=>x.team===team&&x.prs>0).sort((a,b)=>b.prs-a.prs).slice(0,3);
-  const nx=nextOppOf(team);
-  const cell=(p)=>`<div style="${p===pos?'box-shadow:inset 0 0 0 2px var(--blue)':''}"><span>${p}</span><b>${d?d[p].v.toFixed(1):'–'}</b><span class="mrk ${d?rkClass(d[p].rk,n):'mid'}">${d?ord(d[p].rk):''}</span></div>`;
-  const rk=(r,label)=>`<span class="mrk ${rkClass(r,td.n)}" title="${label}">${ord(r)}</span>`;
-  return `<button class="close" aria-label="Close">×</button><h3>${team} defense<small>${td.rec} · ${td.g} games${nx?` · Wk ${META.next_week} ${nx.at?'@':'vs'} ${nx.opp}`:''}</small></h3>
-  <section><h4>PPR points allowed per game · rank (1st = gives up most)</h4><div class="dvp">${['QB','RB','WR','TE'].map(cell).join('')}</div></section>
-  <section><h4>Team defense per game</h4><table><tbody>
-    <tr><td class="l">Points allowed</td><td>${td.pa.toFixed(1)}</td><td>${rk(td.rk.pa,'1st = fewest allowed')}</td><td class="l">Pressures</td><td>${td.pr.toFixed(1)}</td><td>${rk(td.rk.pr,'1st = most')}</td></tr>
-    <tr><td class="l">Yards allowed</td><td>${td.ya.toFixed(0)}</td><td>${rk(td.rk.ya,'1st = fewest allowed')}</td><td class="l">Sacks</td><td>${td.sk.toFixed(1)}</td><td>${rk(td.rk.sk,'1st = most')}</td></tr>
-    <tr><td class="l">Pass / rush yds</td><td>${td.pya.toFixed(0)} / ${td.rya.toFixed(0)}</td><td></td><td class="l">Takeaways</td><td>${td.tk.toFixed(1)}</td><td>${rk(td.rk.tk,'1st = most')}</td></tr>
-    <tr><td class="l">D/ST points</td><td>${td.dst.toFixed(1)}</td><td>${rk(td.rk.dst,'1st = most')}</td><td></td><td></td><td></td></tr>
-  </tbody></table><div class="note">Defense ranks: green = strong defense (tough matchup), red = weak.</div></section>
-  ${cov.length?`<section><h4>Coverage: most yards allowed</h4><table><thead><tr><th class="l">Defender</th><th>Tgt</th><th>Yds</th><th>TD</th><th>Rtg</th></tr></thead><tbody>${cov.map(x=>`<tr><td class="l">${esc(x.name)} <span class="pos">${esc(x.pos||'')}</span></td><td>${x.tgt}</td><td>${x.yds}</td><td>${x.td}</td><td>${num(x.rating)?x.rating.toFixed(0):'–'}</td></tr>`).join('')}</tbody></table></section>`:''}
-  ${rush.length?`<section><h4>Pass rush leaders</h4><table><tbody>${rush.map(x=>`<tr><td class="l">${esc(x.name)} <span class="pos">${esc(x.pos||'')}</span></td><td>${x.prs} pressures</td><td>${x.sk} sacks</td></tr>`).join('')}</tbody></table></section>`:''}`;
-}
-let popEl=null,popBtn=null;
-function closePop(){if(popEl){popEl.remove();popEl=null}if(popBtn){popBtn.setAttribute('aria-expanded','false');popBtn=null}}
-document.addEventListener('click',e=>{
-  const b=e.target.closest('.opp');
-  if(b){e.stopPropagation();if(popBtn===b){closePop();return}closePop();popBtn=b;b.setAttribute('aria-expanded','true');
-    popEl=document.createElement('div');popEl.className='pop';popEl.setAttribute('role','dialog');popEl.innerHTML=popHTML(b.dataset.opp,b.dataset.pos);document.body.appendChild(popEl);
-    const r=b.getBoundingClientRect(),w=popEl.offsetWidth,h=popEl.offsetHeight;let left=r.left+window.scrollX;left=Math.min(left,window.scrollX+document.documentElement.clientWidth-w-12);left=Math.max(window.scrollX+12,left);
-    let top=r.bottom+window.scrollY+6;if(r.bottom+h+12>window.innerHeight&&r.top-h-6>0)top=r.top+window.scrollY-h-6;
-    popEl.style.left=left+'px';popEl.style.top=top+'px';popEl.querySelector('.close').onclick=closePop;return}
-  if(popEl&&!popEl.contains(e.target))closePop();
-});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closePop()});
-window.addEventListener('hashchange',closePop);
+/* the defense card itself (opened by any .opp button) lives in assets/cards.js, shared with every page */
 
 /* ---------- PLAYERS ---------- */
 const SCORING={ppr:{k:'fantasy_points_ppr',label:'PPR'},half:{k:'fantasy_points_half',label:'Half'},std:{k:'fantasy_points',label:'Std'}};
@@ -332,7 +278,7 @@ function Players(){
     <span class="spacer"></span><label class="chk" for="p-heat"><input type="checkbox" id="p-heat" ${ps.heat?'checked':''}>Shading</label><button class="btn" id="p-csv">Download CSV</button></div>
   <div class="summary" id="p-sum"></div>
   <div class="tablewrap"><table id="p-tbl"></table></div>
-  <div class="foot"><span>Click a player for their game log. Click an opponent for that defense's season profile.</span><span>The colored rank next to an opponent is how many PPR points they allow to that position: green = top-8 most allowed (good matchup), red = bottom-8.</span>${ROST?`<span><span class="av fa">FA</span> = free agent in ${esc(ROST.league.name)} (${ROST.source==="live"?"live from Sleeper":"as of "+new Date(ROST.updated).toLocaleString(undefined,{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})})</span>`:""}<span>xFP and PPR − xFP use PPR scoring regardless of the toggle.</span><span>Pressure, YBC and broken tackles come from PFR advanced stats.</span></div>`;
+  <div class="foot"><span>Click a player for their game log. Click an opponent for that defense's card.</span><span>The colored rank next to an opponent is how many PPR points they allow to that position: green = top-8 most allowed (good matchup), red = bottom-8.</span>${ROST?`<span><span class="av fa">FA</span> = free agent in ${esc(ROST.league.name)} (${ROST.source==="live"?"live from Sleeper":"as of "+new Date(ROST.updated).toLocaleString(undefined,{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})})</span>`:""}<span>xFP and PPR − xFP use PPR scoring regardless of the toggle.</span><span>Pressure, YBC and broken tackles come from PFR advanced stats.</span></div>`;
   const re=()=>{store.set('pos',ps.pos);store.set('mode',ps.mode);store.set('scoring',ps.scoring);store.set('set',ps.set);store.set('minG',ps.minG);store.set('heat',ps.heat);drawPlayers()};
   $('#p-pos').onclick=e=>{const b=e.target.closest('button');if(!b)return;ps.pos=b.dataset.v;$('#p-pos').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));re()};
   $('#p-mode').onclick=e=>{const b=e.target.closest('button');if(!b)return;ps.mode=b.dataset.v;$('#p-mode').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));re()};
@@ -414,7 +360,7 @@ function drawTeams(){
   const heat=ts.heat?heatAlpha(data,set.cols):{};
   $('#t-sum').innerHTML=`<span><b>${data.length}</b> teams</span><span>Weeks <b>${ts.w0}–${ts.w1}</b>, ${ts.mode==='pg'?'per game':'totals'}</span><span>Week ${META.next_week} opponent shown</span>`;
   $('#t-tbl').innerHTML=`<thead><tr><th class="rank">#</th><th class="l stick" data-k="team">Team</th><th class="l" data-k="rec">Record</th><th class="l" data-k="next">Wk ${META.next_week}</th>${set.cols.map(c=>`<th data-k="${c.k}" ${c.tip?`title="${esc(c.tip)}"`:''} ${sk===c.k?`aria-sort="${ts.dir<0?'descending':'ascending'}"`:''}>${esc(c.label)}</th>`).join('')}</tr></thead><tbody>${
-    data.map((a,i)=>`<tr><td class="rank">${i+1}</td><td class="l stick"><b>${a.team}</b></td><td class="l">${a.rec}</td><td class="l">${a.next}</td>${set.cols.map(c=>{const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;return `<td class="${al?'heat':''}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${fmt(v,c.d)}</td>`}).join('')}</tr>`).join('')}</tbody>`;
+    data.map((a,i)=>`<tr><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="pname" data-card="d:${a.team}" aria-expanded="false">${a.team}</button></td><td class="l">${a.rec}</td><td class="l">${a.next}</td>${set.cols.map(c=>{const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;return `<td class="${al?'heat':''}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${fmt(v,c.d)}</td>`}).join('')}</tr>`).join('')}</tbody>`;
   $('#t-tbl').onclick=e=>{const h=e.target.closest('th[data-k]');if(!h)return;const k=h.dataset.k;if(ts.sort===k||(!ts.sort&&k===set.cols[0].k))ts.dir*=-1;else{ts.sort=k;ts.dir=['team','rec','next'].includes(k)?1:-1}drawTeams()};
 }
 
@@ -444,7 +390,7 @@ function drawDvP(){
   const cols=['QB','RB','WR','TE'].map(p=>({k:p,heat:1}));const heat=heatAlpha(data,cols);
   $('#d-sum').innerHTML=`<span><b>${data.length}</b> defenses</span><span>Weeks <b>${ds.w0}–${ds.w1}</b>, ${SCORING[ds.scoring].label} points allowed per game</span>`;
   $('#d-tbl').innerHTML=`<thead><tr><th class="l stick" data-k="team">Defense</th><th class="l" data-k="next">Wk ${META.next_week} faces</th>${['QB','RB','WR','TE'].map(p=>`<th data-k="${p}" ${ds.sort===p?`aria-sort="${ds.dir<0?'descending':'ascending'}"`:''}>${p}</th><th class="rank">rk</th>`).join('')}</tr></thead><tbody>${
-    data.map(a=>`<tr><td class="l stick"><b>${a.team}</b></td><td class="l">${a.next}</td>${['QB','RB','WR','TE'].map(p=>{const al=heat[p](a[p]);return `<td class="heat" style="--a:${al.toFixed(3)}">${a[p].toFixed(1)}</td><td class="rank">${rk[a.team][p]}</td>`}).join('')}</tr>`).join('')}</tbody>`;
+    data.map(a=>`<tr><td class="l stick"><button type="button" class="pname" data-card="d:${a.team}" aria-expanded="false">${a.team}</button></td><td class="l">${a.next}</td>${['QB','RB','WR','TE'].map(p=>{const al=heat[p](a[p]);return `<td class="heat" style="--a:${al.toFixed(3)}">${a[p].toFixed(1)}</td><td class="rank">${rk[a.team][p]}</td>`}).join('')}</tr>`).join('')}</tbody>`;
   $('#d-tbl').onclick=e=>{const h=e.target.closest('th[data-k]');if(!h)return;const k=h.dataset.k;if(ds.sort===k)ds.dir*=-1;else{ds.sort=k;ds.dir=['team','next'].includes(k)?1:-1}drawDvP()};
 }
 

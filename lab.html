@@ -104,6 +104,12 @@ select,input[type=text],input[type=number]{font:inherit;font-size:13px;padding:5
 .ask-ex{display:flex;flex-wrap:wrap;gap:6px}
 .ask-ex button{font:12px var(--f-body);padding:3px 10px;border-radius:999px;border:1px solid var(--rule);background:var(--paper);color:var(--ink-2);cursor:pointer;text-align:left}
 .ask-ex button:hover{border-color:var(--blue);color:var(--blue)}
+.ask-focus{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:12.5px;background:var(--blue-soft);border-radius:6px;padding:8px 10px;color:var(--ink)}
+.ask-focus .fx{display:inline-flex;flex-wrap:wrap;gap:4px;align-items:center}
+.ask-focus .fx b{font-family:var(--f-mono);font-size:11.5px;color:var(--blue)}
+.ask-focus .fx button{font:11.5px var(--f-mono);padding:1px 7px;border-radius:999px;border:1px solid color-mix(in srgb,var(--blue) 35%,var(--rule));background:var(--sheet);color:var(--ink-2);cursor:pointer}
+.ask-focus .fx button:hover{border-color:var(--margin);color:var(--margin)}
+.ask-focus button.link{border:0;background:none;padding:0;color:var(--blue);font:inherit;cursor:pointer;text-decoration:underline}
 .ask-pass{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2)}
 .ask-err{color:var(--margin);font-size:12.5px}
 .spin{display:inline-block;width:12px;height:12px;border:2px solid var(--rule);border-top-color:var(--blue);border-radius:50%;animation:sp .8s linear infinite;vertical-align:-2px;margin-right:6px}
@@ -147,7 +153,7 @@ tbody tr:hover td{background-color:color-mix(in srgb,var(--blue-soft) 55%,var(--
 <body>
 <header class="sitenav"><div class="wrap">
   <a class="brand" href="./" title="Home">NFL<span>_</span>stats</a>
-  <nav aria-label="Site"><a href="./">Home</a><a href="guide.html">Guide</a><a href="stats.html">Stats</a><a href="lab.html" aria-current="page">Lab</a><a href="waivers.html">Waivers</a></nav>
+  <nav aria-label="Site"><a href="./">Home</a><a href="guide.html">Guide</a><a href="stats.html">Stats</a><a href="lab.html" aria-current="page">Lab</a><a href="waivers.html">Waivers</a><a href="trade.html">Trade</a></nav>
   <span class="upd" id="upd"></span>
   <div class="navtools" id="navtools"></div>
 </div></header>
@@ -171,6 +177,7 @@ tbody tr:hover td{background-color:color-mix(in srgb,var(--blue-soft) 55%,var(--
       <h2 class="ask-h">Ask <small>plain English → query (uses your Claude API credits)</small></h2>
       <div class="ask">
         <div class="ask-row"><textarea id="ask-q" placeholder="e.g. available offensive players on the Raiders most likely to do well against their matchup this week" aria-label="Ask a question"></textarea><button class="btn primary" id="ask-go" disabled>Ask</button></div>
+        <div class="ask-focus" id="ask-focus" hidden></div>
         <div class="ask-pass" id="ask-pass" hidden><label for="ask-code">Passcode (the one you saved in Cloudflare):</label><input type="password" id="ask-code" autocomplete="off" style="width:200px"><button class="btn" id="ask-code-save">Save</button><span>Stored only in this browser.</span></div>
         <div class="ask-ex" id="ask-ex"></div>
         <div class="ask-meta" id="ask-meta"><span>The query shows up in the SQL tab before results, so you can check or edit it. Recipes and saved queries are free; only Ask uses credits.</span></div>
@@ -308,6 +315,8 @@ async function openFromHash(){
     if(!PICKS||!Object.keys(PICKS).length)return false;
     const order=Object.keys(PICKS).sort((a,b)=>(!!NV.datasets[b]-!!NV.datasets[a])||PICKS[b].length-PICKS[a].length);
     PICKS=Object.fromEntries(order.map(k=>[k,PICKS[k]]));
+    setFocus(PICKS);
+    if(h.has('ask')){const box=$('#askbox');box.scrollIntoView({block:'start'});$('#ask-q').focus()}
     await openDataset(order[0],PICKS[order[0]]);return true;
   }
   if(h.has('ds')){PICKS=null;await openDataset(h.get('ds'));return true}
@@ -437,10 +446,14 @@ function parseAnswer(text){
 const READONLY=sql=>/^\s*(with|select)\b/i.test(sql)&&!/\b(create|insert|update|delete|attach|copy|pragma|install|load|drop|alter|detach|export|import)\b/i.test(sql);
 const askCode=()=>{try{return localStorage.getItem('nfls-askcode')||''}catch(e){return ''}};
 let lastAsk=null;
-function schemaText(){return Object.entries(SCHEMA).filter(([t])=>CORE.has(t)||NVTABLE[t]).map(([t,cols])=>`${t} (${TABLES[t]||''}): ${cols.map(c=>c.name+' '+c.type.replace('VARCHAR','TEXT')).join(', ')}`).join('\n')}
+function schemaText(){return Object.entries(SCHEMA).filter(([t])=>CORE.has(t)||NVTABLE[t]).map(([t,cols])=>{
+  let use=cols,more=0;
+  if(!CORE.has(t)&&cols.length>70){ // wide nflverse tables (pbp has 370+ columns): keep ids, the picks, and the first 50
+    const id=NVTABLE[t],pick=new Set(FOCUS&&FOCUS[id]||[]);use=cols.filter((c,i)=>i<50||pick.has(c.name)||IDCOLS.includes(c.name));more=cols.length-use.length}
+  return `${t} (${TABLES[t]||''}): ${use.map(c=>c.name+' '+c.type.replace('VARCHAR','TEXT')).join(', ')}${more?` (+${more} more columns not listed)`:''}`}).join('\n')}
 function askContext(){return `Season ${META.season}. Last completed week ${META.last_completed_week}; next week ${META.next_week}. League selected: ${LG?LG.name+' ('+LG.teams+' teams, PPR)':'none (avail.status is NULL, so ignore availability)'}.`}
 function initAsk(){
-  $('#ask-ex').innerHTML='<span class="kbd" style="align-self:center">Try:</span>'+EXAMPLES.map(e=>`<button type="button">${esc(e)}</button>`).join('');
+  if(!FOCUS)drawExamples(EXAMPLES);
   $('#ask-ex').onclick=e=>{const b=e.target.closest('button');if(!b)return;$('#ask-q').value=b.textContent;$('#ask-q').focus()};
   $('#ask-pass').hidden=!!askCode();$('#ask-go').disabled=false;
   $('#ask-code-save').onclick=()=>{const v=$('#ask-code').value.trim();if(!v)return;try{localStorage.setItem('nfls-askcode',v)}catch(e){}$('#ask-pass').hidden=true;$('#ask-code').value='';setAskMeta('Passcode saved. Ask away.')};
@@ -448,9 +461,28 @@ function initAsk(){
   $('#ask-q').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();ask($('#ask-q').value)}});
 }
 function setAskMeta(html){$('#ask-meta').innerHTML=html}
+/* Guide picks → Ask: the picked columns ride along with every question until cleared */
+let FOCUS=null;
+const IDCOLS=['player_id','gsis_id','pfr_player_id','pfr_id','espn_id','game_id','play_id','season','week','team','recent_team','posteam','defteam','position','opponent_team','opponent'];
+function setFocus(p){FOCUS=p&&Object.keys(p).length?JSON.parse(JSON.stringify(p)):null;drawFocus()}
+function drawFocus(){
+  const el=$('#ask-focus');if(!el)return;
+  if(!FOCUS){el.hidden=true;$('#ask-q').placeholder='e.g. available offensive players on the Raiders most likely to do well against their matchup this week';drawExamples(EXAMPLES);return}
+  el.hidden=false;
+  el.innerHTML=`<span>Asking about your Guide picks:</span>${Object.entries(FOCUS).map(([id,cols])=>{const d=NV.datasets[id];return `<span class="fx"><b>${esc(d?d.table:id)}</b>${cols.map(c=>`<button type="button" data-fx="${esc(id)}|${esc(c)}" title="Drop ${esc(c)}">${esc(c)} ×</button>`).join('')}</span>`}).join('')}<button type="button" class="link" id="fx-clear">Clear picks</button>`;
+  el.onclick=e=>{const b=e.target.closest('[data-fx]');if(b){const [id,c]=b.dataset.fx.split('|');FOCUS[id]=FOCUS[id].filter(x=>x!==c);if(!FOCUS[id].length)delete FOCUS[id];setFocus(FOCUS);return}if(e.target.id==='fx-clear')setFocus(null)};
+  const cols=Object.values(FOCUS).flat().filter(c=>!IDCOLS.includes(c));const c1=cols[0],c2=cols[1]||cols[0];
+  $('#ask-q').placeholder=c1?`e.g. free agents ranked by ${c1} over the last 3 weeks`:'Ask about your picked stats';
+  drawExamples(c1?[`Top 20 players by ${c1} over the last 3 weeks`,`Free agents with the best ${c1} this season, and their next matchup`,`Which teams lead the league in ${c2}?`,`Players whose ${c1} went up the most in the last 3 weeks vs earlier`]:EXAMPLES);
+}
+function drawExamples(list){const ex=$('#ask-ex');if(!ex)return;ex.innerHTML='<span class="kbd" style="align-self:center">Try:</span>'+list.map(e=>`<button type="button">${esc(e)}</button>`).join('')}
+function focusText(){if(!FOCUS)return '';
+  return `\n\nFOCUS (the user picked these columns in the site's Guide; build the answer on them, joining players/teams/avail/games_long for names, availability and matchups when useful)\n`+Object.entries(FOCUS).map(([id,cols])=>{const d=NV.datasets[id];return `${d?d.table:id}: ${cols.join(', ')}`}).join('\n')}
+async function loadFocus(){if(!FOCUS)return;for(const id of Object.keys(FOCUS)){if(NV.datasets[id])await loadDataset(id).catch(()=>{})}}
 async function callClaude(question){
   const ex=RECIPES.filter(r=>['available_matchups','usage_risers','dst_pressure'].includes(r.id)).map(r=>`-- ${r.title}\n${r.sql}`).join('\n\n');
-  const system=`${RULES}\n\nSCHEMA (table (what it is): columns with types)\n${schemaText()}\n\nCONTEXT\n${askContext()}\n\nWORKING EXAMPLES (correct queries against this exact schema; copy their patterns)\n${ex}`;
+  await loadFocus();
+  const system=`${RULES}\n\nSCHEMA (table (what it is): columns with types)\n${schemaText()}\n\nCONTEXT\n${askContext()}${focusText()}\n\nWORKING EXAMPLES (correct queries against this exact schema; copy their patterns)\n${ex}`;
   const r=await fetch(ASK_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Passcode':askCode()},body:JSON.stringify({question,system})});
   const j=await r.json().catch(()=>({error:'Bad response from the Worker ('+r.status+')'}));
   if(r.status===401){try{localStorage.removeItem('nfls-askcode')}catch(e){}$('#ask-pass').hidden=false;throw new Error('Wrong passcode. Re-enter it.')}

@@ -33,6 +33,7 @@
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js" defer></script>
+<script src="assets/cards.js" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -89,14 +90,14 @@ td.heat{background-image:linear-gradient(rgba(var(--heat),var(--a,0)),rgba(var(-
 <body>
 <header class="sitenav"><div class="wrap">
   <a class="brand" href="./" title="Home">NFL<span>_</span>stats</a>
-  <nav aria-label="Site"><a href="./">Home</a><a href="guide.html">Guide</a><a href="stats.html">Stats</a><a href="lab.html">Lab</a><a href="waivers.html" aria-current="page">Waivers</a></nav>
+  <nav aria-label="Site"><a href="./">Home</a><a href="guide.html">Guide</a><a href="stats.html">Stats</a><a href="lab.html">Lab</a><a href="waivers.html" aria-current="page">Waivers</a><a href="trade.html">Trade</a></nav>
   <span class="upd" id="upd"></span>
   <div class="navtools" id="navtools"></div>
 </div></header>
 
 <header class="top"><div class="wrap">
   <h1>Waiver <span>Board</span></h1>
-  <p class="lede">Free agents in your league, ranked by a waiver score built from recent usage, expected points and next week's matchup. Defenses are ranked by the pressure-matchup formula. Switch leagues at the top right.</p>
+  <p class="lede">Free agents in your league, ranked by a waiver score built from recent usage, expected points and next week's matchup. Defenses are ranked by the pressure-matchup formula. Switch leagues at the top right. Click any player or defense for its weekly points, season stats and news.</p>
   <div class="src"><span class="dot" id="dot"></span><span id="src">Loading…</span></div>
 </div></header>
 
@@ -115,9 +116,12 @@ let P,T,G,META,INJ,ROST=null,LG=null;
 const st={pos:store.get('wpos','ALL'),showTaken:false,sort:'score',dir:-1};
 
 Promise.all(['players','teams','schedule','meta'].map(n=>fetch('data/site/'+n+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(n);return r.json()})))
-.then(([p,t,g,m])=>{P=rows(p);T=rows(t);G=rows(g);META=m;INJ=m.injuries||{};$('#upd').textContent=`${m.season} · thru Wk ${m.last_completed_week}`;hook()})
+.then(([p,t,g,m])=>{P=rows(p);T=rows(t);G=rows(g);META=m;INJ=m.injuries||{};giveCards();$('#upd').textContent=`${m.season} · thru Wk ${m.last_completed_week}`;hook()})
 .catch(e=>{$('#main').innerHTML=`<div class="box"><div class="empty">Couldn't load data (${esc(e.message)}).</div></div>`});
 
+function giveCards(){if(!window.NFLSCards)return setTimeout(giveCards,50);NFLSCards.provide({P,T,G,META,INJ})}
+const OPPB=(team,at,pos)=>`<button type="button" class="opp" data-card="d:${team}" data-pos="${pos||''}">${at?'@ ':'vs '}${team}</button>`;
+const PB=(a,cls)=>`<button type="button" class="pname ${cls||''}" data-card="p:${esc(a.id)}" data-name="${esc(a.name)}" aria-expanded="false">${esc(a.name)}</button>`;
 function hook(){if(!window.NFLS)return setTimeout(hook,50);NFLS.onLeague(lg=>{LG=lg;ROST=null;
   if(!lg){setSrc('No league picked. Choose one at the top right to see who is available.','');draw();return}
   setSrc('Checking '+lg.name+' rosters…','');
@@ -191,15 +195,15 @@ function draw(){
 
   $('#main').innerHTML=`
   ${ROST&&mine.length?`<section class="box"><div class="box-h"><h2>My team</h2><span class="hint">${esc((ROST.rosters.find(r=>r.roster_id===LG.my_roster_id)||{}).team_name||'')} · the 3 lowest waiver scores are marked red: your likeliest drops</span></div>
-    <div class="roster">${[...mine].sort((a,b)=>['QB','RB','WR','TE'].indexOf(a.pos)-['QB','RB','WR','TE'].indexOf(b.pos)||b.score-a.score).map(a=>`<div class="rp ${worstScore.includes(a.id)?'weak':''}"><span class="slot">${a.pos}</span><span class="nm">${esc(a.name)}${NFLS.plink(a.id,a.name)}${a.inj?`<span class="inj">${esc(a.inj[0].replace('Practice: ',''))}</span>`:''}</span><span class="v score">${a.score.toFixed(2)}</span>
-      <span class="sub">${a.team} · ${a.next?(a.next.at?'@ ':'vs ')+a.next.opp:'bye'}${mrk(a.mrk)} · L3 ${f1(a.ppr3)} PPR, ${f1(a.xfp3)} xFP</span></div>`).join('')}</div></section>`:''}
+    <div class="roster">${[...mine].sort((a,b)=>['QB','RB','WR','TE'].indexOf(a.pos)-['QB','RB','WR','TE'].indexOf(b.pos)||b.score-a.score).map(a=>`<div class="rp ${worstScore.includes(a.id)?'weak':''}"><span class="slot">${a.pos}</span><span class="nm">${PB(a)}${NFLS.plink(a.id,a.name)}${a.inj?`<span class="inj">${esc(a.inj[0].replace('Practice: ',''))}</span>`:''}</span><span class="v score">${a.score.toFixed(2)}</span>
+      <span class="sub">${a.team} · ${a.next?OPPB(a.next.opp,a.next.at,a.pos):'bye'}${mrk(a.mrk)} · L3 ${f1(a.ppr3)} PPR, ${f1(a.xfp3)} xFP</span></div>`).join('')}${myDef.map(t=>{const x=dl.find(d=>d.team===t);return `<div class="rp"><span class="slot">DEF</span><span class="nm"><button type="button" class="pname" data-card="d:${t}" aria-expanded="false">${t} D/ST</button></span><span class="v score">${x?x.score.toFixed(2):'bye'}</span><span class="sub">${x?OPPB(x.opp,x.at,'')+' · '+f1(x.dst)+' D/ST pts/g':'bye next week'}</span></div>`}).join('')}</div></section>`:''}
 
   <section class="box"><div class="box-h"><h2>${st.showTaken?'All players':'Free agents'}</h2><span class="hint">${ln} · top ${top.length} of ${pool.length}</span><span class="sp"></span>
     <div class="seg" id="w-pos">${['ALL','QB','RB','WR','TE'].map(p=>`<button data-v="${p}" aria-pressed="${st.pos===p}">${p==='ALL'?'All':p}</button>`).join('')}</div>
     <label class="chk" for="w-taken"><input type="checkbox" id="w-taken" ${st.showTaken?'checked':''}>Include rostered</label></div>
   ${top.length?`<div class="tablewrap"><table id="w-tbl"><thead><tr><th class="rank">#</th><th class="l stick">Player</th><th class="l">Team</th><th class="l">Wk ${META.next_week}</th>${cols.map(([k,l])=>`<th data-k="${k}" ${st.sort===k?`aria-sort="${st.dir<0?'descending':'ascending'}"`:''}>${l}</th>`).join('')}<th class="l">Why</th></tr></thead><tbody>${
-    top.map((a,i)=>{const s=avOf(a.id);return `<tr><td class="rank">${i+1}</td><td class="l stick"><span class="pname ${s==='fa'&&ROST?'name-fa':''}">${esc(a.name)}</span>${NFLS.plink(a.id,a.name)} <span class="pos">${a.pos}</span>${ROST?NFLS.badge(s,LG,a.name):''}${a.inj?`<span class="inj" title="${esc(a.inj[1])}">${esc(a.inj[0].replace('Practice: ',''))}</span>`:''}</td>
-      <td class="l">${a.team}</td><td class="l">${a.next?(a.next.at?'@ ':'vs ')+a.next.opp+mrk(a.mrk):'<span class="pos">bye</span>'}</td>
+    top.map((a,i)=>{const s=avOf(a.id);return `<tr><td class="rank">${i+1}</td><td class="l stick">${PB(a,s==='fa'&&ROST?'name-fa':'')}${NFLS.plink(a.id,a.name)} <span class="pos">${a.pos}</span>${ROST?NFLS.badge(s,LG,a.name):''}${a.inj?`<span class="inj" title="${esc(a.inj[1])}">${esc(a.inj[0].replace('Practice: ',''))}</span>`:''}</td>
+      <td class="l">${a.team}</td><td class="l">${a.next?OPPB(a.next.opp,a.next.at,a.pos)+mrk(a.mrk):'<span class="pos">bye</span>'}</td>
       ${cell(a,'score',`<span class="score">${a.score.toFixed(2)}</span>`)}${cell(a,'xfp3',f1(a.xfp3))}${cell(a,'ppr3',f1(a.ppr3))}${cell(a,'snap3',pct(a.snap3))}<td>${sgn(a.snapD,0,100)}</td>${cell(a,'opp3',f1(a.opp3))}<td>${sgn(a.oppD,1)}</td><td>${pct(a.tgt3)}</td><td>${f1(a.ppr)}</td>
       <td class="l"><div class="why">${why(a)}</div></td></tr>`}).join('')}</tbody></table></div>`:`<div class="empty">No free agents at this position played in the last 3 weeks.</div>`}
   <div class="foot"><span><b>Score</b> = 0.45 × expected points (last 3 games) + 0.20 × actual PPR (last 3) + 0.15 × snap-share change + 0.10 × touch change + 0.10 × next-week matchup. Each piece is a z-score within the position, so 0 is average and +1 is one standard deviation above. Bye week −0.5; Out/IR/Doubtful −1.</span>
@@ -207,7 +211,7 @@ function draw(){
 
   <section class="box"><div class="box-h"><h2>D/ST streamers</h2><span class="hint">${ROST?'Available defenses (plus yours) for':'All defenses for'} Week ${META.next_week}</span></div>
     <div class="tablewrap"><table><thead><tr><th class="rank">#</th><th class="l stick">Defense</th><th class="l">Opponent</th><th>Matchup score</th><th>D/ST pts/g</th><th>Pressures/g</th><th>Opp pressures allowed</th><th>Sacks/g</th><th>Opp sacks allowed</th><th>Opp implied pts</th></tr></thead><tbody>${
-      freeDefs.map((x,i)=>{const m=myDef.includes(x.team);return `<tr><td class="rank">${i+1}</td><td class="l stick"><span class="pname ${!m&&ROST?'name-fa':''}">${x.team}</span>${NFLS.plink('DEF:'+x.team,x.team+' D/ST')}${ROST?NFLS.badge(m?'mine':'fa',LG,x.team+' D/ST'):''}</td><td class="l">${x.at?'@':'vs'} ${x.opp}</td><td><span class="score">${x.score.toFixed(2)}</span></td><td>${f1(x.dst)}</td><td>${f1(x.pr)}</td><td>${f1(x.opra)}</td><td>${f1(x.sk)}</td><td>${f1(x.oska)}</td><td>${f1(x.oi)}</td></tr>`}).join('')}</tbody></table></div>
+      freeDefs.map((x,i)=>{const m=myDef.includes(x.team);return `<tr><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="pname ${!m&&ROST?'name-fa':''}" data-card="d:${x.team}" aria-expanded="false">${x.team} D/ST</button>${NFLS.plink('DEF:'+x.team,x.team+' D/ST')}${ROST?NFLS.badge(m?'mine':'fa',LG,x.team+' D/ST'):''}</td><td class="l">${OPPB(x.opp,x.at,'')}</td><td><span class="score">${x.score.toFixed(2)}</span></td><td>${f1(x.dst)}</td><td>${f1(x.pr)}</td><td>${f1(x.opra)}</td><td>${f1(x.sk)}</td><td>${f1(x.oska)}</td><td>${f1(x.oi)}</td></tr>`}).join('')}</tbody></table></div>
     <div class="foot"><span>Matchup score = z(pressures) + z(opponent pressures allowed) + z(sacks) + z(opponent sacks allowed) − z(opponent Vegas implied points). Same as the Lab recipe.</span></div></section>`;
 
   $('#w-pos').onclick=e=>{const b=e.target.closest('button');if(!b)return;st.pos=b.dataset.v;store.set('wpos',st.pos);draw()};
