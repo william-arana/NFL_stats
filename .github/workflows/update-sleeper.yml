@@ -20,7 +20,7 @@ concurrency:
 jobs:
   sleeper:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -29,12 +29,16 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - run: python scripts/update_sleeper.py
+      - name: Player + defense news archive
+        run: python scripts/update_player_news.py
+        continue-on-error: true
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
           git add data/site/leagues.json data/site/sleeper_map.json
+          git add data/site/news 2>/dev/null || true
           if git diff --cached --quiet; then echo "No roster changes"; else
-            git commit -m "Update Sleeper rosters ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git commit -m "Update Sleeper rosters + player news ($(date -u +%Y-%m-%dT%H:%MZ))"
             git pull --rebase && git push
           fi
