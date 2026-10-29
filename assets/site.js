@@ -73,6 +73,7 @@
 
   /* "open player" link: small icon after a name; opens a menu with Sleeper, ESPN and copy-name */
   let IDS=null;const idsP=()=>IDS?Promise.resolve(IDS):fetch('data/site/ids.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).catch(()=>({})).then(j=>IDS=j);
+  let TM=null;const tmP=()=>TM?Promise.resolve(TM):fetch('data/site/teams_meta.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).catch(()=>({})).then(j=>TM=j);
   function plink(id,name){if(!id||!name)return '';return `<button type="button" class="plink" data-pid="${esc(id)}" data-pname="${esc(name)}" aria-label="Open ${esc(name)} on Sleeper or ESPN" title="Sleeper / ESPN"><span class="slp" aria-hidden="true"></span></button>`}
   let menu=null,menuBtn=null;
   function closeMenu(){if(menu){menu.remove();menu=null}if(menuBtn){menuBtn.setAttribute('aria-expanded','false');menuBtn=null}}
@@ -82,18 +83,20 @@
     if(b){e.preventDefault();e.stopPropagation();if(menuBtn===b){closeMenu();return}closeMenu();menuBtn=b;b.setAttribute('aria-expanded','true');
       const name=b.dataset.pname,id=b.dataset.pid,lg=getLeague();
       menu=document.createElement('div');menu.className='pmenu';menu.setAttribute('role','menu');
-      const paint=()=>{const espn=IDS&&IDS[id];
-        menu.innerHTML=`<div class="pm-h">${esc(name)}</div>
-          <a role="menuitem" href="${leagueUrl(lg)}" target="_blank" rel="noopener" data-copy="1">Sleeper${lg?' · '+esc(lg.name)+' players':''}<small>copies the name so you can paste it into search</small></a>
+      const isDef=id.startsWith('DEF:'),abbr=isDef?id.slice(4):null;let copyText=name;
+      const paint=()=>{const espn=!isDef&&IDS&&IDS[id];const tm=isDef&&TM&&TM[abbr];if(tm)copyText=tm.nick;
+        menu.innerHTML=`<div class="pm-h">${esc(isDef&&tm?tm.name+' D/ST':name)}</div>
+          <a role="menuitem" href="${leagueUrl(lg)}" target="_blank" rel="noopener" data-copy="1">Sleeper${lg?' · '+esc(lg.name)+' players':''}<small>copies "${esc(copyText)}" so you can paste it into search</small></a>
           ${espn?`<a role="menuitem" href="https://www.espn.com/nfl/player/_/id/${encodeURIComponent(espn)}" target="_blank" rel="noopener">ESPN player page<small>stats, game log, news</small></a>`:''}
-          <a role="menuitem" href="https://www.google.com/search?q=${encodeURIComponent(name+' NFL news')}" target="_blank" rel="noopener">Latest news<small>web search</small></a>
-          <button type="button" role="menuitem" data-copyonly="1">Copy name</button>`;
-        menu.querySelector('[data-copy]').addEventListener('click',()=>{copy(name).catch(()=>{})});
-        menu.querySelector('[data-copyonly]').addEventListener('click',ev=>{copy(name).then(()=>{ev.target.textContent='Copied'},()=>{ev.target.textContent=name});});};
+          ${tm?`<a role="menuitem" href="https://www.espn.com/nfl/team/_/name/${encodeURIComponent(tm.espn)}" target="_blank" rel="noopener">ESPN team page<small>schedule, stats, roster</small></a>`:''}
+          <a role="menuitem" href="https://www.google.com/search?q=${encodeURIComponent((isDef&&tm?tm.name+' defense':name)+' NFL news')}" target="_blank" rel="noopener">Latest news<small>web search</small></a>
+          <button type="button" role="menuitem" data-copyonly="1">Copy "${esc(copyText)}"</button>`;
+        menu.querySelector('[data-copy]').addEventListener('click',()=>{copy(copyText).catch(()=>{})});
+        menu.querySelector('[data-copyonly]').addEventListener('click',ev=>{copy(copyText).then(()=>{ev.target.textContent='Copied'},()=>{ev.target.textContent=copyText});});};
       paint();document.body.appendChild(menu);
       const r=b.getBoundingClientRect(),w=menu.offsetWidth;let left=Math.min(r.left+window.scrollX,window.scrollX+document.documentElement.clientWidth-w-12);left=Math.max(window.scrollX+12,left);
       menu.style.left=left+'px';menu.style.top=(r.bottom+window.scrollY+4)+'px';
-      if(!IDS)idsP().then(()=>{if(menu)paint()});return}
+      if(isDef?!TM:!IDS)(isDef?tmP():idsP()).then(()=>{if(menu)paint()});return}
     if(menu&&!menu.contains(e.target))closeMenu();
     if(menu&&e.target.closest('.pmenu a'))setTimeout(closeMenu,50);
   },true);
