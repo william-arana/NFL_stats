@@ -80,7 +80,7 @@ def main() -> None:
                 "wins": (r.get("settings") or {}).get("wins", 0),
                 "losses": (r.get("settings") or {}).get("losses", 0),
             })
-        leagues.append({**{k: lg[k] for k in ("id", "name", "teams", "my_roster_id")}, "default": bool(lg.get("default")),
+        leagues.append({**{k: lg[k] for k in ("id", "name", "teams", "my_roster_id")}, "default": bool(lg.get("default")), "viewers": lg.get("viewers", []),
                         "rosters": rosters, "unmapped": unmapped})
         print(f"[sleeper] {lg['name']}: {len(rosters)} rosters, {sum(len(r['players']) for r in rosters)} players, {unmapped} unmapped")
 

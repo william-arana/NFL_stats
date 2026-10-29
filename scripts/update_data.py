@@ -257,6 +257,10 @@ def main() -> None:
     (SITE_DIR / "teams.json").write_text(json.dumps(to_columns_json(t), separators=(",", ":")))
     (SITE_DIR / "schedule.json").write_text(json.dumps(to_columns_json(sch), separators=(",", ":")))
     (SITE_DIR / "meta.json").write_text(json.dumps(meta, separators=(",", ":")))
+    if players is not None:
+        ids = players.select("gsis_id", "espn_id").drop_nulls()
+        keep_ids = set(pw["player_id"].to_list())
+        (SITE_DIR / "ids.json").write_text(json.dumps({g: str(e).split(".")[0] for g, e in ids.iter_rows() if g in keep_ids}, separators=(",", ":")))
     log(f"site data: {pw.height} player-weeks, {t.height} team-weeks, {sch.height} games, through week {last_week}")
 
 

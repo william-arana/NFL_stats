@@ -13,8 +13,9 @@ My fantasy football stats lab: NFL data from [nflverse](https://github.com/nflve
 
 ## Leagues & theme
 
-- Leagues live in `data/leagues.json` (Sleeper league id, team count, my roster id). The **League** picker in the nav switches every page; free agents get a green name and an **FA** tag on the Stats board.
+- Leagues live in `data/leagues.json` (Sleeper league id, team count, my roster id, and `viewers`: the teams offered in the **Team** picker, e.g. 67FFL · Just Win Baby). The picker switches every page; free agents get a green name and an **FA** tag on the Stats board.
 - Rosters: the browser asks Sleeper live; if that fails it uses the snapshot `.github/workflows/update-sleeper.yml` saves three times a day (`data/site/leagues.json`).
+- The small arrow icon after a player's name opens Sleeper (copies the name for search; Sleeper has no per-player web page), the ESPN player page (`data/site/ids.json`), or a news search.
 - Light mode is the default; the nav button switches to dark (remembered per browser).
 
 ## Data refresh

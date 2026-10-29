@@ -58,3 +58,14 @@ input:focus-visible,button:focus-visible,select:focus-visible,a:focus-visible{ou
 .av.mine{background:var(--blue-soft);color:var(--blue)}
 a.av{text-decoration:none}a.av:hover{text-decoration:underline}
 .name-fa{color:var(--good)!important}
+
+/* "open player" link + menu */
+.plink{display:inline-grid;place-items:center;width:18px;height:18px;margin-left:4px;padding:0;border:0;border-radius:4px;background:none;color:var(--ink-3);cursor:pointer;vertical-align:-3px}
+.plink svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.plink:hover,.plink[aria-expanded="true"]{background:var(--blue-soft);color:var(--blue)}
+.pmenu{position:absolute;z-index:60;min-width:230px;max-width:calc(100vw - 24px);background:var(--sheet);border:1px solid var(--rule);border-radius:8px;box-shadow:0 12px 32px rgba(11,21,40,.22);padding:4px 0;font-size:13px}
+.pmenu .pm-h{padding:6px 12px 6px;font-weight:600;border-bottom:1px solid var(--rule);margin-bottom:2px}
+.pmenu a,.pmenu button{display:block;width:100%;text-align:left;padding:7px 12px;color:var(--ink);text-decoration:none;border:0;background:none;font:inherit;cursor:pointer}
+.pmenu a:hover,.pmenu button:hover{background:var(--blue-soft);color:var(--blue)}
+.pmenu small{display:block;font-size:11px;color:var(--ink-3)}
+.navtools select optgroup{font-weight:600}

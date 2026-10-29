@@ -1,7 +1,34 @@
 {
-  "_note": "Sleeper leagues tracked by the site. default=true is selected first. my_roster_id is your team's roster number in that league.",
+  "_note": "Sleeper leagues tracked by the site. default=true is selected first. my_roster_id is your team; viewers are the teams the Team picker offers (add your brother's or anyone's roster_id here).",
   "leagues": [
-    {"id": "1396022326247591936", "name": "67FFL", "teams": 12, "my_roster_id": 12, "default": true},
-    {"id": "1389372375652405248", "name": "Nuve", "teams": 8, "my_roster_id": 5}
+    {
+      "id": "1396022326247591936",
+      "name": "67FFL",
+      "teams": 12,
+      "my_roster_id": 12,
+      "default": true,
+      "viewers": [
+        {
+          "roster_id": 12,
+          "label": "ATX Bowers"
+        },
+        {
+          "roster_id": 4,
+          "label": "Just Win Baby"
+        }
+      ]
+    },
+    {
+      "id": "1389372375652405248",
+      "name": "Nuve",
+      "teams": 8,
+      "my_roster_id": 5,
+      "viewers": [
+        {
+          "roster_id": 5,
+          "label": "ATX Bowers"
+        }
+      ]
+    }
   ]
 }
