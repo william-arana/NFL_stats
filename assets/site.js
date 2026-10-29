@@ -65,10 +65,10 @@
     });
   }
 
-  /* Sleeper has no public page per player, so badges open the league; the link menu copies the name first. */
-  function leagueUrl(lg){return lg?`https://sleeper.com/leagues/${lg.id}`:'https://sleeper.com'}
+  /* Sleeper has no public page per player, so links open the league's Players tab; the link menu copies the name first. */
+  function leagueUrl(lg){return lg?`https://sleeper.com/leagues/${lg.id}/players`:'https://sleeper.com'}
   function badge(status,lg,name){if(!status||!lg)return '';const t=status==='fa'?'FA':status==='mine'?'MINE':'';if(!t)return '';
-    const tip=status==='fa'?`Free agent in ${lg.name}. Opens ${lg.name} on Sleeper`:`On ${lg.viewer||'your'} roster in ${lg.name}. Opens Sleeper`;
+    const tip=status==='fa'?`Free agent in ${lg.name}. Opens ${lg.name} players on Sleeper`:`On ${lg.viewer||'your'} roster in ${lg.name}. Opens Sleeper`;
     return `<a class="av ${status}" href="${leagueUrl(lg)}" target="_blank" rel="noopener" title="${esc(tip)}">${t}</a>`}
 
   /* "open player" link: small icon after a name; opens a menu with Sleeper, ESPN and copy-name */
@@ -84,7 +84,7 @@
       menu=document.createElement('div');menu.className='pmenu';menu.setAttribute('role','menu');
       const paint=()=>{const espn=IDS&&IDS[id];
         menu.innerHTML=`<div class="pm-h">${esc(name)}</div>
-          <a role="menuitem" href="${leagueUrl(lg)}" target="_blank" rel="noopener" data-copy="1">Sleeper${lg?' · '+esc(lg.name):''}<small>copies the name so you can paste it into search</small></a>
+          <a role="menuitem" href="${leagueUrl(lg)}" target="_blank" rel="noopener" data-copy="1">Sleeper${lg?' · '+esc(lg.name)+' players':''}<small>copies the name so you can paste it into search</small></a>
           ${espn?`<a role="menuitem" href="https://www.espn.com/nfl/player/_/id/${encodeURIComponent(espn)}" target="_blank" rel="noopener">ESPN player page<small>stats, game log, news</small></a>`:''}
           <a role="menuitem" href="https://www.google.com/search?q=${encodeURIComponent(name+' NFL news')}" target="_blank" rel="noopener">Latest news<small>web search</small></a>
           <button type="button" role="menuitem" data-copyonly="1">Copy name</button>`;
