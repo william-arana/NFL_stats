@@ -55,6 +55,7 @@ def main() -> None:
             return "DEF:" + TEAM_FIX.get(sid, sid)
         return None
 
+    state = get("/state/nfl")
     leagues = []
     for lg in CFG["leagues"]:
         info = get(f"/league/{lg['id']}")
@@ -79,8 +80,18 @@ def main() -> None:
                 "faab_left": (info.get("settings") or {}).get("waiver_budget", 100) - (r.get("settings") or {}).get("waiver_budget_used", 0),
                 "wins": (r.get("settings") or {}).get("wins", 0),
                 "losses": (r.get("settings") or {}).get("losses", 0),
+                "ties": (r.get("settings") or {}).get("ties", 0),
+                "fpts": round((r.get("settings") or {}).get("fpts", 0) + (r.get("settings") or {}).get("fpts_decimal", 0) / 100, 2),
+                "fpts_against": round((r.get("settings") or {}).get("fpts_against", 0) + (r.get("settings") or {}).get("fpts_against_decimal", 0) / 100, 2),
             })
-        leagues.append({**{k: lg[k] for k in ("id", "name", "teams", "my_roster_id")}, "default": bool(lg.get("default")), "viewers": lg.get("viewers", []),
+        week = state.get("display_week") or state.get("week") or 1
+        try:
+            mus = [{"matchup_id": m.get("matchup_id"), "roster_id": m["roster_id"], "points": m.get("points") or 0}
+                   for m in get(f"/league/{lg['id']}/matchups/{week}") if m.get("matchup_id") is not None]
+        except Exception as e:  # noqa: BLE001
+            print(f"[sleeper] {lg['name']}: matchups unavailable ({e})")
+            mus = []
+        leagues.append({"week": week, "matchups": mus, **{k: lg[k] for k in ("id", "name", "teams", "my_roster_id")}, "default": bool(lg.get("default")), "viewers": lg.get("viewers", []),
                         "rosters": rosters, "unmapped": unmapped})
         print(f"[sleeper] {lg['name']}: {len(rosters)} rosters, {sum(len(r['players']) for r in rosters)} players, {unmapped} unmapped")
 
