@@ -1,0 +1,102 @@
+=== https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?athlete=12483&limit=50
+HTTP/2 200 
+content-type: application/json;charset=UTF-8
+access-control-allow-origin: *
+bytes 218140
+keys ['header', 'link', 'articles'] n 50
+dates ['2026-10-29T18:18:47Z', '2026-10-29T17:45:48Z'] ['2026-10-28T22:44:31Z', '2026-10-28T22:34:34Z']
+first {"id": 50320295, "nowId": "1-50320295", "contentKey": "50320295-1-22-1", "dataSourceIdentifier": "dc542110cade2", "type": "Preview", "headline": "Raiders and Jets will try to stop struggles and quiet some outside noise when they square off Sunday", "description": "\u2014 Las Vegas Raiders fans are getting restless, while New York Jets fans are fully frustrated.", "lastModified": "2026-10-29T18:18:47Z", "published": "2026-10-29T18:18:47Z", "images": [{"type": "stitcher", "name": "espn.applewatch.awayhome.1", "url": "https://s.espncdn.com/stitcher/sports/football/nfl/events/401873029.png?templat
+=== https://site.api.espn.com/apis/fantasy/v2/games/ffl/news/players?playerId=12483&limit=50
+HTTP/2 200 
+content-type: application/json;charset=UTF-8
+access-control-allow-origin: *
+bytes 51764
+keys ['timestamp', 'resultsOffset', 'status', 'resultsLimit', 'resultsCount', 'feed'] n 8
+dates ['2026-10-26T03:11:47Z', '2026-10-19T01:10:58Z'] ['2026-09-22T19:59:54Z', '2026-09-22T03:56:55Z']
+first {"id": 64446828, "nowId": "23-64446828", "contentKey": "64446828-23-1-1", "dataSourceIdentifier": "5beedf8385f37", "type": "Rotowire", "headline": "Stafford completed 23 of 29 passes for 195 yards with three touchdowns and one interception and rushed three times for minus-3 yards in the Rams' 35-21 win over the Raiders on Sunday.", "description": "Stafford completed 23 of 29 passes for 195 yards with three touchdowns and one interception and rushed three times for minus-3 yards in the Rams' 35-21 win over the Raiders on Sunday.", "categorized": "2026-10-26T03:15:08Z", "lastModified": "2026-10-
+=== https://now.core.api.espn.com/v1/sports/news?athlete=12483&limit=50
+HTTP/2 200 
+content-type: application/json
+access-control-allow-origin: *
+x-content-type-options: nosniff
+bytes 1195317
+keys ['resultsCount', 'resultsLimit', 'resultsOffset', 'headlines', 'breakingNews', 'timestamp', 'status'] n 50
+dates ['2026-10-29T19:35:34Z', '2026-10-29T19:36:04Z'] ['2026-10-29T15:23:47Z', '2026-10-29T15:25:48Z']
+first {"id": 50320393, "nowId": "1-50320393", "contentKey": "50320393-1-6-1", "dataSourceIdentifier": "0c2688828eb27", "publishedkey": "50320393", "type": "Story", "feedDisplayType": "Default", "headline": "Man City vs. PSG LIVE: Women's Champions League updates as hosts chase first win in Europe", "description": "Manchester City host Paris Saint-Germain in the Women's Champions League and you can follow the action live with ESPN.", "title": "Man City vs. PSG LIVE: Women's Champions League updates as hosts chase first win in Europe", "linkText": "Man City vs. PSG LIVE: Women's Champions League updat
+=== https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/12483/news?limit=50
+HTTP/2 404 
+content-type: application/json;charset=UTF-8
+access-control-allow-origin: *
+bytes 111
+keys ['code', 'message'] n 0
+dates [] []
+=== https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/12483/overview
+HTTP/2 200 
+content-type: application/json;charset=UTF-8
+access-control-allow-origin: *
+bytes 126536
+keys ['statistics', 'news', 'nextGame', 'gameLog', 'rotowire', 'awards', 'fantasy'] n 7
+dates ['2026-10-26T17:39:55.000+00:00', '2026-10-26T01:42:26.000+00:00'] ['2026-10-13T05:49:58.000+00:00', '2026-10-12T21:14:59.000+00:00']
+first {"headline": "Matthew Stafford: Win vs. Raiders a step in the right direction for us", "lastModified": "2026-10-26T17:39:55.000+00:00", "root": "nfl", "premium": false, "links": {"api": {"artwork": {"href": "https://artwork.api.espn.com/artwork/collections/media/84e0e755-cedb-44fe-9355-90037ff17262"}, "self": {"href": "https://content.core.api.espn.com/v1/video/clips/50288404"}}, "web": {"href": "https://www.espn.com/video/clip/_/id/50288404/win-vs-raiders-step-right-direction-us", "self": {"href": "https://www.espn.com/video/clip/_/id/50288404/win-vs-raiders-step-right-direction-us"}}}, "type
+=== https://sleeper.com/nfl/players/matthew-stafford-421
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+bytes 982691
+notjson 982642
+Three-TD -1 
+__NEXT_DATA__ -1 
+graphql 8700 xtwfr\",\"NEXT_PUBLIC_BASE_URL\":\"https://sleeper.com\",\"NEXT_PUBLIC_APP_NAMESPACE\":\"prod\",\"NEXT_PUBLIC_GRAPHQL_URL\":\"https://api.sleeper.app/graphql\",\"NEXT_PUBLIC_STATSIG_CLIENT_KEY\":\"client-KZ4ckbc3DnSbAPm1FvixoRdm9CkYGZmhMnpr1vJy0tT\",\"NEXT_PUBLIC_STATSIG_ENVIRONMENT\":\"production\",\"NEXT_PUBLIC_GIPHY_API_KEY\":\"Awq5410QQl0416nJogqlsinldM2s9PCA\",\"NEXT_PUBLIC_REMOTE_REACTIONS_U
+news 6745 nonymous"/><title>Matthew Stafford Stats, Info and Projections - Sleeper</title><meta name="description" content="View Matthew Stafford&#x27;s stats, news, projections, and game logs on Sleeper."/><meta name="keywords" content="fantasy football,fantasy basketball,fantasy league of legends,fantasy leagues,fantasy sports,fantasy lcs,daily fantasy,dfs"/><link rel="canonical" href="https://sleeper.com
+rotowire 428468 {\"channel_id\":\"1113708705066545153\",\"genius_id\":\"180838\",\"rookie_year\":\"2009\"},\"injury_start_date\":null,\"birth_date\":\"1988-02-07\",\"rotowire_id\":5971,\"pandascore_id\":null,\"gsis_id\":\"00-0026498\",\"competitions\":[],\"opta_id\":null,\"first_name\":\"Matthew\",\"depth_chart_order\":1,\"player_shard\":\"3\",\"swish_id\":323205,\"injury_status\":null,\"injury_notes\":null,\"tea
+url https://sleepercdn.com/landing/web2026/img/logos/logo-full-horizontal-white.png
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/39c-hqhjtjgoe.css?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/1-n8_tgflegr5.css?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/1rwosq3cxp9a4.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/1j3fybp9zqn86.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/3xll-3y54r47_.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/14-gcf7--8iyq.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/3b72thricqxtu.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/2v4qfd83ocvhi.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/3oa5nadez9xgv.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/turbopack-3yem5mta6_kqp.js?dpl=0-2-0-1462--0108a
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/1hehkczdip867.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/2ahgno-x8hnf0.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/1v-pks65h81-r.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/0n2-lr-gssuzh.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/0hlofobbzxbp-.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/0kdw8muevl3cb.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/3m9vwjo40bay6.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/40nj_4p1vninn.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/0eioqk2ix50w6.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/19zgj2pco3u1p.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/2zof4gkgm7648.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/3qbsi3yi9r_y2.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/0b3pbpgbnxgkm.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/0q4yc46nagmsu.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/00gpuj4zejx5y.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/294nqx8lk6w2t.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/3qi0gcyo1vije.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/3anqzoeu0ye3_.js?dpl=0-2-0-1462--0108adc
+url https://sleepercdn.com/sleeper-web/_next/static/chunks/1arucpt1m2d4y.js?dpl=0-2-0-1462--0108adc
+=== https://api.sleeper.app/players/nfl/421/news
+HTTP/2 200 
+content-type: application/json; charset=utf-8
+access-control-allow-origin: *
+bytes 5049
+notjson 5049
+Three-TD 858 chdowns and one interception and rushed three times for minus-3 yards in the Rams' 35-21 win over the Raiders on Sunday.","title":"Matthew Stafford - Three-TD day in Week 7 win","topic_id":"1420283623973650432"},"source":"rotowire","sport":"nfl","player_id":"421","source_key":"644468","published":1792984307000},{"metadata":{"analysis":"Stafford continues an impactful stretch behind center, passing
+__NEXT_DATA__ -1 
+graphql -1 
+news 1651 "title":"Matthew Stafford tosses three touchdowns in Week 7 win over Raiders","topic_id":"1420243354893000704","url":"https://www.fantasypros.com/nfl/news/615810/matthew-stafford-tosses-three-touchdowns-week-7-win-over-raiders.php"},"source":"fantasy_pros","sport":"nfl","player_id":"421","source_key":"615810","published":1792974911957},{"metadata":{"description":"Los Angeles Rams quarterback Matth
+rotowire 930  the Rams' 35-21 win over the Raiders on Sunday.","title":"Matthew Stafford - Three-TD day in Week 7 win","topic_id":"1420283623973650432"},"source":"rotowire","sport":"nfl","player_id":"421","source_key":"644468","published":1792984307000},{"metadata":{"analysis":"Stafford continues an impactful stretch behind center, passing for two or more touchdowns in five of his last six contests. The vetera
+=== https://api.sleeper.com/players/nfl/421/news
+HTTP/2 200 
+content-type: application/json; charset=utf-8
+access-control-allow-origin: *
+bytes 5049
+notjson 5049
+Three-TD 858 chdowns and one interception and rushed three times for minus-3 yards in the Rams' 35-21 win over the Raiders on Sunday.","title":"Matthew Stafford - Three-TD day in Week 7 win","topic_id":"1420283623973650432"},"source":"rotowire","sport":"nfl","player_id":"421","published":1792984307000,"source_key":"644468"},{"metadata":{"analysis":"Stafford continues an impactful stretch behind center, passing
+__NEXT_DATA__ -1 
+graphql -1 
+news 1651 "title":"Matthew Stafford tosses three touchdowns in Week 7 win over Raiders","topic_id":"1420243354893000704","url":"https://www.fantasypros.com/nfl/news/615810/matthew-stafford-tosses-three-touchdowns-week-7-win-over-raiders.php"},"source":"fantasy_pros","sport":"nfl","player_id":"421","published":1792974911957,"source_key":"615810"},{"metadata":{"description":"Los Angeles Rams quarterback Matth
+rotowire 930  the Rams' 35-21 win over the Raiders on Sunday.","title":"Matthew Stafford - Three-TD day in Week 7 win","topic_id":"1420283623973650432"},"source":"rotowire","sport":"nfl","player_id":"421","published":1792984307000,"source_key":"644468"},{"metadata":{"analysis":"Stafford continues an impactful stretch behind center, passing for two or more touchdowns in five of his last six contests. The vetera
