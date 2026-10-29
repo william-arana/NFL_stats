@@ -117,7 +117,7 @@
     const arch=fetch('data/site/news/'+key.replace(':','_')+'.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
     const lv=isDef?Promise.resolve({items:[],via:[]}):load().then(()=>liveNews(key));
     return NEWS[key]=Promise.all([arch,lv]).then(([a,l])=>{const by=new Map();for(const it of [...(a&&a.items||[]),...l.items])by.set(nkey(it),{...by.get(nkey(it)),...it});
-      const items=[...by.values()].sort((x,y)=>String(y.d||'').localeCompare(String(x.d||'')));return {items,archived:a?a.items.length:0,live:l.via,updated:a&&a.updated_utc}});
+      const rwT=new Set([...by.values()].filter(x=>x.src==='RotoWire').map(x=>x.d&&new Date(x.d).getTime()));const items=[...by.values()].filter(x=>!(x.src==='ESPN fantasy'&&x.d&&rwT.has(new Date(x.d).getTime()))).sort((x,y)=>String(y.d||'').localeCompare(String(x.d||'')));return {items,archived:a?a.items.length:0,live:l.via,updated:a&&a.updated_utc}});
   }
   const fmtDate=s=>{if(!s)return '';const d=new Date(s);if(isNaN(d))return '';const days=(Date.now()-d)/864e5;
     const md=d.toLocaleDateString(undefined,{month:'short',day:'numeric',...(d.getFullYear()!==new Date().getFullYear()?{year:'numeric'}:{})});
@@ -125,7 +125,7 @@
   function newsHTML(n,all,name){
     if(!n.items.length)return `<p class="dim" style="margin:0">No stories yet. The news archive fills in each time the "Update Sleeper rosters" job runs (3× a day).</p>`;
     const show=all?n.items:n.items.slice(0,6);const oldest=n.items[n.items.length-1].d;
-    return `<ul class="news">${show.map(it=>{const fresh=it.d&&(Date.now()-new Date(it.d))<3*864e5;return `<li class="${fresh?'new':''}">${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.h)}</a>`:`<b>${esc(it.h)}</b>`}${it.s?`<p>${esc(it.s)}</p>`:''}<small>${esc(it.src||'')}${it.d?' · '+esc(fmtDate(it.d)):''}</small></li>`}).join('')}</ul>
+    return `<ul class="pc-news">${show.map(it=>{const fresh=it.d&&(Date.now()-new Date(it.d))<3*864e5;return `<li class="${fresh?'new':''}">${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.h)}</a>`:`<b>${esc(it.h)}</b>`}${it.s?`<p>${esc(it.s)}</p>`:''}<small>${esc(it.src||'')}${it.d?' · '+esc(fmtDate(it.d)):''}</small></li>`}).join('')}</ul>
       ${!all&&n.items.length>show.length?`<button type="button" class="more" data-more>Show all ${n.items.length} stories (back to ${esc(fmtDate(oldest).split(' · ')[0])})</button>`:''}`;
   }
   function newsSrc(n){const p=[];if(n.live&&n.live.length)p.push(n.live.join(' + ')+' live');if(n.archived)p.push(`site archive (${n.archived})`);return p.length?p.join(' + '):'site archive'}
@@ -256,6 +256,7 @@
       if(e.target.closest('.pc-x')){close();return}
       if(e.target.closest('.pc-back')){stack.pop();render();return}
       const sc=e.target.closest('[data-sc] button');if(sc){LS.set('scoring',sc.dataset.v);IX&&(IX._rank={});render();window.dispatchEvent(new CustomEvent('nfls-scoring',{detail:sc.dataset.v}));return}
+      const np=e.target.closest('.pc-news p');if(np){np.classList.toggle('open');return}
       const cp=e.target.closest('[data-copyname]');if(cp){try{navigator.clipboard.writeText(cp.dataset.copyname)}catch(err){}return}
       const t=e.target.closest('[data-card],.opp[data-opp]');if(t){e.preventDefault();const k=t.dataset.card||('d:'+t.dataset.opp);push(k,t.dataset.pos);return}
       return;

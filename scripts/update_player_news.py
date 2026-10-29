@@ -132,7 +132,10 @@ def merge(old: list[dict], new: list[dict]) -> list[dict]:
     for it in old + new:  # newer fetch wins for the same story
         k = key(it)
         by[k] = {**by.get(k, {}), **{a: b for a, b in it.items() if b}}
-    items = sorted(by.values(), key=lambda x: x.get("d") or "", reverse=True)
+    # ESPN republishes RotoWire blurbs with the same timestamp; keep the RotoWire copy (it has a headline)
+    rw_times = {it.get("d") for it in by.values() if it.get("src") == "RotoWire"}
+    items = [it for it in by.values() if not (it.get("src") == "ESPN fantasy" and it.get("d") in rw_times)]
+    items = sorted(items, key=lambda x: x.get("d") or "", reverse=True)
     return items[:KEEP]
 
 
