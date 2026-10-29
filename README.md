@@ -8,10 +8,12 @@ My fantasy football stats lab: NFL data from [nflverse](https://github.com/nflve
 |---|---|
 | [Home](https://william-arana.github.io/NFL_stats/) | Next kickoff, top waiver add, best D/ST stream, highest implied total, links to every page, live headlines + fantasy news + Sleeper trending adds. |
 | [Guide](https://william-arana.github.io/NFL_stats/guide.html) | Every nflverse dataset and all ~1,500 columns, by dataset or stat category. Pick stats and copy the list. |
-| [Stats](https://william-arana.github.io/NFL_stats/stats.html) | Players (fantasy / receiving / rushing / passing, per game or totals, any week range, game logs), Teams (offense, defense & D/ST, pass rush matchup), Defense vs position, Schedule & Vegas lines. |
-| [Lab](https://william-arana.github.io/NFL_stats/lab.html) | Build your own tables in the browser: point-and-click pivots, a SQL editor (DuckDB), 8 waiver recipes, charts, CSV export, saved queries. |
-| [Waivers](https://william-arana.github.io/NFL_stats/waivers.html) | Free agents in the selected Sleeper league ranked by a waiver score (recent xFP, PPR, snap/touch trends, matchup), my roster with likeliest drops, and D/ST streamers. |
+| [Stats](https://william-arana.github.io/NFL_stats/stats.html) | Players (fantasy / receiving / rushing / passing, per game or totals, any week range, game logs), Teams (offense, defense & D/ST with rushing vs passing yards allowed, pass rush matchup), Defense vs position (points allowed by position + rush/pass yards, carries and yards per play allowed), Schedule & Vegas lines. |
+| [Lab](https://william-arana.github.io/NFL_stats/lab.html) | Build your own tables in the browser: point-and-click pivots, a SQL editor (DuckDB), 10 waiver recipes (incl. RB and WR pickup checks with PFR, Next Gen, depth chart and injury data), charts, CSV export, saved queries. |
+| [Waivers](https://william-arana.github.io/NFL_stats/waivers.html) | Free agents in the selected Sleeper league ranked by a waiver score (recent xFP, PPR, snap/touch trends, matchup), player search (name, team or position; includes rostered players), my roster with likeliest drops, and D/ST streamers. |
 | [Trade](https://william-arana.github.io/NFL_stats/trade.html) | Two-sided trade comparison: pick players/defenses from any league roster or search, then compare FP/g, last 3, xFP, usage, weekly scores, rest-of-season schedule and news. Shareable link; "Copy for Claude" summary. |
+
+**Stat descriptions:** dotted-underlined column names on Stats, Lab, Waivers and Trade open a short description (from the Guide's data dictionary, `data/catalog.json`, plus notes for stats the site calculates) with a link to that stat in the Guide (`guide.html#q=<field>`). Tap the rest of a header to sort. Lives in `assets/glossary.js`.
 
 **Player & defense cards:** click any player or D/ST name (Waivers, Trade, Home trending, Stats opponents/teams) for weekly fantasy points, season stats, game log and news (`assets/cards.js`). News = the site's archive (`data/site/news/`, built by `scripts/update_player_news.py` 3× a day with the Sleeper job; grows all season) + the live per-player feeds from Sleeper (`api.sleeper.app/players/nfl/<id>/news`: RotoWire, FantasyPros, RotoBaller, newest 10) and ESPN (fantasy player news, newest ~8), both read straight from the browser.
 
@@ -68,6 +70,7 @@ Load it to a sheet. Each Tuesday, hit **Data → Refresh All**. Google Sheets: `
 | `data/site/` | Compact JSON the site reads: players, teams, schedule, defenders, meta + injuries, Sleeper rosters + id map |
 | `assets/site.js` | Theme toggle, league picker, Sleeper roster lookups |
 | `assets/cards.js` | Clickable player + defense cards (stats, game log, news) on every page |
+| `assets/glossary.js` | Stat descriptions behind the underlined column names |
 | `scripts/update_player_news.py` | Per-player / per-defense news archive → `data/site/news/*.json` |
 | `trade.html` | Trade analyzer |
 | `scripts/update_sleeper.py` | Sleeper rosters → `data/site/leagues.json`, `sleeper_map.json` |
