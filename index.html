@@ -116,7 +116,8 @@ main.col{display:grid;gap:28px;min-width:0}
 .ng.bye{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
 .ng.bye::before{display:none}
 .ng.bye img{width:22px;height:22px;object-fit:contain}
-.ng.mineg{box-shadow:inset 4px 0 0 var(--gold)}
+.ng .yours{font-size:11.5px;line-height:1.35;padding:3px 7px;border-radius:3px;background:var(--gold-soft);color:var(--ink)}
+.ng .yours b{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin-right:4px}
 
 /* footer */
 .sitefoot{background:var(--nav-bg);color:var(--nav-fg);border-top:5px solid var(--margin);margin-top:20px}
@@ -303,16 +304,22 @@ function drawNFL(){
   const games=G.filter(g=>g.week===nw).map(g=>({...g,at:etDate(g.gameday,g.gametime)})).sort((a,b)=>a.at-b.at);
   const byes=[...new Set(G.flatMap(g=>[g.home_team,g.away_team]))].filter(t=>!games.some(g=>g.home_team===t||g.away_team===t)).sort();
   $('#ng-title').textContent=`NFL · Week ${nw}`;
-  const myTeams=new Set(ROST?[...ROST.map.entries()].filter(([k,v])=>v.status==='mine').map(([k])=>k.startsWith('DEF:')?k.slice(4):(P.find(r=>r.player_id===k)||{}).team).filter(Boolean):[]);
+  // team -> names of your players in that game (latest team from the stats; D/ST by team)
+  const myBy={};if(ROST){const last={};for(const r of P)last[r.player_id]=r;
+    for(const [k,v] of ROST.map.entries()){if(v.status!=='mine')continue;let team,name;
+      if(k.startsWith('DEF:')){team=k.slice(4);name=team+' D/ST'}else{const r=last[k];if(!r)continue;team=r.team;name=r.player_display_name}
+      (myBy[team]=myBy[team]||[]).push(name)}}
+  const myTeams=new Set(Object.keys(myBy));
   $('#ng-list').innerHTML=games.map(g=>{const fin=g.home_score!=null;const hf=num(g.spread_line)&&g.spread_line>0,af=num(g.spread_line)&&g.spread_line<0;
     const sp=num(g.spread_line)?(g.spread_line===0?'PK':`${hf?g.home_team:g.away_team} −${Math.abs(g.spread_line)}`):'';
     const row=(t,pre,score,fav,won)=>`<div class="t">${img(t)||'<span></span>'}<span class="ab ${fav&&!fin?'fav':''} ${won?'win':''}">${pre}${t}<small>${recStr(rec[t])}</small></span><span class="sc ${won?'win':''}">${fin?score:''}</span></div>`;
     const when=g.at.toLocaleString(undefined,{weekday:'short',hour:'numeric',minute:'2-digit'});
     const mine=myTeams.has(g.home_team)||myTeams.has(g.away_team);
     const ca=(TM[g.away_team]||{}).color||'var(--rule)',ch=(TM[g.home_team]||{}).color||'var(--rule)';
-    return `<div class="ng ${mine?'mineg':''}" style="--ca:${ca};--ch:${ch}" ${mine?'title="You have players in this game"':''}>${row(g.away_team,'',g.away_score,af,fin&&g.away_score>g.home_score)}${row(g.home_team,'@ ',g.home_score,hf,fin&&g.home_score>g.away_score)}
+    return `<div class="ng ${mine?'mineg':''}" style="--ca:${ca};--ch:${ch}" >${row(g.away_team,'',g.away_score,af,fin&&g.away_score>g.home_score)}${row(g.home_team,'@ ',g.home_score,hf,fin&&g.home_score>g.away_score)}
+      ${mine?`<div class="yours"><b>Yours</b>${esc([...(myBy[g.away_team]||[]),...(myBy[g.home_team]||[])].join(', '))}</div>`:''}
       <div class="meta">${fin?'<b>Final</b>':`<span>${when}</span>`}${sp&&!fin?`<span><b>${sp}</b></span>`:''}${num(g.total_line)&&!fin?`<span>O/U ${g.total_line}</span>`:''}</div></div>`}).join('')+(byes.length?`<div class="ng bye"><span class="meta" style="border:0;padding:0;margin:0"><b>Bye</b></span>${byes.map(t=>img(t)||t).join('')}</div>`:'');
-  $('#mu-sub').textContent=`Week ${nw}${myTeams.size?' · gold edge = you have players in that game':''}`;
+  $('#mu-sub').textContent=`Week ${nw}${myTeams.size?` · you have players in ${games.filter(g=>myTeams.has(g.home_team)||myTeams.has(g.away_team)).length} of ${games.length} games`:''}`;
 }
 let liveMu={};
 function fetchLiveMatchups(lg){
