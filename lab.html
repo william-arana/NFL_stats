@@ -297,6 +297,7 @@ Rules:
 - teams has one row per team per game (offense plus what its defense allowed: points_against, yards_allowed, def_sacks, def_pressures, pressures_allowed, dst_pts, ...).
 - Team codes are NFL abbreviations: LV Raiders, KC Chiefs, LA Rams, LAC Chargers, SF 49ers, NE Patriots, NO Saints, NYJ Jets, NYG Giants, JAX Jaguars, WAS Commanders, TB Buccaneers, GB Packers, ARI Cardinals.
 - "Offensive players" = positions QB, RB, WR, TE.
+- Every table alias you reference (a., p., g., ...) must be defined in the FROM/JOIN of that same SELECT. Columns from a CTE are referenced through that CTE's name or its alias.
 - Round decimals to 1–2 places, use readable snake_case column names, put the player or team name first, ORDER BY the most useful column, LIMIT 50 unless asked otherwise.`;
 /* read Claude's answer: <sql> tags first, then a sql code fence, then JSON, then bare SQL */
 function parseAnswer(text){
@@ -323,26 +324,40 @@ function initAsk(){
   $('#ask-q').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();ask($('#ask-q').value)}});
 }
 function setAskMeta(html){$('#ask-meta').innerHTML=html}
+async function callClaude(question){
+  const ex=RECIPES.filter(r=>['available_matchups','usage_risers','dst_pressure'].includes(r.id)).map(r=>`-- ${r.title}\n${r.sql}`).join('\n\n');
+  const system=`${RULES}\n\nSCHEMA (table (what it is): columns with types)\n${schemaText()}\n\nCONTEXT\n${askContext()}\n\nWORKING EXAMPLES (correct queries against this exact schema; copy their patterns)\n${ex}`;
+  const r=await fetch(ASK_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Passcode':askCode()},body:JSON.stringify({question,system})});
+  const j=await r.json().catch(()=>({error:'Bad response from the Worker ('+r.status+')'}));
+  if(r.status===401){try{localStorage.removeItem('nfls-askcode')}catch(e){}$('#ask-pass').hidden=false;throw new Error('Wrong passcode. Re-enter it.')}
+  if(!r.ok)throw new Error(j.error||('Worker error '+r.status));
+  if(j.text==null)throw new Error(j.error||'The Cloudflare Worker is still the old version. Paste the new worker/ask-worker.js into Cloudflare and Deploy.');
+  const a=parseAnswer(j.text);
+  if(!a.sql)throw new Error("Claude didn't return a query. Its reply started: "+j.text.slice(0,160));
+  if(!READONLY(a.sql))throw new Error('Claude returned something other than a read-only query, so it was blocked. Try rewording.');
+  return {sql:a.sql,exp:a.exp,tokens:j.usage?j.usage.input_tokens+j.usage.output_tokens:0,model:j.model};
+}
+/* DuckDB checks the query without running it; returns the error text or null */
+async function checkSQL(sql){try{await conn.query('EXPLAIN '+sql);return null}catch(e){return e.message}}
 async function ask(q,fix){
   q=(q||'').trim();if(!q)return;
   if(!askCode()){$('#ask-pass').hidden=false;$('#ask-code').focus();setAskMeta('<span class="ask-err">Enter your passcode first.</span>');return}
-  $('#ask-go').disabled=true;setAskMeta(`<span><span class="spin"></span>${fix?'Asking Claude to fix the query…':'Writing a query…'}</span>`);
-  const question=fix?`${q}\n\nYour previous query failed.\nQuery:\n${fix.sql}\nError: ${fix.error}\nReturn a corrected query.`:q;
+  $('#ask-go').disabled=true;
+  const fixQ=(sql,err)=>`${q}\n\nYour previous query failed in DuckDB.\nQuery:\n${sql}\nError: ${err}\nReturn a corrected query. Check that every table alias you reference is defined in the FROM/JOIN of that same SELECT.`;
+  let tokens=0,res=null,err=null,tries=0;const MAX=3;
   try{
-    const r=await fetch(ASK_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Passcode':askCode()},body:JSON.stringify({question,system:`${RULES}\n\nSCHEMA (table (what it is): columns with types)\n${schemaText()}\n\nCONTEXT\n${askContext()}`})});
-    const j=await r.json().catch(()=>({error:'Bad response from the Worker ('+r.status+')'}));
-    if(r.status===401){try{localStorage.removeItem('nfls-askcode')}catch(e){}$('#ask-pass').hidden=false;throw new Error('Wrong passcode. Re-enter it.')}
-    if(!r.ok)throw new Error(j.error||('Worker error '+r.status));
-    if(j.text==null)throw new Error(j.error||'The Cloudflare Worker is still the old version. Paste the new worker/ask-worker.js into Cloudflare and Deploy.');
-    const a=parseAnswer(j.text);
-    if(!a.sql)throw new Error("Claude didn't return a query. Its reply started: "+j.text.slice(0,160));
-    if(!READONLY(a.sql))throw new Error('Claude returned something other than a read-only query, so it was blocked. Try rewording.');
-    j.sql=a.sql;j.explanation=a.exp;
-    lastAsk={q,sql:j.sql};
-    $('#sql').value=j.sql;$('#note').hidden=false;$('#note').innerHTML=`<div><b>Ask: ${esc(q)}</b><br>${esc(j.explanation||'')}</div>`;$('#save-name').value=q.slice(0,60);
+    let question=fix?fixQ(fix.sql,fix.error):q;
+    while(tries<MAX){
+      tries++;setAskMeta(`<span><span class="spin"></span>${tries===1&&!fix?'Writing a query…':`Claude's query had an error, fixing it (try ${tries} of ${MAX})…`}</span>`);
+      res=await callClaude(question);tokens+=res.tokens;
+      err=await checkSQL(res.sql);if(!err)break;
+      question=fixQ(res.sql,err);
+    }
+    lastAsk={q,sql:res.sql};
+    $('#sql').value=res.sql;$('#note').hidden=false;$('#note').innerHTML=`<div><b>Ask: ${esc(q)}</b><br>${esc(res.exp||'')}</div>`;$('#save-name').value=q.slice(0,60);
     markActive('');showTab('sql');
-    const u=j.usage?` · ${j.usage.input_tokens+j.usage.output_tokens} tokens`:'';
-    setAskMeta(`<span>Done${u}. Check the query below, edit if needed, or <b>Save</b> it to reuse for free.</span>`);
+    const m=res.model?` · ${esc(res.model)}`:'';
+    setAskMeta(err?`<span class="ask-err">Still failing after ${MAX} tries${m} · ${tokens} tokens. Try rewording, or click "Ask Claude to fix it" below.</span>`:`<span>Done${tries>1?` (auto-fixed ${tries-1}×)`:''}${m} · ${tokens} tokens. Check the query below, edit if needed, or <b>Save</b> it to reuse for free.</span>`);
     await run('Ask: '+q.slice(0,50));
   }catch(e){setAskMeta(`<span class="ask-err">${esc(e.message)}</span>${askCode()?' <button class="link" id="ask-forget">Change passcode</button>':''}`);const f=$('#ask-forget');if(f)f.onclick=()=>{try{localStorage.removeItem('nfls-askcode')}catch(e){}$('#ask-pass').hidden=false;setAskMeta('Enter the new passcode.')}}
   finally{$('#ask-go').disabled=false}
