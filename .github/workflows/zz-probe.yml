@@ -1,5 +1,8 @@
 name: zz probe (temporary)
-on: workflow_dispatch
+on:
+  push:
+    branches: [player-cards-trade]
+    paths: [".github/workflows/zz-probe.yml"]
 jobs:
   p:
     runs-on: ubuntu-latest
@@ -36,3 +39,4 @@ jobs:
               for m in re.findall(r'https://[a-z.]*sleeper[a-z.]*/[^"\s<>]{0,80}', b)[:30]: print('url',m)
           PY
           done
+# r1
