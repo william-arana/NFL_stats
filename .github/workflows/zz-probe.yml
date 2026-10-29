@@ -12,38 +12,19 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           exec > probe.txt 2>&1
-          for u in \
-           "https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?athlete=12483&limit=50" \
-           "https://site.api.espn.com/apis/fantasy/v2/games/ffl/news/players?playerId=12483&limit=50" \
-           "https://now.core.api.espn.com/v1/sports/news?athlete=12483&limit=50" \
-           "https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/12483/news?limit=50" \
-           "https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/12483/overview" \
-           "https://sleeper.com/nfl/players/matthew-stafford-421" \
-           "https://api.sleeper.app/players/nfl/421/news" \
-           "https://api.sleeper.com/players/nfl/421/news"; do
-            echo "=== $u"
-            curl -sS -m 20 -A "Mozilla/5.0" -H "Origin: https://william-arana.github.io" -D /tmp/h -o /tmp/b "$u" || true
-            grep -i "^HTTP\|access-control-allow-origin\|content-type" /tmp/h
-            echo "bytes $(wc -c < /tmp/b)"
-            python3 - <<'PY'
-          import json,re
-          b=open('/tmp/b','rb').read().decode('utf8','ignore')
-          try:
-              j=json.loads(b)
-              arr=j.get('articles') or j.get('feed') or j.get('headlines') or j.get('news') or []
-              if isinstance(arr,dict): arr=arr.get('items',[])
-              print('keys',list(j.keys())[:12],'n',len(arr))
-              ds=[a.get('published') or a.get('lastModified') for a in arr if isinstance(a,dict)]
-              print('dates',ds[:2],ds[-2:])
-              if arr: print('first',json.dumps(arr[0])[:600])
-          except Exception as e:
-              print('notjson', len(b))
-              for k in ['Three-TD','__NEXT_DATA__','graphql','news','rotowire']:
-                  i=b.find(k); print(k,i, b[max(0,i-150):i+250].replace('\n',' ') if i>=0 else '')
-              for m in re.findall(r'https://[a-z.]*sleeper[a-z.]*/[^"\s<>]{0,80}', b)[:30]: print('url',m)
+          python3 - <<'PY'
+          import json,urllib.request,datetime
+          def get(u):
+              r=urllib.request.urlopen(urllib.request.Request(u,headers={"User-Agent":"Mozilla/5.0"}),timeout=20);return json.loads(r.read())
+          for u in ["https://api.sleeper.app/players/nfl/421/news","https://api.sleeper.app/players/nfl/421/news?limit=100","https://api.sleeper.app/players/nfl/421/news?limit=500","https://api.sleeper.app/players/nfl/421/news?limit=100&offset=20","https://api.sleeper.app/players/nfl/4984/news?limit=200","https://api.sleeper.app/players/nfl/PIT/news?limit=50","https://api.sleeper.app/players/nfl/421/news?limit=100&before=1780000000000"]:
+              try:
+                  j=get(u);ts=[x.get("published") for x in j]
+                  f=lambda t:datetime.datetime.utcfromtimestamp(t/1000).strftime("%Y-%m-%d") if t else None
+                  print(u,"n",len(j),"newest",f(max(ts)) if ts else None,"oldest",f(min(ts)) if ts else None,"sources",sorted(set(x.get("source") for x in j)))
+              except Exception as e: print(u,"ERR",e)
+          j=get("https://api.sleeper.app/players/nfl/421/news?limit=3")
+          print(json.dumps(j,indent=1)[:3000])
           PY
-          done
-
       - run: |
           git config user.name "github-actions[bot]"; git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
           git add probe.txt; git commit -m "probe output"; git push
