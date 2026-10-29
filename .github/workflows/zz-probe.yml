@@ -3,11 +3,15 @@ on:
   push:
     branches: [player-cards-trade]
     paths: [".github/workflows/zz-probe.yml"]
+permissions:
+  contents: write
 jobs:
   p:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: |
+          exec > probe.txt 2>&1
           for u in \
            "https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?athlete=12483&limit=50" \
            "https://site.api.espn.com/apis/fantasy/v2/games/ffl/news/players?playerId=12483&limit=50" \
@@ -39,4 +43,7 @@ jobs:
               for m in re.findall(r'https://[a-z.]*sleeper[a-z.]*/[^"\s<>]{0,80}', b)[:30]: print('url',m)
           PY
           done
-# r1
+
+      - run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add probe.txt; git commit -m "probe output"; git push
