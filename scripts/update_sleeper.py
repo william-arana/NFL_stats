@@ -75,6 +75,8 @@ def main() -> None:
                 "roster_id": r["roster_id"],
                 "owner": u.get("display_name") or "",
                 "team_name": (u.get("metadata") or {}).get("team_name") or u.get("display_name") or f"Team {r['roster_id']}",
+                # custom team logo if they set one in Sleeper, else their profile avatar
+                "avatar": (u.get("metadata") or {}).get("avatar") or (f"https://sleepercdn.com/avatars/thumbs/{u['avatar']}" if u.get("avatar") else None),
                 "players": keys,
                 "starters": [to_key(str(s)) for s in (r.get("starters") or []) if to_key(str(s))],
                 "faab_left": (info.get("settings") or {}).get("waiver_budget", 100) - (r.get("settings") or {}).get("waiver_budget_used", 0),

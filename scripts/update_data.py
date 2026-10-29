@@ -257,6 +257,20 @@ def main() -> None:
     (SITE_DIR / "teams.json").write_text(json.dumps(to_columns_json(t), separators=(",", ":")))
     (SITE_DIR / "schedule.json").write_text(json.dumps(to_columns_json(sch), separators=(",", ":")))
     (SITE_DIR / "meta.json").write_text(json.dumps(meta, separators=(",", ":")))
+    try:
+        tm = nfl.load_teams()
+        current = set(sch["home_team"].to_list()) | set(sch["away_team"].to_list())
+        meta_t = {}
+        for r in tm.iter_rows(named=True):
+            if r["team_abbr"] in current:
+                logo = r["team_logo_espn"] or ""
+                slug = logo.rsplit("/", 1)[-1].split(".")[0] if logo else r["team_abbr"].lower()
+                meta_t[r["team_abbr"]] = {"name": r["team_name"], "nick": r["team_nick"], "conf": r["team_conf"], "div": r["team_division"],
+                                          "color": r["team_color"], "color2": r["team_color2"], "espn": slug,
+                                          "logo": f"https://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/{slug}.png&h=96&w=96"}
+        (SITE_DIR / "teams_meta.json").write_text(json.dumps(meta_t, separators=(",", ":")))
+    except Exception as e:  # noqa: BLE001
+        log(f"teams_meta: FAILED ({e})")
     if players is not None:
         ids = players.select("gsis_id", "espn_id").drop_nulls()
         keep_ids = set(pw["player_id"].to_list())
