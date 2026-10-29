@@ -278,6 +278,8 @@ const PSETS={
     {k:'qb_blitzed',label:'Blitzed',d:1,heat:1},{k:'passing_cpoe',label:'CPOE',d:1,heat:1,rate:1,tip:'Completion % over expected'},
     {k:'passing_epa',label:'Pass EPA',d:1,heat:1},{k:'ypa',label:'Y/A',d:1,heat:1,calc:1}]}
 };
+const FPCOL={k:'fp',label:'FP',d:1,heat:1,tip:'Fantasy points in your scoring'};
+function pcols(set){return set.cols.some(c=>c.k==='fp')?set.cols:[FPCOL,...set.cols]}
 const SUMK=['completions','attempts','passing_yards','passing_tds','passing_interceptions','sacks_suffered','passing_air_yards','passing_epa','carries','rushing_yards','rushing_tds','rushing_first_downs','rushing_epa','targets','receptions','receiving_yards','receiving_tds','receiving_air_yards','receiving_yards_after_catch','receiving_first_downs','receiving_epa','rushing_fumbles_lost','receiving_fumbles_lost','sack_fumbles_lost','fantasy_points','fantasy_points_ppr','fantasy_points_half','offense_snaps','xfp','xfp_diff','qb_pressured','qb_blitzed','ybc','yac_rush','broken_tackles'];
 const MEANK=['target_share','air_yards_share','wopr','racr','offense_pct','passing_cpoe'];
 const ps={av:'all',pos:store.get('pos','ALL'),team:'ALL',w0:1,w1:null,mode:store.get('mode','pg'),scoring:store.get('scoring','ppr'),set:store.get('set','fantasy'),q:'',minG:store.get('minG',2),sort:null,dir:-1,open:new Set(),heat:store.get('heat',true)};
@@ -343,28 +345,28 @@ function Players(){
   let t;$('#p-q').oninput=e=>{clearTimeout(t);t=setTimeout(()=>{ps.q=e.target.value.trim().toLowerCase();re()},120)};
   document.querySelector('.sets').onclick=e=>{const b=e.target.closest('[data-set]');if(!b)return;ps.set=b.dataset.set;ps.sort=null;document.querySelectorAll('[data-set]').forEach(x=>x.setAttribute('aria-pressed',x===b));re()};
   $('#p-heat').onchange=e=>{ps.heat=e.target.checked;re()};
-  $('#p-csv').onclick=()=>{const cols=[{k:'name',label:'Player'},{k:'pos',label:'Pos'},{k:'team',label:'Team'},{k:'g',label:'G'},...PSETS[ps.set].cols.filter(c=>!c.spark)];downloadCSV(`players_${ps.set}_${ps.mode}_wk${ps.w0}-${ps.w1}.csv`,cols,window._prows||[])};
+  $('#p-csv').onclick=()=>{const cols=[{k:'name',label:'Player'},{k:'pos',label:'Pos'},{k:'team',label:'Team'},{k:'g',label:'G'},...pcols(PSETS[ps.set]).filter(c=>!c.spark)];downloadCSV(`players_${ps.set}_${ps.mode}_wk${ps.w0}-${ps.w1}.csv`,cols,window._prows||[])};
   drawPlayers();
 }
 function drawPlayers(){
   const set=PSETS[ps.set];const data=aggPlayers();
   const sk=ps.sort||set.cols[0].k;sortRows(data,sk,ps.dir);window._prows=data;
-  const heat=ps.heat?heatAlpha(data,set.cols):{};
+  const heat=ps.heat?heatAlpha(data,pcols(set)):{};
   const lbl=ps.mode==='pg'?'per game':'totals';
-  $('#p-sum').innerHTML=`<span><b>${data.length}</b> players</span><span>Weeks <b>${ps.w0}–${ps.w1}</b>, ${lbl}</span><span>Sorted by <b>${esc((set.cols.find(c=>c.k===sk)||{label:sk}).label)}</b></span>`;
-  const th=`<thead><tr><th class="rank">#</th><th class="l stick" data-k="name">Player</th><th class="l" data-k="team">Team</th><th class="l" data-k="next" title="Week ${META.next_week} opponent">Wk ${META.next_week}</th><th data-k="g">G</th>${set.cols.map(c=>`<th data-k="${c.k}" ${c.tip?`title="${esc(c.tip)}"`:''} ${c.spark?'class="l"':''} ${sk===c.k?`aria-sort="${ps.dir<0?'descending':'ascending'}"`:''}>${esc(c.label)}</th>`).join('')}</tr></thead>`;
+  $('#p-sum').innerHTML=`<span><b>${data.length}</b> players</span><span>Weeks <b>${ps.w0}–${ps.w1}</b>, ${lbl}</span><span>Sorted by <b>${esc((pcols(set).find(c=>c.k===sk)||{label:sk}).label)}</b></span>`;
+  const th=`<thead><tr><th class="rank">#</th><th class="l stick" data-k="name">Player</th><th class="l" data-k="team">Team</th><th class="l" data-k="next" title="Week ${META.next_week} opponent">Wk ${META.next_week}</th><th data-k="g">G</th>${pcols(set).map(c=>`<th data-k="${c.k}" ${c.tip?`title="${esc(c.tip)}"`:''} ${c.spark?'class="l"':''} ${sk===c.k?`aria-sort="${ps.dir<0?'descending':'ascending'}"`:''}>${esc(c.label)}</th>`).join('')}</tr></thead>`;
   const LIM=400;let body='';
   data.slice(0,LIM).forEach((a,i)=>{
     const inj=INJ[a.id];
     body+=`<tr data-id="${a.id}" class="${ps.open.has(a.id)?'open':''}"><td class="rank">${i+1}</td><td class="l stick"><button class="pname ${avail(a.id)==='fa'?'name-fa':''}" data-id="${a.id}">${esc(a.name)}</button>${window.NFLS?NFLS.plink(a.id,a.name):''} <span class="pos">${a.pos}</span>${avBadge(a.id,a.name)}${inj?`<span class="inj" title="${esc(inj[1])} (Wk ${inj[2]} report)">${esc(inj[0].replace('Practice: ',''))}</span>`:''}</td><td class="l">${a.team}</td><td class="l">${(()=>{const n=nextOppOf(a.team);return n?oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,a.pos):'<span class="pos">bye</span>'})()}</td><td>${a.g}</td>${
-      set.cols.map(c=>{if(c.spark)return `<td class="l">${spark(a)}</td>`;const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;
+      pcols(set).map(c=>{if(c.spark)return `<td class="l">${spark(a)}</td>`;const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;
         const cls=c.diff?(num(v)?(v>0?'pos-d':v<0?'neg-d':''):''):'';
         return `<td class="${al?'heat':''} ${cls}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${c.diff&&num(v)&&v>0?'+':''}${fmt(v,c.d)}</td>`}).join('')}</tr>`;
     if(ps.open.has(a.id)){
       const logs=[...a.logs].sort((x,y)=>x.week-y.week);
       for(const l of logs){const r=Object.assign({},l);r.fp=l[SCORING[ps.scoring].k];r.tds=(l.passing_tds||0)+(l.rushing_tds||0)+(l.receiving_tds||0);r.opps=(l.carries||0)+(l.targets||0);r.fum=(l.rushing_fumbles_lost||0)+(l.receiving_fumbles_lost||0)+(l.sack_fumbles_lost||0);
         r.catch=div(l.receptions,l.targets);r.adot=div(l.receiving_air_yards,l.targets);r.ypc=div(l.rushing_yards,l.carries);r.ybc_att=num(l.ybc)?div(l.ybc,l.carries):null;r.yac_att=num(l.yac_rush)?div(l.yac_rush,l.carries):null;r.press_pct=num(l.qb_pressured)?div(l.qb_pressured,l.attempts+l.sacks_suffered):null;r.ypa=div(l.passing_yards,l.attempts);
-        body+=`<tr class="log"><td></td><td class="l stick">Wk ${l.week} ${oppBtn(l.opponent_team,'vs '+l.opponent_team,a.pos)}</td><td class="l"></td><td></td><td></td>${set.cols.map(c=>c.spark?'<td></td>':`<td>${fmt(r[c.k],c.d==='%'||c.d==='%1'?c.d:(typeof c.d==='number'?Math.min(c.d,2):0))}</td>`).join('')}</tr>`}
+        body+=`<tr class="log"><td></td><td class="l stick">Wk ${l.week} ${oppBtn(l.opponent_team,'vs '+l.opponent_team,a.pos)}</td><td class="l"></td><td></td><td></td>${pcols(set).map(c=>c.spark?'<td></td>':`<td>${fmt(r[c.k],c.d==='%'||c.d==='%1'?c.d:(typeof c.d==='number'?Math.min(c.d,2):0))}</td>`).join('')}</tr>`}
     }
   });
   $('#p-tbl').innerHTML=data.length?th+'<tbody>'+body+'</tbody>':'<tbody><tr><td class="empty">No players match. Lower "Min games" or clear the search.</td></tr></tbody>';
