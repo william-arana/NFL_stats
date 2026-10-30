@@ -35,6 +35,7 @@
 <script src="assets/site.js" defer></script>
 <script src="assets/cards.js" defer></script>
 <script src="assets/glossary.js" defer></script>
+<script src="assets/tables.js" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -295,7 +296,7 @@ function compareTable(all,A,B){
   const tot=(L,s)=>{const S=k=>L.reduce((a,x)=>a+(num(x[k])?x[k]:0),0);return `<tr class="stot" data-s="${s}"><td class="l stick">Side ${s.toUpperCase()} total</td><td></td><td></td><td></td><td>${f1(S('fpg'))}</td><td>${f1(S('l3'))}</td><td>${f1(S('xfp3'))}</td>${'<td></td>'.repeat(7)}<td>${Math.round(S('ros'))}</td><td></td></tr>`};
   const grp=(L,s)=>L.length?`<tr class="grp" style="--sc:var(--${s==='a'?'blue':'margin'})"><td colspan="${cols.length+4}"><b>Side ${s.toUpperCase()}</b></td></tr>${L.map(x=>row({...x,s})).join('')}${tot(L,s)}`:'';
   return `<section class="box"><div class="box-h"><h2>Side by side</h2><span class="hint">Shading ranks each column among these players: darker = higher</span></div>
-    <div class="tablewrap"><table><thead><tr><th class="l stick">Player</th><th class="l">Wk ${nw}</th><th class="l">Bye</th>${cols.map(([k,l,,,tip])=>`<th>${gl(k,l,tip)}</th>`).join('')}<th class="l">Rostered by</th></tr></thead>
+    <div class="tablewrap"><table data-cols="trade-side"><thead><tr><th class="l stick">Player</th><th class="l">Wk ${nw}</th><th class="l">Bye</th>${cols.map(([k,l,,,tip])=>`<th>${gl(k,l,tip)}</th>`).join('')}<th class="l">Rostered by</th></tr></thead>
     <tbody>${grp(A,'a')}${grp(B,'b')}</tbody></table></div>
     <div class="foot"><span>L3 = last 3 weeks. xFP = expected PPR points from usage (targets, carries, where on the field). ROS pts = points per game × games left through Week ${LAST_WEEK}; it doesn't adjust for matchups, so check ROS SoS alongside it.</span><span>ROS SoS: 1st = easiest remaining schedule. Players use PPR points allowed to their position; D/ST uses opponents' points scored per game.</span></div></section>`;
 }
