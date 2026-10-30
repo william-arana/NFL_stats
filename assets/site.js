@@ -102,13 +102,25 @@
   },true);
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
 
-  /* phones: narrow the frozen name column while the table is scrolled sideways (see site.css) */
+  /* phones: narrow the frozen name column while the table is scrolled sideways (see site.css).
+     The full width is measured first so the column can animate between two fixed widths. */
   const phone=window.matchMedia('(max-width:640px)');let lockUntil=0;
+  function setNarrow(el,on){
+    const th=el.querySelector('th.stick')||el.querySelector('td.stick');if(!th)return;
+    if(on){if(!el.classList.contains('sized')){const w=Math.ceil(th.getBoundingClientRect().width);if(w<=innerWidth*.46+8)return;/* already slim: nothing to shrink */
+        el.style.setProperty('--stick-full',w+'px');el.classList.add('sized');void el.offsetWidth}
+      clearTimeout(el._unsize);el.classList.add('narrow')}
+    else{el.classList.remove('narrow');clearTimeout(el._unsize);el._unsize=setTimeout(()=>{if(!el.classList.contains('narrow'))el.classList.remove('sized')},340)}
+  }
+  /* while the width animates, ignore scroll events; then check once more so a quick swipe back isn't missed */
+  function check(el){const x=el.scrollLeft,narrow=el.classList.contains('narrow');
+    if(!narrow&&x>12){setNarrow(el,true);if(!el.classList.contains('narrow'))return}else if(narrow&&x<=1)setNarrow(el,false);else return;
+    lockUntil=Date.now()+320;clearTimeout(el._recheck);el._recheck=setTimeout(()=>check(el),340)}
   document.addEventListener('scroll',e=>{const el=e.target;if(!phone.matches||!el||!el.classList||!el.classList.contains('tablewrap')||!el.querySelector('td.stick'))return;
-    if(Date.now()<lockUntil)return;const x=el.scrollLeft,narrow=el.classList.contains('narrow');
-    if(!narrow&&x>24){el.classList.add('narrow');lockUntil=Date.now()+300}
-    else if(narrow&&x<=1){el.classList.remove('narrow');lockUntil=Date.now()+300}
+    if(Date.now()<lockUntil)return;check(el)
   },true);
+  /* a re-rendered or rotated table re-measures next time */
+  phone.addEventListener&&phone.addEventListener('change',()=>document.querySelectorAll('.tablewrap.sized').forEach(el=>{el.classList.remove('narrow','sized')}));
   window.NFLS={leagueUrl,badge,plink,setTheme,loadLeagues,getLeague,rosterStatus,onLeague(cb){listeners.push(cb);if(leagueCfg)cb(getLeague())}};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
 })();
