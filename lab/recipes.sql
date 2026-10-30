@@ -1,3 +1,24 @@
+-- @recipe pbp_players_game
+-- @title Play-by-play: every play a player was in (one game)
+-- @blurb Every play-by-play row, all ~370 columns, where either player's name shows up in the play description (runs, targets, catches, fumbles, penalties), in game order. No row limit. Set the week, the two teams and the two names (as they appear in play descriptions: first initial, dot, last name) on the settings line. week NULL = every game between those teams in the last 5 weeks of data. The involved column says which player was on the play.
+WITH settings AS (SELECT 6 AS week, 'BAL' AS team_a, 'CLE' AS team_b, 'J.Hill' AS player_1, 'D.Henry' AS player_2)
+SELECT CASE WHEN contains(p."desc", s.player_1) AND contains(p."desc", s.player_2) THEN s.player_1 || ' + ' || s.player_2
+            WHEN contains(p."desc", s.player_1) THEN s.player_1 ELSE s.player_2 END AS involved,
+  p.*
+FROM pbp p, settings s
+WHERE (s.week IS NULL OR p.week = s.week)
+  AND ((p.home_team = s.team_a AND p.away_team = s.team_b) OR (p.home_team = s.team_b AND p.away_team = s.team_a))
+  AND (contains(p."desc", s.player_1) OR contains(p."desc", s.player_2))
+ORDER BY p.week, p.game_seconds_remaining DESC, p.play_id;
+
+-- @recipe pbp_browse
+-- @title Play-by-play: latest 200 plays
+-- @blurb The raw play-by-play table (load_pbp(), last 5 weeks of the season, every play), newest week first, all columns. A starting point: add a WHERE line to filter by team (posteam = 'BAL'), play type (play_type = 'run'), down, red zone (yardline_100 <= 20) and so on.
+SELECT *
+FROM pbp
+ORDER BY week DESC, game_id, game_seconds_remaining DESC, play_id
+LIMIT 200;
+
 -- @recipe rb_pickup
 -- @title RB pickup check: usage, efficiency, matchup
 -- @blurb Every RB with the numbers that decide a waiver or handcuff add. Usage: snap %, carry share and target share, season vs the last 3 weeks. Efficiency: PFR yards before/after contact and broken tackles, Next Gen rush yards over expected. Role: depth-chart spot, the starter ahead of him and that starter's injury status. Matchup: next opponent's rushing yards and yards per carry allowed (rank 1 = gives up the most) and what this player did if he already faced them. Change the settings line at the top to filter.
