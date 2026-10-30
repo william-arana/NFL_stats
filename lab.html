@@ -33,7 +33,9 @@
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js" defer></script>
+<script src="assets/cards.js" defer></script>
 <script src="assets/glossary.js" defer></script>
+<script src="assets/tables.js" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -227,6 +229,15 @@ async function applyLeague(lg){
   if(RES.cols.length)drawResults();
 }
 function hookLeague(){if(!window.NFLS)return setTimeout(hookLeague,50);NFLS.onLeague(lg=>{applyLeague(lg)})}
+/* result cells that name a player, team or game open the matching card */
+const TEAMCOL=/^(team|opponent_team|opp|opponent|recent_team|posteam|defteam|home_team|away_team|defense|faces_defense|dst|def|club_code)$/i;
+function cardCell(c,v,txt){
+  if(typeof v!=='string')return null;
+  if(NAMES.has(v))return `<button type="button" class="pname" data-card="p:${esc(NAMES.get(v))}" data-name="${esc(v)}" aria-expanded="false">${txt}</button>`;
+  if(/^player_id$|^gsis_id$/i.test(c)&&/^00-\d{7}$/.test(v))return `<button type="button" class="pname" data-card="p:${esc(v)}" aria-expanded="false">${txt}</button>`;
+  if(TEAMCOL.test(c)&&/^[A-Z]{2,3}$/.test(v))return `<button type="button" class="pname" data-card="d:${esc(v)}" aria-expanded="false">${txt}</button>`;
+  if(/^game_id$/i.test(c)&&/^\d{4}_\d{2}_[A-Z]{2,3}_[A-Z]{2,3}$/.test(v))return `<button type="button" class="gl-g" data-card="g:${esc(v)}">${txt}</button>`;
+  return null}
 /* figure out which result column holds players (or defenses) so rows can show FA / MINE */
 function playerCol(){if(!ROST)return null;const {cols,rows,num}=RES;
   for(let i=0;i<cols.length;i++){if(num[i])continue;const c=cols[i];const vs=rows.slice(0,50).map(r=>r[c]).filter(v=>v!=null);if(!vs.length)continue;
@@ -599,8 +610,8 @@ function drawResults(){
     <button class="btn" id="r-csv">Download CSV</button></div>
   ${rows.length?'<div class="muted" style="padding:6px 16px;border-bottom:1px solid var(--rule)">Tap an underlined column name for what it means; tap the rest of the header to sort.</div>':''}
   ${rs.chart!=='none'&&numCols.length?`<div class="chart"><div class="line">${rs.chart==='bar'||rs.chart==='line'?'Label':'X'} <select id="c-x">${(rs.chart==='scatter'?numCols:cols).map(c=>`<option ${c===rs.x?'selected':''}>${esc(c)}</option>`).join('')}</select> Y <select id="c-y">${numCols.map(c=>`<option ${c===rs.y?'selected':''}>${esc(c)}</option>`).join('')}</select>${rs.chart==='bar'?'<span class="kbd">top 25 by Y</span>':''}</div><div id="c-svg"></div></div>`:''}
-  ${rows.length?`<div class="tablewrap"><table><thead><tr><th class="t">#</th>${cols.map((c,i)=>`<th class="${num[i]?'':'t'}" data-c="${esc(c)}" ${rs.sort===c?`aria-sort="${rs.dir<0?'descending':'ascending'}"`:''}>${window.NFLSGloss?NFLSGloss.label(c,c):esc(c)}</th>`).join('')}</tr></thead><tbody>${
-    data.slice(0,LIM).map((r,j)=>`<tr><td class="i t">${j+1}</td>${cols.map((c,i)=>{const v=r[c];const a=heat[c]&&typeof v==='number'?heat[c](v):0;return `<td class="${num[i]?'':'t'} ${a?'heat':''} ${typeof v==='number'&&v<0?'neg':''}" ${a?`style="--a:${a.toFixed(3)}"`:''}>${pc&&c===pc.c&&v!=null?`<span class="${stOf(r)==='fa'?'name-fa':''}">${fmtv(v,DEC[c])}</span>${NFLS.plink(pc.key(v),v)}${NFLS.badge(stOf(r),ROST.league,v)}`:(NAMES.has(v)?`${fmtv(v,DEC[c])}${NFLS.plink(NAMES.get(v),v)}`:fmtv(v,DEC[c]))}</td>`}).join('')}</tr>`).join('')}</tbody></table></div>${rows.length>LIM?`<div class="muted">Showing ${LIM} of ${rows.length}. Download CSV for everything.</div>`:''}`:'<div class="empty">The query ran but returned no rows.</div>'}`;
+  ${rows.length?`<div class="tablewrap"><table data-cols="lab-results"><thead><tr><th class="t">#</th>${cols.map((c,i)=>`<th class="${num[i]?'':'t'}" data-c="${esc(c)}" ${rs.sort===c?`aria-sort="${rs.dir<0?'descending':'ascending'}"`:''}>${window.NFLSGloss?NFLSGloss.label(c,c):esc(c)}</th>`).join('')}</tr></thead><tbody>${
+    data.slice(0,LIM).map((r,j)=>`<tr><td class="i t">${j+1}</td>${cols.map((c,i)=>{const v=r[c];const a=heat[c]&&typeof v==='number'?heat[c](v):0;return `<td class="${num[i]?'':'t'} ${a?'heat':''} ${typeof v==='number'&&v<0?'neg':''}" ${a?`style="--a:${a.toFixed(3)}"`:''}>${pc&&c===pc.c&&v!=null?`<span class="${stOf(r)==='fa'?'name-fa':''}">${cardCell(c,v,fmtv(v,DEC[c]))||fmtv(v,DEC[c])}</span>${NFLS.plink(pc.key(v),v)}${NFLS.badge(stOf(r),ROST.league,v)}`:(NAMES.has(v)?`${cardCell(c,v,fmtv(v,DEC[c]))}${NFLS.plink(NAMES.get(v),v)}`:(cardCell(c,v,fmtv(v,DEC[c]))||fmtv(v,DEC[c])))}</td>`}).join('')}</tr>`).join('')}</tbody></table></div>${rows.length>LIM?`<div class="muted">Showing ${LIM} of ${rows.length}. Download CSV for everything.</div>`:''}`:'<div class="empty">The query ran but returned no rows.</div>'}`;
   if($('#r-fa'))$('#r-fa').onchange=e=>{rs.faOnly=e.target.checked;drawResults()};
   $('#r-heat').onchange=e=>{rs.heat=e.target.checked;store.set('labHeat',rs.heat);drawResults()};
   $('#r-chart').onchange=e=>{rs.chart=e.target.value;store.set('labChart',rs.chart);rs.x=null;drawResults()};

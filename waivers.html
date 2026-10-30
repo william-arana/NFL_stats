@@ -35,6 +35,7 @@
 <script src="assets/site.js" defer></script>
 <script src="assets/cards.js" defer></script>
 <script src="assets/glossary.js" defer></script>
+<script src="assets/tables.js" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -210,16 +211,16 @@ function draw(){
     <input type="search" class="wsrch" id="w-q" placeholder="Search any player or team" value="${esc(st.q)}" autocomplete="off" aria-label="Search players">
     <div class="seg" id="w-pos">${['ALL','QB','RB','WR','TE'].map(p=>`<button data-v="${p}" aria-pressed="${st.pos===p}">${p==='ALL'?'All':p}</button>`).join('')}</div>
     <label class="chk" for="w-taken" ${q?'hidden':''}><input type="checkbox" id="w-taken" ${st.showTaken?'checked':''}>Include rostered</label></div>
-  ${top.length?`<div class="tablewrap"><table id="w-tbl"><thead><tr><th class="rank">#</th><th class="l stick">Player</th><th class="l">Team</th><th class="l">Wk ${META.next_week}</th>${cols.map(([k,l])=>`<th data-k="${k}" ${st.sort===k?`aria-sort="${st.dir<0?'descending':'ascending'}"`:''}>${gl(k==='ppr'?'ppr':k,l)}</th>`).join('')}<th class="l">Why</th></tr></thead><tbody>${
+  ${top.length?`<div class="tablewrap"><table id="w-tbl" data-cols="waivers-fa"><thead><tr><th class="rank">#</th><th class="l stick">Player</th><th class="l">Team</th><th class="l">Wk ${META.next_week}</th>${cols.map(([k,l])=>`<th data-k="${k}" ${st.sort===k?`aria-sort="${st.dir<0?'descending':'ascending'}"`:''}>${gl(k==='ppr'?'ppr':k,l)}</th>`).join('')}<th class="l">Why</th></tr></thead><tbody>${
     top.map((a,i)=>{const s=avOf(a.id);const own=q&&ROST&&s==='taken'?(ROST.map.get(a.id)||{}).team:'';return `<tr><td class="rank">${i+1}</td><td class="l stick">${PB(a,s==='fa'&&ROST?'name-fa':'')}${NFLS.plink(a.id,a.name)} <span class="pos">${a.pos}</span>${ROST?NFLS.badge(s,LG,a.name):''}${a.inj?`<span class="inj" title="${esc(a.inj[1])}">${esc(a.inj[0].replace('Practice: ',''))}</span>`:''}${own?`<span class="pos" title="Rostered by"> · ${esc(own)}</span>`:''}${a.idle?'<span class="pos"> · no games last 3 wks</span>':''}</td>
-      <td class="l">${a.team}</td><td class="l">${a.next?OPPB(a.next.opp,a.next.at,a.pos)+mrk(a.mrk):'<span class="pos">bye</span>'}</td>
+      <td class="l"><button type="button" class="opp" data-card="d:${a.team}" title="${a.team} team card">${a.team}</button></td><td class="l">${a.next?OPPB(a.next.opp,a.next.at,a.pos)+mrk(a.mrk):'<span class="pos">bye</span>'}</td>
       ${cell(a,'score',`<span class="score">${a.score.toFixed(2)}</span>`)}${cell(a,'xfp3',f1(a.xfp3))}${cell(a,'ppr3',f1(a.ppr3))}${cell(a,'snap3',pct(a.snap3))}<td>${sgn(a.snapD,0,100)}</td>${cell(a,'opp3',f1(a.opp3))}<td>${sgn(a.oppD,1)}</td><td>${pct(a.tgt3)}</td><td>${f1(a.ppr)}</td>
       <td class="l"><div class="why">${why(a)}</div></td></tr>`}).join('')}</tbody></table></div>`:`<div class="empty">${q?`No player matches “${esc(st.q.trim())}”${st.pos!=='ALL'?' at '+st.pos+' (switch to All)':''}.`:'No free agents at this position played in the last 3 weeks.'}</div>`}
   <div class="foot"><span><b>Score</b> = 0.45 × expected points (last 3 games) + 0.20 × actual PPR (last 3) + 0.15 × snap-share change + 0.10 × touch change + 0.10 × next-week matchup. Each piece is a z-score within the position, so 0 is average and +1 is one standard deviation above. Bye week −0.5; Out/IR/Doubtful −1.</span>
     <span>L3 = last 3 weeks. Δ = last 3 weeks vs. earlier in the season. Green rank next to the opponent = top-8 most PPR allowed to that position.</span></div></section>
 
   <section class="box"><div class="box-h"><h2>D/ST streamers</h2><span class="hint">${ROST?'Available defenses (plus yours) for':'All defenses for'} Week ${META.next_week}</span></div>
-    <div class="tablewrap"><table><thead><tr><th class="rank">#</th><th class="l stick">Defense</th><th class="l">Opponent</th><th>Matchup score</th><th>D/ST pts/g</th><th>Pressures/g</th><th>Opp pressures allowed</th><th>Sacks/g</th><th>Opp sacks allowed</th><th>Opp implied pts</th></tr></thead><tbody>${
+    <div class="tablewrap"><table data-cols="waivers-dst"><thead><tr><th class="rank">#</th><th class="l stick">Defense</th><th class="l">Opponent</th><th>Matchup score</th><th>D/ST pts/g</th><th>Pressures/g</th><th>Opp pressures allowed</th><th>Sacks/g</th><th>Opp sacks allowed</th><th>Opp implied pts</th></tr></thead><tbody>${
       freeDefs.map((x,i)=>{const m=myDef.includes(x.team);return `<tr><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="pname ${!m&&ROST?'name-fa':''}" data-card="d:${x.team}" aria-expanded="false">${x.team} D/ST</button>${NFLS.plink('DEF:'+x.team,x.team+' D/ST')}${ROST?NFLS.badge(m?'mine':'fa',LG,x.team+' D/ST'):''}</td><td class="l">${OPPB(x.opp,x.at,'')}</td><td><span class="score">${x.score.toFixed(2)}</span></td><td>${f1(x.dst)}</td><td>${f1(x.pr)}</td><td>${f1(x.opra)}</td><td>${f1(x.sk)}</td><td>${f1(x.oska)}</td><td>${f1(x.oi)}</td></tr>`}).join('')}</tbody></table></div>
     <div class="foot"><span>Matchup score = z(pressures) + z(opponent pressures allowed) + z(sacks) + z(opponent sacks allowed) − z(opponent Vegas implied points). Same as the Lab recipe.</span></div></section>`;
 

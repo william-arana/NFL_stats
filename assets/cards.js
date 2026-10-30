@@ -162,9 +162,9 @@
     const tot=k=>sum(s.logs.map(l=>l[k])),pg=k=>RATE.has(k)?mean(s.logs.map(l=>l[k])):tot(k)/s.g;
     const cell=(k,v,isPg)=>!num(v)?'<span class="dim">–</span>':RATE.has(k)?pct(v):(isPg||k==='xfp')?f1(v):f0(v);
     const seasonRow=(lbl,isPg)=>`<tr${isPg?'':' class="tot"'}><td class="l">${lbl}</td><td class="fp">${f1(isPg?s.fpg:s.fp)}</td>${cols.map(([k])=>`<td>${cell(k,isPg||RATE.has(k)?pg(k):tot(k),isPg)}</td>`).join('')}</tr>`;
-    const logRows=s.logs.map(l=>`<tr><td class="l">${l.week}</td><td class="l">${oppBtn(l.opponent_team,((gameOf(l.team,l.week)||{}).at?'@ ':'vs ')+l.opponent_team,null)}</td><td class="fp">${f1(l[sk])}</td>${cols.map(([k])=>`<td>${cell(k,l[k],false)}</td>`).join('')}</tr>`).join('');
+    const logRows=s.logs.map(l=>`<tr><td class="l">${gbtn(gameKey(l.team,l.week),l.week)}</td><td class="l">${oppBtn(l.opponent_team,((gameOf(l.team,l.week)||{}).at?'@ ':'vs ')+l.opponent_team,null)}</td><td class="fp">${f1(l[sk])}</td>${cols.map(([k])=>`<td>${cell(k,l[k],false)}</td>`).join('')}</tr>`).join('');
     return `<div class="pc-top">${s.headshot?`<img class="hs" src="${esc(s.headshot)}" alt="" loading="lazy" onerror="this.remove()">`:''}<div><h3>${esc(s.name)}</h3>
-      <div class="sub"><span>${s.pos} · ${s.team}</span><span>bye ${byeWeek(s.team)||'–'}</span>${n?`<span>Wk ${D.META.next_week} ${oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,s.pos)}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}</div></div></div>
+      <div class="sub"><span>${s.pos} · ${dbtn(s.team,s.team,'tmlink')}</span><span>bye ${byeWeek(s.team)||'–'}</span>${n?`<span>${gbtn(n.g.game_id,'Wk '+D.META.next_week)} ${oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,s.pos)}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}</div></div></div>
     <section><div class="tags">${inj?`<span class="tag inj" title="${esc(inj[1])} · Wk ${inj[2]} report">${esc(inj[0].replace('Practice: ','Practice '))} · ${esc(inj[1])}</span>`:''}${ownerTag(id)}<span class="sp" style="flex:1"></span>${scoringSeg(sc)}</div>
       <div class="tiles" style="margin-top:8px">
         <div><span>FP / game</span><b>${f1(s.fpg)}</b><small>${[s.rank?s.pos+s.rank:'',s.g+' g'].filter(Boolean).join(' · ')}</small></div>
@@ -194,7 +194,7 @@
     const rk=(r,label)=>`<span class="mrk ${rkClass(r,td.n)}" title="${label}">${ord(r)}</span>`;
     const logs=td.rows.map(r=>({week:r.week,fantasy_points_ppr:r.dst_pts}));
     return `<div class="pc-top">${tm.logo?`<img class="logo" src="${esc(tm.logo)}" alt="" loading="lazy" onerror="this.remove()">`:''}<div><h3>${esc(team)} D/ST</h3>
-      <div class="sub"><span>${esc(tm.name||team)} · ${td.rec}</span><span>bye ${byeWeek(team)||'–'}</span>${nx?`<span>Wk ${D.META.next_week} ${nx.at?'@':'vs'} ${esc(nx.opp)}${num(nx.opp_implied)?` · opp implied ${nx.opp_implied.toFixed(1)}`:''}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}</div></div></div>
+      <div class="sub"><span>${esc(tm.name||team)} · ${td.rec}</span><span>bye ${byeWeek(team)||'–'}</span>${nx?`<span>${gbtn(nx.g.game_id,'Wk '+D.META.next_week)} ${nx.at?'@':'vs'} ${dbtn(nx.opp,nx.opp)}${num(nx.opp_implied)?` · opp implied ${nx.opp_implied.toFixed(1)}`:''}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}</div></div></div>
     <section><div class="tags">${ownerTag('DEF:'+team)}</div>
       <div class="tiles" style="margin-top:8px"><div><span>D/ST pts / g</span><b>${f1(td.dst)}</b><small>${ord(td.rk.dst)} of ${td.n}</small></div><div><span>Last 3</span><b>${f1(ds.l3)}</b><small>${num(ds.sd)?'±'+ds.sd.toFixed(1)+' weekly':''}</small></div><div><span>Sacks / g</span><b>${f1(td.sk)}</b><small>${ord(td.rk.sk)}</small></div><div><span>Takeaways / g</span><b>${f1(td.tk)}</b><small>${ord(td.rk.tk)}</small></div></div></section>
     <section><h4>D/ST points by week</h4>${bars(logs,'fantasy_points_ppr',team)}</section>
@@ -205,73 +205,240 @@
       <tr><td class="l">Pass yds allowed</td><td>${td.pya.toFixed(0)}</td><td>${rk(td.rk.pya,'1st = fewest allowed')}</td><td class="l">Takeaways</td><td>${td.tk.toFixed(1)}</td><td>${rk(td.rk.tk,'1st = most')}</td></tr>
       <tr><td class="l">Rush yds allowed</td><td>${td.rya.toFixed(0)}</td><td>${rk(td.rk.rya,'1st = fewest allowed')}</td><td></td><td></td><td></td></tr>
     </tbody></table></div><div class="note">Defense ranks: green = strong defense (tough matchup), red = weak.</div></section>
-    <section><h4>Game log</h4><div class="scr"><table><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>D/ST</th><th>Pts alw</th><th>Pass alw</th><th>Rush alw</th><th>Sk</th><th>Prs</th><th>INT</th><th>FR</th><th>TD</th></tr></thead><tbody>${td.rows.map(r=>`<tr><td class="l">${r.week}</td><td class="l">${(gameOf(team,r.week)||{}).at?'@':'vs'} ${esc(r.opponent_team)}</td><td class="fp">${f1(r.dst_pts)}</td><td>${f0(r.points_against)}</td><td>${f0(r.pass_yards_allowed)}</td><td>${f0(r.rush_yards_allowed)}</td><td>${f0(r.def_sacks)}</td><td>${f0(r.def_pressures)}</td><td>${f0(r.def_interceptions)}</td><td>${f0(r.fumble_recovery_opp)}</td><td>${f0((r.def_tds||0)+(r.special_teams_tds||0))}</td></tr>`).join('')}</tbody></table></div></section>
+    <section><h4>Game log</h4><div class="scr"><table><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>D/ST</th><th>Pts alw</th><th>Pass alw</th><th>Rush alw</th><th>Sk</th><th>Prs</th><th>INT</th><th>FR</th><th>TD</th></tr></thead><tbody>${td.rows.map(r=>`<tr><td class="l">${gbtn(gameKey(team,r.week),r.week)}</td><td class="l">${oppBtn(r.opponent_team,((gameOf(team,r.week)||{}).at?'@ ':'vs ')+r.opponent_team,null)}</td><td class="fp">${f1(r.dst_pts)}</td><td>${f0(r.points_against)}</td><td>${f0(r.pass_yards_allowed)}</td><td>${f0(r.rush_yards_allowed)}</td><td>${f0(r.def_sacks)}</td><td>${f0(r.def_pressures)}</td><td>${f0(r.def_interceptions)}</td><td>${f0(r.fumble_recovery_opp)}</td><td>${f0((r.def_tds||0)+(r.special_teams_tds||0))}</td></tr>`).join('')}</tbody></table></div></section>
     ${cov.length?`<section><h4>Coverage: most yards allowed</h4><div class="scr"><table><thead><tr><th class="l">Defender</th><th>Tgt</th><th>Yds</th><th>TD</th><th>Rtg</th></tr></thead><tbody>${cov.map(x=>`<tr><td class="l">${esc(x.name)} <span class="dim">${esc(x.pos||'')}</span></td><td>${x.tgt}</td><td>${x.yds}</td><td>${x.td}</td><td>${num(x.rating)?x.rating.toFixed(0):'–'}</td></tr>`).join('')}</tbody></table></div></section>`:''}
     ${rush.length?`<section><h4>Pass rush leaders</h4><div class="scr"><table><tbody>${rush.map(x=>`<tr><td class="l">${esc(x.name)} <span class="dim">${esc(x.pos||'')}</span></td><td>${x.prs} pressures</td><td>${x.sk} sacks</td></tr>`).join('')}</tbody></table></div></section>`:''}
     <section><h4>Team news <span class="sp"></span><span data-news-src></span></h4><div data-news><span class="spin"></span>Loading news…</div></section>
     ${linksHTML('DEF:'+team,team+' D/ST',null,tm)}`;
   }
+  /* ---------- game card (g:<nflverse game_id>) ---------- */
+  const gameById=id=>D.G.find(g=>g.game_id===id)||null;
+  const gameKey=(team,week)=>{const x=gameOf(team,week);return x?x.g.game_id:null};
+  /* small link to a game card; falls back to plain text when the game isn't in the schedule */
+  function gbtn(gid,label,cls){return gid?`<button type="button" class="gl-g ${cls||''}" data-card="g:${esc(gid)}" title="Game card">${label}</button>`:label}
+  function qbId(team,name){if(!name)return null;const n=name.toLowerCase();for(const [pid,logs] of IX.byP){const l=logs[logs.length-1];if(l.position==='QB'&&l.team===team&&String(l.player_display_name).toLowerCase()===n)return pid}return null}
+  function gameHTML(gid){
+    const g=gameById(gid);if(!g)return `<div class="pc-top"><div><h3>Game not found</h3><div class="sub">${esc(gid)}</div></div></div>`;
+    const sc=scoring(),sk=SCORING[sc].k;const fin=num(g.home_score)&&num(g.away_score);const A=g.away_team,H=g.home_team,w=g.week;
+    const d=new Date(g.gameday+'T12:00:00');const date=isNaN(d)?'':d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});
+    const fav=num(g.spread_line)&&g.spread_line!==0?(g.spread_line>0?H:A):null;
+    const spread=num(g.spread_line)?(g.spread_line===0?'Pick’em':`${fav} −${Math.abs(g.spread_line)}`):'–';
+    const indoor=/dome|closed/i.test(g.roof||'');
+    const weather=indoor?'Indoors ('+esc(g.roof)+')':(num(g.temp)||num(g.wind))?[num(g.temp)?g.temp+'°F':'',num(g.wind)?'wind '+g.wind+' mph':''].filter(Boolean).join(' · ')+(g.roof?' · '+esc(g.roof):''):`${esc(g.roof||'outdoors')} · ${fin?'not recorded':'not posted yet'}`;
+    const side=(t,qb,imp,score,rest)=>{const q=qbId(t,qb);const win=fin&&score>(t===H?g.away_score:g.home_score);
+      return `<div class="gc-side ${win?'win':''}"><div class="gc-tm" title="Open the ${esc(t)} defense card">${dbtn(t,t)}</div><b class="gc-n">${fin?score:(num(imp)?imp.toFixed(1):'–')}</b><small>${fin?(win?'won':'final'):'implied pts'}</small>
+        <div class="gc-qb">QB ${q?pbtn(q,qb):esc(qb||'–')}</div><small>${num(rest)?rest+' days rest':''}</small></div>`};
+    /* team form: season per-game, from teams.json */
+    const tf=t=>{const rr=(IX.byT.get(t)||[]).filter(r=>r.week<w||!fin);const n=rr.length||1;const s=k=>sum(rr.map(r=>r[k]))/n;return {g:rr.length,pf:s('points_for'),pa:s('points_against'),yds:s('total_yards'),ya:s('yards_allowed'),prs:s('def_pressures'),pra:s('pressures_allowed'),dst:s('dst_pts')}};
+    const fa=tf(A),fh=tf(H);const row=(lbl,k,dg,hi)=>{const a=fa[k],h=fh[k];const better=hi===null?'':(hi?(a>h?'a':'h'):(a<h?'a':'h'));
+      return `<tr><td class="${better==='a'?'gc-b':''}">${num(a)?a.toFixed(dg):'–'}</td><td class="l gc-l">${lbl}</td><td class="${better==='h'?'gc-b':''}">${num(h)?h.toFixed(dg):'–'}</td></tr>`};
+    /* players: in a finished game, who scored; before it, who to watch (season FP/g) */
+    let pl;
+    if(fin){pl=D.P.filter(r=>r.week===w&&(r.team===A||r.team===H)&&num(r[sk])).sort((a,b)=>b[sk]-a[sk]).slice(0,10).map(r=>({id:r.player_id,name:r.player_display_name,pos:r.position,team:r.team,v:r[sk],sub:statLine(r)}))}
+    else{pl=[];for(const t of [A,H]){const opp=t===A?H:A;for(const [pid,logs] of IX.byP){const l=logs[logs.length-1];if(l.team!==t||logs.length<2)continue;const v=mean(logs.map(x=>x[sk]));if(num(v))pl.push({id:pid,name:l.player_display_name,pos:l.position,team:t,v,opp,sub:''})}}
+      pl.sort((a,b)=>b.v-a.v);pl=pl.slice(0,10)}
+    const plRows=pl.map(p=>`<tr><td class="l">${pbtn(p.id,p.name)} <span class="dim">${p.pos} · ${p.team}</span></td><td class="fp">${f1(p.v)}</td><td class="l dim">${fin?esc(p.sub):mrk(p.opp,p.pos)}</td></tr>`).join('');
+    return `<div class="pc-top"><div><h3>${esc(A)} @ ${esc(H)}</h3>
+      <div class="sub"><span>Week ${w}</span><span>${esc(date)}${g.gametime?' · '+esc(g.gametime)+' ET':''}</span>${g.div_game?'<span>Division</span>':''}<span>${esc(g.stadium||'')}</span></div></div></div>
+    <section><div class="gc-sides">${side(A,g.away_qb_name,g.away_implied,g.away_score,g.away_rest)}<div class="gc-at">@</div>${side(H,g.home_qb_name,g.home_implied,g.home_score,g.home_rest)}</div></section>
+    <section><h4>Vegas line</h4><div class="tiles"><div><span>Spread</span><b>${esc(spread)}</b><small>${fin&&num(g.spread_line)?((g.home_score-g.away_score)>g.spread_line?H:(g.home_score-g.away_score)<g.spread_line?A:'push')+(fin&&(g.home_score-g.away_score)!==g.spread_line?' covered':''):'closing/latest'}</small></div>
+      <div><span>Over/under</span><b>${num(g.total_line)?g.total_line:'–'}</b><small>${fin&&num(g.total_line)?(g.home_score+g.away_score)+' scored · '+((g.home_score+g.away_score)>g.total_line?'over':(g.home_score+g.away_score)<g.total_line?'under':'push'):''}</small></div>
+      <div><span>Implied</span><b>${num(g.away_implied)?g.away_implied.toFixed(1):'–'}–${num(g.home_implied)?g.home_implied.toFixed(1):'–'}</b><small>${esc(A)}–${esc(H)}</small></div></div></section>
+    <section><h4>Weather</h4><div>${weather}</div></section>
+    <section><h4>${fin?'Top fantasy scorers':'Players to watch'} <span class="sp"></span><span>${SCORING[sc].label}${fin?' this game':' per game this season'}</span></h4><div class="scr"><table><tbody>${plRows||'<tr><td class="dim">No player data yet.</td></tr>'}</tbody></table></div>${fin?'':'<div class="note">Rank = how many points the opponent allows to that position (green = soft matchup).</div>'}</section>
+    <section><h4>Team form <span class="sp"></span><span>per game${fin?' before this game':' this season'}</span></h4><div class="scr"><table class="gc-form"><thead><tr><th>${esc(A)}</th><th class="l gc-l"></th><th>${esc(H)}</th></tr></thead><tbody>
+      ${row('Points scored','pf',1,true)}${row('Points allowed','pa',1,false)}${row('Yards','yds',0,true)}${row('Yards allowed','ya',0,false)}${row('Pressures made','prs',1,true)}${row('Pressures allowed','pra',1,false)}${row('D/ST points','dst',1,true)}
+    </tbody></table></div><div class="note">Bold = the better side.</div></section>`;
+  }
+  function statLine(r){const p=[];if(r.attempts)p.push(`${r.completions}/${r.attempts}, ${r.passing_yards} yds, ${r.passing_tds} TD${r.passing_interceptions?', '+r.passing_interceptions+' INT':''}`);
+    if(r.carries)p.push(`${r.carries} car, ${r.rushing_yards} yds${r.rushing_tds?', '+r.rushing_tds+' TD':''}`);if(r.targets)p.push(`${r.receptions}/${r.targets}, ${r.receiving_yards} yds${r.receiving_tds?', '+r.receiving_tds+' TD':''}`);return p.join(' · ')}
   const NAMEHINT={};
 
-  /* ---------- popup ---------- */
+  /* ---------- popup ----------
+     The card stack lives in the address bar (?card=p:<id>) and in history.state, so the browser back button
+     and the phone back swipe step back one card, a crumb trail jumps back further, and any card can be shared
+     or bookmarked. Opening a name inside a card pushes a new card (capped at MAXDEPTH). */
+  const MAXDEPTH=12;
   let el=null,shade=null,anchor=null,stack=[];
-  function close(){if(el){el.remove();el=null}if(shade){shade.remove();shade=null}if(anchor){anchor.setAttribute('aria-expanded','false');anchor=null}stack=[]}
+  let pendingBack=false,afterPop=null;
+  const cardState=()=>history.state&&history.state.nflsCard?history.state:null;
+  const depth=()=>{const s=cardState();return s?s.nflsDepth||0:0};
+  const validKey=k=>typeof k==='string'&&/^[pdg]:[A-Za-z0-9_-]+$/.test(k);
+  function urlFor(key){const u=new URL(location.href);if(key)u.searchParams.set('card',key);else u.searchParams.delete('card');return u.pathname+u.search+u.hash}
+  function writeState(mode,d){const top=stack[stack.length-1];history[mode]({nflsCard:stack.map(x=>({key:x.key,pos:x.pos||''})),nflsDepth:d},'',urlFor(top&&top.key))}
+  function closeLocal(){if(el){el.remove();el=null}if(shade){shade.remove();shade=null}if(anchor){anchor.setAttribute('aria-expanded','false');anchor=null}stack=[]}
+  /* close = go back past every card entry we added, so Back afterwards leaves the page normally */
+  function close(){
+    if(!el)return;const d=depth();closeLocal();
+    if(d>0){pendingBack=true;history.go(-d)}else if(new URLSearchParams(location.search).has('card'))history.replaceState(null,'',urlFor(null));
+  }
   function place(){
-    if(!el||!anchor)return;const phone=matchMedia('(max-width:640px)').matches;
+    if(!el)return;const phone=matchMedia('(max-width:640px)').matches;
     if(phone){if(!shade){shade=document.createElement('div');shade.className='pc-shade';shade.onclick=close;document.body.appendChild(shade)}return}
-    const r=anchor.getBoundingClientRect(),w=el.offsetWidth,h=el.offsetHeight;
-    let left=r.left+scrollX;left=Math.min(left,scrollX+document.documentElement.clientWidth-w-12);left=Math.max(scrollX+12,left);
+    const w=el.offsetWidth,h=el.offsetHeight,cw=document.documentElement.clientWidth;
+    if(!anchor||!anchor.isConnected){el.style.left=Math.max(scrollX+12,scrollX+(cw-w)/2)+'px';el.style.top=(scrollY+64)+'px';return}
+    const r=anchor.getBoundingClientRect();
+    let left=r.left+scrollX;left=Math.min(left,scrollX+cw-w-12);left=Math.max(scrollX+12,left);
     const below=innerHeight-r.bottom-12,above=r.top-60;let top=r.bottom+scrollY+6;
     if(below<Math.min(h,360)){if(above>=h)top=r.top+scrollY-h-6;else setTimeout(()=>{if(el)el.scrollIntoView({block:'nearest',behavior:'smooth'})},30)}
     el.style.left=left+'px';el.style.top=top+'px';
   }
+  const keyName=k=>k[0]==='d'?k.slice(2)+' D/ST':k[0]==='g'?(m=>m?m[2]+' @ '+m[3]+' · Wk '+(+m[1]):k.slice(2))(k.slice(2).match(/^\d{4}_(\d+)_([A-Z]+)_([A-Z]+)$/)):(NAMEHINT[k.slice(2)]||'Player');
+  const ICON={pop:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="14" height="14" rx="2"/><path d="M10 3h11v11"/></svg>',
+    link:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>'};
+  /* every <section> with a heading gets an id (data-sec) so it can be popped out on its own */
+  const slug=s=>s.toLowerCase().replace(/\b(ppr|half|std)\b/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  function tagSections(root,withButtons){
+    root.querySelectorAll('section').forEach(sec=>{const h=sec.querySelector(':scope > h4');if(!h)return;
+      const label=(h.firstChild&&h.firstChild.nodeType===3?h.firstChild.textContent:h.textContent).trim();const id=slug(label);if(!id)return;
+      sec.dataset.sec=id;sec.dataset.secLabel=label;
+      if(withButtons&&!h.querySelector('.pc-pop')){if(!h.querySelector('.sp'))h.insertAdjacentHTML('beforeend','<span class="sp"></span>');
+        h.insertAdjacentHTML('beforeend',`<button type="button" class="pc-pop" data-pop="${id}" title="Pop out: keep “${esc(label)}” on screen while you browse" aria-label="Pop out ${esc(label)}">${ICON.pop}</button>`)}});
+  }
+  function cardHTML(key,pos){const kind=key[0],id=key.slice(2);try{return kind==='d'?defHTML(id,pos):kind==='g'?gameHTML(id):playerHTML(id)}catch(e){return `<div class="pc-top"><div><h3>Couldn't build this card</h3></div></div><section class="dim">${esc(e.message)}</section>`}}
+  const newsKey=key=>key[0]==='d'?'DEF:'+key.slice(2):key[0]==='g'?null:key.slice(2);
   function render(){
     const cur=stack[stack.length-1];if(!cur||!el)return;
-    const [kind,id]=[cur.key[0],cur.key.slice(2)];
-    let html;try{html=kind==='d'?defHTML(id,cur.pos):playerHTML(id)}catch(e){html=`<div class="pc-top"><div><h3>Couldn't build this card</h3></div></div><section class="dim">${esc(e.message)}</section>`}
-    el.innerHTML=`<button type="button" class="pc-x" aria-label="Close">×</button>`+html;
-    if(stack.length>1){const top=el.querySelector('.pc-top');top.insertAdjacentHTML('afterbegin',`<button type="button" class="pc-back" aria-label="Back">←</button>`)}
-    el.scrollTop=0;fillOwner();fillNews(kind==='d'?'DEF:'+id:id,false);
+    const html=cardHTML(cur.key,cur.pos);
+    const crumbs=stack.length>1?`<nav class="pc-crumbs" aria-label="Card trail">${stack.map((x,i)=>i===stack.length-1?`<span aria-current="true">${esc(keyName(x.key))}</span>`:`<button type="button" data-crumb="${i}">${esc(keyName(x.key))}</button>`).join('<i>›</i>')}</nav>`:'';
+    el.innerHTML=`<button type="button" class="pc-x" aria-label="Close">×</button><div class="pc-tools"><button type="button" data-copylink title="Copy a link to this card">${ICON.link}</button><button type="button" data-pin-card title="Pop out the whole card">${ICON.pop}</button></div>`+crumbs+html;
+    if(stack.length>1){const top=el.querySelector('.pc-top');if(top)top.insertAdjacentHTML('afterbegin',`<button type="button" class="pc-back" aria-label="Back">←</button>`)}
+    if(crumbs){const c=el.querySelector('.pc-crumbs');c.scrollLeft=c.scrollWidth}
+    tagSections(el,true);
+    el.scrollTop=0;fillOwner(el);fillNews(el,newsKey(cur.key),false);
   }
-  function fillOwner(){
-    if(!window.NFLS||!el)return;const lg=NFLS.getLeague();if(!lg)return;
-    NFLS.rosterStatus().then(rs=>{if(!rs||!el)return;el.querySelectorAll('[data-own]').forEach(s=>{const k=s.dataset.own;const m=rs.map.get(k);
+  function fillOwner(root){
+    if(!window.NFLS||!root)return;const lg=NFLS.getLeague();if(!lg)return;
+    NFLS.rosterStatus().then(rs=>{if(!rs||!root.isConnected)return;root.querySelectorAll('[data-own]').forEach(s=>{const k=s.dataset.own;const m=rs.map.get(k);
       s.outerHTML=m?(m.status==='mine'?`<span class="tag mine">On ${esc(lg.viewer||'your')} roster · ${esc(lg.name)}</span>`:`<span class="tag">Rostered by ${esc(m.team)} · ${esc(lg.name)}</span>`):`<span class="tag fa">Free agent in ${esc(lg.name)}</span>`})}).catch(()=>{});
   }
-  function fillNews(key,all){
-    const box=el&&el.querySelector('[data-news]');if(!box)return;const me=el;const name=NAMEHINT[key]||'';
-    newsFor(key).then(n=>{if(el!==me)return;box.innerHTML=newsHTML(n,all,name);const s=el.querySelector('[data-news-src]');if(s)s.textContent=n.items.length?newsSrc(n):'';
-      const m=box.querySelector('[data-more]');if(m)m.onclick=ev=>{ev.stopPropagation();fillNews(key,true)}}).catch(()=>{box.textContent="Couldn't load news."});
+  function fillNews(root,key,all){
+    const box=root&&root.querySelector('[data-news]');if(!box)return;const name=NAMEHINT[key]||'';
+    newsFor(key).then(n=>{if(!box.isConnected)return;box.innerHTML=newsHTML(n,all,name);const s=root.querySelector('[data-news-src]');if(s)s.textContent=n.items.length?newsSrc(n):'';
+      const m=box.querySelector('[data-more]');if(m)m.onclick=ev=>{ev.stopPropagation();fillNews(root,key,true)}}).catch(()=>{box.textContent="Couldn't load news."});
   }
-  function open(key,a,pos){
-    const same=anchor===a&&el;close();if(same)return;
+  function mk(a){
     anchor=a||null;if(anchor)anchor.setAttribute('aria-expanded','true');
     el=document.createElement('div');el.className='pc';el.setAttribute('role','dialog');el.setAttribute('aria-label','Player card');
     el.innerHTML=`<button type="button" class="pc-x" aria-label="Close">×</button><div class="pc-top"><div><h3>${esc(a?a.textContent.trim().split('\n')[0]:'')}</h3><div class="sub"><span><span class="spin"></span>Loading…</span></div></div></div>`;
     document.body.appendChild(el);place();
-    stack=[{key,pos}];load().then(()=>{if(stack[0]&&stack[0].key===key){render();place()}}).catch(e=>{if(el)el.innerHTML=`<button type="button" class="pc-x">×</button><section>Couldn't load the season data (${esc(e.message)}).</section>`});
   }
-  function push(key,pos){stack.push({key,pos});render()}
+  function show(){const want=stack[stack.length-1]&&stack[stack.length-1].key;
+    load().then(()=>{if(el&&stack.length&&stack[stack.length-1].key===want){render();place()}}).catch(e=>{if(el)el.innerHTML=`<button type="button" class="pc-x">×</button><section>Couldn't load the season data (${esc(e.message)}).</section>`})}
+  function open(key,a,pos){
+    if(!validKey(key))return;
+    if(pendingBack){afterPop=()=>open(key,a,pos);return}
+    if(el&&a&&anchor===a){close();return}
+    const d=el?depth():0;closeLocal();mk(a);
+    stack=[{key,pos:pos||''}];writeState('pushState',d+1);show();
+  }
+  function push(key,pos){
+    if(!validKey(key))return;
+    if(!el){open(key,null,pos);return}
+    stack.push({key,pos:pos||''});
+    if(stack.length>MAXDEPTH){stack.shift();writeState('replaceState',depth())}else writeState('pushState',depth()+1);
+    render();
+  }
+  function goBack(steps){
+    steps=Math.min(steps,stack.length-1);if(steps<=0)return;
+    if(depth()>=steps)history.go(-steps);else{stack=stack.slice(0,stack.length-steps);writeState('replaceState',depth());render()}
+  }
+  addEventListener('popstate',e=>{
+    if(pendingBack){pendingBack=false;closeLocal();const f=afterPop;afterPop=null;if(f)f();return}
+    const s=e.state&&e.state.nflsCard;
+    if(s&&s.length&&s.every(x=>validKey(x.key))){stack=s.map(x=>({key:x.key,pos:x.pos||''}));if(!el)mk(null);show()}
+    else if(el)closeLocal();
+  });
+  /* a ?card= link (shared, bookmarked or reloaded) opens that card when the page loads */
+  (function fromURL(){
+    const s=cardState();
+    if(s&&s.nflsCard.length&&s.nflsCard.every(x=>validKey(x.key))){stack=s.nflsCard.map(x=>({key:x.key,pos:x.pos||''}))}
+    else{const k=new URLSearchParams(location.search).get('card');if(!validKey(k))return;stack=[{key:k,pos:''}];writeState('replaceState',0)}
+    mk(null);show();
+  })();
+
+  /* ---------- pop-out windows ----------
+     ⧉ on a card (or on one of its sections) floats it in its own window: drag it by the title bar, resize from
+     the corner, minimize, or open it back up as a card. Windows stay put while you browse other cards and
+     follow you to other pages in the same tab (sessionStorage). Names inside a window open cards too. */
+  const MAXPINS=6,ZBASE=72;
+  const SS={get(){try{const v=JSON.parse(sessionStorage.getItem('nfls-pins')||'[]');return Array.isArray(v)?v.filter(p=>p&&validKey(p.key)):[]}catch(e){return []}},set(v){try{sessionStorage.setItem('nfls-pins',JSON.stringify(v))}catch(e){}}};
+  let pins=SS.get();const pinEls=new Map();let zTop=ZBASE;
+  const savePins=()=>SS.set(pins);
+  const pinTitle=p=>keyName(p.key)+(p.sec?' · '+p.label:'');
+  function pinBody(p){
+    const html=cardHTML(p.key,p.pos);if(!p.sec)return html;
+    const t=document.createElement('div');t.innerHTML=html;tagSections(t,false);
+    const s=t.querySelector(`section[data-sec="${p.sec}"]`);return s?s.outerHTML:`<section class="dim">That section isn't on this card anymore.</section>`;
+  }
+  function fillPin(p){const w=pinEls.get(p.id);if(!w)return;const b=w.querySelector('.pw-b');b.innerHTML=pinBody(p);w.querySelector('.pw-h b').textContent=pinTitle(p);fillOwner(b);fillNews(b,newsKey(p.key),false)}
+  function front(w){if(zTop>ZBASE+40){zTop=ZBASE;[...pinEls.values()].sort((a,b)=>(+a.style.zIndex)-(+b.style.zIndex)).forEach(x=>x.style.zIndex=++zTop)}w.style.zIndex=++zTop}
+  function clampPin(p){const vw=document.documentElement.clientWidth,vh=innerHeight;p.x=Math.max(4-(p.w||300)+60,Math.min(p.x,vw-60));p.y=Math.max(0,Math.min(p.y,vh-36))}
+  function mountPin(p){
+    const w=document.createElement('div');w.className='pw'+(p.min?' min':'');w.setAttribute('role','dialog');w.dataset.pin=p.id;
+    w.innerHTML=`<div class="pw-h"><b></b><span class="sp"></span><button type="button" data-pw-open title="Open as a card">↗</button><button type="button" data-pw-min title="Minimize">${p.min?'▢':'–'}</button><button type="button" data-pw-x title="Close">×</button></div><div class="pw-b"></div>`;
+    clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px';if(p.w)w.style.width=p.w+'px';if(p.h&&!p.min)w.style.height=p.h+'px';
+    document.body.appendChild(w);pinEls.set(p.id,w);front(w);fillPin(p);
+    const h=w.querySelector('.pw-h');let drag=null;
+    h.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;e.preventDefault();drag={dx:e.clientX-p.x,dy:e.clientY-p.y};h.setPointerCapture(e.pointerId);w.classList.add('drag')});
+    h.addEventListener('pointermove',e=>{if(!drag)return;p.x=e.clientX-drag.dx;p.y=e.clientY-drag.dy;clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px'});
+    const end=()=>{if(!drag)return;drag=null;w.classList.remove('drag');savePins()};h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
+    w.addEventListener('pointerdown',()=>front(w),true);
+    if(window.ResizeObserver){let t=null;new ResizeObserver(()=>{if(p.min||!w.isConnected)return;clearTimeout(t);t=setTimeout(()=>{const r=w.getBoundingClientRect();if(Math.abs(r.width-(p.w||0))>2||Math.abs(r.height-(p.h||0))>2){p.w=Math.round(r.width);p.h=Math.round(r.height);savePins()}},150)}).observe(w)}
+  }
+  function addPin(key,pos,sec,label){
+    if(pins.some(p=>p.key===key&&(p.sec||'')===(sec||''))){const p=pins.find(p=>p.key===key&&(p.sec||'')===(sec||''));const w=pinEls.get(p.id);if(w){front(w);w.classList.add('flash');setTimeout(()=>w.classList.remove('flash'),600)}return}
+    const phone=matchMedia('(max-width:640px)').matches,vw=document.documentElement.clientWidth,n=pins.length;
+    const width=phone?vw-16:(sec?360:440);
+    const p={id:'w'+Date.now().toString(36),key,pos:pos||'',sec:sec||'',label:label||'',w:width,h:0,min:false,
+      x:phone?8:vw-width-20-n*26,y:phone?8+n*40:76+n*30};
+    pins.push(p);while(pins.length>MAXPINS)removePin(pins[0].id);savePins();load().then(()=>mountPin(p));
+  }
+  function removePin(id){const w=pinEls.get(id);if(w)w.remove();pinEls.delete(id);pins=pins.filter(p=>p.id!==id);savePins()}
+  function refreshPins(){for(const p of pins)fillPin(p)}
+  if(pins.length)load().then(()=>pins.forEach(mountPin)).catch(()=>{});
+  addEventListener('resize',()=>{for(const p of pins){const w=pinEls.get(p.id);if(!w)continue;clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px'}});
+
+  function copyText(t,btn){const ok=()=>{if(btn){btn.classList.add('ok');btn.title='Link copied';setTimeout(()=>btn.classList.remove('ok'),1200)}};try{navigator.clipboard.writeText(t).then(ok,()=>prompt('Copy this link',t))}catch(err){prompt('Copy this link',t)}}
+  function setScoring(v){LS.set('scoring',v);IX&&(IX._rank={});render();refreshPins();window.dispatchEvent(new CustomEvent('nfls-scoring',{detail:v}))}
   document.addEventListener('click',e=>{
-    if(el&&el.contains(e.target)){
-      if(e.target.closest('.pc-x')){close();return}
-      if(e.target.closest('.pc-back')){stack.pop();render();return}
-      const sc=e.target.closest('[data-sc] button');if(sc){LS.set('scoring',sc.dataset.v);IX&&(IX._rank={});render();window.dispatchEvent(new CustomEvent('nfls-scoring',{detail:sc.dataset.v}));return}
+    const pw=e.target.closest('.pw');
+    if(pw){
+      const p=pins.find(x=>x.id===pw.dataset.pin);if(!p)return;
+      if(e.target.closest('[data-pw-x]')){removePin(p.id);return}
+      if(e.target.closest('[data-pw-min]')){p.min=!p.min;pw.classList.toggle('min',p.min);e.target.closest('[data-pw-min]').textContent=p.min?'▢':'–';pw.style.height=p.min?'':(p.h?p.h+'px':'');savePins();return}
+      if(e.target.closest('[data-pw-open]')){push(p.key,p.pos);return}
+      const sc=e.target.closest('[data-sc] button');if(sc){setScoring(sc.dataset.v);return}
       const np=e.target.closest('.pc-news p');if(np){np.classList.toggle('open');return}
       const cp=e.target.closest('[data-copyname]');if(cp){try{navigator.clipboard.writeText(cp.dataset.copyname)}catch(err){}return}
-      const t=e.target.closest('[data-card],.opp[data-opp]');if(t){e.preventDefault();const k=t.dataset.card||('d:'+t.dataset.opp);push(k,t.dataset.pos);return}
+      const t=e.target.closest('[data-card],.opp[data-opp]');if(t){e.preventDefault();const k=t.dataset.card||('d:'+t.dataset.opp);if(t.dataset.name)NAMEHINT[k.slice(2)]=t.dataset.name;push(k,t.dataset.pos);return}
+      return;
+    }
+    if(el&&el.contains(e.target)){
+      if(e.target.closest('.pc-x')){close();return}
+      if(e.target.closest('.pc-back')){goBack(1);return}
+      const cr=e.target.closest('[data-crumb]');if(cr){goBack(stack.length-1-(+cr.dataset.crumb));return}
+      const cur=stack[stack.length-1];
+      if(e.target.closest('[data-copylink]')){copyText(location.origin+urlFor(cur.key),e.target.closest('[data-copylink]'));return}
+      if(e.target.closest('[data-pin-card]')){addPin(cur.key,cur.pos,'','');return}
+      const pp=e.target.closest('.pc-pop');if(pp){const s=pp.closest('section');addPin(cur.key,cur.pos,pp.dataset.pop,s&&s.dataset.secLabel);return}
+      const sc=e.target.closest('[data-sc] button');if(sc){setScoring(sc.dataset.v);return}
+      const np=e.target.closest('.pc-news p');if(np){np.classList.toggle('open');return}
+      const cp=e.target.closest('[data-copyname]');if(cp){try{navigator.clipboard.writeText(cp.dataset.copyname)}catch(err){}return}
+      const t=e.target.closest('[data-card],.opp[data-opp]');if(t){e.preventDefault();const k=t.dataset.card||('d:'+t.dataset.opp);if(t.dataset.name)NAMEHINT[k.slice(2)]=t.dataset.name;push(k,t.dataset.pos);return}
       return;
     }
     const t=e.target.closest('[data-card],.opp[data-opp]');
     if(t&&!e.target.closest('.plink,.av,a[href]:not([data-card])')){e.preventDefault();e.stopPropagation();const k=t.dataset.card||('d:'+t.dataset.opp);if(t.dataset.name)NAMEHINT[k.slice(2)]=t.dataset.name;open(k,t,t.dataset.pos);return}
-    if(el&&!e.target.closest('.pmenu'))close();
+    if(el&&!e.target.closest('.pmenu,.glpop'))close();
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el)close()});
-  addEventListener('hashchange',()=>{if(el&&!location.hash.startsWith('#a='))close()});
+  /* a page changing its own #hash (Stats tabs, Lab, Guide) closes the card; Trade's #a= state doesn't */
+  addEventListener('hashchange',()=>{if(location.hash.startsWith('#a='))return;if(el)closeLocal();if(new URLSearchParams(location.search).has('card'))history.replaceState(null,'',urlFor(null))});
   addEventListener('resize',()=>{if(el)place()});
 
   /* markup helpers for pages */
   function pbtn(id,name,cls){return `<button type="button" class="pname ${cls||''}" data-card="p:${esc(id)}" data-name="${esc(name)}" aria-expanded="false">${esc(name)}</button>`}
   function dbtn(team,label,cls){return `<button type="button" class="pname ${cls||''}" data-card="d:${esc(team)}" aria-expanded="false">${esc(label||team)}</button>`}
-  window.NFLSCards={provide,load,open,close,pbtn,dbtn,oppBtn,mrk,newsFor,playerSummary,defSummary,teamDefense,dvp,gameOf,nextOpp,byeWeek,scoring,SCORING,data:()=>D,index:()=>IX};
+  window.NFLSCards={provide,load,open,push,close,addPin,gbtn,gameKey,pbtn,dbtn,oppBtn,mrk,newsFor,playerSummary,defSummary,teamDefense,dvp,gameOf,nextOpp,byeWeek,scoring,SCORING,data:()=>D,index:()=>IX};
 })();
