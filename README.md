@@ -82,6 +82,8 @@ Run locally: `pip install -r requirements.txt && python scripts/update_data.py`,
 
 ## Roadmap
 
+Full plan, ideas and decisions: [ROADMAP.md](ROADMAP.md). Navigation plan: [docs/SITEMAP.md](docs/SITEMAP.md).
+
 1. ~~Map everything nflverse offers~~ (Guide)
 2. ~~Weekly data pipeline + Stats board + Excel hookup~~
 3. ~~Lab: in-browser pivots and stats (DuckDB)~~
