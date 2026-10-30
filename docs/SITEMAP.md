@@ -58,7 +58,7 @@ One table helper reused by Stats, Waivers, Lab results, Trade:
 1. ✅ `?card=` in the URL + back/swipe pops cards + open-on-load + Copy link. (2026-10-29)
 2. ✅ Breadcrumb + depth cap (12). (2026-10-29)
 2b. ✅ Pop-out windows: ⧉ on a card or any card section floats it in a draggable, resizable, minimizable window that stays while you browse; names inside open cards; windows follow you across pages in the same tab (sessionStorage, max 6). (2026-10-29)
-3. Game card (`g:`) + link schedule rows and game logs to it.
+3. ✅ Game card (`g:<game_id>`): score or implied totals, QBs, rest, spread/O-U (covered/over after the game), weather, top fantasy scorers (final) or players to watch with matchup rank (upcoming), team form side by side. Linked from Stats → Schedule ("Game card" + team names), week numbers in player and D/ST game logs, and the next-game week on cards. (2026-10-29)
 4. Linking audit: every name/team on every page is a card link; Lab results auto-link.
 5. Shared table helper with column chooser; roll out Stats → Waivers → Trade → Lab.
 6. Optional `sitemap.xml` / page index for the site.

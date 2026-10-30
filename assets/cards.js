@@ -162,9 +162,9 @@
     const tot=k=>sum(s.logs.map(l=>l[k])),pg=k=>RATE.has(k)?mean(s.logs.map(l=>l[k])):tot(k)/s.g;
     const cell=(k,v,isPg)=>!num(v)?'<span class="dim">–</span>':RATE.has(k)?pct(v):(isPg||k==='xfp')?f1(v):f0(v);
     const seasonRow=(lbl,isPg)=>`<tr${isPg?'':' class="tot"'}><td class="l">${lbl}</td><td class="fp">${f1(isPg?s.fpg:s.fp)}</td>${cols.map(([k])=>`<td>${cell(k,isPg||RATE.has(k)?pg(k):tot(k),isPg)}</td>`).join('')}</tr>`;
-    const logRows=s.logs.map(l=>`<tr><td class="l">${l.week}</td><td class="l">${oppBtn(l.opponent_team,((gameOf(l.team,l.week)||{}).at?'@ ':'vs ')+l.opponent_team,null)}</td><td class="fp">${f1(l[sk])}</td>${cols.map(([k])=>`<td>${cell(k,l[k],false)}</td>`).join('')}</tr>`).join('');
+    const logRows=s.logs.map(l=>`<tr><td class="l">${gbtn(gameKey(l.team,l.week),l.week)}</td><td class="l">${oppBtn(l.opponent_team,((gameOf(l.team,l.week)||{}).at?'@ ':'vs ')+l.opponent_team,null)}</td><td class="fp">${f1(l[sk])}</td>${cols.map(([k])=>`<td>${cell(k,l[k],false)}</td>`).join('')}</tr>`).join('');
     return `<div class="pc-top">${s.headshot?`<img class="hs" src="${esc(s.headshot)}" alt="" loading="lazy" onerror="this.remove()">`:''}<div><h3>${esc(s.name)}</h3>
-      <div class="sub"><span>${s.pos} · ${s.team}</span><span>bye ${byeWeek(s.team)||'–'}</span>${n?`<span>Wk ${D.META.next_week} ${oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,s.pos)}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}</div></div></div>
+      <div class="sub"><span>${s.pos} · ${s.team}</span><span>bye ${byeWeek(s.team)||'–'}</span>${n?`<span>${gbtn(n.g.game_id,'Wk '+D.META.next_week)} ${oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,s.pos)}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}</div></div></div>
     <section><div class="tags">${inj?`<span class="tag inj" title="${esc(inj[1])} · Wk ${inj[2]} report">${esc(inj[0].replace('Practice: ','Practice '))} · ${esc(inj[1])}</span>`:''}${ownerTag(id)}<span class="sp" style="flex:1"></span>${scoringSeg(sc)}</div>
       <div class="tiles" style="margin-top:8px">
         <div><span>FP / game</span><b>${f1(s.fpg)}</b><small>${[s.rank?s.pos+s.rank:'',s.g+' g'].filter(Boolean).join(' · ')}</small></div>
@@ -194,7 +194,7 @@
     const rk=(r,label)=>`<span class="mrk ${rkClass(r,td.n)}" title="${label}">${ord(r)}</span>`;
     const logs=td.rows.map(r=>({week:r.week,fantasy_points_ppr:r.dst_pts}));
     return `<div class="pc-top">${tm.logo?`<img class="logo" src="${esc(tm.logo)}" alt="" loading="lazy" onerror="this.remove()">`:''}<div><h3>${esc(team)} D/ST</h3>
-      <div class="sub"><span>${esc(tm.name||team)} · ${td.rec}</span><span>bye ${byeWeek(team)||'–'}</span>${nx?`<span>Wk ${D.META.next_week} ${nx.at?'@':'vs'} ${esc(nx.opp)}${num(nx.opp_implied)?` · opp implied ${nx.opp_implied.toFixed(1)}`:''}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}</div></div></div>
+      <div class="sub"><span>${esc(tm.name||team)} · ${td.rec}</span><span>bye ${byeWeek(team)||'–'}</span>${nx?`<span>${gbtn(nx.g.game_id,'Wk '+D.META.next_week)} ${nx.at?'@':'vs'} ${dbtn(nx.opp,nx.opp)}${num(nx.opp_implied)?` · opp implied ${nx.opp_implied.toFixed(1)}`:''}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}</div></div></div>
     <section><div class="tags">${ownerTag('DEF:'+team)}</div>
       <div class="tiles" style="margin-top:8px"><div><span>D/ST pts / g</span><b>${f1(td.dst)}</b><small>${ord(td.rk.dst)} of ${td.n}</small></div><div><span>Last 3</span><b>${f1(ds.l3)}</b><small>${num(ds.sd)?'±'+ds.sd.toFixed(1)+' weekly':''}</small></div><div><span>Sacks / g</span><b>${f1(td.sk)}</b><small>${ord(td.rk.sk)}</small></div><div><span>Takeaways / g</span><b>${f1(td.tk)}</b><small>${ord(td.rk.tk)}</small></div></div></section>
     <section><h4>D/ST points by week</h4>${bars(logs,'fantasy_points_ppr',team)}</section>
@@ -205,12 +205,53 @@
       <tr><td class="l">Pass yds allowed</td><td>${td.pya.toFixed(0)}</td><td>${rk(td.rk.pya,'1st = fewest allowed')}</td><td class="l">Takeaways</td><td>${td.tk.toFixed(1)}</td><td>${rk(td.rk.tk,'1st = most')}</td></tr>
       <tr><td class="l">Rush yds allowed</td><td>${td.rya.toFixed(0)}</td><td>${rk(td.rk.rya,'1st = fewest allowed')}</td><td></td><td></td><td></td></tr>
     </tbody></table></div><div class="note">Defense ranks: green = strong defense (tough matchup), red = weak.</div></section>
-    <section><h4>Game log</h4><div class="scr"><table><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>D/ST</th><th>Pts alw</th><th>Pass alw</th><th>Rush alw</th><th>Sk</th><th>Prs</th><th>INT</th><th>FR</th><th>TD</th></tr></thead><tbody>${td.rows.map(r=>`<tr><td class="l">${r.week}</td><td class="l">${(gameOf(team,r.week)||{}).at?'@':'vs'} ${esc(r.opponent_team)}</td><td class="fp">${f1(r.dst_pts)}</td><td>${f0(r.points_against)}</td><td>${f0(r.pass_yards_allowed)}</td><td>${f0(r.rush_yards_allowed)}</td><td>${f0(r.def_sacks)}</td><td>${f0(r.def_pressures)}</td><td>${f0(r.def_interceptions)}</td><td>${f0(r.fumble_recovery_opp)}</td><td>${f0((r.def_tds||0)+(r.special_teams_tds||0))}</td></tr>`).join('')}</tbody></table></div></section>
+    <section><h4>Game log</h4><div class="scr"><table><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>D/ST</th><th>Pts alw</th><th>Pass alw</th><th>Rush alw</th><th>Sk</th><th>Prs</th><th>INT</th><th>FR</th><th>TD</th></tr></thead><tbody>${td.rows.map(r=>`<tr><td class="l">${gbtn(gameKey(team,r.week),r.week)}</td><td class="l">${(gameOf(team,r.week)||{}).at?'@':'vs'} ${esc(r.opponent_team)}</td><td class="fp">${f1(r.dst_pts)}</td><td>${f0(r.points_against)}</td><td>${f0(r.pass_yards_allowed)}</td><td>${f0(r.rush_yards_allowed)}</td><td>${f0(r.def_sacks)}</td><td>${f0(r.def_pressures)}</td><td>${f0(r.def_interceptions)}</td><td>${f0(r.fumble_recovery_opp)}</td><td>${f0((r.def_tds||0)+(r.special_teams_tds||0))}</td></tr>`).join('')}</tbody></table></div></section>
     ${cov.length?`<section><h4>Coverage: most yards allowed</h4><div class="scr"><table><thead><tr><th class="l">Defender</th><th>Tgt</th><th>Yds</th><th>TD</th><th>Rtg</th></tr></thead><tbody>${cov.map(x=>`<tr><td class="l">${esc(x.name)} <span class="dim">${esc(x.pos||'')}</span></td><td>${x.tgt}</td><td>${x.yds}</td><td>${x.td}</td><td>${num(x.rating)?x.rating.toFixed(0):'–'}</td></tr>`).join('')}</tbody></table></div></section>`:''}
     ${rush.length?`<section><h4>Pass rush leaders</h4><div class="scr"><table><tbody>${rush.map(x=>`<tr><td class="l">${esc(x.name)} <span class="dim">${esc(x.pos||'')}</span></td><td>${x.prs} pressures</td><td>${x.sk} sacks</td></tr>`).join('')}</tbody></table></div></section>`:''}
     <section><h4>Team news <span class="sp"></span><span data-news-src></span></h4><div data-news><span class="spin"></span>Loading news…</div></section>
     ${linksHTML('DEF:'+team,team+' D/ST',null,tm)}`;
   }
+  /* ---------- game card (g:<nflverse game_id>) ---------- */
+  const gameById=id=>D.G.find(g=>g.game_id===id)||null;
+  const gameKey=(team,week)=>{const x=gameOf(team,week);return x?x.g.game_id:null};
+  /* small link to a game card; falls back to plain text when the game isn't in the schedule */
+  function gbtn(gid,label,cls){return gid?`<button type="button" class="gl-g ${cls||''}" data-card="g:${esc(gid)}" title="Game card">${label}</button>`:label}
+  function qbId(team,name){if(!name)return null;const n=name.toLowerCase();for(const [pid,logs] of IX.byP){const l=logs[logs.length-1];if(l.position==='QB'&&l.team===team&&String(l.player_display_name).toLowerCase()===n)return pid}return null}
+  function gameHTML(gid){
+    const g=gameById(gid);if(!g)return `<div class="pc-top"><div><h3>Game not found</h3><div class="sub">${esc(gid)}</div></div></div>`;
+    const sc=scoring(),sk=SCORING[sc].k;const fin=num(g.home_score)&&num(g.away_score);const A=g.away_team,H=g.home_team,w=g.week;
+    const d=new Date(g.gameday+'T12:00:00');const date=isNaN(d)?'':d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});
+    const fav=num(g.spread_line)&&g.spread_line!==0?(g.spread_line>0?H:A):null;
+    const spread=num(g.spread_line)?(g.spread_line===0?'Pick’em':`${fav} −${Math.abs(g.spread_line)}`):'–';
+    const indoor=/dome|closed/i.test(g.roof||'');
+    const weather=indoor?'Indoors ('+esc(g.roof)+')':(num(g.temp)||num(g.wind))?[num(g.temp)?g.temp+'°F':'',num(g.wind)?'wind '+g.wind+' mph':''].filter(Boolean).join(' · ')+(g.roof?' · '+esc(g.roof):''):`${esc(g.roof||'outdoors')} · ${fin?'not recorded':'not posted yet'}`;
+    const side=(t,qb,imp,score,rest)=>{const q=qbId(t,qb);const win=fin&&score>(t===H?g.away_score:g.home_score);
+      return `<div class="gc-side ${win?'win':''}"><div class="gc-tm" title="Open the ${esc(t)} defense card">${dbtn(t,t)}</div><b class="gc-n">${fin?score:(num(imp)?imp.toFixed(1):'–')}</b><small>${fin?(win?'won':'final'):'implied pts'}</small>
+        <div class="gc-qb">QB ${q?pbtn(q,qb):esc(qb||'–')}</div><small>${num(rest)?rest+' days rest':''}</small></div>`};
+    /* team form: season per-game, from teams.json */
+    const tf=t=>{const rr=(IX.byT.get(t)||[]).filter(r=>r.week<w||!fin);const n=rr.length||1;const s=k=>sum(rr.map(r=>r[k]))/n;return {g:rr.length,pf:s('points_for'),pa:s('points_against'),yds:s('total_yards'),ya:s('yards_allowed'),prs:s('def_pressures'),pra:s('pressures_allowed'),dst:s('dst_pts')}};
+    const fa=tf(A),fh=tf(H);const row=(lbl,k,dg,hi)=>{const a=fa[k],h=fh[k];const better=hi===null?'':(hi?(a>h?'a':'h'):(a<h?'a':'h'));
+      return `<tr><td class="${better==='a'?'gc-b':''}">${num(a)?a.toFixed(dg):'–'}</td><td class="l gc-l">${lbl}</td><td class="${better==='h'?'gc-b':''}">${num(h)?h.toFixed(dg):'–'}</td></tr>`};
+    /* players: in a finished game, who scored; before it, who to watch (season FP/g) */
+    let pl;
+    if(fin){pl=D.P.filter(r=>r.week===w&&(r.team===A||r.team===H)&&num(r[sk])).sort((a,b)=>b[sk]-a[sk]).slice(0,10).map(r=>({id:r.player_id,name:r.player_display_name,pos:r.position,team:r.team,v:r[sk],sub:statLine(r)}))}
+    else{pl=[];for(const t of [A,H]){const opp=t===A?H:A;for(const [pid,logs] of IX.byP){const l=logs[logs.length-1];if(l.team!==t||logs.length<2)continue;const v=mean(logs.map(x=>x[sk]));if(num(v))pl.push({id:pid,name:l.player_display_name,pos:l.position,team:t,v,opp,sub:''})}}
+      pl.sort((a,b)=>b.v-a.v);pl=pl.slice(0,10)}
+    const plRows=pl.map(p=>`<tr><td class="l">${pbtn(p.id,p.name)} <span class="dim">${p.pos} · ${p.team}</span></td><td class="fp">${f1(p.v)}</td><td class="l dim">${fin?esc(p.sub):mrk(p.opp,p.pos)}</td></tr>`).join('');
+    return `<div class="pc-top"><div><h3>${esc(A)} @ ${esc(H)}</h3>
+      <div class="sub"><span>Week ${w}</span><span>${esc(date)}${g.gametime?' · '+esc(g.gametime)+' ET':''}</span>${g.div_game?'<span>Division</span>':''}<span>${esc(g.stadium||'')}</span></div></div></div>
+    <section><div class="gc-sides">${side(A,g.away_qb_name,g.away_implied,g.away_score,g.away_rest)}<div class="gc-at">@</div>${side(H,g.home_qb_name,g.home_implied,g.home_score,g.home_rest)}</div></section>
+    <section><h4>Vegas line</h4><div class="tiles"><div><span>Spread</span><b>${esc(spread)}</b><small>${fin&&num(g.spread_line)?((g.home_score-g.away_score)>g.spread_line?H:(g.home_score-g.away_score)<g.spread_line?A:'push')+(fin&&(g.home_score-g.away_score)!==g.spread_line?' covered':''):'closing/latest'}</small></div>
+      <div><span>Over/under</span><b>${num(g.total_line)?g.total_line:'–'}</b><small>${fin&&num(g.total_line)?(g.home_score+g.away_score)+' scored · '+((g.home_score+g.away_score)>g.total_line?'over':(g.home_score+g.away_score)<g.total_line?'under':'push'):''}</small></div>
+      <div><span>Implied</span><b>${num(g.away_implied)?g.away_implied.toFixed(1):'–'}–${num(g.home_implied)?g.home_implied.toFixed(1):'–'}</b><small>${esc(A)}–${esc(H)}</small></div></div></section>
+    <section><h4>Weather</h4><div>${weather}</div></section>
+    <section><h4>${fin?'Top fantasy scorers':'Players to watch'} <span class="sp"></span><span>${SCORING[sc].label}${fin?' this game':' per game this season'}</span></h4><div class="scr"><table><tbody>${plRows||'<tr><td class="dim">No player data yet.</td></tr>'}</tbody></table></div>${fin?'':'<div class="note">Rank = how many points the opponent allows to that position (green = soft matchup).</div>'}</section>
+    <section><h4>Team form <span class="sp"></span><span>per game${fin?' before this game':' this season'}</span></h4><div class="scr"><table class="gc-form"><thead><tr><th>${esc(A)}</th><th class="l gc-l"></th><th>${esc(H)}</th></tr></thead><tbody>
+      ${row('Points scored','pf',1,true)}${row('Points allowed','pa',1,false)}${row('Yards','yds',0,true)}${row('Yards allowed','ya',0,false)}${row('Pressures made','prs',1,true)}${row('Pressures allowed','pra',1,false)}${row('D/ST points','dst',1,true)}
+    </tbody></table></div><div class="note">Bold = the better side.</div></section>`;
+  }
+  function statLine(r){const p=[];if(r.attempts)p.push(`${r.completions}/${r.attempts}, ${r.passing_yards} yds, ${r.passing_tds} TD${r.passing_interceptions?', '+r.passing_interceptions+' INT':''}`);
+    if(r.carries)p.push(`${r.carries} car, ${r.rushing_yards} yds${r.rushing_tds?', '+r.rushing_tds+' TD':''}`);if(r.targets)p.push(`${r.receptions}/${r.targets}, ${r.receiving_yards} yds${r.receiving_tds?', '+r.receiving_tds+' TD':''}`);return p.join(' · ')}
   const NAMEHINT={};
 
   /* ---------- popup ----------
@@ -222,7 +263,7 @@
   let pendingBack=false,afterPop=null;
   const cardState=()=>history.state&&history.state.nflsCard?history.state:null;
   const depth=()=>{const s=cardState();return s?s.nflsDepth||0:0};
-  const validKey=k=>typeof k==='string'&&/^[pd]:[A-Za-z0-9_-]+$/.test(k);
+  const validKey=k=>typeof k==='string'&&/^[pdg]:[A-Za-z0-9_-]+$/.test(k);
   function urlFor(key){const u=new URL(location.href);if(key)u.searchParams.set('card',key);else u.searchParams.delete('card');return u.pathname+u.search+u.hash}
   function writeState(mode,d){const top=stack[stack.length-1];history[mode]({nflsCard:stack.map(x=>({key:x.key,pos:x.pos||''})),nflsDepth:d},'',urlFor(top&&top.key))}
   function closeLocal(){if(el){el.remove();el=null}if(shade){shade.remove();shade=null}if(anchor){anchor.setAttribute('aria-expanded','false');anchor=null}stack=[]}
@@ -242,7 +283,7 @@
     if(below<Math.min(h,360)){if(above>=h)top=r.top+scrollY-h-6;else setTimeout(()=>{if(el)el.scrollIntoView({block:'nearest',behavior:'smooth'})},30)}
     el.style.left=left+'px';el.style.top=top+'px';
   }
-  const keyName=k=>k[0]==='d'?k.slice(2)+' D/ST':(NAMEHINT[k.slice(2)]||'Player');
+  const keyName=k=>k[0]==='d'?k.slice(2)+' D/ST':k[0]==='g'?(m=>m?m[2]+' @ '+m[3]+' · Wk '+(+m[1]):k.slice(2))(k.slice(2).match(/^\d{4}_(\d+)_([A-Z]+)_([A-Z]+)$/)):(NAMEHINT[k.slice(2)]||'Player');
   const ICON={pop:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="14" height="14" rx="2"/><path d="M10 3h11v11"/></svg>',
     link:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>'};
   /* every <section> with a heading gets an id (data-sec) so it can be popped out on its own */
@@ -254,8 +295,8 @@
       if(withButtons&&!h.querySelector('.pc-pop')){if(!h.querySelector('.sp'))h.insertAdjacentHTML('beforeend','<span class="sp"></span>');
         h.insertAdjacentHTML('beforeend',`<button type="button" class="pc-pop" data-pop="${id}" title="Pop out: keep “${esc(label)}” on screen while you browse" aria-label="Pop out ${esc(label)}">${ICON.pop}</button>`)}});
   }
-  function cardHTML(key,pos){const kind=key[0],id=key.slice(2);try{return kind==='d'?defHTML(id,pos):playerHTML(id)}catch(e){return `<div class="pc-top"><div><h3>Couldn't build this card</h3></div></div><section class="dim">${esc(e.message)}</section>`}}
-  const newsKey=key=>key[0]==='d'?'DEF:'+key.slice(2):key.slice(2);
+  function cardHTML(key,pos){const kind=key[0],id=key.slice(2);try{return kind==='d'?defHTML(id,pos):kind==='g'?gameHTML(id):playerHTML(id)}catch(e){return `<div class="pc-top"><div><h3>Couldn't build this card</h3></div></div><section class="dim">${esc(e.message)}</section>`}}
+  const newsKey=key=>key[0]==='d'?'DEF:'+key.slice(2):key[0]==='g'?null:key.slice(2);
   function render(){
     const cur=stack[stack.length-1];if(!cur||!el)return;
     const html=cardHTML(cur.key,cur.pos);
@@ -399,5 +440,5 @@
   /* markup helpers for pages */
   function pbtn(id,name,cls){return `<button type="button" class="pname ${cls||''}" data-card="p:${esc(id)}" data-name="${esc(name)}" aria-expanded="false">${esc(name)}</button>`}
   function dbtn(team,label,cls){return `<button type="button" class="pname ${cls||''}" data-card="d:${esc(team)}" aria-expanded="false">${esc(label||team)}</button>`}
-  window.NFLSCards={provide,load,open,push,close,addPin,pbtn,dbtn,oppBtn,mrk,newsFor,playerSummary,defSummary,teamDefense,dvp,gameOf,nextOpp,byeWeek,scoring,SCORING,data:()=>D,index:()=>IX};
+  window.NFLSCards={provide,load,open,push,close,addPin,gbtn,gameKey,pbtn,dbtn,oppBtn,mrk,newsFor,playerSummary,defSummary,teamDefense,dvp,gameOf,nextOpp,byeWeek,scoring,SCORING,data:()=>D,index:()=>IX};
 })();
