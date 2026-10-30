@@ -576,18 +576,21 @@ function pivotSQL(){
 /* ---------- run + results ---------- */
 let RES={cols:[],rows:[],types:[]},rs={sort:null,dir:-1,heat:store.get('labHeat',true),chart:store.get('labChart','none'),x:null,y:null},lastTitle='';
 const toJS=v=>typeof v==='bigint'?Number(v):(v&&typeof v==='object'&&'valueOf' in v&&typeof v.valueOf()==='bigint')?Number(v.valueOf()):v;
+/* only the newest run may draw: a slow query (e.g. one that first loads play-by-play) can't overwrite a newer one */
+let RUNID=0;
 async function run(title){
-  if(!conn)return;const sql=$('#sql').value.trim();if(!sql)return;lastTitle=title||'Query';
+  if(!conn)return;const sql=$('#sql').value.trim();if(!sql)return;const id=++RUNID;
   $('#run').disabled=true;const t0=performance.now();
   try{
     await ensureTablesFor(sql);
     const r=await conn.query(sql);
+    if(id!==RUNID)return;lastTitle=title||'Query';
     const fields=r.schema.fields;const cols=fields.map(f=>f.name);
     const rows=r.toArray().map(row=>{const o=row.toJSON();for(const k in o){let v=toJS(o[k]);if(v instanceof Date)v=v.toISOString().slice(0,10);else if(v!=null&&typeof v==='object')v=String(v);o[k]=v}return o});
     RES={cols,rows,ms:performance.now()-t0,num:cols.map(c=>rows.some(r=>typeof r[c]==='number')&&rows.every(r=>r[c]==null||typeof r[c]==='number'))};
     rs.sort=null;rs.x=null;rs.y=null;drawResults();
-  }catch(e){const canFix=lastAsk&&sql===lastAsk.sql;$('#results').innerHTML=`<div class="res-h"><span class="meta"><b>${esc(lastTitle)}</b> didn't run</span>${canFix?'<span style="flex:1"></span><button class="btn primary" id="ask-fix">Ask Claude to fix it</button>':''}</div><div class="err">${esc(e.message)}</div>`;if(canFix)$('#ask-fix').onclick=()=>ask(lastAsk.q,{sql,error:e.message})}
-  finally{$('#run').disabled=false}
+  }catch(e){if(id!==RUNID)return;lastTitle=title||'Query';const canFix=lastAsk&&sql===lastAsk.sql;$('#results').innerHTML=`<div class="res-h"><span class="meta"><b>${esc(lastTitle)}</b> didn't run</span>${canFix?'<span style="flex:1"></span><button class="btn primary" id="ask-fix">Ask Claude to fix it</button>':''}</div><div class="err">${esc(e.message)}</div>`;if(canFix)$('#ask-fix').onclick=()=>ask(lastAsk.q,{sql,error:e.message})}
+  finally{if(id===RUNID)$('#run').disabled=false}
 }
 $('#run').onclick=()=>run($('#save-name').value||'Query');
 $('#sql').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();run($('#save-name').value||'Query')}if(e.key==='Tab'&&!e.shiftKey){e.preventDefault();insertAtCursor(e.target,'  ')}});
