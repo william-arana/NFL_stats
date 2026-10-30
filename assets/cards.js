@@ -100,13 +100,16 @@
     return {h,s:clean([m.description,m.analysis].filter(Boolean).join(' '),700),d:a.published?new Date(a.published).toISOString():null,src:SLP_SRC[a.source]||String(a.source||'').replace(/_/g,' '),url:m.url||null}}).filter(Boolean)}
   let SMAPP=null;const sleeperId=g=>(SMAPP||(SMAPP=fetch('data/site/sleeper_map.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{map:{}}).then(j=>{const inv={};for(const [s,x] of Object.entries(j.map||{}))inv[x]=s;return inv}).catch(()=>({})))).then(inv=>inv[g]);
   /* live feeds, straight from the browser (both send Access-Control-Allow-Origin: *) */
+  /* ESPN's athlete feed mixes in general NFL headlines: keep only stories that name the player */
+  function namesPlayer(g){const full=String(NAMEHINT[g]||'').toLowerCase().replace(/\s+(jr\.?|sr\.?|ii|iii|iv|v)$/,'');const last=full.split(/\s+/).pop()||'';
+    return it=>{if(!last)return false;const t=(it.h+' '+(it.s||'')).toLowerCase();return t.includes(full)||new RegExp('\\b'+last.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b').test(t)}}
   async function liveNews(g){
     const out={items:[],via:[]};
     const espn=D.IDS[g];
     const jobs=[
       espn?getJSON(`https://site.api.espn.com/apis/fantasy/v2/games/ffl/news/players?playerId=${encodeURIComponent(espn)}&limit=50`,7000).then(j=>{out.items.push(...espnItems(j.feed));if(!out.via.includes('ESPN'))out.via.push('ESPN')}).catch(()=>{}):null,
       /* ESPN's general athlete news covers everyone (defenders, linemen, kickers), not just fantasy-relevant players */
-      espn?getJSON(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?athlete=${encodeURIComponent(espn)}&limit=50`,7000).then(j=>{out.items.push(...espnItems(j.articles));if(!out.via.includes('ESPN'))out.via.push('ESPN')}).catch(()=>{}):null,
+      espn?getJSON(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?athlete=${encodeURIComponent(espn)}&limit=50`,7000).then(j=>{const it=espnItems(j.articles).filter(namesPlayer(g));out.items.push(...it);if(it.length&&!out.via.includes('ESPN'))out.via.push('ESPN')}).catch(()=>{}):null,
       sleeperId(g).then(sid=>sid?getJSON(`https://api.sleeper.app/players/nfl/${encodeURIComponent(sid)}/news?limit=50`,7000):null).then(j=>{if(j){out.items.push(...sleeperItems(j));out.via.push('Sleeper')}}).catch(()=>{})
     ].filter(Boolean);
     await Promise.all(jobs);return out;

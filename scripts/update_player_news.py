@@ -91,13 +91,18 @@ def espn_items(articles) -> list[dict]:
     return out
 
 
-def espn_player(espn_id: str) -> list[dict]:
-    """ESPN fantasy news + ESPN's general athlete news (covers defenders, linemen and kickers too)."""
+def espn_player(espn_id: str, name: str = "") -> list[dict]:
+    """ESPN fantasy news + ESPN's athlete news. The athlete feed mixes in general NFL headlines,
+    so only stories that name the player are kept."""
     j = get_json(f"https://site.api.espn.com/apis/fantasy/v2/games/ffl/news/players?playerId={espn_id}&limit=50")
     out = espn_items(j.get("feed"))
     try:
         a = get_json(f"https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?athlete={espn_id}&limit=50")
-        out += espn_items(a.get("articles"))
+        full = re.sub(r"\s+(jr\.?|sr\.?|ii|iii|iv|v)$", "", (name or "").lower()).strip()
+        last = full.split()[-1] if full else ""
+        if last:
+            pat = re.compile(r"\b" + re.escape(last) + r"\b")
+            out += [it for it in espn_items(a.get("articles")) if full in (it["h"] + " " + (it.get("s") or "")).lower() or pat.search((it["h"] + " " + (it.get("s") or "")).lower())]
     except Exception:  # noqa: BLE001
         pass
     return out
@@ -242,7 +247,7 @@ def main() -> None:
         e = ids.get(g)
         if e:
             try:
-                new += espn_player(e)
+                new += espn_player(e, names.get(g, ""))
             except Exception as ex:  # noqa: BLE001
                 fails += 1
                 if fails <= 5:
