@@ -274,3 +274,10 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 /* Columns button inside cards / pop-outs: smaller, tucked above the table */
 :is(.pc,.pw) .colbar{padding:0 0 4px}
 :is(.pc,.pw) .colbtn{font-size:11px;padding:2px 8px}
+/* card news: order toggle + general NFL stories shown last */
+:is(.pc,.pw) .nmode{margin:0 0 8px}
+:is(.pc,.pw) .nmode button{font:500 11px var(--f-body);padding:2px 9px;border:0;background:transparent;color:var(--ink-2);cursor:pointer}
+:is(.pc,.pw) .nmode button[aria-pressed="true"]{background:var(--ink);color:var(--sheet)}
+:is(.pc,.pw) ul.pc-news li.gen-h{border:0;padding:6px 0 0;font:500 10px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);border-top:1px dashed var(--rule)}
+:is(.pc,.pw) ul.pc-news li.gen{border-left-color:var(--rule)}
+:is(.pc,.pw) ul.pc-news li.gen a{font-weight:500;color:var(--ink-2)}
