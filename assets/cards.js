@@ -437,6 +437,33 @@
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el)close()});
   /* a page changing its own #hash (Stats tabs, Lab, Guide) closes the card; Trade's #a= state doesn't */
   addEventListener('hashchange',()=>{if(location.hash.startsWith('#a='))return;if(el)closeLocal();if(new URLSearchParams(location.search).has('card'))history.replaceState(null,'',urlFor(null))});
+  /* phones: drag the card down to close it (from the header, or from the content once it's scrolled to the top).
+     Past ~110px or a quick flick it closes; otherwise it snaps back. The page behind never moves. */
+  (function(){
+    const phone=matchMedia('(max-width:640px)');let drag=null;
+    document.addEventListener('touchstart',e=>{
+      if(!el||!phone.matches||e.touches.length!==1||!el.contains(e.target))return;
+      if(e.target.closest('.pc-crumbs,.scr,.seg,input,select,textarea'))return;
+      const inHead=!!e.target.closest('.pc-head');if(!inHead&&el.scrollTop>0)return;
+      drag={y0:e.touches[0].clientY,x0:e.touches[0].clientX,t0:Date.now(),dy:0,on:false,inHead};
+    },{passive:true});
+    document.addEventListener('touchmove',e=>{
+      if(!drag||!el)return;const t=e.touches[0];const dy=t.clientY-drag.y0,dx=t.clientX-drag.x0;
+      if(!drag.on){if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>8){drag=null;return}
+        if(dy<-4&&!drag.inHead){drag=null;return}   /* scrolling the card up: let it scroll */
+        if(dy>6&&(drag.inHead||el.scrollTop<=0)){drag.on=true;el.style.transition='none';if(shade)shade.style.transition='none'}else return}
+      e.preventDefault();drag.dy=Math.max(0,dy);
+      el.style.transform=`translateY(${drag.dy}px)`;if(shade)shade.style.opacity=String(Math.max(0,1-drag.dy/400));
+    },{passive:false});
+    const end=()=>{
+      if(!drag)return;const d=drag;drag=null;if(!d.on||!el)return;
+      const fast=d.dy/Math.max(1,Date.now()-d.t0)>0.6;
+      el.style.transition='transform .2s ease';if(shade)shade.style.transition='opacity .2s ease';
+      if(d.dy>110||(fast&&d.dy>30)){el.style.transform='translateY(100%)';if(shade)shade.style.opacity='0';const me=el;setTimeout(()=>{if(el===me)close()},190)}
+      else{el.style.transform='';if(shade)shade.style.opacity='';setTimeout(()=>{if(el){el.style.transition='';}},220)}
+    };
+    document.addEventListener('touchend',end,{passive:true});document.addEventListener('touchcancel',end,{passive:true});
+  })();
   addEventListener('resize',()=>{if(el)place()});
 
   /* markup helpers for pages */

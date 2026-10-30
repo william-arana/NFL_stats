@@ -267,3 +267,4 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
   .pc{max-height:86vh;max-height:calc(100dvh - env(safe-area-inset-top,0px) - 64px)}
   .pc-head{border-radius:14px 14px 0 0}
 }
+@media (max-width:640px){.pc-head{touch-action:none;cursor:grab}.pc-head .pc-crumbs{touch-action:pan-x}.pc{overscroll-behavior-y:contain}}
