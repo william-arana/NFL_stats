@@ -301,7 +301,9 @@
     const cur=stack[stack.length-1];if(!cur||!el)return;
     const html=cardHTML(cur.key,cur.pos);
     const crumbs=stack.length>1?`<nav class="pc-crumbs" aria-label="Card trail">${stack.map((x,i)=>i===stack.length-1?`<span aria-current="true">${esc(keyName(x.key))}</span>`:`<button type="button" data-crumb="${i}">${esc(keyName(x.key))}</button>`).join('<i>›</i>')}</nav>`:'';
-    el.innerHTML=`<button type="button" class="pc-x" aria-label="Close">×</button><div class="pc-tools"><button type="button" data-copylink title="Copy a link to this card">${ICON.link}</button><button type="button" data-pin-card title="Pop out the whole card">${ICON.pop}</button></div>`+crumbs+html;
+    /* header (close, tools, crumbs, name) is one sticky block so it never scrolls out of reach */
+    el.innerHTML=`<div class="pc-head"><button type="button" class="pc-x" aria-label="Close">×</button><div class="pc-tools"><button type="button" data-copylink title="Copy a link to this card">${ICON.link}</button><button type="button" data-pin-card title="Pop out the whole card">${ICON.pop}</button></div>${crumbs}</div>`+html;
+    {const head=el.querySelector('.pc-head'),top=el.querySelector(':scope > .pc-top');if(head&&top)head.appendChild(top)}
     if(stack.length>1){const top=el.querySelector('.pc-top');if(top)top.insertAdjacentHTML('afterbegin',`<button type="button" class="pc-back" aria-label="Back">←</button>`)}
     if(crumbs){const c=el.querySelector('.pc-crumbs');c.scrollLeft=c.scrollWidth}
     tagSections(el,true);
