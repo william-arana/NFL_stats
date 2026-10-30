@@ -116,7 +116,8 @@
   function check(el){const x=el.scrollLeft,narrow=el.classList.contains('narrow');
     if(!narrow&&x>12){setNarrow(el,true);if(!el.classList.contains('narrow'))return}else if(narrow&&x<=1)setNarrow(el,false);else return;
     lockUntil=Date.now()+320;clearTimeout(el._recheck);el._recheck=setTimeout(()=>check(el),340)}
-  document.addEventListener('scroll',e=>{const el=e.target;if(!phone.matches||!el||!el.classList||!el.classList.contains('tablewrap')||!el.querySelector('td.stick'))return;
+  /* only player tables slide; team / defense tables keep their size */
+  document.addEventListener('scroll',e=>{const el=e.target;if(!phone.matches||!el||!el.classList||!el.classList.contains('tablewrap')||!el.querySelector('td.stick [data-card^="p:"]'))return;
     if(Date.now()<lockUntil)return;check(el)
   },true);
   /* a re-rendered or rotated table re-measures next time */
