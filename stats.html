@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=20261029j">
-<script src="assets/site.js?v=20261029j" defer></script>
-<script src="assets/cards.js?v=20261029j" defer></script>
-<script src="assets/glossary.js?v=20261029j" defer></script>
-<script src="assets/tables.js?v=20261029j" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=20261029k">
+<script src="assets/site.js?v=20261029k" defer></script>
+<script src="assets/cards.js?v=20261029k" defer></script>
+<script src="assets/glossary.js?v=20261029k" defer></script>
+<script src="assets/tables.js?v=20261029k" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -219,32 +219,37 @@ const PSETS={
     {k:'carries',label:'Rush att',d:1,heat:1,tip:'Rushing attempts (carries)'},{k:'targets',label:'Tgt',d:1,heat:1},
     {k:'opps',label:'Opps',d:1,heat:1,tip:'Carries + targets'},
     {k:'tds',label:'TD',d:1,heat:1},
-    {k:'trend',label:'Weekly FP',spark:1}]},
+    {k:'trend',label:'Weekly FP',spark:1},{k:'offense_snaps',label:'Snaps',d:1,heat:1,off:1},{k:'fp_snap',label:'FP/snap',d:2,heat:1,calc:1,off:1,tip:'Fantasy points per offensive snap'},{k:'fp_opp',label:'FP/opp',d:2,heat:1,calc:1,off:1,tip:'Fantasy points per carry + target'},{k:'scrim',label:'Scrim yds',d:1,heat:1,off:1,tip:'Rushing + receiving yards'},{k:'receptions',label:'Rec',d:1,heat:1,off:1},{k:'rushing_tds',label:'Rush TD',d:1,heat:1,off:1},{k:'receiving_tds',label:'Rec TD',d:1,heat:1,off:1},{k:'fum',label:'Fum lost',d:1,heat:1,invert:1,off:1}]},
   receiving:{label:'Receiving',cols:[
     {k:'targets',label:'Tgt',d:1,heat:1},{k:'receptions',label:'Rec',d:1,heat:1},{k:'catch',label:'Catch %',d:'%',heat:1,calc:1},
     {k:'receiving_yards',label:'Yds',d:1,heat:1},{k:'receiving_tds',label:'TD',d:1,heat:1},
     {k:'receiving_air_yards',label:'Air yds',d:1,heat:1},{k:'adot',label:'aDOT',d:1,heat:1,calc:1,tip:'Air yards per target'},
     {k:'receiving_yards_after_catch',label:'YAC',d:1,heat:1},{k:'target_share',label:'Tgt share',d:'%',heat:1,rate:1},
     {k:'air_yards_share',label:'Air share',d:'%',heat:1,rate:1},{k:'wopr',label:'WOPR',d:2,heat:1,rate:1,tip:'1.5 × target share + 0.7 × air yards share'},
-    {k:'racr',label:'RACR',d:2,heat:1,rate:1,tip:'Receiving yards per air yard'},{k:'receiving_epa',label:'Rec EPA',d:1,heat:1}]},
+    {k:'racr',label:'RACR',d:2,heat:1,rate:1,tip:'Receiving yards per air yard'},{k:'receiving_epa',label:'Rec EPA',d:1,heat:1},{k:'receiving_first_downs',label:'Rec 1st dn',d:1,heat:1,off:1},{k:'ypt',label:'Yds/tgt',d:1,heat:1,calc:1,off:1,tip:'Receiving yards per target'},{k:'rec_epa_tgt',label:'EPA/tgt',d:2,heat:1,calc:1,off:1,tip:'Receiving EPA per target'},{k:'offense_pct',label:'Snap %',d:'%',heat:1,rate:1,off:1},{k:'scrim',label:'Scrim yds',d:1,heat:1,off:1,tip:'Rushing + receiving yards'}]},
   rushing:{label:'Rushing',cols:[
     {k:'carries',label:'Rush att',d:1,heat:1,tip:'Rushing attempts (carries)'},{k:'rushing_yards',label:'Yds',d:1,heat:1},{k:'ypc',label:'YPC',d:1,heat:1,calc:1},
     {k:'rushing_tds',label:'TD',d:1,heat:1},{k:'rushing_first_downs',label:'1st dn',d:1,heat:1},
     {k:'ybc_att',label:'YBC/att',d:2,heat:1,calc:1,tip:'Yards before contact per carry. Mostly the O-line'},
     {k:'yac_att',label:'YAC/att',d:2,heat:1,calc:1,tip:'Yards after contact per carry. Mostly the runner'},
-    {k:'broken_tackles',label:'Brk tkl',d:1,heat:1},{k:'rushing_epa',label:'Rush EPA',d:1,heat:1},{k:'fum',label:'Fum lost',d:1,heat:1,invert:1}]},
+    {k:'broken_tackles',label:'Brk tkl',d:1,heat:1},{k:'rushing_epa',label:'Rush EPA',d:1,heat:1},{k:'fum',label:'Fum lost',d:1,heat:1,invert:1},{k:'rush_epa_att',label:'EPA/att',d:2,heat:1,calc:1,off:1,tip:'Rushing EPA per carry'},{k:'btk_att',label:'Brk tkl/att',d:2,heat:1,calc:1,off:1,tip:'Broken tackles per carry (PFR)'},{k:'ybc',label:'YBC',d:1,heat:1,off:1,tip:'Rushing yards before contact (PFR)'},{k:'yac_rush',label:'YAC',d:1,heat:1,off:1,tip:'Rushing yards after contact (PFR)'},{k:'targets',label:'Tgt',d:1,heat:1,off:1},{k:'receiving_yards',label:'Rec yds',d:1,heat:1,off:1},{k:'scrim',label:'Scrim yds',d:1,heat:1,off:1,tip:'Rushing + receiving yards'},{k:'offense_pct',label:'Snap %',d:'%',heat:1,rate:1,off:1}]},
   passing:{label:'Passing',cols:[
     {k:'completions',label:'Cmp',d:1,heat:1},{k:'attempts',label:'Att',d:1,heat:1},{k:'passing_yards',label:'Yds',d:1,heat:1},
     {k:'passing_tds',label:'TD',d:1,heat:1},{k:'passing_interceptions',label:'INT',d:1,heat:1,invert:1},
     {k:'sacks_suffered',label:'Sacked',d:1,heat:1,invert:1},{k:'press_pct',label:'Pressured %',d:'%',heat:1,invert:1,calc:1,tip:'Times pressured ÷ dropbacks (PFR)'},
     {k:'qb_blitzed',label:'Blitzed',d:1,heat:1},{k:'passing_cpoe',label:'CPOE',d:1,heat:1,rate:1,tip:'Completion % over expected'},
-    {k:'passing_epa',label:'Pass EPA',d:1,heat:1},{k:'ypa',label:'Y/A',d:1,heat:1,calc:1}]}
+    {k:'passing_epa',label:'Pass EPA',d:1,heat:1},{k:'ypa',label:'Y/A',d:1,heat:1,calc:1},{k:'cmp_pct',label:'Cmp %',d:'%1',heat:1,calc:1,off:1},{k:'td_pct',label:'TD %',d:'%1',heat:1,calc:1,off:1,tip:'Passing TDs per attempt'},{k:'int_pct',label:'INT %',d:'%1',heat:1,invert:1,calc:1,off:1},{k:'sack_pct',label:'Sack %',d:'%1',heat:1,invert:1,calc:1,off:1,tip:'Sacks per dropback'},{k:'passing_air_yards',label:'Air yds',d:1,heat:1,off:1},{k:'iay',label:'IAY/att',d:1,heat:1,calc:1,off:1,tip:'Intended air yards per attempt'},{k:'epa_db',label:'EPA/db',d:2,heat:1,calc:1,off:1,tip:'Passing EPA per dropback'},{k:'qb_pressured',label:'Pressured',d:1,heat:1,invert:1,off:1,tip:'Times pressured (PFR)'},{k:'rushing_yards',label:'Rush yds',d:1,heat:1,off:1},{k:'rushing_tds',label:'Rush TD',d:1,heat:1,off:1},{k:'fum',label:'Fum lost',d:1,heat:1,invert:1,off:1}]}
 };
 const FPCOL={k:'fp',label:'FP',d:1,heat:1,tip:'Fantasy points in your scoring'};
 function pcols(set){return set.cols.some(c=>c.k==='fp')?set.cols:[FPCOL,...set.cols]}
 const SUMK=['completions','attempts','passing_yards','passing_tds','passing_interceptions','sacks_suffered','passing_air_yards','passing_epa','carries','rushing_yards','rushing_tds','rushing_first_downs','rushing_epa','targets','receptions','receiving_yards','receiving_tds','receiving_air_yards','receiving_yards_after_catch','receiving_first_downs','receiving_epa','rushing_fumbles_lost','receiving_fumbles_lost','sack_fumbles_lost','fantasy_points','fantasy_points_ppr','fantasy_points_half','offense_snaps','xfp','xfp_diff','qb_pressured','qb_blitzed','ybc','yac_rush','broken_tackles'];
 const MEANK=['target_share','air_yards_share','wopr','racr','offense_pct','passing_cpoe'];
 const ps={av:'all',pos:store.get('pos','ALL'),team:'ALL',w0:1,w1:null,mode:store.get('mode','pg'),scoring:store.get('scoring','ppr'),set:store.get('set','fantasy'),q:'',minG:store.get('minG',2),sort:null,dir:-1,open:new Set(),heat:store.get('heat',true)};
+/* ratios used by the optional ("More stats") columns; works on season sums or a single game */
+function addCalc(o){o.scrim=(o.rushing_yards||0)+(o.receiving_yards||0);o.fp_snap=num(o.offense_snaps)?div(o.fp,o.offense_snaps):null;o.fp_opp=div(o.fp,(o.carries||0)+(o.targets||0));
+  o.ypt=div(o.receiving_yards,o.targets);o.rec_epa_tgt=num(o.receiving_epa)?div(o.receiving_epa,o.targets):null;o.rush_epa_att=num(o.rushing_epa)?div(o.rushing_epa,o.carries):null;
+  o.btk_att=num(o.broken_tackles)?div(o.broken_tackles,o.carries):null;o.cmp_pct=div(o.completions,o.attempts);o.td_pct=div(o.passing_tds,o.attempts);o.int_pct=div(o.passing_interceptions,o.attempts);
+  o.sack_pct=div(o.sacks_suffered,(o.attempts||0)+(o.sacks_suffered||0));o.iay=div(o.passing_air_yards,o.attempts);o.epa_db=num(o.passing_epa)?div(o.passing_epa,(o.attempts||0)+(o.sacks_suffered||0)):null;return o}
 function aggPlayers(){
   const s=SCORING[ps.scoring].k,w0=ps.w0,w1=ps.w1;const by=new Map();
   for(const r of P){if(r.week<w0||r.week>w1)continue;if(ps.pos!=='ALL'&&r.position!==ps.pos)continue;if(ps.team!=='ALL'&&r.team!==ps.team)continue;
@@ -263,7 +268,8 @@ function aggPlayers(){
     a.catch=div(a.receptions,a.targets);a.adot=div(a.receiving_air_yards,a.targets);a.ypc=div(a.rushing_yards,a.carries);
     a.ybc_att=a.ybc==null?null:div(a.ybc,a.carries);a.yac_att=a.ybc==null?null:div(a.yac_rush,a.carries);
     a.press_pct=a.qb_pressured==null?null:div(a.qb_pressured,a.attempts+a.sacks_suffered);a.ypa=div(a.passing_yards,a.attempts);
-    if(ps.mode==='pg'){const g=a.g;for(const k of [...SUMK,'fp','tds','opps','fum'])if(num(a[k]))a[k]=a[k]/g}
+    addCalc(a);
+    if(ps.mode==='pg'){const g=a.g;for(const k of [...SUMK,'fp','tds','opps','fum','scrim'])if(num(a[k]))a[k]=a[k]/g}
     out.push(a);
   }
   return out;
@@ -316,7 +322,7 @@ function drawPlayers(){
   const heat=ps.heat?heatAlpha(data,pcols(set)):{};
   const lbl=ps.mode==='pg'?'per game':'totals';
   $('#p-sum').innerHTML=`<span><b>${data.length}</b> players</span><span>Weeks <b>${ps.w0}–${ps.w1}</b>, ${lbl}</span><span>Sorted by <b>${esc((pcols(set).find(c=>c.k===sk)||{label:sk}).label)}</b></span>`;
-  const th=`<thead><tr><th class="rank">#</th><th class="l stick" data-k="name">Player</th><th class="l" data-k="team">Team</th><th class="l" data-k="next">${gl('next','Wk '+META.next_week)}</th><th data-k="g">${gl('g','G')}</th>${pcols(set).map(c=>`<th data-k="${c.k}" ${c.spark?'class="l"':''} ${sk===c.k?`aria-sort="${ps.dir<0?'descending':'ascending'}"`:''}>${gl(c.k,c.label,c.tip)}</th>`).join('')}</tr></thead>`;
+  const th=`<thead><tr><th class="rank">#</th><th class="l stick" data-k="name">Player</th><th class="l" data-k="team">Team</th><th class="l" data-k="next">${gl('next','Wk '+META.next_week)}</th><th data-k="g">${gl('g','G')}</th>${pcols(set).map(c=>`<th data-k="${c.k}" ${c.off?'data-def-off="1"':''} ${c.spark?'class="l"':''} ${sk===c.k?`aria-sort="${ps.dir<0?'descending':'ascending'}"`:''}>${gl(c.k,c.label,c.tip)}</th>`).join('')}</tr></thead>`;
   const LIM=400;let body='';
   data.slice(0,LIM).forEach((a,i)=>{
     const inj=INJ[a.id];
@@ -327,7 +333,7 @@ function drawPlayers(){
     if(ps.open.has(a.id)){
       const logs=[...a.logs].sort((x,y)=>x.week-y.week);
       for(const l of logs){const r=Object.assign({},l);r.fp=l[SCORING[ps.scoring].k];r.tds=(l.passing_tds||0)+(l.rushing_tds||0)+(l.receiving_tds||0);r.opps=(l.carries||0)+(l.targets||0);r.fum=(l.rushing_fumbles_lost||0)+(l.receiving_fumbles_lost||0)+(l.sack_fumbles_lost||0);
-        r.catch=div(l.receptions,l.targets);r.adot=div(l.receiving_air_yards,l.targets);r.ypc=div(l.rushing_yards,l.carries);r.ybc_att=num(l.ybc)?div(l.ybc,l.carries):null;r.yac_att=num(l.yac_rush)?div(l.yac_rush,l.carries):null;r.press_pct=num(l.qb_pressured)?div(l.qb_pressured,l.attempts+l.sacks_suffered):null;r.ypa=div(l.passing_yards,l.attempts);
+        r.catch=div(l.receptions,l.targets);r.adot=div(l.receiving_air_yards,l.targets);r.ypc=div(l.rushing_yards,l.carries);r.ybc_att=num(l.ybc)?div(l.ybc,l.carries):null;r.yac_att=num(l.yac_rush)?div(l.yac_rush,l.carries):null;r.press_pct=num(l.qb_pressured)?div(l.qb_pressured,l.attempts+l.sacks_suffered):null;r.ypa=div(l.passing_yards,l.attempts);addCalc(r);
         body+=`<tr class="log"><td></td><td class="l stick">${gameBtn(l.team||a.team,l.week,'Wk '+l.week)} ${oppBtn(l.opponent_team,'vs '+l.opponent_team,a.pos)}</td><td class="l"></td><td></td><td></td>${pcols(set).map(c=>c.spark?'<td></td>':`<td>${fmt(r[c.k],c.d==='%'||c.d==='%1'?c.d:(typeof c.d==='number'?Math.min(c.d,2):0))}</td>`).join('')}</tr>`}
     }
   });

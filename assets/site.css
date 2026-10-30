@@ -274,3 +274,6 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 /* Columns button inside cards / pop-outs: smaller, tucked above the table */
 :is(.pc,.pw) .colbar{padding:0 0 4px}
 :is(.pc,.pw) .colbtn{font-size:11px;padding:2px 8px}
+.colpanel li.cp-sep{display:block;padding:8px 10px 3px;font:500 10px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);background:var(--head)!important;border-top:1px solid var(--rule)}
+.colpanel li.xtra label{color:var(--ink-2)}
+.colbtn span.plus{color:var(--good)}

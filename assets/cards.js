@@ -138,6 +138,19 @@
     WR:[['targets','Tgt'],['receptions','Rec'],['receiving_yards','Yds'],['receiving_tds','TD'],['receiving_air_yards','Air yds'],['target_share','Tgt %','%'],['offense_pct','Snap %','%'],['carries','Car'],['xfp','xFP',1]],
   };POSCOLS.TE=POSCOLS.WR;
   const RATE=new Set(['offense_pct','target_share']);
+  /* "More stats" columns on player cards: off by default, switched on from the Columns menu.
+     v(logs) computes the value for a set of games (season or one game); sum:true = per game divides by games */
+  const SL=(L,k)=>sum(L.map(l=>l[k])),ML=(L,k)=>mean(L.map(l=>l[k]));
+  const xs=(k,l,f,o={})=>({k,l,f,sum:true,v:L=>L.some(x=>num(x[k]))?SL(L,k):null,...o});
+  const xr=(k,l,f,a,b)=>({k,l,f,v:L=>div(SL(L,a),[].concat(b).reduce((t,c)=>t+SL(L,c),0))});
+  const xm=(k,l,f)=>({k,l,f,v:L=>ML(L,k)});
+  const XFUM={k:'fum',l:'Fum lost',f:0,sum:true,v:L=>SL(L,'rushing_fumbles_lost')+SL(L,'receiving_fumbles_lost')+SL(L,'sack_fumbles_lost')};
+  const XCOLS={
+    QB:[xr('cmp_pct','Cmp %','%','completions','attempts'),xs('passing_air_yards','Air yds',0),xm('passing_cpoe','CPOE',1),xs('passing_epa','Pass EPA',1),xs('qb_pressured','Pressured',0),xs('qb_blitzed','Blitzed',0),xm('offense_pct','Snap %','%'),xs('xfp','xFP',1),XFUM],
+    RB:[xr('ypc','YPC',1,'rushing_yards','carries'),xs('ybc','YBC',0),xs('yac_rush','YAC (rush)',0),xs('broken_tackles','Brk tkl',0),xs('rushing_first_downs','Rush 1D',0),xs('rushing_epa','Rush EPA',1),xm('target_share','Tgt %','%'),xs('receiving_yards_after_catch','Rec YAC',0),XFUM],
+    WR:[xr('catch','Catch %','%','receptions','targets'),xr('ypt','Yds/tgt',1,'receiving_yards','targets'),xr('adot','aDOT',1,'receiving_air_yards','targets'),xs('receiving_yards_after_catch','YAC',0),xs('receiving_first_downs','1st dn',0),xm('air_yards_share','Air share','%'),xm('wopr','WOPR',2),xs('receiving_epa','Rec EPA',1),XFUM]};
+  XCOLS.TE=XCOLS.WR;
+  const xfmt=(v,f)=>!num(v)?'<span class="dim">–</span>':f==='%'?pct(v):v.toFixed(f);
   function bars(logs,sk,team){
     const lw=D.META.last_completed_week;const W=Math.max(lw,1);const byW=new Map(logs.map(l=>[l.week,l[sk]]));const bye=byeWeek(team);
     const vals=[...byW.values()].filter(num);const max=Math.max(20,...vals);const avg=mean(vals);
@@ -162,8 +175,9 @@
     const n=nextOpp(s.team);const cols=POSCOLS[s.pos]||POSCOLS.WR;
     const tot=k=>sum(s.logs.map(l=>l[k])),pg=k=>RATE.has(k)?mean(s.logs.map(l=>l[k])):tot(k)/s.g;
     const cell=(k,v,isPg)=>!num(v)?'<span class="dim">–</span>':RATE.has(k)?pct(v):(isPg||k==='xfp')?f1(v):f0(v);
-    const seasonRow=(lbl,isPg)=>`<tr${isPg?'':' class="tot"'}><td class="l">${lbl}</td><td class="fp">${f1(isPg?s.fpg:s.fp)}</td>${cols.map(([k])=>`<td>${cell(k,isPg||RATE.has(k)?pg(k):tot(k),isPg)}</td>`).join('')}</tr>`;
-    const logRows=s.logs.map(l=>`<tr><td class="l">${gbtn(gameKey(l.team,l.week),l.week)}</td><td class="l">${oppBtn(l.opponent_team,((gameOf(l.team,l.week)||{}).at?'@ ':'vs ')+l.opponent_team,null)}</td><td class="fp">${f1(l[sk])}</td>${cols.map(([k])=>`<td>${cell(k,l[k],false)}</td>`).join('')}</tr>`).join('');
+    const xc=XCOLS[s.pos]||XCOLS.WR;const xcell=(c,L,isPg)=>{let v=c.v(L);if(isPg&&c.sum&&num(v))v=v/L.length;return `<td>${xfmt(v,isPg&&c.sum&&c.f===0?1:c.f)}</td>`};
+    const seasonRow=(lbl,isPg)=>`<tr${isPg?'':' class="tot"'}><td class="l">${lbl}</td><td class="fp">${f1(isPg?s.fpg:s.fp)}</td>${cols.map(([k])=>`<td>${cell(k,isPg||RATE.has(k)?pg(k):tot(k),isPg)}</td>`).join('')}${xc.map(c=>xcell(c,s.logs,isPg)).join('')}</tr>`;
+    const logRows=s.logs.map(l=>`<tr><td class="l">${gbtn(gameKey(l.team,l.week),l.week)}</td><td class="l">${oppBtn(l.opponent_team,((gameOf(l.team,l.week)||{}).at?'@ ':'vs ')+l.opponent_team,null)}</td><td class="fp">${f1(l[sk])}</td>${cols.map(([k])=>`<td>${cell(k,l[k],false)}</td>`).join('')}${xc.map(c=>xcell(c,[l],false)).join('')}</tr>`).join('');
     return `<div class="pc-top">${s.headshot?`<img class="hs" src="${esc(s.headshot)}" alt="" loading="lazy" onerror="this.remove()">`:''}<div><h3>${esc(s.name)}</h3>
       <div class="sub"><span>${s.pos} · ${dbtn(s.team,s.team,'tmlink')}</span><span>bye ${byeWeek(s.team)||'–'}</span>${n?`<span>${gbtn(n.g.game_id,'Wk '+D.META.next_week)} ${oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,s.pos)}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}</div></div></div>
     <section><div class="tags">${inj?`<span class="tag inj" title="${esc(inj[1])} · Wk ${inj[2]} report">${esc(inj[0].replace('Practice: ','Practice '))} · ${esc(inj[1])}</span>`:''}${ownerTag(id)}<span class="sp" style="flex:1"></span>${scoringSeg(sc)}</div>
@@ -175,8 +189,8 @@
         <div><span>Touches / g</span><b>${f1(s.opps)}</b><small>${s.pos==='QB'?'carries + targets':'L3 '+f1(s.opps3)}</small></div>
       </div></section>
     <section><h4>${SCORING[sc].label} points by week <span class="sp"></span><span>high ${f1(s.best)} · low ${f1(s.worst)}${num(s.sd)?' · ±'+s.sd.toFixed(1):''}</span></h4>${bars(s.logs,sk,s.team)}</section>
-    <section><h4>Season stats</h4><div class="scr"><table data-cols="card-season-${s.pos}"><thead><tr><th class="l"></th><th>FP</th>${cols.map(([,l])=>`<th>${l}</th>`).join('')}</tr></thead><tbody>${seasonRow('Per game',true)}${seasonRow('Total',false)}</tbody></table></div></section>
-    <section><h4>Game log</h4><div class="scr"><table data-cols="card-log-${s.pos}"><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>FP</th>${cols.map(([,l])=>`<th>${l}</th>`).join('')}</tr></thead><tbody>${logRows}</tbody></table></div><div class="note">Opponent rank = PPR points that defense allows to ${s.pos}s (green = generous). Click an opponent for its defense card.</div></section>
+    <section><h4>Season stats</h4><div class="scr"><table data-cols="card-season-${s.pos}"><thead><tr><th class="l"></th><th>FP</th>${cols.map(([,l])=>`<th>${l}</th>`).join('')}${xc.map(c=>`<th data-k="x-${c.k}" data-def-off="1">${c.l}</th>`).join('')}</tr></thead><tbody>${seasonRow('Per game',true)}${seasonRow('Total',false)}</tbody></table></div></section>
+    <section><h4>Game log</h4><div class="scr"><table data-cols="card-log-${s.pos}"><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>FP</th>${cols.map(([,l])=>`<th>${l}</th>`).join('')}${xc.map(c=>`<th data-k="x-${c.k}" data-def-off="1">${c.l}</th>`).join('')}</tr></thead><tbody>${logRows}</tbody></table></div><div class="note">Opponent rank = PPR points that defense allows to ${s.pos}s (green = generous). Click an opponent for its defense card.</div></section>
     <section><h4>News <span class="sp"></span><span data-news-src></span></h4><div data-news><span class="spin"></span>Loading news…</div></section>
     ${linksHTML(id,s.name,espn,null)}`;
   }

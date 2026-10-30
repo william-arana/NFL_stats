@@ -9,7 +9,9 @@
   const keyOf=th=>th.dataset.k||th.dataset.c||th.textContent.trim().replace(/\s+/g,' ');
   const labelOf=th=>th.textContent.trim().replace(/\s+/g,' ')||keyOf(th);
   const isLocked=th=>th.classList.contains('rank')||th.classList.contains('stick')||th.textContent.trim()==='#'||!th.textContent.trim()||!!th.closest('.pc,.pw')&&th.cellIndex===0;
-  const cfgOf=id=>{const c=LS.get(id);return {hide:(c&&c.hide)||[],order:(c&&c.order)||[]}};
+  const cfgOf=id=>{const c=LS.get(id);return {hide:(c&&c.hide)||[],order:(c&&c.order)||[],show:(c&&c.show)||[]}};
+  /* <th data-def-off> = an extra stat that starts hidden; ticking it adds it to cfg.show */
+  const isOff=(th,k,cfg)=>th.dataset.defOff?!cfg.show.includes(k):cfg.hide.includes(k);
 
   function headRow(t){return t.tHead&&t.tHead.rows.length===1?t.tHead.rows[0]:null}
   /* put the table's columns in the saved order and hide the hidden ones */
@@ -29,7 +31,7 @@
       if(row.cells.length!==n)continue;
       if(moved){const cells=[...row.cells];for(const p of perm)row.appendChild(cells[p])}
       const hk=moved?perm.map(p=>keys[p]):keys;
-      [...row.cells].forEach((c,i)=>c.classList.toggle('col-off',!locked[perm[i]]&&cfg.hide.includes(hk[i])))
+      [...row.cells].forEach((c,i)=>c.classList.toggle('col-off',!locked[perm[i]]&&isOff(ths[perm[i]],hk[i],cfg)))
     }
     t.tHead.dataset.colsDone='1';
     bar(t,cfg);
@@ -39,8 +41,8 @@
     const wrap=t.closest('.tablewrap,.scr')||t;let b=wrap.previousElementSibling;
     if(!b||!b.classList.contains('colbar')){b=document.createElement('div');b.className='colbar';wrap.parentNode.insertBefore(b,wrap)}
     b.dataset.for=t.dataset.cols;
-    const hr=headRow(t);const hidden=hr?[...hr.cells].filter(c=>!isLocked(c)&&cfg.hide.includes(keyOf(c))).length:0;
-    b.innerHTML=`<button type="button" class="colbtn" aria-haspopup="dialog">Columns${hidden?` <span>${hidden} hidden</span>`:''} ▾</button>`;
+    const hr=headRow(t);const hidden=hr?[...hr.cells].filter(c=>!isLocked(c)&&!c.dataset.defOff&&cfg.hide.includes(keyOf(c))).length:0;const extra=hr?[...hr.cells].filter(c=>c.dataset.defOff&&cfg.show.includes(keyOf(c))).length:0;
+    b.innerHTML=`<button type="button" class="colbtn" aria-haspopup="dialog">Columns${hidden?` <span>${hidden} hidden</span>`:''}${extra?` <span class="plus">+${extra}</span>`:''} ▾</button>`;
     b.querySelector('button')._table=t;
   }
   let panel=null,panelBtn=null;
@@ -54,8 +56,11 @@
   }
   function paintPanel(t){
     const hr=headRow(t);if(!hr||!panel)return;const id=t.dataset.cols;const cfg=cfgOf(id);
-    const cols=[...hr.cells].filter(c=>!isLocked(c)).map(c=>({k:keyOf(c),l:labelOf(c)}));
-    panel.innerHTML=`<div class="cp-h"><b>Columns</b><span>tick to show · arrows to move</span></div><ul>${cols.map((c,i)=>`<li><label><input type="checkbox" data-k="${esc(c.k)}" ${cfg.hide.includes(c.k)?'':'checked'}>${esc(c.l)}</label><button type="button" data-mv="-1" data-k="${esc(c.k)}" ${i===0?'disabled':''} aria-label="Move ${esc(c.l)} left">↑</button><button type="button" data-mv="1" data-k="${esc(c.k)}" ${i===cols.length-1?'disabled':''} aria-label="Move ${esc(c.l)} right">↓</button></li>`).join('')}</ul>
+    const all=[...hr.cells].filter(c=>!isLocked(c)).map(c=>({k:keyOf(c),l:labelOf(c),off:!!c.dataset.defOff,th:c}));
+    const cols=[...all.filter(c=>!c.off),...all.filter(c=>c.off)];
+    const row=(c,i)=>`<li${c.off?' class="xtra"':''}><label><input type="checkbox" data-k="${esc(c.k)}" ${c.off?'data-off="1"':''} ${isOff(c.th,c.k,cfg)?'':'checked'}>${esc(c.l)}</label><button type="button" data-mv="-1" data-k="${esc(c.k)}" ${i===0?'disabled':''} aria-label="Move ${esc(c.l)} left">↑</button><button type="button" data-mv="1" data-k="${esc(c.k)}" ${i===cols.length-1?'disabled':''} aria-label="Move ${esc(c.l)} right">↓</button></li>`;
+    const firstX=cols.findIndex(c=>c.off);
+    panel.innerHTML=`<div class="cp-h"><b>Columns</b><span>tick to show · arrows to move</span></div><ul>${cols.map((c,i)=>(i===firstX?'<li class="cp-sep">More stats (off by default)</li>':'')+row(c,i)).join('')}</ul>
       <div class="cp-f"><button type="button" data-all>Show all</button><button type="button" data-reset>Reset</button><button type="button" data-done>Done</button></div>`;
     panel._table=t;panel._cols=cols.map(c=>c.k);
   }
@@ -66,10 +71,10 @@
     if(!panel.contains(e.target)){closePanel();return}
     const t=panel._table;if(!t||!t.isConnected){closePanel();return}const cfg=cfgOf(t.dataset.cols);
     const cb=e.target.closest('input[type=checkbox]');
-    if(cb){const k=cb.dataset.k;cfg.hide=cb.checked?cfg.hide.filter(x=>x!==k):[...new Set([...cfg.hide,k])];save(t,cfg);return}
+    if(cb){const k=cb.dataset.k;if(cb.dataset.off)cfg.show=cb.checked?[...new Set([...cfg.show,k])]:cfg.show.filter(x=>x!==k);else cfg.hide=cb.checked?cfg.hide.filter(x=>x!==k):[...new Set([...cfg.hide,k])];save(t,cfg);return}
     const mv=e.target.closest('[data-mv]');
     if(mv){const order=[...panel._cols];const i=order.indexOf(mv.dataset.k),j=i+(+mv.dataset.mv);if(i<0||j<0||j>=order.length)return;[order[i],order[j]]=[order[j],order[i]];cfg.order=order;save(t,cfg);return}
-    if(e.target.closest('[data-all]')){cfg.hide=[];save(t,cfg);return}
+    if(e.target.closest('[data-all]')){cfg.hide=[];cfg.show=[...panel.querySelectorAll('input[data-off]')].map(x=>x.dataset.k);save(t,cfg);return}
     if(e.target.closest('[data-reset]')){LS.del(t.dataset.cols);t.tHead.dataset.colsDone='';apply(t);paintPanel(t);return}
     if(e.target.closest('[data-done]'))closePanel();
   });
