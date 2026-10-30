@@ -92,8 +92,15 @@ def espn_items(articles) -> list[dict]:
 
 
 def espn_player(espn_id: str) -> list[dict]:
+    """ESPN fantasy news + ESPN's general athlete news (covers defenders, linemen and kickers too)."""
     j = get_json(f"https://site.api.espn.com/apis/fantasy/v2/games/ffl/news/players?playerId={espn_id}&limit=50")
-    return espn_items(j.get("feed"))
+    out = espn_items(j.get("feed"))
+    try:
+        a = get_json(f"https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?athlete={espn_id}&limit=50")
+        out += espn_items(a.get("articles"))
+    except Exception:  # noqa: BLE001
+        pass
+    return out
 
 
 def espn_team(team_id: str) -> list[dict]:

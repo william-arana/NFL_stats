@@ -104,7 +104,9 @@
     const out={items:[],via:[]};
     const espn=D.IDS[g];
     const jobs=[
-      espn?getJSON(`https://site.api.espn.com/apis/fantasy/v2/games/ffl/news/players?playerId=${encodeURIComponent(espn)}&limit=50`,7000).then(j=>{out.items.push(...espnItems(j.feed));out.via.push('ESPN')}).catch(()=>{}):null,
+      espn?getJSON(`https://site.api.espn.com/apis/fantasy/v2/games/ffl/news/players?playerId=${encodeURIComponent(espn)}&limit=50`,7000).then(j=>{out.items.push(...espnItems(j.feed));if(!out.via.includes('ESPN'))out.via.push('ESPN')}).catch(()=>{}):null,
+      /* ESPN's general athlete news covers everyone (defenders, linemen, kickers), not just fantasy-relevant players */
+      espn?getJSON(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?athlete=${encodeURIComponent(espn)}&limit=50`,7000).then(j=>{out.items.push(...espnItems(j.articles));if(!out.via.includes('ESPN'))out.via.push('ESPN')}).catch(()=>{}):null,
       sleeperId(g).then(sid=>sid?getJSON(`https://api.sleeper.app/players/nfl/${encodeURIComponent(sid)}/news?limit=50`,7000):null).then(j=>{if(j){out.items.push(...sleeperItems(j));out.via.push('Sleeper')}}).catch(()=>{})
     ].filter(Boolean);
     await Promise.all(jobs);return out;

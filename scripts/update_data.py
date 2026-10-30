@@ -378,6 +378,10 @@ def main() -> None:
     if players is not None:
         ids = players.select("gsis_id", "espn_id").drop_nulls()
         keep_ids = set(pw["player_id"].to_list())
+        for extra in ("kickers", "def_week", "oline"):  # every player with a card gets ESPN links + news
+            f = SITE_DIR / f"{extra}.json"
+            if f.exists():
+                keep_ids.update(json.loads(f.read_text())["data"].get("player_id", []))
         (SITE_DIR / "ids.json").write_text(json.dumps({g: str(e).split(".")[0] for g, e in ids.iter_rows() if g in keep_ids}, separators=(",", ":")))
     log(f"site data: {pw.height} player-weeks, {t.height} team-weeks, {sch.height} games, through week {last_week}")
 

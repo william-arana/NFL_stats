@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CFG = json.loads((ROOT / "data" / "leagues.json").read_text())
 OUT = ROOT / "data" / "site"
 API = "https://api.sleeper.app/v1"
-POS = {"QB", "RB", "WR", "TE", "K"}
+POS = {"QB", "RB", "WR", "TE", "K", "DL", "LB", "DB", "DE", "DT", "CB", "S", "OL", "OT", "OG", "C", "G", "T"}  # all players, so cards can show Sleeper news for anyone
 
 # Sleeper uses a few different team codes than nflverse
 TEAM_FIX = {"LAR": "LA", "JAC": "JAX", "WSH": "WAS"}
