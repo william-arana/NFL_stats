@@ -15,6 +15,7 @@ William's fantasy football stats site. Static site on GitHub Pages, data from nf
 - **Light mode is the default** (white/light backgrounds, high contrast, shaded sections). Dark is a toggle only.
 - Every player/defense name should be clickable (`NFLSCards.pbtn` / `dbtn`, `data-card="p:<gsis_id>"` or `d:<TEAM>`). Every stat column header should go through the glossary.
 - Data files the browser reads live in `data/site/` (compact JSON) and `data/lab/` (gzipped CSV for DuckDB). Keep them small; big files go to the `data-latest` release.
+- **Cache busting:** pages load shared files as `assets/<file>?v=<version>`. Whenever you change anything in `assets/` (css/js), bump the version in every `.html` in the same change (one sed over `*.html`), or phones keep the old file.
 - The Claude API key lives only in the Cloudflare Worker (`worker/ask-worker.js`), never in page code.
 
 ## Data & licensing (don't break these)
