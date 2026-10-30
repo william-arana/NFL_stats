@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=20261029m">
-<script src="assets/site.js?v=20261029m" defer></script>
-<script src="assets/cards.js?v=20261029m" defer></script>
-<script src="assets/glossary.js?v=20261029m" defer></script>
-<script src="assets/tables.js?v=20261029m" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=20261029n">
+<script src="assets/site.js?v=20261029n" defer></script>
+<script src="assets/cards.js?v=20261029n" defer></script>
+<script src="assets/glossary.js?v=20261029n" defer></script>
+<script src="assets/tables.js?v=20261029n" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -246,7 +246,7 @@ function draw(){
     <span>L3 = last 3 weeks. Δ = last 3 weeks vs. earlier in the season. Green rank next to the opponent = top-8 most PPR allowed to that position.</span></div></section>
 
   <section class="box"><div class="box-h"><h2>D/ST streamers</h2><span class="hint">${ROST?'Available defenses (plus yours) for':'All defenses for'} Week ${META.next_week}</span></div>
-    <div class="tablewrap"><table data-cols="waivers-dst"><thead><tr><th class="rank">#</th><th class="l stick">Defense</th><th class="l">Opponent</th><th>Matchup score</th><th>D/ST pts/g</th><th>Pressures/g</th><th>Opp pressures allowed</th><th>Sacks/g</th><th>Opp sacks allowed</th><th>Opp implied pts</th></tr></thead><tbody>${
+    <div class="tablewrap"><table data-cols="waivers-dst"><thead><tr><th class="rank">#</th><th class="l stick">Defense</th><th class="l">Opponent</th><th>Matchup score</th><th>D/ST pts/g</th><th>Pressures/g</th><th>Opp prs alw</th><th>Sacks/g</th><th>Opp sk alw</th><th>Opp implied</th></tr></thead><tbody>${
       freeDefs.map((x,i)=>{const m=myDef.includes(x.team);return `<tr><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="pname ${!m&&ROST?'name-fa':''}" data-card="d:${x.team}" aria-expanded="false">${x.team} D/ST</button>${NFLS.plink('DEF:'+x.team,x.team+' D/ST')}${ROST?NFLS.badge(m?'mine':'fa',LG,x.team+' D/ST'):''}</td><td class="l">${OPPB(x.opp,x.at,'')}</td><td><span class="score">${x.score.toFixed(2)}</span></td><td>${f1(x.dst)}</td><td>${f1(x.pr)}</td><td>${f1(x.opra)}</td><td>${f1(x.sk)}</td><td>${f1(x.oska)}</td><td>${f1(x.oi)}</td></tr>`}).join('')}</tbody></table></div>
     <div class="foot"><span>Matchup score = z(pressures) + z(opponent pressures allowed) + z(sacks) + z(opponent sacks allowed) − z(opponent Vegas implied points). Same as the Lab recipe.</span></div></section>`;
 
