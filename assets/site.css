@@ -277,3 +277,5 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 .colpanel li.cp-sep{display:block;padding:8px 10px 3px;font:500 10px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);background:var(--head)!important;border-top:1px solid var(--rule)}
 .colpanel li.xtra label{color:var(--ink-2)}
 .colbtn span.plus{color:var(--good)}
+.colpanel label small{color:var(--ink-3);font-size:11.5px}
+.colpanel{width:min(340px,calc(100vw - 16px))}

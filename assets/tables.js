@@ -8,6 +8,30 @@
   const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const keyOf=th=>th.dataset.k||th.dataset.c||th.textContent.trim().replace(/\s+/g,' ');
   const labelOf=th=>th.textContent.trim().replace(/\s+/g,' ')||keyOf(th);
+  /* full names shown next to the short column labels in the Columns menu: "Tgt (Targets)" */
+  const FULL={'FP':'Fantasy points','xFP':'Expected fantasy points','PPR − xFP':'Actual minus expected points','Snap %':'Share of offensive snaps','Tgt share':'Target share','Tgt %':'Target share',
+    'Rush att':'Rushing attempts','Car':'Carries','Tgt':'Targets','Opps':'Carries + targets','TD':'Touchdowns','Rec':'Receptions','Catch %':'Catch rate','Yds':'Yards','Air yds':'Air yards',
+    'aDOT':'Average depth of target','YAC':'Yards after catch','Air share':'Share of team air yards','WOPR':'Weighted opportunity rating','RACR':'Receiver air conversion ratio',
+    'Rec EPA':'Receiving expected points added','YPC':'Yards per carry','1st dn':'First downs','YBC/att':'Yards before contact per carry','YAC/att':'Yards after contact per carry',
+    'Brk tkl':'Broken tackles','Rush EPA':'Rushing expected points added','Fum lost':'Fumbles lost','Cmp':'Completions','Att':'Attempts','INT':'Interceptions','Sacked':'Times sacked',
+    'Pressured %':'Pressure rate','Blitzed':'Times blitzed','CPOE':'Completion % over expected','Pass EPA':'Passing expected points added','Y/A':'Yards per attempt','Snaps':'Offensive snaps',
+    'FP/snap':'Fantasy points per snap','FP/opp':'Fantasy points per carry + target','Scrim yds':'Scrimmage yards (rush + rec)','Rush TD':'Rushing touchdowns','Rec TD':'Receiving touchdowns',
+    'Rec 1st dn':'Receiving first downs','Yds/tgt':'Yards per target','EPA/tgt':'Expected points added per target','EPA/att':'Expected points added per carry','Brk tkl/att':'Broken tackles per carry',
+    'YBC':'Yards before contact','Rec yds':'Receiving yards','Cmp %':'Completion %','TD %':'Touchdown rate','INT %':'Interception rate','Sack %':'Sack rate','IAY/att':'Intended air yards per attempt',
+    'EPA/db':'Expected points added per dropback','Pressured':'Times pressured','Rush yds':'Rushing yards','YAC (rush)':'Yards after contact','Rush 1D':'Rushing first downs','Rec YAC':'Receiving yards after catch',
+    'Pass yds':'Passing yards','Sk':'Sacks','Prs':'Pressures','G':'Games','Tkl':'Tackles','TFL':'Tackles for loss','PD':'Passes defended','FF':'Forced fumbles','Cmp % alw':'Completion % allowed',
+    'Yds alw':'Yards allowed','TD alw':'Touchdowns allowed','Rating alw':'Passer rating allowed','Rtg':'Passer rating allowed','Missed tkl':'Missed tackles','Starts':'Games started',
+    'Prs % with':'Team pressure rate with him','Prs % without':'Team pressure rate without him','Prs Δ':'Pressure rate change','G without':'Games without him','Sacks/g with':'Sacks per game with him',
+    'Sacks/g without':'Sacks per game without him','YBC/carry with':'Yards before contact per carry with him','YBC/carry without':'Yards before contact per carry without him','YBC Δ':'Run blocking change',
+    'K pts':'Kicker fantasy points','K pts/g':'Kicker fantasy points per game','Implied':'Implied team points (Vegas)','FGM':'Field goals made','FGA':'Field goals attempted','FG %':'Field goal %',
+    'Long':'Longest field goal','0–39':'Field goals made, 0–39 yds','40–49':'Field goals made, 40–49 yds','50+':'Field goals made, 50+ yds','Missed':'Missed field goals','XPM':'Extra points made',
+    'XP miss':'Missed extra points','FG':'Field goals made / attempted','XP':'Extra points made / attempted','L3':'Last 3 games','Score':'Waiver score','xFP L3':'Expected fantasy points, last 3',
+    'PPR L3':'PPR points, last 3','Snap % L3':'Snap share, last 3','Snap Δ':'Snap share change','Touches L3':'Carries + targets, last 3','Touch Δ':'Touches change','Tgt share L3':'Target share, last 3',
+    'PPR season':'PPR points per game, season','Matchup score':'D/ST matchup score','D/ST pts/g':'D/ST fantasy points per game','D/ST':'D/ST fantasy points','Pts alw':'Points allowed',
+    'Pass alw':'Passing yards allowed','Rush alw':'Rushing yards allowed','FR':'Fumble recoveries','Opp implied':'Opponent implied points (Vegas)','Slot':'Depth chart slot','Pts':'Points'};
+  const fullOf=(th,label)=>{const k=keyOf(th).replace(/^x-/,'');let f=FULL[label];
+    if(!f&&window.NFLSGloss){const e=NFLSGloss.lookup(k);if(e&&e[0])f=e[0]}
+    return f&&f.toLowerCase()!==label.toLowerCase()?f:''};
   const isLocked=th=>th.classList.contains('rank')||th.classList.contains('stick')||th.textContent.trim()==='#'||!th.textContent.trim()||!!th.closest('.pc,.pw')&&th.cellIndex===0;
   const cfgOf=id=>{const c=LS.get(id);return {hide:(c&&c.hide)||[],order:(c&&c.order)||[],show:(c&&c.show)||[]}};
   /* <th data-def-off> = an extra stat that starts hidden; ticking it adds it to cfg.show */
@@ -58,7 +82,7 @@
     const hr=headRow(t);if(!hr||!panel)return;const id=t.dataset.cols;const cfg=cfgOf(id);
     const all=[...hr.cells].filter(c=>!isLocked(c)).map(c=>({k:keyOf(c),l:labelOf(c),off:!!c.dataset.defOff,th:c}));
     const cols=[...all.filter(c=>!c.off),...all.filter(c=>c.off)];
-    const row=(c,i)=>`<li${c.off?' class="xtra"':''}><label><input type="checkbox" data-k="${esc(c.k)}" ${c.off?'data-off="1"':''} ${isOff(c.th,c.k,cfg)?'':'checked'}>${esc(c.l)}</label><button type="button" data-mv="-1" data-k="${esc(c.k)}" ${i===0?'disabled':''} aria-label="Move ${esc(c.l)} left">↑</button><button type="button" data-mv="1" data-k="${esc(c.k)}" ${i===cols.length-1?'disabled':''} aria-label="Move ${esc(c.l)} right">↓</button></li>`;
+    const row=(c,i)=>`<li${c.off?' class="xtra"':''}><label><input type="checkbox" data-k="${esc(c.k)}" ${c.off?'data-off="1"':''} ${isOff(c.th,c.k,cfg)?'':'checked'}><span>${esc(c.l)}${(f=>f?` <small>(${esc(f)})</small>`:'')(fullOf(c.th,c.l))}</span></label><button type="button" data-mv="-1" data-k="${esc(c.k)}" ${i===0?'disabled':''} aria-label="Move ${esc(c.l)} left">↑</button><button type="button" data-mv="1" data-k="${esc(c.k)}" ${i===cols.length-1?'disabled':''} aria-label="Move ${esc(c.l)} right">↓</button></li>`;
     const firstX=cols.findIndex(c=>c.off);
     panel.innerHTML=`<div class="cp-h"><b>Columns</b><span>tick to show · arrows to move</span></div><ul>${cols.map((c,i)=>(i===firstX?'<li class="cp-sep">More stats (off by default)</li>':'')+row(c,i)).join('')}</ul>
       <div class="cp-f"><button type="button" data-all>Show all</button><button type="button" data-reset>Reset</button><button type="button" data-done>Done</button></div>`;
