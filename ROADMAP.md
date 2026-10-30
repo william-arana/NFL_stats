@@ -43,4 +43,5 @@ Done when: every player/team/game has a link you can share or bookmark, phone ba
 - 2026-10-29 · This NFL version is the test run for MLB next season. After the NFL season, move to FPL (Premier League Fantasy).
 - 2026-10-29 · MLB data (MLB Stats API, Statcast) is likely non-commercial-only; check terms before planning paid MLB features. FPL API is unofficial and the Premier League owns the data; fine free, check terms before charging.
 - 2026-10-29 · Differentiators: presser signals, William's own metrics (backtested), much easier Lab, everything clickable/navigable, data-only outlooks that get graded.
+- 2026-10-29 · Cards: drop-down + draggable pop-out windows (see docs/SITEMAP.md → Decided). Game card: both teams, Vegas line, weather, top fantasy scorers.
 - 2026-10-29 · Context lives in this repo (CLAUDE.md + ROADMAP.md + docs/), not a claude.ai Project.

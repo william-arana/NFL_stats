@@ -213,65 +213,191 @@
   }
   const NAMEHINT={};
 
-  /* ---------- popup ---------- */
+  /* ---------- popup ----------
+     The card stack lives in the address bar (?card=p:<id>) and in history.state, so the browser back button
+     and the phone back swipe step back one card, a crumb trail jumps back further, and any card can be shared
+     or bookmarked. Opening a name inside a card pushes a new card (capped at MAXDEPTH). */
+  const MAXDEPTH=12;
   let el=null,shade=null,anchor=null,stack=[];
-  function close(){if(el){el.remove();el=null}if(shade){shade.remove();shade=null}if(anchor){anchor.setAttribute('aria-expanded','false');anchor=null}stack=[]}
+  let pendingBack=false,afterPop=null;
+  const cardState=()=>history.state&&history.state.nflsCard?history.state:null;
+  const depth=()=>{const s=cardState();return s?s.nflsDepth||0:0};
+  const validKey=k=>typeof k==='string'&&/^[pd]:[A-Za-z0-9_-]+$/.test(k);
+  function urlFor(key){const u=new URL(location.href);if(key)u.searchParams.set('card',key);else u.searchParams.delete('card');return u.pathname+u.search+u.hash}
+  function writeState(mode,d){const top=stack[stack.length-1];history[mode]({nflsCard:stack.map(x=>({key:x.key,pos:x.pos||''})),nflsDepth:d},'',urlFor(top&&top.key))}
+  function closeLocal(){if(el){el.remove();el=null}if(shade){shade.remove();shade=null}if(anchor){anchor.setAttribute('aria-expanded','false');anchor=null}stack=[]}
+  /* close = go back past every card entry we added, so Back afterwards leaves the page normally */
+  function close(){
+    if(!el)return;const d=depth();closeLocal();
+    if(d>0){pendingBack=true;history.go(-d)}else if(new URLSearchParams(location.search).has('card'))history.replaceState(null,'',urlFor(null));
+  }
   function place(){
-    if(!el||!anchor)return;const phone=matchMedia('(max-width:640px)').matches;
+    if(!el)return;const phone=matchMedia('(max-width:640px)').matches;
     if(phone){if(!shade){shade=document.createElement('div');shade.className='pc-shade';shade.onclick=close;document.body.appendChild(shade)}return}
-    const r=anchor.getBoundingClientRect(),w=el.offsetWidth,h=el.offsetHeight;
-    let left=r.left+scrollX;left=Math.min(left,scrollX+document.documentElement.clientWidth-w-12);left=Math.max(scrollX+12,left);
+    const w=el.offsetWidth,h=el.offsetHeight,cw=document.documentElement.clientWidth;
+    if(!anchor||!anchor.isConnected){el.style.left=Math.max(scrollX+12,scrollX+(cw-w)/2)+'px';el.style.top=(scrollY+64)+'px';return}
+    const r=anchor.getBoundingClientRect();
+    let left=r.left+scrollX;left=Math.min(left,scrollX+cw-w-12);left=Math.max(scrollX+12,left);
     const below=innerHeight-r.bottom-12,above=r.top-60;let top=r.bottom+scrollY+6;
     if(below<Math.min(h,360)){if(above>=h)top=r.top+scrollY-h-6;else setTimeout(()=>{if(el)el.scrollIntoView({block:'nearest',behavior:'smooth'})},30)}
     el.style.left=left+'px';el.style.top=top+'px';
   }
+  const keyName=k=>k[0]==='d'?k.slice(2)+' D/ST':(NAMEHINT[k.slice(2)]||'Player');
+  const ICON={pop:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="14" height="14" rx="2"/><path d="M10 3h11v11"/></svg>',
+    link:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>'};
+  /* every <section> with a heading gets an id (data-sec) so it can be popped out on its own */
+  const slug=s=>s.toLowerCase().replace(/\b(ppr|half|std)\b/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  function tagSections(root,withButtons){
+    root.querySelectorAll('section').forEach(sec=>{const h=sec.querySelector(':scope > h4');if(!h)return;
+      const label=(h.firstChild&&h.firstChild.nodeType===3?h.firstChild.textContent:h.textContent).trim();const id=slug(label);if(!id)return;
+      sec.dataset.sec=id;sec.dataset.secLabel=label;
+      if(withButtons&&!h.querySelector('.pc-pop')){if(!h.querySelector('.sp'))h.insertAdjacentHTML('beforeend','<span class="sp"></span>');
+        h.insertAdjacentHTML('beforeend',`<button type="button" class="pc-pop" data-pop="${id}" title="Pop out: keep “${esc(label)}” on screen while you browse" aria-label="Pop out ${esc(label)}">${ICON.pop}</button>`)}});
+  }
+  function cardHTML(key,pos){const kind=key[0],id=key.slice(2);try{return kind==='d'?defHTML(id,pos):playerHTML(id)}catch(e){return `<div class="pc-top"><div><h3>Couldn't build this card</h3></div></div><section class="dim">${esc(e.message)}</section>`}}
+  const newsKey=key=>key[0]==='d'?'DEF:'+key.slice(2):key.slice(2);
   function render(){
     const cur=stack[stack.length-1];if(!cur||!el)return;
-    const [kind,id]=[cur.key[0],cur.key.slice(2)];
-    let html;try{html=kind==='d'?defHTML(id,cur.pos):playerHTML(id)}catch(e){html=`<div class="pc-top"><div><h3>Couldn't build this card</h3></div></div><section class="dim">${esc(e.message)}</section>`}
-    el.innerHTML=`<button type="button" class="pc-x" aria-label="Close">×</button>`+html;
-    if(stack.length>1){const top=el.querySelector('.pc-top');top.insertAdjacentHTML('afterbegin',`<button type="button" class="pc-back" aria-label="Back">←</button>`)}
-    el.scrollTop=0;fillOwner();fillNews(kind==='d'?'DEF:'+id:id,false);
+    const html=cardHTML(cur.key,cur.pos);
+    const crumbs=stack.length>1?`<nav class="pc-crumbs" aria-label="Card trail">${stack.map((x,i)=>i===stack.length-1?`<span aria-current="true">${esc(keyName(x.key))}</span>`:`<button type="button" data-crumb="${i}">${esc(keyName(x.key))}</button>`).join('<i>›</i>')}</nav>`:'';
+    el.innerHTML=`<button type="button" class="pc-x" aria-label="Close">×</button><div class="pc-tools"><button type="button" data-copylink title="Copy a link to this card">${ICON.link}</button><button type="button" data-pin-card title="Pop out the whole card">${ICON.pop}</button></div>`+crumbs+html;
+    if(stack.length>1){const top=el.querySelector('.pc-top');if(top)top.insertAdjacentHTML('afterbegin',`<button type="button" class="pc-back" aria-label="Back">←</button>`)}
+    if(crumbs){const c=el.querySelector('.pc-crumbs');c.scrollLeft=c.scrollWidth}
+    tagSections(el,true);
+    el.scrollTop=0;fillOwner(el);fillNews(el,newsKey(cur.key),false);
   }
-  function fillOwner(){
-    if(!window.NFLS||!el)return;const lg=NFLS.getLeague();if(!lg)return;
-    NFLS.rosterStatus().then(rs=>{if(!rs||!el)return;el.querySelectorAll('[data-own]').forEach(s=>{const k=s.dataset.own;const m=rs.map.get(k);
+  function fillOwner(root){
+    if(!window.NFLS||!root)return;const lg=NFLS.getLeague();if(!lg)return;
+    NFLS.rosterStatus().then(rs=>{if(!rs||!root.isConnected)return;root.querySelectorAll('[data-own]').forEach(s=>{const k=s.dataset.own;const m=rs.map.get(k);
       s.outerHTML=m?(m.status==='mine'?`<span class="tag mine">On ${esc(lg.viewer||'your')} roster · ${esc(lg.name)}</span>`:`<span class="tag">Rostered by ${esc(m.team)} · ${esc(lg.name)}</span>`):`<span class="tag fa">Free agent in ${esc(lg.name)}</span>`})}).catch(()=>{});
   }
-  function fillNews(key,all){
-    const box=el&&el.querySelector('[data-news]');if(!box)return;const me=el;const name=NAMEHINT[key]||'';
-    newsFor(key).then(n=>{if(el!==me)return;box.innerHTML=newsHTML(n,all,name);const s=el.querySelector('[data-news-src]');if(s)s.textContent=n.items.length?newsSrc(n):'';
-      const m=box.querySelector('[data-more]');if(m)m.onclick=ev=>{ev.stopPropagation();fillNews(key,true)}}).catch(()=>{box.textContent="Couldn't load news."});
+  function fillNews(root,key,all){
+    const box=root&&root.querySelector('[data-news]');if(!box)return;const name=NAMEHINT[key]||'';
+    newsFor(key).then(n=>{if(!box.isConnected)return;box.innerHTML=newsHTML(n,all,name);const s=root.querySelector('[data-news-src]');if(s)s.textContent=n.items.length?newsSrc(n):'';
+      const m=box.querySelector('[data-more]');if(m)m.onclick=ev=>{ev.stopPropagation();fillNews(root,key,true)}}).catch(()=>{box.textContent="Couldn't load news."});
   }
-  function open(key,a,pos){
-    const same=anchor===a&&el;close();if(same)return;
+  function mk(a){
     anchor=a||null;if(anchor)anchor.setAttribute('aria-expanded','true');
     el=document.createElement('div');el.className='pc';el.setAttribute('role','dialog');el.setAttribute('aria-label','Player card');
     el.innerHTML=`<button type="button" class="pc-x" aria-label="Close">×</button><div class="pc-top"><div><h3>${esc(a?a.textContent.trim().split('\n')[0]:'')}</h3><div class="sub"><span><span class="spin"></span>Loading…</span></div></div></div>`;
     document.body.appendChild(el);place();
-    stack=[{key,pos}];load().then(()=>{if(stack[0]&&stack[0].key===key){render();place()}}).catch(e=>{if(el)el.innerHTML=`<button type="button" class="pc-x">×</button><section>Couldn't load the season data (${esc(e.message)}).</section>`});
   }
-  function push(key,pos){stack.push({key,pos});render()}
+  function show(){const want=stack[stack.length-1]&&stack[stack.length-1].key;
+    load().then(()=>{if(el&&stack.length&&stack[stack.length-1].key===want){render();place()}}).catch(e=>{if(el)el.innerHTML=`<button type="button" class="pc-x">×</button><section>Couldn't load the season data (${esc(e.message)}).</section>`})}
+  function open(key,a,pos){
+    if(!validKey(key))return;
+    if(pendingBack){afterPop=()=>open(key,a,pos);return}
+    if(el&&a&&anchor===a){close();return}
+    const d=el?depth():0;closeLocal();mk(a);
+    stack=[{key,pos:pos||''}];writeState('pushState',d+1);show();
+  }
+  function push(key,pos){
+    if(!validKey(key))return;
+    if(!el){open(key,null,pos);return}
+    stack.push({key,pos:pos||''});
+    if(stack.length>MAXDEPTH){stack.shift();writeState('replaceState',depth())}else writeState('pushState',depth()+1);
+    render();
+  }
+  function goBack(steps){
+    steps=Math.min(steps,stack.length-1);if(steps<=0)return;
+    if(depth()>=steps)history.go(-steps);else{stack=stack.slice(0,stack.length-steps);writeState('replaceState',depth());render()}
+  }
+  addEventListener('popstate',e=>{
+    if(pendingBack){pendingBack=false;closeLocal();const f=afterPop;afterPop=null;if(f)f();return}
+    const s=e.state&&e.state.nflsCard;
+    if(s&&s.length&&s.every(x=>validKey(x.key))){stack=s.map(x=>({key:x.key,pos:x.pos||''}));if(!el)mk(null);show()}
+    else if(el)closeLocal();
+  });
+  /* a ?card= link (shared, bookmarked or reloaded) opens that card when the page loads */
+  (function fromURL(){
+    const s=cardState();
+    if(s&&s.nflsCard.length&&s.nflsCard.every(x=>validKey(x.key))){stack=s.nflsCard.map(x=>({key:x.key,pos:x.pos||''}))}
+    else{const k=new URLSearchParams(location.search).get('card');if(!validKey(k))return;stack=[{key:k,pos:''}];writeState('replaceState',0)}
+    mk(null);show();
+  })();
+
+  /* ---------- pop-out windows ----------
+     ⧉ on a card (or on one of its sections) floats it in its own window: drag it by the title bar, resize from
+     the corner, minimize, or open it back up as a card. Windows stay put while you browse other cards and
+     follow you to other pages in the same tab (sessionStorage). Names inside a window open cards too. */
+  const MAXPINS=6,ZBASE=72;
+  const SS={get(){try{const v=JSON.parse(sessionStorage.getItem('nfls-pins')||'[]');return Array.isArray(v)?v.filter(p=>p&&validKey(p.key)):[]}catch(e){return []}},set(v){try{sessionStorage.setItem('nfls-pins',JSON.stringify(v))}catch(e){}}};
+  let pins=SS.get();const pinEls=new Map();let zTop=ZBASE;
+  const savePins=()=>SS.set(pins);
+  const pinTitle=p=>keyName(p.key)+(p.sec?' · '+p.label:'');
+  function pinBody(p){
+    const html=cardHTML(p.key,p.pos);if(!p.sec)return html;
+    const t=document.createElement('div');t.innerHTML=html;tagSections(t,false);
+    const s=t.querySelector(`section[data-sec="${p.sec}"]`);return s?s.outerHTML:`<section class="dim">That section isn't on this card anymore.</section>`;
+  }
+  function fillPin(p){const w=pinEls.get(p.id);if(!w)return;const b=w.querySelector('.pw-b');b.innerHTML=pinBody(p);w.querySelector('.pw-h b').textContent=pinTitle(p);fillOwner(b);fillNews(b,newsKey(p.key),false)}
+  function front(w){if(zTop>ZBASE+40){zTop=ZBASE;[...pinEls.values()].sort((a,b)=>(+a.style.zIndex)-(+b.style.zIndex)).forEach(x=>x.style.zIndex=++zTop)}w.style.zIndex=++zTop}
+  function clampPin(p){const vw=document.documentElement.clientWidth,vh=innerHeight;p.x=Math.max(4-(p.w||300)+60,Math.min(p.x,vw-60));p.y=Math.max(0,Math.min(p.y,vh-36))}
+  function mountPin(p){
+    const w=document.createElement('div');w.className='pw'+(p.min?' min':'');w.setAttribute('role','dialog');w.dataset.pin=p.id;
+    w.innerHTML=`<div class="pw-h"><b></b><span class="sp"></span><button type="button" data-pw-open title="Open as a card">↗</button><button type="button" data-pw-min title="Minimize">${p.min?'▢':'–'}</button><button type="button" data-pw-x title="Close">×</button></div><div class="pw-b"></div>`;
+    clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px';if(p.w)w.style.width=p.w+'px';if(p.h&&!p.min)w.style.height=p.h+'px';
+    document.body.appendChild(w);pinEls.set(p.id,w);front(w);fillPin(p);
+    const h=w.querySelector('.pw-h');let drag=null;
+    h.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;e.preventDefault();drag={dx:e.clientX-p.x,dy:e.clientY-p.y};h.setPointerCapture(e.pointerId);w.classList.add('drag')});
+    h.addEventListener('pointermove',e=>{if(!drag)return;p.x=e.clientX-drag.dx;p.y=e.clientY-drag.dy;clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px'});
+    const end=()=>{if(!drag)return;drag=null;w.classList.remove('drag');savePins()};h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
+    w.addEventListener('pointerdown',()=>front(w),true);
+    if(window.ResizeObserver){let t=null;new ResizeObserver(()=>{if(p.min||!w.isConnected)return;clearTimeout(t);t=setTimeout(()=>{const r=w.getBoundingClientRect();if(Math.abs(r.width-(p.w||0))>2||Math.abs(r.height-(p.h||0))>2){p.w=Math.round(r.width);p.h=Math.round(r.height);savePins()}},150)}).observe(w)}
+  }
+  function addPin(key,pos,sec,label){
+    if(pins.some(p=>p.key===key&&(p.sec||'')===(sec||''))){const p=pins.find(p=>p.key===key&&(p.sec||'')===(sec||''));const w=pinEls.get(p.id);if(w){front(w);w.classList.add('flash');setTimeout(()=>w.classList.remove('flash'),600)}return}
+    const phone=matchMedia('(max-width:640px)').matches,vw=document.documentElement.clientWidth,n=pins.length;
+    const width=phone?vw-16:(sec?360:440);
+    const p={id:'w'+Date.now().toString(36),key,pos:pos||'',sec:sec||'',label:label||'',w:width,h:0,min:false,
+      x:phone?8:vw-width-20-n*26,y:phone?8+n*40:76+n*30};
+    pins.push(p);while(pins.length>MAXPINS)removePin(pins[0].id);savePins();load().then(()=>mountPin(p));
+  }
+  function removePin(id){const w=pinEls.get(id);if(w)w.remove();pinEls.delete(id);pins=pins.filter(p=>p.id!==id);savePins()}
+  function refreshPins(){for(const p of pins)fillPin(p)}
+  if(pins.length)load().then(()=>pins.forEach(mountPin)).catch(()=>{});
+  addEventListener('resize',()=>{for(const p of pins){const w=pinEls.get(p.id);if(!w)continue;clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px'}});
+
+  function copyText(t,btn){const ok=()=>{if(btn){btn.classList.add('ok');btn.title='Link copied';setTimeout(()=>btn.classList.remove('ok'),1200)}};try{navigator.clipboard.writeText(t).then(ok,()=>prompt('Copy this link',t))}catch(err){prompt('Copy this link',t)}}
+  function setScoring(v){LS.set('scoring',v);IX&&(IX._rank={});render();refreshPins();window.dispatchEvent(new CustomEvent('nfls-scoring',{detail:v}))}
   document.addEventListener('click',e=>{
-    if(el&&el.contains(e.target)){
-      if(e.target.closest('.pc-x')){close();return}
-      if(e.target.closest('.pc-back')){stack.pop();render();return}
-      const sc=e.target.closest('[data-sc] button');if(sc){LS.set('scoring',sc.dataset.v);IX&&(IX._rank={});render();window.dispatchEvent(new CustomEvent('nfls-scoring',{detail:sc.dataset.v}));return}
+    const pw=e.target.closest('.pw');
+    if(pw){
+      const p=pins.find(x=>x.id===pw.dataset.pin);if(!p)return;
+      if(e.target.closest('[data-pw-x]')){removePin(p.id);return}
+      if(e.target.closest('[data-pw-min]')){p.min=!p.min;pw.classList.toggle('min',p.min);e.target.closest('[data-pw-min]').textContent=p.min?'▢':'–';pw.style.height=p.min?'':(p.h?p.h+'px':'');savePins();return}
+      if(e.target.closest('[data-pw-open]')){push(p.key,p.pos);return}
+      const sc=e.target.closest('[data-sc] button');if(sc){setScoring(sc.dataset.v);return}
       const np=e.target.closest('.pc-news p');if(np){np.classList.toggle('open');return}
       const cp=e.target.closest('[data-copyname]');if(cp){try{navigator.clipboard.writeText(cp.dataset.copyname)}catch(err){}return}
-      const t=e.target.closest('[data-card],.opp[data-opp]');if(t){e.preventDefault();const k=t.dataset.card||('d:'+t.dataset.opp);push(k,t.dataset.pos);return}
+      const t=e.target.closest('[data-card],.opp[data-opp]');if(t){e.preventDefault();const k=t.dataset.card||('d:'+t.dataset.opp);if(t.dataset.name)NAMEHINT[k.slice(2)]=t.dataset.name;push(k,t.dataset.pos);return}
+      return;
+    }
+    if(el&&el.contains(e.target)){
+      if(e.target.closest('.pc-x')){close();return}
+      if(e.target.closest('.pc-back')){goBack(1);return}
+      const cr=e.target.closest('[data-crumb]');if(cr){goBack(stack.length-1-(+cr.dataset.crumb));return}
+      const cur=stack[stack.length-1];
+      if(e.target.closest('[data-copylink]')){copyText(location.origin+urlFor(cur.key),e.target.closest('[data-copylink]'));return}
+      if(e.target.closest('[data-pin-card]')){addPin(cur.key,cur.pos,'','');return}
+      const pp=e.target.closest('.pc-pop');if(pp){const s=pp.closest('section');addPin(cur.key,cur.pos,pp.dataset.pop,s&&s.dataset.secLabel);return}
+      const sc=e.target.closest('[data-sc] button');if(sc){setScoring(sc.dataset.v);return}
+      const np=e.target.closest('.pc-news p');if(np){np.classList.toggle('open');return}
+      const cp=e.target.closest('[data-copyname]');if(cp){try{navigator.clipboard.writeText(cp.dataset.copyname)}catch(err){}return}
+      const t=e.target.closest('[data-card],.opp[data-opp]');if(t){e.preventDefault();const k=t.dataset.card||('d:'+t.dataset.opp);if(t.dataset.name)NAMEHINT[k.slice(2)]=t.dataset.name;push(k,t.dataset.pos);return}
       return;
     }
     const t=e.target.closest('[data-card],.opp[data-opp]');
     if(t&&!e.target.closest('.plink,.av,a[href]:not([data-card])')){e.preventDefault();e.stopPropagation();const k=t.dataset.card||('d:'+t.dataset.opp);if(t.dataset.name)NAMEHINT[k.slice(2)]=t.dataset.name;open(k,t,t.dataset.pos);return}
-    if(el&&!e.target.closest('.pmenu'))close();
+    if(el&&!e.target.closest('.pmenu,.glpop'))close();
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el)close()});
-  addEventListener('hashchange',()=>{if(el&&!location.hash.startsWith('#a='))close()});
+  /* a page changing its own #hash (Stats tabs, Lab, Guide) closes the card; Trade's #a= state doesn't */
+  addEventListener('hashchange',()=>{if(location.hash.startsWith('#a='))return;if(el)closeLocal();if(new URLSearchParams(location.search).has('card'))history.replaceState(null,'',urlFor(null))});
   addEventListener('resize',()=>{if(el)place()});
 
   /* markup helpers for pages */
   function pbtn(id,name,cls){return `<button type="button" class="pname ${cls||''}" data-card="p:${esc(id)}" data-name="${esc(name)}" aria-expanded="false">${esc(name)}</button>`}
   function dbtn(team,label,cls){return `<button type="button" class="pname ${cls||''}" data-card="d:${esc(team)}" aria-expanded="false">${esc(label||team)}</button>`}
-  window.NFLSCards={provide,load,open,close,pbtn,dbtn,oppBtn,mrk,newsFor,playerSummary,defSummary,teamDefense,dvp,gameOf,nextOpp,byeWeek,scoring,SCORING,data:()=>D,index:()=>IX};
+  window.NFLSCards={provide,load,open,push,close,addPin,pbtn,dbtn,oppBtn,mrk,newsFor,playerSummary,defSummary,teamDefense,dvp,gameOf,nextOpp,byeWeek,scoring,SCORING,data:()=>D,index:()=>IX};
 })();
