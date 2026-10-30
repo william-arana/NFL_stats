@@ -154,9 +154,9 @@
     WR:[xr('catch','Catch %','%','receptions','targets'),xr('ypt','Yds/tgt',1,'receiving_yards','targets'),xr('adot','aDOT',1,'receiving_air_yards','targets'),xs('receiving_yards_after_catch','YAC',0),xs('receiving_first_downs','1st dn',0),xm('air_yards_share','Air share','%'),xm('wopr','WOPR',2),xs('receiving_epa','Rec EPA',1),XFUM]};
   /* tracking (NGS), charting (FTN) and red-zone extras */
   const xw=(k,l,f,a,b)=>({k,l,f,v:L=>{const d=SL(L,b);return d?SL(L,a)/d:null}});
-  XCOLS.QB.push(xw('ttt','Time to throw',2,'ttt_sum','ngs_patt'),xw('aggr_pct','Aggressive %','%','aggr','ngs_patt'),xw('pa_pct','Play-action %','%','pa_db','db'),xs('int_worthy','INT-worthy',0),xs('throwaways','Throwaways',0));
+  XCOLS.QB.push(xw('ttt','TTT',2,'ttt_sum','ngs_patt'),xw('aggr_pct','Aggr %','%','aggr','ngs_patt'),xw('pa_pct','PA %','%','pa_db','db'),xs('int_worthy','INT-worthy',0),xs('throwaways','Throwaways',0));
   XCOLS.RB.push({k:'ryoe',l:'RYOE',f:1,sum:true,v:L=>SL(L,'ngs_att')?SL(L,'ryoe'):null},xw('ryoe_att','RYOE/att',2,'ryoe','ngs_att'),xw('box8_pct','8+ box %','%','box8','ngs_att'),xs('rz_car','RZ car',0),xs('gl_car','GL car',0),xs('rz_tgt','RZ tgt',0));
-  XCOLS.WR.push(xw('sep','Separation',1,'sep_sum','ngs_tgt'),xw('cush','Cushion',1,'cush_sum','ngs_tgt'),xw('yacoe','YAC over exp',1,'yacoe_sum','ngs_rec'),xs('deep_tgt','Deep tgt',0),xs('rz_tgt','RZ tgt',0),xs('contested','Contested',0),xs('drops','Drops',0),xw('catchable_pct','Catchable %','%','catchable','targets'));
+  XCOLS.WR.push(xw('sep','Separation',1,'sep_sum','ngs_tgt'),xw('cush','Cushion',1,'cush_sum','ngs_tgt'),xw('yacoe','YACOE',1,'yacoe_sum','ngs_rec'),xs('deep_tgt','Deep tgt',0),xs('rz_tgt','RZ tgt',0),xs('contested','Contested',0),xs('drops','Drops',0),xw('catchable_pct','Catchable %','%','catchable','targets'));
   XCOLS.TE=XCOLS.WR;
   const xfmt=(v,f)=>!num(v)?'<span class="dim">–</span>':f==='%'?pct(v):v.toFixed(f);
   function bars(logs,sk,team){
