@@ -59,7 +59,7 @@ One table helper reused by Stats, Waivers, Lab results, Trade:
 2. ✅ Breadcrumb + depth cap (12). (2026-10-29)
 2b. ✅ Pop-out windows: ⧉ on a card or any card section floats it in a draggable, resizable, minimizable window that stays while you browse; names inside open cards; windows follow you across pages in the same tab (sessionStorage, max 6). (2026-10-29)
 3. ✅ Game card (`g:<game_id>`): score or implied totals, QBs, rest, spread/O-U (covered/over after the game), weather, top fantasy scorers (final) or players to watch with matchup rank (upcoming), team form side by side. Linked from Stats → Schedule ("Game card" + team names), week numbers in player and D/ST game logs, and the next-game week on cards. (2026-10-29)
-4. Linking audit: every name/team on every page is a card link; Lab results auto-link.
+4. ✅ Linking audit (2026-10-29): Home hero tiles (next game, top add, D/ST stream, highest implied → cards), Home NFL matchups → game cards, RotoWire news names → player cards; Stats players: name opens the card, ▸ still expands week rows (logs' week → game card), team column → team card; Stats Teams/DvP next opponent → game card; Waivers team column → team card; card subtitles (team) and D/ST game log opponents → cards; Lab results auto-link player names, `player_id`/`gsis_id`, team columns and `game_id` (not click-tested: DuckDB CDN blocked in the test sandbox). Not linked on purpose: individual defenders (no defender cards yet).
 5. Shared table helper with column chooser; roll out Stats → Waivers → Trade → Lab.
 6. Optional `sitemap.xml` / page index for the site.
 

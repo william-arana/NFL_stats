@@ -81,6 +81,9 @@ tbody tr.open td{background:var(--blue-soft)}
 td.heat{background-image:linear-gradient(rgba(var(--heat),var(--a,0)),rgba(var(--heat),var(--a,0)))}
 .pname{font-weight:600;color:var(--ink);cursor:pointer;background:none;border:0;padding:0;font:inherit;font-weight:600;text-align:left}
 .pname:hover{color:var(--blue);text-decoration:underline}
+.xp{border:0;background:none;padding:0 4px 0 0;margin-left:-2px;color:var(--ink-3);cursor:pointer;font-size:12px;width:16px}
+.xp:hover,.xp[aria-expanded="true"]{color:var(--blue)}
+.pname.tm{font-weight:500}
 .pos{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
 .inj{font-family:var(--f-mono);font-size:10px;padding:1px 5px;border-radius:3px;background:var(--margin-soft);color:var(--margin);margin-left:6px}
 .rank{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);text-align:right;width:28px}
@@ -187,6 +190,8 @@ function dvpSeason(){ // PPR allowed per game by position + ranks (1 = gives up 
   for(const p of ['QB','RB','WR','TE'])Object.keys(out).sort((a,b)=>out[b][p].v-out[a][p].v).forEach((t,i)=>out[t][p].rk=i+1);
   return _dvp=out;
 }
+/* link to the game card for a team's game in a week (plain text if there's no game) */
+function gameBtn(team,week,label){const g=G.find(x=>x.week===week&&(x.home_team===team||x.away_team===team));return g?`<button type="button" class="gl-g" data-card="g:${esc(g.game_id)}" title="Game card">${label}</button>`:label}
 function nextOppOf(team){const nw=META.next_week;for(const g of G)if(g.week===nw){if(g.home_team===team)return {opp:g.away_team,at:false};if(g.away_team===team)return {opp:g.home_team,at:true}}return null}
 function rkClass(rk,n){return rk<=8?'good':rk>n-8?'bad':'mid'}
 function oppBtn(team,label,pos){const d=dvpSeason()[team];const rk=d&&pos&&d[pos]?d[pos].rk:null;const n=Object.keys(dvpSeason()).length;
@@ -308,7 +313,7 @@ function drawPlayers(){
   const LIM=400;let body='';
   data.slice(0,LIM).forEach((a,i)=>{
     const inj=INJ[a.id];
-    body+=`<tr data-id="${a.id}" class="${ps.open.has(a.id)?'open':''}"><td class="rank">${i+1}</td><td class="l stick"><button class="pname ${avail(a.id)==='fa'?'name-fa':''}" data-id="${a.id}">${esc(a.name)}</button>${window.NFLS?NFLS.plink(a.id,a.name):''} <span class="pos">${a.pos}</span>${avBadge(a.id,a.name)}${inj?`<span class="inj" title="${esc(inj[1])} (Wk ${inj[2]} report)">${esc(inj[0].replace('Practice: ',''))}</span>`:''}</td><td class="l">${a.team}</td><td class="l">${(()=>{const n=nextOppOf(a.team);return n?oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,a.pos):'<span class="pos">bye</span>'})()}</td><td>${a.g}</td>${
+    body+=`<tr data-id="${a.id}" class="${ps.open.has(a.id)?'open':''}"><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="xp" data-id="${a.id}" aria-expanded="${ps.open.has(a.id)}" title="${ps.open.has(a.id)?'Hide':'Show'} week-by-week rows" aria-label="Week-by-week rows for ${esc(a.name)}">${ps.open.has(a.id)?'▾':'▸'}</button><button type="button" class="pname ${avail(a.id)==='fa'?'name-fa':''}" data-card="p:${a.id}" data-name="${esc(a.name)}" aria-expanded="false">${esc(a.name)}</button>${window.NFLS?NFLS.plink(a.id,a.name):''} <span class="pos">${a.pos}</span>${avBadge(a.id,a.name)}${inj?`<span class="inj" title="${esc(inj[1])} (Wk ${inj[2]} report)">${esc(inj[0].replace('Practice: ',''))}</span>`:''}</td><td class="l"><button type="button" class="pname tm" data-card="d:${a.team}" aria-expanded="false" title="${a.team} team card">${a.team}</button></td><td class="l">${(()=>{const n=nextOppOf(a.team);return n?oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,a.pos):'<span class="pos">bye</span>'})()}</td><td>${a.g}</td>${
       pcols(set).map(c=>{if(c.spark)return `<td class="l">${spark(a)}</td>`;const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;
         const cls=c.diff?(num(v)?(v>0?'pos-d':v<0?'neg-d':''):''):'';
         return `<td class="${al?'heat':''} ${cls}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${c.diff&&num(v)&&v>0?'+':''}${fmt(v,c.d)}</td>`}).join('')}</tr>`;
@@ -316,13 +321,13 @@ function drawPlayers(){
       const logs=[...a.logs].sort((x,y)=>x.week-y.week);
       for(const l of logs){const r=Object.assign({},l);r.fp=l[SCORING[ps.scoring].k];r.tds=(l.passing_tds||0)+(l.rushing_tds||0)+(l.receiving_tds||0);r.opps=(l.carries||0)+(l.targets||0);r.fum=(l.rushing_fumbles_lost||0)+(l.receiving_fumbles_lost||0)+(l.sack_fumbles_lost||0);
         r.catch=div(l.receptions,l.targets);r.adot=div(l.receiving_air_yards,l.targets);r.ypc=div(l.rushing_yards,l.carries);r.ybc_att=num(l.ybc)?div(l.ybc,l.carries):null;r.yac_att=num(l.yac_rush)?div(l.yac_rush,l.carries):null;r.press_pct=num(l.qb_pressured)?div(l.qb_pressured,l.attempts+l.sacks_suffered):null;r.ypa=div(l.passing_yards,l.attempts);
-        body+=`<tr class="log"><td></td><td class="l stick">Wk ${l.week} ${oppBtn(l.opponent_team,'vs '+l.opponent_team,a.pos)}</td><td class="l"></td><td></td><td></td>${pcols(set).map(c=>c.spark?'<td></td>':`<td>${fmt(r[c.k],c.d==='%'||c.d==='%1'?c.d:(typeof c.d==='number'?Math.min(c.d,2):0))}</td>`).join('')}</tr>`}
+        body+=`<tr class="log"><td></td><td class="l stick">${gameBtn(l.team||a.team,l.week,'Wk '+l.week)} ${oppBtn(l.opponent_team,'vs '+l.opponent_team,a.pos)}</td><td class="l"></td><td></td><td></td>${pcols(set).map(c=>c.spark?'<td></td>':`<td>${fmt(r[c.k],c.d==='%'||c.d==='%1'?c.d:(typeof c.d==='number'?Math.min(c.d,2):0))}</td>`).join('')}</tr>`}
     }
   });
   $('#p-tbl').innerHTML=data.length?th+'<tbody>'+body+'</tbody>':'<tbody><tr><td class="empty">No players match. Lower "Min games" or clear the search.</td></tr></tbody>';
   if(data.length>LIM)$('#p-sum').innerHTML+=`<span>Showing top ${LIM}. Filter or download CSV for all.</span>`;
   $('#p-tbl').onclick=e=>{const h=e.target.closest('th[data-k]');if(h){const k=h.dataset.k;if(k==='trend')return;if(ps.sort===k||(!ps.sort&&k===set.cols[0].k))ps.dir*=-1;else{ps.sort=k;ps.dir=(k==='name'||k==='team'||k==='next')?1:-1}drawPlayers();return}
-    const n=e.target.closest('.pname');if(n){const id=n.dataset.id;ps.open.has(id)?ps.open.delete(id):ps.open.add(id);drawPlayers()}};
+    const n=e.target.closest('.xp');if(n){const id=n.dataset.id;ps.open.has(id)?ps.open.delete(id):ps.open.add(id);drawPlayers()}};
 }
 
 /* ---------- TEAMS ---------- */
@@ -365,7 +370,7 @@ function drawTeams(){
   const heat=ts.heat?heatAlpha(data,set.cols):{};
   $('#t-sum').innerHTML=`<span><b>${data.length}</b> teams</span><span>Weeks <b>${ts.w0}–${ts.w1}</b>, ${ts.mode==='pg'?'per game':'totals'}</span><span>Week ${META.next_week} opponent shown</span>`;
   $('#t-tbl').innerHTML=`<thead><tr><th class="rank">#</th><th class="l stick" data-k="team">Team</th><th class="l" data-k="rec">${gl('rec','Record')}</th><th class="l" data-k="next">Wk ${META.next_week}</th>${set.cols.map(c=>`<th data-k="${c.k}" ${sk===c.k?`aria-sort="${ts.dir<0?'descending':'ascending'}"`:''}>${gl('t:'+c.k,c.label,c.tip)}</th>`).join('')}</tr></thead><tbody>${
-    data.map((a,i)=>`<tr><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="pname" data-card="d:${a.team}" aria-expanded="false">${a.team}</button></td><td class="l">${a.rec}</td><td class="l">${a.next}</td>${set.cols.map(c=>{const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;return `<td class="${al?'heat':''}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${fmt(v,c.d)}</td>`}).join('')}</tr>`).join('')}</tbody>`;
+    data.map((a,i)=>`<tr><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="pname" data-card="d:${a.team}" aria-expanded="false">${a.team}</button></td><td class="l">${a.rec}</td><td class="l">${a.next==='bye'?'<span class="pos">bye</span>':gameBtn(a.team,META.next_week,a.next)}</td>${set.cols.map(c=>{const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;return `<td class="${al?'heat':''}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${fmt(v,c.d)}</td>`}).join('')}</tr>`).join('')}</tbody>`;
   $('#t-tbl').onclick=e=>{const h=e.target.closest('th[data-k]');if(!h)return;const k=h.dataset.k;if(ts.sort===k||(!ts.sort&&k===set.cols[0].k))ts.dir*=-1;else{ts.sort=k;ts.dir=['team','rec','next'].includes(k)?1:-1}drawTeams()};
 }
 
@@ -402,7 +407,7 @@ function drawDvP(){
   const sa=k=>ds.sort===k?`aria-sort="${ds.dir<0?'descending':'ascending'}"`:'';
   $('#d-sum').innerHTML=`<span><b>${data.length}</b> defenses</span><span>Weeks <b>${ds.w0}–${ds.w1}</b>, ${SCORING[ds.scoring].label} points and yards allowed per game</span>`;
   $('#d-tbl').innerHTML=`<thead><tr><th class="l stick" data-k="team">Defense</th><th class="l" data-k="next">Wk ${META.next_week} faces</th>${['QB','RB','WR','TE'].map(p=>`<th data-k="${p}" ${sa(p)}>${gl('dvp:'+p,p)}</th><th class="rank">rk</th>`).join('')}<th class="gap"></th>${YC.map(([k,l,g])=>`<th data-k="${k}" ${sa(k)}>${gl(g,l)}</th>${k==='rya'||k==='pya'||k==='ypc'?'<th class="rank">rk</th>':''}`).join('')}</tr></thead><tbody>${
-    data.map(a=>`<tr><td class="l stick"><button type="button" class="pname" data-card="d:${a.team}" aria-expanded="false">${a.team}</button></td><td class="l">${a.next}</td>${['QB','RB','WR','TE'].map(p=>{const al=heat[p](a[p]);return `<td class="heat" style="--a:${al.toFixed(3)}">${a[p].toFixed(1)}</td><td class="rank">${rk[a.team][p]}</td>`}).join('')}<td class="gap"></td>${YC.map(([k,,,d])=>{const al=heat[k]?heat[k](a[k]):0;return `<td class="${al?'heat':''}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${fmt(a[k],d)}</td>${k==='rya'||k==='pya'||k==='ypc'?`<td class="rank">${rk[a.team][k]||''}</td>`:''}`}).join('')}</tr>`).join('')}</tbody>`;
+    data.map(a=>`<tr><td class="l stick"><button type="button" class="pname" data-card="d:${a.team}" aria-expanded="false">${a.team}</button></td><td class="l">${a.next==='bye'?'<span class="pos">bye</span>':gameBtn(a.team,META.next_week,a.next)}</td>${['QB','RB','WR','TE'].map(p=>{const al=heat[p](a[p]);return `<td class="heat" style="--a:${al.toFixed(3)}">${a[p].toFixed(1)}</td><td class="rank">${rk[a.team][p]}</td>`}).join('')}<td class="gap"></td>${YC.map(([k,,,d])=>{const al=heat[k]?heat[k](a[k]):0;return `<td class="${al?'heat':''}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${fmt(a[k],d)}</td>${k==='rya'||k==='pya'||k==='ypc'?`<td class="rank">${rk[a.team][k]||''}</td>`:''}`}).join('')}</tr>`).join('')}</tbody>`;
   $('#d-tbl').onclick=e=>{const h=e.target.closest('th[data-k]');if(!h)return;const k=h.dataset.k;if(ds.sort===k)ds.dir*=-1;else{ds.sort=k;ds.dir=['team','next'].includes(k)?1:-1}drawDvP()};
 }
 
