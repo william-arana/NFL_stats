@@ -71,11 +71,12 @@ Load it to a sheet. Each Tuesday, hit **Data → Refresh All**. Google Sheets: `
 | `assets/site.js` | Theme toggle, league picker, Sleeper roster lookups |
 | `assets/cards.js` | Clickable player + defense cards (stats, game log, news) on every page |
 | `assets/glossary.js` | Stat descriptions behind the underlined column names |
+| `assets/tables.js` | Columns button (hide / reorder) for any `table[data-cols]`, pages and cards |
 | `scripts/update_player_news.py` | Per-player / per-defense news archive → `data/site/news/*.json` |
 | `trade.html` | Trade analyzer |
 | `scripts/update_sleeper.py` | Sleeper rosters → `data/site/leagues.json`, `sleeper_map.json` |
 | `data/catalog.json` | Catalog behind the Guide |
-| `scripts/update_data.py` | Weekly data pull → CSVs, master.xlsx, site JSON |
+| `scripts/update_data.py` | Weekly data pull → CSVs, master.xlsx, site JSON (incl. `kickers.json`, `def_week.json`, `oline.json` for the Defenders / O-line / Kickers tabs) |
 | `scripts/build_catalog.py`, `fetch_live_columns.py`, `page_template.html` | Rebuild the Guide catalog |
 
 Run locally: `pip install -r requirements.txt && python scripts/update_data.py`, then `python -m http.server` and open http://localhost:8000.

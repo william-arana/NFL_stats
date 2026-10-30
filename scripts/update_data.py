@@ -49,6 +49,104 @@ def to_columns_json(df: pl.DataFrame) -> dict:
     df = round_floats(df, 3)
     return {"cols": df.columns, "rows": df.height, "data": {c: df[c].to_list() for c in df.columns}}
 
+DEFENSE = ["DE", "DT", "NT", "DL", "LB", "OLB", "ILB", "MLB", "CB", "DB", "SAF", "S", "FS", "SS"]
+OLINE = ["T", "G", "C", "OT", "OG", "OL"]
+OL_SLOTS = ["LT", "LG", "C", "RG", "RT"]
+
+
+def build_extra(raw: dict, players, bridge, t: pl.DataFrame, injuries: dict, ps: pl.DataFrame) -> None:
+    """Kickers (weekly + Sleeper default kicker points), defensive players (weekly box score + PFR pressure /
+    coverage), offensive linemen (snaps, depth chart slot, team pressure / sack / run-blocking with vs without him).
+    Free data has no per-lineman pressures allowed (that's PFF / tracking data), so O-line uses game-level with/without."""
+    reg = ps.filter(pl.col("season_type") == "REG")
+
+    # Kickers: Sleeper default scoring — FG 0-39 3, 40-49 4, 50+ 5, PAT 1, missed FG -1, missed PAT -1
+    k = reg.filter(pl.col("position") == "K")
+    if k.height:
+        z = lambda c: pl.col(c).fill_null(0)  # noqa: E731
+        k = k.with_columns(
+            (z("fg_made_0_19") + z("fg_made_20_29") + z("fg_made_30_39")).alias("fg_0_39"),
+            z("fg_made_40_49").alias("fg_40_49"), (z("fg_made_50_59") + z("fg_made_60_")).alias("fg_50"),
+        ).with_columns(
+            (3 * pl.col("fg_0_39") + 4 * pl.col("fg_40_49") + 5 * pl.col("fg_50") + z("pat_made")
+             - z("fg_missed") - z("pat_missed")).cast(pl.Float64).alias("k_pts"))
+        kk = k.select("player_id", "player_display_name", "team", "opponent_team", pl.col("week").cast(pl.Int32),
+                      "fg_made", "fg_att", "fg_long", "fg_0_39", "fg_40_49", "fg_50", "fg_missed", "pat_made", "pat_att",
+                      "pat_missed", "k_pts", "headshot_url")
+        (SITE_DIR / "kickers.json").write_text(json.dumps(to_columns_json(kk), separators=(",", ":")))
+        log(f"kickers: {kk.height} kicker-weeks")
+
+    # Defensive players: weekly box score + snaps + PFR pressure / coverage
+    dw = reg.filter(pl.col("position").is_in(DEFENSE))
+    if dw.height:
+        z = lambda c: pl.col(c).fill_null(0) if c in dw.columns else pl.lit(0)  # noqa: E731
+        dw = dw.select("player_id", "player_display_name", "position", "team", "opponent_team", pl.col("week").cast(pl.Int32),
+                       (z("def_tackles_solo") + z("def_tackle_assists")).alias("tkl"), z("def_tackles_solo").alias("solo"),
+                       z("def_tackles_for_loss").alias("tfl"), z("def_sacks").alias("sk"), z("def_qb_hits").alias("qbh"),
+                       z("def_interceptions").alias("int"), z("def_pass_defended").alias("pd"),
+                       z("def_fumbles_forced").alias("ff"), z("def_tds").alias("td"))
+        sc, pdf = raw.get("snap_counts"), raw.get("pfr_def")
+        if sc is not None and bridge is not None:
+            snaps = (sc.filter(pl.col("game_type") == "REG").join(bridge, on="pfr_player_id", how="inner")
+                     .select("player_id", pl.col("week").cast(pl.Int32), pl.col("defense_snaps").alias("snaps"),
+                             pl.col("defense_pct").alias("snap_pct")).unique(["player_id", "week"]))
+            dw = dw.join(snaps, on=["player_id", "week"], how="left")
+        if pdf is not None and bridge is not None:
+            pf = (pdf.filter(pl.col("game_type") == "REG").join(bridge, on="pfr_player_id", how="inner")
+                  .select("player_id", pl.col("week").cast(pl.Int32), pl.col("def_pressures").alias("prs"),
+                          pl.col("def_times_hurried").alias("hurries"), pl.col("def_times_blitzed").alias("blitz"),
+                          pl.col("def_targets").alias("tgt"), pl.col("def_completions_allowed").alias("cmp"),
+                          pl.col("def_yards_allowed").alias("yds_alw"), pl.col("def_receiving_td_allowed").alias("td_alw"),
+                          pl.col("def_missed_tackles").alias("mtkl")).unique(["player_id", "week"]))
+            dw = dw.join(pf, on=["player_id", "week"], how="left")
+        (SITE_DIR / "def_week.json").write_text(json.dumps(to_columns_json(round_floats(dw, 2)), separators=(",", ":")))
+        log(f"defensive players: {dw.height} player-weeks")
+
+    # Offensive linemen: snaps + depth chart slot + team results with / without him
+    sc = raw.get("snap_counts")
+    if sc is not None and bridge is not None:
+        ol = (sc.filter((pl.col("game_type") == "REG") & pl.col("position").is_in(OLINE))
+              .join(bridge, on="pfr_player_id", how="inner")
+              .select("player_id", pl.col("player").alias("name"), "position", "team", pl.col("week").cast(pl.Int32),
+                      "offense_snaps", "offense_pct").unique(["player_id", "week"]))
+        tt = t.select("team", "week", pl.col("pressures_allowed").fill_null(0).alias("prs"),
+                      (pl.col("attempts").fill_null(0) + pl.col("sacks_suffered").fill_null(0)).alias("db"),
+                      pl.col("sacks_suffered").fill_null(0).alias("sk"), pl.col("ybc").fill_null(0).alias("ybc"),
+                      pl.col("pfr_carries").fill_null(0).alias("car"))
+        slot = {}
+        dc = raw.get("depth_charts")
+        if dc is not None and "pos_abb" in dc.columns:
+            for r in dc.filter(pl.col("pos_abb").is_in(OL_SLOTS)).iter_rows(named=True):
+                if r["gsis_id"]:
+                    lab = r["pos_abb"] + ("" if (r["pos_rank"] or 1) == 1 else str(r["pos_rank"]))
+                    if r["gsis_id"] not in slot or (r["pos_rank"] or 9) < slot[r["gsis_id"]][1]:
+                        slot[r["gsis_id"]] = (lab, r["pos_rank"] or 9)
+        rows = []
+        for (pid,), g in ol.group_by(["player_id"]):
+            g = g.sort("week")
+            team = g["team"][-1]
+            on_w = set(g.filter(pl.col("offense_pct") >= 0.5)["week"].to_list())
+            tw_ = tt.filter(pl.col("team") == team)
+            on, off = tw_.filter(pl.col("week").is_in(list(on_w))), tw_.filter(~pl.col("week").is_in(list(on_w)))
+            rate = lambda d: (d["prs"].sum() / d["db"].sum()) if d.height and d["db"].sum() else None  # noqa: E731
+            sk_g = lambda d: (d["sk"].sum() / d.height) if d.height else None  # noqa: E731
+            ybc = lambda d: (d["ybc"].sum() / d["car"].sum()) if d.height and d["car"].sum() else None  # noqa: E731
+            inj = injuries.get(pid)
+            pos = g["position"][-1]
+            sl = slot.get(pid, ("", 9))[0][:2]
+            if pos in ("OL", "OT", "OG"):  # generic labels: use the depth chart slot when there is one
+                pos = {"LT": "T", "RT": "T", "LG": "G", "RG": "G"}.get(sl, "C" if sl.startswith("C") else ("T" if pos == "OT" else "G" if pos == "OG" else "OL"))
+            rows.append({"player_id": pid, "name": g["name"][-1], "pos": pos, "team": team,
+                         "slot": slot.get(pid, ("", 9))[0], "g": int((g["offense_snaps"] > 0).sum()), "starts": len(on_w),
+                         "snaps": int(g["offense_snaps"].sum()), "snap_pct": float(g["offense_pct"].mean()),
+                         "prs_on": rate(on), "prs_off": rate(off), "g_off": off.height,
+                         "sk_on": sk_g(on), "sk_off": sk_g(off), "ybc_on": ybc(on), "ybc_off": ybc(off),
+                         "inj": f"{inj[0]} · {inj[1]}".strip(" ·") if inj else ""})
+        if rows:
+            df = round_floats(pl.DataFrame(rows), 3)
+            (SITE_DIR / "oline.json").write_text(json.dumps(to_columns_json(df), separators=(",", ":")))
+            log(f"offensive linemen: {df.height}")
+
 
 def main() -> None:
     season = int(sys.argv[1]) if len(sys.argv) > 1 else nfl.get_current_season()
@@ -249,6 +347,12 @@ def main() -> None:
             .drop("pfr_player_id"))
         (SITE_DIR / "defenders.json").write_text(json.dumps(to_columns_json(defenders), separators=(",", ":")))
         log(f"defenders: {defenders.height}")
+
+    # ---------- kickers, defensive players, offensive linemen (Stats tabs + cards) ----------
+    try:
+        build_extra(raw, players, bridge, t, injuries, ps)
+    except Exception as e:  # noqa: BLE001  (never let these break the main refresh)
+        log(f"extra (kickers/defenders/oline): FAILED ({e})")
 
     meta = {"season": season, "last_completed_week": last_week, "next_week": last_week + 1,
             "updated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),

@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=20261029e">
-<script src="assets/site.js?v=20261029e" defer></script>
-<script src="assets/cards.js?v=20261029e" defer></script>
-<script src="assets/glossary.js?v=20261029e" defer></script>
-<script src="assets/tables.js?v=20261029e" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=20261029f">
+<script src="assets/site.js?v=20261029f" defer></script>
+<script src="assets/cards.js?v=20261029f" defer></script>
+<script src="assets/glossary.js?v=20261029f" defer></script>
+<script src="assets/tables.js?v=20261029f" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -186,6 +186,32 @@ function why(a){const w=[];if(num(a.snapD)&&a.snapD>=.15)w.push(['up',`Snaps +${
   if(num(a.xfp3)&&num(a.ppr3)&&a.xfp3-a.ppr3>=3)w.push(['',`Due: xFP > pts by ${(a.xfp3-a.ppr3).toFixed(1)}`]);if(a.mrk&&a.mrk<=8)w.push(['up','Soft matchup']);
   if(num(a.tgt3)&&a.tgt3>=.2)w.push(['',`${Math.round(a.tgt3*100)}% tgt share`]);if(!a.next)w.push(['','Bye next week']);return w.map(([c,t])=>`<span class="${c}">${esc(t)}</span>`).join('')}
 
+/* ---------- kickers + defenses in search (and the K / DEF position buttons) ---------- */
+let KR=null;fetch('data/site/kickers.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(j=>{if(j){KR=rows(j);if(P)draw()}}).catch(()=>{});
+function kickerList(){
+  if(!KR)return [];const by=new Map();for(const r of KR){let a=by.get(r.player_id);if(!a){a={id:r.player_id,name:r.player_display_name,pos:'K',team:r.team,logs:[]};by.set(r.player_id,a)}a.team=r.team;a.logs.push(r)}
+  const lw=META.last_completed_week;
+  return [...by.values()].map(a=>{const s=k=>a.logs.reduce((x,r)=>x+(num(r[k])?r[k]:0),0);const l3=a.logs.filter(r=>r.week>lw-3);const n=nextOpp(a.team);
+    return {...a,g:a.logs.length,ppg:s('k_pts')/a.logs.length,l3:l3.length?l3.reduce((x,r)=>x+(r.k_pts||0),0)/l3.length:null,fgm:s('fg_made'),fga:s('fg_att'),next:n,impl:n?n.implied:null}});
+}
+function kdHTML(q,words,dl,onlyPos){
+  const st_=k=>ROST?avOf(k):null;
+  const tag=k=>{const s=st_(k);if(!ROST||!s)return '';if(s==='fa')return '<span class="kd-fa">FA</span>';if(s==='mine')return '<span class="kd-mine">Mine</span>';const o=ROST.map.get(k);return `<span class="kd-own">${esc(o?o.team:'Rostered')}</span>`};
+  const kw=w=>['k','kicker','kickers'].includes(w),dw=w=>['def','dst','d/st','defense','defenses','d'].includes(w);
+  let ks=kickerList(),ds=dl.map(x=>({...x,key:'DEF:'+x.team}));
+  if(q){const kOnly=words.some(kw),dOnly=words.some(dw);const rest=words.filter(w=>!kw(w)&&!dw(w));
+    const hitK=a=>rest.every(w=>w===a.team.toLowerCase()||norm(a.name).split(/\s+/).some(x=>x.startsWith(w)));
+    ks=dOnly&&!kOnly?[]:ks.filter(a=>(kOnly||rest.length)&&hitK(a));
+    ds=kOnly&&!dOnly?[]:ds.filter(x=>(dOnly||rest.length)&&rest.every(w=>w===x.team.toLowerCase()))}
+  else{ks=onlyPos==='K'?ks.filter(a=>st.showTaken||!ROST||avOf(a.id)==='fa'):[];ds=onlyPos==='DEF'?ds.filter(x=>st.showTaken||!ROST||avOf(x.key)==='fa'):[]}
+  ks.sort((a,b)=>(b.ppg||0)-(a.ppg||0));ds.sort((a,b)=>b.score-a.score);
+  if(!ks.length&&!ds.length)return onlyPos?`<div class="empty">No ${onlyPos==='K'?'kickers':'defenses'} to show yet.</div>`:'';
+  const nx=n=>n?OPPB(n.opp,n.at,''):'<span class="pos">bye</span>';
+  return `${ks.length?`<div class="tablewrap"><table data-cols="waivers-k"><thead><tr><th class="rank">#</th><th class="l stick">Kicker</th><th class="l">Team</th><th class="l">Wk ${META.next_week}</th><th>${gl('k_pts','K pts/g')}</th><th>L3</th><th>FG</th><th>${gl('implied','Implied')}</th><th class="l">Status</th></tr></thead><tbody>${
+      ks.slice(0,40).map((a,i)=>`<tr><td class="rank">${i+1}</td><td class="l stick">${PB(a,ROST&&avOf(a.id)==='fa'?'name-fa':ROST&&avOf(a.id)==='mine'?'name-mine':'')}${NFLS.plink(a.id,a.name)}</td><td class="l"><button type="button" class="opp" data-card="d:${a.team}">${a.team}</button></td><td class="l">${nx(a.next)}</td><td><b>${f1(a.ppg)}</b></td><td>${f1(a.l3)}</td><td>${a.fgm}/${a.fga}</td><td>${num(a.impl)?a.impl.toFixed(1):'–'}</td><td class="l">${tag(a.id)}</td></tr>`).join('')}</tbody></table></div>`:''}
+    ${ds.length?`<div class="tablewrap"><table data-cols="waivers-dsearch"><thead><tr><th class="rank">#</th><th class="l stick">Defense</th><th class="l">Wk ${META.next_week}</th><th>Matchup score</th><th>D/ST pts/g</th><th>Pressures/g</th><th>Opp implied</th><th class="l">Status</th></tr></thead><tbody>${
+      ds.slice(0,32).map((x,i)=>`<tr><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="pname ${ROST&&avOf(x.key)==='fa'?'name-fa':ROST&&avOf(x.key)==='mine'?'name-mine':''}" data-card="d:${x.team}" aria-expanded="false">${x.team} D/ST</button>${NFLS.plink(x.key,x.team+' D/ST')}</td><td class="l">${OPPB(x.opp,x.at,'')}</td><td><span class="score">${x.score.toFixed(2)}</span></td><td>${f1(x.dst)}</td><td>${f1(x.pr)}</td><td>${f1(x.oi)}</td><td class="l">${tag(x.key)}</td></tr>`).join('')}</tbody></table></div>`:''}`;
+}
 function draw(){
   if(!P)return;
   const all=players();const dl=dstBoard();
@@ -209,7 +235,7 @@ function draw(){
 
   <section class="box" id="fa-box"><div class="box-h"><h2>${q?'Search':st.showTaken?'All players':'Free agents'}</h2><span class="hint">${q?`${pool.length} match${pool.length===1?'':'es'} for “${esc(st.q.trim())}” · rostered players included`:`${ln} · top ${top.length} of ${pool.length}`}</span><span class="sp"></span>
     <input type="search" class="wsrch" id="w-q" placeholder="Search any player or team" value="${esc(st.q)}" autocomplete="off" aria-label="Search players">
-    <div class="seg" id="w-pos">${['ALL','QB','RB','WR','TE'].map(p=>`<button data-v="${p}" aria-pressed="${st.pos===p}">${p==='ALL'?'All':p}</button>`).join('')}</div>
+    <div class="seg" id="w-pos">${['ALL','QB','RB','WR','TE','K','DEF'].map(p=>`<button data-v="${p}" aria-pressed="${st.pos===p}">${p==='ALL'?'All':p}</button>`).join('')}</div>
     <label class="chk" for="w-taken" ${q?'hidden':''}><input type="checkbox" id="w-taken" ${st.showTaken?'checked':''}>Include rostered</label></div>
   ${top.length?`<div class="tablewrap"><table id="w-tbl" data-cols="waivers-fa"><thead><tr><th class="rank">#</th><th class="l stick">Player</th><th class="l">Team</th><th class="l">Wk ${META.next_week}</th>${cols.map(([k,l])=>`<th data-k="${k}" ${st.sort===k?`aria-sort="${st.dir<0?'descending':'ascending'}"`:''}>${gl(k==='ppr'?'ppr':k,l)}</th>`).join('')}<th class="l">Why</th></tr></thead><tbody>${
     top.map((a,i)=>{const s=avOf(a.id);const own=q&&ROST&&s==='taken'?(ROST.map.get(a.id)||{}).team:'';return `<tr><td class="rank">${i+1}</td><td class="l stick">${PB(a,s==='fa'&&ROST?'name-fa':'')}${NFLS.plink(a.id,a.name)} <span class="pos">${a.pos}</span>${ROST?NFLS.badge(s,LG,a.name):''}${a.inj?`<span class="inj" title="${esc(a.inj[1])}">${esc(a.inj[0].replace('Practice: ',''))}</span>`:''}${own?`<span class="pos" title="Rostered by"> · ${esc(own)}</span>`:''}${a.idle?'<span class="pos"> · no games last 3 wks</span>':''}</td>
@@ -224,6 +250,10 @@ function draw(){
       freeDefs.map((x,i)=>{const m=myDef.includes(x.team);return `<tr><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="pname ${!m&&ROST?'name-fa':''}" data-card="d:${x.team}" aria-expanded="false">${x.team} D/ST</button>${NFLS.plink('DEF:'+x.team,x.team+' D/ST')}${ROST?NFLS.badge(m?'mine':'fa',LG,x.team+' D/ST'):''}</td><td class="l">${OPPB(x.opp,x.at,'')}</td><td><span class="score">${x.score.toFixed(2)}</span></td><td>${f1(x.dst)}</td><td>${f1(x.pr)}</td><td>${f1(x.opra)}</td><td>${f1(x.sk)}</td><td>${f1(x.oska)}</td><td>${f1(x.oi)}</td></tr>`}).join('')}</tbody></table></div>
     <div class="foot"><span>Matchup score = z(pressures) + z(opponent pressures allowed) + z(sacks) + z(opponent sacks allowed) − z(opponent Vegas implied points). Same as the Lab recipe.</span></div></section>`;
 
+  {const kdOnly=st.pos==='K'||st.pos==='DEF';const box=$('#fa-box');
+    if(box){const html=kdHTML(q,words,dl,kdOnly?st.pos:null);
+      if(kdOnly){box.querySelectorAll(':scope > .tablewrap, :scope > .empty, :scope > .colbar, :scope > .foot').forEach(n=>n.remove());const h=box.querySelector('.box-h h2');if(h&&!q)h.textContent=st.pos==='K'?(st.showTaken?'All kickers':'Free agent kickers'):(st.showTaken?'All defenses':'Free agent defenses');box.insertAdjacentHTML('beforeend',html)}
+      else if(html)box.insertAdjacentHTML('afterend',`<section class="box" id="kd-box"><div class="box-h"><h2>Kickers &amp; defenses</h2><span class="hint">matching “${esc(st.q.trim())}”</span></div>${html}</section>`)}}
   $('#w-pos').onclick=e=>{const b=e.target.closest('button');if(!b)return;st.pos=b.dataset.v;store.set('wpos',st.pos);draw()};
   $('#w-taken').onchange=e=>{st.showTaken=e.target.checked;draw()};
   {const qi=$('#w-q');let t;qi.oninput=e=>{clearTimeout(t);t=setTimeout(()=>{const pos=e.target.selectionStart;st.q=e.target.value;draw();const n=$('#w-q');n.focus();try{n.setSelectionRange(pos,pos)}catch(_){}},150)};
