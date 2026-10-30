@@ -107,7 +107,7 @@
   const phone=window.matchMedia('(max-width:640px)');let lockUntil=0;
   function setNarrow(el,on){
     const th=el.querySelector('th.stick')||el.querySelector('td.stick');if(!th)return;
-    if(on){if(!el.classList.contains('sized')){const w=Math.ceil(th.getBoundingClientRect().width);if(w<=innerWidth*.46+8)return;/* already slim: nothing to shrink */
+    if(on){if(!el.classList.contains('sized')){const w=Math.ceil(th.getBoundingClientRect().width);if(w<=innerWidth*.34+8)return;/* already slim: nothing to shrink */
         el.style.setProperty('--stick-full',w+'px');el.classList.add('sized');void el.offsetWidth}
       clearTimeout(el._unsize);el.classList.add('narrow')}
     else{el.classList.remove('narrow');clearTimeout(el._unsize);el._unsize=setTimeout(()=>{if(!el.classList.contains('narrow'))el.classList.remove('sized')},340)}

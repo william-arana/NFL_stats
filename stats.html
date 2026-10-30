@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=20261029b">
-<script src="assets/site.js?v=20261029b" defer></script>
-<script src="assets/cards.js?v=20261029b" defer></script>
-<script src="assets/glossary.js?v=20261029b" defer></script>
-<script src="assets/tables.js?v=20261029b" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=20261029c">
+<script src="assets/site.js?v=20261029c" defer></script>
+<script src="assets/cards.js?v=20261029c" defer></script>
+<script src="assets/glossary.js?v=20261029c" defer></script>
+<script src="assets/tables.js?v=20261029c" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -314,7 +314,7 @@ function drawPlayers(){
   const LIM=400;let body='';
   data.slice(0,LIM).forEach((a,i)=>{
     const inj=INJ[a.id];
-    body+=`<tr data-id="${a.id}" class="${ps.open.has(a.id)?'open':''}"><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="xp" data-id="${a.id}" aria-expanded="${ps.open.has(a.id)}" title="${ps.open.has(a.id)?'Hide':'Show'} week-by-week rows" aria-label="Week-by-week rows for ${esc(a.name)}">${ps.open.has(a.id)?'▾':'▸'}</button><button type="button" class="pname ${avail(a.id)==='fa'?'name-fa':''}" data-card="p:${a.id}" data-name="${esc(a.name)}" aria-expanded="false">${esc(a.name)}</button>${window.NFLS?NFLS.plink(a.id,a.name):''} <span class="pos">${a.pos}</span>${avBadge(a.id,a.name)}${inj?`<span class="inj" title="${esc(inj[1])} (Wk ${inj[2]} report)">${esc(inj[0].replace('Practice: ',''))}</span>`:''}</td><td class="l"><button type="button" class="pname tm" data-card="d:${a.team}" aria-expanded="false" title="${a.team} team card">${a.team}</button></td><td class="l">${(()=>{const n=nextOppOf(a.team);return n?oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,a.pos):'<span class="pos">bye</span>'})()}</td><td>${a.g}</td>${
+    body+=`<tr data-id="${a.id}" class="${ps.open.has(a.id)?'open':''}"><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="xp" data-id="${a.id}" aria-expanded="${ps.open.has(a.id)}" title="${ps.open.has(a.id)?'Hide':'Show'} week-by-week rows" aria-label="Week-by-week rows for ${esc(a.name)}">${ps.open.has(a.id)?'▾':'▸'}</button><button type="button" class="pname ${avail(a.id)==='fa'?'name-fa':avail(a.id)==='mine'?'name-mine':''}" data-card="p:${a.id}" data-name="${esc(a.name)}" aria-expanded="false">${esc(a.name)}</button>${window.NFLS?NFLS.plink(a.id,a.name):''} <span class="pos">${a.pos}</span>${avBadge(a.id,a.name)}${inj?`<span class="inj" title="${esc(inj[1])} (Wk ${inj[2]} report)">${esc(inj[0].replace('Practice: ',''))}</span>`:''}</td><td class="l"><button type="button" class="pname tm" data-card="d:${a.team}" aria-expanded="false" title="${a.team} team card">${a.team}</button></td><td class="l">${(()=>{const n=nextOppOf(a.team);return n?oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,a.pos):'<span class="pos">bye</span>'})()}</td><td>${a.g}</td>${
       pcols(set).map(c=>{if(c.spark)return `<td class="l">${spark(a)}</td>`;const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;
         const cls=c.diff?(num(v)?(v>0?'pos-d':v<0?'neg-d':''):''):'';
         return `<td class="${al?'heat':''} ${cls}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${c.diff&&num(v)&&v>0?'+':''}${fmt(v,c.d)}</td>`}).join('')}</tr>`;

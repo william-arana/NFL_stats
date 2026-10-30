@@ -59,6 +59,7 @@ input:focus-visible,button:focus-visible,select:focus-visible,a:focus-visible{ou
 .av.mine{background:var(--blue-soft);color:var(--blue)}
 a.av{text-decoration:none}a.av:hover{text-decoration:underline}
 .name-fa{color:var(--good)!important}
+.name-mine{color:var(--blue)!important}
 
 /* "open player" link + menu */
 .plink{display:inline-grid;place-items:center;width:20px;height:20px;margin-left:4px;padding:0;border:0;border-radius:4px;background:none;color:var(--ink-2);cursor:pointer;vertical-align:-4px}
@@ -73,20 +74,18 @@ a.av{text-decoration:none}a.av:hover{text-decoration:underline}
 .navtools select optgroup{font-weight:600}
 
 /* phones: the frozen name column starts full width; once you swipe toward the stats it slides down to
-   ~46% of the screen and slides back open at the left edge. The name shortens with "…" while the Sleeper
-   icon and the FA / MINE badge stay visible; position and injury tags hide until you're back.
+   ~a third of the screen and slides back open at the left edge. The name shortens with "…" and the Sleeper
+   icon stays; position, injury and FA / MINE tags hide (FA names are green, yours are blue).
    site.js measures the full width (--stick-full), adds .sized, then toggles .narrow so the width animates. */
 @media (max-width:640px){
   .tablewrap .rank{width:22px;padding-left:4px;padding-right:2px}
   .tablewrap.sized th.stick,.tablewrap.sized td.stick{width:var(--stick-full);min-width:var(--stick-full);max-width:var(--stick-full);white-space:nowrap;overflow:hidden;
     transition:width .28s cubic-bezier(.2,.7,.3,1),min-width .28s cubic-bezier(.2,.7,.3,1),max-width .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s}
   .tablewrap.sized td.stick .pname{display:inline-block;vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:calc(var(--stick-full) - 12px);transition:max-width .28s cubic-bezier(.2,.7,.3,1)}
-  .tablewrap.narrow th.stick,.tablewrap.narrow td.stick{width:46vw;min-width:46vw;max-width:46vw;text-overflow:ellipsis;box-shadow:6px 0 8px -6px rgba(11,21,40,.35)}
+  .tablewrap.narrow th.stick,.tablewrap.narrow td.stick{width:34vw;min-width:34vw;max-width:34vw;text-overflow:ellipsis;box-shadow:6px 0 8px -6px rgba(11,21,40,.35)}
   .tablewrap.narrow td.stick{padding-right:6px}
-  .tablewrap.narrow td.stick .pname{max-width:calc(46vw - 62px)}
-  .tablewrap.narrow td.stick:has(.av) .pname{max-width:calc(46vw - 104px)}
-  .tablewrap.narrow td.stick :is(.pos,.inj){display:none}
-  .tablewrap.narrow td.stick .av{margin-left:3px;padding:1px 4px}
+  .tablewrap.narrow td.stick .pname{max-width:calc(34vw - 52px)}
+  .tablewrap.narrow td.stick :is(.pos,.inj,.av){display:none}
   .tablewrap.narrow td.stick .plink{margin-left:2px}
   .tablewrap.narrow tr.log td.stick > *{display:inline}
 }
