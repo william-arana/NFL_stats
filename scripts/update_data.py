@@ -49,6 +49,91 @@ def to_columns_json(df: pl.DataFrame) -> dict:
     df = round_floats(df, 3)
     return {"cols": df.columns, "rows": df.height, "data": {c: df[c].to_list() for c in df.columns}}
 
+
+def play_extras(season: int, raw: dict, pw: pl.DataFrame, t: pl.DataFrame) -> tuple[pl.DataFrame, pl.DataFrame]:
+    """Extra player + team columns from Next Gen Stats, FTN charting (CC-BY-SA, credit FTN Data via nflverse)
+    and play-by-play. Stored as sums/counts so the site can total any week range and divide."""
+    z = lambda c: pl.col(c).fill_null(0)  # noqa: E731
+    wk = pl.col("week").cast(pl.Int32)
+    # Next Gen Stats (weekly rows; week 0 = season total, skipped)
+    parts = []
+    n = raw.get("ngs_receiving")
+    if n is not None:
+        parts.append(n.filter(pl.col("week") > 0).select(pl.col("player_gsis_id").alias("player_id"), wk,
+            (z("avg_separation") * z("targets")).alias("sep_sum"), (z("avg_cushion") * z("targets")).alias("cush_sum"),
+            z("targets").alias("ngs_tgt"), (z("avg_yac_above_expectation") * z("receptions")).alias("yacoe_sum"), z("receptions").alias("ngs_rec")))
+    n = raw.get("ngs_rushing")
+    if n is not None:
+        parts.append(n.filter(pl.col("week") > 0).select(pl.col("player_gsis_id").alias("player_id"), wk,
+            z("rush_yards_over_expected").alias("ryoe"), z("rush_attempts").alias("ngs_att"),
+            (z("percent_attempts_gte_eight_defenders") / 100 * z("rush_attempts")).alias("box8"),
+            (z("avg_time_to_los") * z("rush_attempts")).alias("ttl_sum")))
+    n = raw.get("ngs_passing")
+    if n is not None:
+        parts.append(n.filter(pl.col("week") > 0).select(pl.col("player_gsis_id").alias("player_id"), wk,
+            (z("avg_time_to_throw") * z("attempts")).alias("ttt_sum"), (z("aggressiveness") / 100 * z("attempts")).alias("aggr"),
+            z("attempts").alias("ngs_patt"), (z("avg_completed_air_yards") * z("completions")).alias("cay_sum"), z("completions").alias("ngs_cmp")))
+    for p in parts:
+        pw = pw.join(p.unique(["player_id", "week"]), on=["player_id", "week"], how="left")
+
+    try:
+        pbp = nfl.load_pbp(seasons=[season])
+    except Exception as e:  # noqa: BLE001
+        log(f"pbp for extras: FAILED ({e})")
+        return pw, t
+    pbp = pbp.filter((pl.col("season_type") == "REG") & pl.col("play_type").is_in(["pass", "run"]))
+    try:
+        ftn = nfl.load_ftn_charting(seasons=[season]).select(
+            pl.col("nflverse_game_id").alias("game_id"), pl.col("nflverse_play_id").cast(pl.Float64).alias("play_id"),
+            "is_play_action", "is_screen_pass", "is_interception_worthy", "is_throw_away", "is_catchable_ball",
+            "is_contested_ball", "is_created_reception", "is_drop", "n_blitzers", "n_pass_rushers", "n_defense_box")
+        pbp = pbp.with_columns(pl.col("play_id").cast(pl.Float64)).join(ftn.unique(["game_id", "play_id"]), on=["game_id", "play_id"], how="left")
+        has_ftn = True
+    except Exception as e:  # noqa: BLE001
+        log(f"ftn for extras: FAILED ({e})")
+        has_ftn = False
+    b = lambda c: pl.col(c).fill_null(False).cast(pl.Int32) if has_ftn else pl.lit(0)  # noqa: E731
+    yl = pl.col("yardline_100")
+    tgt = pl.col("receiver_player_id").is_not_null() & (pl.col("pass") == 1)
+    rec = (pbp.filter(tgt).group_by(pl.col("receiver_player_id").alias("player_id"), wk).agg(
+        (yl <= 20).sum().alias("rz_tgt"), (yl <= 10).sum().alias("i10_tgt"), (pl.col("air_yards") >= 20).sum().alias("deep_tgt"),
+        b("is_catchable_ball").sum().alias("catchable"), b("is_contested_ball").sum().alias("contested"),
+        (b("is_contested_ball") * z("complete_pass")).sum().alias("contested_c"), b("is_drop").sum().alias("drops"),
+        b("is_created_reception").sum().alias("created")))
+    ru = (pbp.filter((pl.col("rush") == 1) & pl.col("rusher_player_id").is_not_null() & (z("qb_scramble") == 0))
+          .group_by(pl.col("rusher_player_id").alias("player_id"), wk).agg(
+          (yl <= 20).sum().alias("rz_car"), (yl <= 10).sum().alias("i10_car"), (yl <= 5).sum().alias("gl_car")))
+    qb = (pbp.filter((z("qb_dropback") == 1) & pl.col("passer_player_id").is_not_null())
+          .group_by(pl.col("passer_player_id").alias("player_id"), wk).agg(
+          pl.len().alias("db"), b("is_play_action").sum().alias("pa_db"), b("is_interception_worthy").sum().alias("int_worthy"),
+          b("is_throw_away").sum().alias("throwaways")))
+    for p in (rec, ru, qb):
+        pw = pw.join(p, on=["player_id", "week"], how="left")
+
+    # Team-week, both sides of the ball: o_* = this team's offense, d_* = what its defense allowed
+    def side(key: str, pre: str) -> pl.DataFrame:
+        g = pbp.group_by(pl.col(key).alias("team"), wk)
+        d = g.agg(pl.len().alias(pre + "plays"), z("epa").sum().alias(pre + "epa"), z("success").sum().alias(pre + "succ"),
+                  z("qb_dropback").sum().alias(pre + "db"), (pl.col("down") == 3).sum().alias(pre + "3d"),
+                  z("third_down_converted").sum().alias(pre + "3d_conv"),
+                  (z("yards_gained") >= 20).sum().alias(pre + "expl"),
+                  (b("is_play_action") * z("qb_dropback")).sum().alias(pre + "pa_db"),
+                  (pl.when((b("is_play_action") == 1) & (z("qb_dropback") == 1)).then(z("epa")).otherwise(0)).sum().alias(pre + "pa_epa"),
+                  (pl.when(z("qb_dropback") == 1).then((pl.col("n_blitzers").fill_null(0) > 0).cast(pl.Int32) if has_ftn else 0).otherwise(0)).sum().alias(pre + "blitz"),
+                  (pl.col("n_pass_rushers").fill_null(0) if has_ftn else pl.lit(0)).sum().alias(pre + "rushers"),
+                  ((pl.col("n_pass_rushers").is_not_null() & (z("qb_dropback") == 1)).cast(pl.Int32) if has_ftn else pl.lit(0)).sum().alias(pre + "rushers_n"),
+                  (pl.when(z("rush") == 1).then(pl.col("n_defense_box").fill_null(0) if has_ftn else 0).otherwise(0)).sum().alias(pre + "box"),
+                  ((pl.col("n_defense_box").is_not_null() & (z("rush") == 1)).cast(pl.Int32) if has_ftn else pl.lit(0)).sum().alias(pre + "box_n"))
+        # red zone: drives that reached the 20, and how many ended in a touchdown
+        dr = (pbp.filter(yl <= 20).group_by(pl.col(key).alias("team"), wk, "game_id", "fixed_drive")
+              .agg(pl.col("fixed_drive_result").last().alias("res"))
+              .group_by("team", "week").agg(pl.len().alias(pre + "rz"), (pl.col("res") == "Touchdown").sum().alias(pre + "rz_td")))
+        return d.join(dr, on=["team", "week"], how="left")
+    t = t.join(side("posteam", "o_"), on=["team", "week"], how="left").join(side("defteam", "d_"), on=["team", "week"], how="left")
+    log(f"play extras: NGS + FTN{'' if has_ftn else ' (FTN missing)'} + pbp joined")
+    return pw, t
+
+
 DEFENSE = ["DE", "DT", "NT", "DL", "LB", "OLB", "ILB", "MLB", "CB", "DB", "SAF", "S", "FS", "SS"]
 OLINE = ["T", "G", "C", "OT", "OG", "OL"]
 OL_SLOTS = ["LT", "LG", "C", "RG", "RT"]
@@ -84,12 +169,16 @@ def build_extra(raw: dict, players, bridge, t: pl.DataFrame, injuries: dict, ps:
                        (z("def_tackles_solo") + z("def_tackle_assists")).alias("tkl"), z("def_tackles_solo").alias("solo"),
                        z("def_tackles_for_loss").alias("tfl"), z("def_sacks").alias("sk"), z("def_qb_hits").alias("qbh"),
                        z("def_interceptions").alias("int"), z("def_pass_defended").alias("pd"),
-                       z("def_fumbles_forced").alias("ff"), z("def_tds").alias("td"))
+                       z("def_fumbles_forced").alias("ff"), z("def_tds").alias("td"),
+                       z("def_tackle_assists").alias("ast"), z("fumble_recovery_opp").alias("fr"),
+                       z("def_interception_yards").alias("int_yds"), z("def_safeties").alias("sfty"),
+                       (z("def_fg_blocks") + z("def_punt_blocks") + z("def_pat_blocks")).alias("blk"),
+                       z("def_sack_yards").alias("sk_yds"), z("def_tackles_for_loss_yards").alias("tfl_yds"))
         sc, pdf = raw.get("snap_counts"), raw.get("pfr_def")
         if sc is not None and bridge is not None:
             snaps = (sc.filter(pl.col("game_type") == "REG").join(bridge, on="pfr_player_id", how="inner")
                      .select("player_id", pl.col("week").cast(pl.Int32), pl.col("defense_snaps").alias("snaps"),
-                             pl.col("defense_pct").alias("snap_pct")).unique(["player_id", "week"]))
+                             pl.col("defense_pct").alias("snap_pct"), pl.col("st_snaps")).unique(["player_id", "week"]))
             dw = dw.join(snaps, on=["player_id", "week"], how="left")
         if pdf is not None and bridge is not None:
             pf = (pdf.filter(pl.col("game_type") == "REG").join(bridge, on="pfr_player_id", how="inner")
@@ -97,8 +186,17 @@ def build_extra(raw: dict, players, bridge, t: pl.DataFrame, injuries: dict, ps:
                           pl.col("def_times_hurried").alias("hurries"), pl.col("def_times_blitzed").alias("blitz"),
                           pl.col("def_targets").alias("tgt"), pl.col("def_completions_allowed").alias("cmp"),
                           pl.col("def_yards_allowed").alias("yds_alw"), pl.col("def_receiving_td_allowed").alias("td_alw"),
-                          pl.col("def_missed_tackles").alias("mtkl")).unique(["player_id", "week"]))
+                          pl.col("def_missed_tackles").alias("mtkl"), pl.col("def_air_yards_completed").alias("air_alw"),
+                          pl.col("def_yards_after_catch").alias("yac_alw"),
+                          (pl.col("def_adot").fill_null(0) * pl.col("def_targets").fill_null(0)).alias("cov_ay")).unique(["player_id", "week"]))
             dw = dw.join(pf, on=["player_id", "week"], how="left")
+        dc = raw.get("depth_charts")
+        if dc is not None and "pos_abb" in dc.columns:  # current depth chart slot (LDE, RCB…; 2 = backup)
+            sl = (dc.filter(pl.col("pos_grp").str.ends_with(" D")) if "pos_grp" in dc.columns else dc).filter(pl.col("gsis_id").is_not_null())
+            sl = sl.sort("pos_rank").unique("gsis_id", keep="first").select(
+                pl.col("gsis_id").alias("player_id"),
+                (pl.col("pos_abb") + pl.when(pl.col("pos_rank") > 1).then(pl.col("pos_rank").cast(pl.Utf8)).otherwise(pl.lit(""))).alias("slot"))
+            dw = dw.join(sl, on="player_id", how="left")
         (SITE_DIR / "def_week.json").write_text(json.dumps(to_columns_json(round_floats(dw, 2)), separators=(",", ":")))
         log(f"defensive players: {dw.height} player-weeks")
 
@@ -205,7 +303,11 @@ def main() -> None:
     # ---------- site files ----------
     ps, sched = raw["player_week"], raw["schedule"]
     games = sched.filter(pl.col("game_type") == "REG") if sched is not None else None
-    last_week = int(games.filter(pl.col("home_score").is_not_null())["week"].max() or 0) if games is not None else 0
+    # a week counts as completed only when every game in it has a final score (Thursday night alone doesn't end the week)
+    last_week = 0
+    if games is not None:
+        wk_done = games.group_by("week").agg(pl.col("home_score").is_not_null().all().alias("done")).filter(pl.col("done"))
+        last_week = int(wk_done["week"].max() or 0) if wk_done.height else 0
 
     # pfr_player_id -> gsis_id bridge for snap counts
     bridge = None
@@ -309,6 +411,11 @@ def main() -> None:
                         + 6 * (pl.col("def_tds") + pl.col("special_teams_tds")) + 2 * pl.col("def_safeties")
                         + 2 * (pl.col("def_fg_blocks") + pl.col("def_punt_blocks") + pl.col("def_pat_blocks")) + pa_pts
                         ).alias("dst_pts"))
+
+    try:
+        pw, t = play_extras(season, raw, pw, t)
+    except Exception as e:  # noqa: BLE001
+        log(f"play extras: FAILED ({e})")
 
     # Schedule (all games, with implied team totals)
     sch = games.select("game_id", pl.col("week").cast(pl.Int32), "gameday", "gametime", "weekday", "away_team", "home_team",

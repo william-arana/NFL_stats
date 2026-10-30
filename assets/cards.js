@@ -64,7 +64,10 @@
     const all=IX._td;const rank=(k,desc)=>[...all].sort((a,b)=>desc?b[k]-a[k]:a[k]-b[k]).findIndex(x=>x.t===team)+1;
     const rr=IX.byT.get(team)||[];const n=rr.length||1;const per=k=>sum(rr.map(r=>r[k]))/n;
     const w=rr.filter(r=>num(r.points_for));
-    return {rows:rr,rec:`${w.filter(r=>r.points_for>r.points_against).length}-${w.filter(r=>r.points_for<r.points_against).length}`,g:rr.length,pa:per('points_against'),ya:per('yards_allowed'),pya:per('pass_yards_allowed'),rya:per('rush_yards_allowed'),pr:per('def_pressures'),sk:per('def_sacks'),tk:per('def_interceptions')+per('fumble_recovery_opp'),dst:per('dst_pts'),
+    if(!IX._td2){const S=(rows,k)=>sum(rows.map(r=>r[k]));IX._td2={};for(const [t2,rows] of IX.byT){const d=(a,b)=>{const x=S(rows,b);return x?S(rows,a)/x:null};IX._td2[t2]={rz:d('d_rz_td','d_rz'),expl:rows.length?S(rows,'d_expl')/rows.length:null,third:d('d_3d_conv','d_3d'),blitz:d('d_blitz','d_rushers_n'),rushers:d('d_rushers','d_rushers_n'),epa:d('d_epa','d_plays')}}
+      const ks=Object.keys(IX._td2);for(const [k,desc] of [['rz',false],['expl',false],['third',false],['blitz',true],['rushers',true],['epa',false]]){ks.filter(x=>num(IX._td2[x][k])).sort((a,b)=>desc?IX._td2[b][k]-IX._td2[a][k]:IX._td2[a][k]-IX._td2[b][k]).forEach((x,i)=>IX._td2[x][k+'_rk']=i+1)}}
+    const x2=IX._td2[team]||{};
+    return {x2,rows:rr,rec:`${w.filter(r=>r.points_for>r.points_against).length}-${w.filter(r=>r.points_for<r.points_against).length}`,g:rr.length,pa:per('points_against'),ya:per('yards_allowed'),pya:per('pass_yards_allowed'),rya:per('rush_yards_allowed'),pr:per('def_pressures'),sk:per('def_sacks'),tk:per('def_interceptions')+per('fumble_recovery_opp'),dst:per('dst_pts'),
       rk:{pa:rank('pa',false),ya:rank('ya',false),pya:rank('pya',false),rya:rank('rya',false),pr:rank('pr',true),sk:rank('sk',true),tk:rank('tk',true),dst:rank('dst',true)},n:all.length};
   }
   /* FP-per-game rank within position (min 2 games) for the chosen scoring */
@@ -149,6 +152,11 @@
     QB:[xr('cmp_pct','Cmp %','%','completions','attempts'),xs('passing_air_yards','Air yds',0),xm('passing_cpoe','CPOE',1),xs('passing_epa','Pass EPA',1),xs('qb_pressured','Pressured',0),xs('qb_blitzed','Blitzed',0),xm('offense_pct','Snap %','%'),xs('xfp','xFP',1),XFUM],
     RB:[xr('ypc','YPC',1,'rushing_yards','carries'),xs('ybc','YBC',0),xs('yac_rush','YAC (rush)',0),xs('broken_tackles','Brk tkl',0),xs('rushing_first_downs','Rush 1D',0),xs('rushing_epa','Rush EPA',1),xm('target_share','Tgt %','%'),xs('receiving_yards_after_catch','Rec YAC',0),XFUM],
     WR:[xr('catch','Catch %','%','receptions','targets'),xr('ypt','Yds/tgt',1,'receiving_yards','targets'),xr('adot','aDOT',1,'receiving_air_yards','targets'),xs('receiving_yards_after_catch','YAC',0),xs('receiving_first_downs','1st dn',0),xm('air_yards_share','Air share','%'),xm('wopr','WOPR',2),xs('receiving_epa','Rec EPA',1),XFUM]};
+  /* tracking (NGS), charting (FTN) and red-zone extras */
+  const xw=(k,l,f,a,b)=>({k,l,f,v:L=>{const d=SL(L,b);return d?SL(L,a)/d:null}});
+  XCOLS.QB.push(xw('ttt','Time to throw',2,'ttt_sum','ngs_patt'),xw('aggr_pct','Aggressive %','%','aggr','ngs_patt'),xw('pa_pct','Play-action %','%','pa_db','db'),xs('int_worthy','INT-worthy',0),xs('throwaways','Throwaways',0));
+  XCOLS.RB.push({k:'ryoe',l:'RYOE',f:1,sum:true,v:L=>SL(L,'ngs_att')?SL(L,'ryoe'):null},xw('ryoe_att','RYOE/att',2,'ryoe','ngs_att'),xw('box8_pct','8+ box %','%','box8','ngs_att'),xs('rz_car','RZ car',0),xs('gl_car','GL car',0),xs('rz_tgt','RZ tgt',0));
+  XCOLS.WR.push(xw('sep','Separation',1,'sep_sum','ngs_tgt'),xw('cush','Cushion',1,'cush_sum','ngs_tgt'),xw('yacoe','YAC over exp',1,'yacoe_sum','ngs_rec'),xs('deep_tgt','Deep tgt',0),xs('rz_tgt','RZ tgt',0),xs('contested','Contested',0),xs('drops','Drops',0),xw('catchable_pct','Catchable %','%','catchable','targets'));
   XCOLS.TE=XCOLS.WR;
   const xfmt=(v,f)=>!num(v)?'<span class="dim">–</span>':f==='%'?pct(v):v.toFixed(f);
   function bars(logs,sk,team){
@@ -216,7 +224,9 @@
       <tr><td class="l">Points allowed</td><td>${td.pa.toFixed(1)}</td><td>${rk(td.rk.pa,'1st = fewest allowed')}</td><td class="l">Pressures</td><td>${td.pr.toFixed(1)}</td><td>${rk(td.rk.pr,'1st = most')}</td></tr>
       <tr><td class="l">Yards allowed</td><td>${td.ya.toFixed(0)}</td><td>${rk(td.rk.ya,'1st = fewest allowed')}</td><td class="l">Sacks</td><td>${td.sk.toFixed(1)}</td><td>${rk(td.rk.sk,'1st = most')}</td></tr>
       <tr><td class="l">Pass yds allowed</td><td>${td.pya.toFixed(0)}</td><td>${rk(td.rk.pya,'1st = fewest allowed')}</td><td class="l">Takeaways</td><td>${td.tk.toFixed(1)}</td><td>${rk(td.rk.tk,'1st = most')}</td></tr>
-      <tr><td class="l">Rush yds allowed</td><td>${td.rya.toFixed(0)}</td><td>${rk(td.rk.rya,'1st = fewest allowed')}</td><td></td><td></td><td></td></tr>
+      <tr><td class="l">Rush yds allowed</td><td>${td.rya.toFixed(0)}</td><td>${rk(td.rk.rya,'1st = fewest allowed')}</td><td class="l">Blitz rate</td><td>${pct(td.x2.blitz)}</td><td>${td.x2.blitz_rk?rk(td.x2.blitz_rk,'1st = blitzes most'):''}</td></tr>
+      <tr><td class="l">Red zone TD %</td><td>${pct(td.x2.rz)}</td><td>${td.x2.rz_rk?rk(td.x2.rz_rk,'1st = fewest TDs allowed in the red zone'):''}</td><td class="l">Avg pass rushers</td><td>${num(td.x2.rushers)?td.x2.rushers.toFixed(1):'–'}</td><td>${td.x2.rushers_rk?rk(td.x2.rushers_rk,'1st = sends the most'):''}</td></tr>
+      <tr><td class="l">Explosive plays / g</td><td>${f1(td.x2.expl)}</td><td>${td.x2.expl_rk?rk(td.x2.expl_rk,'1st = fewest 20+ yd plays allowed'):''}</td><td class="l">3rd down %</td><td>${pct(td.x2.third)}</td><td>${td.x2.third_rk?rk(td.x2.third_rk,'1st = lowest conversion rate allowed'):''}</td></tr>
     </tbody></table></div><div class="note">Defense ranks: green = strong defense (tough matchup), red = weak.</div></section>
     <section><h4>Game log</h4><div class="scr"><table data-cols="card-dst-log"><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>D/ST</th><th>Pts alw</th><th>Pass alw</th><th>Rush alw</th><th>Sk</th><th>Prs</th><th>INT</th><th>FR</th><th>TD</th></tr></thead><tbody>${td.rows.map(r=>`<tr><td class="l">${gbtn(gameKey(team,r.week),r.week)}</td><td class="l">${oppBtn(r.opponent_team,((gameOf(team,r.week)||{}).at?'@ ':'vs ')+r.opponent_team,null)}</td><td class="fp">${f1(r.dst_pts)}</td><td>${f0(r.points_against)}</td><td>${f0(r.pass_yards_allowed)}</td><td>${f0(r.rush_yards_allowed)}</td><td>${f0(r.def_sacks)}</td><td>${f0(r.def_pressures)}</td><td>${f0(r.def_interceptions)}</td><td>${f0(r.fumble_recovery_opp)}</td><td>${f0((r.def_tds||0)+(r.special_teams_tds||0))}</td></tr>`).join('')}</tbody></table></div></section>
     ${personnelHTML(team)}
