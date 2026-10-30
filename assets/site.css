@@ -268,3 +268,9 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
   .pc-head{border-radius:14px 14px 0 0}
 }
 @media (max-width:640px){.pc-head{touch-action:none;cursor:grab}.pc-head .pc-crumbs{touch-action:pan-x}.pc{overscroll-behavior-y:contain}}
+/* Waivers: kicker / defense status tags */
+.kd-fa,.kd-mine,.kd-own{font:500 10.5px var(--f-mono);padding:1px 6px;border-radius:3px;white-space:nowrap}
+.kd-fa{background:var(--good-soft);color:var(--good)}.kd-mine{background:var(--blue-soft);color:var(--blue)}.kd-own{background:var(--head);color:var(--ink-2)}
+/* Columns button inside cards / pop-outs: smaller, tucked above the table */
+:is(.pc,.pw) .colbar{padding:0 0 4px}
+:is(.pc,.pw) .colbtn{font-size:11px;padding:2px 8px}

@@ -18,6 +18,8 @@ Done when: every player/team/game has a link you can share or bookmark, phone ba
 
 ## Ideas (not scheduled)
 
+- 2026-10-29 · **Bug to fix:** the stat description's "in the Guide" link opens the Guide but doesn't scroll to / select that stat (William, talk through 10/30).
+
 - 2026-10-29 · **Monitor / health check:** GitHub Action every 12h (or daily). Checks: each team's presser source has something new within its expected window (skip bye weeks using the nflverse schedule); page structure still parses (title, date, body); nflverse data updated on time; sitemap pages load, no broken links. On failure, open a GitHub Issue naming the team, the check and the last success (GitHub app pushes it to William's phone). Log to `monitor/status.json`; maybe a small status page later. *Ideas only — don't build yet.*
 - 2026-10-29 · Track coach reliability: over a season, did "he'll get a bigger role" actually happen? Weight each coach's signals by their track record.
 - 2026-10-29 · Outlooks are the same for every user → generate once a week and cache. Only personal Lab runs cost credits.
@@ -44,4 +46,6 @@ Done when: every player/team/game has a link you can share or bookmark, phone ba
 - 2026-10-29 · MLB data (MLB Stats API, Statcast) is likely non-commercial-only; check terms before planning paid MLB features. FPL API is unofficial and the Premier League owns the data; fine free, check terms before charging.
 - 2026-10-29 · Differentiators: presser signals, William's own metrics (backtested), much easier Lab, everything clickable/navigable, data-only outlooks that get graded.
 - 2026-10-29 · Cards: drop-down + draggable pop-out windows (see docs/SITEMAP.md → Decided). Game card: both teams, Vegas line, weather, top fantasy scorers.
+- 2026-10-29 · Whole-roster coverage added: kickers (Sleeper default kicker points), defensive players (box score + PFR pressures/coverage), offensive linemen. New Stats tabs (Defenders, O-line, Kickers), kicker/defender/lineman cards, K + DEF in Waivers search/filters, D/ST card shows pass rush, coverage and next opponent's O-line, Columns button inside cards.
+- 2026-10-29 · O-line data limit: no free per-lineman pressures allowed (PFF film charting / NFL tracking data → ESPN Pass Block Win Rate, published only in articles). We use free team-level pressure/sack/YBC rates *with vs without* each lineman (games started vs not). nflverse participation data (on-field per play) isn't available for 2026.
 - 2026-10-29 · Context lives in this repo (CLAUDE.md + ROADMAP.md + docs/), not a claude.ai Project.

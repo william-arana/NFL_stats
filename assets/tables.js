@@ -8,7 +8,7 @@
   const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const keyOf=th=>th.dataset.k||th.dataset.c||th.textContent.trim().replace(/\s+/g,' ');
   const labelOf=th=>th.textContent.trim().replace(/\s+/g,' ')||keyOf(th);
-  const isLocked=th=>th.classList.contains('rank')||th.classList.contains('stick')||th.textContent.trim()==='#';
+  const isLocked=th=>th.classList.contains('rank')||th.classList.contains('stick')||th.textContent.trim()==='#'||!th.textContent.trim()||!!th.closest('.pc,.pw')&&th.cellIndex===0;
   const cfgOf=id=>{const c=LS.get(id);return {hide:(c&&c.hide)||[],order:(c&&c.order)||[]}};
 
   function headRow(t){return t.tHead&&t.tHead.rows.length===1?t.tHead.rows[0]:null}
@@ -36,7 +36,7 @@
   }
   /* the "Columns" button sits just above the table's scroll box */
   function bar(t,cfg){
-    const wrap=t.closest('.tablewrap')||t;let b=wrap.previousElementSibling;
+    const wrap=t.closest('.tablewrap,.scr')||t;let b=wrap.previousElementSibling;
     if(!b||!b.classList.contains('colbar')){b=document.createElement('div');b.className='colbar';wrap.parentNode.insertBefore(b,wrap)}
     b.dataset.for=t.dataset.cols;
     const hr=headRow(t);const hidden=hr?[...hr.cells].filter(c=>!isLocked(c)&&cfg.hide.includes(keyOf(c))).length:0;

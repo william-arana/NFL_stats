@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=20261029e">
-<script src="assets/site.js?v=20261029e" defer></script>
-<script src="assets/cards.js?v=20261029e" defer></script>
-<script src="assets/glossary.js?v=20261029e" defer></script>
-<script src="assets/tables.js?v=20261029e" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=20261029f">
+<script src="assets/site.js?v=20261029f" defer></script>
+<script src="assets/cards.js?v=20261029f" defer></script>
+<script src="assets/glossary.js?v=20261029f" defer></script>
+<script src="assets/tables.js?v=20261029f" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -133,6 +133,9 @@ th.gap,td.gap{padding:0;width:10px;border-bottom-color:transparent}
     <a href="#teams" data-tab="teams">Teams</a>
     <a href="#dvp" data-tab="dvp">Defense vs position</a>
     <a href="#schedule" data-tab="schedule">Schedule &amp; lines</a>
+    <a href="#defenders" data-tab="defenders">Defenders</a>
+    <a href="#oline" data-tab="oline">O-line</a>
+    <a href="#kickers" data-tab="kickers">Kickers</a>
   </div>
 </div></header>
 
@@ -161,9 +164,12 @@ Promise.all(['players','teams','schedule','meta'].map(n=>fetch('data/site/'+n+'.
 }).catch(e=>{$('#panel').innerHTML=`<div class="empty">Couldn't load the data files (${esc(e.message)}). If you're opening this from your computer, open it through the website instead.</div>`});
 
 window.addEventListener('hashchange',route);
+let LEDE0=null;
 function route(){
   if(!P)return;
-  let tab=(location.hash||'#players').slice(1);if(!['players','teams','dvp','schedule'].includes(tab))tab='players';
+  const [h0,hTeam]=(location.hash||'#players').slice(1).split('/');let tab=h0;if(!['players','teams','dvp','schedule','defenders','oline','kickers'].includes(tab))tab='players';
+  if(LEDE0==null)LEDE0=$('#lede').textContent;if(!XT[tab])$('#lede').textContent=LEDE0;
+  if(XT[tab]){document.querySelectorAll('.tabs a').forEach(a=>a.setAttribute('aria-current',a.dataset.tab===tab));XTab(tab,hTeam&&/^[A-Z]{2,3}$/.test(hTeam)?hTeam:null);return}
   document.querySelectorAll('.tabs a').forEach(a=>a.setAttribute('aria-current',a.dataset.tab===tab));
   ({players:Players,teams:Teams,dvp:DvP,schedule:Schedule})[tab]();
 }
@@ -415,6 +421,79 @@ function drawDvP(){
 }
 
 /* ---------- SCHEDULE ---------- */
+
+/* ---------- DEFENDERS / O-LINE / KICKERS ----------
+   One table builder for the three roster tabs. Data files load the first time a tab opens.
+   #defenders/KC (or #oline/KC, #kickers/KC) opens the tab filtered to a team — the D/ST card links here. */
+const XD={};
+function xload(f){return XD[f]||(XD[f]=fetch('data/site/'+f+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(f+'.json');return r.json()}).then(rows))}
+const DPOS={DE:'DL',DT:'DL',NT:'DL',DL:'DL',LB:'LB',OLB:'LB',ILB:'LB',MLB:'LB',CB:'DB',DB:'DB',SAF:'DB',S:'DB',FS:'DB',SS:'DB'};
+const passerRating=(c,a,y,td,i)=>{if(!a)return null;const cl=v=>Math.max(0,Math.min(2.375,v));return (cl((c/a-.3)*5)+cl((y/a-3)*.25)+cl(td/a*20)+cl(2.375-i/a*25))/6*100};
+const XT={
+  defenders:{file:'def_week',noun:'defenders',pos:['ALL','DL','LB','DB'],minG:true,mode:true,
+    lede:'Every defensive player: tackles, sacks, pressures (Pro Football Reference charting) and what they allow in coverage. Click a name for his card.',
+    agg(rs){const by=new Map();for(const r of rs){let a=by.get(r.player_id);if(!a){a={id:r.player_id,name:r.player_display_name,pos:r.position,grp:DPOS[r.position]||r.position,team:r.team,g:0,_sp:[]};by.set(r.player_id,a)}
+        a.team=r.team;a.g++;if(num(r.snap_pct))a._sp.push(r.snap_pct);for(const k of ['snaps','tkl','solo','tfl','sk','qbh','int','pd','ff','td','prs','hurries','blitz','tgt','cmp','yds_alw','td_alw','mtkl'])a[k]=(a[k]||0)+(num(r[k])?r[k]:0)}
+      for(const a of by.values()){a.snap_pct=a._sp.length?a._sp.reduce((x,y)=>x+y,0)/a._sp.length:null;a.rating=passerRating(a.cmp,a.tgt,a.yds_alw,a.td_alw,a.int);a.cmp_pct=div(a.cmp,a.tgt)}
+      return [...by.values()]},
+    pg:['snaps','tkl','solo','tfl','sk','qbh','int','pd','ff','td','prs','hurries','blitz','tgt','cmp','yds_alw','td_alw','mtkl'],
+    cols:[{k:'snap_pct',label:'Snap %',d:'%',heat:1,tip:'Share of defensive snaps in games he played'},{k:'tkl',label:'Tkl',d:1,heat:1},{k:'tfl',label:'TFL',d:1,heat:1},{k:'sk',label:'Sacks',d:1,heat:1},{k:'qbh',label:'QB hits',d:1,heat:1},{k:'prs',label:'Pressures',d:1,heat:1,tip:'Hurries + QB hits + sacks (PFR charting)'},{k:'hurries',label:'Hurries',d:1,heat:1},{k:'blitz',label:'Blitzes',d:1,heat:1},
+      {k:'int',label:'INT',d:1,heat:1},{k:'pd',label:'PD',d:1,heat:1,tip:'Passes defended'},{k:'ff',label:'FF',d:1,heat:1,tip:'Forced fumbles'},{k:'td',label:'TD',d:1},{k:'tgt',label:'Tgt',d:1,heat:1,tip:'Times targeted in coverage'},{k:'cmp_pct',label:'Cmp % alw',d:'%',heat:1,invert:1},{k:'yds_alw',label:'Yds alw',d:1,heat:1,invert:1},{k:'td_alw',label:'TD alw',d:1,heat:1,invert:1},{k:'rating',label:'Rating alw',d:1,heat:1,invert:1,tip:'Passer rating when targeted (lower = better coverage)'},{k:'mtkl',label:'Missed tkl',d:1,heat:1,invert:1}],
+    sort:'prs'},
+  oline:{file:'oline',noun:'linemen',pos:['ALL','T','G','C','OL'],minG:true,mode:false,
+    lede:'Offensive linemen: depth chart slot, snaps, and how the line did with him on the field vs without him (games he started vs games he didn\'t). Free data has no per-lineman pressures allowed — that needs film charting (PFF) or tracking data — so with/without is the honest proxy.',
+    agg(rs){return rs.map(r=>({...r,id:r.player_id,grp:r.pos,prs_d:num(r.prs_on)&&num(r.prs_off)?r.prs_off-r.prs_on:null,ybc_d:num(r.ybc_on)&&num(r.ybc_off)?r.ybc_on-r.ybc_off:null}))},
+    cols:[{k:'slot',label:'Slot',txt:1,tip:'Current depth chart: LT LG C RG RT (2 = backup)'},{k:'starts',label:'Starts',d:0,heat:1,tip:'Games with 50%+ of offensive snaps'},{k:'snap_pct',label:'Snap %',d:'%',heat:1},{k:'prs_on',label:'Prs % with',d:'%1',heat:1,invert:1,tip:'Team pressure rate allowed (pressures ÷ dropbacks) in games he started'},{k:'prs_off',label:'Prs % without',d:'%1',heat:1,invert:1,tip:'Same, in games he didn\'t start'},{k:'prs_d',label:'Prs Δ',d:'%1',diff:1,tip:'Without minus with: positive = fewer pressures with him'},{k:'g_off',label:'G without',d:0},
+      {k:'sk_on',label:'Sacks/g with',d:1,heat:1,invert:1},{k:'sk_off',label:'Sacks/g without',d:1,heat:1,invert:1},{k:'ybc_on',label:'YBC/carry with',d:2,heat:1,tip:'Team rushing yards before contact per carry in games he started'},{k:'ybc_off',label:'YBC/carry without',d:2,heat:1},{k:'ybc_d',label:'YBC Δ',d:2,diff:1,tip:'With minus without: positive = better run blocking with him'},{k:'inj',label:'Injury',txt:1}],
+    sort:'snap_pct'},
+  kickers:{file:'kickers',noun:'kickers',pos:null,minG:false,mode:true,
+    lede:'Kickers: field goals by distance, extra points and kicker points (Sleeper default: FG 0–39 = 3, 40–49 = 4, 50+ = 5, PAT = 1, misses −1). Implied total = how many points Vegas expects his team to score next week.',
+    agg(rs){const by=new Map();for(const r of rs){let a=by.get(r.player_id);if(!a){a={id:r.player_id,name:r.player_display_name,pos:'K',grp:'K',team:r.team,g:0};by.set(r.player_id,a)}a.team=r.team;a.g++;
+        for(const k of ['fg_made','fg_att','fg_0_39','fg_40_49','fg_50','fg_missed','pat_made','pat_att','pat_missed','k_pts'])a[k]=(a[k]||0)+(num(r[k])?r[k]:0);a.fg_long=Math.max(a.fg_long||0,r.fg_long||0)}
+      for(const a of by.values()){a.fg_pct=div(a.fg_made,a.fg_att);const n=nextImpl(a.team);a.impl=n}return [...by.values()]},
+    pg:['fg_made','fg_att','fg_0_39','fg_40_49','fg_50','fg_missed','pat_made','pat_att','pat_missed','k_pts'],
+    cols:[{k:'k_pts',label:'K pts',d:1,heat:1},{k:'impl',label:'Implied',d:1,heat:1,tip:'Team implied points next week (Vegas)'},{k:'fg_made',label:'FGM',d:1,heat:1},{k:'fg_att',label:'FGA',d:1,heat:1},{k:'fg_pct',label:'FG %',d:'%',heat:1},{k:'fg_long',label:'Long',d:0,heat:1,nopg:1},{k:'fg_0_39',label:'0–39',d:1,heat:1},{k:'fg_40_49',label:'40–49',d:1,heat:1},{k:'fg_50',label:'50+',d:1,heat:1},{k:'fg_missed',label:'Missed',d:1,heat:1,invert:1},{k:'pat_made',label:'XPM',d:1,heat:1},{k:'pat_missed',label:'XP miss',d:1,heat:1,invert:1}],
+    sort:'k_pts'}
+};
+function nextImpl(team){for(const g of G)if(g.week===META.next_week){if(g.home_team===team)return g.home_implied;if(g.away_team===team)return g.away_implied}return null}
+const xs={};
+function XTab(kind,team){
+  const C=XT[kind];const s=xs[kind]=xs[kind]||{q:'',team:'ALL',pos:'ALL',minG:kind==='oline'?1:2,mode:'tot',sort:C.sort,dir:-1};
+  if(team)s.team=team;
+  $('#lede').textContent=C.lede;
+  const teams=[...new Set(T.map(r=>r.team))].sort();
+  $('#panel').innerHTML=`<div class="controls">
+    ${C.pos?`<div class="ctl"><span>Position</span><div class="seg" id="x-pos">${C.pos.map(p=>`<button data-v="${p}" aria-pressed="${s.pos===p}">${p==='ALL'?'All':p}</button>`).join('')}</div></div>`:''}
+    <div class="ctl"><span>Team</span><select id="x-team"><option value="ALL">All teams</option>${teams.map(t=>`<option ${t===s.team?'selected':''}>${t}</option>`).join('')}</select></div>
+    ${C.mode?`<div class="ctl"><span>Show</span><div class="seg" id="x-mode"><button data-v="pg" aria-pressed="${s.mode==='pg'}">Per game</button><button data-v="tot" aria-pressed="${s.mode==='tot'}">Totals</button></div></div>`:''}
+    ${C.minG?`<div class="ctl"><span>Min games</span><input type="number" id="x-min" min="0" max="18" value="${s.minG}"></div>`:''}
+    <div class="ctl"><span>Search</span><input type="search" id="x-q" placeholder="Name" value="${esc(s.q)}"></div></div>
+  <div class="summary" id="x-sum"></div><div class="tablewrap"><table id="x-tbl"></table></div>
+  <div class="foot"><span>Data: nflverse (box score, snap counts, depth charts) + Pro Football Reference charting (pressures, coverage) via nflverse.</span></div>`;
+  $('#panel').querySelectorAll('.seg').forEach(g=>g.onclick=e=>{const b=e.target.closest('button');if(!b)return;g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));if(g.id==='x-pos')s.pos=b.dataset.v;else s.mode=b.dataset.v;draw()});
+  $('#x-team').onchange=e=>{s.team=e.target.value;history.replaceState(history.state,'',location.pathname+location.search+'#'+kind+(s.team==='ALL'?'':'/'+s.team));draw()};
+  if($('#x-min'))$('#x-min').oninput=e=>{s.minG=+e.target.value||0;draw()};
+  let tq;$('#x-q').oninput=e=>{clearTimeout(tq);tq=setTimeout(()=>{s.q=e.target.value.trim().toLowerCase();draw()},120)};
+  $('#x-sum').innerHTML='<span>Loading…</span>';
+  let ALL=null;
+  xload(C.file).then(rs=>{ALL=C.agg(rs);draw()}).catch(e=>{$('#x-sum').innerHTML=`<span>Couldn't load ${esc(C.noun)} (${esc(e.message)}). It appears after the next data refresh.</span>`});
+  function draw(){
+    if(!ALL)return;
+    let data=ALL.filter(a=>(s.team==='ALL'||a.team===s.team)&&(s.pos==='ALL'||a.grp===s.pos)&&(!C.minG||a.g>=s.minG)&&(!s.q||String(a.name).toLowerCase().includes(s.q)));
+    const pg=C.mode&&s.mode==='pg';
+    data=data.map(a=>{if(!pg)return a;const o={...a};for(const k of C.pg||[])o[k]=num(a[k])?a[k]/a.g:a[k];return o});
+    sortRows(data,s.sort,s.dir);
+    const heat=heatAlpha(data,C.cols);
+    $('#x-sum').innerHTML=`<span><b>${data.length}</b> ${C.noun}</span>${s.team!=='ALL'?`<span>${esc(s.team)} · <button type="button" class="pname" data-card="d:${esc(s.team)}">${esc(s.team)} team card</button></span>`:''}<span>${pg?'Per game':'Season totals'} · through Week ${META.last_completed_week}</span>`;
+    const th=`<thead><tr><th class="rank">#</th><th class="l stick" data-k="name">Player</th><th class="l" data-k="pos">Pos</th><th class="l" data-k="team">Team</th><th data-k="g">G</th>${C.cols.map(c=>`<th data-k="${c.k}" class="${c.txt?'l':''}" ${s.sort===c.k?`aria-sort="${s.dir<0?'descending':'ascending'}"`:''}>${gl(c.k,c.label,c.tip)}</th>`).join('')}</tr></thead>`;
+    const body=data.slice(0,400).map((a,i)=>`<tr><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="pname" data-card="p:${esc(a.id)}" data-name="${esc(a.name)}" aria-expanded="false">${esc(a.name)}</button></td><td class="l"><span class="pos">${esc(a.pos||'')}</span></td><td class="l"><button type="button" class="pname tm" data-card="d:${esc(a.team)}">${esc(a.team)}</button></td><td>${a.g}</td>${C.cols.map(c=>{const v=a[c.k];if(c.txt)return `<td class="l">${v?esc(v):'<span class="pos">–</span>'}</td>`;const al=heat[c.k]?heat[c.k](v):0;const cls=c.diff?(num(v)?(v>0?'pos-d':v<0?'neg-d':''):''):'';
+      return `<td class="${al?'heat':''} ${cls}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${c.diff&&num(v)&&v>0?'+':''}${fmt(v,c.d)}</td>`}).join('')}</tr>`).join('');
+    const tb=$('#x-tbl');tb.dataset.cols='stats-'+kind;
+    tb.innerHTML=data.length?th+'<tbody>'+body+'</tbody>':'<tbody><tr><td class="empty">No one matches. Clear the search or lower "Min games".</td></tr></tbody>';
+    tb.onclick=e=>{const h=e.target.closest('th[data-k]');if(!h)return;const k=h.dataset.k;if(s.sort===k)s.dir*=-1;else{s.sort=k;s.dir=(k==='name'||k==='team'||k==='pos'||k==='slot')?1:-1}draw()};
+  }
+}
+
 const ss={week:null};
 function Schedule(){
   const weeks=[...new Set(G.map(g=>g.week))].sort((a,b)=>a-b);if(ss.week==null)ss.week=Math.min(META.next_week,weeks[weeks.length-1]);
