@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Trade Analyzer</title>
+<title>Compare</title>
 <!-- link previews -->
 <meta name="description" content="Compare players and defenses side by side for a fantasy trade: points, usage, schedule and news.">
 <meta property="og:type" content="website">
@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=20261030g">
-<script src="assets/site.js?v=20261030g" defer></script>
-<script src="assets/cards.js?v=20261030g" defer></script>
-<script src="assets/glossary.js?v=20261030g" defer></script>
-<script src="assets/tables.js?v=20261030g" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.29">
+<script src="assets/site.js?v=1.29" defer></script>
+<script src="assets/cards.js?v=1.29" defer></script>
+<script src="assets/glossary.js?v=1.29" defer></script>
+<script src="assets/tables.js?v=1.29" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -152,13 +152,13 @@ td.wkdiv,th.wkdiv{border-left:2px solid var(--ink-3)}
 <body>
 <header class="sitenav"><div class="wrap">
   <a class="brand" href="./" title="Home">NFL<span>_</span>stats</a>
-  <nav aria-label="Site"><a href="./">Home</a><a href="guide.html">Guide</a><a href="stats.html">Stats</a><a href="lab.html">Lab</a><a href="waivers.html">Waivers</a><a href="trade.html" aria-current="page">Trade</a></nav>
+  <nav aria-label="Site"><a href="./">Home</a><a href="stats.html">Stats</a><a href="waivers.html">Waivers</a><a href="trade.html" aria-current="page">Compare</a><a href="lab.html">Lab</a><a href="guide.html">Guide</a></nav>
   <span class="upd" id="upd"></span>
   <div class="navtools" id="navtools"></div>
 </div></header>
 
 <header class="top"><div class="wrap">
-  <h1>Trade <span>Analyzer</span></h1>
+  <h1>Compare <span>Players</span></h1>
   <p class="lede">Put players and defenses on two sides and compare them on the same numbers: points per game, last 3 weeks, usage, weekly scores, rest-of-season schedule and the latest news. Pull players from any roster in your league or search anyone. Click a name for its full card. The link updates as you go, so you can send a trade to someone.</p>
 </div></header>
 
@@ -192,7 +192,7 @@ waitCards();
 function readHash(){const h=new URLSearchParams(location.hash.slice(1));const L=k=>(h.get(k)||'').split(',').map(decodeURIComponent).filter(Boolean);
   st.a=L('a');st.b=L('b');st.ta=h.has('ta')?+h.get('ta'):null;st.tb=h.has('tb')?+h.get('tb'):null}
 function writeHash(){const p=[];if(st.a.length)p.push('a='+st.a.map(encodeURIComponent).join(','));if(st.b.length)p.push('b='+st.b.map(encodeURIComponent).join(','));if(st.ta!=null)p.push('ta='+st.ta);if(st.tb!=null)p.push('tb='+st.tb);
-  history.replaceState(null,'','#'+p.join('&'))}
+  history.replaceState(null,'','#'+p.join('&'));try{localStorage.setItem('nfls-trade-hash',p.join('&'))}catch(e){}}
 
 /* ---------- per-entry numbers ---------- */
 const isDef=k=>k.startsWith('DEF:');
