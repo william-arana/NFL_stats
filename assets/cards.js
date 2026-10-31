@@ -696,15 +696,27 @@
     sec.querySelector('[data-pl-body]').innerHTML='<span class="spin"></span>Loading plays…';fillPlays(sec.parentNode||sec);
   });
 
-  /* "Add to Trade: A · B" on player cards: adds him to that side of the Trade page (keeps whatever is already there) */
-  function tradeAdd(id){return `<span class="tr-add">Add to Compare <button type="button" data-trade="a" data-tid="${esc(id)}" title="Add to side A on the Compare page">A</button><button type="button" data-trade="b" data-tid="${esc(id)}" title="Add to side B on the Compare page">B</button></span>`}
+  /* "Add to Compare: A · B" on player cards: adds him to that side of the Compare page and stays put.
+     The button turns into a thin green check (click it again to take him off); keep adding from any page.
+     The list is saved in this browser (nfls-trade-hash) and the Compare page opens with it. */
+  const onTrade=()=>location.pathname.endsWith('trade.html');
+  function tradeQ(){let h='';try{h=onTrade()&&location.hash.length>1?location.hash.slice(1):(localStorage.getItem('nfls-trade-hash')||'')}catch(err){}return new URLSearchParams(h)}
+  const tradeL=(q,k)=>(q.get(k)||'').split(',').filter(Boolean);
+  const CHECK='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>';
+  function trBtn(side,id,on){const S=side.toUpperCase();return `<button type="button" data-trade="${side}" data-tid="${esc(id)}" class="${on?'on':''}" aria-pressed="${on}" title="${on?`On side ${S} · click to take him off`:`Add to side ${S} on the Compare page`}" aria-label="${on?`Remove from side ${S}`:`Add to side ${S}`}">${on?CHECK:S}</button>`}
+  function tradeAdd(id){const q=tradeQ();return `<span class="tr-add" data-tr="${esc(id)}"><a href="trade.html" class="tr-go" title="Open the Compare page">Add to Compare</a> ${trBtn('a',id,tradeL(q,'a').includes(id))}${trBtn('b',id,tradeL(q,'b').includes(id))}</span>`}
+  function paintTrade(){const q=tradeQ();document.querySelectorAll('.tr-add[data-tr]').forEach(w=>{const id=w.dataset.tr;
+    for(const side of ['a','b']){const on=tradeL(q,side).includes(id),b=w.querySelector(`[data-trade="${side}"]`);if(b&&b.classList.contains('on')!==on)b.outerHTML=trBtn(side,id,on)}})}
   document.addEventListener('click',e=>{const b=e.target.closest('[data-trade][data-tid]');if(!b)return;e.preventDefault();e.stopPropagation();
-    let h='';try{h=location.pathname.endsWith('trade.html')&&location.hash.length>1?location.hash.slice(1):(localStorage.getItem('nfls-trade-hash')||'')}catch(err){}
-    const q=new URLSearchParams(h);const side=b.dataset.trade,other=side==='a'?'b':'a',id=b.dataset.tid;
-    const L=k=>(q.get(k)||'').split(',').filter(Boolean);const mine=L(side).filter(x=>x!==id),theirs=L(other).filter(x=>x!==id);
-    q.set(side,[...mine,id].join(','));if(theirs.length)q.set(other,theirs.join(','));else q.delete(other);
+    const q=tradeQ();const side=b.dataset.trade,other=side==='a'?'b':'a',id=b.dataset.tid;const was=tradeL(q,side).includes(id);
+    const mine=tradeL(q,side).filter(x=>x!==id),theirs=tradeL(q,other).filter(x=>x!==id);
+    if(!was)mine.push(id);
+    if(mine.length)q.set(side,mine.join(','));else q.delete(side);if(theirs.length)q.set(other,theirs.join(','));else q.delete(other);
     const hash=decodeURIComponent(q.toString());try{localStorage.setItem('nfls-trade-hash',hash)}catch(err){}
-    if(location.pathname.endsWith('trade.html')){location.hash=hash;b.classList.add('ok');setTimeout(()=>b.classList.remove('ok'),900)}else location.href='trade.html#'+hash},true);
+    if(onTrade())location.hash=hash||'a=';   // on the Compare page itself: update the sides right away
+    paintTrade()},true);
+  addEventListener('storage',e=>{if(e.key==='nfls-trade-hash')paintTrade()});   // another tab changed the list
+  addEventListener('hashchange',()=>{if(onTrade())paintTrade()});
 
   /* markup helpers for pages */
   function pbtn(id,name,cls){return `<button type="button" class="pname ${cls||''}" data-card="p:${esc(id)}" data-name="${esc(name)}" aria-expanded="false">${esc(name)}</button>`}
