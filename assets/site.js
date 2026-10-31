@@ -142,6 +142,14 @@
   },true);
   /* a re-rendered or rotated table re-measures next time */
   phone.addEventListener&&phone.addEventListener('change',()=>document.querySelectorAll('.tablewrap.sized').forEach(el=>{el.classList.remove('narrow','sized')}));
+  /* every page: if the server has a newer version than the files this page loaded, reload once with ?v=<new>.
+     A new URL skips the browser's cached copy of the page (GitHub Pages lets browsers keep pages ~10 min),
+     so Stats, Lab etc. update themselves, not just Home. Once per version per tab, so it can't loop. */
+  (function(){const me=document.querySelector('script[src*="assets/site.js"]');const v=me&&(me.src.match(/[?&]v=([^&]+)/)||[])[1];if(!v)return;
+    fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{
+      if(!j||!j.version||j.version===v||parseFloat(j.version.split('.')[1])<parseFloat(v.split('.')[1]))return;
+      const k='nfls-upd-'+j.version;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){return}
+      const u=new URL(location.href);u.searchParams.set('v',j.version);location.replace(u.pathname+u.search+u.hash)}).catch(()=>{})})();
   window.NFLS={leagueUrl,badge,plink,setTheme,loadLeagues,getLeague,rosterStatus,onLeague(cb){listeners.push(cb);if(leagueCfg)cb(getLeague())}};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
 })();
