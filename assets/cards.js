@@ -681,13 +681,14 @@
       if(!el||!phone.matches||e.touches.length!==1||!el.contains(e.target))return;
       if(e.target.closest('.pc-crumbs,.scr,.seg,input,select,textarea'))return;
       const inHead=!!e.target.closest('.pc-head');if(!inHead&&el.scrollTop>0)return;
-      drag={y0:e.touches[0].clientY,x0:e.touches[0].clientX,t0:Date.now(),dy:0,on:false,inHead};
+      drag={y0:e.touches[0].clientY,x0:e.touches[0].clientX,t0:Date.now(),dy:0,on:false,inHead,btn:!!e.target.closest('button,a,label')};
     },{passive:true});
     document.addEventListener('touchmove',e=>{
       if(!drag||!el)return;const t=e.touches[0];const dy=t.clientY-drag.y0,dx=t.clientX-drag.x0;
       if(!drag.on){if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>8){drag=null;return}
         if(dy<-4&&!drag.inHead){drag=null;return}   /* scrolling the card up: let it scroll */
-        if(dy>6&&(drag.inHead||el.scrollTop<=0)){drag.on=true;el.style.transition='none';if(shade)shade.style.transition='none'}else return}
+        /* a tap on a button (Columns, chips, names) with a little finger roll is still a tap: needs a real pull to start closing */
+        if(dy>(drag.btn?18:6)&&(drag.inHead||el.scrollTop<=0)){drag.on=true;el.style.transition='none';if(shade)shade.style.transition='none'}else return}
       e.preventDefault();drag.dy=Math.max(0,dy);
       el.style.transform=`translateY(${drag.dy}px)`;if(shade)shade.style.opacity=String(Math.max(0,1-drag.dy/400));
     },{passive:false});
