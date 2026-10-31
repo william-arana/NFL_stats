@@ -443,3 +443,96 @@ JOIN dz ON dz.defense = g.opp AND dz.position = a.position
 WHERE coalesce(a.status, 'fa') = 'fa' AND a.position IN ('RB','WR','TE') AND r.snap_l3 >= 0.3
 ORDER BY pickup_score DESC
 LIMIT 40;
+
+-- @recipe handcuffs
+-- @title Handcuffs: backups whose starter is out
+-- @blurb Teams whose top-2 RB (by touches, last 4 weeks) is on IR / PUP or listed Out or Doubtful on the latest injury report, with the healthy backups who'd inherit the work. Starter touches/g = how much work is up for grabs. League = your selected Sleeper league (fa = free agent).
+WITH lw AS (SELECT max(week) AS w FROM players),
+recent AS (
+  SELECT player_id, any_value(player_display_name) AS name, arg_max(team, week) AS team,
+    avg(offense_pct) AS snap, avg(carries + targets) AS touches, avg(fantasy_points_ppr) AS ppr
+  FROM players WHERE position = 'RB' AND week > (SELECT w FROM lw) - 4 GROUP BY player_id),
+ranked AS (SELECT *, row_number() OVER (PARTITION BY team ORDER BY touches DESC) AS rk FROM recent),
+report AS (SELECT gsis_id AS player_id, arg_max(report_status, week) AS report FROM injuries GROUP BY gsis_id),
+out_now AS (
+  SELECT r.player_id, coalesce(st.s, rp.report) AS why
+  FROM ranked r LEFT JOIN status st USING (player_id) LEFT JOIN report rp USING (player_id)
+  WHERE st.player_id IS NOT NULL OR rp.report IN ('Out', 'Doubtful'))
+SELECT h.team, h.name AS out_starter, o.why AS status, round(h.touches, 1) AS starter_touches_g, round(h.ppr, 1) AS starter_ppr_g,
+  b.name AS backup, round(b.snap * 100) AS backup_snap_pct, round(b.touches, 1) AS backup_touches_g, round(b.ppr, 1) AS backup_ppr_g,
+  a.status AS league
+FROM ranked h JOIN out_now o USING (player_id)
+JOIN ranked b ON b.team = h.team AND b.player_id <> h.player_id AND b.rk <= 3
+LEFT JOIN out_now bo ON bo.player_id = b.player_id
+LEFT JOIN avail a ON a.player_id = b.player_id
+WHERE h.rk <= 2 AND bo.player_id IS NULL
+ORDER BY h.touches DESC, b.touches DESC;
+
+-- @recipe sell_high
+-- @title Sell high: scoring above their usage
+-- @blurb Points per game well above expected points (xFP: what usage like his normally scores). Big gaps usually come from long or lucky touchdowns and tend to shrink. Good trade chips, or players not to chase on waivers. 4+ games, 8+ PPR/g.
+WITH lw AS (SELECT max(week) AS w FROM players),
+s AS (
+  SELECT player_id, any_value(player_display_name) AS player, any_value(position) AS position, arg_max(team, week) AS team, count(*) AS g,
+    avg(fantasy_points_ppr) AS ppr, avg(xfp) AS xfp,
+    avg(fantasy_points_ppr) FILTER (WHERE week > (SELECT w FROM lw) - 3) AS ppr_l3, avg(xfp) FILTER (WHERE week > (SELECT w FROM lw) - 3) AS xfp_l3,
+    sum(coalesce(rushing_tds, 0) + coalesce(receiving_tds, 0)) AS rush_rec_tds
+  FROM players WHERE position IN ('QB', 'RB', 'WR', 'TE') GROUP BY player_id HAVING count(*) >= 4)
+SELECT s.player, s.position, s.team, s.g, round(s.ppr, 1) AS ppr_g, round(s.xfp, 1) AS xfp_g, round(s.ppr - s.xfp, 1) AS above_expected,
+  round(s.ppr_l3, 1) AS ppr_l3, round(s.xfp_l3, 1) AS xfp_l3, s.rush_rec_tds, a.status AS league
+FROM s LEFT JOIN avail a USING (player_id)
+WHERE s.ppr >= 8 AND s.xfp IS NOT NULL
+ORDER BY s.ppr - s.xfp DESC
+LIMIT 30;
+
+-- @recipe player_usage
+-- @title Player usage week by week
+-- @blurb One player, every game: snap share, carries, targets, catches, yards, red zone / inside-10 / goal-line looks, TDs, target share, expected points and PPR. Pick the player in the form above.
+WITH settings AS (SELECT '00-0034975' AS player)
+SELECT p.week, p.opponent_team AS opp, round(p.offense_pct * 100) AS snap_pct, p.offense_snaps AS snaps,
+  p.carries, p.targets, p.receptions AS rec, p.rushing_yards AS rush_yds, p.receiving_yards AS rec_yds,
+  coalesce(p.rz_car, 0) + coalesce(p.rz_tgt, 0) AS rz_opps, coalesce(p.i10_car, 0) + coalesce(p.i10_tgt, 0) AS i10_opps, coalesce(p.gl_car, 0) AS gl_car,
+  coalesce(p.rushing_tds, 0) + coalesce(p.receiving_tds, 0) AS tds, round(p.target_share * 100) AS tgt_share_pct,
+  round(p.xfp, 1) AS xfp, round(p.fantasy_points_ppr, 1) AS ppr
+FROM players p, settings s
+WHERE p.player_id = s.player::VARCHAR
+ORDER BY p.week;
+
+-- @recipe rz_leaders
+-- @title Red zone and goal-line leaders
+-- @blurb Who gets the ball near the end zone: red zone (inside the 20) carries + targets, inside-10 looks and goal-line carries (inside the 5) per game over the last N weeks, plus each player's share of his team's red zone looks. TDs follow these.
+WITH settings AS (SELECT 4 AS last_weeks),
+lw AS (SELECT max(week) AS w FROM players),
+p AS (SELECT * FROM players, settings s WHERE week > (SELECT w FROM lw) - s.last_weeks AND position IN ('QB', 'RB', 'WR', 'TE')),
+t AS (SELECT team, sum(coalesce(rz_car, 0) + coalesce(rz_tgt, 0)) AS team_rz FROM p GROUP BY team),
+x AS (
+  SELECT player_id, any_value(player_display_name) AS player, any_value(position) AS position, arg_max(team, week) AS team, count(*) AS g,
+    sum(coalesce(rz_car, 0) + coalesce(rz_tgt, 0)) AS rz, sum(coalesce(i10_car, 0) + coalesce(i10_tgt, 0)) AS i10, sum(coalesce(gl_car, 0)) AS gl,
+    sum(coalesce(rushing_tds, 0) + coalesce(receiving_tds, 0)) AS tds
+  FROM p GROUP BY player_id)
+SELECT x.player, x.position, x.team, x.g, round(x.rz / x.g, 1) AS rz_opps_g, round(x.i10 / x.g, 1) AS i10_opps_g, round(x.gl / x.g, 1) AS gl_car_g,
+  round(100.0 * x.rz / nullif(t.team_rz, 0)) AS team_rz_share_pct, x.tds, a.status AS league
+FROM x JOIN t USING (team) LEFT JOIN avail a USING (player_id)
+WHERE x.rz > 0
+ORDER BY x.rz / x.g DESC
+LIMIT 50;
+
+-- @recipe def_run_direction
+-- @title Where each defense gets run on
+-- @blurb Runs against each defense split by direction and gap (left end, left tackle, left guard, middle, right guard, right tackle, right end): carries, yards per carry, success rate (runs with positive EPA), 10+ yard runs, and yards per carry vs the league average for that gap. Pick a defense or leave Any for all 32. Uses the Lab's play-by-play (last 5 weeks), not opponent-adjusted yet. Left/right are from the offense's view.
+WITH settings AS (SELECT NULL::VARCHAR AS defense),
+r AS (
+  SELECT defteam AS defense,
+    CASE WHEN run_location = 'middle' THEN 'middle' ELSE run_location || ' ' || coalesce(run_gap, '') END AS lane,
+    CASE WHEN run_location = 'left' THEN CASE run_gap WHEN 'end' THEN 1 WHEN 'tackle' THEN 2 ELSE 3 END WHEN run_location = 'middle' THEN 4
+         ELSE CASE run_gap WHEN 'guard' THEN 5 WHEN 'tackle' THEN 6 ELSE 7 END END AS ord,
+    yards_gained, epa
+  FROM pbp, settings s
+  WHERE play_type = 'run' AND coalesce(qb_scramble, 0) = 0 AND run_location IS NOT NULL AND (s.defense IS NULL OR defteam = s.defense)),
+lg AS (SELECT lane, avg(yards_gained) AS lg_ypc FROM r GROUP BY lane)
+SELECT r.defense, r.lane, count(*) AS carries, round(avg(r.yards_gained), 2) AS ypc, round(avg(r.yards_gained) - any_value(lg.lg_ypc), 2) AS ypc_vs_league,
+  round(100.0 * avg(CASE WHEN r.epa > 0 THEN 1 ELSE 0 END)) AS success_pct, sum(CASE WHEN r.yards_gained >= 10 THEN 1 ELSE 0 END) AS runs_10_plus,
+  round(100.0 * avg(CASE WHEN r.yards_gained >= 10 THEN 1 ELSE 0 END), 1) AS pct_10_plus
+FROM r JOIN lg USING (lane)
+GROUP BY r.defense, r.lane, r.ord
+ORDER BY r.defense, r.ord;
