@@ -279,27 +279,46 @@ SUFFIX = {"jr", "jr.", "sr", "sr.", "ii", "iii", "iv", "v"}
 RESERVE = {"IR", "PUP", "NFI"}
 
 
+OTHER_RE = re.compile(r"([A-Z][\w'.-]+)\s*\([a-z][\w /-]*\)")  # "Pearsall (knee)": someone's injury tag
+WITH_RE = re.compile(r"\bwith ((?:[A-Z][\w'.-]+ ?){1,3})(?:\([^)]*\) ?)?(?:,? who is )?$")
+
+
+def about_him(before: str, last: str) -> bool:
+    """The out-for-the-season phrase is about this player, not a teammate tagged just before it
+    ("...with Ricky Pearsall (knee) out for the season", "joins Pearsall (knee), who is out for the season")."""
+    tags = OTHER_RE.findall(before)
+    if tags and norm(tags[-1]) != last:
+        return False
+    w = WITH_RE.search(before.rstrip())
+    return not (w and last not in norm(w.group(1)))
+
+
 def season_item(items: list[dict], name: str) -> dict | None:
     """Newest news item that says this player is out for the season, unless something newer says he's coming back."""
     toks = [t for t in (name or "").split() if t.lower() not in SUFFIX]
     last = norm(toks[-1]) if toks else ""
     for it in items:  # newest first
-        if (it.get("d") or "") < "2026-08-01":
+        if (it.get("d") or "") < "2026-09-01":  # regular season only (preseason talk is mostly last year's injuries)
             break
         text = f"{it.get('h') or ''}. {it.get('s') or ''}"
         sents = re.split(r"(?<=[.!?])\s+", text)
         if any(BACK_RE.search(x) and not FUTURE_RE.search(x) for x in sents) and last and last in norm(text):
             return None  # actually on his way back (not "could be activated in Week 14")
         for sent in sents:
-            if SEASON_RE.search(sent) and not NOT_RE.search(sent) and last and last in norm(sent):
+            m = SEASON_RE.search(sent)
+            if m and not NOT_RE.search(sent) and last and last in norm(sent) and about_him(sent[:m.start()], last):
                 return it
     return None
 
 
 def build_status(sp: dict) -> None:
     out: dict[str, dict] = {}
-    for p in (sp or {}).values():
-        g = (p.get("gsis_id") or "").strip()
+    try:
+        smap = json.loads((SITE / "sleeper_map.json").read_text())["map"]
+    except Exception:  # noqa: BLE001
+        smap = {}
+    for sid, p in (sp or {}).items():
+        g = smap.get(sid) or (p.get("gsis_id") or "").strip()
         st = p.get("injury_status") or ""
         if not g or st not in RESERVE | {"Out"}:
             continue
