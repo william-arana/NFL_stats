@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=20261030e">
-<script src="assets/site.js?v=20261030e" defer></script>
-<script src="assets/cards.js?v=20261030e" defer></script>
-<script src="assets/glossary.js?v=20261030e" defer></script>
-<script src="assets/tables.js?v=20261030e" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=20261030f">
+<script src="assets/site.js?v=20261030f" defer></script>
+<script src="assets/cards.js?v=20261030f" defer></script>
+<script src="assets/glossary.js?v=20261030f" defer></script>
+<script src="assets/tables.js?v=20261030f" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -176,6 +176,12 @@ function route(){
 }
 
 /* ---------- generic table ---------- */
+/* Next Gen Stats columns: blank means NGS didn't track it, not zero. Say so instead of showing a dash. */
+const NGS={sep:'rec',cush:'rec',yacoe:'rec',ryoe:'rush',ryoe_att:'rush',box8_pct:'rush',ttl:'rush',ttt:'pass',aggr_pct:'pass',cay:'pass'};
+const NGSPOS={rec:['WR','TE'],rush:['RB'],pass:['QB']};
+function ngsNA(k,pos){const g=NGS[k];if(!g)return '';
+  const t=NGSPOS[g].includes(pos)?`Not enough ${g==='rec'?'targets':g==='rush'?'carries':'attempts'} to make the Next Gen Stats cut (or that week's NGS isn't out yet; it posts a few days after games)`:`Next Gen Stats only tracks this for ${NGSPOS[g].join('s and ')}s`;
+  return `<span class="na" title="${t}">n/a</span>`}
 function fmt(v,d){if(v==null||!num(v))return '<span style="color:var(--ink-3)">–</span>';if(d==='%')return (v*100).toFixed(0)+'%';if(d==='%1')return (v*100).toFixed(1)+'%';return v.toFixed(d??0)}
 function heatAlpha(rows,cols){
   const out={};for(const c of cols){if(!c.heat)continue;const vals=rows.map(r=>r[c.k]).filter(num).sort((a,b)=>a-b);if(vals.length<3)continue;
@@ -335,12 +341,12 @@ function drawPlayers(){
     body+=`<tr data-id="${a.id}" class="${ps.open.has(a.id)?'open':''}"><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="xp" data-id="${a.id}" aria-expanded="${ps.open.has(a.id)}" title="${ps.open.has(a.id)?'Hide':'Show'} week-by-week rows" aria-label="Week-by-week rows for ${esc(a.name)}">${ps.open.has(a.id)?'▾':'▸'}</button><button type="button" class="pname ${avail(a.id)==='fa'?'name-fa':avail(a.id)==='mine'?'name-mine':''}" data-card="p:${a.id}" data-name="${esc(a.name)}" aria-expanded="false">${esc(a.name)}</button>${window.NFLS?NFLS.plink(a.id,a.name):''} <span class="pos">${a.pos}</span>${avBadge(a.id,a.name)}${inj?`<span class="inj" title="${esc(inj[1])} (Wk ${inj[2]} report)">${esc(inj[0].replace('Practice: ',''))}</span>`:''}</td><td class="l"><button type="button" class="pname tm" data-card="d:${a.team}" aria-expanded="false" title="${a.team} team card">${a.team}</button></td><td class="l">${(()=>{const n=nextOppOf(a.team);return n?oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,a.pos):'<span class="pos">bye</span>'})()}</td><td>${a.g}</td>${
       pcols(set).map(c=>{if(c.spark)return `<td class="l">${spark(a)}</td>`;const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;
         const cls=c.diff?(num(v)?(v>0?'pos-d':v<0?'neg-d':''):''):'';
-        return `<td class="${al?'heat':''} ${cls}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${c.diff&&num(v)&&v>0?'+':''}${fmt(v,c.d)}</td>`}).join('')}</tr>`;
+        return `<td class="${al?'heat':''} ${cls}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${c.diff&&num(v)&&v>0?'+':''}${!num(v)&&NGS[c.k]?ngsNA(c.k,a.pos):fmt(v,c.d)}</td>`}).join('')}</tr>`;
     if(ps.open.has(a.id)){
       const logs=[...a.logs].sort((x,y)=>x.week-y.week);
       for(const l of logs){const r=Object.assign({},l);r.fp=l[SCORING[ps.scoring].k];r.tds=(l.passing_tds||0)+(l.rushing_tds||0)+(l.receiving_tds||0);r.opps=(l.carries||0)+(l.targets||0);r.fum=(l.rushing_fumbles_lost||0)+(l.receiving_fumbles_lost||0)+(l.sack_fumbles_lost||0);
         r.catch=div(l.receptions,l.targets);r.adot=div(l.receiving_air_yards,l.targets);r.ypc=div(l.rushing_yards,l.carries);r.ybc_att=num(l.ybc)?div(l.ybc,l.carries):null;r.yac_att=num(l.yac_rush)?div(l.yac_rush,l.carries):null;r.press_pct=num(l.qb_pressured)?div(l.qb_pressured,l.attempts+l.sacks_suffered):null;r.ypa=div(l.passing_yards,l.attempts);addCalc(r);
-        body+=`<tr class="log"><td></td><td class="l stick">${gameBtn(l.team||a.team,l.week,'Wk '+l.week)} ${oppBtn(l.opponent_team,'vs '+l.opponent_team,a.pos)}</td><td class="l"></td><td></td><td></td>${pcols(set).map(c=>c.spark?'<td></td>':`<td>${fmt(r[c.k],c.d==='%'||c.d==='%1'?c.d:(typeof c.d==='number'?Math.min(c.d,2):0))}</td>`).join('')}</tr>`}
+        body+=`<tr class="log"><td></td><td class="l stick">${gameBtn(l.team||a.team,l.week,'Wk '+l.week)} ${oppBtn(l.opponent_team,'vs '+l.opponent_team,a.pos)}</td><td class="l"></td><td></td><td></td>${pcols(set).map(c=>c.spark?'<td></td>':`<td>${!num(r[c.k])&&NGS[c.k]?ngsNA(c.k,a.pos):fmt(r[c.k],c.d==='%'||c.d==='%1'?c.d:(typeof c.d==='number'?Math.min(c.d,2):0))}</td>`).join('')}</tr>`}
     }
   });
   $('#p-tbl').dataset.cols='stats-players-'+ps.set;
