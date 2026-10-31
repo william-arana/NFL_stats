@@ -77,7 +77,16 @@
   function plink(id,name){if(!id||!name)return '';return `<button type="button" class="plink" data-pid="${esc(id)}" data-pname="${esc(name)}" aria-label="Open ${esc(name)} on Sleeper or ESPN" title="Sleeper / ESPN"><span class="slp" aria-hidden="true"></span></button>`}
   let menu=null,menuBtn=null;
   function closeMenu(){if(menu){menu.remove();menu=null}if(menuBtn){menuBtn.setAttribute('aria-expanded','false');menuBtn=null}}
-  function copy(t){try{return navigator.clipboard.writeText(t)}catch(e){return Promise.reject(e)}}
+  /* copy text: the clipboard API, or the older copy command when an app / browser blocks it. Never a pop-up. */
+  function legacyCopy(t){const ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+    const prev=document.activeElement;document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,t.length);let ok=false;try{ok=document.execCommand('copy')}catch(e){}ta.remove();try{prev&&prev.focus&&prev.focus({preventScroll:true})}catch(e){}return ok}
+  function copy(t){const fb=()=>legacyCopy(t)?undefined:Promise.reject(new Error('copy blocked'));
+    try{if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t).catch(fb)}catch(e){}
+    try{return Promise.resolve(fb())}catch(e){return Promise.reject(e)}}
+  /* small note at the bottom of the screen that goes away by itself (no OK button to click) */
+  let toastT=null;function toast(msg,sub){let el=document.getElementById('nfls-toast');if(!el){el=document.createElement('div');el.id='nfls-toast';el.setAttribute('role','status');document.body.appendChild(el)}
+    el.innerHTML='';const b=document.createElement('b');b.textContent=msg;el.appendChild(b);if(sub){const s=document.createElement('span');s.textContent=sub;el.appendChild(s)}
+    el.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('on'),sub?5000:1800)}
   document.addEventListener('click',e=>{
     const b=e.target.closest('.plink');
     if(b){e.preventDefault();e.stopPropagation();if(menuBtn===b){closeMenu();return}closeMenu();menuBtn=b;b.setAttribute('aria-expanded','true');
@@ -150,6 +159,6 @@
       if(!j||!j.version||j.version===v||parseFloat(j.version.split('.')[1])<parseFloat(v.split('.')[1]))return;
       const k='nfls-upd-'+j.version;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){return}
       const u=new URL(location.href);u.searchParams.set('v',j.version);location.replace(u.pathname+u.search+u.hash)}).catch(()=>{})})();
-  window.NFLS={leagueUrl,badge,plink,setTheme,loadLeagues,getLeague,rosterStatus,onLeague(cb){listeners.push(cb);if(leagueCfg)cb(getLeague())}};
+  window.NFLS={copy,toast,leagueUrl,badge,plink,setTheme,loadLeagues,getLeague,rosterStatus,onLeague(cb){listeners.push(cb);if(leagueCfg)cb(getLeague())}};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
 })();

@@ -531,7 +531,8 @@
   if(pins.length)loadAll().then(()=>pins.forEach(mountPin)).catch(()=>{});
   addEventListener('resize',()=>{for(const p of pins){const w=pinEls.get(p.id);if(!w)continue;clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px'}});
 
-  function copyText(t,btn){const ok=()=>{if(btn){btn.classList.add('ok');btn.title='Link copied';setTimeout(()=>btn.classList.remove('ok'),1200)}};try{navigator.clipboard.writeText(t).then(ok,()=>prompt('Copy this link',t))}catch(err){prompt('Copy this link',t)}}
+  function copyText(t,btn){const ok=()=>{if(btn){btn.classList.add('ok');btn.title='Link copied';setTimeout(()=>btn.classList.remove('ok'),1200)}NFLS.toast('Link copied')};
+    NFLS.copy(t).then(ok,()=>NFLS.toast("Couldn't copy here",t))}
   function setScoring(v){LS.set('scoring',v);IX&&(IX._rank={});render();refreshPins();window.dispatchEvent(new CustomEvent('nfls-scoring',{detail:v}))}
   document.addEventListener('click',e=>{
     const pw=e.target.closest('.pw');
@@ -541,7 +542,7 @@
       if(e.target.closest('[data-pw-min]')){p.min=!p.min;pw.classList.toggle('min',p.min);e.target.closest('[data-pw-min]').textContent=p.min?'▢':'–';pw.style.height=p.min?'':(p.h?p.h+'px':'');savePins();return}
       const sc=e.target.closest('[data-sc] button');if(sc){setScoring(sc.dataset.v);return}
       const np=e.target.closest('.pc-news p');if(np){np.classList.toggle('open');return}
-      const cp=e.target.closest('[data-copyname]');if(cp){try{navigator.clipboard.writeText(cp.dataset.copyname)}catch(err){}return}
+      const cp=e.target.closest('[data-copyname]');if(cp){if(!/^https:\/\/sleeper\./.test(cp.getAttribute('href')||''))NFLS.copy(cp.dataset.copyname).catch(()=>{});return}
       const t=e.target.closest('[data-card],.opp[data-opp]');if(t){e.preventDefault();const k=t.dataset.card||('d:'+t.dataset.opp);if(t.dataset.name)NAMEHINT[k.slice(2)]=t.dataset.name;push(k,t.dataset.pos);return}
       return;
     }
@@ -555,7 +556,7 @@
       const pp=e.target.closest('.pc-pop');if(pp){const s=pp.closest('section');addPin(cur.key,cur.pos,pp.dataset.pop,s&&s.dataset.secLabel);return}
       const sc=e.target.closest('[data-sc] button');if(sc){setScoring(sc.dataset.v);return}
       const np=e.target.closest('.pc-news p');if(np){np.classList.toggle('open');return}
-      const cp=e.target.closest('[data-copyname]');if(cp){try{navigator.clipboard.writeText(cp.dataset.copyname)}catch(err){}return}
+      const cp=e.target.closest('[data-copyname]');if(cp){if(!/^https:\/\/sleeper\./.test(cp.getAttribute('href')||''))NFLS.copy(cp.dataset.copyname).catch(()=>{});return}
       const t=e.target.closest('[data-card],.opp[data-opp]');if(t){e.preventDefault();const k=t.dataset.card||('d:'+t.dataset.opp);if(t.dataset.name)NAMEHINT[k.slice(2)]=t.dataset.name;push(k,t.dataset.pos);return}
       return;
     }

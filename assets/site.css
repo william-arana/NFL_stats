@@ -320,3 +320,8 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 .thtip small{display:block;margin-top:5px;color:var(--ink-3);font-size:11.5px}
 @media (pointer:coarse){thead th{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}}
 th.col-holding{background:var(--stripe)!important;box-shadow:inset 0 -3px 0 var(--blue)}
+
+/* copy confirmations: a small note at the bottom that fades out (never a blocking pop-up) */
+#nfls-toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);z-index:95;max-width:min(460px,calc(100vw - 24px));background:var(--ink);color:var(--sheet);border-radius:8px;padding:8px 14px;font:500 13px/1.4 var(--f-body);box-shadow:0 10px 28px rgba(11,21,40,.28);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}
+#nfls-toast.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#nfls-toast span{display:block;margin-top:3px;font:400 12px var(--f-mono);word-break:break-all;user-select:all;opacity:.85}
