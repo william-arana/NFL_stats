@@ -200,6 +200,7 @@
     <section><h4>${SCORING[sc].label} points by week <span class="sp"></span><span>high ${f1(s.best)} · low ${f1(s.worst)}${num(s.sd)?' · ±'+s.sd.toFixed(1):''}</span></h4>${bars(s.logs,sk,s.team)}</section>
     <section><h4>Season stats</h4><div class="scr"><table data-cols="card-season-${s.pos}"><thead><tr><th class="l"></th><th>FP</th>${cols.map(([,l])=>`<th>${l}</th>`).join('')}${xc.map(c=>`<th data-k="x-${c.k}" data-def-off="1">${c.l}</th>`).join('')}</tr></thead><tbody>${seasonRow('Per game',true)}${seasonRow('Total',false)}</tbody></table></div></section>
     <section><h4>Game log</h4><div class="scr"><table data-cols="card-log-${s.pos}"><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>FP</th>${cols.map(([,l])=>`<th>${l}</th>`).join('')}${xc.map(c=>`<th data-k="x-${c.k}" data-def-off="1">${c.l}</th>`).join('')}</tr></thead><tbody>${logRows}</tbody></table></div><div class="note">Opponent rank = PPR points that defense allows to ${s.pos}s (green = generous). Click an opponent for its defense card.</div></section>
+    ${playsSec('p',id,[...s.logs].reverse().map(l=>[gameKey(l.team,l.week),l.week]).filter(x=>x[0]))}
     <section><h4>News <span class="sp"></span><span data-news-src></span></h4><div data-news><span class="spin"></span>Loading news…</div></section>
     ${linksHTML(id,s.name,espn,null)}`;
   }
@@ -368,7 +369,7 @@
     <section><h4>${fin?'Top fantasy scorers':'Players to watch'} <span class="sp"></span><span>${SCORING[sc].label}${fin?' this game':' per game this season'}</span></h4><div class="scr"><table><tbody>${plRows||'<tr><td class="dim">No player data yet.</td></tr>'}</tbody></table></div>${fin?'':'<div class="note">Rank = how many points the opponent allows to that position (green = soft matchup).</div>'}</section>
     <section><h4>Team form <span class="sp"></span><span>per game${fin?' before this game':' this season'}</span></h4><div class="scr"><table class="gc-form"><thead><tr><th>${esc(A)}</th><th class="l gc-l"></th><th>${esc(H)}</th></tr></thead><tbody>
       ${row('Points scored','pf',1,true)}${row('Points allowed','pa',1,false)}${row('Yards','yds',0,true)}${row('Yards allowed','ya',0,false)}${row('Pressures made','prs',1,true)}${row('Pressures allowed','pra',1,false)}${row('D/ST points','dst',1,true)}
-    </tbody></table></div><div class="note">Bold = the better side.</div></section>`;
+    </tbody></table></div><div class="note">Bold = the better side.</div></section>${fin?playsSec('g',gid,[[gid,w]],[A,H]):''}`;
   }
   function statLine(r){const p=[];if(r.attempts)p.push(`${r.completions}/${r.attempts}, ${r.passing_yards} yds, ${r.passing_tds} TD${r.passing_interceptions?', '+r.passing_interceptions+' INT':''}`);
     if(r.carries)p.push(`${r.carries} car, ${r.rushing_yards} yds${r.rushing_tds?', '+r.rushing_tds+' TD':''}`);if(r.targets)p.push(`${r.receptions}/${r.targets}, ${r.receiving_yards} yds${r.receiving_tds?', '+r.receiving_tds+' TD':''}`);return p.join(' · ')}
@@ -427,7 +428,7 @@
     if(stack.length>1){const top=el.querySelector('.pc-top');if(top)top.insertAdjacentHTML('afterbegin',`<button type="button" class="pc-back" aria-label="Back">←</button>`)}
     if(crumbs){const c=el.querySelector('.pc-crumbs');c.scrollLeft=c.scrollWidth}
     tagSections(el,true);
-    el.scrollTop=0;fillOwner(el);fillNews(el,newsKey(cur.key),false);
+    el.scrollTop=0;fillOwner(el);fillNews(el,newsKey(cur.key),false);fillPlays(el);
   }
   function fillOwner(root){
     if(!window.NFLS||!root)return;const lg=NFLS.getLeague();if(!lg)return;
@@ -496,7 +497,7 @@
     const t=document.createElement('div');t.innerHTML=html;tagSections(t,false);
     const s=t.querySelector(`section[data-sec="${p.sec}"]`);return s?s.outerHTML:`<section class="dim">That section isn't on this card anymore.</section>`;
   }
-  function fillPin(p){const w=pinEls.get(p.id);if(!w)return;const b=w.querySelector('.pw-b');b.innerHTML=pinBody(p);w.querySelector('.pw-h b').textContent=pinTitle(p);fillOwner(b);fillNews(b,newsKey(p.key),false)}
+  function fillPin(p){const w=pinEls.get(p.id);if(!w)return;const b=w.querySelector('.pw-b');b.innerHTML=pinBody(p);w.querySelector('.pw-h b').textContent=pinTitle(p);fillPlays(b);fillOwner(b);fillNews(b,newsKey(p.key),false)}
   function front(w){if(zTop>ZBASE+40){zTop=ZBASE;[...pinEls.values()].sort((a,b)=>(+a.style.zIndex)-(+b.style.zIndex)).forEach(x=>x.style.zIndex=++zTop)}w.style.zIndex=++zTop}
   function clampPin(p){const vw=document.documentElement.clientWidth,vh=innerHeight;p.x=Math.max(4-(p.w||300)+60,Math.min(p.x,vw-60));p.y=Math.max(0,Math.min(p.y,vh-36))}
   function mountPin(p){
@@ -623,6 +624,38 @@
   function tagInj(){if(!INJ)return;document.querySelectorAll('[data-card^="p:"]:not([data-inj])').forEach(b=>{const r=INJ[b.dataset.card.slice(2)];b.dataset.inj=r?(r.season?'season':'ir'):'';if(r&&!b.title)b.title=injTip(r)})}
   fetch('data/site/status.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(j=>{INJ=(j&&j.p)||{};tagInj();let q=false;
     new MutationObserver(()=>{if(!q){q=true;requestAnimationFrame(()=>{q=false;tagInj()})}}).observe(document.documentElement,{childList:true,subtree:true})}).catch(()=>{});
+
+  /* ---------- Plays: readable play-by-play inside player and game cards ----------
+     data/site/plays/<game_id>.json.gz (built by update_data.py): rows in game order + who = {player_id: [row,…]}.
+     Player card: his plays, one game at a time (week chips). Game card: every play, filter by offense. */
+  const PLAYS=new Map();
+  function getPlays(gid){if(!PLAYS.has(gid))PLAYS.set(gid,fetch('data/site/plays/'+gid+'.json.gz',{cache:'no-cache'}).then(async r=>{if(!r.ok)throw new Error(r.status);
+    const b=new Uint8Array(await r.arrayBuffer());const t=b[0]===0x1f&&b[1]===0x8b?await new Response(new Blob([b]).stream().pipeThrough(new DecompressionStream('gzip'))).text():new TextDecoder().decode(b);return JSON.parse(t)}).catch(e=>{PLAYS.delete(gid);throw e}));return PLAYS.get(gid)}
+  function playsSec(kind,id,games,teams){if(!games.length)return '';const g0=games[0][0];
+    const chips=kind==='p'?games.map(([g,w])=>`<button type="button" data-pl-g="${esc(g)}" aria-pressed="${g===g0}">${w}</button>`).join(''):['All',...teams].map((t,i)=>`<button type="button" data-pl-off="${i?esc(t):''}" aria-pressed="${!i}">${esc(t)}</button>`).join('');
+    return `<section class="plays" data-plays="${kind}:${esc(id)}" data-pl-cur="${esc(g0)}" data-pl-o=""><h4>Plays <span class="sp"></span><span class="pl-chips">${kind==='p'?'<i>Wk</i>':''}${chips}</span></h4><div data-pl-body><span class="spin"></span>Loading plays…</div></section>`}
+  const ordn=d=>d+(d===1?'st':d===2?'nd':d===3?'rd':'th');
+  const fullName=(pid,short)=>{const L=IX&&IX.byP.get(pid);return L&&L.length?L[L.length-1].player_display_name:(NAMEHINT[pid]||short||'')};
+  const nameBtn=(pid,short)=>pid?pbtn(pid,fullName(pid,short)):esc(short||'');
+  function fillPlays(root){root.querySelectorAll('section[data-plays]').forEach(sec=>{
+    const [kind,id]=[sec.dataset.plays.slice(0,1),sec.dataset.plays.slice(2)];const gid=sec.dataset.plPlays||sec.dataset.plCur;const body=sec.querySelector('[data-pl-body]');
+    getPlays(gid).then(j=>{if(!sec.isConnected||sec.dataset.plCur!==gid)return;const C=Object.fromEntries(j.cols.map((c,i)=>[c,i]));
+      let idx=kind==='p'?(j.who[id]||[]):j.rows.map((r,i)=>i);const off=sec.dataset.plO;if(off)idx=idx.filter(i=>j.rows[i][C.off]===off);
+      if(!idx.length){body.innerHTML=`<p class="dim" style="margin:0">${kind==='p'?'Not on a play in this game.':'No plays.'}</p>`;return}
+      const v=(r,c)=>r[C[c]];
+      const rowH=r=>{const res=v(r,'result');return `<tr${res==='TD'?' class="pl-td"':res==='INT'||res==='Fumble lost'?' class="pl-to"':''}><td>${v(r,'q')??''}</td><td>${esc((m=>m?(+m[1])+':'+m[2]:'')(String(v(r,'clock')||'').match(/^(\d{1,2}):(\d{2})/)))}</td><td class="l">${v(r,'down')?ordn(v(r,'down'))+' & '+v(r,'togo'):''}</td><td class="l">${esc(v(r,'field')||'')}</td>${kind==='g'?`<td class="l">${esc(v(r,'off')||'')}</td>`:''}
+        <td class="l">${esc(v(r,'kind')||'')}</td><td class="l">${nameBtn(v(r,'qb'),v(r,'qb_n'))}</td><td class="l">${nameBtn(v(r,'bc'),v(r,'bc_n'))}</td><td class="l">${esc(v(r,'dir')||'')}</td><td class="l">${esc(v(r,'gap')||'')}</td><td class="l">${esc(v(r,'depth')||'')}</td><td>${v(r,'air')??''}</td>
+        <td class="l"><b>${esc(res||'')}</b></td><td>${v(r,'yds')??''}</td><td>${v(r,'yac')??''}</td><td class="l">${(v(r,'tkl')||[]).map(([a,b])=>nameBtn(a,b)).join(', ')}</td><td class="l">${(v(r,'pd')||[]).map(([a,b])=>nameBtn(a,b)).join(', ')}</td>
+        <td class="l">${esc(v(r,'pen')||'')}</td><td>${num(v(r,'epa'))?v(r,'epa').toFixed(2):''}</td><td class="l pl-desc">${esc(v(r,'desc')||'')}</td></tr>`};
+      body.innerHTML=`<div class="scr"><table data-cols="card-plays-${kind}"><thead><tr><th>Q</th><th>Clock</th><th class="l">Down</th><th class="l">Field</th>${kind==='g'?'<th class="l">Off</th>':''}<th class="l">Play</th><th class="l">QB</th><th class="l">Player</th><th class="l">Dir</th><th class="l">Gap</th><th class="l">Depth</th><th>Air yds</th><th class="l">Result</th><th>Yds</th><th>YAC</th><th class="l">Tacklers</th><th class="l">Pass def</th><th class="l">Penalty</th><th>EPA</th><th class="l" data-def-off="1">Play text</th></tr></thead><tbody>${idx.map(i=>rowH(j.rows[i])).join('')}</tbody></table></div><div class="note">${idx.length} play${idx.length===1?'':'s'}. Dir/Gap = where the run went or the pass was thrown. Play text is in Columns.</div>`;
+    }).catch(()=>{if(sec.isConnected&&sec.dataset.plCur===gid)body.innerHTML='<p class="dim" style="margin:0">No play-by-play for this game yet (it posts the day after games).</p>'});
+  })}
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('section[data-plays] [data-pl-g],section[data-plays] [data-pl-off]');if(!b)return;
+    const sec=b.closest('section[data-plays]');sec.querySelectorAll('.pl-chips button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    if(b.dataset.plG!=null)sec.dataset.plCur=b.dataset.plG;else sec.dataset.plO=b.dataset.plOff;
+    sec.querySelector('[data-pl-body]').innerHTML='<span class="spin"></span>Loading plays…';fillPlays(sec.parentNode||sec);
+  });
 
   /* markup helpers for pages */
   function pbtn(id,name,cls){return `<button type="button" class="pname ${cls||''}" data-card="p:${esc(id)}" data-name="${esc(name)}" aria-expanded="false">${esc(name)}</button>`}

@@ -8,7 +8,7 @@ The plan for NFL_stats. Claude keeps this current (see CLAUDE.md → "How we wor
 - ✅ **Recipe settings with search (10/30):** any query with a `WITH settings AS (SELECT … AS name, …)` line gets a form above the SQL: player search (stores the id, fills in his team and that week's opponent), team and week pickers, number/text boxes. Works for recipes, saved queries and anything pasted.
 - ✅ **Match players by id, not description text:** `pbp_players_game` matches every `*_player_id` column (runner, passer, target, returner, tacklers, pass defenders, penalties…).
 - ✅ **Readable play log (Lab):** recipe `pbp_log` — one row per play: quarter, clock, down & distance, field, run/pass/sack/scramble, QB, ball carrier/target, direction + gap, depth + air yards, result, yards, YAC, tacklers, pass defended, penalty, EPA, original text last. Filter by player (any role), team, week; names link to cards.
-- **Plays tab on player/game cards:** same columns inside the card. Needs a small per-game plays file in `data/site/` (pbp is 5 MB, too big for cards).
+- ✅ **Plays in player/game cards:** player card = his plays one game at a time (week chips); game card = every play, filter by offense. TDs green, turnovers red; names link. Data: `data/site/plays/<game_id>.json.gz` (~8 KB a game) from `update_data.py`.
 - **Presets before typing:** clickable starting points grouped by question (waivers, matchups, trade checks, play-by-play) with one plain-English line each.
 - **Suggested custom metrics as Lab filters** (after metrics are backtested).
 

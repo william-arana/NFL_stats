@@ -297,3 +297,11 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 
 /* Next Gen Stats cell that NGS didn't track (Stats board, cards) */
 .na{color:var(--ink-3);font-size:.85em;letter-spacing:.02em;cursor:help;text-decoration:underline dotted;text-underline-offset:2px}
+
+/* Plays section in player / game cards */
+.plays .pl-chips{display:inline-flex;flex-wrap:wrap;gap:3px;align-items:center;text-transform:none;letter-spacing:0}
+.plays .pl-chips i{font-style:normal;color:var(--ink-3);margin-right:2px}
+.plays .pl-chips button{font:600 11px var(--f-mono);min-width:24px;padding:1px 6px;border:1px solid var(--rule);border-radius:5px;background:var(--sheet);color:var(--ink-2);cursor:pointer}
+.plays .pl-chips button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.plays table{font-size:12px}.plays td{white-space:nowrap}.plays td.pl-desc{white-space:normal;min-width:320px}
+.plays tr.pl-td td{background:var(--good-soft)}.plays tr.pl-to td{background:var(--margin-soft)}

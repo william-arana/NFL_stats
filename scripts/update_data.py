@@ -10,6 +10,7 @@ Run:  python scripts/update_data.py            (current season)
 """
 from __future__ import annotations
 
+import gzip
 import json
 import sys
 from datetime import datetime, timezone
@@ -50,6 +51,67 @@ def to_columns_json(df: pl.DataFrame) -> dict:
     return {"cols": df.columns, "rows": df.height, "data": {c: df[c].to_list() for c in df.columns}}
 
 
+PLAYS_DIR = Path(__file__).resolve().parent.parent / "data" / "site" / "plays"
+PLAY_KINDS = ["pass", "run", "qb_kneel", "qb_spike", "punt", "field_goal", "extra_point", "kickoff", "no_play"]
+PLAY_COLS = ["q", "clock", "down", "togo", "field", "off", "kind", "qb", "qb_n", "bc", "bc_n", "dir", "gap", "depth", "air",
+             "result", "yds", "yac", "tkl", "pd", "pen", "epa", "desc"]
+
+
+def write_plays(pbp: pl.DataFrame) -> None:
+    """One small gzipped file per game (~8 KB) for the Plays section of player and game cards: data/site/plays/<game_id>.json.gz
+    {"game_id", "cols": PLAY_COLS, "rows": [[...], ...], "who": {player_id: [row, ...]}}  (rows in game order)."""
+    PLAYS_DIR.mkdir(parents=True, exist_ok=True)
+    idc = [c for c in pbp.columns if c.endswith("_player_id")]
+    df = pbp.filter((pl.col("season_type") == "REG") & pl.col("play_type").is_in(PLAY_KINDS)).sort(
+        ["game_id", "game_seconds_remaining", "play_id"], descending=[False, True, False])
+
+    def num(v, nd=None):
+        if v is None or v != v:
+            return None
+        return round(float(v), nd) if nd is not None else int(v)
+
+    def pairs(r, *keys):
+        out = []
+        for k in keys:
+            i, n = r.get(k + "_player_id"), r.get(k + "_player_name")
+            if i or n:
+                out.append([i or "", n or ""])
+        return out
+
+    n = 0
+    for (gid,), g in df.group_by(["game_id"], maintain_order=True):
+        rows, who = [], {}
+        for r in g.iter_rows(named=True):
+            f = lambda c: r.get(c) == 1  # noqa: E731
+            kind = ("Sack" if f("sack") else "Scramble" if f("qb_scramble") else "Pass" if r["play_type"] == "pass"
+                    else "Run" if r["play_type"] == "run" else "Penalty" if r["play_type"] == "no_play" else r["play_type"].replace("_", " "))
+            res = ("TD" if f("touchdown") else "INT" if f("interception") else "Fumble lost" if f("fumble_lost") else "Catch" if f("complete_pass")
+                   else "Incomplete" if f("incomplete_pass") else "Sack" if f("sack") else "First down" if f("first_down") else "")
+            pen = ""
+            if r.get("penalty_type"):
+                pen = r["penalty_type"] + (f" ({r.get('penalty_team') or ''}{', ' + r['penalty_player_name'] if r.get('penalty_player_name') else ''})" if r.get("penalty_team") else "")
+            bc = r.get("rusher_player_id") or r.get("receiver_player_id")
+            bcn = r.get("rusher_player_name") or r.get("receiver_player_name")
+            tm = r.get("time")
+            rows.append([num(r.get("qtr")), str(tm) if tm is not None else None, num(r.get("down")), num(r.get("ydstogo")), r.get("yrdln"), r.get("posteam"), kind,
+                         r.get("passer_player_id"), r.get("passer_player_name"), bc, bcn,
+                         r.get("pass_location") or r.get("run_location"), r.get("run_gap"), r.get("pass_length"), num(r.get("air_yards")),
+                         res, num(r.get("yards_gained")), num(r.get("yards_after_catch")),
+                         pairs(r, "solo_tackle_1", "solo_tackle_2", "tackle_with_assist_1", "tackle_with_assist_2", "assist_tackle_1", "assist_tackle_2"),
+                         pairs(r, "pass_defense_1", "pass_defense_2"), pen, num(r.get("epa"), 2), r.get("desc")])
+            i = len(rows) - 1
+            for c in idc:
+                v = r.get(c)
+                if v and (not who.get(v) or who[v][-1] != i):
+                    who.setdefault(v, []).append(i)
+        data = gzip.compress(json.dumps({"game_id": gid, "cols": PLAY_COLS, "rows": rows, "who": who}, separators=(",", ":"), ensure_ascii=False).encode(), mtime=0)
+        out = PLAYS_DIR / f"{gid}.json.gz"
+        if not out.exists() or out.read_bytes() != data:  # finished games don't change: no git churn
+            out.write_bytes(data)
+            n += 1
+    log(f"plays for cards: {n} game files written/updated in {PLAYS_DIR}")
+
+
 def play_extras(season: int, raw: dict, pw: pl.DataFrame, t: pl.DataFrame) -> tuple[pl.DataFrame, pl.DataFrame]:
     """Extra player + team columns from Next Gen Stats, FTN charting (CC-BY-SA, credit FTN Data via nflverse)
     and play-by-play. Stored as sums/counts so the site can total any week range and divide."""
@@ -81,6 +143,10 @@ def play_extras(season: int, raw: dict, pw: pl.DataFrame, t: pl.DataFrame) -> tu
     except Exception as e:  # noqa: BLE001
         log(f"pbp for extras: FAILED ({e})")
         return pw, t
+    try:
+        write_plays(pbp)
+    except Exception as e:  # noqa: BLE001
+        log(f"plays for cards: FAILED ({e})")
     pbp = pbp.filter((pl.col("season_type") == "REG") & pl.col("play_type").is_in(["pass", "run"]))
     try:
         ftn = nfl.load_ftn_charting(seasons=[season]).select(
