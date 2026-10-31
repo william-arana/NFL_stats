@@ -26,7 +26,7 @@ Remaining, from William's 10/30 notes (fold into the last Now PRs):
    - Candidates from the Justice Hill look (10/30): production split by opponent's RB points allowed (does he only hit vs bottom-5 run defenses? his two good games were BUF and ARI); scrimmage yards (rush + rec) and share; snap % trend as the role signal.
    - From play-by-play: run direction / gap profile per RB vs where each defense gives up yards by gap; opponent's pass vs run play mix; who makes the tackles on RBs per defense. Defender-on-field data (participation) only goes through 2025, so it's backtest-only.
 3. **Pressers + coaching profiles** — head coach press conferences → structured per-player signals (player, topic, tone, short quote snippet). Feeds Trade/compare tabs and outlooks. Grows into a profile per coach: offense style, honesty (said vs did), outlook on players, trust signals, opponent-defense context, injury updates. See Pressers notes below.
-4. **Statistical outlooks + grading** — AI outlooks built only from data (QB, defense, depth chart, draft position, presser sentiment, injuries, news), every claim tied to a data row. Save each week's projections, grade them after the games, learn why misses happened, publish accuracy.
+4. **Statistical outlooks + grading** — the rest-of-season score (see "Model + public site") plus AI outlooks built only from data (QB, defense, depth chart, draft position, presser sentiment, injuries, news), every claim tied to a data row. Save each week's projections, grade them after the games, learn why misses happened, publish accuracy.
 5. **Monitor** — health checks with alerts (see Ideas).
 6. **Accounts + payments** — after the NFL season. See Business model.
 
@@ -60,6 +60,22 @@ Remaining, from William's 10/30 notes (fold into the last Now PRs):
 - 2026-10-29 · Credit ledger (every top-up and run is a row). Before a run, reserve worst-case cost (input + hard `max_tokens` cap); after, charge actual and refund the rest; block runs the balance can't cover.
 - 2026-10-29 · Stack when it's time: Supabase or Clerk (auth + database + row-level security), Stripe Checkout + webhooks into the Cloudflare Worker, saved Lab filters per account. Start as an installable web app (PWA); Tauri for desktop later; avoid app stores at first (their payment rules/cuts).
 - 2026-10-29 · Validate first: league mates + a few Reddit/Discord fantasy communities on the free version; if 10–20 people use it weekly without reminders, add payments. Build in the offseason, launch in July before draft season.
+
+## Model + public site (decided 2026-10-30)
+
+- **Two sites.** This one stays William's developer workbench (full SQL, every column). A separate public site later gets only what proved itself: Lab results that held up become one-click tools with a plain-English line. Start it after this roadmap is done.
+- **Target = rest-of-season value, not next week's points.** Beating weekly projections is hard; ROS value is where a better schedule read pays off. Building blocks (each its own score, backtested on 2022–2025 before it goes in):
+  - Defense vs play type: how each defense does against run gaps/directions, short/deep, by side, screens, play action.
+  - Offense tendencies: how often the team runs those plays and how well it does on them.
+  - Coaching: preferences weighted by the coach's trust score (said vs did) and his outlook on the player.
+  - History vs similar defenses (cluster defenses by style, not just rank).
+  - Availability: chance he plays, from presser/injury news + league-wide return times for similar injuries. Report a range, not one number (spread is wide; outliers are normal).
+  - Depth chart and teammate injuries (who absorbs the work).
+  - Individual defenders: what they allow by play type.
+- **Proving it's better.** Lock each week's numbers in a git commit before kickoff (start once the model is ready). Compare against ESPN and Sleeper projections and a simple baseline (last-3-week average); xFP is an input, not a benchmark (it's calculated after the game). Score: average miss, rank order within each position, start/sit and trade calls right/wrong. Backtest + one live season before claiming anything.
+- **Benchmarks are for comparison only.** Never republish ESPN/Sleeper numbers or differences on the site.
+- **Premium = our score and tools, never raw stats.** nflverse is fine with credit; FTN stays free (CC-BY-SA); NGS (NFL) and PFR (Sports Reference) data have commercial limits, so don't sell features that are just those stats.
+- **Competition:** strength-of-schedule tools are everywhere (ESPN/Mike Clay, PFF, CBS, Footballguys, Fantasy Footballers, Sharp Football, 4for4, RotoViz). Most rank defenses by fantasy points allowed per position; a few add scheme grades. FantasyPros grades experts' rankings every year. Gap: play-type matchups + coach signals + a public, locked track record.
 
 ## Decisions
 
