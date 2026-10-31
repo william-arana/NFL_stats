@@ -36,7 +36,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
-          git add data/site/leagues.json data/site/sleeper_map.json
+          git add data/site/leagues.json data/site/sleeper_map.json data/site/status.json 2>/dev/null || git add data/site/leagues.json data/site/sleeper_map.json
           git add data/site/news 2>/dev/null || true
           if git diff --cached --quiet; then echo "No roster changes"; else
             git commit -m "Update Sleeper rosters + player news ($(date -u +%Y-%m-%dT%H:%MZ))"

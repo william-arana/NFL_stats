@@ -12,7 +12,7 @@ Remaining, from William's 10/30 notes (fold into the last Now PRs):
 - ✅ **Columns panel:** add **Hide all** next to Show all / Reset.
 - ✅ **Desktop:** drag column headers to reorder (the ↑/↓ arrows stay for phones).
 - ✅ **Desktop:** the player card itself is movable and resizable, not only pop-outs. Option: on desktop, open cards as a window by default.
-- **Injury colors on names:** IR = red, out for the season = dark red, everywhere `pbtn` draws a name. Source: Sleeper `injury_status` (IR) + nflverse rosters reserve status. Nobody flags "season-ending" outright, so the dark red rule needs a call: IR without a return designation, or a "season-ending" match in news.
+- ✅ **Injury colors on names:** IR / PUP / NFI = red, out for the season = dark red, on every player name (hover for the reason). Built 3× a day into `data/site/status.json` by `scripts/update_player_news.py`.
 - **Default columns:** Receiving set gets rush attempts; Rushing set gets targets + receptions; Trade side-by-side gets more columns (column chooser already there; widen the defaults).
 - **NGS columns that look empty:** separation, cushion and YACOE only exist for WR/TE with enough targets that week (NGS cutoff, ~70 players a week, none for RBs) and arrive a few days after games. Deep tgt is real but almost always 0 for RBs. Fix: show "n/a" with a tooltip ("NGS tracks WR/TE only") instead of blank, and leave them off for RB rows.
 
@@ -78,6 +78,8 @@ Remaining, from William's 10/30 notes (fold into the last Now PRs):
 - **Competition:** strength-of-schedule tools are everywhere (ESPN/Mike Clay, PFF, CBS, Footballguys, Fantasy Footballers, Sharp Football, 4for4, RotoViz). Most rank defenses by fantasy points allowed per position; a few add scheme grades. FantasyPros grades experts' rankings every year. Gap: play-type matchups + coach signals + a public, locked track record.
 
 ## Decisions
+
+- 2026-10-30 · Out-for-the-season rule (William): Sleeper still lists him IR/PUP/NFI/Out **and** this season's player news (Sleeper + ESPN feeds in the archive) says season-ending / out for the season about him. Ignores "could", "not", last-year mentions, and clears if newer news says designated to return / activated / back at practice.
 
 - 2026-10-29 · This NFL version is the test run for MLB next season. After the NFL season, move to FPL (Premier League Fantasy).
 - 2026-10-29 · MLB data (MLB Stats API, Statcast) is likely non-commercial-only; check terms before planning paid MLB features. FPL API is unofficial and the Premier League owns the data; fine free, check terms before charging.

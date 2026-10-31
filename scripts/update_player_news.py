@@ -188,6 +188,7 @@ def main() -> None:
     except Exception:  # noqa: BLE001
         pass
 
+    sp: dict = {}
     # Sleeper's player directory fills in ESPN ids + names for rostered players with no stats yet (kickers, rookies)
     try:
         sp = get_json("https://api.sleeper.app/v1/players/nfl")
@@ -244,6 +245,10 @@ def main() -> None:
         if new or (OUT / f"{g}.json").exists():
             changed += save(g, names.get(g, g), new)
     print(f"[pnews] players: {len(want)} checked, {changed} files changed, {fails} fetch failures")
+    try:
+        build_status(sp)
+    except Exception as ex:  # noqa: BLE001
+        print(f"[pnews] status failed: {ex}")
 
     # defenses: every team (D/ST streamers are usually unrostered)
     try:
@@ -260,6 +265,58 @@ def main() -> None:
         print(f"[pnews] teams: {len(tlist)} checked, {tchanged} files changed")
     except Exception as ex:  # noqa: BLE001
         print(f"[pnews] team list failed: {ex}")
+
+
+# ---------- injury status for name colors (data/site/status.json) ----------
+# red  = on a reserve list in Sleeper (IR, PUP, NFI)
+# dark red ("season") = still on IR/PUP/NFI/Out AND this season's player news says he's done for the year
+SEASON_RE = re.compile(r"season[- ]ending|(?:out|lost|done|sidelined|shut down) for the (?:rest of the |remainder of the )?(?:\d{4} )?(?:season|year)"
+                       r"|(?:miss|sit out) the (?:rest|remainder) of the (?:\d{4} )?(?:season|year)|won'?t (?:play|return) (?:again )?this season", re.I)
+NOT_RE = re.compile(r"\b(?:not|isn'?t|wasn'?t|avoid(?:s|ed)?|no longer|unlikely|ruled out a|fear(?:s|ed)?|could|may|might|possibly|potential(?:ly)?|last (?:year|season)|20(?:1\d|2[0-5]))\b|returning from|return from|recover(?:ed|ing) from", re.I)
+BACK_RE = re.compile(r"designated (?:for|to) return|activated (?:from|off)|(?:returns?|returned) to practice|back at practice|opened (?:his|the) (?:21-day )?(?:practice )?window|cleared to (?:play|return)", re.I)
+FUTURE_RE = re.compile(r"\b(?:could|can|can't|cannot|would|chance|possible|possibly|might|may|eligible|earliest|until|won'?t|if|when|before|hope[sd]?|aim(?:s|ing)?|expect(?:s|ed)?|target(?:s|ing)?)\b", re.I)
+SUFFIX = {"jr", "jr.", "sr", "sr.", "ii", "iii", "iv", "v"}
+RESERVE = {"IR", "PUP", "NFI"}
+
+
+def season_item(items: list[dict], name: str) -> dict | None:
+    """Newest news item that says this player is out for the season, unless something newer says he's coming back."""
+    toks = [t for t in (name or "").split() if t.lower() not in SUFFIX]
+    last = norm(toks[-1]) if toks else ""
+    for it in items:  # newest first
+        if (it.get("d") or "") < "2026-08-01":
+            break
+        text = f"{it.get('h') or ''}. {it.get('s') or ''}"
+        sents = re.split(r"(?<=[.!?])\s+", text)
+        if any(BACK_RE.search(x) and not FUTURE_RE.search(x) for x in sents) and last and last in norm(text):
+            return None  # actually on his way back (not "could be activated in Week 14")
+        for sent in sents:
+            if SEASON_RE.search(sent) and not NOT_RE.search(sent) and last and last in norm(sent):
+                return it
+    return None
+
+
+def build_status(sp: dict) -> None:
+    out: dict[str, dict] = {}
+    for p in (sp or {}).values():
+        g = (p.get("gsis_id") or "").strip()
+        st = p.get("injury_status") or ""
+        if not g or st not in RESERVE | {"Out"}:
+            continue
+        rec = {"s": st}
+        f = OUT / f"{g}.json"
+        if f.exists():
+            try:
+                j = json.loads(f.read_text())
+                it = season_item(j.get("items") or [], p.get("full_name") or j.get("name") or "")
+                if it:
+                    rec.update(season=1, d=(it.get("d") or "")[:10], h=clean(it.get("h"), 120))
+            except Exception:  # noqa: BLE001
+                pass
+        if st in RESERVE or rec.get("season"):
+            out[g] = rec
+    (SITE / "status.json").write_text(json.dumps({"updated_utc": now(), "p": out}, separators=(",", ":"), ensure_ascii=False))
+    print(f"[pnews] status: {len(out)} players flagged, {sum(1 for r in out.values() if r.get('season'))} out for the season")
 
 
 if __name__ == "__main__":
