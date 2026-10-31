@@ -76,10 +76,14 @@
     panel=document.createElement('div');panel.className='colpanel';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','Choose columns');
     document.body.appendChild(panel);paintPanel(t);
     const r=btn.getBoundingClientRect(),w=panel.offsetWidth;
-    panel.style.left=Math.max(scrollX+8,Math.min(r.left+scrollX,scrollX+document.documentElement.clientWidth-w-8))+'px';// keep the whole panel (and its buttons) on screen: open below the button, or above it when there's more room there
+    /* inside a card or window that's pinned to the screen (phone card sheet, pop-outs, snapped cards): pin the panel too,
+       so it opens right at the button and stays there */
+    const host=btn.closest('.pc,.pw');const fixed=!!host&&getComputedStyle(host).position==='fixed';
+    const sx=fixed?0:scrollX,sy=fixed?0:scrollY;panel.style.position=fixed?'fixed':'';
+    panel.style.left=Math.max(sx+8,Math.min(r.left+sx,sx+document.documentElement.clientWidth-w-8))+'px';// keep the whole panel (and its buttons) on screen: open below the button, or above it when there's more room there
     const h=panel.offsetHeight,vh=document.documentElement.clientHeight,below=vh-r.bottom-12,above=r.top-12;
-    if(below>=Math.min(h,260)||below>=above){panel.style.maxHeight=Math.max(below,200)+'px';panel.style.top=(r.bottom+4+scrollY)+'px'}
-    else{const ph=Math.min(h,above);panel.style.maxHeight=above+'px';panel.style.top=(r.top-4-ph+scrollY)+'px'}
+    if(below>=Math.min(h,260)||below>=above){panel.style.maxHeight=Math.max(below,200)+'px';panel.style.top=(r.bottom+4+sy)+'px'}
+    else{const ph=Math.min(h,above);panel.style.maxHeight=above+'px';panel.style.top=(r.top-4-ph+sy)+'px'}
   }
   function paintPanel(t){
     const hr=headRow(t);if(!hr||!panel)return;const id=t.dataset.cols;const cfg=cfgOf(id);
