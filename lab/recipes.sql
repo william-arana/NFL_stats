@@ -57,8 +57,87 @@ SELECT CASE WHEN list_contains(who_, s.player_1) AND list_contains(who_, s.playe
 FROM plays CROSS JOIN settings s
 LEFT JOIN names n1 ON n1.player_id = s.player_1
 LEFT JOIN names n2 ON n2.player_id = s.player_2
-WHERE list_contains(who_, s.player_1) OR list_contains(who_, s.player_2)
+WHERE list_contains(who_, s.player_1::VARCHAR) OR list_contains(who_, s.player_2::VARCHAR)
 ORDER BY plays.week, plays.game_seconds_remaining DESC, plays.play_id;
+
+-- @recipe pbp_log
+-- @title Play log: readable play-by-play
+-- @blurb One row per play, split into plain columns: quarter, clock, down and distance, field position, run or pass, QB, ball carrier or target, direction and gap, depth and air yards, result, yards, tacklers, pass defender, penalty and EPA, with the original play text last. Pick a player (any role: runner, target, tackler, defender…), a team and a week in the form above. Clear the player box to see every play for that team. Week "All" = the last 5 weeks of data. Names link to player cards.
+WITH settings AS (SELECT 6 AS week, 'BAL' AS team, '00-0034975' AS player),
+names AS (SELECT player_id, any_value(player_display_name) AS name FROM players GROUP BY player_id),
+plays AS (
+  SELECT p.*, [
+    p.td_player_id,
+    p.passer_player_id,
+    p.receiver_player_id,
+    p.rusher_player_id,
+    p.lateral_receiver_player_id,
+    p.lateral_rusher_player_id,
+    p.lateral_sack_player_id,
+    p.interception_player_id,
+    p.lateral_interception_player_id,
+    p.punt_returner_player_id,
+    p.lateral_punt_returner_player_id,
+    p.kickoff_returner_player_id,
+    p.lateral_kickoff_returner_player_id,
+    p.punter_player_id,
+    p.kicker_player_id,
+    p.own_kickoff_recovery_player_id,
+    p.blocked_player_id,
+    p.tackle_for_loss_1_player_id,
+    p.tackle_for_loss_2_player_id,
+    p.qb_hit_1_player_id,
+    p.qb_hit_2_player_id,
+    p.forced_fumble_player_1_player_id,
+    p.forced_fumble_player_2_player_id,
+    p.solo_tackle_1_player_id,
+    p.solo_tackle_2_player_id,
+    p.assist_tackle_1_player_id,
+    p.assist_tackle_2_player_id,
+    p.assist_tackle_3_player_id,
+    p.assist_tackle_4_player_id,
+    p.tackle_with_assist_1_player_id,
+    p.tackle_with_assist_2_player_id,
+    p.pass_defense_1_player_id,
+    p.pass_defense_2_player_id,
+    p.fumbled_1_player_id,
+    p.fumbled_2_player_id,
+    p.fumble_recovery_1_player_id,
+    p.fumble_recovery_2_player_id,
+    p.sack_player_id,
+    p.half_sack_1_player_id,
+    p.half_sack_2_player_id,
+    p.penalty_player_id,
+    p.safety_player_id,
+    p.fantasy_player_id] AS who_
+  FROM pbp p, settings s
+  WHERE (s.week IS NULL OR p.week = s.week)
+    AND (s.team IS NULL OR s.team IN (p.home_team, p.away_team))
+    AND p.play_type IN ('pass', 'run', 'qb_kneel', 'qb_spike', 'punt', 'field_goal', 'extra_point', 'kickoff', 'no_play'))
+SELECT
+  x.week, x.game_id, x.qtr::INT AS q, left(x.time::VARCHAR, 5) AS clock,
+  CASE WHEN x.down IS NULL THEN '' ELSE x.down::INT || CASE x.down::INT WHEN 1 THEN 'st' WHEN 2 THEN 'nd' WHEN 3 THEN 'rd' ELSE 'th' END || ' & ' || x.ydstogo::INT END AS situation,
+  x.yrdln AS field, x.posteam AS offense,
+  CASE WHEN x.sack = 1 THEN 'Sack' WHEN x.qb_scramble = 1 THEN 'Scramble' WHEN x.play_type = 'pass' THEN 'Pass' WHEN x.play_type = 'run' THEN 'Run'
+       WHEN x.play_type = 'no_play' THEN 'Penalty' ELSE replace(x.play_type, '_', ' ') END AS play,
+  coalesce(nq.name, x.passer_player_name) AS qb,
+  coalesce(nb.name, x.rusher_player_name, x.receiver_player_name) AS ball_carrier,
+  coalesce(x.pass_location, x.run_location) AS direction, x.run_gap AS gap, x.pass_length AS depth, x.air_yards,
+  CASE WHEN x.touchdown = 1 THEN 'TD' WHEN x.interception = 1 THEN 'INT' WHEN x.fumble_lost = 1 THEN 'Fumble lost'
+       WHEN x.complete_pass = 1 THEN 'Catch' WHEN x.incomplete_pass = 1 THEN 'Incomplete' WHEN x.sack = 1 THEN 'Sack'
+       WHEN x.first_down = 1 THEN 'First down' ELSE '' END AS result,
+  x.yards_gained AS yards, x.yards_after_catch AS yac,
+  concat_ws(', ', x.solo_tackle_1_player_name, x.solo_tackle_2_player_name, x.tackle_with_assist_1_player_name, x.tackle_with_assist_2_player_name,
+            x.assist_tackle_1_player_name, x.assist_tackle_2_player_name) AS tacklers,
+  concat_ws(', ', x.pass_defense_1_player_name, x.pass_defense_2_player_name) AS pass_defended,
+  CASE WHEN x.penalty_type IS NULL THEN '' ELSE x.penalty_type || coalesce(' (' || x.penalty_team || coalesce(', ' || x.penalty_player_name, '') || ')', '') END AS penalty,
+  round(x.epa, 2) AS epa, x."desc" AS play_text
+FROM plays x CROSS JOIN settings s
+LEFT JOIN names nq ON nq.player_id = x.passer_player_id
+LEFT JOIN names nb ON nb.player_id = coalesce(x.rusher_player_id, x.receiver_player_id)
+WHERE s.player IS NULL OR list_contains(x.who_, s.player::VARCHAR)
+ORDER BY x.week, x.game_id, x.game_seconds_remaining DESC, x.play_id
+LIMIT 3000;
 
 -- @recipe pbp_browse
 -- @title Play-by-play: latest 200 plays
