@@ -75,6 +75,10 @@ The plan for NFL_stats. Claude keeps this current (see CLAUDE.md → "How we wor
 
 ## Decisions
 
+- 2026-10-31 · **Window moves for cards + pop-outs (desktop, William):** resize from any side as well as corners; double-click a side/corner = stretch to that screen edge; drag the header to the top edge = full screen, left/right edge = half (blue preview). A snapped card is pinned to the screen so the page scrolls behind it; dragging it out restores its size. Double-click header still = normal size.
+
+- 2026-10-31 · **Add to Compare stays put (William):** A/B on player cards no longer jumps to Compare; the button turns into a thin green ✓ (click again to remove) and you keep adding. Compare opens with that saved list when there's no link.
+
 - 2026-10-30 · **No pop-out windows on phones (William):** clunky full-width box stuck at the top, and you had to close it to move around anyway. ⧉ buttons hidden under 640px; desktop/tablet keep them.
 
 - 2026-10-30 · **Pages update themselves:** every page checks `version.json` on load; if the server is newer than the files it loaded, it reloads once with `?v=<new>`. Fixes stale Stats/Lab pages in the desktop app ("Check for updates" only refreshed Home; browsers keep pages ~10 min).

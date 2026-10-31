@@ -507,12 +507,15 @@
     clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px';if(p.w)w.style.width=p.w+'px';if(p.h&&!p.min)w.style.height=p.h+'px';
     document.body.appendChild(w);pinEls.set(p.id,w);front(w);fillPin(p);if(p.st){const b=w.querySelector('.pw-b');requestAnimationFrame(()=>{b.scrollTop=p.st;p.st=0})}
     const h=w.querySelector('.pw-h');let drag=null;
-    h.addEventListener('pointerdown',e=>{if(e.target.closest('button')||cornerAt(w,e.clientX,e.clientY,e.pointerType!=='mouse'))return;e.preventDefault();drag={dx:e.clientX-p.x,dy:e.clientY-p.y,x0:p.x,y0:p.y};h.setPointerCapture(e.pointerId);w.classList.add('drag')});
-    h.addEventListener('pointermove',e=>{if(!drag)return;p.x=e.clientX-drag.dx;p.y=e.clientY-drag.dy;clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px'});
+    h.addEventListener('pointerdown',e=>{if(e.target.closest('button')||zoneAt(w,e.clientX,e.clientY,e.pointerType!=='mouse'))return;e.preventDefault();drag={dx:e.clientX-p.x,dy:e.clientY-p.y,x0:p.x,y0:p.y,cx:e.clientX,cy:e.clientY,on:false,z:''};h.setPointerCapture(e.pointerId);w.classList.add('drag')});
+    h.addEventListener('pointermove',e=>{if(!drag)return;
+      if(!drag.on){if(Math.abs(e.clientX-drag.cx)+Math.abs(e.clientY-drag.cy)<5)return;drag.on=true;
+        if(p.snap){const r=w.getBoundingClientRect(),pre=p.pre||{w:600,h:0};drag.dx=(e.clientX-r.left)/r.width*pre.w;p.w=pre.w;p.h=pre.h;w.style.width=p.w+'px';w.style.height=p.h?p.h+'px':'';p.snap=''}}
+      p.x=e.clientX-drag.dx;p.y=e.clientY-drag.dy;clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px';drag.z=desk()?snapZone(e.clientX,e.clientY):'';ghost(drag.z)});
     let tap=null;
-    const end=e=>{if(!drag)return;const moved=Math.abs(p.x-drag.x0)+Math.abs(p.y-drag.y0)>3;drag=null;w.classList.remove('drag');savePins();
+    const end=e=>{if(!drag)return;const moved=drag.on||Math.abs(p.x-drag.x0)+Math.abs(p.y-drag.y0)>3,z=drag.z;drag=null;ghost('');w.classList.remove('drag');if(z)snapPin(p,w,z);savePins();
       if(moved||!e||e.type!=='pointerup'){tap=null;return}const now=Date.now();
-      if(tap&&now-tap<350&&!p.min){tap=null;p.w=Math.min(p.sec?420:600,document.documentElement.clientWidth-16);p.h=0;w.style.width=p.w+'px';w.style.height='';clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px';savePins();return}tap=now};
+      if(tap&&now-tap<350&&!p.min){tap=null;p.w=Math.min(p.sec?420:600,document.documentElement.clientWidth-16);p.h=0;p.snap='';w.style.width=p.w+'px';w.style.height='';clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px';savePins();return}tap=now};
     h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
     w.addEventListener('pointerdown',()=>front(w),true);
     if(window.ResizeObserver){let t=null;new ResizeObserver(()=>{if(p.min||!w.isConnected)return;clearTimeout(t);t=setTimeout(()=>{const r=w.getBoundingClientRect();if(Math.abs(r.width-(p.w||0))>2||Math.abs(r.height-(p.h||0))>2){p.w=Math.round(r.width);p.h=Math.round(r.height);savePins()}},150)}).observe(w)}
@@ -565,28 +568,37 @@
     if(t&&!e.target.closest('.plink,.av,a[href]:not([data-card])')){e.preventDefault();e.stopPropagation();const k=t.dataset.card||('d:'+t.dataset.opp);if(t.dataset.name)NAMEHINT[k.slice(2)]=t.dataset.name;open(k,t,t.dataset.pos);return}
     if(el&&!e.target.closest('.pmenu,.glpop,.colpanel'))close();
   });
-  /* desktop/tablet: drag the card by its header to move it, resize it from any of its 4 corners (the size is
-     remembered for the next card), double-tap / double-click the header to put it back to its normal size and spot. */
+  /* desktop/tablet: drag the card by its header to move it, resize it from any corner or side (the size is
+     remembered for the next card), double-tap / double-click the header to put it back to its normal size and spot.
+     Like a computer window: drag the header to the top edge = full screen, left / right edge = that half;
+     double-click a side or corner = stretch it to that edge of the screen. */
   function desk(){return !matchMedia('(max-width:640px)').matches}
   function sizeCard(){if(!el||!desk())return;const z=LS.get('card-size',null);if(z&&z.w&&z.h){el.style.width=z.w+'px';el.style.height=z.h+'px';el.style.maxHeight='none'}}
-  function resetCard(){if(!el)return;LS.set('card-size',null);el._moved=false;el.style.width=el.style.height=el.style.maxHeight='';place()}
+  function resetCard(){if(!el)return;LS.set('card-size',null);el._moved=false;el._snap='';el.style.position='';el.style.width=el.style.height=el.style.maxHeight='';place()}
+  /* a snapped card is pinned to the screen (position:fixed) so the page can scroll behind it; moving or
+     resizing it turns it back into a normal card in the same spot */
+  function unfix(b){if(b.style.position!=='fixed')return;const r=b.getBoundingClientRect();b.style.position='';b.style.left=(r.left+scrollX)+'px';b.style.top=(r.top+scrollY)+'px'}
   let mv=null,eatClick=false,lastTap=null;
   const eat=()=>{eatClick=true;setTimeout(()=>eatClick=false,0)};
   document.addEventListener('pointerdown',e=>{
     if(!el||!desk()||e.button!==0||!el.contains(e.target))return;
-    if(cornerAt(el,e.clientX,e.clientY,e.pointerType!=='mouse'))return;  // a corner = resize (handled below)
+    if(zoneAt(el,e.clientX,e.clientY,e.pointerType!=='mouse'))return;  // a corner / side = resize (handled below)
     if(!e.target.closest('.pc-head')||e.target.closest('button,a,input,select,label,.pc-crumbs'))return;
-    e.preventDefault();mv={dx:e.pageX-el.offsetLeft,dy:e.pageY-el.offsetTop,x0:e.clientX,y0:e.clientY,on:false};
+    const r=el.getBoundingClientRect();e.preventDefault();mv={gx:e.clientX-r.left,gy:e.clientY-r.top,x0:e.clientX,y0:e.clientY,on:false,z:''};
   },true);
   document.addEventListener('pointermove',e=>{
-    if(!mv||!el)return;if(!mv.on){if(Math.abs(e.clientX-mv.x0)+Math.abs(e.clientY-mv.y0)<5)return;mv.on=true;el.classList.add('pc-moving')}
+    if(!mv||!el)return;
+    if(!mv.on){if(Math.abs(e.clientX-mv.x0)+Math.abs(e.clientY-mv.y0)<5)return;mv.on=true;el.classList.add('pc-moving');
+      const r=el.getBoundingClientRect();unfix(el);
+      if(el._snap){const pw=el._pre&&el._pre.w||660;mv.gx=mv.gx/r.width*pw;el.style.width=el._pre&&el._pre.w?pw+'px':'';el.style.height=el._pre&&el._pre.h?el._pre.h+'px':'';if(!(el._pre&&el._pre.h))el.style.maxHeight='';el._snap=''}}
     const cw=document.documentElement.clientWidth,w=el.offsetWidth;
-    const x=Math.max(scrollX+80-w,Math.min(e.pageX-mv.dx,scrollX+cw-80)),y=Math.max(scrollY,Math.min(e.pageY-mv.dy,scrollY+innerHeight-40));
-    el.style.left=x+'px';el.style.top=y+'px';el._moved=true;
+    const x=Math.max(80-w,Math.min(e.clientX-mv.gx,cw-80)),y=Math.max(0,Math.min(e.clientY-mv.gy,innerHeight-40));
+    el.style.left=(x+scrollX)+'px';el.style.top=(y+scrollY)+'px';el._moved=true;
+    mv.z=snapZone(e.clientX,e.clientY);ghost(mv.z);
   });
   document.addEventListener('pointerup',e=>{
-    if(!mv)return;const m=mv;mv=null;el&&el.classList.remove('pc-moving');
-    if(m.on){eat();lastTap=null;return}
+    if(!mv)return;const m=mv;mv=null;ghost('');el&&el.classList.remove('pc-moving');
+    if(m.on){eat();lastTap=null;if(m.z&&el)snapCard(el,m.z);return}
     /* a tap on the header: two within 350 ms = back to the normal size and spot */
     const now=Date.now();
     if(lastTap&&now-lastTap.t<350&&Math.abs(e.clientX-lastTap.x)+Math.abs(e.clientY-lastTap.y)<30){lastTap=null;resetCard();return}
@@ -594,33 +606,67 @@
   });
   window.addEventListener('click',e=>{if(eatClick){eatClick=false;e.stopPropagation();e.preventDefault()}},true);  // a drag that ends outside the card must not close it
 
-  /* resize from any corner: the card and pop-out windows, mouse or finger (not on phones, where the card is a sheet).
-     A press on a corner only becomes a resize once it moves, so the × button in the top-right corner still works. */
+  /* ---- snapping: drop a header on the top edge = full screen, left / right edge = that half ---- */
+  const SNAPM=8;let ghostEl=null;
+  function snapZone(x,y){const vw=document.documentElement.clientWidth;return y<=6?'max':x<=6?'left':x>=vw-7?'right':''}
+  function snapRect(z){const vw=document.documentElement.clientWidth,vh=innerHeight,m=SNAPM,half=Math.round(vw/2);
+    return z==='max'?{x:m,y:m,w:vw-2*m,h:vh-2*m}:z==='left'?{x:m,y:m,w:half-m-m/2,h:vh-2*m}:{x:half+m/2,y:m,w:vw-half-m-m/2,h:vh-2*m}}
+  function ghost(z){if(!z){if(ghostEl){ghostEl.remove();ghostEl=null}return}
+    if(!ghostEl){ghostEl=document.createElement('div');ghostEl.className='snap-ghost';document.body.appendChild(ghostEl)}
+    const r=snapRect(z);Object.assign(ghostEl.style,{left:r.x+'px',top:r.y+'px',width:r.w+'px',height:r.h+'px'})}
+  function snapCard(b,z){
+    const r=snapRect(z);
+    if(!b._snap){const q=b.getBoundingClientRect();b._pre={w:b.style.width?q.width:0,h:b.style.height?q.height:0}}
+    b._snap=z;b._moved=true;Object.assign(b.style,{position:'fixed',left:r.x+'px',top:r.y+'px',width:r.w+'px',height:r.h+'px',maxHeight:'none'});
+  }
+  function snapPin(p,w,z){const r=snapRect(z);if(!p.snap)p.pre={w:p.w,h:p.h};p.snap=z;p.min=false;w.classList.remove('min');
+    Object.assign(p,{x:r.x,y:r.y,w:r.w,h:r.h});Object.assign(w.style,{left:r.x+'px',top:r.y+'px',width:r.w+'px',height:r.h+'px'});savePins()}
+  addEventListener('resize',()=>{if(el&&el._snap)snapCard(el,el._snap);for(const p of pins){const w=pinEls.get(p.id);if(w&&p.snap)snapPin(p,w,p.snap)}});
+
+  /* ---- resize: drag any corner (mouse or finger) or side (mouse) of the card or a pop-out window.
+     Not on phones, where the card is a sheet. A press only becomes a resize once it moves, so the × in the
+     top-right corner still works. Double-click a side / corner = stretch it to that edge of the screen. ---- */
   const RZMIN={pc:[320,180],pw:[220,38]};
-  function cornerAt(b,x,y,touch){const r=b.getBoundingClientRect(),p=touch?30:16;const v=y<r.top+p?'n':y>r.bottom-p?'s':'',h=x<r.left+p?'w':x>r.right-p?'e':'';return v&&h?v+h:''}
+  const CURSOR={n:'ns-resize',s:'ns-resize',e:'ew-resize',w:'ew-resize',nw:'nwse-resize',se:'nwse-resize',ne:'nesw-resize',sw:'nesw-resize'};
+  function zoneAt(b,x,y,touch){const r=b.getBoundingClientRect();if(x<r.left||x>r.right||y<r.top||y>r.bottom)return '';
+    const p=touch?30:16,v=y<r.top+p?'n':y>r.bottom-p?'s':'',h=x<r.left+p?'w':x>r.right-p?'e':'';if(v&&h)return v+h;
+    if(touch)return '';const q=6;return y<r.top+q?'n':y>r.bottom-q?'s':x<r.left+q?'w':x>r.right-q?'e':''}
   function rzBox(t){const b=t&&t.closest&&t.closest('.pc,.pw');return b&&desk()&&!b.classList.contains('min')?b:null}
+  function savePinGeo(b){const p=pins.find(x=>x.id===b.dataset.pin);if(p){p.x=parseFloat(b.style.left)||p.x;p.y=parseFloat(b.style.top)||p.y;p.w=b.offsetWidth;p.h=b.offsetHeight;p.snap='';savePins()}}
   let rz=null;
-  function rzStart(t,x,y,touch){const b=rzBox(t);if(!b)return;const c=cornerAt(b,x,y,touch);if(!c)return;
-    const r=b.getBoundingClientRect();rz={b,c,x0:x,y0:y,l:parseFloat(b.style.left)||0,t:parseFloat(b.style.top)||0,w:r.width,h:r.height,on:false,kind:b.classList.contains('pc')?'pc':'pw'}}
+  function rzStart(t,x,y,touch){const b=rzBox(t);if(!b)return false;const c=zoneAt(b,x,y,touch);if(!c)return false;
+    const r=b.getBoundingClientRect();rz={b,c,x0:x,y0:y,w:r.width,h:r.height,on:false,kind:b.classList.contains('pc')?'pc':'pw'};return !t.closest('button,a,input,select')}
   function rzMove(x,y){
     if(!rz)return false;const dx=x-rz.x0,dy=y-rz.y0;
-    if(!rz.on){if(Math.abs(dx)+Math.abs(dy)<5)return false;rz.on=true;rz.b.classList.add('pc-sizing');document.documentElement.classList.add('rz-doc');if(rz.kind==='pc')rz.b.style.maxHeight='none'}
+    if(!rz.on){if(Math.abs(dx)+Math.abs(dy)<5)return false;rz.on=true;rz.b.classList.add('pc-sizing');document.documentElement.classList.add('rz-doc');
+      if(rz.kind==='pc'){unfix(rz.b);rz.b.style.maxHeight='none';rz.b._snap=''}
+      rz.l=parseFloat(rz.b.style.left)||0;rz.t=parseFloat(rz.b.style.top)||0}
     const [mw,mh]=RZMIN[rz.kind],vw=document.documentElement.clientWidth;const {b,c}=rz;
-    let w=rz.w+(c[1]==='e'?dx:-dx),h=rz.h+(c[0]==='s'?dy:-dy);w=Math.max(mw,Math.min(w,vw-8));h=Math.max(mh,h);
-    b.style.width=w+'px';b.style.height=h+'px';
-    if(c[1]==='w')b.style.left=(rz.l+rz.w-w)+'px';if(c[0]==='n')b.style.top=(rz.t+rz.h-h)+'px';
-    if(rz.kind==='pc'&&(c[1]==='w'||c[0]==='n'))b._moved=true;
+    const E=c.includes('e'),W=c.includes('w'),S=c.includes('s'),N=c.includes('n');
+    let w=rz.w+(E?dx:W?-dx:0),h=rz.h+(S?dy:N?-dy:0);w=Math.max(mw,Math.min(w,vw-8));h=Math.max(mh,h);
+    if(E||W)b.style.width=w+'px';if(N||S)b.style.height=h+'px';
+    if(W)b.style.left=(rz.l+rz.w-w)+'px';if(N)b.style.top=(rz.t+rz.h-h)+'px';
+    if(rz.kind==='pc'&&(W||N))b._moved=true;
     return true;
   }
   function rzEnd(){
     if(!rz)return;const z=rz;rz=null;if(!z.on)return;z.b.classList.remove('pc-sizing');document.documentElement.classList.remove('rz-doc');eat();
-    if(z.kind==='pc')LS.set('card-size',{w:z.b.offsetWidth,h:z.b.offsetHeight});
-    else{const p=pins.find(x=>x.id===z.b.dataset.pin);if(p){p.x=parseFloat(z.b.style.left)||p.x;p.y=parseFloat(z.b.style.top)||p.y;p.w=z.b.offsetWidth;p.h=z.b.offsetHeight;savePins()}}
+    if(z.kind==='pc')LS.set('card-size',{w:z.b.offsetWidth,h:z.b.offsetHeight});else savePinGeo(z.b);
   }
-  document.addEventListener('mousedown',e=>{if(e.button===0)rzStart(e.target,e.clientX,e.clientY,false)},true);
+  /* double-click a side or corner: stretch that side / those sides to the edge of the screen */
+  function stretch(b,c){
+    const r=b.getBoundingClientRect(),vw=document.documentElement.clientWidth,vh=innerHeight,m=SNAPM;
+    let L=r.left,T=r.top,R=r.right,B=r.bottom;if(c.includes('n'))T=m;if(c.includes('s'))B=vh-m;if(c.includes('w'))L=m;if(c.includes('e'))R=vw-m;
+    const pc=b.classList.contains('pc');const fixed=!pc||b.style.position==='fixed';const ox=fixed?0:scrollX,oy=fixed?0:scrollY;
+    Object.assign(b.style,{left:(L+ox)+'px',top:(T+oy)+'px',width:(R-L)+'px',height:(B-T)+'px'});
+    if(pc){b.style.maxHeight='none';b._moved=true;b._snap=''}else savePinGeo(b);
+  }
+  document.addEventListener('mousedown',e=>{if(e.button===0&&rzStart(e.target,e.clientX,e.clientY,false))e.preventDefault()},true);  // no text selection on a double-click
   document.addEventListener('mousemove',e=>{if(rzMove(e.clientX,e.clientY))e.preventDefault();
-    else if(!rz&&!e.buttons){const b=rzBox(e.target);if(b){const c=cornerAt(b,e.clientX,e.clientY,false);b.style.cursor=c?(c==='nw'||c==='se'?'nwse-resize':'nesw-resize'):''}}});
+    else if(!rz&&!e.buttons){const b=rzBox(e.target);if(b){const c=zoneAt(b,e.clientX,e.clientY,false);b.style.cursor=CURSOR[c]||''}}});
   document.addEventListener('mouseup',rzEnd,true);
+  document.addEventListener('dblclick',e=>{const b=rzBox(e.target);if(!b||e.target.closest('button,a,input,select'))return;const c=zoneAt(b,e.clientX,e.clientY,false);if(!c)return;
+    e.preventDefault();e.stopPropagation();stretch(b,c)},true);
   document.addEventListener('touchstart',e=>{if(e.touches.length===1)rzStart(e.target,e.touches[0].clientX,e.touches[0].clientY,true)},{passive:true,capture:true});
   document.addEventListener('touchmove',e=>{if(!rz)return;if(e.touches.length!==1){rz=null;return}if(rzMove(e.touches[0].clientX,e.touches[0].clientY)||rz)e.preventDefault()},{passive:false,capture:true});
   document.addEventListener('touchend',rzEnd,{passive:true,capture:true});document.addEventListener('touchcancel',rzEnd,{passive:true,capture:true});
@@ -696,15 +742,27 @@
     sec.querySelector('[data-pl-body]').innerHTML='<span class="spin"></span>Loading plays…';fillPlays(sec.parentNode||sec);
   });
 
-  /* "Add to Trade: A · B" on player cards: adds him to that side of the Trade page (keeps whatever is already there) */
-  function tradeAdd(id){return `<span class="tr-add">Add to Compare <button type="button" data-trade="a" data-tid="${esc(id)}" title="Add to side A on the Compare page">A</button><button type="button" data-trade="b" data-tid="${esc(id)}" title="Add to side B on the Compare page">B</button></span>`}
+  /* "Add to Compare: A · B" on player cards: adds him to that side of the Compare page and stays put.
+     The button turns into a thin green check (click it again to take him off); keep adding from any page.
+     The list is saved in this browser (nfls-trade-hash) and the Compare page opens with it. */
+  const onTrade=()=>location.pathname.endsWith('trade.html');
+  function tradeQ(){let h='';try{h=onTrade()&&location.hash.length>1?location.hash.slice(1):(localStorage.getItem('nfls-trade-hash')||'')}catch(err){}return new URLSearchParams(h)}
+  const tradeL=(q,k)=>(q.get(k)||'').split(',').filter(Boolean);
+  const CHECK='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>';
+  function trBtn(side,id,on){const S=side.toUpperCase();return `<button type="button" data-trade="${side}" data-tid="${esc(id)}" class="${on?'on':''}" aria-pressed="${on}" title="${on?`On side ${S} · click to take him off`:`Add to side ${S} on the Compare page`}" aria-label="${on?`Remove from side ${S}`:`Add to side ${S}`}">${on?CHECK:S}</button>`}
+  function tradeAdd(id){const q=tradeQ();return `<span class="tr-add" data-tr="${esc(id)}"><a href="trade.html" class="tr-go" title="Open the Compare page">Add to Compare</a> ${trBtn('a',id,tradeL(q,'a').includes(id))}${trBtn('b',id,tradeL(q,'b').includes(id))}</span>`}
+  function paintTrade(){const q=tradeQ();document.querySelectorAll('.tr-add[data-tr]').forEach(w=>{const id=w.dataset.tr;
+    for(const side of ['a','b']){const on=tradeL(q,side).includes(id),b=w.querySelector(`[data-trade="${side}"]`);if(b&&b.classList.contains('on')!==on)b.outerHTML=trBtn(side,id,on)}})}
   document.addEventListener('click',e=>{const b=e.target.closest('[data-trade][data-tid]');if(!b)return;e.preventDefault();e.stopPropagation();
-    let h='';try{h=location.pathname.endsWith('trade.html')&&location.hash.length>1?location.hash.slice(1):(localStorage.getItem('nfls-trade-hash')||'')}catch(err){}
-    const q=new URLSearchParams(h);const side=b.dataset.trade,other=side==='a'?'b':'a',id=b.dataset.tid;
-    const L=k=>(q.get(k)||'').split(',').filter(Boolean);const mine=L(side).filter(x=>x!==id),theirs=L(other).filter(x=>x!==id);
-    q.set(side,[...mine,id].join(','));if(theirs.length)q.set(other,theirs.join(','));else q.delete(other);
+    const q=tradeQ();const side=b.dataset.trade,other=side==='a'?'b':'a',id=b.dataset.tid;const was=tradeL(q,side).includes(id);
+    const mine=tradeL(q,side).filter(x=>x!==id),theirs=tradeL(q,other).filter(x=>x!==id);
+    if(!was)mine.push(id);
+    if(mine.length)q.set(side,mine.join(','));else q.delete(side);if(theirs.length)q.set(other,theirs.join(','));else q.delete(other);
     const hash=decodeURIComponent(q.toString());try{localStorage.setItem('nfls-trade-hash',hash)}catch(err){}
-    if(location.pathname.endsWith('trade.html')){location.hash=hash;b.classList.add('ok');setTimeout(()=>b.classList.remove('ok'),900)}else location.href='trade.html#'+hash},true);
+    if(onTrade())location.hash=hash||'a=';   // on the Compare page itself: update the sides right away
+    paintTrade()},true);
+  addEventListener('storage',e=>{if(e.key==='nfls-trade-hash')paintTrade()});   // another tab changed the list
+  addEventListener('hashchange',()=>{if(onTrade())paintTrade()});
 
   /* markup helpers for pages */
   function pbtn(id,name,cls){return `<button type="button" class="pname ${cls||''}" data-card="p:${esc(id)}" data-name="${esc(name)}" aria-expanded="false">${esc(name)}</button>`}
