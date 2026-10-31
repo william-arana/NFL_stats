@@ -102,6 +102,26 @@
   },true);
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
 
+  /* Sleeper links (menu, card, FA/MINE badges): copy the name first, then open Sleeper.
+     Phones / the home-screen app: open in the same window. A new tab is what left a blank page behind when
+     the Sleeper app took over; this way the app opens straight away (or Sleeper's site, with a way back).
+     Desktop: always the same "Sleeper" tab, so repeat clicks reuse it instead of piling up tabs. A browser
+     only lets us reuse a tab this site opened, not one you opened yourself. */
+  const touchy=()=>matchMedia('(pointer:coarse)').matches||navigator.standalone===true||matchMedia('(display-mode:standalone)').matches;
+  document.addEventListener('click',e=>{
+    const a=e.target.closest&&e.target.closest('a[href^="https://sleeper.com"],a[href^="https://sleeper.app"]');
+    if(!a||e.defaultPrevented||e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;
+    e.preventDefault();
+    let name=a.dataset.copyname||'';
+    if(!name&&a.dataset.copy){const h=a.closest('.pmenu');const b=h&&h.querySelector('[data-copyonly]');const m=b&&b.textContent.match(/"(.*)"/);if(m)name=m[1]}
+    if(!touchy()){   // desktop: start the copy, then open the tab in the same click (a later open gets blocked as a pop-up)
+      if(name)copy(name).catch(()=>{});
+      const w=window.open(a.href,'nfls-sleeper');if(w){try{w.focus()}catch(err){}}return}
+    const go=()=>{location.href=a.href};if(!name){go();return}
+    let done=false;const once=()=>{if(!done){done=true;go()}};
+    copy(name).then(once,once);setTimeout(once,400);   // phones: copy first (leaving the page can cancel it), but don't wait long
+  },true);
+
   /* phones: narrow the frozen name column while the table is scrolled sideways (see site.css).
      The full width is measured first so the column can animate between two fixed widths. */
   const phone=window.matchMedia('(max-width:640px)');let lockUntil=0;
