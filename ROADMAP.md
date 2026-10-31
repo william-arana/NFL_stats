@@ -76,6 +76,8 @@ The plan for NFL_stats. Claude keeps this current (see CLAUDE.md → "How we wor
 
 ## Decisions
 
+- 2026-10-31 · **Lab pivot builder shows plain names (William):** Table, Rows, Columns, Values and Filters lists use common names ("Targets", "Red zone carries", "Snap %"), sorted A–Z; the SQL keeps the real field names. Names live in `FIELD_NAMES` in lab.html: add one there when a new field is added.
+
 - 2026-10-31 · **Window moves for cards + pop-outs (desktop, William):** resize from any side as well as corners; double-click a side/corner = stretch to that screen edge; drag the header to the top edge = full screen, left/right edge = half (blue preview). A snapped card is pinned to the screen so the page scrolls behind it; dragging it out restores its size. Double-click header still = normal size.
 
 - 2026-10-31 · **Add to Compare stays put (William):** A/B on player cards no longer jumps to Compare; the button turns into a thin green ✓ (click again to remove) and you keep adding. Compare opens with that saved list when there's no link.
