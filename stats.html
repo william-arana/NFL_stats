@@ -84,6 +84,7 @@ td.heat{background-image:linear-gradient(rgba(var(--heat),var(--a,0)),rgba(var(-
 .pname:hover{color:var(--blue);text-decoration:underline}
 .xp{border:0;background:none;padding:0 4px 0 0;margin-left:-2px;color:var(--ink-3);cursor:pointer;font-size:12px;width:16px}
 .xp:hover,.xp[aria-expanded="true"]{color:var(--blue)}
+#p-tbl tbody td.stick:has(.xp){cursor:pointer}#p-tbl tbody td.stick:has(.xp):hover .xp{color:var(--blue)}
 .pname.tm{font-weight:500}
 .pos{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
 .inj{font-family:var(--f-mono);font-size:10px;padding:1px 5px;border-radius:3px;background:var(--margin-soft);color:var(--margin);margin-left:6px}
@@ -353,7 +354,8 @@ function drawPlayers(){
   $('#p-tbl').innerHTML=data.length?th+'<tbody>'+body+'</tbody>':'<tbody><tr><td class="empty">No players match. Lower "Min games" or clear the search.</td></tr></tbody>';
   if(data.length>LIM)$('#p-sum').innerHTML+=`<span>Showing top ${LIM}. Filter or download CSV for all.</span>`;
   $('#p-tbl').onclick=e=>{const h=e.target.closest('th[data-k]');if(h){const k=h.dataset.k;if(k==='trend')return;const d0=(k==='name'||k==='team'||k==='next')?1:-1;/* click: sort · again: flip · 3rd: back to the default order */if(ps.sort===k){if(ps.flipped){ps.sort=null;ps.dir=-1;ps.flipped=false}else{ps.dir*=-1;ps.flipped=true}}else if(!ps.sort&&k===set.cols[0].k){ps.sort=k;ps.dir=1;ps.flipped=true}else{ps.sort=k;ps.dir=d0;ps.flipped=false}drawPlayers();return}
-    const n=e.target.closest('.xp');if(n){const id=n.dataset.id;ps.open.has(id)?ps.open.delete(id):ps.open.add(id);drawPlayers()}};
+    /* the arrow, or anywhere in the name cell that isn't the name or another button / link, opens the week rows */
+    const n=e.target.closest('.xp')||(!e.target.closest('button,a,input,select')&&(c=>c&&c.querySelector('.xp'))(e.target.closest('tbody td.stick')));if(n){const id=n.dataset.id;ps.open.has(id)?ps.open.delete(id):ps.open.add(id);drawPlayers()}};
 }
 
 /* ---------- TEAMS ---------- */
