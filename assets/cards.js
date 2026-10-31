@@ -450,6 +450,9 @@
     if(!validKey(key))return;
     if(pendingBack){afterPop=()=>open(key,a,pos);return}
     if(el&&a&&anchor===a){close();return}
+    /* desktop: a card you dragged somewhere stays there — it becomes a pop-out window in the same spot and size,
+       and the new name opens as a second card (side-by-side compares) */
+    if(el&&el._moved&&desk()&&stack.length){const cur=stack[stack.length-1],r=el.getBoundingClientRect();addPin(cur.key,cur.pos,'','',{x:r.left,y:r.top,w:r.width,h:r.height})}
     const d=el?depth():0;closeLocal();mk(a);
     stack=[{key,pos:pos||''}];writeState('pushState',d+1);show();
   }
@@ -507,12 +510,12 @@
     w.addEventListener('pointerdown',()=>front(w),true);
     if(window.ResizeObserver){let t=null;new ResizeObserver(()=>{if(p.min||!w.isConnected)return;clearTimeout(t);t=setTimeout(()=>{const r=w.getBoundingClientRect();if(Math.abs(r.width-(p.w||0))>2||Math.abs(r.height-(p.h||0))>2){p.w=Math.round(r.width);p.h=Math.round(r.height);savePins()}},150)}).observe(w)}
   }
-  function addPin(key,pos,sec,label){
+  function addPin(key,pos,sec,label,geo){
     if(pins.some(p=>p.key===key&&(p.sec||'')===(sec||''))){const p=pins.find(p=>p.key===key&&(p.sec||'')===(sec||''));const w=pinEls.get(p.id);if(w){front(w);w.classList.add('flash');setTimeout(()=>w.classList.remove('flash'),600)}return}
     const phone=matchMedia('(max-width:640px)').matches,vw=document.documentElement.clientWidth,n=pins.length;
     const width=phone?vw-16:(sec?360:440);
-    const p={id:'w'+Date.now().toString(36),key,pos:pos||'',sec:sec||'',label:label||'',w:width,h:0,min:false,
-      x:phone?8:vw-width-20-n*26,y:phone?8+n*40:76+n*30};
+    const p={id:'w'+Date.now().toString(36),key,pos:pos||'',sec:sec||'',label:label||'',w:geo?Math.round(geo.w):width,h:geo?Math.round(geo.h):0,min:false,
+      x:geo?Math.round(geo.x):phone?8:vw-width-20-n*26,y:geo?Math.round(geo.y):phone?8+n*40:76+n*30};
     pins.push(p);while(pins.length>MAXPINS)removePin(pins[0].id);savePins();loadAll().then(()=>mountPin(p));
   }
   function removePin(id){const w=pinEls.get(id);if(w)w.remove();pinEls.delete(id);pins=pins.filter(p=>p.id!==id);savePins()}
