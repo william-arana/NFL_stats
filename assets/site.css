@@ -294,3 +294,6 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 [data-card^="p:"][data-inj="ir"]{color:var(--inj-ir)!important}
 [data-card^="p:"][data-inj="season"]{color:var(--inj-season)!important}
 :root[data-theme="dark"]{--inj-ir:#ff7a7a;--inj-season:#e2405a}
+
+/* Next Gen Stats cell that NGS didn't track (Stats board, cards) */
+.na{color:var(--ink-3);font-size:.85em;letter-spacing:.02em;cursor:help;text-decoration:underline dotted;text-underline-offset:2px}

@@ -183,7 +183,8 @@
     const n=nextOpp(s.team);const cols=POSCOLS[s.pos]||POSCOLS.WR;
     const tot=k=>sum(s.logs.map(l=>l[k])),pg=k=>RATE.has(k)?mean(s.logs.map(l=>l[k])):tot(k)/s.g;
     const cell=(k,v,isPg)=>!num(v)?'<span class="dim">–</span>':RATE.has(k)?pct(v):(isPg||k==='xfp')?f1(v):f0(v);
-    const xc=XCOLS[s.pos]||XCOLS.WR;const xcell=(c,L,isPg)=>{let v=c.v(L);if(isPg&&c.sum&&num(v))v=v/L.length;return `<td>${xfmt(v,isPg&&c.sum&&c.f===0?1:c.f)}</td>`};
+    const xc=XCOLS[s.pos]||XCOLS.WR;const NGSK={sep:1,cush:1,yacoe:1,ryoe:1,ryoe_att:1,box8_pct:1,ttt:1,aggr_pct:1,cay:1};
+    const xcell=(c,L,isPg)=>{let v=c.v(L);if(isPg&&c.sum&&num(v))v=v/L.length;if(!num(v)&&NGSK[c.k])return `<td><span class="na" title="Not tracked by Next Gen Stats here (too few targets/carries/attempts, or this week's NGS isn't out yet)">n/a</span></td>`;return `<td>${xfmt(v,isPg&&c.sum&&c.f===0?1:c.f)}</td>`};
     const seasonRow=(lbl,isPg)=>`<tr${isPg?'':' class="tot"'}><td class="l">${lbl}</td><td class="fp">${f1(isPg?s.fpg:s.fp)}</td>${cols.map(([k])=>`<td>${cell(k,isPg||RATE.has(k)?pg(k):tot(k),isPg)}</td>`).join('')}${xc.map(c=>xcell(c,s.logs,isPg)).join('')}</tr>`;
     const logRows=s.logs.map(l=>`<tr><td class="l">${gbtn(gameKey(l.team,l.week),l.week)}</td><td class="l">${oppBtn(l.opponent_team,((gameOf(l.team,l.week)||{}).at?'@ ':'vs ')+l.opponent_team,null)}</td><td class="fp">${f1(l[sk])}</td>${cols.map(([k])=>`<td>${cell(k,l[k],false)}</td>`).join('')}${xc.map(c=>xcell(c,[l],false)).join('')}</tr>`).join('');
     return `<div class="pc-top">${s.headshot?`<img class="hs" src="${esc(s.headshot)}" alt="" loading="lazy" onerror="this.remove()">`:''}<div><h3>${esc(s.name)}</h3>
