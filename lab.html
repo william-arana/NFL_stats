@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.37">
-<script src="assets/site.js?v=1.37" defer></script>
-<script src="assets/cards.js?v=1.37" defer></script>
-<script src="assets/glossary.js?v=1.37" defer></script>
-<script src="assets/tables.js?v=1.37" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.39">
+<script src="assets/site.js?v=1.39" defer></script>
+<script src="assets/cards.js?v=1.39" defer></script>
+<script src="assets/glossary.js?v=1.39" defer></script>
+<script src="assets/tables.js?v=1.39" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -236,6 +236,52 @@ const setStatus=(t,cls)=>{$('#status').textContent=t;$('#dot').className='dot '+
 const TABLES={avail:'Every offensive player and defense with their status in your selected league: fa / mine / taken',status:'Players on IR / PUP / NFI (s) and out for the season (season = true, with the news that says so)',players:'One row per offensive player per game',teams:'One row per team per game, offense + defense',schedule:'One row per game, with Vegas lines',games_long:'Schedule with one row per team (team / opp / implied)',meta:'Season, last completed week, next week'};
 let conn, DB, READY='', SCHEMA={}, RECIPES=[], META, SRC=null, NAMES=new Map(), ROST=null, LG=null;
 const CORE=new Set(Object.keys(TABLES));
+/* plain names for the pivot builder's field lists (the SQL keeps the real field names) */
+const FIELD_NAMES={
+  /* players */
+  player_id:'Player ID',player_display_name:'Player',position:'Position',team:'Team',opponent_team:'Opponent',week:'Week',
+  completions:'Completions',attempts:'Pass attempts',passing_yards:'Passing yards',passing_tds:'Passing TDs',passing_interceptions:'Interceptions thrown',
+  sacks_suffered:'Times sacked',passing_air_yards:'Passing air yards',passing_epa:'Passing EPA',passing_cpoe:'Completion % over expected (CPOE)',
+  carries:'Carries',rushing_yards:'Rushing yards',rushing_tds:'Rushing TDs',rushing_first_downs:'Rushing first downs',rushing_epa:'Rushing EPA',
+  targets:'Targets',receptions:'Receptions',receiving_yards:'Receiving yards',receiving_tds:'Receiving TDs',receiving_air_yards:'Receiving air yards',
+  receiving_yards_after_catch:'Yards after catch',receiving_first_downs:'Receiving first downs',receiving_epa:'Receiving EPA',
+  target_share:'Target share',air_yards_share:'Air yards share',wopr:'WOPR (weighted opportunity)',racr:'RACR (receiving yards per air yard)',
+  rushing_fumbles_lost:'Fumbles lost (rushing)',receiving_fumbles_lost:'Fumbles lost (receiving)',sack_fumbles_lost:'Fumbles lost (sacks)',
+  fantasy_points:'Fantasy points (standard)',fantasy_points_ppr:'Fantasy points (PPR)',fantasy_points_half:'Fantasy points (half PPR)',headshot_url:'Headshot link',
+  offense_snaps:'Offensive snaps',offense_pct:'Snap %',xfp:'Expected fantasy points (xFP)',xfp_diff:'PPR minus xFP',
+  qb_pressured:'Times pressured',qb_blitzed:'Times blitzed',ybc:'Yards before contact',yac_rush:'Yards after contact',broken_tackles:'Broken tackles',
+  sep_sum:'Separation (total, NGS)',cush_sum:'Cushion (total, NGS)',ngs_tgt:'Targets tracked (NGS)',yacoe_sum:'YAC over expected (total, NGS)',ngs_rec:'Catches tracked (NGS)',
+  ryoe:'Rush yards over expected (NGS)',ngs_att:'Carries tracked (NGS)',box8:'Carries vs 8+ in the box',ttl_sum:'Time to line of scrimmage (total, NGS)',
+  ttt_sum:'Time to throw (total, NGS)',aggr:'Tight-window throws',ngs_patt:'Pass attempts tracked (NGS)',cay_sum:'Completed air yards (total, NGS)',ngs_cmp:'Completions tracked (NGS)',
+  rz_tgt:'Red zone targets',i10_tgt:'Targets inside the 10',deep_tgt:'Deep targets (20+ air yards)',catchable:'Catchable targets',contested:'Contested targets',
+  contested_c:'Contested catches',drops:'Drops',created:'Catches on poor throws',rz_car:'Red zone carries',i10_car:'Carries inside the 10',gl_car:'Goal-line carries',
+  db:'Dropbacks',pa_db:'Play-action dropbacks',int_worthy:'Interception-worthy throws',throwaways:'Throwaways',
+  /* teams */
+  def_sacks:'Sacks (defense)',def_qb_hits:'QB hits (defense)',def_interceptions:'Interceptions (defense)',fumble_recovery_opp:'Fumble recoveries',def_tds:'Defensive TDs',
+  def_safeties:'Safeties',special_teams_tds:'Special teams TDs',def_fg_blocks:'Blocked field goals',def_punt_blocks:'Blocked punts',def_pat_blocks:'Blocked extra points',
+  def_fumbles_forced:'Forced fumbles',points_for:'Points scored',points_against:'Points allowed',pressures_allowed:'Pressures allowed (offense)',def_pressures:'Pressures (defense)',
+  def_blitzes:'Blitzes (defense)',pfr_carries:'Carries (PFR)',total_yards:'Total yards',yards_allowed:'Yards allowed',pass_yards_allowed:'Passing yards allowed',
+  rush_yards_allowed:'Rushing yards allowed',epa_allowed:'EPA allowed',dst_pts:'D/ST fantasy points',
+  o_plays:'Offense: plays',o_epa:'Offense: EPA',o_succ:'Offense: successful plays',o_db:'Offense: dropbacks',o_3d:'Offense: 3rd downs',o_3d_conv:'Offense: 3rd downs converted',
+  o_expl:'Offense: explosive plays (20+ yds)',o_pa_db:'Offense: play-action dropbacks',o_pa_epa:'Offense: play-action EPA',o_blitz:'Offense: times blitzed',
+  o_rushers:'Offense: pass rushers faced (total)',o_rushers_n:'Offense: dropbacks with rusher count',o_box:'Offense: defenders in the box (total)',o_box_n:'Offense: runs with box count',
+  o_rz:'Offense: red zone trips',o_rz_td:'Offense: red zone TDs',
+  d_plays:'Defense: plays',d_epa:'Defense: EPA allowed',d_succ:'Defense: successful plays allowed',d_db:'Defense: dropbacks faced',d_3d:'Defense: 3rd downs faced',
+  d_3d_conv:'Defense: 3rd downs allowed',d_expl:'Defense: explosive plays allowed',d_pa_db:'Defense: play-action dropbacks faced',d_pa_epa:'Defense: play-action EPA allowed',
+  d_blitz:'Defense: blitzes',d_rushers:'Defense: pass rushers sent (total)',d_rushers_n:'Defense: dropbacks with rusher count',d_box:'Defense: defenders in the box (total)',
+  d_box_n:'Defense: runs with box count',d_rz:'Defense: red zone trips allowed',d_rz_td:'Defense: red zone TDs allowed',
+  /* schedule / games_long */
+  game_id:'Game ID',gameday:'Game date',gametime:'Kickoff time',weekday:'Day',away_team:'Away team',home_team:'Home team',away_score:'Away score',home_score:'Home score',
+  spread_line:'Spread',total_line:'Over/under',roof:'Roof',temp:'Temperature',wind:'Wind',away_rest:'Away rest days',home_rest:'Home rest days',div_game:'Division game',
+  away_qb_name:'Away QB',home_qb_name:'Home QB',stadium:'Stadium',home_implied:'Home implied points',away_implied:'Away implied points',
+  opp:'Opponent',is_home:'Home game',implied:'Implied points',opp_implied:'Opponent implied points',
+  /* avail / status / meta */
+  status:'League status (fa / mine / taken)',fantasy_team:'Fantasy team',league:'League',s:'Injury list (IR / PUP / NFI)',season:'Season',news_date:'News date',news:'News',
+  last_completed_week:'Last completed week',next_week:'Next week'
+};
+const TABLE_NAMES={players:'Players, by game',teams:'Teams, by game',schedule:'Schedule',games_long:'Games, one row per team',avail:'League availability',status:'Injury lists'};
+const fieldName=n=>FIELD_NAMES[n]||String(n).replace(/_/g,' ').replace(/^./,c=>c.toUpperCase());
+
 /* league availability: fill the availability table, then re-badge the current results */
 async function applyLeague(lg){
   LG=lg;ROST=null;if(!conn)return;
@@ -645,11 +691,11 @@ async function ask(q,fix){
 
 const qi=s=>'"'+String(s).replace(/"/g,'""')+'"';
 function drawPivot(){
-  const cols=SCHEMA[pv.table]||[];const opt=(sel,filt)=>cols.filter(c=>!filt||filt(c)).map(c=>`<option ${c.name===sel?'selected':''}>${esc(c.name)}</option>`).join('');
+  const cols=SCHEMA[pv.table]||[];const opt=(sel,filt)=>cols.filter(c=>!filt||filt(c)).map(c=>({n:c.name,l:fieldName(c.name)})).sort((a,b)=>a.l.localeCompare(b.l)).map(c=>`<option value="${esc(c.n)}" ${c.n===sel?'selected':''}>${esc(c.l)}</option>`).join('');
   $('#pane-pv').innerHTML=`
-  <div class="pv-row"><label for="pv-t">Table</label><div class="line"><select id="pv-t">${Object.keys(TABLES).filter(t=>t!=='meta').map(t=>`<option ${t===pv.table?'selected':''}>${t}</option>`).join('')}</select><span class="hint">${esc(TABLES[pv.table])}</span></div></div>
-  <div class="pv-row"><label>Rows</label><div class="line">${pv.groups.map((g,i)=>`<span class="pill">${esc(g)}<button data-rg="${i}" aria-label="Remove ${esc(g)}">×</button></span>`).join('')}<select id="pv-addg"><option value="">+ group by…</option>${opt('',c=>!pv.groups.includes(c.name))}</select></div></div>
-  <div class="pv-row"><label for="pv-p">Columns</label><div class="line"><select id="pv-p"><option value="">(none)</option>${opt(pv.pivot,c=>!isNum(c.type)||/week/.test(c.name))}</select><span class="hint">Spread one field across columns, like week. Uses the first value below.</span></div></div>
+  <div class="pv-row"><label for="pv-t">Table</label><div class="line"><select id="pv-t" autocomplete="off">${Object.keys(TABLES).filter(t=>t!=='meta').map(t=>`<option value="${t}" ${t===pv.table?'selected':''}>${esc(TABLE_NAMES[t]||t)}</option>`).join('')}</select><span class="hint">${esc(TABLES[pv.table])}</span></div></div>
+  <div class="pv-row"><label>Rows</label><div class="line">${pv.groups.map((g,i)=>`<span class="pill" title="${esc(g)}">${esc(fieldName(g))}<button data-rg="${i}" aria-label="Remove ${esc(fieldName(g))}">×</button></span>`).join('')}<select id="pv-addg" autocomplete="off"><option value="">+ group by…</option>${opt('',c=>!pv.groups.includes(c.name))}</select></div></div>
+  <div class="pv-row"><label for="pv-p">Columns</label><div class="line"><select id="pv-p" autocomplete="off"><option value="">(none)</option>${opt(pv.pivot,c=>!isNum(c.type)||/week/.test(c.name))}</select><span class="hint">Spread one field across columns, like week. Uses the first value below.</span></div></div>
   <div class="pv-row"><label>Values</label><div class="stack">${pv.values.map((v,i)=>`<div class="line"><select data-va="${i}">${AGGS.map(([k,l])=>`<option value="${k}" ${k===v.agg?'selected':''}>${l}</option>`).join('')}</select> of <select data-vc="${i}">${opt(v.col,c=>isNum(c.type)||v.agg==='count')}</select><button class="btn ghost" data-rv="${i}" aria-label="Remove value">×</button></div>`).join('')}<div><button class="btn ghost" id="pv-addv">+ value</button></div></div></div>
   <div class="pv-row"><label>Filters</label><div class="stack">${pv.filters.map((f,i)=>`<div class="line"><select data-fc="${i}">${opt(f.col)}</select><select data-fo="${i}">${OPS.map(([k,l])=>`<option value="${k}" ${k===f.op?'selected':''}>${l}</option>`).join('')}</select><input type="text" data-fv="${i}" value="${esc(f.val)}" placeholder="value" size="12"><button class="btn ghost" data-rf="${i}" aria-label="Remove filter">×</button></div>`).join('')}<div><button class="btn ghost" id="pv-addf">+ filter</button></div></div></div>
   <div class="pv-row"><label for="pv-min">Options</label><div class="line">Only groups with at least <input type="number" id="pv-min" min="1" value="${pv.minN}" style="width:60px"> rows · show <input type="number" id="pv-lim" min="1" value="${pv.limit}" style="width:70px"> results</div></div>
