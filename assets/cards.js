@@ -612,6 +612,14 @@
   })();
   addEventListener('resize',()=>{if(el)place()});
 
+  /* injury colors on every player name: red = IR / PUP / NFI, dark red = out for the season.
+     data/site/status.json (Sleeper injury status + "season-ending" in this season's player news), 3x a day. */
+  let INJ=null;
+  const injTip=r=>r.season?`Out for the season${r.d?' (news '+r.d+')':''}${r.h?': '+r.h:''}`:({IR:'On injured reserve',PUP:'On the PUP list',NFI:'On the non-football injury list'}[r.s]||r.s);
+  function tagInj(){if(!INJ)return;document.querySelectorAll('[data-card^="p:"]:not([data-inj])').forEach(b=>{const r=INJ[b.dataset.card.slice(2)];b.dataset.inj=r?(r.season?'season':'ir'):'';if(r&&!b.title)b.title=injTip(r)})}
+  fetch('data/site/status.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(j=>{INJ=(j&&j.p)||{};tagInj();let q=false;
+    new MutationObserver(()=>{if(!q){q=true;requestAnimationFrame(()=>{q=false;tagInj()})}}).observe(document.documentElement,{childList:true,subtree:true})}).catch(()=>{});
+
   /* markup helpers for pages */
   function pbtn(id,name,cls){return `<button type="button" class="pname ${cls||''}" data-card="p:${esc(id)}" data-name="${esc(name)}" aria-expanded="false">${esc(name)}</button>`}
   function dbtn(team,label,cls){return `<button type="button" class="pname ${cls||''}" data-card="d:${esc(team)}" aria-expanded="false">${esc(label||team)}</button>`}
