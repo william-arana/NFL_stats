@@ -485,7 +485,7 @@
 
   /* ---------- pop-out windows ----------
      ⧉ on a card (or on one of its sections) floats it in its own window: drag it by the title bar, resize from
-     the corner, minimize, or open it back up as a card. Windows stay put while you browse other cards and
+     any corner (double-tap the title bar = normal size), minimize, or open it back up as a card. Windows stay put while you browse other cards and
      follow you to other pages in the same tab (sessionStorage). Names inside a window open cards too. */
   const MAXBOX=2,ZBASE=72;  // at most 2 boxes on screen: pop-out windows + the open card
   const SS={get(){try{const v=JSON.parse(sessionStorage.getItem('nfls-pins')||'[]');return Array.isArray(v)?v.filter(p=>p&&validKey(p.key)):[]}catch(e){return []}},set(v){try{sessionStorage.setItem('nfls-pins',JSON.stringify(v))}catch(e){}}};
@@ -507,9 +507,13 @@
     clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px';if(p.w)w.style.width=p.w+'px';if(p.h&&!p.min)w.style.height=p.h+'px';
     document.body.appendChild(w);pinEls.set(p.id,w);front(w);fillPin(p);if(p.st){const b=w.querySelector('.pw-b');requestAnimationFrame(()=>{b.scrollTop=p.st;p.st=0})}
     const h=w.querySelector('.pw-h');let drag=null;
-    h.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;e.preventDefault();drag={dx:e.clientX-p.x,dy:e.clientY-p.y};h.setPointerCapture(e.pointerId);w.classList.add('drag')});
+    h.addEventListener('pointerdown',e=>{if(e.target.closest('button')||cornerAt(w,e.clientX,e.clientY,e.pointerType!=='mouse'))return;e.preventDefault();drag={dx:e.clientX-p.x,dy:e.clientY-p.y,x0:p.x,y0:p.y};h.setPointerCapture(e.pointerId);w.classList.add('drag')});
     h.addEventListener('pointermove',e=>{if(!drag)return;p.x=e.clientX-drag.dx;p.y=e.clientY-drag.dy;clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px'});
-    const end=()=>{if(!drag)return;drag=null;w.classList.remove('drag');savePins()};h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
+    let tap=null;
+    const end=e=>{if(!drag)return;const moved=Math.abs(p.x-drag.x0)+Math.abs(p.y-drag.y0)>3;drag=null;w.classList.remove('drag');savePins();
+      if(moved||!e||e.type!=='pointerup'){tap=null;return}const now=Date.now();
+      if(tap&&now-tap<350&&!p.min){tap=null;p.w=Math.min(p.sec?420:600,document.documentElement.clientWidth-16);p.h=0;w.style.width=p.w+'px';w.style.height='';clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px';savePins();return}tap=now};
+    h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
     w.addEventListener('pointerdown',()=>front(w),true);
     if(window.ResizeObserver){let t=null;new ResizeObserver(()=>{if(p.min||!w.isConnected)return;clearTimeout(t);t=setTimeout(()=>{const r=w.getBoundingClientRect();if(Math.abs(r.width-(p.w||0))>2||Math.abs(r.height-(p.h||0))>2){p.w=Math.round(r.width);p.h=Math.round(r.height);savePins()}},150)}).observe(w)}
   }
@@ -559,15 +563,16 @@
     if(t&&!e.target.closest('.plink,.av,a[href]:not([data-card])')){e.preventDefault();e.stopPropagation();const k=t.dataset.card||('d:'+t.dataset.opp);if(t.dataset.name)NAMEHINT[k.slice(2)]=t.dataset.name;open(k,t,t.dataset.pos);return}
     if(el&&!e.target.closest('.pmenu,.glpop,.colpanel'))close();
   });
-  /* desktop: drag the card by its header to move it, resize it from the bottom-right corner (the size is
-     remembered for the next card). */
+  /* desktop/tablet: drag the card by its header to move it, resize it from any of its 4 corners (the size is
+     remembered for the next card), double-tap / double-click the header to put it back to its normal size and spot. */
   function desk(){return !matchMedia('(max-width:640px)').matches}
   function sizeCard(){if(!el||!desk())return;const z=LS.get('card-size',null);if(z&&z.w&&z.h){el.style.width=z.w+'px';el.style.height=z.h+'px';el.style.maxHeight='none'}}
-  let mv=null,rs=false,eatClick=false;
+  function resetCard(){if(!el)return;LS.set('card-size',null);el._moved=false;el.style.width=el.style.height=el.style.maxHeight='';place()}
+  let mv=null,eatClick=false,lastTap=null;
+  const eat=()=>{eatClick=true;setTimeout(()=>eatClick=false,0)};
   document.addEventListener('pointerdown',e=>{
     if(!el||!desk()||e.button!==0||!el.contains(e.target))return;
-    const r=el.getBoundingClientRect();
-    if(e.clientX>r.right-20&&e.clientY>r.bottom-20){rs=true;el.style.height=el.offsetHeight+'px';el.style.maxHeight='none';return}  // the resize corner
+    if(cornerAt(el,e.clientX,e.clientY,e.pointerType!=='mouse'))return;  // a corner = resize (handled below)
     if(!e.target.closest('.pc-head')||e.target.closest('button,a,input,select,label,.pc-crumbs'))return;
     e.preventDefault();mv={dx:e.pageX-el.offsetLeft,dy:e.pageY-el.offsetTop,x0:e.clientX,y0:e.clientY,on:false};
   },true);
@@ -577,11 +582,46 @@
     const x=Math.max(scrollX+80-w,Math.min(e.pageX-mv.dx,scrollX+cw-80)),y=Math.max(scrollY,Math.min(e.pageY-mv.dy,scrollY+innerHeight-40));
     el.style.left=x+'px';el.style.top=y+'px';el._moved=true;
   });
-  document.addEventListener('pointerup',()=>{
-    if(mv){if(mv.on){eatClick=true;setTimeout(()=>eatClick=false,0)}mv=null;el&&el.classList.remove('pc-moving')}
-    if(rs){rs=false;if(el){LS.set('card-size',{w:el.offsetWidth,h:el.offsetHeight});eatClick=true;setTimeout(()=>eatClick=false,0)}}
+  document.addEventListener('pointerup',e=>{
+    if(!mv)return;const m=mv;mv=null;el&&el.classList.remove('pc-moving');
+    if(m.on){eat();lastTap=null;return}
+    /* a tap on the header: two within 350 ms = back to the normal size and spot */
+    const now=Date.now();
+    if(lastTap&&now-lastTap.t<350&&Math.abs(e.clientX-lastTap.x)+Math.abs(e.clientY-lastTap.y)<30){lastTap=null;resetCard();return}
+    lastTap={t:now,x:e.clientX,y:e.clientY};
   });
   window.addEventListener('click',e=>{if(eatClick){eatClick=false;e.stopPropagation();e.preventDefault()}},true);  // a drag that ends outside the card must not close it
+
+  /* resize from any corner: the card and pop-out windows, mouse or finger (not on phones, where the card is a sheet).
+     A press on a corner only becomes a resize once it moves, so the × button in the top-right corner still works. */
+  const RZMIN={pc:[320,180],pw:[220,38]};
+  function cornerAt(b,x,y,touch){const r=b.getBoundingClientRect(),p=touch?30:16;const v=y<r.top+p?'n':y>r.bottom-p?'s':'',h=x<r.left+p?'w':x>r.right-p?'e':'';return v&&h?v+h:''}
+  function rzBox(t){const b=t&&t.closest&&t.closest('.pc,.pw');return b&&desk()&&!b.classList.contains('min')?b:null}
+  let rz=null;
+  function rzStart(t,x,y,touch){const b=rzBox(t);if(!b)return;const c=cornerAt(b,x,y,touch);if(!c)return;
+    const r=b.getBoundingClientRect();rz={b,c,x0:x,y0:y,l:parseFloat(b.style.left)||0,t:parseFloat(b.style.top)||0,w:r.width,h:r.height,on:false,kind:b.classList.contains('pc')?'pc':'pw'}}
+  function rzMove(x,y){
+    if(!rz)return false;const dx=x-rz.x0,dy=y-rz.y0;
+    if(!rz.on){if(Math.abs(dx)+Math.abs(dy)<5)return false;rz.on=true;rz.b.classList.add('pc-sizing');document.documentElement.classList.add('rz-doc');if(rz.kind==='pc')rz.b.style.maxHeight='none'}
+    const [mw,mh]=RZMIN[rz.kind],vw=document.documentElement.clientWidth;const {b,c}=rz;
+    let w=rz.w+(c[1]==='e'?dx:-dx),h=rz.h+(c[0]==='s'?dy:-dy);w=Math.max(mw,Math.min(w,vw-8));h=Math.max(mh,h);
+    b.style.width=w+'px';b.style.height=h+'px';
+    if(c[1]==='w')b.style.left=(rz.l+rz.w-w)+'px';if(c[0]==='n')b.style.top=(rz.t+rz.h-h)+'px';
+    if(rz.kind==='pc'&&(c[1]==='w'||c[0]==='n'))b._moved=true;
+    return true;
+  }
+  function rzEnd(){
+    if(!rz)return;const z=rz;rz=null;if(!z.on)return;z.b.classList.remove('pc-sizing');document.documentElement.classList.remove('rz-doc');eat();
+    if(z.kind==='pc')LS.set('card-size',{w:z.b.offsetWidth,h:z.b.offsetHeight});
+    else{const p=pins.find(x=>x.id===z.b.dataset.pin);if(p){p.x=parseFloat(z.b.style.left)||p.x;p.y=parseFloat(z.b.style.top)||p.y;p.w=z.b.offsetWidth;p.h=z.b.offsetHeight;savePins()}}
+  }
+  document.addEventListener('mousedown',e=>{if(e.button===0)rzStart(e.target,e.clientX,e.clientY,false)},true);
+  document.addEventListener('mousemove',e=>{if(rzMove(e.clientX,e.clientY))e.preventDefault();
+    else if(!rz&&!e.buttons){const b=rzBox(e.target);if(b){const c=cornerAt(b,e.clientX,e.clientY,false);b.style.cursor=c?(c==='nw'||c==='se'?'nwse-resize':'nesw-resize'):''}}});
+  document.addEventListener('mouseup',rzEnd,true);
+  document.addEventListener('touchstart',e=>{if(e.touches.length===1)rzStart(e.target,e.touches[0].clientX,e.touches[0].clientY,true)},{passive:true,capture:true});
+  document.addEventListener('touchmove',e=>{if(!rz)return;if(e.touches.length!==1){rz=null;return}if(rzMove(e.touches[0].clientX,e.touches[0].clientY)||rz)e.preventDefault()},{passive:false,capture:true});
+  document.addEventListener('touchend',rzEnd,{passive:true,capture:true});document.addEventListener('touchcancel',rzEnd,{passive:true,capture:true});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el)close()});
   /* a page changing its own #hash (Stats tabs, Lab, Guide) closes the card; Trade's #a= state doesn't */
   addEventListener('hashchange',()=>{if(/^#(a|b|ta|tb)=/.test(location.hash))return;if(el)closeLocal();if(new URLSearchParams(location.search).has('card'))history.replaceState(null,'',urlFor(null))});

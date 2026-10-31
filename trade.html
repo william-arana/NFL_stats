@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.31">
-<script src="assets/site.js?v=1.31" defer></script>
-<script src="assets/cards.js?v=1.31" defer></script>
-<script src="assets/glossary.js?v=1.31" defer></script>
-<script src="assets/tables.js?v=1.31" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.32">
+<script src="assets/site.js?v=1.32" defer></script>
+<script src="assets/cards.js?v=1.32" defer></script>
+<script src="assets/glossary.js?v=1.32" defer></script>
+<script src="assets/tables.js?v=1.32" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -183,7 +183,7 @@ function waitCards(){if(!window.NFLSCards||!window.NFLS)return setTimeout(waitCa
   $('#upd').textContent=`${D.META.season} · thru Wk ${D.META.last_completed_week}`;
   for(const r of D.P)NAMES[r.player_id]={name:r.player_display_name,pos:r.position,team:r.team};
   for(const t of Object.keys(D.TM||{}))NAMES['DEF:'+t]={name:t+' D/ST',pos:'DEF',team:t};
-  readHash();NFLS.onLeague(lg=>{LG=lg;ROST=null;if(!lg){draw();return}NFLS.rosterStatus().then(r=>{ROST=r;if(st.ta==null&&r)st.ta=lg.my_roster_id;draw()})});
+  readHash();NFLS.onLeague(lg=>{const was=LG&&LG.my_roster_id;LG=lg;ROST=null;if(!lg){draw();return}NFLS.rosterStatus().then(r=>{if(LG!==lg)return;ROST=r;defaultSides(was);draw()})});
   window.addEventListener('nfls-scoring',draw);
 }).catch(e=>{$('#main').innerHTML=`<div class="box"><div class="empty">Couldn't load the season data (${esc(e.message)}).</div></div>`})}
 waitCards();
@@ -191,6 +191,11 @@ waitCards();
 /* ---------- URL: trade.html#a=id,id&b=id&ta=12&tb=4 ---------- */
 function readHash(){const h=new URLSearchParams(location.hash.slice(1));const L=k=>(h.get(k)||'').split(',').map(decodeURIComponent).filter(Boolean);
   st.a=L('a');st.b=L('b');st.ta=h.has('ta')?+h.get('ta'):null;st.tb=h.has('tb')?+h.get('tb'):null}
+/* Side A defaults to your team. Also when the league / team you view as changes (a roster number from the
+   other league would leave the picker empty) and when a link without a roster arrives. */
+function defaultSides(was){if(!ROST||!LG)return;const ok=t=>t!=null&&ROST.rosters.some(r=>r.roster_id===t);const ta=st.ta,tb=st.tb;
+  if(!ok(st.ta)||(was!=null&&st.ta===was))st.ta=LG.my_roster_id;if(!ok(st.tb)||st.tb===st.ta)st.tb=null;
+  if(st.ta!==ta||st.tb!==tb)writeHash()}
 function writeHash(){const p=[];if(st.a.length)p.push('a='+st.a.map(encodeURIComponent).join(','));if(st.b.length)p.push('b='+st.b.map(encodeURIComponent).join(','));if(st.ta!=null)p.push('ta='+st.ta);if(st.tb!=null)p.push('tb='+st.tb);
   history.replaceState(null,'','#'+p.join('&'));try{localStorage.setItem('nfls-trade-hash',p.join('&'))}catch(e){}}
 
@@ -376,7 +381,7 @@ function wire(){
   const sc=$('#sc');if(sc)sc.onclick=e=>{const b=e.target.closest('button');if(!b)return;try{localStorage.setItem('nfls-scoring',JSON.stringify(b.dataset.v))}catch(err){}draw()};
   const cp=$('#copy');if(cp)cp.onclick=()=>{const t=summaryText();const done=m=>{const x=$('#toast');if(x)x.textContent=m};try{navigator.clipboard.writeText(t).then(()=>done('Copied. Paste it into Claude.'),()=>done("Couldn't copy"))}catch(e){done("Couldn't copy")}};
 }
-addEventListener('hashchange',()=>{if(!D)return;readHash();draw()});
+addEventListener('hashchange',()=>{if(!D)return;readHash();defaultSides();draw()});
 })();
 </script>
 </body>
