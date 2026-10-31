@@ -9,7 +9,7 @@ The plan for NFL_stats. Claude keeps this current (see CLAUDE.md → "How we wor
 - ✅ **Match players by id, not description text:** `pbp_players_game` matches every `*_player_id` column (runner, passer, target, returner, tacklers, pass defenders, penalties…).
 - ✅ **Readable play log (Lab):** recipe `pbp_log` — one row per play: quarter, clock, down & distance, field, run/pass/sack/scramble, QB, ball carrier/target, direction + gap, depth + air yards, result, yards, YAC, tacklers, pass defended, penalty, EPA, original text last. Filter by player (any role), team, week; names link to cards.
 - ✅ **Plays in player/game cards:** player card = his plays one game at a time (week chips); game card = every play, filter by offense. TDs green, turnovers red; names link. Data: `data/site/plays/<game_id>.json.gz` (~8 KB a game) from `update_data.py`.
-- **Presets before typing:** clickable starting points grouped by question (waivers, matchups, trade checks, play-by-play) with one plain-English line each.
+- ✅ **Presets before typing:** "Start here" panel on the Lab: 18 presets in 5 question groups (pick up / matchups / buy-sell / player-game / defenses), one line each. New recipes: handcuffs, sell high, player usage week by week, red zone leaders, where defenses get run on. New Lab table `status` (IR/PUP/NFI + out for season).
 - **Suggested custom metrics as Lab filters** (after metrics are backtested).
 
 ## Next (in order, one at a time)

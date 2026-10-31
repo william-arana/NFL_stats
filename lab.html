@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.29">
-<script src="assets/site.js?v=1.29" defer></script>
-<script src="assets/cards.js?v=1.29" defer></script>
-<script src="assets/glossary.js?v=1.29" defer></script>
-<script src="assets/tables.js?v=1.29" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.30">
+<script src="assets/site.js?v=1.30" defer></script>
+<script src="assets/cards.js?v=1.30" defer></script>
+<script src="assets/glossary.js?v=1.30" defer></script>
+<script src="assets/tables.js?v=1.30" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -85,6 +85,13 @@ details.tbl summary span{font-weight:400;color:var(--ink-3);margin-left:auto}
 .params .pf-sug{position:absolute;top:100%;left:0;z-index:20;list-style:none;margin:2px 0 0;padding:4px 0;width:280px;background:var(--sheet);border:1px solid var(--rule);border-radius:8px;box-shadow:0 10px 24px rgba(11,21,40,.18);max-height:300px;overflow:auto}
 .params .pf-sug button{display:block;width:100%;text-align:left;border:0;background:none;padding:5px 10px;font:13px var(--f-body);color:var(--ink);cursor:pointer}
 .params .pf-sug button:hover{background:var(--stripe);color:var(--blue)}.params .pf-sug small{color:var(--ink-3)}.params .pf-sug .none{padding:5px 10px;color:var(--ink-3)}
+#starts .st-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px 18px;padding:4px 14px 14px}
+#starts .st-g h3{margin:0 0 6px;font:700 12px var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2)}
+#starts .st-list{display:flex;flex-direction:column;gap:5px}
+#starts .st-b{display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:left;padding:7px 10px;border:1px solid var(--rule);border-radius:8px;background:var(--sheet);color:var(--ink);cursor:pointer;font:13px var(--f-body)}
+#starts .st-b span{font-size:11.5px;color:var(--ink-3)}
+#starts .st-b:hover{border-color:var(--blue)}#starts .st-b:hover b{color:var(--blue)}
+#starts .st-b.on{border-color:var(--blue);background:var(--blue-soft)}
 .recipe-note .miss{color:var(--ink-2);font-size:12px}
 main{display:grid;gap:14px;min-width:0;align-content:start}
 main > *,.layout > *{min-width:0}
@@ -185,6 +192,7 @@ tbody tr:hover td{background-color:color-mix(in srgb,var(--blue-soft) 55%,var(--
   </aside>
 
   <main>
+    <div class="box" id="starts"><h2 class="ask-h">Start here <small>pick a question, then a preset. Nothing to type.</small></h2><div class="st-groups" id="st-groups"><div class="muted">Loading…</div></div></div>
     <div class="box" id="askbox">
       <h2 class="ask-h">Ask <small>plain English → query (uses your Claude API credits)</small></h2>
       <div class="ask">
@@ -225,7 +233,7 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const store={get(k,d){try{const v=localStorage.getItem('nfls-'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('nfls-'+k,JSON.stringify(v))}catch(e){}}};
 const setStatus=(t,cls)=>{$('#status').textContent=t;$('#dot').className='dot '+(cls||'')};
 
-const TABLES={avail:'Every offensive player and defense with their status in your selected league: fa / mine / taken',players:'One row per offensive player per game',teams:'One row per team per game, offense + defense',schedule:'One row per game, with Vegas lines',games_long:'Schedule with one row per team (team / opp / implied)',meta:'Season, last completed week, next week'};
+const TABLES={avail:'Every offensive player and defense with their status in your selected league: fa / mine / taken',status:'Players on IR / PUP / NFI (s) and out for the season (season = true, with the news that says so)',players:'One row per offensive player per game',teams:'One row per team per game, offense + defense',schedule:'One row per game, with Vegas lines',games_long:'Schedule with one row per team (team / opp / implied)',meta:'Season, last completed week, next week'};
 let conn, DB, READY='', SCHEMA={}, RECIPES=[], META, SRC=null, NAMES=new Map(), ROST=null, LG=null;
 const CORE=new Set(Object.keys(TABLES));
 /* league availability: fill the availability table, then re-badge the current results */
@@ -366,7 +374,12 @@ async function boot(){
     }
     await conn.query(`CREATE TABLE meta AS SELECT ${+m.season} AS season, ${+m.last_completed_week} AS last_completed_week, ${+m.next_week} AS next_week`);
     await conn.query(initSql);
-    await conn.query('CREATE TABLE availability(player_id VARCHAR, status VARCHAR, fantasy_team VARCHAR)');await conn.query('CREATE TABLE league_info(name VARCHAR, id VARCHAR)');
+    await conn.query('CREATE TABLE availability(player_id VARCHAR, status VARCHAR, fantasy_team VARCHAR)');
+    /* status = who's on IR / PUP / NFI or out for the season (data/site/status.json, 3x a day) */
+    await conn.query('CREATE TABLE status(player_id VARCHAR, s VARCHAR, season BOOLEAN, news_date VARCHAR, news VARCHAR)');
+    try{const st=await get('status.json');const rows=Object.entries(st.p||{}).map(([id,r])=>({player_id:id,s:r.s||null,season:!!r.season,news_date:r.d||null,news:r.h||null}));
+      const q=v=>v==null?'NULL':typeof v==='boolean'?String(v).toUpperCase():`'${String(v).replace(/'/g,"''")}'`;
+      if(rows.length)await conn.query('INSERT INTO status VALUES '+rows.map(r=>`(${q(r.player_id)},${q(r.s)},${q(r.season)},${q(r.news_date)},${q(r.news)})`).join(','))}catch(e){console.warn('status.json',e)}await conn.query('CREATE TABLE league_info(name VARCHAR, id VARCHAR)');
     await conn.query(`CREATE VIEW avail AS
         SELECT p.player_id, p.player_display_name, p.position, p.team,
                CASE WHEN (SELECT count(*) FROM league_info) = 0 THEN NULL ELSE coalesce(a.status, 'fa') END AS status,
@@ -404,7 +417,22 @@ function drawTables(){
   $('#tables').onclick=e=>{const b=e.target.closest('[data-ins]');if(!b)return;showTab('sql');insertAtCursor($('#sql'),b.dataset.ins)};
 }
 function insertAtCursor(ta,txt){const s=ta.selectionStart,e=ta.selectionEnd;ta.setRangeText(txt,s,e,'end');ta.focus()}
+/* ---------- Start here: presets grouped by question ---------- */
+const STARTS=[
+  ['Who should I pick up?',[['rb_pickup','RB pickup check','usage, efficiency and matchup for available backs'],['wr_pickup','WR/TE pickup check','targets, target quality and matchup'],['usage_risers','Usage risers','snap share and touches up over the last 3 weeks'],['available_matchups','Free agents, soft matchups','available players getting used who face a weak defense'],['handcuffs','Handcuffs','backups whose starter is on IR or out, and how much work opens up']]],
+  ["This week's matchups",[['dvp','Defense vs position','points each defense allows to QB / RB / WR / TE'],['implied','Vegas implied totals','points each team is expected to score'],['dst_pressure','D/ST streamers','pass rush vs a leaky offensive line'],['qb_pressure','QB danger','pressured QBs facing a strong pass rush']]],
+  ['Buy, sell or trade',[['buy_low','Buy low','big usage, small points so far'],['sell_high','Sell high','scoring well above expected: likely to cool off'],['tiers','Vs good, average, bad defenses','who only produces in soft matchups'],['composite','My WR/TE score','William\'s composite ranking']]],
+  ['Dig into a player or game',[['pbp_log','Play log','every play, readable: direction, gap, result, tacklers'],['pbp_players_game','Two players, one game','every play either player was on'],['player_usage','Usage week by week','snaps, carries, targets, red zone looks per game'],['rz_leaders','Red zone leaders','looks inside the 20, the 10 and the 5']]],
+  ['Defenses',[['def_run_direction','Where defenses get run on','yards per carry and big runs allowed by direction and gap']]]];
+function drawStarts(){
+  const have=new Set(RECIPES.map(r=>r.id));
+  $('#st-groups').innerHTML=STARTS.map(([q,list])=>{const items=list.filter(([id])=>have.has(id));if(!items.length)return '';
+    return `<div class="st-g"><h3>${esc(q)}</h3><div class="st-list">${items.map(([id,t,line])=>`<button type="button" class="st-b" data-r="${id}"><b>${esc(t)}</b><span>${esc(line)}</span></button>`).join('')}</div></div>`}).join('');
+  $('#st-groups').onclick=e=>{const b=e.target.closest('[data-r]');if(!b)return;const r=RECIPES.find(x=>x.id===b.dataset.r);if(!r)return;
+    document.querySelectorAll('#st-groups .st-b').forEach(x=>x.classList.toggle('on',x===b));loadRecipe(r,true);$('#results').scrollIntoView({behavior:'smooth',block:'start'})};
+}
 function drawRecipes(){
+  drawStarts();
   $('#recipes').innerHTML=RECIPES.map(r=>`<button class="item" data-r="${r.id}">${esc(r.title)}</button>`).join('');
   $('#recipes').onclick=e=>{const b=e.target.closest('[data-r]');if(!b)return;loadRecipe(RECIPES.find(r=>r.id===b.dataset.r),true)};
 }
