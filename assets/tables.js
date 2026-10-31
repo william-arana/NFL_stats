@@ -110,6 +110,38 @@
     if(e.target.closest('[data-done]'))closePanel();
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel()});
+  /* desktop: drag a column header sideways to move the column (phones keep the ↑/↓ arrows in the panel) */
+  const fine=matchMedia('(pointer:fine)');let drag=null,swallow=false;
+  function dropSpot(d,x){
+    const hr=headRow(d.t);if(!hr)return null;let best=null;
+    for(const c of hr.cells){if(isLocked(c)||c.classList.contains('col-off'))continue;const r=c.getBoundingClientRect();if(!r.width)continue;
+      const before=x<r.left+r.width/2,edge=before?r.left:r.right,dist=Math.abs(x-edge);if(!best||dist<best.dist)best={c,before,edge,dist,r}}
+    return best}
+  function endDrag(){if(!drag)return;drag.line&&drag.line.remove();drag.t.classList.remove('col-dragging');document.documentElement.classList.remove('col-dragging-doc');
+    for(const row of drag.t.rows){const c=row.cells[drag.idx];c&&c.classList.remove('col-drag-src')}drag=null}
+  document.addEventListener('mousedown',e=>{
+    if(!fine.matches||e.button!==0)return;const th=e.target.closest('table[data-cols] thead th');if(!th||isLocked(th))return;
+    const t=th.closest('table');if(!headRow(t)||e.target.closest('a,button,input,select'))return;
+    drag={t,th,k:keyOf(th),idx:th.cellIndex,x0:e.clientX,on:false,wrap:t.closest('.tablewrap,.scr')}});
+  document.addEventListener('mousemove',e=>{
+    if(!drag)return;
+    if(!drag.on){if(Math.abs(e.clientX-drag.x0)<8)return;drag.on=true;closePanel();drag.t.classList.add('col-dragging');document.documentElement.classList.add('col-dragging-doc');
+      for(const row of drag.t.rows){const c=row.cells[drag.idx];c&&c.classList.add('col-drag-src')}
+      drag.line=document.createElement('div');drag.line.className='col-drop-line';document.body.appendChild(drag.line)}
+    e.preventDefault();
+    const w=drag.wrap;if(w){const r=w.getBoundingClientRect();if(e.clientX<r.left+40)w.scrollLeft-=14;else if(e.clientX>r.right-40)w.scrollLeft+=14}
+    const s=dropSpot(drag,e.clientX);drag.spot=s;if(!s){drag.line.style.display='none';return}
+    const tr=drag.t.getBoundingClientRect();const top=Math.max(tr.top,0),bot=Math.min(tr.bottom,innerHeight);
+    Object.assign(drag.line.style,{display:'block',left:(s.edge+scrollX-1)+'px',top:(top+scrollY)+'px',height:Math.max(0,bot-top)+'px'})});
+  document.addEventListener('mouseup',()=>{
+    if(!drag)return;const d=drag;const s=d.spot;const was=d.on;endDrag();if(!was)return;
+    swallow=true;setTimeout(()=>swallow=false,0);  // the mouseup is followed by a click: don't let it sort the column
+    if(!s||s.c===d.th)return;const hr=headRow(d.t);
+    const order=[...hr.cells].filter(c=>!isLocked(c)).map(keyOf).filter(k=>k!==d.k);
+    let at=order.indexOf(keyOf(s.c));if(at<0)return;if(!s.before)at++;order.splice(at,0,d.k);
+    const cfg=cfgOf(d.t.dataset.cols);cfg.order=order;LS.set(d.t.dataset.cols,cfg);d.t.tHead.dataset.colsDone='';apply(d.t)});
+  window.addEventListener('click',e=>{if(swallow){e.stopPropagation();e.preventDefault();swallow=false}},true);
+  window.addEventListener('blur',endDrag);
   /* tables get rebuilt all the time (filters, sorting, league switch): re-apply whenever one appears */
   let queued=false;
   function scan(){queued=false;document.querySelectorAll('table[data-cols]').forEach(t=>{if(t.tHead&&!t.tHead.dataset.colsDone)apply(t)})}

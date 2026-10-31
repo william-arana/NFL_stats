@@ -279,3 +279,9 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 .colbtn span.plus{color:var(--good)}
 .colpanel label small{color:var(--ink-3);font-size:11.5px}
 .colpanel{width:min(340px,calc(100vw - 16px))}
+
+/* drag a column header to move it (desktop) */
+@media (pointer:fine){table[data-cols] thead th:not(.rank):not(.stick){cursor:grab}}
+.col-dragging-doc,.col-dragging-doc *{cursor:grabbing!important;user-select:none}
+.col-drag-src{opacity:.45;background:var(--stripe)!important}
+.col-drop-line{position:absolute;z-index:90;width:3px;background:var(--blue);border-radius:2px;pointer-events:none;box-shadow:0 0 0 1px var(--sheet)}
