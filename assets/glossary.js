@@ -1,6 +1,6 @@
 /* Stat glossary: click a dotted-underlined stat name (table headers on Stats, Lab, Waivers, Trade) to see what it means.
    Descriptions come from the Guide (data/catalog.json, the nflverse data dictionary) plus plain-English notes for the
-   stats this site calculates itself. Usage:  NFLSGloss.label(key, 'Label')  →  clickable label HTML (or plain label if unknown). */
+   stats this site calculates itself. Usage:  NFLSGloss.label(key, 'Label')  →  label HTML with a hover description (or plain label if unknown). */
 (function(){
   const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   /* key: [name, description, guide field (dataset.field) or ''] */
@@ -179,39 +179,13 @@
     return null;
   }
   function has(key){return !!lookup(key)}
-  /* label HTML: dotted underline, opens the description. Falls back to tip text, then to the plain label */
+  /* label HTML: dotted underline; hover shows the description (title), a click falls through to the header's sort */
   function label(key,text,tip){const e=lookup(key);if(!e&&!tip)return esc(text);
-    return `<span class="gl" role="button" tabindex="0" data-gl="${esc(key)}"${!e&&tip?` data-gltip="${esc(tip)}"`:''}>${esc(text)}</span>`}
-
-  /* ---------- popover ---------- */
-  let pop=null,anchor=null;
-  function close(){if(pop){pop.remove();pop=null}if(anchor){anchor.setAttribute('aria-expanded','false');anchor=null}}
-  function place(){if(!pop||!anchor)return;
-    const r=anchor.getBoundingClientRect(),w=pop.offsetWidth,vw=document.documentElement.clientWidth;
-    let left=Math.min(r.left+window.scrollX,window.scrollX+vw-w-12);left=Math.max(window.scrollX+12,left);
-    pop.style.left=left+'px';pop.style.top=(r.bottom+window.scrollY+6)+'px'}
-  function open(el){
-    if(anchor===el){close();return}close();anchor=el;el.setAttribute('aria-expanded','true');
-    const key=el.dataset.gl,e=lookup(key)||[el.textContent,el.dataset.gltip||'',''];const [name,desc,src]=e;
-    const th=el.closest('th');const sortable=th&&(th.dataset.k||th.dataset.c);
-    const field=src?src.split('.')[1]:'';const ds=src?src.split('.')[0]:'';
-    const shown=el.textContent.trim();
-    pop=document.createElement('div');pop.className='glpop';pop.setAttribute('role','dialog');pop.setAttribute('aria-label',name);
-    pop.innerHTML=`<div class="gl-h"><b>${esc(shown)}</b>${shown.toLowerCase()!==String(name).toLowerCase()?`<span>${esc(name)}</span>`:''}<button type="button" class="gl-x" aria-label="Close">×</button></div>
-      <p>${esc(desc)}</p>
-      <div class="gl-f">${src?`<span class="gl-src">${esc(ds)} · ${esc(field)}</span><a href="guide.html#q=${encodeURIComponent(field)}">In the Guide →</a>`:'<span class="gl-src">Calculated on this site</span>'}
-      ${sortable?'<span class="sp"></span><button type="button" class="gl-sort">Sort by this</button>':''}</div>`;
-    document.body.appendChild(pop);place();
-    pop.querySelector('.gl-x').onclick=close;
-    const sb=pop.querySelector('.gl-sort');if(sb)sb.onclick=()=>{const t=th;close();t.click()};
-  }
-  /* capture phase: runs before table header click handlers, so tapping the word explains instead of sorting */
-  document.addEventListener('click',e=>{const g=e.target.closest&&e.target.closest('.gl');
-    if(g){e.preventDefault();e.stopPropagation();open(g);return}
-    if(pop&&!pop.contains(e.target))close()},true);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();const g=e.target.closest&&e.target.closest('.gl');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();e.stopPropagation();open(g)}},true);
-  window.addEventListener('resize',close);
-  /* a table scrolling sideways: keep the box under its column */
-  document.addEventListener('scroll',e=>{if(pop&&e.target!==document&&!pop.contains(e.target))place()},true);
+    return `<span class="gl" data-gl="${esc(key)}"${tip?` data-gltip="${esc(tip)}"`:''}${e?` title="${esc(tipText(e,text))}"`:tip?` title="${esc(tip)}"`:''}>${esc(text)}</span>`}
+  const tipText=(e,shown)=>{const [name,desc]=e;return (String(name).toLowerCase()!==String(shown||'').trim().toLowerCase()?name+': ':'')+desc};
+  /* descriptions from data/catalog.json arrive a moment later: fill the title in on first hover */
+  document.addEventListener('mouseover',e=>{const g=e.target.closest&&e.target.closest('.gl');if(!g||g.title)return;
+    const x=lookup(g.dataset.gl);if(x)g.title=tipText(x,g.textContent);else if(g.dataset.gltip)g.title=g.dataset.gltip});
+  const close=()=>{};
   window.NFLSGloss={label,lookup,has,ready:catP,close};
 })();

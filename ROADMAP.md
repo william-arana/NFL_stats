@@ -24,6 +24,9 @@ The plan for NFL_stats. Claude keeps this current (see CLAUDE.md → "How we wor
 
 ## Ideas (not scheduled)
 
+- 2026-10-30 · **RB vs DEF rating (William):** one number for "this back vs this defense" built from *where* plays go. Team level first: yards / success / explosive rate allowed by run direction + gap and by pass area (left/middle/right, short/deep), opponent-adjusted (a weak RB gaining 10+ in an area counts more than Jeanty doing it; the difference between raw and adjusted flags real holes). Then match each RB's direction/gap profile (and target share) to those holes, plus how often opponents actually attack that side. Per-defender splits only through who made the tackle / pass defense (2026 has no on-field participation data, and the tackler isn't always the player at fault, e.g. a safety cleaning up a 12-yard run). Check before trusting it: sample size (8 games ≈ 20–40 carries per gap, so shrink toward league average), scheme (zone defenders don't own one area every snap), game script (Vegas spread → carries), teammate injuries / depth chart (Hill's role vs Henry's health), the O-line side he runs behind (we have with/without lineman rates), and whether offenses really steer runs at a weak side (testable in pbp: does attack rate rise vs weak gaps?). Backtest like the other metrics. Belongs to Custom metrics.
+- 2026-10-30 · **Rename Trade → Compare?** William raised it. It's really a side-by-side compare of any players/defenses (trades are one use). Decide later; nav label + page title only, URL can stay `trade.html`.
+
 - 2026-10-29 · **Bug to fix:** the stat description's "in the Guide" link opens the Guide but doesn't scroll to / select that stat (William, talk through 10/30).
 
 - 2026-10-29 · **Monitor / health check:** GitHub Action every 12h (or daily). Checks: each team's presser source has something new within its expected window (skip bye weeks using the nflverse schedule); page structure still parses (title, date, body); nflverse data updated on time; sitemap pages load, no broken links. On failure, open a GitHub Issue naming the team, the check and the last success (GitHub app pushes it to William's phone). Log to `monitor/status.json`; maybe a small status page later. *Ideas only — don't build yet.*
@@ -70,6 +73,8 @@ The plan for NFL_stats. Claude keeps this current (see CLAUDE.md → "How we wor
 - **Competition:** strength-of-schedule tools are everywhere (ESPN/Mike Clay, PFF, CBS, Footballguys, Fantasy Footballers, Sharp Football, 4for4, RotoViz). Most rank defenses by fantasy points allowed per position; a few add scheme grades. FantasyPros grades experts' rankings every year. Gap: play-type matchups + coach signals + a public, locked track record.
 
 ## Decisions
+
+- 2026-10-30 · Site version = `1.<PR number>`; shown bottom right on Home with a "Check for updates" button (`version.json`). Nav order: Home, Stats, Waivers, Trade, Lab, Guide. Column names: hover = description, click = sort (no more pop-up box); card tables sort too. Max 2 boxes on screen (open card + pop-outs).
 
 - 2026-10-30 · **Navigation & sitemap done.** Shareable `?card=` links, back/swipe through cards, breadcrumb, game cards, pop-out windows, column chooser (hide all, drag to reorder on desktop), movable/resizable cards, keep a moved card when opening another, injury colors, NGS n/a. Optional `sitemap.xml` skipped for now.
 

@@ -23,7 +23,7 @@ html,body{margin:0}
 html{background:var(--nav-bg)}
 body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.5;
   padding-bottom:env(safe-area-inset-bottom,0px)}
-.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1440px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 code{font-family:var(--f-mono);font-size:.92em}
 a{color:var(--blue)}
 input:focus-visible,button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
@@ -102,7 +102,7 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 .mrk{display:inline-block;min-width:24px;font-family:var(--f-mono);font-size:10px;padding:0 4px;border-radius:3px;margin-left:4px;text-align:center}
 .mrk.good{background:var(--good-soft);color:var(--good)}.mrk.bad{background:var(--margin-soft);color:var(--margin)}.mrk.mid{background:var(--head);color:var(--ink-2)}
 
-.pc{position:absolute;z-index:70;width:min(500px,calc(100vw - 24px));max-height:min(80vh,780px);overflow:auto;overscroll-behavior:contain;
+.pc{position:absolute;z-index:70;width:min(660px,calc(100vw - 24px));max-height:min(80vh,780px);overflow:auto;overscroll-behavior:contain;
   background:var(--sheet);color:var(--ink);border:1px solid var(--rule);border-radius:10px;box-shadow:0 16px 40px rgba(11,21,40,.25);font-size:12.5px;line-height:1.45;text-align:left;white-space:normal}
 .pc *{box-sizing:border-box}
 .pc-top{position:sticky;top:0;z-index:2;background:var(--head);border-bottom:1px solid var(--rule);padding:10px 44px 10px 14px;display:flex;gap:10px;align-items:center}
@@ -174,7 +174,7 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 }
 @media (min-width:641px){.pc-shade{display:none}}
 /* stat glossary (assets/glossary.js): dotted-underlined stat names open a short description */
-.gl{cursor:help;text-decoration:underline dotted var(--ink-3);text-underline-offset:3px;text-decoration-thickness:1.5px;border-radius:3px}
+.gl{cursor:pointer;text-decoration:underline dotted var(--ink-3);text-underline-offset:3px;text-decoration-thickness:1.5px;border-radius:3px}
 .gl:hover,.gl[aria-expanded="true"]{color:var(--blue);text-decoration-color:var(--blue)}
 .gl:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
 .glpop{position:absolute;z-index:80;width:min(320px,calc(100vw - 24px));background:var(--sheet);color:var(--ink);border:1px solid var(--rule);border-radius:8px;box-shadow:0 12px 32px rgba(11,21,40,.22);font:400 13px/1.45 var(--f-body);text-align:left;white-space:normal}
@@ -305,3 +305,11 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 .plays .pl-chips button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
 .plays table{font-size:12px}.plays td{white-space:nowrap}.plays td.pl-desc{white-space:normal;min-width:320px}
 .plays tr.pl-td td{background:var(--good-soft)}.plays tr.pl-to td{background:var(--margin-soft)}
+
+/* card tables sort on header click */
+:is(.pc,.pw) table thead th{cursor:pointer}
+:is(.pc,.pw) table thead th[aria-sort="descending"]::after{content:" ▾";color:var(--blue)}
+:is(.pc,.pw) table thead th[aria-sort="ascending"]::after{content:" ▴";color:var(--blue)}
+.pc .sub .tr-add,.pw .sub .tr-add{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:var(--ink-3)}
+.tr-add button{font:700 11px var(--f-mono);width:22px;height:20px;padding:0;border:1px solid var(--rule);border-radius:5px;background:var(--sheet);color:var(--blue);cursor:pointer}
+.tr-add button:hover,.tr-add button.ok{background:var(--blue);color:var(--sheet);border-color:var(--blue)}

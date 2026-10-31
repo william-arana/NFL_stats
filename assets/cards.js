@@ -188,7 +188,7 @@
     const seasonRow=(lbl,isPg)=>`<tr${isPg?'':' class="tot"'}><td class="l">${lbl}</td><td class="fp">${f1(isPg?s.fpg:s.fp)}</td>${cols.map(([k])=>`<td>${cell(k,isPg||RATE.has(k)?pg(k):tot(k),isPg)}</td>`).join('')}${xc.map(c=>xcell(c,s.logs,isPg)).join('')}</tr>`;
     const logRows=s.logs.map(l=>`<tr><td class="l">${gbtn(gameKey(l.team,l.week),l.week)}</td><td class="l">${oppBtn(l.opponent_team,((gameOf(l.team,l.week)||{}).at?'@ ':'vs ')+l.opponent_team,null)}</td><td class="fp">${f1(l[sk])}</td>${cols.map(([k])=>`<td>${cell(k,l[k],false)}</td>`).join('')}${xc.map(c=>xcell(c,[l],false)).join('')}</tr>`).join('');
     return `<div class="pc-top">${s.headshot?`<img class="hs" src="${esc(s.headshot)}" alt="" loading="lazy" onerror="this.remove()">`:''}<div><h3>${esc(s.name)}</h3>
-      <div class="sub"><span>${s.pos} · ${dbtn(s.team,s.team,'tmlink')}</span><span>bye ${byeWeek(s.team)||'–'}</span>${n?`<span>${gbtn(n.g.game_id,'Wk '+D.META.next_week)} ${oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,s.pos)}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}</div></div></div>
+      <div class="sub"><span>${s.pos} · ${dbtn(s.team,s.team,'tmlink')}</span><span>bye ${byeWeek(s.team)||'–'}</span>${n?`<span>${gbtn(n.g.game_id,'Wk '+D.META.next_week)} ${oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,s.pos)}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}${tradeAdd(id)}</div></div></div>
     <section><div class="tags">${inj?`<span class="tag inj" title="${esc(inj[1])} · Wk ${inj[2]} report">${esc(inj[0].replace('Practice: ','Practice '))} · ${esc(inj[1])}</span>`:''}${ownerTag(id)}<span class="sp" style="flex:1"></span>${scoringSeg(sc)}</div>
       <div class="tiles" style="margin-top:8px">
         <div><span>FP / game</span><b>${f1(s.fpg)}</b><small>${[s.rank?s.pos+s.rank:'',s.g+' g'].filter(Boolean).join(' · ')}</small></div>
@@ -444,7 +444,7 @@
     anchor=a||null;if(anchor)anchor.setAttribute('aria-expanded','true');
     el=document.createElement('div');el.className='pc';el.setAttribute('role','dialog');el.setAttribute('aria-label','Player card');
     el.innerHTML=`<button type="button" class="pc-x" aria-label="Close">×</button><div class="pc-top"><div><h3>${esc(a?a.textContent.trim().split('\n')[0]:'')}</h3><div class="sub"><span><span class="spin"></span>Loading…</span></div></div></div>`;
-    document.body.appendChild(el);sizeCard();place();
+    document.body.appendChild(el);sizeCard();place();front(el);capPins();
   }
   function show(){const want=stack[stack.length-1]&&stack[stack.length-1].key;
     loadAll().then(()=>{if(el&&stack.length&&stack[stack.length-1].key===want){render();place()}}).catch(e=>{if(el)el.innerHTML=`<button type="button" class="pc-x">×</button><section>Couldn't load the season data (${esc(e.message)}).</section>`})}
@@ -454,7 +454,7 @@
     if(el&&a&&anchor===a){close();return}
     /* desktop: a card you dragged somewhere stays there — it becomes a pop-out window in the same spot and size,
        and the new name opens as a second card (side-by-side compares) */
-    if(el&&el._moved&&desk()&&stack.length){const cur=stack[stack.length-1],r=el.getBoundingClientRect();addPin(cur.key,cur.pos,'','',{x:r.left,y:r.top,w:r.width,h:r.height})}
+    if(el&&el._moved&&desk()&&stack.length){const cur=stack[stack.length-1],r=el.getBoundingClientRect();addPin(cur.key,cur.pos,'','',{x:r.left,y:r.top,w:r.width,h:r.height,st:el.scrollTop})}
     const d=el?depth():0;closeLocal();mk(a);
     stack=[{key,pos:pos||''}];writeState('pushState',d+1);show();
   }
@@ -487,7 +487,7 @@
      ⧉ on a card (or on one of its sections) floats it in its own window: drag it by the title bar, resize from
      the corner, minimize, or open it back up as a card. Windows stay put while you browse other cards and
      follow you to other pages in the same tab (sessionStorage). Names inside a window open cards too. */
-  const MAXPINS=6,ZBASE=72;
+  const MAXBOX=2,ZBASE=72;  // at most 2 boxes on screen: pop-out windows + the open card
   const SS={get(){try{const v=JSON.parse(sessionStorage.getItem('nfls-pins')||'[]');return Array.isArray(v)?v.filter(p=>p&&validKey(p.key)):[]}catch(e){return []}},set(v){try{sessionStorage.setItem('nfls-pins',JSON.stringify(v))}catch(e){}}};
   let pins=SS.get();const pinEls=new Map();let zTop=ZBASE;
   const savePins=()=>SS.set(pins);
@@ -498,13 +498,14 @@
     const s=t.querySelector(`section[data-sec="${p.sec}"]`);return s?s.outerHTML:`<section class="dim">That section isn't on this card anymore.</section>`;
   }
   function fillPin(p){const w=pinEls.get(p.id);if(!w)return;const b=w.querySelector('.pw-b');b.innerHTML=pinBody(p);w.querySelector('.pw-h b').textContent=pinTitle(p);fillPlays(b);fillOwner(b);fillNews(b,newsKey(p.key),false)}
-  function front(w){if(zTop>ZBASE+40){zTop=ZBASE;[...pinEls.values()].sort((a,b)=>(+a.style.zIndex)-(+b.style.zIndex)).forEach(x=>x.style.zIndex=++zTop)}w.style.zIndex=++zTop}
+  function front(w){if(!w)return;if(zTop>ZBASE+40){zTop=ZBASE;[...pinEls.values(),el].filter(Boolean).sort((a,b)=>(+a.style.zIndex||0)-(+b.style.zIndex||0)).forEach(x=>x.style.zIndex=++zTop)}w.style.zIndex=++zTop}
+  document.addEventListener('pointerdown',e=>{if(el&&el.contains(e.target))front(el)},true);
   function clampPin(p){const vw=document.documentElement.clientWidth,vh=innerHeight;p.x=Math.max(4-(p.w||300)+60,Math.min(p.x,vw-60));p.y=Math.max(0,Math.min(p.y,vh-36))}
   function mountPin(p){
     const w=document.createElement('div');w.className='pw'+(p.min?' min':'');w.setAttribute('role','dialog');w.dataset.pin=p.id;
-    w.innerHTML=`<div class="pw-h"><b></b><span class="sp"></span><button type="button" data-pw-open title="Open as a card">↗</button><button type="button" data-pw-min title="Minimize">${p.min?'▢':'–'}</button><button type="button" data-pw-x title="Close">×</button></div><div class="pw-b"></div>`;
+    w.innerHTML=`<div class="pw-h"><b></b><span class="sp"></span><button type="button" data-pw-min title="Minimize">${p.min?'▢':'–'}</button><button type="button" data-pw-x title="Close">×</button></div><div class="pw-b"></div>`;
     clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px';if(p.w)w.style.width=p.w+'px';if(p.h&&!p.min)w.style.height=p.h+'px';
-    document.body.appendChild(w);pinEls.set(p.id,w);front(w);fillPin(p);
+    document.body.appendChild(w);pinEls.set(p.id,w);front(w);fillPin(p);if(p.st){const b=w.querySelector('.pw-b');requestAnimationFrame(()=>{b.scrollTop=p.st;p.st=0})}
     const h=w.querySelector('.pw-h');let drag=null;
     h.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;e.preventDefault();drag={dx:e.clientX-p.x,dy:e.clientY-p.y};h.setPointerCapture(e.pointerId);w.classList.add('drag')});
     h.addEventListener('pointermove',e=>{if(!drag)return;p.x=e.clientX-drag.dx;p.y=e.clientY-drag.dy;clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px'});
@@ -515,11 +516,12 @@
   function addPin(key,pos,sec,label,geo){
     if(pins.some(p=>p.key===key&&(p.sec||'')===(sec||''))){const p=pins.find(p=>p.key===key&&(p.sec||'')===(sec||''));const w=pinEls.get(p.id);if(w){front(w);w.classList.add('flash');setTimeout(()=>w.classList.remove('flash'),600)}return}
     const phone=matchMedia('(max-width:640px)').matches,vw=document.documentElement.clientWidth,n=pins.length;
-    const width=phone?vw-16:(sec?360:440);
-    const p={id:'w'+Date.now().toString(36),key,pos:pos||'',sec:sec||'',label:label||'',w:geo?Math.round(geo.w):width,h:geo?Math.round(geo.h):0,min:false,
+    const width=phone?vw-16:(sec?420:600);
+    const p={id:'w'+Date.now().toString(36),key,pos:pos||'',sec:sec||'',label:label||'',st:geo&&geo.st||0,w:geo?Math.round(geo.w):width,h:geo?Math.round(geo.h):0,min:false,
       x:geo?Math.round(geo.x):phone?8:vw-width-20-n*26,y:geo?Math.round(geo.y):phone?8+n*40:76+n*30};
-    pins.push(p);while(pins.length>MAXPINS)removePin(pins[0].id);savePins();loadAll().then(()=>mountPin(p));
+    pins.push(p);capPins();savePins();loadAll().then(()=>{if(pins.includes(p))mountPin(p)});
   }
+  function capPins(){const cap=Math.max(1,MAXBOX-(el?1:0));while(pins.length>cap)removePin(pins[0].id)}
   function removePin(id){const w=pinEls.get(id);if(w)w.remove();pinEls.delete(id);pins=pins.filter(p=>p.id!==id);savePins()}
   function refreshPins(){for(const p of pins)fillPin(p)}
   if(pins.length)loadAll().then(()=>pins.forEach(mountPin)).catch(()=>{});
@@ -533,7 +535,6 @@
       const p=pins.find(x=>x.id===pw.dataset.pin);if(!p)return;
       if(e.target.closest('[data-pw-x]')){removePin(p.id);return}
       if(e.target.closest('[data-pw-min]')){p.min=!p.min;pw.classList.toggle('min',p.min);e.target.closest('[data-pw-min]').textContent=p.min?'▢':'–';pw.style.height=p.min?'':(p.h?p.h+'px':'');savePins();return}
-      if(e.target.closest('[data-pw-open]')){push(p.key,p.pos);return}
       const sc=e.target.closest('[data-sc] button');if(sc){setScoring(sc.dataset.v);return}
       const np=e.target.closest('.pc-news p');if(np){np.classList.toggle('open');return}
       const cp=e.target.closest('[data-copyname]');if(cp){try{navigator.clipboard.writeText(cp.dataset.copyname)}catch(err){}return}
@@ -559,7 +560,7 @@
     if(el&&!e.target.closest('.pmenu,.glpop,.colpanel'))close();
   });
   /* desktop: drag the card by its header to move it, resize it from the bottom-right corner (the size is
-     remembered for the next card), double-click the header to put it back next to the name you clicked. */
+     remembered for the next card). */
   function desk(){return !matchMedia('(max-width:640px)').matches}
   function sizeCard(){if(!el||!desk())return;const z=LS.get('card-size',null);if(z&&z.w&&z.h){el.style.width=z.w+'px';el.style.height=z.h+'px';el.style.maxHeight='none'}}
   let mv=null,rs=false,eatClick=false;
@@ -581,13 +582,9 @@
     if(rs){rs=false;if(el){LS.set('card-size',{w:el.offsetWidth,h:el.offsetHeight});eatClick=true;setTimeout(()=>eatClick=false,0)}}
   });
   window.addEventListener('click',e=>{if(eatClick){eatClick=false;e.stopPropagation();e.preventDefault()}},true);  // a drag that ends outside the card must not close it
-  document.addEventListener('dblclick',e=>{
-    if(!el||!desk()||!e.target.closest('.pc .pc-head')||e.target.closest('button,a,input'))return;
-    try{localStorage.removeItem('nfls-card-size')}catch(err){}el._moved=false;el.style.width=el.style.height=el.style.maxHeight='';place();
-  });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el)close()});
   /* a page changing its own #hash (Stats tabs, Lab, Guide) closes the card; Trade's #a= state doesn't */
-  addEventListener('hashchange',()=>{if(location.hash.startsWith('#a='))return;if(el)closeLocal();if(new URLSearchParams(location.search).has('card'))history.replaceState(null,'',urlFor(null))});
+  addEventListener('hashchange',()=>{if(/^#(a|b|ta|tb)=/.test(location.hash))return;if(el)closeLocal();if(new URLSearchParams(location.search).has('card'))history.replaceState(null,'',urlFor(null))});
   /* phones: drag the card down to close it (from the header, or from the content once it's scrolled to the top).
      Past ~110px or a quick flick it closes; otherwise it snaps back. The page behind never moves. */
   (function(){
@@ -656,6 +653,16 @@
     if(b.dataset.plG!=null)sec.dataset.plCur=b.dataset.plG;else sec.dataset.plO=b.dataset.plOff;
     sec.querySelector('[data-pl-body]').innerHTML='<span class="spin"></span>Loading plays…';fillPlays(sec.parentNode||sec);
   });
+
+  /* "Add to Trade: A · B" on player cards: adds him to that side of the Trade page (keeps whatever is already there) */
+  function tradeAdd(id){return `<span class="tr-add">Add to Trade <button type="button" data-trade="a" data-tid="${esc(id)}" title="Add to side A on the Trade page">A</button><button type="button" data-trade="b" data-tid="${esc(id)}" title="Add to side B on the Trade page">B</button></span>`}
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-trade][data-tid]');if(!b)return;e.preventDefault();e.stopPropagation();
+    let h='';try{h=location.pathname.endsWith('trade.html')&&location.hash.length>1?location.hash.slice(1):(localStorage.getItem('nfls-trade-hash')||'')}catch(err){}
+    const q=new URLSearchParams(h);const side=b.dataset.trade,other=side==='a'?'b':'a',id=b.dataset.tid;
+    const L=k=>(q.get(k)||'').split(',').filter(Boolean);const mine=L(side).filter(x=>x!==id),theirs=L(other).filter(x=>x!==id);
+    q.set(side,[...mine,id].join(','));if(theirs.length)q.set(other,theirs.join(','));else q.delete(other);
+    const hash=decodeURIComponent(q.toString());try{localStorage.setItem('nfls-trade-hash',hash)}catch(err){}
+    if(location.pathname.endsWith('trade.html')){location.hash=hash;b.classList.add('ok');setTimeout(()=>b.classList.remove('ok'),900)}else location.href='trade.html#'+hash},true);
 
   /* markup helpers for pages */
   function pbtn(id,name,cls){return `<button type="button" class="pname ${cls||''}" data-card="p:${esc(id)}" data-name="${esc(name)}" aria-expanded="false">${esc(name)}</button>`}

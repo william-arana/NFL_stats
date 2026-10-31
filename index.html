@@ -31,10 +31,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=20261030g">
-<script src="assets/site.js?v=20261030g" defer></script>
-<script src="assets/cards.js?v=20261030g" defer></script>
-<script src="assets/tables.js?v=20261030g" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.29">
+<script src="assets/site.js?v=1.29" defer></script>
+<script src="assets/cards.js?v=1.29" defer></script>
+<script src="assets/tables.js?v=1.29" defer></script>
 <style>
 /* Home: a night-game field. Navy turf with yard lines and hash marks, red end-zone stripe,
    big condensed scoreboard type; light content area below with a news rail. */
@@ -152,6 +152,9 @@ main.col{display:grid;gap:28px;min-width:0}
 .sitefoot h2{margin:0;font-family:var(--f-display);font-weight:700;font-size:20px;text-transform:uppercase;letter-spacing:.04em}
 .foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;font-size:12px;color:color-mix(in srgb,var(--nav-fg) 60%,transparent)}
 .foot-row a{color:inherit}
+.foot-ver{align-items:center}.foot-ver #ver{font:600 11px var(--f-mono);letter-spacing:.04em;margin-left:auto}
+.foot-ver button{font:600 12px var(--f-body);padding:4px 10px;border-radius:6px;border:1px solid color-mix(in srgb,var(--nav-fg) 35%,transparent);background:none;color:var(--nav-fg);cursor:pointer}
+.foot-ver button:hover{border-color:var(--nav-fg)}
 .qlinks{display:flex;flex-wrap:wrap;gap:6px 0;font-size:14px}
 .qlinks a{color:var(--nav-fg);text-decoration:none;padding-right:14px;margin-right:14px;border-right:1px solid color-mix(in srgb,var(--nav-fg) 25%,transparent);white-space:nowrap}
 .qlinks a:last-child{border-right:0}
@@ -200,7 +203,7 @@ aside.rail{display:grid;gap:16px;min-width:0;position:sticky;top:12px}
 <body>
 <header class="sitenav"><div class="wrap">
   <a class="brand" href="./" title="Home">NFL<span>_</span>stats</a>
-  <nav aria-label="Site"><a href="./" aria-current="page">Home</a><a href="guide.html">Guide</a><a href="stats.html">Stats</a><a href="lab.html">Lab</a><a href="waivers.html">Waivers</a><a href="trade.html">Trade</a></nav>
+  <nav aria-label="Site"><a href="./" aria-current="page">Home</a><a href="stats.html">Stats</a><a href="waivers.html">Waivers</a><a href="trade.html">Trade</a><a href="lab.html">Lab</a><a href="guide.html">Guide</a></nav>
   <span class="upd" id="upd"></span>
   <div class="navtools" id="navtools"></div>
 </div></header>
@@ -262,7 +265,18 @@ aside.rail{display:grid;gap:16px;min-width:0;position:sticky;top:12px}
   <h2>Quick links</h2>
   <div class="qlinks" id="qlinks"></div>
   <div class="foot-row"><span>NFL_stats · data from <a href="https://github.com/nflverse" target="_blank" rel="noopener">nflverse</a> and Sleeper · headlines link to their publishers</span><span id="foot-upd"></span></div>
+  <div class="foot-row foot-ver"><span><button type="button" id="ver-check">Check for updates</button> <span id="ver-msg"></span></span><span id="ver" title="Site version: 1.&lt;pull request number&gt; of the last change">v</span></div>
 </div></footer>
+<script>
+/* version: assets load as ?v=<version> (1.<PR number>); version.json on the server says what's live */
+(function(){const cur=(document.querySelector('script[src*="assets/site.js"]')||{}).src||'';const v=(cur.match(/[?&]v=([^&]+)/)||[])[1]||'?';
+  const show=document.getElementById('ver');show.textContent='v'+v;const msg=document.getElementById('ver-msg');
+  document.getElementById('ver-check').onclick=()=>{msg.textContent='Checking…';
+    fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(j=>{
+      if(j.version===v){msg.textContent='Up to date (v'+v+', '+j.date+')';return}
+      msg.textContent='Updating to v'+j.version+'…';const u=new URL(location.href);u.searchParams.set('v',j.version);location.replace(u.pathname+u.search+u.hash)
+    }).catch(()=>{msg.textContent="Couldn't check right now"})}})();
+</script>
 
 <script>
 (function(){

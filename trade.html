@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=20261030g">
-<script src="assets/site.js?v=20261030g" defer></script>
-<script src="assets/cards.js?v=20261030g" defer></script>
-<script src="assets/glossary.js?v=20261030g" defer></script>
-<script src="assets/tables.js?v=20261030g" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.29">
+<script src="assets/site.js?v=1.29" defer></script>
+<script src="assets/cards.js?v=1.29" defer></script>
+<script src="assets/glossary.js?v=1.29" defer></script>
+<script src="assets/tables.js?v=1.29" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -152,7 +152,7 @@ td.wkdiv,th.wkdiv{border-left:2px solid var(--ink-3)}
 <body>
 <header class="sitenav"><div class="wrap">
   <a class="brand" href="./" title="Home">NFL<span>_</span>stats</a>
-  <nav aria-label="Site"><a href="./">Home</a><a href="guide.html">Guide</a><a href="stats.html">Stats</a><a href="lab.html">Lab</a><a href="waivers.html">Waivers</a><a href="trade.html" aria-current="page">Trade</a></nav>
+  <nav aria-label="Site"><a href="./">Home</a><a href="stats.html">Stats</a><a href="waivers.html">Waivers</a><a href="trade.html" aria-current="page">Trade</a><a href="lab.html">Lab</a><a href="guide.html">Guide</a></nav>
   <span class="upd" id="upd"></span>
   <div class="navtools" id="navtools"></div>
 </div></header>
@@ -192,7 +192,7 @@ waitCards();
 function readHash(){const h=new URLSearchParams(location.hash.slice(1));const L=k=>(h.get(k)||'').split(',').map(decodeURIComponent).filter(Boolean);
   st.a=L('a');st.b=L('b');st.ta=h.has('ta')?+h.get('ta'):null;st.tb=h.has('tb')?+h.get('tb'):null}
 function writeHash(){const p=[];if(st.a.length)p.push('a='+st.a.map(encodeURIComponent).join(','));if(st.b.length)p.push('b='+st.b.map(encodeURIComponent).join(','));if(st.ta!=null)p.push('ta='+st.ta);if(st.tb!=null)p.push('tb='+st.tb);
-  history.replaceState(null,'','#'+p.join('&'))}
+  history.replaceState(null,'','#'+p.join('&'));try{localStorage.setItem('nfls-trade-hash',p.join('&'))}catch(e){}}
 
 /* ---------- per-entry numbers ---------- */
 const isDef=k=>k.startsWith('DEF:');
