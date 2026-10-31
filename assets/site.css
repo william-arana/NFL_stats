@@ -320,3 +320,6 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 .thtip small{display:block;margin-top:5px;color:var(--ink-3);font-size:11.5px}
 @media (pointer:coarse){thead th{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}}
 th.col-holding{background:var(--stripe)!important;box-shadow:inset 0 -3px 0 var(--blue)}
+
+/* phones: no pop-out windows (a full-width box stuck at the top that you have to close anyway) */
+@media (max-width:640px){.pc-pop,.pc-tools [data-pin-card]{display:none!important}.pw{display:none!important}}

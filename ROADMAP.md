@@ -75,6 +75,8 @@ The plan for NFL_stats. Claude keeps this current (see CLAUDE.md → "How we wor
 
 ## Decisions
 
+- 2026-10-30 · **No pop-out windows on phones (William):** clunky full-width box stuck at the top, and you had to close it to move around anyway. ⧉ buttons hidden under 640px; desktop/tablet keep them.
+
 - 2026-10-30 · **Pages update themselves:** every page checks `version.json` on load; if the server is newer than the files it loaded, it reloads once with `?v=<new>`. Fixes stale Stats/Lab pages in the desktop app ("Check for updates" only refreshed Home; browsers keep pages ~10 min).
 
 - 2026-10-30 · **Sleeper links:** phones / home-screen app open Sleeper in the same window (a new tab left a blank page behind when the Sleeper app took over); desktop reuses one named Sleeper tab. A browser can't take over a Sleeper tab you opened yourself, only one this site opened. Name is still copied first.

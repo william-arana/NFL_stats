@@ -518,6 +518,7 @@
     if(window.ResizeObserver){let t=null;new ResizeObserver(()=>{if(p.min||!w.isConnected)return;clearTimeout(t);t=setTimeout(()=>{const r=w.getBoundingClientRect();if(Math.abs(r.width-(p.w||0))>2||Math.abs(r.height-(p.h||0))>2){p.w=Math.round(r.width);p.h=Math.round(r.height);savePins()}},150)}).observe(w)}
   }
   function addPin(key,pos,sec,label,geo){
+    if(matchMedia('(max-width:640px)').matches)return;   // phones: no pop-out windows
     if(pins.some(p=>p.key===key&&(p.sec||'')===(sec||''))){const p=pins.find(p=>p.key===key&&(p.sec||'')===(sec||''));const w=pinEls.get(p.id);if(w){front(w);w.classList.add('flash');setTimeout(()=>w.classList.remove('flash'),600)}return}
     const phone=matchMedia('(max-width:640px)').matches,vw=document.documentElement.clientWidth,n=pins.length;
     const width=phone?vw-16:(sec?420:600);
@@ -528,6 +529,7 @@
   function capPins(){const cap=Math.max(1,MAXBOX-(el?1:0));while(pins.length>cap)removePin(pins[0].id)}
   function removePin(id){const w=pinEls.get(id);if(w)w.remove();pinEls.delete(id);pins=pins.filter(p=>p.id!==id);savePins()}
   function refreshPins(){for(const p of pins)fillPin(p)}
+  if(pins.length&&matchMedia('(max-width:640px)').matches){pins=[];savePins()}   // phones: drop windows left over from a wider screen
   if(pins.length)loadAll().then(()=>pins.forEach(mountPin)).catch(()=>{});
   addEventListener('resize',()=>{for(const p of pins){const w=pinEls.get(p.id);if(!w)continue;clampPin(p);w.style.left=p.x+'px';w.style.top=p.y+'px'}});
 
