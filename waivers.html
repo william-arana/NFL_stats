@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.30">
-<script src="assets/site.js?v=1.30" defer></script>
-<script src="assets/cards.js?v=1.30" defer></script>
-<script src="assets/glossary.js?v=1.30" defer></script>
-<script src="assets/tables.js?v=1.30" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.31">
+<script src="assets/site.js?v=1.31" defer></script>
+<script src="assets/cards.js?v=1.31" defer></script>
+<script src="assets/glossary.js?v=1.31" defer></script>
+<script src="assets/tables.js?v=1.31" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -258,7 +258,7 @@ function draw(){
   $('#w-taken').onchange=e=>{st.showTaken=e.target.checked;draw()};
   {const qi=$('#w-q');let t;qi.oninput=e=>{clearTimeout(t);t=setTimeout(()=>{const pos=e.target.selectionStart;st.q=e.target.value;draw();const n=$('#w-q');n.focus();try{n.setSelectionRange(pos,pos)}catch(_){}},150)};
     qi.onkeydown=e=>{if(e.key==='Escape'&&st.q){st.q='';draw();$('#w-q').focus()}};}
-  const tb=$('#w-tbl thead');if(tb)tb.onclick=e=>{const h=e.target.closest('th[data-k]');if(!h)return;const k=h.dataset.k;if(st.sort===k)st.dir*=-1;else{st.sort=k;st.dir=-1}draw()};
+  const tb=$('#w-tbl thead');if(tb)tb.onclick=e=>{const h=e.target.closest('th[data-k]');if(!h)return;const k=h.dataset.k;/* click: sort · again: flip · 3rd: back to waiver score */if(st.sort===k&&k!=='score'){if(st.flipped){st.sort='score';st.dir=-1;st.flipped=false}else{st.dir*=-1;st.flipped=true}}else if(st.sort===k){st.dir*=-1;st.flipped=!st.flipped;if(!st.flipped)st.dir=-1}else{st.sort=k;st.dir=-1;st.flipped=false}draw()};
 }
 })();
 </script>

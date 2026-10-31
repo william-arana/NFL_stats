@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.30">
-<script src="assets/site.js?v=1.30" defer></script>
-<script src="assets/cards.js?v=1.30" defer></script>
-<script src="assets/glossary.js?v=1.30" defer></script>
-<script src="assets/tables.js?v=1.30" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.31">
+<script src="assets/site.js?v=1.31" defer></script>
+<script src="assets/cards.js?v=1.31" defer></script>
+<script src="assets/glossary.js?v=1.31" defer></script>
+<script src="assets/tables.js?v=1.31" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -352,7 +352,7 @@ function drawPlayers(){
   $('#p-tbl').dataset.cols='stats-players-'+ps.set;
   $('#p-tbl').innerHTML=data.length?th+'<tbody>'+body+'</tbody>':'<tbody><tr><td class="empty">No players match. Lower "Min games" or clear the search.</td></tr></tbody>';
   if(data.length>LIM)$('#p-sum').innerHTML+=`<span>Showing top ${LIM}. Filter or download CSV for all.</span>`;
-  $('#p-tbl').onclick=e=>{const h=e.target.closest('th[data-k]');if(h){const k=h.dataset.k;if(k==='trend')return;if(ps.sort===k||(!ps.sort&&k===set.cols[0].k))ps.dir*=-1;else{ps.sort=k;ps.dir=(k==='name'||k==='team'||k==='next')?1:-1}drawPlayers();return}
+  $('#p-tbl').onclick=e=>{const h=e.target.closest('th[data-k]');if(h){const k=h.dataset.k;if(k==='trend')return;const d0=(k==='name'||k==='team'||k==='next')?1:-1;/* click: sort · again: flip · 3rd: back to the default order */if(ps.sort===k){if(ps.flipped){ps.sort=null;ps.dir=-1;ps.flipped=false}else{ps.dir*=-1;ps.flipped=true}}else if(!ps.sort&&k===set.cols[0].k){ps.sort=k;ps.dir=1;ps.flipped=true}else{ps.sort=k;ps.dir=d0;ps.flipped=false}drawPlayers();return}
     const n=e.target.closest('.xp');if(n){const id=n.dataset.id;ps.open.has(id)?ps.open.delete(id):ps.open.add(id);drawPlayers()}};
 }
 

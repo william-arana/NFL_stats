@@ -144,17 +144,24 @@
   window.addEventListener('blur',endDrag);
   /* tables inside player/game cards and pop-out windows: click a header to sort (again = flip), hover for the full name */
   const cellVal=td=>{if(!td)return null;const t=td.textContent.trim();if(!t||t==='–'||t==='-')return null;const m=t.replace(/,/g,'').match(/^[+−-]?\d*\.?\d+/);return m?parseFloat(m[0].replace('−','-')):t.toLowerCase()};
+  const SORTABLE=':is(.pc,.pw) table thead th, table[data-sort="local"] thead th';
+  const isSep=r=>r.classList.contains('tot')||r.classList.contains('stot')||r.classList.contains('grp');
   document.addEventListener('click',e=>{
-    const th=e.target.closest(':is(.pc,.pw) table thead th');if(!th||e.target.closest('button,a,input'))return;
+    const th=e.target.closest(SORTABLE);if(!th||e.target.closest('button,a,input'))return;
     const t=th.closest('table'),body=t.tBodies[0];if(!body||!headRow(t))return;const i=th.cellIndex;
-    const dir=th.dataset.sortDir==='desc'?'asc':'desc';[...th.parentNode.cells].forEach(c=>{delete c.dataset.sortDir;c.removeAttribute('aria-sort')});
-    th.dataset.sortDir=dir;th.setAttribute('aria-sort',dir==='desc'?'descending':'ascending');
-    const rows=[...body.rows],keep=rows.filter(r=>r.classList.contains('tot')||r.classList.contains('stot')),sortable=rows.filter(r=>!keep.includes(r));
-    sortable.sort((a,b)=>{const x=cellVal(a.cells[i]),y=cellVal(b.cells[i]);if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return -1;
-      const c=typeof x==='number'&&typeof y==='number'?x-y:String(x).localeCompare(String(y));return dir==='desc'?-c:c});
-    for(const r of [...sortable,...keep])body.appendChild(r);
+    const rows=[...body.rows];rows.forEach((r,n)=>{if(r.dataset.oi==null)r.dataset.oi=n});
+    /* click: high→low · again: low→high · 3rd: back to the original order */
+    const dir=th.dataset.sortDir==null?'desc':th.dataset.sortDir==='desc'?'asc':null;
+    [...th.parentNode.cells].forEach(c=>{delete c.dataset.sortDir;c.removeAttribute('aria-sort')});
+    if(dir){th.dataset.sortDir=dir;th.setAttribute('aria-sort',dir==='desc'?'descending':'ascending')}
+    const cmp=(a,b)=>{if(!dir)return a.dataset.oi-b.dataset.oi;const x=cellVal(a.cells[i]),y=cellVal(b.cells[i]);if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return -1;
+      const c=typeof x==='number'&&typeof y==='number'?x-y:String(x).localeCompare(String(y));return dir==='desc'?-c:c};
+    // sort inside each run of rows between separators (group headers, totals), so sides/groups stay together
+    const out=[];let seg=[];const flush=()=>{out.push(...seg.sort(cmp));seg=[]};
+    for(const r of rows.sort((a,b)=>a.dataset.oi-b.dataset.oi)){if(isSep(r)){flush();out.push(r)}else seg.push(r)}flush();
+    for(const r of out)body.appendChild(r);
   });
-  document.addEventListener('mouseover',e=>{const th=e.target.closest(':is(.pc,.pw) table thead th');if(!th||th.title)return;const l=labelOf(th);const f=fullOf(th,l);th.title=(f?f+' · ':'')+'click to sort'});
+  document.addEventListener('mouseover',e=>{const th=e.target.closest(SORTABLE);if(!th||th.title)return;const l=labelOf(th);const f=fullOf(th,l);th.title=(f?f+' · ':'')+'click to sort'});
   /* tables get rebuilt all the time (filters, sorting, league switch): re-apply whenever one appears */
   let queued=false;
   function scan(){queued=false;document.querySelectorAll('table[data-cols]').forEach(t=>{if(t.tHead&&!t.tHead.dataset.colsDone)apply(t)})}

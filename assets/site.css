@@ -307,9 +307,9 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 .plays tr.pl-td td{background:var(--good-soft)}.plays tr.pl-to td{background:var(--margin-soft)}
 
 /* card tables sort on header click */
-:is(.pc,.pw) table thead th{cursor:pointer}
-:is(.pc,.pw) table thead th[aria-sort="descending"]::after{content:" ▾";color:var(--blue)}
-:is(.pc,.pw) table thead th[aria-sort="ascending"]::after{content:" ▴";color:var(--blue)}
+:is(.pc,.pw) table thead th,table[data-sort="local"] thead th{cursor:pointer}
+:is(.pc,.pw,[data-sort="local"]) thead th[aria-sort="descending"]::after{content:" ▾";color:var(--blue)}
+:is(.pc,.pw,[data-sort="local"]) thead th[aria-sort="ascending"]::after{content:" ▴";color:var(--blue)}
 .pc .sub .tr-add,.pw .sub .tr-add{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:var(--ink-3)}
 .tr-add button{font:700 11px var(--f-mono);width:22px;height:20px;padding:0;border:1px solid var(--rule);border-radius:5px;background:var(--sheet);color:var(--blue);cursor:pointer}
 .tr-add button:hover,.tr-add button.ok{background:var(--blue);color:var(--sheet);border-color:var(--blue)}

@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.30">
-<script src="assets/site.js?v=1.30" defer></script>
-<script src="assets/cards.js?v=1.30" defer></script>
-<script src="assets/glossary.js?v=1.30" defer></script>
-<script src="assets/tables.js?v=1.30" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.31">
+<script src="assets/site.js?v=1.31" defer></script>
+<script src="assets/cards.js?v=1.31" defer></script>
+<script src="assets/glossary.js?v=1.31" defer></script>
+<script src="assets/tables.js?v=1.31" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -700,7 +700,7 @@ async function run(title){
     const fields=r.schema.fields;const cols=fields.map(f=>f.name);
     const rows=r.toArray().map(row=>{const o=row.toJSON();for(const k in o){let v=toJS(o[k]);if(v instanceof Date)v=v.toISOString().slice(0,10);else if(v!=null&&typeof v==='object')v=String(v);o[k]=v}return o});
     RES={cols,rows,ms:performance.now()-t0,num:cols.map(c=>rows.some(r=>typeof r[c]==='number')&&rows.every(r=>r[c]==null||typeof r[c]==='number'))};
-    rs.sort=null;rs.x=null;rs.y=null;drawResults();
+    rs.sort=null;rs.flipped=false;rs.x=null;rs.y=null;drawResults();
   }catch(e){if(id!==RUNID)return;lastTitle=title||'Query';const canFix=lastAsk&&sql===lastAsk.sql;$('#results').innerHTML=`<div class="res-h"><span class="meta"><b>${esc(lastTitle)}</b> didn't run</span>${canFix?'<span style="flex:1"></span><button class="btn primary" id="ask-fix">Ask Claude to fix it</button>':''}</div><div class="err">${esc(e.message)}</div>`;if(canFix)$('#ask-fix').onclick=()=>ask(lastAsk.q,{sql,error:e.message})}
   finally{if(id===RUNID)$('#run').disabled=false}
 }
@@ -732,7 +732,7 @@ function drawResults(){
   $('#r-chart').onchange=e=>{rs.chart=e.target.value;store.set('labChart',rs.chart);rs.x=null;drawResults()};
   $('#r-csv').onclick=()=>{const out=[cols.join(',')].concat(data.map(r=>cols.map(c=>{const v=r[c];if(v==null)return '';if(typeof v==='number')return String(v);return '"'+String(v).replace(/"/g,'""')+'"'}).join(','))).join('\n');
     const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([out],{type:'text/csv'}));a.download=(lastTitle||'query').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'')+'.csv';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)};
-  const th=$('#results thead');if(th)th.onclick=e=>{const h=e.target.closest('th[data-c]');if(!h)return;const c=h.dataset.c;if(rs.sort===c)rs.dir*=-1;else{rs.sort=c;rs.dir=RES.num[cols.indexOf(c)]?-1:1}drawResults()};
+  const th=$('#results thead');if(th)th.onclick=e=>{const h=e.target.closest('th[data-c]');if(!h)return;const c=h.dataset.c;/* click: sort · again: flip · 3rd: back to the query's own order */if(rs.sort===c){if(rs.flipped){rs.sort=null;rs.flipped=false}else{rs.dir*=-1;rs.flipped=true}}else{rs.sort=c;rs.dir=RES.num[cols.indexOf(c)]?-1:1;rs.flipped=false}drawResults()};
   if($('#c-x')){$('#c-x').onchange=e=>{rs.x=e.target.value;drawChart(data)};$('#c-y').onchange=e=>{rs.y=e.target.value;drawChart(data)};
     if(rs.chart==='scatter'&&!numCols.includes(rs.x))rs.x=numCols[0];drawChart(data)}
 }
