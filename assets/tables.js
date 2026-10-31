@@ -110,7 +110,7 @@
     if(e.target.closest('[data-done]'))closePanel();
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel()});
-  /* desktop: drag a column header sideways to move the column (phones keep the ↑/↓ arrows in the panel) */
+  /* desktop: drag a column header sideways to move the column (touch: press and hold, below) */
   const fine=matchMedia('(pointer:fine)');let drag=null,swallow=false;
   function dropSpot(d,x){
     const hr=headRow(d.t);if(!hr)return null;let best=null;
@@ -125,22 +125,75 @@
     drag={t,th,k:keyOf(th),idx:th.cellIndex,x0:e.clientX,on:false,wrap:t.closest('.tablewrap,.scr')}});
   document.addEventListener('mousemove',e=>{
     if(!drag)return;
-    if(!drag.on){if(Math.abs(e.clientX-drag.x0)<8)return;drag.on=true;closePanel();drag.t.classList.add('col-dragging');document.documentElement.classList.add('col-dragging-doc');
-      for(const row of drag.t.rows){const c=row.cells[drag.idx];c&&c.classList.add('col-drag-src')}
-      drag.line=document.createElement('div');drag.line.className='col-drop-line';document.body.appendChild(drag.line)}
-    e.preventDefault();
-    const w=drag.wrap;if(w){const r=w.getBoundingClientRect();if(e.clientX<r.left+40)w.scrollLeft-=14;else if(e.clientX>r.right-40)w.scrollLeft+=14}
-    const s=dropSpot(drag,e.clientX);drag.spot=s;if(!s){drag.line.style.display='none';return}
-    const tr=drag.t.getBoundingClientRect();const top=Math.max(tr.top,0),bot=Math.min(tr.bottom,innerHeight);
-    Object.assign(drag.line.style,{display:'block',left:(s.edge+scrollX-1)+'px',top:(top+scrollY)+'px',height:Math.max(0,bot-top)+'px'})});
-  document.addEventListener('mouseup',()=>{
-    if(!drag)return;const d=drag;const s=d.spot;const was=d.on;endDrag();if(!was)return;
-    swallow=true;setTimeout(()=>swallow=false,0);  // the mouseup is followed by a click: don't let it sort the column
+    if(drag.touch)return;
+    if(!drag.on){if(Math.abs(e.clientX-drag.x0)<8)return;liftCol(drag)}
+    e.preventDefault();dragTo(e.clientX)});
+  function dropAt(d,s){
     if(!s||s.c===d.th)return;const hr=headRow(d.t);
     const order=[...hr.cells].filter(c=>!isLocked(c)).map(keyOf).filter(k=>k!==d.k);
     let at=order.indexOf(keyOf(s.c));if(at<0)return;if(!s.before)at++;order.splice(at,0,d.k);
-    const cfg=cfgOf(d.t.dataset.cols);cfg.order=order;LS.set(d.t.dataset.cols,cfg);d.t.tHead.dataset.colsDone='';apply(d.t)});
+    const cfg=cfgOf(d.t.dataset.cols);cfg.order=order;LS.set(d.t.dataset.cols,cfg);d.t.tHead.dataset.colsDone='';apply(d.t)}
+  function liftCol(d){d.on=true;closePanel();d.t.classList.add('col-dragging');document.documentElement.classList.add('col-dragging-doc');
+    for(const row of d.t.rows){const c=row.cells[d.idx];c&&c.classList.add('col-drag-src')}
+    d.line=document.createElement('div');d.line.className='col-drop-line';document.body.appendChild(d.line)}
+  function dragTo(x){
+    const w=drag.wrap;if(w){const r=w.getBoundingClientRect();if(x<r.left+40)w.scrollLeft-=14;else if(x>r.right-40)w.scrollLeft+=14}
+    const s=dropSpot(drag,x);drag.spot=s;if(!s){drag.line.style.display='none';return}
+    const tr=drag.t.getBoundingClientRect();const top=Math.max(tr.top,0),bot=Math.min(tr.bottom,innerHeight);
+    Object.assign(drag.line.style,{display:'block',left:(s.edge+scrollX-1)+'px',top:(top+scrollY)+'px',height:Math.max(0,bot-top)+'px'})}
+  document.addEventListener('mouseup',()=>{
+    if(!drag||drag.touch)return;const d=drag;const s=d.spot;const was=d.on;endDrag();if(!was)return;
+    swallow=true;setTimeout(()=>swallow=false,0);  // the mouseup is followed by a click: don't let it sort the column
+    dropAt(d,s)});
   window.addEventListener('click',e=>{if(swallow){e.stopPropagation();e.preventDefault();swallow=false}},true);
+  /* phones/tablets: press and hold a column name (~½ s) = a bubble with what the stat means.
+     Keep holding (~1 s) = the column lifts: slide sideways and let go to move it (tables with a Columns button).
+     Moving the finger before that just scrolls. iPhones no longer sense press strength, so "harder" = longer. */
+  const HOLD_TIP=450,HOLD_LIFT=1000;let hold=null,tipEl=null;
+  const canMove=th=>{const t=th.closest('table');return !!(t&&t.dataset.cols&&headRow(t)&&![...headRow(t).cells].some(c=>c.colSpan>1)&&!isLocked(th))};
+  function tipFor(th){
+    const l=labelOf(th),g=th.querySelector('.gl');let e=null;
+    if(window.NFLSGloss){e=(g&&NFLSGloss.lookup(g.dataset.gl))||NFLSGloss.lookup(keyOf(th).replace(/^x-/,''))}
+    const f=fullOf(th,l);let name=e?e[0]:(f||l),desc=e?e[1]:(g&&g.dataset.gltip)||'';
+    if(!desc&&f&&name!==f)desc=f;
+    return {name,desc}}
+  function hideTip(){if(tipEl){tipEl.remove();tipEl=null}document.querySelectorAll('th.col-holding').forEach(x=>x.classList.remove('col-holding'))}
+  function showTip(th,movable){
+    hideTip();const {name,desc}=tipFor(th);th.classList.add('col-holding');
+    tipEl=document.createElement('div');tipEl.className='thtip';tipEl.setAttribute('role','tooltip');
+    tipEl.innerHTML=`<b>${esc(name)}</b>${desc?esc(desc):''}<small>${movable?'Keep holding to move this column · tap to sort':'Tap to sort'}</small>`;
+    document.body.appendChild(tipEl);
+    const r=th.getBoundingClientRect(),w=tipEl.offsetWidth,h=tipEl.offsetHeight,vw=document.documentElement.clientWidth;
+    const left=Math.max(8,Math.min(r.left+r.width/2-w/2,vw-w-8));const top=r.top-h-8>=4?r.top-h-8:r.bottom+8;
+    tipEl.style.left=(left+scrollX)+'px';tipEl.style.top=(top+scrollY)+'px'}
+  function clearHold(){if(hold){clearTimeout(hold.t1);clearTimeout(hold.t2);hold=null}}
+  document.addEventListener('touchstart',e=>{
+    hideTip();
+    clearHold();if(e.touches.length!==1)return;
+    const th=e.target.closest('thead th');if(!th||isLocked(th)||e.target.closest('a,input,select,.colbtn'))return;
+    const t0=e.touches[0],movable=canMove(th);
+    hold={th,x0:t0.clientX,y0:t0.clientY,stage:0,movable};
+    hold.t1=setTimeout(()=>{if(!hold)return;hold.stage=1;showTip(th,movable)},HOLD_TIP);
+    if(movable)hold.t2=setTimeout(()=>{if(!hold)return;hold.stage=2;hideTip();const t=th.closest('table');
+      drag={t,th,k:keyOf(th),idx:th.cellIndex,x0:hold.x0,on:false,wrap:t.closest('.tablewrap,.scr'),touch:true};liftCol(drag);dragTo(hold.x0);
+      try{navigator.vibrate&&navigator.vibrate(12)}catch(err){}},HOLD_LIFT);
+  },{passive:true});
+  document.addEventListener('touchmove',e=>{
+    if(!hold)return;const t=e.touches[0];
+    if(hold.stage===2&&drag&&drag.touch){e.preventDefault();dragTo(t.clientX);return}
+    if(Math.abs(t.clientX-hold.x0)+Math.abs(t.clientY-hold.y0)>10){hideTip();clearHold()}   // moved before the hold finished: it's a scroll
+  },{passive:false});
+  function touchEnd(){
+    if(!hold)return;const h=hold;clearHold();
+    if(h.stage===0)return;   // a quick tap: the normal click sorts
+    swallow=true;setTimeout(()=>swallow=false,600);   // a hold never sorts
+    if(h.stage===2&&drag&&drag.touch){const d=drag,s=d.spot;endDrag();dropAt(d,s);return}
+    // stage 1: the bubble stays up until the next touch or scroll
+  }
+  document.addEventListener('touchend',touchEnd,{passive:true});
+  document.addEventListener('touchcancel',()=>{if(drag&&drag.touch)endDrag();clearHold();hideTip()},{passive:true});
+  document.addEventListener('contextmenu',e=>{if(e.target.closest&&e.target.closest('thead th')&&matchMedia('(pointer:coarse)').matches)e.preventDefault()});
+  addEventListener('scroll',()=>{if(!hold)hideTip()},{passive:true,capture:true});
   window.addEventListener('blur',endDrag);
   /* tables inside player/game cards and pop-out windows: click a header to sort (again = flip), hover for the full name */
   const cellVal=td=>{if(!td)return null;const t=td.textContent.trim();if(!t||t==='–'||t==='-')return null;const m=t.replace(/,/g,'').match(/^[+−-]?\d*\.?\d+/);return m?parseFloat(m[0].replace('−','-')):t.toLowerCase()};

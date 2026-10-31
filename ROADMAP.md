@@ -75,6 +75,8 @@ The plan for NFL_stats. Claude keeps this current (see CLAUDE.md → "How we wor
 
 ## Decisions
 
+- 2026-10-30 · **Touch gestures (William):** on phones/tablets, press and hold a column name ≈½ s = description bubble; keep holding ≈1 s = the column lifts, slide to move it (iPhones can't sense press strength, so "hard press" = longer hold). Cards and pop-outs resize from all 4 corners (mouse or finger); double-tap / double-click the header = back to normal size and spot. Compare: Side A always defaults to your team, including after switching league / team.
+
 - 2026-10-30 · Site version = `1.<PR number>`; shown bottom right on Home with a "Check for updates" button (`version.json`). Nav order: Home, Stats, Waivers, Compare, Lab, Guide. Trade page renamed **Compare** (URL stays `trade.html`). Column names: hover = description, click = sort (no more pop-up box); card tables sort too. Max 2 boxes on screen (open card + pop-outs).
 
 - 2026-10-30 · **Navigation & sitemap done.** Shareable `?card=` links, back/swipe through cards, breadcrumb, game cards, pop-out windows, column chooser (hide all, drag to reorder on desktop), movable/resizable cards, keep a moved card when opening another, injury colors, NGS n/a. Optional `sitemap.xml` skipped for now.

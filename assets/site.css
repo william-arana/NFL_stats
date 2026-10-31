@@ -207,7 +207,7 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 .pc-crumbs span{padding:2px 4px;color:var(--ink);font-weight:600}
 .pc-crumbs i{font-style:normal;color:var(--ink-3)}
 .pc-crumbs+.pc-top{padding-top:6px}
-.pw{position:fixed;z-index:72;display:flex;flex-direction:column;width:360px;min-width:220px;min-height:38px;max-width:calc(100vw - 8px);max-height:calc(100vh - 16px);resize:both;overflow:hidden;
+.pw{position:fixed;z-index:72;display:flex;flex-direction:column;width:360px;min-width:220px;min-height:38px;max-width:calc(100vw - 8px);max-height:calc(100vh - 16px);overflow:hidden;
   background:var(--sheet);color:var(--ink);border:1px solid var(--rule);border-radius:10px;box-shadow:0 14px 36px rgba(11,21,40,.28);font-size:12.5px;line-height:1.45;text-align:left;white-space:normal}
 .pw:not([style*="height"]) .pw-b{max-height:60vh}
 .pw *{box-sizing:border-box}
@@ -221,11 +221,11 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 .pw-b{flex:1;overflow:auto;overscroll-behavior:contain}
 .pw-b>section:first-child{border-top:0}
 .pw .pc-top{position:static;padding-right:14px}
-.pw.min{resize:none;height:auto!important;min-height:0}
+.pw.min{height:auto!important;min-height:0}
 .pw.min .pw-b{display:none}
 .pw.min .pw-h{border-bottom:0}
 .pw.flash{box-shadow:0 0 0 3px var(--blue),0 14px 36px rgba(11,21,40,.28)}
-@media (max-width:640px){.pw{resize:none}.pw:not([style*="height"]) .pw-b{max-height:38vh}}
+@media (max-width:640px){.pw:not([style*="height"]) .pw-b{max-height:38vh}}
 /* game links + game card */
 .gl-g{font:inherit;border:0;background:none;padding:0 2px;margin:0 -2px;border-radius:3px;color:var(--blue);cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}
 .gl-g:hover{background:var(--blue-soft);text-decoration-style:solid}
@@ -286,8 +286,8 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 .col-drag-src{opacity:.45;background:var(--stripe)!important}
 .col-drop-line{position:absolute;z-index:90;width:3px;background:var(--blue);border-radius:2px;pointer-events:none;box-shadow:0 0 0 1px var(--sheet)}
 
-/* desktop: cards move (drag the header) and resize (bottom-right corner) */
-@media (min-width:641px){.pc{resize:both;min-width:320px;min-height:180px}.pc-head{cursor:move}.pc-head :is(button,a,input,select,label){cursor:pointer}.pc.pc-moving{opacity:.92;box-shadow:0 22px 50px rgba(11,21,40,.32);user-select:none}}
+/* desktop/tablet: cards move (drag the header) and resize (any corner) */
+@media (min-width:641px){.pc{min-width:320px;min-height:180px}.pc-head,.pw-h{touch-action:none}.pc-head{cursor:move}.pc.pc-sizing,.pw.pc-sizing{user-select:none;transition:none}.rz-doc,.rz-doc *{user-select:none!important}.pc-head :is(button,a,input,select,label){cursor:pointer}.pc.pc-moving{opacity:.92;box-shadow:0 22px 50px rgba(11,21,40,.32);user-select:none}}
 
 /* injury colors on player names (assets/cards.js → data/site/status.json): red = IR/PUP/NFI, dark red = out for the season */
 :root{--inj-ir:#d0121b;--inj-season:#7d0a14}
@@ -313,3 +313,10 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 .pc .sub .tr-add,.pw .sub .tr-add{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:var(--ink-3)}
 .tr-add button{font:700 11px var(--f-mono);width:22px;height:20px;padding:0;border:1px solid var(--rule);border-radius:5px;background:var(--sheet);color:var(--blue);cursor:pointer}
 .tr-add button:hover,.tr-add button.ok{background:var(--blue);color:var(--sheet);border-color:var(--blue)}
+
+/* column headers: press and hold = description bubble; keep holding = pick the column up and slide it */
+.thtip{position:absolute;z-index:90;max-width:min(300px,calc(100vw - 16px));background:var(--sheet);color:var(--ink);border:1px solid var(--rule);border-radius:8px;box-shadow:0 10px 28px rgba(11,21,40,.22);padding:8px 11px;font:400 13px/1.4 var(--f-body);text-align:left;white-space:normal;pointer-events:none}
+.thtip b{display:block;font-weight:700;margin-bottom:2px}
+.thtip small{display:block;margin-top:5px;color:var(--ink-3);font-size:11.5px}
+@media (pointer:coarse){thead th{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}}
+th.col-holding{background:var(--stripe)!important;box-shadow:inset 0 -3px 0 var(--blue)}
