@@ -4,31 +4,22 @@ The plan for NFL_stats. Claude keeps this current (see CLAUDE.md → "How we wor
 
 ## Now
 
-**Navigation & sitemap** — make everything inter-navigable. Plan in `docs/SITEMAP.md`.
-Done when: every player/team/game has a link you can share or bookmark, phone back/swipe works through cards, there's a breadcrumb trail, and tables have a column chooser + sort everywhere.
-
-Remaining, from William's 10/30 notes (fold into the last Now PRs):
-- ✅ **Columns panel bug:** ticking a column in a card or pop-out jumps the list back to the top. Keep the scroll position.
-- ✅ **Columns panel:** add **Hide all** next to Show all / Reset.
-- ✅ **Desktop:** drag column headers to reorder (the ↑/↓ arrows stay for phones).
-- ✅ **Desktop:** the player card itself is movable and resizable, not only pop-outs. Option: on desktop, open cards as a window by default.
-- ✅ **Injury colors on names:** IR / PUP / NFI = red, out for the season = dark red, on every player name (hover for the reason). Built 3× a day into `data/site/status.json` by `scripts/update_player_news.py`.
-- ✅ **Default columns:** Receiving set gets rush attempts; Rushing set gets targets + receptions; Trade side-by-side gets more columns (column chooser already there; widen the defaults).
-- ✅ **NGS columns that look empty:** separation, cushion and YACOE only exist for WR/TE with enough targets that week (NGS cutoff, ~70 players a week, none for RBs) and arrive a few days after games. Deep tgt is real but almost always 0 for RBs. Fix: show "n/a" with a tooltip ("NGS tracks WR/TE only") instead of blank, and leave them off for RB rows.
+**Lab UX** — easier to understand and navigate. Preset filters people can click before they type; the Ask box for everyone else; suggested custom metrics as Lab filters.
+- ✅ **Recipe settings with search (10/30):** any query with a `WITH settings AS (SELECT … AS name, …)` line gets a form above the SQL: player search (stores the id, fills in his team and that week's opponent), team and week pickers, number/text boxes. Works for recipes, saved queries and anything pasted.
+- ✅ **Match players by id, not description text:** `pbp_players_game` matches every `*_player_id` column (runner, passer, target, returner, tacklers, pass defenders, penalties…).
+- **Readable play log:** a "Plays" view (Lab preset + a tab on player/game cards) that shows the play-by-play description split into columns already in nflverse: QB, pass/run, direction (`pass_location` / `run_location` + `run_gap`), depth (`pass_length`, `air_yards`), receiver/rusher, result, field position, yards, tacklers, pass defenders, penalties. Names link to cards. Keep the original description as the last column.
+- **Presets before typing:** clickable starting points grouped by question (waivers, matchups, trade checks, play-by-play) with one plain-English line each.
+- **Suggested custom metrics as Lab filters** (after metrics are backtested).
 
 ## Next (in order, one at a time)
 
-1. **Lab UX** — easier to understand and navigate. Preset filters people can click before they type; the Ask box for everyone else; suggested custom metrics as Lab filters.
-   - **Recipe settings with search (10/30):** recipes with a settings line (e.g. `pbp_players_game`) get a form above the SQL: player search box (name → fills id, team and the next/last game), team pickers, week picker. No hand-typing `'J.Hill'`.
-   - **Match players by id, not description text:** use `rusher/receiver/passer_player_id` or `fantasy_player_id` (play descriptions say "J.Hill", which can match more than one player).
-   - **Readable play log:** a "Plays" view (Lab preset + a tab on player/game cards) that shows the play-by-play description split into columns already in nflverse: QB, pass/run, direction (`pass_location` / `run_location` + `run_gap`), depth (`pass_length`, `air_yards`), receiver/rusher, result, field position, yards, tacklers, pass defenders, penalties. Names link to cards. Keep the original description as the last column.
-2. **Custom metrics + backtests** — William's own filters/metrics, each with a one-line plain-English explanation and a backtest (does it predict next-week points better than a simple baseline like last-3-week average? if not, cut it). Seasons 2022–2025.
+1. **Custom metrics + backtests** — William's own filters/metrics, each with a one-line plain-English explanation and a backtest (does it predict next-week points better than a simple baseline like last-3-week average? if not, cut it). Seasons 2022–2025.
    - Candidates from the Justice Hill look (10/30): production split by opponent's RB points allowed (does he only hit vs bottom-5 run defenses? his two good games were BUF and ARI); scrimmage yards (rush + rec) and share; snap % trend as the role signal.
    - From play-by-play: run direction / gap profile per RB vs where each defense gives up yards by gap; opponent's pass vs run play mix; who makes the tackles on RBs per defense. Defender-on-field data (participation) only goes through 2025, so it's backtest-only.
-3. **Pressers + coaching profiles** — head coach press conferences → structured per-player signals (player, topic, tone, short quote snippet). Feeds Trade/compare tabs and outlooks. Grows into a profile per coach: offense style, honesty (said vs did), outlook on players, trust signals, opponent-defense context, injury updates. See Pressers notes below.
-4. **Statistical outlooks + grading** — the rest-of-season score (see "Model + public site") plus AI outlooks built only from data (QB, defense, depth chart, draft position, presser sentiment, injuries, news), every claim tied to a data row. Save each week's projections, grade them after the games, learn why misses happened, publish accuracy.
-5. **Monitor** — health checks with alerts (see Ideas).
-6. **Accounts + payments** — after the NFL season. See Business model.
+2. **Pressers + coaching profiles** — head coach press conferences → structured per-player signals (player, topic, tone, short quote snippet). Feeds Trade/compare tabs and outlooks. Grows into a profile per coach: offense style, honesty (said vs did), outlook on players, trust signals, opponent-defense context, injury updates. See Pressers notes below.
+3. **Statistical outlooks + grading** — the rest-of-season score (see "Model + public site") plus AI outlooks built only from data (QB, defense, depth chart, draft position, presser sentiment, injuries, news), every claim tied to a data row. Save each week's projections, grade them after the games, learn why misses happened, publish accuracy.
+4. **Monitor** — health checks with alerts (see Ideas).
+5. **Accounts + payments** — after the NFL season. See Business model.
 
 ## Ideas (not scheduled)
 
@@ -78,6 +69,8 @@ Remaining, from William's 10/30 notes (fold into the last Now PRs):
 - **Competition:** strength-of-schedule tools are everywhere (ESPN/Mike Clay, PFF, CBS, Footballguys, Fantasy Footballers, Sharp Football, 4for4, RotoViz). Most rank defenses by fantasy points allowed per position; a few add scheme grades. FantasyPros grades experts' rankings every year. Gap: play-type matchups + coach signals + a public, locked track record.
 
 ## Decisions
+
+- 2026-10-30 · **Navigation & sitemap done.** Shareable `?card=` links, back/swipe through cards, breadcrumb, game cards, pop-out windows, column chooser (hide all, drag to reorder on desktop), movable/resizable cards, keep a moved card when opening another, injury colors, NGS n/a. Optional `sitemap.xml` skipped for now.
 
 - 2026-10-30 · Out-for-the-season rule (William): Sleeper still lists him IR/PUP/NFI/Out **and** this season's player news (Sleeper + ESPN feeds in the archive) says season-ending / out for the season about him. Ignores "could", "not", last-year mentions, and clears if newer news says designated to return / activated / back at practice.
 
