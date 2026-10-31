@@ -392,7 +392,7 @@
     if(d>0){pendingBack=true;history.go(-d)}else if(new URLSearchParams(location.search).has('card'))history.replaceState(null,'',urlFor(null));
   }
   function place(){
-    if(!el)return;const phone=matchMedia('(max-width:640px)').matches;
+    if(!el||el._moved)return;/* moved by hand (desktop): stay put */const phone=matchMedia('(max-width:640px)').matches;
     if(phone){if(!shade){shade=document.createElement('div');shade.className='pc-shade';shade.onclick=close;document.body.appendChild(shade)}return}
     const w=el.offsetWidth,h=el.offsetHeight,cw=document.documentElement.clientWidth;
     if(!anchor||!anchor.isConnected){el.style.left=Math.max(scrollX+12,scrollX+(cw-w)/2)+'px';el.style.top=(scrollY+64)+'px';return}
@@ -442,7 +442,7 @@
     anchor=a||null;if(anchor)anchor.setAttribute('aria-expanded','true');
     el=document.createElement('div');el.className='pc';el.setAttribute('role','dialog');el.setAttribute('aria-label','Player card');
     el.innerHTML=`<button type="button" class="pc-x" aria-label="Close">×</button><div class="pc-top"><div><h3>${esc(a?a.textContent.trim().split('\n')[0]:'')}</h3><div class="sub"><span><span class="spin"></span>Loading…</span></div></div></div>`;
-    document.body.appendChild(el);place();
+    document.body.appendChild(el);sizeCard();place();
   }
   function show(){const want=stack[stack.length-1]&&stack[stack.length-1].key;
     loadAll().then(()=>{if(el&&stack.length&&stack[stack.length-1].key===want){render();place()}}).catch(e=>{if(el)el.innerHTML=`<button type="button" class="pc-x">×</button><section>Couldn't load the season data (${esc(e.message)}).</section>`})}
@@ -552,6 +552,33 @@
     const t=e.target.closest('[data-card],.opp[data-opp]');
     if(t&&!e.target.closest('.plink,.av,a[href]:not([data-card])')){e.preventDefault();e.stopPropagation();const k=t.dataset.card||('d:'+t.dataset.opp);if(t.dataset.name)NAMEHINT[k.slice(2)]=t.dataset.name;open(k,t,t.dataset.pos);return}
     if(el&&!e.target.closest('.pmenu,.glpop,.colpanel'))close();
+  });
+  /* desktop: drag the card by its header to move it, resize it from the bottom-right corner (the size is
+     remembered for the next card), double-click the header to put it back next to the name you clicked. */
+  function desk(){return !matchMedia('(max-width:640px)').matches}
+  function sizeCard(){if(!el||!desk())return;const z=LS.get('card-size',null);if(z&&z.w&&z.h){el.style.width=z.w+'px';el.style.height=z.h+'px';el.style.maxHeight='none'}}
+  let mv=null,rs=false,eatClick=false;
+  document.addEventListener('pointerdown',e=>{
+    if(!el||!desk()||e.button!==0||!el.contains(e.target))return;
+    const r=el.getBoundingClientRect();
+    if(e.clientX>r.right-20&&e.clientY>r.bottom-20){rs=true;el.style.height=el.offsetHeight+'px';el.style.maxHeight='none';return}  // the resize corner
+    if(!e.target.closest('.pc-head')||e.target.closest('button,a,input,select,label,.pc-crumbs'))return;
+    e.preventDefault();mv={dx:e.pageX-el.offsetLeft,dy:e.pageY-el.offsetTop,x0:e.clientX,y0:e.clientY,on:false};
+  },true);
+  document.addEventListener('pointermove',e=>{
+    if(!mv||!el)return;if(!mv.on){if(Math.abs(e.clientX-mv.x0)+Math.abs(e.clientY-mv.y0)<5)return;mv.on=true;el.classList.add('pc-moving')}
+    const cw=document.documentElement.clientWidth,w=el.offsetWidth;
+    const x=Math.max(scrollX+80-w,Math.min(e.pageX-mv.dx,scrollX+cw-80)),y=Math.max(scrollY,Math.min(e.pageY-mv.dy,scrollY+innerHeight-40));
+    el.style.left=x+'px';el.style.top=y+'px';el._moved=true;
+  });
+  document.addEventListener('pointerup',()=>{
+    if(mv){if(mv.on){eatClick=true;setTimeout(()=>eatClick=false,0)}mv=null;el&&el.classList.remove('pc-moving')}
+    if(rs){rs=false;if(el){LS.set('card-size',{w:el.offsetWidth,h:el.offsetHeight});eatClick=true;setTimeout(()=>eatClick=false,0)}}
+  });
+  window.addEventListener('click',e=>{if(eatClick){eatClick=false;e.stopPropagation();e.preventDefault()}},true);  // a drag that ends outside the card must not close it
+  document.addEventListener('dblclick',e=>{
+    if(!el||!desk()||!e.target.closest('.pc .pc-head')||e.target.closest('button,a,input'))return;
+    try{localStorage.removeItem('nfls-card-size')}catch(err){}el._moved=false;el.style.width=el.style.height=el.style.maxHeight='';place();
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el)close()});
   /* a page changing its own #hash (Stats tabs, Lab, Guide) closes the card; Trade's #a= state doesn't */
