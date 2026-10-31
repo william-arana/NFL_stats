@@ -76,6 +76,15 @@ details.tbl summary span{font-weight:400;color:var(--ink-3);margin-left:auto}
 .recipe-note .nvp{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .recipe-note .nvp button{font:500 12px var(--f-body);border:1px solid var(--rule);background:var(--sheet);color:var(--ink);border-radius:999px;padding:3px 10px;cursor:pointer}
 .recipe-note .nvp button:hover{border-color:var(--blue);color:var(--blue)}
+.params{margin:0 0 10px;padding:10px 12px;background:var(--head);border:1px solid var(--rule);border-radius:8px}
+.params .pf-h{font:600 13px var(--f-body);margin-bottom:6px}.params .pf-h small{font-weight:400;color:var(--ink-3);margin-left:6px}
+.params .pf{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:flex-end}
+.params .pf-f{display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:var(--ink-2);position:relative}
+.params .pf-f input,.params .pf-f select{font:13px var(--f-body);padding:5px 8px;border:1px solid var(--rule);border-radius:6px;background:var(--sheet);color:var(--ink);min-width:110px}
+.params .pf-p input{width:210px}
+.params .pf-sug{position:absolute;top:100%;left:0;z-index:20;list-style:none;margin:2px 0 0;padding:4px 0;width:280px;background:var(--sheet);border:1px solid var(--rule);border-radius:8px;box-shadow:0 10px 24px rgba(11,21,40,.18);max-height:300px;overflow:auto}
+.params .pf-sug button{display:block;width:100%;text-align:left;border:0;background:none;padding:5px 10px;font:13px var(--f-body);color:var(--ink);cursor:pointer}
+.params .pf-sug button:hover{background:var(--stripe);color:var(--blue)}.params .pf-sug small{color:var(--ink-3)}.params .pf-sug .none{padding:5px 10px;color:var(--ink-3)}
 .recipe-note .miss{color:var(--ink-2);font-size:12px}
 main{display:grid;gap:14px;min-width:0;align-content:start}
 main > *,.layout > *{min-width:0}
@@ -195,6 +204,7 @@ tbody tr:hover td{background-color:color-mix(in srgb,var(--blue-soft) 55%,var(--
         <div id="pane-pv" class="pv"></div>
         <div id="pane-sql" class="sqlwrap" hidden>
           <div class="recipe-note" id="note" hidden></div>
+          <div class="params" id="params" hidden></div>
           <textarea id="sql" spellcheck="false" aria-label="SQL query"></textarea>
           <div class="bar">
             <button class="btn primary" id="run" disabled>Run</button><span class="kbd">Ctrl/⌘ + Enter</span>
@@ -216,7 +226,7 @@ const store={get(k,d){try{const v=localStorage.getItem('nfls-'+k);return v==null
 const setStatus=(t,cls)=>{$('#status').textContent=t;$('#dot').className='dot '+(cls||'')};
 
 const TABLES={avail:'Every offensive player and defense with their status in your selected league: fa / mine / taken',players:'One row per offensive player per game',teams:'One row per team per game, offense + defense',schedule:'One row per game, with Vegas lines',games_long:'Schedule with one row per team (team / opp / implied)',meta:'Season, last completed week, next week'};
-let conn, DB, READY='', SCHEMA={}, RECIPES=[], META, NAMES=new Map(), ROST=null, LG=null;
+let conn, DB, READY='', SCHEMA={}, RECIPES=[], META, SRC=null, NAMES=new Map(), ROST=null, LG=null;
 const CORE=new Set(Object.keys(TABLES));
 /* league availability: fill the availability table, then re-badge the current results */
 async function applyLeague(lg){
@@ -348,7 +358,7 @@ async function boot(){
     const get=n=>fetch('data/site/'+n,{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(n+' '+r.status);return r.json()});
     const [p,t,s,m,initSql,recTxt]=await Promise.all([get('players.json'),get('teams.json'),get('schedule.json'),get('meta.json'),
       fetch('lab/init.sql').then(r=>r.text()),fetch('lab/recipes.sql').then(r=>r.text())]);
-    META=m;
+    META=m;SRC={p,s};
     for(const [name,j] of [['players',p],['teams',t],['schedule',s]]){
       const rows=new Array(j.rows);for(let i=0;i<j.rows;i++){const r={};for(const c of j.cols)r[c]=j.data[c][i];rows[i]=r}
       await db.registerFileText(name+'.json',JSON.stringify(rows));
@@ -401,14 +411,87 @@ function drawRecipes(){
 function markActive(id){document.querySelectorAll('#recipes .item,#saved .item').forEach(x=>x.classList.toggle('on',x.dataset.r===id||x.dataset.s===id))}
 function loadRecipe(r,switchTab){
   store.set('lastRecipe',r.id);$('#sql').value=r.sql;$('#note').hidden=false;$('#note').innerHTML=`<div><b>${esc(r.title)}</b><br>${esc(r.blurb)}</div>`;
-  $('#save-name').value='';markActive(r.id);if(switchTab)showTab('sql');run(r.title);
+  $('#save-name').value='';markActive(r.id);if(switchTab)showTab('sql');drawParams(r.title);run(r.title);
 }
+
+/* ---------- recipe settings form ----------
+   Any query with `WITH settings AS (SELECT <value> AS <name>, ...)` gets a form above the SQL:
+   player_* → name search (stores the player id), team_* → team picker, week → week picker (All = NULL),
+   numbers → number box, anything else → text box. Picking a player fills in his team and that week's opponent.
+   Every change rewrites the settings line in the SQL; Run runs it. */
+const SET_RE=/(settings\s+AS\s*\(\s*SELECT\s+)([^()]*?)(\s*\))/i;
+function splitTop(t){const out=[];let cur='',q=false;for(const ch of t){if(ch==="'")q=!q;if(ch===','&&!q){out.push(cur);cur=''}else cur+=ch}if(cur.trim())out.push(cur);return out}
+function parseSettings(sql){
+  const m=sql.match(SET_RE);if(!m)return null;const items=[];
+  for(const part of splitTop(m[2])){
+    const mm=part.trim().match(/^([\s\S]+?)\s+AS\s+([A-Za-z_]\w*)$/i);if(!mm)return null;const raw=mm[1].trim(),name=mm[2];let v;
+    if(/^null$/i.test(raw))v=null;else if(/^'[\s\S]*'$/.test(raw))v=raw.slice(1,-1).replace(/''/g,"'");else if(/^-?\d+(\.\d+)?$/.test(raw))v=+raw;else return null;
+    const kind=/player/i.test(name)?'player':/team|^opp/i.test(name)?'team':/^week/i.test(name)?'week':typeof v==='number'?'num':'text';
+    items.push({name,v,kind})}
+  return items.length?items:null}
+const sqlLit=v=>v==null||v===''?'NULL':typeof v==='number'?String(v):`'${String(v).replace(/'/g,"''")}'`;
+function writeSettings(){if(!PF.items)return;const ta=$('#sql');ta.value=ta.value.replace(SET_RE,(all,a,b,c)=>a+PF.items.map(it=>`${sqlLit(it.v)} AS ${it.name}`).join(', ')+c)}
+let LK=null;
+function lookups(){
+  if(LK||!SRC)return LK;const P=SRC.p,S=SRC.s,col=(j,c)=>j.data[c]||[];
+  const by=new Map();const id=col(P,'player_id'),nm=col(P,'player_display_name'),pos=col(P,'position'),tm=col(P,'team'),wk=col(P,'week');
+  for(let i=0;i<P.rows;i++){const o=by.get(id[i]);if(!o||wk[i]>=o.w)by.set(id[i],{id:id[i],name:nm[i],pos:pos[i],team:tm[i],w:wk[i]})}
+  const games=[];const h=col(S,'home_team'),a=col(S,'away_team'),w=col(S,'week');for(let i=0;i<S.rows;i++)games.push({w:w[i],h:h[i],a:a[i]});
+  const teams=[...new Set(games.flatMap(g=>[g.h,g.a]))].filter(Boolean).sort();
+  LK={pl:[...by.values()].sort((x,y)=>x.name.localeCompare(y.name)),byId:by,games,teams,lw:+((META&&META.last_completed_week)||18)};return LK}
+const nrm=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9 ]/g,'');
+const pretty=n=>n.replace(/_/g,' ').replace(/\b([a-z])$/,m=>m.toUpperCase()).replace(/^./,c=>c.toUpperCase());
+let PF={items:null,title:''};
+function drawParams(title){
+  const box=$('#params');const items=parseSettings($('#sql').value);PF={items,title:title||PF.title};
+  if(!items){box.hidden=true;box.innerHTML='';return}const L=lookups();if(!L){box.hidden=true;return}
+  const opt=(v,l,sel)=>`<option value="${esc(v)}"${sel?' selected':''}>${esc(l)}</option>`;
+  const field=(it,i)=>{const lab=`<span>${esc(pretty(it.name))}</span>`;
+    if(it.kind==='player'){const p=L.byId.get(it.v);return `<label class="pf-f pf-p">${lab}<input type="search" data-i="${i}" value="${esc(p?p.name:it.v||'')}" placeholder="Search a player" autocomplete="off" spellcheck="false"><ul class="pf-sug" hidden></ul></label>`}
+    if(it.kind==='team')return `<label class="pf-f">${lab}<select data-i="${i}">${opt('','Any',it.v==null)}${L.teams.map(t=>opt(t,t,t===it.v)).join('')}</select></label>`;
+    if(it.kind==='week'){const ws=[];for(let w=1;w<=L.lw;w++)ws.push(w);return `<label class="pf-f">${lab}<select data-i="${i}">${opt('','All',it.v==null)}${ws.map(w=>opt(w,'Week '+w,w===it.v)).join('')}</select></label>`}
+    return `<label class="pf-f">${lab}<input data-i="${i}" ${it.kind==='num'?'type="number" step="any"':''} value="${esc(it.v??'')}"></label>`};
+  box.hidden=false;
+  box.innerHTML=`<div class="pf-h">Settings <small>change any of these and press Run. The SQL below updates as you go.</small></div><div class="pf">${items.map(field).join('')}<button type="button" class="btn primary" id="pf-run">Run</button></div>`;
+}
+function oppOf(team,week){const g=lookups().games.find(g=>g.w===week&&(g.h===team||g.a===team));return g?(g.h===team?g.a:g.h):null}
+function autoOpp(){ // team B = team A's opponent in the picked week
+  const T=PF.items.filter(x=>x.kind==='team'),W=PF.items.find(x=>x.kind==='week');
+  if(T.length<2||!W||W.v==null||!T[0].v)return;const o=oppOf(T[0].v,W.v);if(o)T[1].v=o}
+function pickPlayer(i,id){
+  const L=lookups(),p=L.byId.get(id);if(!p)return;const it=PF.items[i];it.v=id;
+  const P=PF.items.filter(x=>x.kind==='player'),T=PF.items.filter(x=>x.kind==='team');
+  const first=P[0]===it;
+  if(T.length&&first)T[0].v=p.team;
+  else if(T.length>1&&p.team!==T[0].v)T[1].v=p.team;   // second player on the other team = the opponent
+  if(first||!(T.length>1&&p.team!==T[0].v))autoOpp();
+  writeSettings();drawParams();
+}
+$('#params').addEventListener('input',e=>{
+  const inp=e.target.closest('.pf-p input');if(!inp)return;const ul=inp.nextElementSibling;const q=nrm(inp.value).trim();
+  if(q.length<2){ul.hidden=true;return}const L=lookups();const parts=q.split(' ');
+  const hits=L.pl.filter(p=>{const n=nrm(p.name);return parts.every(t=>n.includes(t))}).slice(0,8);
+  ul.innerHTML=hits.length?hits.map(p=>`<li><button type="button" data-pick="${esc(p.id)}" data-i="${inp.dataset.i}">${esc(p.name)} <small>${esc(p.pos||'')} · ${esc(p.team||'')}</small></button></li>`).join(''):'<li class="none">No player by that name</li>';ul.hidden=false;
+});
+$('#params').addEventListener('click',e=>{
+  const b=e.target.closest('[data-pick]');if(b){pickPlayer(+b.dataset.i,b.dataset.pick);return}
+  if(e.target.closest('#pf-run')){writeSettings();run(PF.title||'Query')}
+});
+$('#params').addEventListener('change',e=>{
+  const el=e.target.closest('[data-i]');if(!el||el.closest('.pf-p'))return;const it=PF.items[+el.dataset.i];
+  it.v=el.value===''?null:(it.kind==='week'||it.kind==='num')&&!isNaN(+el.value)?+el.value:el.value;
+  if(it.kind==='week'||(it.kind==='team'&&PF.items.filter(x=>x.kind==='team')[0]===it))autoOpp();
+  writeSettings();drawParams();
+});
+$('#params').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches('input')){e.preventDefault();const b=e.target.closest('.pf-p')?.querySelector('[data-pick]');if(b)b.click();else{writeSettings();run(PF.title||'Query')}}});
+document.addEventListener('click',e=>{if(!e.target.closest('.pf-p'))document.querySelectorAll('.pf-sug').forEach(u=>u.hidden=true)});
+$('#sql').addEventListener('change',()=>drawParams());
 function drawSaved(){
   const s=store.get('saved',[]);
   $('#saved').innerHTML=s.length?s.map((q,i)=>`<div class="saved-row"><button class="item" data-s="saved-${i}" data-i="${i}" title="${esc(q.name)}">${esc(q.name)}</button><button class="x" data-del="${i}" aria-label="Delete ${esc(q.name)}">×</button></div>`).join(''):'<div class="muted">Queries you save show up here.</div>';
   $('#saved').onclick=e=>{const d=e.target.closest('[data-del]');const list=store.get('saved',[]);
     if(d){const i=+d.dataset.del;if(d.dataset.armed){list.splice(i,1);store.set('saved',list);drawSaved()}else{d.dataset.armed=1;d.textContent='delete?';setTimeout(()=>{if(d.isConnected){delete d.dataset.armed;d.textContent='×'}},2500)}return}
-    const b=e.target.closest('[data-i]');if(!b)return;const q=list[+b.dataset.i];$('#sql').value=q.sql;$('#note').hidden=true;$('#save-name').value=q.name;markActive('saved-'+b.dataset.i);showTab('sql');run(q.name)};
+    const b=e.target.closest('[data-i]');if(!b)return;const q=list[+b.dataset.i];$('#sql').value=q.sql;$('#note').hidden=true;$('#save-name').value=q.name;markActive('saved-'+b.dataset.i);showTab('sql');drawParams(q.name);run(q.name)};
 }
 $('#save').onclick=()=>{const name=$('#save-name').value.trim()||('Query '+new Date().toLocaleString());const list=store.get('saved',[]);const i=list.findIndex(q=>q.name===name);const q={name,sql:$('#sql').value};if(i>=0)list[i]=q;else list.push(q);store.set('saved',list);drawSaved();$('#save').textContent='Saved';setTimeout(()=>$('#save').textContent='Save',1500)};
 

@@ -1,15 +1,64 @@
 -- @recipe pbp_players_game
 -- @title Play-by-play: every play a player was in (one game)
--- @blurb Every play-by-play row, all ~370 columns, where either player's name shows up in the play description (runs, targets, catches, fumbles, penalties), in game order. No row limit. Set the week, the two teams and the two names (as they appear in play descriptions: first initial, dot, last name) on the settings line. week NULL = every game between those teams in the last 5 weeks of data. The involved column says which player was on the play.
-WITH settings AS (SELECT 6 AS week, 'BAL' AS team_a, 'CLE' AS team_b, 'J.Hill' AS player_1, 'D.Henry' AS player_2)
-SELECT CASE WHEN contains(p."desc", s.player_1) AND contains(p."desc", s.player_2) THEN s.player_1 || ' + ' || s.player_2
-            WHEN contains(p."desc", s.player_1) THEN s.player_1 ELSE s.player_2 END AS involved,
-  p.*
-FROM pbp p, settings s
-WHERE (s.week IS NULL OR p.week = s.week)
-  AND ((p.home_team = s.team_a AND p.away_team = s.team_b) OR (p.home_team = s.team_b AND p.away_team = s.team_a))
-  AND (contains(p."desc", s.player_1) OR contains(p."desc", s.player_2))
-ORDER BY p.week, p.game_seconds_remaining DESC, p.play_id;
+-- @blurb Every play-by-play row, all ~370 columns, where either player is on the play: runner, passer, target, returner, tackler, pass defender, penalty and so on (matched by player id, not by name). No row limit. Pick the players, week and teams in the form above the SQL; picking a player fills in his team and that week's opponent. Week "All" = every game between those teams in the last 5 weeks of data. The involved column says which player was on the play.
+WITH settings AS (SELECT 6 AS week, 'BAL' AS team_a, 'CLE' AS team_b, '00-0034975' AS player_1, '00-0032764' AS player_2),
+names AS (SELECT player_id, any_value(player_display_name) AS name FROM players GROUP BY player_id),
+plays AS (
+  SELECT p.*, [
+    p.td_player_id,
+    p.passer_player_id,
+    p.receiver_player_id,
+    p.rusher_player_id,
+    p.lateral_receiver_player_id,
+    p.lateral_rusher_player_id,
+    p.lateral_sack_player_id,
+    p.interception_player_id,
+    p.lateral_interception_player_id,
+    p.punt_returner_player_id,
+    p.lateral_punt_returner_player_id,
+    p.kickoff_returner_player_id,
+    p.lateral_kickoff_returner_player_id,
+    p.punter_player_id,
+    p.kicker_player_id,
+    p.own_kickoff_recovery_player_id,
+    p.blocked_player_id,
+    p.tackle_for_loss_1_player_id,
+    p.tackle_for_loss_2_player_id,
+    p.qb_hit_1_player_id,
+    p.qb_hit_2_player_id,
+    p.forced_fumble_player_1_player_id,
+    p.forced_fumble_player_2_player_id,
+    p.solo_tackle_1_player_id,
+    p.solo_tackle_2_player_id,
+    p.assist_tackle_1_player_id,
+    p.assist_tackle_2_player_id,
+    p.assist_tackle_3_player_id,
+    p.assist_tackle_4_player_id,
+    p.tackle_with_assist_1_player_id,
+    p.tackle_with_assist_2_player_id,
+    p.pass_defense_1_player_id,
+    p.pass_defense_2_player_id,
+    p.fumbled_1_player_id,
+    p.fumbled_2_player_id,
+    p.fumble_recovery_1_player_id,
+    p.fumble_recovery_2_player_id,
+    p.sack_player_id,
+    p.half_sack_1_player_id,
+    p.half_sack_2_player_id,
+    p.penalty_player_id,
+    p.safety_player_id,
+    p.fantasy_player_id] AS who_
+  FROM pbp p, settings s
+  WHERE (s.week IS NULL OR p.week = s.week)
+    AND ((p.home_team = s.team_a AND p.away_team = s.team_b) OR (p.home_team = s.team_b AND p.away_team = s.team_a)))
+SELECT CASE WHEN list_contains(who_, s.player_1) AND list_contains(who_, s.player_2) THEN coalesce(n1.name, s.player_1) || ' + ' || coalesce(n2.name, s.player_2)
+            WHEN list_contains(who_, s.player_1) THEN coalesce(n1.name, s.player_1) ELSE coalesce(n2.name, s.player_2) END AS involved,
+  plays.* EXCLUDE (who_)
+FROM plays CROSS JOIN settings s
+LEFT JOIN names n1 ON n1.player_id = s.player_1
+LEFT JOIN names n2 ON n2.player_id = s.player_2
+WHERE list_contains(who_, s.player_1) OR list_contains(who_, s.player_2)
+ORDER BY plays.week, plays.game_seconds_remaining DESC, plays.play_id;
 
 -- @recipe pbp_browse
 -- @title Play-by-play: latest 200 plays
