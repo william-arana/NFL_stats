@@ -212,6 +212,9 @@ function entry(k){
   if(!s){const n=NAMES[k]||{};return {k,none:true,name:n.name||'Player '+k,pos:n.pos||'',team:n.team||'',fut:[],left:null,weeks:{}}}
   const x={k,name:s.name,pos:s.pos,team:s.team,g:s.g,fpg:s.fpg,l3:s.l3,xfp3:s.xfp3,snap3:s.snap3,opps:s.opps,tgt:s.tgt,best:s.best,sd:s.sd,rank:s.rank,
     weeks:Object.fromEntries(s.logs.map(l=>[l.week,l[sk()]])),inj:D.INJ[k]};
+  {const PG=(...ks)=>s.g?s.logs.reduce((a,l)=>a+ks.reduce((b,c)=>b+(num(l[c])?l[c]:0),0),0)/s.g:null;  // per-game box score
+    Object.assign(x,{carg:PG('carries'),tgtg:PG('targets'),recg:PG('receptions'),ryg:PG('rushing_yards'),reyg:PG('receiving_yards'),
+      tdg:PG('rushing_tds','receiving_tds','passing_tds'),pyg:PG('passing_yards'),rzg:PG('rz_tgt','rz_car'),xfpg:s.xfpg,snap:s.snap})}
   Object.assign(x,fut0(x));x.ros=num(x.fpg)?x.fpg*x.left:null;return x;
 }
 const owner=k=>{if(!ROST)return null;const m=ROST.map.get(k);return m?m:{status:'fa',team:'Free agent'}};
@@ -285,7 +288,9 @@ function draw(){
 }
 function compareTable(all,A,B){
   const nw=D.META.next_week;
-  const cols=[['g','G',0],['fpg','FP/g',1,1],['l3','L3',1,1],['xfp3','xFP L3',1,1],['snap3','Snap L3','%',1],['opps','Touch/g',1,1],['tgt','Tgt %','%',1],['best','Best',1],['sd','±Wk',1,0,'Weekly swing (standard deviation). Lower = steadier'],['rank','Pos rk','rk',0,'Rank at the position by FP per game (D/ST: by D/ST points)'],['left','G left',0],['sos','ROS SoS','sos',0,'Average opponent rank for the rest of the season. 1st = easiest (gives up the most to this position; for D/ST, scores the fewest)'],['ros','ROS pts',0,1]];
+  const cols=[['g','G',0],['fpg','FP/g',1,1],['l3','L3',1,1],['xfp3','xFP L3',1,1],['snap3','Snap L3','%',1],['opps','Touch/g',1,1],['carg','Rush att/g',1,1,'Rushing attempts per game'],['tgtg','Tgt/g',1,1,'Targets per game'],['recg','Rec/g',1,1,'Receptions per game'],['ryg','Rush yds/g',1,1,'Rushing yards per game'],['reyg','Rec yds/g',1,1,'Receiving yards per game'],['tdg','TD/g',2,1,'Rushing + receiving + passing TDs per game'],['tgt','Tgt %','%',1],['best','Best',1],['sd','±Wk',1,0,'Weekly swing (standard deviation). Lower = steadier'],['rank','Pos rk','rk',0,'Rank at the position by FP per game (D/ST: by D/ST points)'],['left','G left',0],['sos','ROS SoS','sos',0,'Average opponent rank for the rest of the season. 1st = easiest (gives up the most to this position; for D/ST, scores the fewest)'],['ros','ROS pts',0,1],
+    ['pyg','Pass yds/g',1,1,'Passing yards per game',1],['xfpg','xFP/g',1,1,'Expected PPR points per game, season',1],['snap','Snap %','%',1,'Offensive snap share, season',1],['rzg','RZ opps/g',1,1,'Red zone carries + targets per game',1]];
+  const SUMS=new Set(['fpg','l3','xfp3','opps','carg','tgtg','recg','ryg','reyg','tdg','pyg','xfpg','rzg','ros']);
   const heat={};for(const [k,,,h] of cols)if(h){const v=all.map(x=>x[k]).filter(num).sort((a,b)=>a-b);heat[k]=x=>{if(!num(x)||v.length<3)return 0;let lo=0;while(lo<v.length&&v[lo]<x)lo++;return lo/(v.length-1)*.45}}
   const cell=(x,[k,,d])=>{const v=x[k];if(!num(v))return '<td><span class="pos">–</span></td>';const al=heat[k]?heat[k](v):0;
     const t=d==='%'?pct(v):d==='rk'?(x.pos==='DEF'?'DST':x.pos)+v:d==='sos'?ord(Math.round(v)):d===0?Math.round(v):v.toFixed(d);
@@ -293,10 +298,10 @@ function compareTable(all,A,B){
   const row=x=>{const o=owner(x.k);const g=C.gameOf(x.team,nw);
     return `<tr data-s="${x.s}"><td class="l stick">${x.def?`<button type="button" class="pname" data-card="d:${esc(x.team)}">${esc(x.name)}</button>`:`<button type="button" class="pname" data-card="p:${esc(x.k)}" data-name="${esc(x.name)}">${esc(x.name)}</button>`} <span class="pos">${esc(x.pos)} · ${esc(x.team)}</span>${x.inj?`<span class="inj" title="${esc(x.inj[1])}">${esc(x.inj[0].replace('Practice: ',''))}</span>`:''}</td>
       <td class="l">${g?C.oppBtn(g.opp,(g.at?'@ ':'vs ')+g.opp,x.pos==='DEF'?null:x.pos):'<span class="pos">bye</span>'}</td><td class="l">${C.byeWeek(x.team)||'–'}</td>${cols.map(c=>cell(x,c)).join('')}<td class="l own">${o?esc(o.status==='mine'?'You':o.team):''}</td></tr>`};
-  const tot=(L,s)=>{const S=k=>L.reduce((a,x)=>a+(num(x[k])?x[k]:0),0);return `<tr class="stot" data-s="${s}"><td class="l stick">Side ${s.toUpperCase()} total</td><td></td><td></td><td></td><td>${f1(S('fpg'))}</td><td>${f1(S('l3'))}</td><td>${f1(S('xfp3'))}</td>${'<td></td>'.repeat(7)}<td>${Math.round(S('ros'))}</td><td></td></tr>`};
+  const tot=(L,s)=>{const S=k=>L.reduce((a,x)=>a+(num(x[k])?x[k]:0),0);return `<tr class="stot" data-s="${s}"><td class="l stick">Side ${s.toUpperCase()} total</td><td></td><td></td>${cols.map(([k,,d])=>`<td>${SUMS.has(k)?(k==='ros'?Math.round(S(k)):d===2?S(k).toFixed(2):f1(S(k))):''}</td>`).join('')}<td></td></tr>`};
   const grp=(L,s)=>L.length?`<tr class="grp" style="--sc:var(--${s==='a'?'blue':'margin'})"><td colspan="${cols.length+4}"><b>Side ${s.toUpperCase()}</b></td></tr>${L.map(x=>row({...x,s})).join('')}${tot(L,s)}`:'';
   return `<section class="box"><div class="box-h"><h2>Side by side</h2><span class="hint">Shading ranks each column among these players: darker = higher</span></div>
-    <div class="tablewrap"><table data-cols="trade-side"><thead><tr><th class="l stick">Player</th><th class="l">Wk ${nw}</th><th class="l">Bye</th>${cols.map(([k,l,,,tip])=>`<th>${gl(k,l,tip)}</th>`).join('')}<th class="l">Rostered by</th></tr></thead>
+    <div class="tablewrap"><table data-cols="trade-side"><thead><tr><th class="l stick">Player</th><th class="l">Wk ${nw}</th><th class="l">Bye</th>${cols.map(([k,l,,,tip,off])=>`<th${off?' data-def-off="1"':''}>${gl(k,l,tip||undefined)}</th>`).join('')}<th class="l">Rostered by</th></tr></thead>
     <tbody>${grp(A,'a')}${grp(B,'b')}</tbody></table></div>
     <div class="foot"><span>L3 = last 3 weeks. xFP = expected PPR points from usage (targets, carries, where on the field). ROS pts = points per game × games left through Week ${LAST_WEEK}; it doesn't adjust for matchups, so check ROS SoS alongside it.</span><span>ROS SoS: 1st = easiest remaining schedule. Players use PPR points allowed to their position; D/ST uses opponents' points scored per game.</span></div></section>`;
 }
