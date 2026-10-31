@@ -425,12 +425,12 @@ function parseSettings(sql){
   const m=sql.match(SET_RE);if(!m)return null;const items=[];
   for(const part of splitTop(m[2])){
     const mm=part.trim().match(/^([\s\S]+?)\s+AS\s+([A-Za-z_]\w*)$/i);if(!mm)return null;const raw=mm[1].trim(),name=mm[2];let v;
-    if(/^null$/i.test(raw))v=null;else if(/^'[\s\S]*'$/.test(raw))v=raw.slice(1,-1).replace(/''/g,"'");else if(/^-?\d+(\.\d+)?$/.test(raw))v=+raw;else return null;
+    if(/^null(::\w+)?$/i.test(raw))v=null;else if(/^'[\s\S]*'$/.test(raw))v=raw.slice(1,-1).replace(/''/g,"'");else if(/^-?\d+(\.\d+)?$/.test(raw))v=+raw;else return null;
     const kind=/player/i.test(name)?'player':/team|^opp/i.test(name)?'team':/^week/i.test(name)?'week':typeof v==='number'?'num':'text';
     items.push({name,v,kind})}
   return items.length?items:null}
 const sqlLit=v=>v==null||v===''?'NULL':typeof v==='number'?String(v):`'${String(v).replace(/'/g,"''")}'`;
-function writeSettings(){if(!PF.items)return;const ta=$('#sql');ta.value=ta.value.replace(SET_RE,(all,a,b,c)=>a+PF.items.map(it=>`${sqlLit(it.v)} AS ${it.name}`).join(', ')+c)}
+function writeSettings(){if(!PF.items)return;const ta=$('#sql');ta.value=ta.value.replace(SET_RE,(all,a,b,c)=>a+PF.items.map(it=>`${it.v==null&&/player|team|text/.test(it.kind)?'NULL::VARCHAR':sqlLit(it.v)} AS ${it.name}`).join(', ')+c)}
 let LK=null;
 function lookups(){
   if(LK||!SRC)return LK;const P=SRC.p,S=SRC.s,col=(j,c)=>j.data[c]||[];
@@ -447,7 +447,7 @@ function drawParams(title){
   if(!items){box.hidden=true;box.innerHTML='';return}const L=lookups();if(!L){box.hidden=true;return}
   const opt=(v,l,sel)=>`<option value="${esc(v)}"${sel?' selected':''}>${esc(l)}</option>`;
   const field=(it,i)=>{const lab=`<span>${esc(pretty(it.name))}</span>`;
-    if(it.kind==='player'){const p=L.byId.get(it.v);return `<label class="pf-f pf-p">${lab}<input type="search" data-i="${i}" value="${esc(p?p.name:it.v||'')}" placeholder="Search a player" autocomplete="off" spellcheck="false"><ul class="pf-sug" hidden></ul></label>`}
+    if(it.kind==='player'){const p=L.byId.get(it.v);return `<label class="pf-f pf-p">${lab}<input type="search" data-i="${i}" value="${esc(p?p.name:it.v||'')}" placeholder="Search a player (empty = any)" autocomplete="off" spellcheck="false"><ul class="pf-sug" hidden></ul></label>`}
     if(it.kind==='team')return `<label class="pf-f">${lab}<select data-i="${i}">${opt('','Any',it.v==null)}${L.teams.map(t=>opt(t,t,t===it.v)).join('')}</select></label>`;
     if(it.kind==='week'){const ws=[];for(let w=1;w<=L.lw;w++)ws.push(w);return `<label class="pf-f">${lab}<select data-i="${i}">${opt('','All',it.v==null)}${ws.map(w=>opt(w,'Week '+w,w===it.v)).join('')}</select></label>`}
     return `<label class="pf-f">${lab}<input data-i="${i}" ${it.kind==='num'?'type="number" step="any"':''} value="${esc(it.v??'')}"></label>`};
@@ -478,7 +478,8 @@ $('#params').addEventListener('click',e=>{
   if(e.target.closest('#pf-run')){writeSettings();run(PF.title||'Query')}
 });
 $('#params').addEventListener('change',e=>{
-  const el=e.target.closest('[data-i]');if(!el||el.closest('.pf-p'))return;const it=PF.items[+el.dataset.i];
+  const el=e.target.closest('[data-i]');if(!el)return;const it=PF.items[+el.dataset.i];
+  if(el.closest('.pf-p')){if(!el.value.trim()){it.v=null;writeSettings()}return}  // cleared player box = any player
   it.v=el.value===''?null:(it.kind==='week'||it.kind==='num')&&!isNaN(+el.value)?+el.value:el.value;
   if(it.kind==='week'||(it.kind==='team'&&PF.items.filter(x=>x.kind==='team')[0]===it))autoOpp();
   writeSettings();drawParams();

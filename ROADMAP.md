@@ -7,7 +7,8 @@ The plan for NFL_stats. Claude keeps this current (see CLAUDE.md → "How we wor
 **Lab UX** — easier to understand and navigate. Preset filters people can click before they type; the Ask box for everyone else; suggested custom metrics as Lab filters.
 - ✅ **Recipe settings with search (10/30):** any query with a `WITH settings AS (SELECT … AS name, …)` line gets a form above the SQL: player search (stores the id, fills in his team and that week's opponent), team and week pickers, number/text boxes. Works for recipes, saved queries and anything pasted.
 - ✅ **Match players by id, not description text:** `pbp_players_game` matches every `*_player_id` column (runner, passer, target, returner, tacklers, pass defenders, penalties…).
-- **Readable play log:** a "Plays" view (Lab preset + a tab on player/game cards) that shows the play-by-play description split into columns already in nflverse: QB, pass/run, direction (`pass_location` / `run_location` + `run_gap`), depth (`pass_length`, `air_yards`), receiver/rusher, result, field position, yards, tacklers, pass defenders, penalties. Names link to cards. Keep the original description as the last column.
+- ✅ **Readable play log (Lab):** recipe `pbp_log` — one row per play: quarter, clock, down & distance, field, run/pass/sack/scramble, QB, ball carrier/target, direction + gap, depth + air yards, result, yards, YAC, tacklers, pass defended, penalty, EPA, original text last. Filter by player (any role), team, week; names link to cards.
+- **Plays tab on player/game cards:** same columns inside the card. Needs a small per-game plays file in `data/site/` (pbp is 5 MB, too big for cards).
 - **Presets before typing:** clickable starting points grouped by question (waivers, matchups, trade checks, play-by-play) with one plain-English line each.
 - **Suggested custom metrics as Lab filters** (after metrics are backtested).
 
