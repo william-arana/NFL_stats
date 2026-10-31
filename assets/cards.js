@@ -208,7 +208,7 @@
     const lg=window.NFLS&&NFLS.getLeague();
     return `<section class="links">${espn?`<a href="https://www.espn.com/nfl/player/_/id/${encodeURIComponent(espn)}" target="_blank" rel="noopener">ESPN</a>`:''}${tm?`<a href="https://www.espn.com/nfl/team/_/name/${encodeURIComponent(tm.espn)}" target="_blank" rel="noopener">ESPN team page</a>`:''}
       <a href="${window.NFLS?NFLS.leagueUrl(lg):'https://sleeper.com'}" target="_blank" rel="noopener" data-copyname="${esc(tm?tm.nick:name)}" title="Copies the name so you can paste it into Sleeper search">Sleeper</a>
-      <a href="trade.html#a=${encodeURIComponent(id)}">Compare on Trade page</a>
+      <a href="trade.html#a=${encodeURIComponent(id)}">Compare</a>
       <a href="https://www.google.com/search?q=${encodeURIComponent((tm?tm.name+' defense':name)+' NFL news')}" target="_blank" rel="noopener">Web news</a></section>`;
   }
   function defHTML(team,pos){
@@ -655,7 +655,7 @@
   });
 
   /* "Add to Trade: A · B" on player cards: adds him to that side of the Trade page (keeps whatever is already there) */
-  function tradeAdd(id){return `<span class="tr-add">Add to Trade <button type="button" data-trade="a" data-tid="${esc(id)}" title="Add to side A on the Trade page">A</button><button type="button" data-trade="b" data-tid="${esc(id)}" title="Add to side B on the Trade page">B</button></span>`}
+  function tradeAdd(id){return `<span class="tr-add">Add to Compare <button type="button" data-trade="a" data-tid="${esc(id)}" title="Add to side A on the Compare page">A</button><button type="button" data-trade="b" data-tid="${esc(id)}" title="Add to side B on the Compare page">B</button></span>`}
   document.addEventListener('click',e=>{const b=e.target.closest('[data-trade][data-tid]');if(!b)return;e.preventDefault();e.stopPropagation();
     let h='';try{h=location.pathname.endsWith('trade.html')&&location.hash.length>1?location.hash.slice(1):(localStorage.getItem('nfls-trade-hash')||'')}catch(err){}
     const q=new URLSearchParams(h);const side=b.dataset.trade,other=side==='a'?'b':'a',id=b.dataset.tid;
