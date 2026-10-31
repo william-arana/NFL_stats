@@ -76,17 +76,23 @@
     panel=document.createElement('div');panel.className='colpanel';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','Choose columns');
     document.body.appendChild(panel);paintPanel(t);
     const r=btn.getBoundingClientRect(),w=panel.offsetWidth;
-    panel.style.left=Math.max(scrollX+8,Math.min(r.left+scrollX,scrollX+document.documentElement.clientWidth-w-8))+'px';panel.style.top=(r.bottom+scrollY+4)+'px';
+    panel.style.left=Math.max(scrollX+8,Math.min(r.left+scrollX,scrollX+document.documentElement.clientWidth-w-8))+'px';// keep the whole panel (and its buttons) on screen: open below the button, or above it when there's more room there
+    const h=panel.offsetHeight,vh=document.documentElement.clientHeight,below=vh-r.bottom-12,above=r.top-12;
+    if(below>=Math.min(h,260)||below>=above){panel.style.maxHeight=Math.max(below,200)+'px';panel.style.top=(r.bottom+4+scrollY)+'px'}
+    else{const ph=Math.min(h,above);panel.style.maxHeight=above+'px';panel.style.top=(r.top-4-ph+scrollY)+'px'}
   }
   function paintPanel(t){
     const hr=headRow(t);if(!hr||!panel)return;const id=t.dataset.cols;const cfg=cfgOf(id);
+    const oldUl=panel.querySelector('ul'),keepTop=oldUl?oldUl.scrollTop:0;  // repaint must not jump the list back to the top
     const all=[...hr.cells].filter(c=>!isLocked(c)).map(c=>({k:keyOf(c),l:labelOf(c),off:!!c.dataset.defOff,th:c}));
     const cols=[...all.filter(c=>!c.off),...all.filter(c=>c.off)];
     const row=(c,i)=>`<li${c.off?' class="xtra"':''}><label><input type="checkbox" data-k="${esc(c.k)}" ${c.off?'data-off="1"':''} ${isOff(c.th,c.k,cfg)?'':'checked'}><span>${esc(c.l)}${(f=>f?` <small>(${esc(f)})</small>`:'')(fullOf(c.th,c.l))}</span></label><button type="button" data-mv="-1" data-k="${esc(c.k)}" ${i===0?'disabled':''} aria-label="Move ${esc(c.l)} left">↑</button><button type="button" data-mv="1" data-k="${esc(c.k)}" ${i===cols.length-1?'disabled':''} aria-label="Move ${esc(c.l)} right">↓</button></li>`;
     const firstX=cols.findIndex(c=>c.off);
     panel.innerHTML=`<div class="cp-h"><b>Columns</b><span>tick to show · arrows to move</span></div><ul>${cols.map((c,i)=>(i===firstX?'<li class="cp-sep">More stats (off by default)</li>':'')+row(c,i)).join('')}</ul>
-      <div class="cp-f"><button type="button" data-all>Show all</button><button type="button" data-reset>Reset</button><button type="button" data-done>Done</button></div>`;
+      <div class="cp-f"><button type="button" data-all>Show all</button><button type="button" data-none>Hide all</button><button type="button" data-reset>Reset</button><button type="button" data-done>Done</button></div>`;
     panel._table=t;panel._cols=cols.map(c=>c.k);
+    const ul=panel.querySelector('ul');if(ul)ul.scrollTop=keepTop;
+    if(panel._focus){const f=panel.querySelector(panel._focus);panel._focus=null;if(f&&!f.disabled){f.focus({preventScroll:true});const li=f.closest('li');if(li&&ul){const a=li.offsetTop,b=a+li.offsetHeight;if(a<ul.scrollTop)ul.scrollTop=a;else if(b>ul.scrollTop+ul.clientHeight)ul.scrollTop=b-ul.clientHeight}}}
   }
   function save(t,cfg){LS.set(t.dataset.cols,cfg);t.tHead.dataset.colsDone='';apply(t);paintPanel(t)}
   document.addEventListener('click',e=>{
@@ -95,10 +101,11 @@
     if(!panel.contains(e.target)){closePanel();return}
     const t=panel._table;if(!t||!t.isConnected){closePanel();return}const cfg=cfgOf(t.dataset.cols);
     const cb=e.target.closest('input[type=checkbox]');
-    if(cb){const k=cb.dataset.k;if(cb.dataset.off)cfg.show=cb.checked?[...new Set([...cfg.show,k])]:cfg.show.filter(x=>x!==k);else cfg.hide=cb.checked?cfg.hide.filter(x=>x!==k):[...new Set([...cfg.hide,k])];save(t,cfg);return}
+    if(cb){const k=cb.dataset.k;panel._focus=`input[data-k="${CSS.escape(k)}"]`;if(cb.dataset.off)cfg.show=cb.checked?[...new Set([...cfg.show,k])]:cfg.show.filter(x=>x!==k);else cfg.hide=cb.checked?cfg.hide.filter(x=>x!==k):[...new Set([...cfg.hide,k])];save(t,cfg);return}
     const mv=e.target.closest('[data-mv]');
-    if(mv){const order=[...panel._cols];const i=order.indexOf(mv.dataset.k),j=i+(+mv.dataset.mv);if(i<0||j<0||j>=order.length)return;[order[i],order[j]]=[order[j],order[i]];cfg.order=order;save(t,cfg);return}
+    if(mv){panel._focus=`[data-mv="${mv.dataset.mv}"][data-k="${CSS.escape(mv.dataset.k)}"]`;const order=[...panel._cols];const i=order.indexOf(mv.dataset.k),j=i+(+mv.dataset.mv);if(i<0||j<0||j>=order.length)return;[order[i],order[j]]=[order[j],order[i]];cfg.order=order;save(t,cfg);return}
     if(e.target.closest('[data-all]')){cfg.hide=[];cfg.show=[...panel.querySelectorAll('input[data-off]')].map(x=>x.dataset.k);save(t,cfg);return}
+    if(e.target.closest('[data-none]')){cfg.hide=[...panel.querySelectorAll('input[type=checkbox]:not([data-off])')].map(x=>x.dataset.k);cfg.show=[];save(t,cfg);return}
     if(e.target.closest('[data-reset]')){LS.del(t.dataset.cols);t.tHead.dataset.colsDone='';apply(t);paintPanel(t);return}
     if(e.target.closest('[data-done]'))closePanel();
   });
