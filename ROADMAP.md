@@ -13,7 +13,7 @@ Remaining, from William's 10/30 notes (fold into the last Now PRs):
 - ✅ **Desktop:** drag column headers to reorder (the ↑/↓ arrows stay for phones).
 - ✅ **Desktop:** the player card itself is movable and resizable, not only pop-outs. Option: on desktop, open cards as a window by default.
 - ✅ **Injury colors on names:** IR / PUP / NFI = red, out for the season = dark red, on every player name (hover for the reason). Built 3× a day into `data/site/status.json` by `scripts/update_player_news.py`.
-- **Default columns:** Receiving set gets rush attempts; Rushing set gets targets + receptions; Trade side-by-side gets more columns (column chooser already there; widen the defaults).
+- ✅ **Default columns:** Receiving set gets rush attempts; Rushing set gets targets + receptions; Trade side-by-side gets more columns (column chooser already there; widen the defaults).
 - **NGS columns that look empty:** separation, cushion and YACOE only exist for WR/TE with enough targets that week (NGS cutoff, ~70 players a week, none for RBs) and arrive a few days after games. Deep tgt is real but almost always 0 for RBs. Fix: show "n/a" with a tooltip ("NGS tracks WR/TE only") instead of blank, and leave them off for RB rows.
 
 ## Next (in order, one at a time)
