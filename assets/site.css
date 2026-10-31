@@ -285,3 +285,6 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 .col-dragging-doc,.col-dragging-doc *{cursor:grabbing!important;user-select:none}
 .col-drag-src{opacity:.45;background:var(--stripe)!important}
 .col-drop-line{position:absolute;z-index:90;width:3px;background:var(--blue);border-radius:2px;pointer-events:none;box-shadow:0 0 0 1px var(--sheet)}
+
+/* desktop: cards move (drag the header) and resize (bottom-right corner) */
+@media (min-width:641px){.pc{resize:both;min-width:320px;min-height:180px}.pc-head{cursor:move}.pc-head :is(button,a,input,select,label){cursor:pointer}.pc.pc-moving{opacity:.92;box-shadow:0 22px 50px rgba(11,21,40,.32);user-select:none}}

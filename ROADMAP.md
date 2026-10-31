@@ -8,10 +8,10 @@ The plan for NFL_stats. Claude keeps this current (see CLAUDE.md → "How we wor
 Done when: every player/team/game has a link you can share or bookmark, phone back/swipe works through cards, there's a breadcrumb trail, and tables have a column chooser + sort everywhere.
 
 Remaining, from William's 10/30 notes (fold into the last Now PRs):
-- **Columns panel bug:** ticking a column in a card or pop-out jumps the list back to the top. Keep the scroll position.
-- **Columns panel:** add **Hide all** next to Show all / Reset.
-- **Desktop:** drag column headers to reorder (the ↑/↓ arrows stay for phones).
-- **Desktop:** the player card itself is movable and resizable, not only pop-outs. Option: on desktop, open cards as a window by default.
+- ✅ **Columns panel bug:** ticking a column in a card or pop-out jumps the list back to the top. Keep the scroll position.
+- ✅ **Columns panel:** add **Hide all** next to Show all / Reset.
+- ✅ **Desktop:** drag column headers to reorder (the ↑/↓ arrows stay for phones).
+- ✅ **Desktop:** the player card itself is movable and resizable, not only pop-outs. Option: on desktop, open cards as a window by default.
 - **Injury colors on names:** IR = red, out for the season = dark red, everywhere `pbtn` draws a name. Source: Sleeper `injury_status` (IR) + nflverse rosters reserve status. Nobody flags "season-ending" outright, so the dark red rule needs a call: IR without a return designation, or a "season-ending" match in news.
 - **Default columns:** Receiving set gets rush attempts; Rushing set gets targets + receptions; Trade side-by-side gets more columns (column chooser already there; widen the defaults).
 - **NGS columns that look empty:** separation, cushion and YACOE only exist for WR/TE with enough targets that week (NGS cutoff, ~70 players a week, none for RBs) and arrive a few days after games. Deep tgt is real but almost always 0 for RBs. Fix: show "n/a" with a tooltip ("NGS tracks WR/TE only") instead of blank, and leave them off for RB rows.
