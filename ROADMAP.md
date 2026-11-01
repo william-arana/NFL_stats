@@ -76,6 +76,8 @@ The plan for NFL_stats. Claude keeps this current (see CLAUDE.md → "How we wor
 
 ## Decisions
 
+- 2026-10-31 · **Yahoo leagues (William):** added Westin's Yahoo league (id 1490549, viewing as Prime Time Marcos). Yahoo's API needs a member's sign-in: one-time OAuth ("oob" code) via the *Connect Yahoo league* workflow; one refresh token per Yahoo account (each person connects their own, `yahoo_account` in data/leagues.json), stored encrypted in `data/private/yahoo_token_<account>.enc` (key = YAHOO_CLIENT_SECRET secret). The roster job pulls Yahoo 3x a day into the same `data/site/leagues.json` snapshot (no live Yahoo in the browser). Manager names aren't saved (private league, public repo). If Yahoo ever says the token is invalid, Westin redoes the 1-minute Agree step.
+
 - 2026-10-31 · **Lab pivot builder shows plain names (William):** Table, Rows, Columns, Values and Filters lists use common names ("Targets", "Red zone carries", "Snap %"), sorted A–Z; the SQL keeps the real field names. Names live in `FIELD_NAMES` in lab.html: add one there when a new field is added.
 
 - 2026-10-31 · **Window moves for cards + pop-outs (desktop, William):** resize from any side as well as corners; double-click a side/corner = stretch to that screen edge; drag the header to the top edge = full screen, left/right edge = half (blue preview). A snapped card is pinned to the screen so the page scrolls behind it; dragging it out restores its size. Double-click header still = normal size.

@@ -20,9 +20,11 @@
     const cfgP=fetch('data/leagues.json',{cache:'no-cache'}).then(r=>r.json()).catch(()=>({leagues:[]}));
     const snapP=fetch('data/site/leagues.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
     return Promise.all([cfgP,snapP]).then(([cfg,snap])=>{
-      const leagues=cfg.leagues.map(l=>{const s=snap&&snap.leagues.find(x=>x.id===l.id);const name=rid=>{const r=s&&s.rosters.find(x=>x.roster_id===rid);return r?r.team_name.trim():null};
+      const leagues=cfg.leagues.map(l=>{const s=snap&&snap.leagues.find(x=>x.id===l.id);
+        /* Yahoo: team count, your team and the viewer come from the snapshot (Yahoo's API needs a sign-in, so the Action pulls it) */
+        if(l.provider==='yahoo'){if(!s)return null;l={...l,name:l.name||s.name||'Yahoo league',teams:s.teams,my_roster_id:s.my_roster_id,viewers:s.viewers,url:s.url}}const name=rid=>{const r=s&&s.rosters.find(x=>x.roster_id===rid);return r?r.team_name.trim():null};
         const viewers=(l.viewers&&l.viewers.length?l.viewers:[{roster_id:l.my_roster_id}]).map(v=>({roster_id:v.roster_id,label:v.label||name(v.roster_id)||('Team '+v.roster_id)}));
-        return {...l,viewers}});
+        return {...l,viewers}}).filter(Boolean);
       leagueCfg={snapshot:snap,leagues};
       const opts=allOptions();if(!sel||!opts.some(o=>o.value===sel)){const legacy=sel&&opts.find(o=>o.value.split('|')[0]===sel);const d=legacy||opts.find(o=>o.def)||opts[0];sel=d?d.value:'none'}
       return leagueCfg;
@@ -40,6 +42,7 @@
     const snap=leagueCfg.snapshot&&leagueCfg.snapshot.leagues.find(l=>l.id===id);
     const build=(rosters,source,updated)=>{const map=new Map();for(const r of rosters){const mine=r.roster_id===cfg.my_roster_id;for(const k of r.players)map.set(k,{status:mine?'mine':'taken',team:r.team_name,roster_id:r.roster_id})}
       return {league:cfg,map,source,updated,rosters,status:k=>map.has(k)?map.get(k).status:'fa'}};
+    if(cfg.provider==='yahoo'){cache[key]=Promise.resolve(snap?build(snap.rosters,'snapshot',leagueCfg.snapshot.yahoo_updated_utc||leagueCfg.snapshot.updated_utc):null);return cache[key]}
     const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),6000);
     const live=Promise.all([
       fetch(`https://api.sleeper.app/v1/league/${id}/rosters`,{signal:ctl.signal}).then(r=>r.ok?r.json():Promise.reject()),
@@ -66,9 +69,10 @@
   }
 
   /* Sleeper has no public page per player, so links open the league's Players tab; the link menu copies the name first. */
-  function leagueUrl(lg){return lg?`https://sleeper.com/leagues/${lg.id}/players`:'https://sleeper.com'}
+  function leagueUrl(lg){return !lg?'https://sleeper.com':lg.provider==='yahoo'?(lg.url||'https://football.fantasysports.yahoo.com/f1/'+lg.yahoo_league_id)+'/players':`https://sleeper.com/leagues/${lg.id}/players`}
+  const appName=lg=>lg&&lg.provider==='yahoo'?'Yahoo':'Sleeper';
   function badge(status,lg,name){if(!status||!lg)return '';const t=status==='fa'?'FA':status==='mine'?'MINE':'';if(!t)return '';
-    const tip=status==='fa'?`Free agent in ${lg.name}. Opens ${lg.name} players on Sleeper`:`On ${lg.viewer||'your'} roster in ${lg.name}. Opens Sleeper`;
+    const tip=status==='fa'?`Free agent in ${lg.name}. Opens ${lg.name} players on ${appName(lg)}`:`On ${lg.viewer||'your'} roster in ${lg.name}. Opens ${appName(lg)}`;
     return `<a class="av ${status}" href="${leagueUrl(lg)}" target="_blank" rel="noopener" title="${esc(tip)}">${t}</a>`}
 
   /* "open player" link: small icon after a name; opens a menu with Sleeper, ESPN and copy-name */
@@ -86,7 +90,7 @@
       const isDef=id.startsWith('DEF:'),abbr=isDef?id.slice(4):null;let copyText=name;
       const paint=()=>{const espn=!isDef&&IDS&&IDS[id];const tm=isDef&&TM&&TM[abbr];if(tm)copyText=tm.nick;
         menu.innerHTML=`<div class="pm-h">${esc(isDef&&tm?tm.name+' D/ST':name)}</div>
-          <a role="menuitem" href="${leagueUrl(lg)}" target="_blank" rel="noopener" data-copy="1">Sleeper${lg?' · '+esc(lg.name)+' players':''}<small>copies "${esc(copyText)}" so you can paste it into search</small></a>
+          <a role="menuitem" href="${leagueUrl(lg)}" target="_blank" rel="noopener" data-copy="1">${appName(lg)}${lg?' · '+esc(lg.name)+' players':''}<small>copies "${esc(copyText)}" so you can paste it into search</small></a>
           ${espn?`<a role="menuitem" href="https://www.espn.com/nfl/player/_/id/${encodeURIComponent(espn)}" target="_blank" rel="noopener">ESPN player page<small>stats, game log, news</small></a>`:''}
           ${tm?`<a role="menuitem" href="https://www.espn.com/nfl/team/_/name/${encodeURIComponent(tm.espn)}" target="_blank" rel="noopener">ESPN team page<small>schedule, stats, roster</small></a>`:''}
           <a role="menuitem" href="https://www.google.com/search?q=${encodeURIComponent((isDef&&tm?tm.name+' defense':name)+' NFL news')}" target="_blank" rel="noopener">Latest news<small>web search</small></a>
@@ -150,6 +154,6 @@
       if(!j||!j.version||j.version===v||parseFloat(j.version.split('.')[1])<parseFloat(v.split('.')[1]))return;
       const k='nfls-upd-'+j.version;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){return}
       const u=new URL(location.href);u.searchParams.set('v',j.version);location.replace(u.pathname+u.search+u.hash)}).catch(()=>{})})();
-  window.NFLS={leagueUrl,badge,plink,setTheme,loadLeagues,getLeague,rosterStatus,onLeague(cb){listeners.push(cb);if(leagueCfg)cb(getLeague())}};
+  window.NFLS={leagueUrl,appName,badge,plink,setTheme,loadLeagues,getLeague,rosterStatus,onLeague(cb){listeners.push(cb);if(leagueCfg)cb(getLeague())}};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
 })();

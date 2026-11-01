@@ -57,7 +57,7 @@ def main() -> None:
 
     state = get("/state/nfl")
     leagues = []
-    for lg in CFG["leagues"]:
+    for lg in [x for x in CFG["leagues"] if x.get("provider", "sleeper") == "sleeper"]:
         info = get(f"/league/{lg['id']}")
         users = {u["user_id"]: u for u in get(f"/league/{lg['id']}/users")}
         rosters = []
@@ -99,7 +99,14 @@ def main() -> None:
 
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "leagues.json").write_text(json.dumps({"updated_utc": now, "leagues": leagues}, separators=(",", ":")))
+    # keep the Yahoo leagues (written by update_yahoo.py) in the same snapshot
+    try:
+        prev = json.loads((OUT / "leagues.json").read_text())
+        leagues += [lg for lg in prev.get("leagues", []) if lg.get("provider") == "yahoo"]
+        extra = {k: prev[k] for k in ("yahoo_updated_utc",) if k in prev}
+    except Exception:  # noqa: BLE001
+        extra = {}
+    (OUT / "leagues.json").write_text(json.dumps({"updated_utc": now, **extra, "leagues": leagues}, separators=(",", ":")))
     (OUT / "sleeper_map.json").write_text(json.dumps({"updated_utc": now, "team_fix": TEAM_FIX, "map": smap}, separators=(",", ":")))
     print(f"[sleeper] map: {len(smap)} players")
 

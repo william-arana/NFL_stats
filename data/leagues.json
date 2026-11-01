@@ -1,5 +1,5 @@
 {
-  "_note": "Sleeper leagues tracked by the site. default=true is selected first. my_roster_id is your team; viewers are the teams the Team picker offers (add your brother's or anyone's roster_id here).",
+  "_note": "Sleeper leagues tracked by the site. default=true is selected first. my_roster_id is your team; viewers are the teams the Team picker offers (add your brother's or anyone's roster_id here). Yahoo leagues: provider=yahoo, yahoo_league_id, viewer_team = the team name to view as; yahoo_account = whose Yahoo sign-in reads it (each person connects once); teams / my_roster_id / viewers are filled from the Yahoo snapshot (data/site/leagues.json).",
   "leagues": [
     {
       "id": "1396022326247591936",
@@ -29,6 +29,28 @@
           "label": "ATX Bowers"
         }
       ]
+    },
+    {
+      "id": "yahoo-1548944",
+      "provider": "yahoo",
+      "yahoo_league_id": "1548944",
+      "yahoo_account": "william",
+      "name": "",
+      "viewer_team": "You like that?!",
+      "teams": 0,
+      "my_roster_id": 0,
+      "viewers": []
+    },
+    {
+      "id": "yahoo-1490549",
+      "provider": "yahoo",
+      "yahoo_league_id": "1490549",
+      "name": "Westin (Yahoo)",
+      "viewer_team": "Prime Time Marcos",
+      "teams": 0,
+      "my_roster_id": 0,
+      "viewers": [],
+      "yahoo_account": "westin"
     }
   ]
 }

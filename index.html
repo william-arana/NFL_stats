@@ -31,10 +31,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.40">
-<script src="assets/site.js?v=1.40" defer></script>
-<script src="assets/cards.js?v=1.40" defer></script>
-<script src="assets/tables.js?v=1.40" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.41">
+<script src="assets/site.js?v=1.41" defer></script>
+<script src="assets/cards.js?v=1.41" defer></script>
+<script src="assets/tables.js?v=1.41" defer></script>
 <style>
 /* Home: a night-game field. Navy turf with yard lines and hash marks, red end-zone stripe,
    big condensed scoreboard type; light content area below with a news rail. */
@@ -106,6 +106,7 @@ main.col{display:grid;gap:28px;min-width:0}
 .mbox-h a{font-size:12px;font-weight:600;text-decoration:none}
 .mbox-h .slink{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:3px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink-2)}
 .mbox-h .slink:hover{border-color:var(--blue);color:var(--blue)}
+.mbox-h .slink.yahoo i{display:none}
 .mbox-h .slink i{display:block;width:13px;height:16px;background:currentColor;-webkit-mask:url(assets/sleeper-outline.png) center/contain no-repeat;mask:url(assets/sleeper-outline.png) center/contain no-repeat}
 .mbox-h .hr{display:flex;gap:10px;align-items:center}
 .fmu{display:grid}
@@ -366,6 +367,7 @@ function drawNFL(){
 }
 let liveMu={};
 function fetchLiveMatchups(lg){
+  if(lg.provider==='yahoo')return Promise.resolve(null);   // Yahoo: snapshot only
   if(liveMu[lg.id])return liveMu[lg.id];
   const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),6000);const j=u=>fetch('https://api.sleeper.app/v1'+u,{signal:ctl.signal}).then(r=>r.ok?r.json():Promise.reject());
   return liveMu[lg.id]=j('/state/nfl').then(st=>{const wk=st.display_week||st.week;return Promise.all([j(`/league/${lg.id}/matchups/${wk}`),j(`/league/${lg.id}/rosters`),j(`/league/${lg.id}/users`)]).then(([mu,rs,us])=>{clearTimeout(to);
@@ -377,7 +379,7 @@ function fetchLiveMatchups(lg){
 function drawFantasyMatchups(){
   const lg=LG;if(!lg){$('#fm-title').textContent='Your league';$('#fm-list').innerHTML='<div class="fm"><span class="rk" style="text-align:left">Pick a team at the top right to see your league\'s matchups.</span></div>';$('#fm-src').textContent='';return}
   fetchLiveMatchups(lg).then(live=>{
-    let data=live;if(!data){get('leagues.json').then(sn=>{const l=sn&&sn.leagues.find(x=>x.id===lg.id);if(l&&l.matchups)paint({source:'snapshot',updated:sn.updated_utc,week:l.week,matchups:l.matchups,rosters:l.rosters});else $('#fm-list').innerHTML='<div class="fm"><span class="rk" style="text-align:left">Matchups appear after the Sleeper roster job runs.</span></div>'});return}
+    let data=live;if(!data){get('leagues.json').then(sn=>{const l=sn&&sn.leagues.find(x=>x.id===lg.id);if(l&&l.matchups)paint({source:'snapshot',updated:sn.updated_utc,yupdated:sn.yahoo_updated_utc,week:l.week,matchups:l.matchups,rosters:l.rosters});else $('#fm-list').innerHTML='<div class="fm"><span class="rk" style="text-align:left">Matchups appear after the roster job runs.</span></div>'});return}
     paint(data)});
   function paint(d){
     if(LG!==lg&&LG&&LG.id!==lg.id)return;
@@ -388,8 +390,8 @@ function drawFantasyMatchups(){
     list.sort((a,b)=>(b.some(x=>x.roster_id===me)-a.some(x=>x.roster_id===me))||(Math.min(...a.map(x=>rank[x.roster_id]))-Math.min(...b.map(x=>rank[x.roster_id]))));
     const any=list.some(g=>g.some(x=>x.points>0));
     $('#fm-title').textContent=`${lg.name} · Week ${d.week}`;
-    $('#fm-src').textContent=d.source==='live'?'live from Sleeper':'as of '+new Date(d.updated.replace(/(T\d\d:\d\d)Z$/,'$1:00Z')).toLocaleString(undefined,{weekday:'short',hour:'numeric',minute:'2-digit'});
-    $('#fm-sl').href=`https://sleeper.com/leagues/${lg.id}`;
+    $('#fm-src').textContent=d.source==='live'?'live from Sleeper':'as of '+new Date((lg.provider==='yahoo'&&d.yupdated||d.updated).replace(/(T\d\d:\d\d)Z$/,'$1:00Z')).toLocaleString(undefined,{weekday:'short',hour:'numeric',minute:'2-digit'});
+    {const sl=$('#fm-sl');sl.href=lg.provider==='yahoo'?(lg.url||'https://football.fantasysports.yahoo.com/f1/'+lg.yahoo_league_id):`https://sleeper.com/leagues/${lg.id}`;sl.lastChild.textContent=NFLS.appName(lg);sl.title='Open the league on '+NFLS.appName(lg);sl.classList.toggle('yahoo',lg.provider==='yahoo')}
     const hue=t=>{let h=0;for(const c of String(t))h=(h*31+c.charCodeAt(0))%360;return h};
     const av=r=>r.avatar?`<img class="av2" src="${esc(r.avatar)}" alt="" loading="lazy">`:`<span class="ini" style="background:hsl(${hue(r.team_name)} 55% 42%)">${esc((r.team_name||'?').trim().slice(0,1).toUpperCase())}</span>`;
     $('#fm-list').innerHTML=list.map(g=>{const mine=g.some(x=>x.roster_id===me);const hi=Math.max(...g.map(x=>x.points));
