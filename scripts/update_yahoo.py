@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 
-from yahoo_common import ROOT, access_token, api, items, merge
+from yahoo_common import ROOT, access_token, api, items, merge, my_leagues, nfl_game_key
 
 CFG = json.loads((ROOT / "data" / "leagues.json").read_text())
 OUT = ROOT / "data" / "site" / "leagues.json"
@@ -24,7 +24,7 @@ def id_map() -> dict[str, str]:
 
 
 def fetch_league(lg: dict, tok: str, ymap: dict[str, str]) -> dict:
-    key = f"nfl.l.{lg['yahoo_league_id']}"
+    key = f"{lg['_game_key']}.l.{lg['yahoo_league_id']}"
     meta = merge(api(f"league/{key}", tok)["league"])
     week = int(meta.get("current_week") or 1)
     teams_raw = items(merge(api(f"league/{key}/teams/roster", tok)["league"]).get("teams", {}), "team")
@@ -90,8 +90,11 @@ def fetch_league(lg: dict, tok: str, ymap: dict[str, str]) -> dict:
                 "url": meta.get("url") or f"https://football.fantasysports.yahoo.com/f1/{lg['yahoo_league_id']}",
                 "teams": int(meta.get("num_teams") or len(rosters)), "my_roster_id": mine, "default": False,
                 "viewers": [{"roster_id": mine, "label": viewer}], "week": week, "matchups": mus, "rosters": rosters, "unmapped": unmapped}
-    print(f"[yahoo] {lg['name']}: {len(rosters)} teams, {sum(len(r['players']) for r in rosters)} players, {unmapped} unmapped, viewing as {viewer}")
+    print(f"[yahoo] {res['name']}: {len(rosters)} teams, {sum(len(r['players']) for r in rosters)} players, {unmapped} unmapped, viewing as {viewer}")
     return res
+
+
+GAME_KEYS: dict[str, str] = {}
 
 
 def main() -> None:
@@ -112,10 +115,14 @@ def main() -> None:
             print(f"[yahoo] {lg['name']}: not connected yet ({e})")
             out += [x for x in snap.get("leagues", []) if x.get("id") == lg["id"]]  # keep the last snapshot if any
             continue
+        if acct not in GAME_KEYS:
+            GAME_KEYS[acct] = nfl_game_key(tok)
+            print(f"[yahoo] {acct}: NFL game key {GAME_KEYS[acct]}; leagues on this account: {my_leagues(tok)}")
+        lg = {**lg, "_game_key": GAME_KEYS[acct], "name": lg.get("name") or ""}
         try:
             out.append(fetch_league(lg, tok, ymap))
         except Exception as e:  # noqa: BLE001  one broken league shouldn't stop the others
-            print(f"[yahoo] {lg['name']}: failed ({e})")
+            print(f"[yahoo] {lg['name'] or lg['id']}: failed ({e})")
             out += [x for x in snap.get("leagues", []) if x.get("id") == lg["id"]]
     snap["leagues"] = keep + out
     snap["updated_utc"] = snap.get("updated_utc") or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ")

@@ -82,8 +82,32 @@ def access_token(account: str) -> str:
 
 def api(path: str, token: str) -> dict:
     r = requests.get(f"{API}/{path}", params={"format": "json"}, headers={"Authorization": "Bearer " + token}, timeout=60)
-    r.raise_for_status()
+    if r.status_code != 200:
+        # Yahoo explains the problem in the body ("You are not allowed to view this page", "Invalid league key"…)
+        raise RuntimeError(f"{r.status_code} on {path}: {r.text[:300]}")
     return r.json()["fantasy_content"]
+
+
+def nfl_game_key(token: str) -> str:
+    """This season's NFL game key (league keys look like 461.l.123456, not nfl.l.123456)."""
+    return str(merge(api("game/nfl", token)["game"])["game_key"])
+
+
+def my_leagues(token: str) -> list[tuple[str, str]]:
+    """(league_key, name) of the NFL leagues this Yahoo account is in, to check the league id is right."""
+    try:
+        users = api("users;use_login=1/games;game_keys=nfl/leagues", token)["users"]
+        user = merge(items(users, "user")[0])
+        out = []
+        for g in items(user.get("games") or {}, "game"):
+            gm = merge(g)
+            for lg in items(gm.get("leagues") or {}, "league"):
+                lm = merge(lg)
+                out.append((lm.get("league_key"), lm.get("name")))
+        return out
+    except Exception as e:  # noqa: BLE001
+        print(f"[yahoo] couldn't list leagues ({e})")
+        return []
 
 
 # Yahoo's JSON: objects come as lists of one-key dicts, collections as {"0": {...}, "1": {...}, "count": n}
