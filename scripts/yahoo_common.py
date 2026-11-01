@@ -24,6 +24,9 @@ def token_file(account: str) -> Path:
     return PRIVATE / f"yahoo_token_{safe}.enc"
 AUTH = "https://api.login.yahoo.com/oauth2/get_token"
 API = "https://fantasysports.yahooapis.com/fantasy/v2"
+# must match the Redirect URI set on the Yahoo app (developer.yahoo.com/apps); after "Agree", Yahoo sends the browser
+# to this address with ?code=… on the end (the page itself won't load, the code is in the address bar)
+REDIRECT = os.environ.get("YAHOO_REDIRECT_URI", "").strip() or "https://localhost:8080"
 
 
 def creds() -> tuple[str, str]:
@@ -57,7 +60,7 @@ def load_token(account: str) -> dict:
 def token_request(data: dict) -> dict:
     cid, sec = creds()
     basic = base64.b64encode(f"{cid}:{sec}".encode()).decode()
-    r = requests.post(AUTH, data={**data, "redirect_uri": "oob"}, headers={"Authorization": "Basic " + basic,
+    r = requests.post(AUTH, data={**data, "redirect_uri": REDIRECT}, headers={"Authorization": "Basic " + basic,
                       "Content-Type": "application/x-www-form-urlencoded"}, timeout=30)
     if r.status_code != 200:
         # never print the token; Yahoo's error text is safe to show

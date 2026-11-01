@@ -11,7 +11,7 @@ on:
         required: true
         default: william
       code:
-        description: "Code from Yahoo"
+        description: "Code from Yahoo (or the whole localhost address it ends on)"
         required: true
 
 permissions:

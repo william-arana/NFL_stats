@@ -10,6 +10,9 @@ import os
 from yahoo_common import save_token, token_request
 
 code = os.environ.get("YAHOO_CODE", "").strip()
+# people often paste the whole address (https://localhost:8080/?code=abc…): keep just the code
+if "code=" in code:
+    code = code.split("code=", 1)[1].split("&", 1)[0]
 account = os.environ.get("YAHOO_ACCOUNT", "").strip() or "william"
 if not code:
     raise SystemExit("No code given")
