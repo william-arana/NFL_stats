@@ -22,7 +22,7 @@
     return Promise.all([cfgP,snapP]).then(([cfg,snap])=>{
       const leagues=cfg.leagues.map(l=>{const s=snap&&snap.leagues.find(x=>x.id===l.id);
         /* Yahoo: team count, your team and the viewer come from the snapshot (Yahoo's API needs a sign-in, so the Action pulls it) */
-        if(l.provider==='yahoo'){if(!s)return null;l={...l,teams:s.teams,my_roster_id:s.my_roster_id,viewers:s.viewers,url:s.url}}const name=rid=>{const r=s&&s.rosters.find(x=>x.roster_id===rid);return r?r.team_name.trim():null};
+        if(l.provider==='yahoo'){if(!s)return null;l={...l,name:l.name||s.name||'Yahoo league',teams:s.teams,my_roster_id:s.my_roster_id,viewers:s.viewers,url:s.url}}const name=rid=>{const r=s&&s.rosters.find(x=>x.roster_id===rid);return r?r.team_name.trim():null};
         const viewers=(l.viewers&&l.viewers.length?l.viewers:[{roster_id:l.my_roster_id}]).map(v=>({roster_id:v.roster_id,label:v.label||name(v.roster_id)||('Team '+v.roster_id)}));
         return {...l,viewers}}).filter(Boolean);
       leagueCfg={snapshot:snap,leagues};
