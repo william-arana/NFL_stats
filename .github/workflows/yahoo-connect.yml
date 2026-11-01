@@ -1,0 +1,49 @@
+name: Connect Yahoo league
+
+# One-time (or when the connection breaks): paste the code a league member got from Yahoo's "Agree" page.
+# The code works once and expires in ~10 minutes. Saves an encrypted token to data/private/yahoo_token.enc,
+# then pulls the Yahoo league right away.
+on:
+  workflow_dispatch:
+    inputs:
+      code:
+        description: "Code from Yahoo"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  connect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      YAHOO_CLIENT_ID: ${{ secrets.YAHOO_CLIENT_ID }}
+      YAHOO_CLIENT_SECRET: ${{ secrets.YAHOO_CLIENT_SECRET }}
+    steps:
+      - name: Hide the code in logs
+        run: echo "::add-mask::${{ inputs.code }}"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: "Trade the code for a token (first: the code expires fast)"
+        env:
+          YAHOO_CODE: ${{ inputs.code }}
+        run: pip install requests -q && python scripts/yahoo_connect.py
+      - run: pip install -r requirements.txt
+      - run: python scripts/update_yahoo.py
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add data/private/yahoo_token.enc data/site/leagues.json
+          if git diff --cached --quiet; then echo "No changes"; else
+            git commit -m "Connect Yahoo league ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git pull --rebase && git push
+          fi
