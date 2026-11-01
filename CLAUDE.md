@@ -4,9 +4,10 @@ William's fantasy football stats site. Static site on GitHub Pages, data from nf
 
 ## How we work
 
-- **One project at a time.** `ROADMAP.md` → "Now" holds the single active project. Finish it to a version William is happy with before starting the next. If a new idea comes up mid-project, log it in `ROADMAP.md` → "Ideas" and keep going on the current one.
-- **Log important things without being asked.** When a decision is made, an idea comes up, a constraint is discovered, or something is ruled out, add a short dated line to the right section of `ROADMAP.md` (or the relevant `docs/` file) in the same change. Mention it in one line in the reply ("logged to ROADMAP → Ideas"). Don't log routine edits; git history covers those.
-- **Start of a session:** read `ROADMAP.md` (Now + Decisions) so nothing has to be re-explained.
+- **Plans live in a private repo.** `ROADMAP.md` and `docs/` (plans, ideas, decisions, navigation plan) are in the private repo `william-arana/NFL_stats-notes`, not here. Attach and clone it at the start of a session (`/home/claude/nfl_stats-notes`). Never copy roadmap content into this public repo or the site.
+- **One project at a time.** `ROADMAP.md` (notes repo) → "Now" holds the single active project. Finish it to a version William is happy with before starting the next. If a new idea comes up mid-project, log it in `ROADMAP.md` → "Ideas" and keep going on the current one.
+- **Log important things without being asked.** When a decision is made, an idea comes up, a constraint is discovered, or something is ruled out, add a short dated line to the right section of `ROADMAP.md` (or the relevant `docs/` file) in the notes repo (push straight to its `main`). Mention it in one line in the reply ("logged to ROADMAP → Ideas"). Don't log routine edits; git history covers those.
+- **Start of a session:** read `ROADMAP.md` (Now + Decisions) in the notes repo so nothing has to be re-explained.
 - William is on his phone a lot: keep replies short and concrete. Open PRs for review instead of pushing to `main`.
 
 ## Site rules
