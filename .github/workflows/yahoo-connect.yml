@@ -1,11 +1,15 @@
 name: Connect Yahoo league
 
 # One-time (or when the connection breaks): paste the code a league member got from Yahoo's "Agree" page.
-# The code works once and expires in ~10 minutes. Saves an encrypted token to data/private/yahoo_token.enc,
+# The code works once and expires in ~10 minutes. Saves that person's encrypted token to data/private/yahoo_token_<account>.enc,
 # then pulls the Yahoo league right away.
 on:
   workflow_dispatch:
     inputs:
+      account:
+        description: "Whose Yahoo account (william, westin, ...)"
+        required: true
+        default: william
       code:
         description: "Code from Yahoo"
         required: true
@@ -35,6 +39,7 @@ jobs:
       - name: "Trade the code for a token (first: the code expires fast)"
         env:
           YAHOO_CODE: ${{ inputs.code }}
+          YAHOO_ACCOUNT: ${{ inputs.account }}
         run: pip install requests -q && python scripts/yahoo_connect.py
       - run: pip install -r requirements.txt
       - run: python scripts/update_yahoo.py
@@ -42,7 +47,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
-          git add data/private/yahoo_token.enc data/site/leagues.json
+          git add data/private data/site/leagues.json
           if git diff --cached --quiet; then echo "No changes"; else
             git commit -m "Connect Yahoo league ($(date -u +%Y-%m-%dT%H:%MZ))"
             git pull --rebase && git push
