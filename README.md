@@ -4,6 +4,22 @@ My fantasy football stats lab: NFL data from [nflverse](https://github.com/nflve
 
 **Site:** https://william-arana.github.io/NFL_stats/
 
+## About this project
+
+A personal, non-commercial hobby site, shared with a small group of friends and family who use it for their own fantasy leagues.
+
+**Goals**
+- Make fantasy decisions (waivers, start/sit, trades) from the numbers instead of app news feeds.
+- Make the data easy to explore: every name and stat clickable, plain-language descriptions, and a Lab where anyone can build their own tables without writing code.
+- Learn by building: the site is a test bed for working with sports data.
+
+**Principles**
+- **Non-commercial.** No ads, no paid features, no data resale.
+- **Open data, credited.** Stats come from [nflverse](https://github.com/nflverse) (CC-BY 4.0) and FTN charting via nflverse (CC-BY-SA 4.0), always credited on the site. FTN-derived stats always stay free.
+- **Read-only league access.** Fantasy league data (Sleeper; Yahoo once Yahoo approves API access) is only read, never changed. Each person connects only their own leagues. Yahoo data is used under the [Yahoo Fantasy Sports API Terms of Use](https://legal.yahoo.com/us/en/yahoo/terms/product-atos/fantasysportsapi/index.html).
+- **Not official.** Not affiliated with or endorsed by the NFL, its teams, Sleeper, Yahoo or ESPN. No league or team logos, no official headshots.
+- **Small and simple.** A static site (HTML + vanilla JS) on GitHub Pages; data refreshed by scheduled GitHub Actions.
+
 | Page | What it does |
 |---|---|
 | [Home](https://william-arana.github.io/NFL_stats/) | Next kickoff, top waiver add, best D/ST stream, highest implied total, links to every page, live headlines + fantasy news + Sleeper trending adds. |
@@ -20,6 +36,7 @@ My fantasy football stats lab: NFL data from [nflverse](https://github.com/nflve
 ## Leagues & theme
 
 - Leagues live in `data/leagues.json` (Sleeper league id, team count, my roster id, and `viewers`: the teams offered in the **Team** picker, e.g. 67FFL · Just Win Baby). The picker switches every page; free agents get a green name and an **FA** tag on the Stats board.
+- Yahoo leagues (`provider: "yahoo"`, waiting on Yahoo's API approval): each member signs in once with their own Yahoo account (*Connect Yahoo league* workflow; the token is stored encrypted in `data/private/`), and the roster job reads those leagues 3× a day into the same snapshot. Manager names aren't saved.
 - Rosters: the browser asks Sleeper live; if that fails it uses the snapshot `.github/workflows/update-sleeper.yml` saves three times a day (`data/site/leagues.json`).
 - The small arrow icon after a player's name opens Sleeper (copies the name for search; Sleeper has no per-player web page), the ESPN player page (`data/site/ids.json`), or a news search.
 - Light mode is the default; the nav button switches to dark (remembered per browser).
