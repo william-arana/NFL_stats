@@ -1,10 +1,12 @@
 name: Update data
 
 # Tuesday = full refresh after Monday Night Football.
+# Monday morning = Sunday's games in before Monday Night Football.
 # Thursday + Sunday mornings = pick up new injury reports before games.
-# Times are UTC (15:17 UTC = 8:17 AM Pacific during daylight time).
+# Times are UTC (15:17 UTC = 8:17 AM Pacific in daylight time, 7:17 AM in standard time).
 on:
   schedule:
+    - cron: "17 15 * * 1"   # Mon, before MNF
     - cron: "17 15 * * 2"   # Tue
     - cron: "17 21 * * 4"   # Thu, before TNF
     - cron: "17 15 * * 0"   # Sun, before early games

@@ -45,7 +45,8 @@ A personal, non-commercial hobby site, shared with a small group of friends and 
 
 `.github/workflows/update-data.yml` runs `scripts/update_data.py`:
 
-- **Tuesday** 8:17 AM PT: full refresh after Monday Night Football
+- **Monday** morning (~7:17 AM PT): Sunday's games in before Monday Night Football
+- **Tuesday** morning: full refresh after Monday Night Football
 - **Thursday** afternoon and **Sunday** morning: picks up new injury reports
 - **Any time:** Actions tab → *Update data* → *Run workflow*
 

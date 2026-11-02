@@ -31,10 +31,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.41">
-<script src="assets/site.js?v=1.41" defer></script>
-<script src="assets/cards.js?v=1.41" defer></script>
-<script src="assets/tables.js?v=1.41" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.47">
+<script src="assets/site.js?v=1.47" defer></script>
+<script src="assets/cards.js?v=1.47" defer></script>
+<script src="assets/tables.js?v=1.47" defer></script>
 <style>
 /* Home: a night-game field. Navy turf with yard lines and hash marks, red end-zone stripe,
    big condensed scoreboard type; light content area below with a news rail. */
@@ -116,6 +116,8 @@ main.col{display:grid;gap:28px;min-width:0}
 .fm.mine{background:color-mix(in srgb,var(--blue-soft) 70%,var(--sheet));box-shadow:inset 4px 0 0 var(--blue)}
 .fm .side{display:flex;align-items:center;gap:10px;min-width:0}
 .fm .side.r{flex-direction:row-reverse;text-align:right}
+a.side{color:inherit;text-decoration:none;border-radius:8px;margin:-4px;padding:4px}
+a.side:hover .tn,a.side:focus-visible .tn{text-decoration:underline;color:var(--blue)}
 .fm .av2{flex:none;width:38px;height:38px;border-radius:50%;object-fit:cover;background:var(--head);border:2px solid var(--sheet);box-shadow:0 0 0 1px var(--rule)}
 .fm .ini{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:16px;color:#fff}
 .fm .nm{display:grid;min-width:0;line-height:1.2}
@@ -397,7 +399,8 @@ function drawFantasyMatchups(){
     $('#fm-list').innerHTML=list.map(g=>{const mine=g.some(x=>x.roster_id===me);const hi=Math.max(...g.map(x=>x.points));
       if(g[1].roster_id===me)g=[g[1],g[0]];
       const side=(x,right)=>{const r=R[x.roster_id]||{};const lead=any&&x.points===hi&&g[0].points!==g[1].points;
-        return `<div class="side ${right?'r':''} ${lead?'lead':''}">${av(r)}<span class="nm"><span class="tn">${esc(r.team_name||'Team '+x.roster_id)}${x.roster_id===me?'<span class="you">YOU</span>':''}</span><span class="sub">#${rank[x.roster_id]} · ${recStr({w:r.wins,l:r.losses,t:r.ties})}</span></span><span class="pts">${any?x.points.toFixed(2):'–'}</span></div>`};
+        const tn=r.team_name||'Team '+x.roster_id;
+        return `<a class="side ${right?'r':''} ${lead?'lead':''}" href="stats.html?roster=${encodeURIComponent(lg.id+'|'+x.roster_id)}#players" title="${esc(tn)}: their players on Stats">${av(r)}<span class="nm"><span class="tn">${esc(tn)}${x.roster_id===me?'<span class="you">YOU</span>':''}</span><span class="sub">#${rank[x.roster_id]} · ${recStr({w:r.wins,l:r.losses,t:r.ties})}</span></span><span class="pts">${any?x.points.toFixed(2):'–'}</span></a>`};
       return `<div class="fm ${mine?'mine':''}">${side(g[0],false)}<span class="vs">VS</span>${side(g[1],true)}</div>`}).join('');
   }
 }
