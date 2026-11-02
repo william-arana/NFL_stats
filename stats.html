@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.41">
-<script src="assets/site.js?v=1.41" defer></script>
-<script src="assets/cards.js?v=1.41" defer></script>
-<script src="assets/glossary.js?v=1.41" defer></script>
-<script src="assets/tables.js?v=1.41" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.47">
+<script src="assets/site.js?v=1.47" defer></script>
+<script src="assets/cards.js?v=1.47" defer></script>
+<script src="assets/glossary.js?v=1.47" defer></script>
+<script src="assets/tables.js?v=1.47" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -273,7 +273,7 @@ function aggPlayers(){
   const out=[];const q=ps.q;
   for(const a of by.values()){
     if(a.g<ps.minG)continue;if(q&&!a.name.toLowerCase().includes(q))continue;
-    if(ROST&&ps.av!=='all'&&avail(a.id)!==ps.av)continue;
+    if(ROST&&ps.av!=='all'){if(ps.av.startsWith('r:')){const m=ROST.map.get(a.id);if(!m||String(m.roster_id)!==ps.av.slice(2))continue}else if(avail(a.id)!==ps.av)continue}
     for(const k of MEANK)a[k]=a._n[k]?a[k]/a._n[k]:null;
     for(const k of ['offense_snaps','xfp','xfp_diff','qb_pressured','ybc'])if(!a.logs.some(l=>num(l[k])))a[k]=null;
     {const n=nextOppOf(a.team);a.next=n?n.opp:'zzz'}
@@ -294,7 +294,16 @@ function spark(a){
   const last=vals.length-1-[...vals].reverse().findIndex(num);
   return `<svg class="spark" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" aria-label="Weekly fantasy points"><line x1="0" x2="${W}" y1="${y(10).toFixed(1)}" y2="${y(10).toFixed(1)}"/><path d="${d}"/>${last>=0&&last<vals.length?`<circle cx="${x(last).toFixed(1)}" cy="${y(vals[last]).toFixed(1)}" r="2"/>`:''}</svg>`;
 }
+/* Home → click a fantasy team: stats.html?roster=<league id>|<roster id> shows only that team's players */
+function rosterParam(){
+  if(String(ps.av).startsWith('r:')&&!(ROST&&ROST.rosters.some(r=>'r:'+r.roster_id===ps.av)))ps.av='all';  // league switched
+  const q=new URLSearchParams(location.search),v=q.get('roster');if(!v||!ROST)return;
+  const [lid,rid]=v.split('|');if(String(ROST.league.id)!==lid||!ROST.rosters.some(r=>String(r.roster_id)===rid))return;
+  ps.av=+rid===ROST.league.my_roster_id?'mine':'r:'+rid;ps.pos='ALL';ps.team='ALL';ps.q='';ps.minG=1;
+  q.delete('roster');const qs=q.toString();history.replaceState(history.state,'',location.pathname+(qs?'?'+qs:'')+location.hash);
+}
 function Players(){
+  rosterParam();
   const weeks=[...new Set(P.map(r=>r.week))].sort((a,b)=>a-b);const maxW=weeks[weeks.length-1];if(ps.w1==null)ps.w1=maxW;
   const teams=[...new Set(P.map(r=>r.team))].sort();
   const set=PSETS[ps.set];
@@ -307,7 +316,7 @@ function Players(){
     <div class="ctl"><span>Scoring</span><div class="seg" id="p-sc">${Object.entries(SCORING).map(([k,v])=>`<button data-v="${k}" aria-pressed="${ps.scoring===k}">${v.label}</button>`).join('')}</div></div>
     <div class="ctl"><span>Min games</span><input type="number" id="p-min" min="1" max="17" value="${ps.minG}"></div>
     <div class="ctl"><span>Player</span><input type="search" id="p-q" placeholder="Search name" value="${esc(ps.q)}"></div>
-    ${ROST?`<div class="ctl"><span>${esc(ROST.league.name)}</span><div class="seg" id="p-av"><button data-v="all" aria-pressed="${ps.av==='all'}">Everyone</button><button data-v="fa" aria-pressed="${ps.av==='fa'}">Free agents</button><button data-v="mine" aria-pressed="${ps.av==='mine'}">My team</button></div></div>`:''}
+    ${ROST?`<div class="ctl"><span>${esc(ROST.league.name)}</span><div class="seg" id="p-av"><button data-v="all" aria-pressed="${ps.av==='all'}">Everyone</button><button data-v="fa" aria-pressed="${ps.av==='fa'}">Free agents</button><button data-v="mine" aria-pressed="${ps.av==='mine'}">My team</button></div></div><div class="ctl"><span>Fantasy team</span><select id="p-ft"><option value="">Any</option>${[...ROST.rosters].sort((a,b)=>String(a.team_name).localeCompare(b.team_name)).map(r=>`<option value="r:${r.roster_id}" ${ps.av==='r:'+r.roster_id?'selected':''}>${esc(r.team_name)}${r.roster_id===ROST.league.my_roster_id?' (you)':''}</option>`).join('')}</select></div>`:''}
   </div>
   <div class="sets"><span class="lbl">Columns</span>${Object.entries(PSETS).map(([k,v])=>`<button class="chip" data-set="${k}" aria-pressed="${ps.set===k}">${v.label}</button>`).join('')}
     <span class="spacer"></span><label class="chk" for="p-heat"><input type="checkbox" id="p-heat" ${ps.heat?'checked':''}>Shading</label><button class="btn" id="p-csv">Download CSV</button></div>
@@ -322,7 +331,8 @@ function Players(){
   $('#p-w0').onchange=e=>{ps.w0=+e.target.value;if(ps.w0>ps.w1){ps.w1=ps.w0;$('#p-w1').value=ps.w1}re()};
   $('#p-w1').onchange=e=>{ps.w1=+e.target.value;if(ps.w1<ps.w0){ps.w0=ps.w1;$('#p-w0').value=ps.w0}re()};
   $('#p-min').oninput=e=>{ps.minG=Math.max(1,+e.target.value||1);re()};
-  if($('#p-av'))$('#p-av').onclick=e=>{const b=e.target.closest('button');if(!b)return;ps.av=b.dataset.v;$('#p-av').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));drawPlayers()};
+  if($('#p-av'))$('#p-av').onclick=e=>{const b=e.target.closest('button');if(!b)return;ps.av=b.dataset.v;$('#p-av').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#p-ft').value='';drawPlayers()};
+  if($('#p-ft'))$('#p-ft').onchange=e=>{ps.av=e.target.value||'all';$('#p-av').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.v===ps.av));drawPlayers()};
   let t;$('#p-q').oninput=e=>{clearTimeout(t);t=setTimeout(()=>{ps.q=e.target.value.trim().toLowerCase();re()},120)};
   document.querySelector('.sets').onclick=e=>{const b=e.target.closest('[data-set]');if(!b)return;ps.set=b.dataset.set;ps.sort=null;document.querySelectorAll('[data-set]').forEach(x=>x.setAttribute('aria-pressed',x===b));re()};
   $('#p-heat').onchange=e=>{ps.heat=e.target.checked;re()};
@@ -334,7 +344,8 @@ function drawPlayers(){
   const sk=ps.sort||set.cols[0].k;sortRows(data,sk,ps.dir);window._prows=data;
   const heat=ps.heat?heatAlpha(data,pcols(set)):{};
   const lbl=ps.mode==='pg'?'per game':'totals';
-  $('#p-sum').innerHTML=`<span><b>${data.length}</b> players</span><span>Weeks <b>${ps.w0}–${ps.w1}</b>, ${lbl}</span><span>Sorted by <b>${esc((pcols(set).find(c=>c.k===sk)||{label:sk}).label)}</b></span>`;
+  const ftn=ROST&&ps.av.startsWith('r:')&&(ROST.rosters.find(r=>'r:'+r.roster_id===ps.av)||{}).team_name;
+  $('#p-sum').innerHTML=`${ftn?`<span><b>${esc(ftn)}</b>'s roster (K and D/ST are on the Kickers and Teams tabs)</span>`:''}<span><b>${data.length}</b> players</span><span>Weeks <b>${ps.w0}–${ps.w1}</b>, ${lbl}</span><span>Sorted by <b>${esc((pcols(set).find(c=>c.k===sk)||{label:sk}).label)}</b></span>`;
   const th=`<thead><tr><th class="rank">#</th><th class="l stick" data-k="name">Player</th><th class="l" data-k="team">Team</th><th class="l" data-k="next">${gl('next','Wk '+META.next_week)}</th><th data-k="g">${gl('g','G')}</th>${pcols(set).map(c=>`<th data-k="${c.k}" ${c.off?'data-def-off="1"':''} ${c.spark?'class="l"':''} ${sk===c.k?`aria-sort="${ps.dir<0?'descending':'ascending'}"`:''}>${gl(c.k,c.label,c.tip)}</th>`).join('')}</tr></thead>`;
   const LIM=400;let body='';
   data.slice(0,LIM).forEach((a,i)=>{
