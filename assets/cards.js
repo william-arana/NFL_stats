@@ -347,18 +347,21 @@
     const indoor=/dome|closed/i.test(g.roof||'');
     const weather=indoor?'Indoors ('+esc(g.roof)+')':(num(g.temp)||num(g.wind))?[num(g.temp)?g.temp+'°F':'',num(g.wind)?'wind '+g.wind+' mph':''].filter(Boolean).join(' · ')+(g.roof?' · '+esc(g.roof):''):`${esc(g.roof||'outdoors')} · ${fin?'not recorded':'not posted yet'}`;
     const side=(t,qb,imp,score,rest)=>{const q=qbId(t,qb);const win=fin&&score>(t===H?g.away_score:g.home_score);
-      return `<div class="gc-side ${win?'win':''}"><div class="gc-tm" title="Open the ${esc(t)} defense card">${dbtn(t,t)}</div><b class="gc-n">${fin?score:(num(imp)?imp.toFixed(1):'–')}</b><small>${fin?(win?'won':'final'):'implied pts'}</small>
+      return `<div class="gc-side ${win?'win':''}" data-gf="${esc(t)}" role="button" tabindex="0" title="Show every ${esc(t)} player below"><div class="gc-tm" title="Open the ${esc(t)} defense card">${dbtn(t,t)}</div><b class="gc-n">${fin?score:(num(imp)?imp.toFixed(1):'–')}</b><small>${fin?(win?'won':'final'):'implied pts'}</small>
         <div class="gc-qb">QB ${q?pbtn(q,qb):esc(qb||'–')}</div><small>${num(rest)?rest+' days rest':''}</small></div>`};
     /* team form: season per-game, from teams.json */
     const tf=t=>{const rr=(IX.byT.get(t)||[]).filter(r=>r.week<w||!fin);const n=rr.length||1;const s=k=>sum(rr.map(r=>r[k]))/n;return {g:rr.length,pf:s('points_for'),pa:s('points_against'),yds:s('total_yards'),ya:s('yards_allowed'),prs:s('def_pressures'),pra:s('pressures_allowed'),dst:s('dst_pts')}};
     const fa=tf(A),fh=tf(H);const row=(lbl,k,dg,hi)=>{const a=fa[k],h=fh[k];const better=hi===null?'':(hi?(a>h?'a':'h'):(a<h?'a':'h'));
       return `<tr><td class="${better==='a'?'gc-b':''}">${num(a)?a.toFixed(dg):'–'}</td><td class="l gc-l">${lbl}</td><td class="${better==='h'?'gc-b':''}">${num(h)?h.toFixed(dg):'–'}</td></tr>`};
     /* players: in a finished game, who scored; before it, who to watch (season FP/g) */
+    /* Both teams: top 10. Tap a team's box (or its chip) = that team's whole list, most points first. */
     let pl;
-    if(fin){pl=D.P.filter(r=>r.week===w&&(r.team===A||r.team===H)&&num(r[sk])).sort((a,b)=>b[sk]-a[sk]).slice(0,10).map(r=>({id:r.player_id,name:r.player_display_name,pos:r.position,team:r.team,v:r[sk],sub:statLine(r)}))}
-    else{pl=[];for(const t of [A,H]){const opp=t===A?H:A;for(const [pid,logs] of IX.byP){const l=logs[logs.length-1];if(l.team!==t||logs.length<2)continue;const v=mean(logs.map(x=>x[sk]));if(num(v))pl.push({id:pid,name:l.player_display_name,pos:l.position,team:t,v,opp,sub:''})}}
-      pl.sort((a,b)=>b.v-a.v);pl=pl.slice(0,10)}
-    const plRows=pl.map(p=>`<tr><td class="l">${pbtn(p.id,p.name)} <span class="dim">${p.pos} · ${p.team}</span></td><td class="fp">${f1(p.v)}</td><td class="l dim">${fin?esc(p.sub):mrk(p.opp,p.pos)}</td></tr>`).join('');
+    if(fin){pl=D.P.filter(r=>r.week===w&&(r.team===A||r.team===H)&&num(r[sk])).sort((a,b)=>b[sk]-a[sk]).map(r=>({id:r.player_id,name:r.player_display_name,pos:r.position,team:r.team,v:r[sk],g:1,sub:statLine(r)}))}
+    else{pl=[];for(const t of [A,H]){const opp=t===A?H:A;for(const [pid,logs] of IX.byP){const l=logs[logs.length-1];if(l.team!==t)continue;const v=mean(logs.map(x=>x[sk]));if(num(v))pl.push({id:pid,name:l.player_display_name,pos:l.position,team:t,v,g:logs.length,opp,sub:''})}}
+      pl.sort((a,b)=>b.v-a.v)}
+    let top=0;const plRows=pl.map(p=>{const inTop=(fin||p.g>=2)&&top<10;if(inTop)top++;
+      return `<tr data-t="${esc(p.team)}" class="${inTop?'':'gc-x'}"><td class="l">${pbtn(p.id,p.name)} <span class="dim">${p.pos} · ${p.team}${fin?'':' · '+p.g+' G'}</span></td><td class="fp">${f1(p.v)}</td><td class="l dim">${fin?esc(p.sub):mrk(p.opp,p.pos)}</td></tr>`}).join('');
+    const gfChips=`<span class="gc-chips">${[['','Both'],[A,A],[H,H]].map(([v,l])=>`<button type="button" data-gf="${esc(v)}" aria-pressed="${v===''}">${esc(l)}</button>`).join('')}</span>`;
     return `<div class="pc-top"><div><h3>${esc(A)} @ ${esc(H)}</h3>
       <div class="sub"><span>Week ${w}</span><span>${esc(date)}${g.gametime?' · '+esc(g.gametime)+' ET':''}</span>${g.div_game?'<span>Division</span>':''}<span>${esc(g.stadium||'')}</span></div></div></div>
     <section><div class="gc-sides">${side(A,g.away_qb_name,g.away_implied,g.away_score,g.away_rest)}<div class="gc-at">@</div>${side(H,g.home_qb_name,g.home_implied,g.home_score,g.home_rest)}</div></section>
@@ -366,7 +369,7 @@
       <div><span>Over/under</span><b>${num(g.total_line)?g.total_line:'–'}</b><small>${fin&&num(g.total_line)?(g.home_score+g.away_score)+' scored · '+((g.home_score+g.away_score)>g.total_line?'over':(g.home_score+g.away_score)<g.total_line?'under':'push'):''}</small></div>
       <div><span>Implied</span><b>${num(g.away_implied)?g.away_implied.toFixed(1):'–'}–${num(g.home_implied)?g.home_implied.toFixed(1):'–'}</b><small>${esc(A)}–${esc(H)}</small></div></div></section>
     <section><h4>Weather</h4><div>${weather}</div></section>
-    <section><h4>${fin?'Top fantasy scorers':'Players to watch'} <span class="sp"></span><span>${SCORING[sc].label}${fin?' this game':' per game this season'}</span></h4><div class="scr"><table><tbody>${plRows||'<tr><td class="dim">No player data yet.</td></tr>'}</tbody></table></div>${fin?'':'<div class="note">Rank = how many points the opponent allows to that position (green = soft matchup).</div>'}</section>
+    <section class="gc-pl"><h4>${fin?'Top fantasy scorers':'Players to watch'} <span class="sp"></span><span>${SCORING[sc].label}${fin?' this game':' per game this season'}</span></h4>${gfChips}<div class="scr"><table><tbody>${plRows||'<tr><td class="dim">No player data yet.</td></tr>'}</tbody></table></div><div class="note">Tap a team's box above to see all of its players.${fin?'':' Rank = how many points the opponent allows to that position (green = soft matchup).'}</div></section>
     <section><h4>Team form <span class="sp"></span><span>per game${fin?' before this game':' this season'}</span></h4><div class="scr"><table class="gc-form"><thead><tr><th>${esc(A)}</th><th class="l gc-l"></th><th>${esc(H)}</th></tr></thead><tbody>
       ${row('Points scored','pf',1,true)}${row('Points allowed','pa',1,false)}${row('Yards','yds',0,true)}${row('Yards allowed','ya',0,false)}${row('Pressures made','prs',1,true)}${row('Pressures allowed','pra',1,false)}${row('D/ST points','dst',1,true)}
     </tbody></table></div><div class="note">Bold = the better side.</div></section>${fin?playsSec('g',gid,[[gid,w]],[A,H]):''}`;
@@ -480,7 +483,7 @@
     const s=cardState();
     if(s&&s.nflsCard.length&&s.nflsCard.every(x=>validKey(x.key))){stack=s.nflsCard.map(x=>({key:x.key,pos:x.pos||''}))}
     else{const k=new URLSearchParams(location.search).get('card');if(!validKey(k))return;stack=[{key:k,pos:''}];writeState('replaceState',0)}
-    mk(null);show();
+    setTimeout(()=>{mk(null);show()},0);  // after the pop-out window code below is set up (it used to crash: zTop not ready)
   })();
 
   /* ---------- pop-out windows ----------
@@ -736,6 +739,19 @@
       body.innerHTML=`<div class="scr"><table data-cols="card-plays-${kind}"><thead><tr><th>Q</th><th>Clock</th><th class="l">Down</th><th class="l">Field</th>${kind==='g'?'<th class="l">Off</th>':''}<th class="l">Play</th><th class="l">QB</th><th class="l">Player</th><th class="l">Dir</th><th class="l">Gap</th><th class="l">Depth</th><th>Air yds</th><th class="l">Result</th><th>Yds</th><th>YAC</th><th class="l">Tacklers</th><th class="l">Pass def</th><th class="l">Penalty</th><th>EPA</th><th class="l" data-def-off="1">Play text</th></tr></thead><tbody>${idx.map(i=>rowH(j.rows[i])).join('')}</tbody></table></div><div class="note">${idx.length} play${idx.length===1?'':'s'}. Dir/Gap = where the run went or the pass was thrown. Play text is in Columns.</div>`;
     }).catch(()=>{if(sec.isConnected&&sec.dataset.plCur===gid)body.innerHTML='<p class="dim" style="margin:0">No play-by-play for this game yet (it posts the day after games).</p>'});
   })}
+  /* game card: filter "Players to watch" to one team (tap its box or chip; tap the box again = both) */
+  function gameFilter(e){
+    const b=e.target.closest('[data-gf]');if(!b||e.target.closest('.gc-side button,.gc-side a'))return;
+    const root=b.closest('.pc,.pw')||document;const sec=root.querySelector('section.gc-pl');if(!sec)return;
+    let f=b.dataset.gf;if(b.classList.contains('gc-side')&&sec.dataset.f===f)f='';
+    if(f)sec.dataset.f=f;else delete sec.dataset.f;
+    sec.querySelectorAll('tbody tr[data-t]').forEach(tr=>{tr.hidden=!!f&&tr.dataset.t!==f});
+    sec.querySelectorAll('.gc-chips button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.gf===f));
+    root.querySelectorAll('.gc-side').forEach(x=>x.classList.toggle('sel',x.dataset.gf===f));
+    if(b.classList.contains('gc-side'))sec.scrollIntoView({block:'nearest',behavior:'smooth'});
+  }
+  document.addEventListener('click',gameFilter);
+  document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.gc-side')){e.preventDefault();gameFilter(e)}});
   document.addEventListener('click',e=>{
     const b=e.target.closest('section[data-plays] [data-pl-g],section[data-plays] [data-pl-off]');if(!b)return;
     const sec=b.closest('section[data-plays]');sec.querySelectorAll('.pl-chips button').forEach(x=>x.setAttribute('aria-pressed',x===b));
