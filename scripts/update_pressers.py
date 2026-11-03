@@ -331,6 +331,16 @@ def rosters() -> dict[str, dict[str, str]]:
     for pid, name, team, pos in zip(d["player_id"], d["player_display_name"], d["team"], d["position"]):
         if team and name:
             out.setdefault(team, {})[name] = pid
+    # O-line (has ids) and defenders (names only) so the model can fix misheard names there too
+    for f, idk in (("oline.json", "player_id"), ("defenders.json", None)):
+        try:
+            x = json.loads((PLAYERS.parent / f).read_text())["data"]
+        except (OSError, KeyError, ValueError):
+            continue
+        ids = x[idk] if idk else [""] * len(x["name"])
+        for pid, name, team in zip(ids, x["name"], x["team"]):
+            if team and name:
+                out.setdefault(team, {}).setdefault(name, pid)
     return out
 
 
