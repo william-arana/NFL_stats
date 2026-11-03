@@ -30,4 +30,4 @@ jobs:
       - name: Dry run
         env:
           PRESSERS_TEAMS: ${{ inputs.teams || 'ALL' }}
-        run: python scripts/update_pressers.py --dry-run
+        run: python scripts/update_pressers.py --dry-run --list

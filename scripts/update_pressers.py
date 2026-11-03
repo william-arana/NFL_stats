@@ -68,16 +68,18 @@ POSTGAME = re.compile(r"post-?game", re.I)
 
 
 def is_head_coach(team: str, title: str, desc: str, tags: list[str]) -> bool:
-    hay = " ".join([title, desc, *tags])
+    """Title only: descriptions of coordinator/player videos often mention the head coach too."""
     last = COACHES[team].split()[-1]
     pat = re.escape(last).replace("'", "['’]?")  # O'Connell / O’Connell / OConnell
-    return bool(re.search(rf"\b{pat}\b", hay, re.I) or re.search(r"\bhead coach\b|\bHC\b", title))
+    if re.search(r"\b(?:asst\.?|assistant)\s+(?:head coach|HC)\b", title, re.I):
+        return bool(re.search(rf"\b{pat}\b", title, re.I))
+    return bool(re.search(rf"\b{pat}\b", title, re.I) or re.search(r"\bhead coach\b|\bHC\b", title, re.I))
 
 
 # Each club tags its videos a little differently ("Press Conferences", "Media Pass", Detroit's
 # "Media Sessions", SF's "49ers Press Pass", the Giants' "Interviews"), so match tags and titles.
-PRESSER_TAG = re.compile(r"press conference|media pass|media session|press pass|^interviews$|media availability|scrums?$", re.I)
-PRESSER_TITLE = re.compile(r"press conference|presser|media availability|\bscrums?\b|postgame (?:press|interview|availability)", re.I)
+PRESSER_TAG = re.compile(r"press conference|news conference|media pass|media session|press pass|^interviews$|media availability|scrums?$|coaches (?:and|&|/) executives", re.I)
+PRESSER_TITLE = re.compile(r"press conference|news conference|presser|media availability|\bscrums?\b|postgame (?:press|interview|availability)", re.I)
 SKIP = re.compile(r"espa[nñ]ol|spanish|highlight|podcast|cheer|trailer|mic'?d up|sights (?:&|and) sounds", re.I)
 MIN_SEC, MAX_SEC = 60, 3600
 
@@ -170,15 +172,28 @@ def vtt_to_text(vtt: str) -> str:
     return re.sub(r"\s*>>\s*", "\n>> ", text).strip()
 
 
+class Stuck(Exception):
+    pass
+
+
+def _alarm(*_):
+    raise Stuck("took over 120s")
+
+
 def fetch_captions(videos: list[dict]) -> None:
-    """Fill v["transcript"] (or v["error"]) for each video, using one headless browser."""
+    """Fill v["transcript"] (or v["error"]) for each video, using one headless browser.
+    Each video gets a 120 s watchdog so one stuck page can't eat the whole run."""
+    import signal
     from playwright.sync_api import sync_playwright
 
+    signal.signal(signal.SIGALRM, _alarm)
     with sync_playwright() as p:
         browser = p.chromium.launch(args=["--autoplay-policy=no-user-gesture-required"])
         ctx = browser.new_context(user_agent=UA, viewport={"width": 1280, "height": 800})
         for v in videos:
             page = ctx.new_page()
+            page.set_default_timeout(30000)
+            signal.alarm(120)
             subs: list[str] = []
             page.on("request", lambda r: subs.append(r.url) if "subs.m3u8" in r.url else None)
             try:
@@ -201,7 +216,11 @@ def fetch_captions(videos: list[dict]) -> None:
             except Exception as e:  # noqa: BLE001
                 v["error"] = f"{type(e).__name__}: {e}"[:200]
             finally:
-                page.close()
+                signal.alarm(0)
+                try:
+                    page.close()
+                except Exception:  # noqa: BLE001
+                    pass
             log(f"  {v['id']}: {len(v.get('transcript', '').split())} words" + (f" ({v['error']})" if v.get("error") else ""))
         browser.close()
 
@@ -211,7 +230,10 @@ def pick_transcript(sub_urls: list[str], mcp: str | None) -> str:
         segs = [l for l in get(su).splitlines() if l.startswith("http")]
         if not segs or (mcp and f"/{mcp}/" not in segs[0]):
             continue  # a preroll or a different video on the page
-        return vtt_to_text("\n".join(get(s) for s in segs))
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(8) as ex:
+            parts = list(ex.map(lambda s: get(s, timeout=15), segs))
+        return vtt_to_text("\n".join(parts))
     return ""
 
 
@@ -327,6 +349,9 @@ def main() -> None:
         except Exception as e:  # noqa: BLE001
             log(f"{t}: sitemap FAILED ({e})")
             continue
+        if "--list" in sys.argv:
+            for v in sorted(allv, key=lambda v: v["date"]):
+                log(f"    {v['date']} {'HC ' if v['hc'] else '   '}{'PG ' if v['postgame'] else '   '}{v['duration']:>5}s {v['title'][:70]} | {', '.join(v['tags'])[:50]}")
         vids = allv if every else pick_weekly(allv)
         vids = [v for v in vids if v["id"] not in index["done"]]
         n_hc = sum(v["hc"] for v in allv)
