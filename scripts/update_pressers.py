@@ -288,85 +288,92 @@ def pick_transcript(sub_urls: list[str], mcp: str | None) -> str:
     return ""
 
 
-# ---------- 3. summarize ----------
+# ---------- 3. signals ----------
+# One Claude call per presser -> JSON. Plain Messages API (same as build_articles.py), no SDK.
 
-SCHEMA = {
-    "type": "object",
-    "additionalProperties": False,
-    "required": ["speakers", "headline", "summary", "injuries", "fantasy", "topics", "quotes", "opponent"],
-    "properties": {
-        "speakers": {"type": "array", "items": {
-            "type": "object", "additionalProperties": False, "required": ["name", "role"],
-            "properties": {"name": {"type": "string"}, "role": {"type": "string"}}}},
-        "headline": {"type": "string"},
-        "summary": {"type": "string"},
-        "injuries": {"type": "array", "items": {
-            "type": "object", "additionalProperties": False, "required": ["player", "status", "detail"],
-            "properties": {"player": {"type": "string"},
-                           "status": {"type": "string", "enum": ["out", "doubtful", "questionable", "limited", "full", "returning", "ir", "unclear"]},
-                           "detail": {"type": "string"}}}},
-        "fantasy": {"type": "array", "items": {
-            "type": "object", "additionalProperties": False, "required": ["player", "signal", "note"],
-            "properties": {"player": {"type": "string"},
-                           "signal": {"type": "string", "enum": ["up", "down", "watch"]},
-                           "note": {"type": "string"}}}},
-        "topics": {"type": "array", "items": {
-            "type": "object", "additionalProperties": False, "required": ["topic", "detail"],
-            "properties": {"topic": {"type": "string"}, "detail": {"type": "string"}}}},
-        "quotes": {"type": "array", "items": {"type": "string"}},
-        "opponent": {"type": "string"},
-    },
+SIGNAL_TOPICS = ["role", "usage", "injury", "depth_chart", "scheme", "matchup", "trade_or_roster", "other"]
+
+SYSTEM = """You turn one NFL head coach press conference transcript into structured fantasy-football signals.
+
+The transcript comes from auto-generated broadcast captions: names are often misspelled, there are no speaker names,
+and ">>" marks a new speaker (usually a reporter question, then the coach's answer). Use the roster to correct names and
+only name a player when you are confident who is meant. Attribute statements to the coach, not to the reporter asking.
+
+Return ONLY a JSON object (no code fences, no prose) with these keys:
+{
+ "headline": one line, the most useful takeaway for a fantasy manager,
+ "summary": a thorough paragraph (5-8 sentences) of what the coach said, in your own words,
+ "injuries": [{"player", "status": one of out|doubtful|questionable|limited|full|returning|ir|unclear, "detail"}],
+ "signals": [{
+    "player": exact roster name,
+    "topic": one of role|usage|injury|depth_chart|scheme|matchup|trade_or_roster|other,
+    "signal": "up" | "down" | "watch",
+    "tone": "positive" | "negative" | "neutral" | "hedged"   (how the coach talked about him),
+    "claim": what the coach said or implied will happen, as a checkable statement
+             (e.g. "will get more snaps at RB this week"; "" if nothing checkable),
+    "note": one sentence, why it matters for fantasy,
+    "quote": the coach's own words backing it, verbatim, max 15 words ("" if none)
+ }],
+ "topics": [{"topic", "detail"}]  other subjects (scheme, opponent, team news), 1-2 sentences each,
+ "opponent": next opponent if discussed, else ""
 }
-
-SYSTEM = """You write a fantasy-football scouting digest from NFL press conference transcripts.
-
-The transcript comes from auto-generated broadcast captions, so names are often misspelled or misheard. \
-Use the roster and the video title/description to correct them, and only name a player when you are confident who is meant. \
-Reporter questions start with ">>" too; attribute statements to the speaker answering, not the reporter.
-
-Fill the fields like this:
-- speakers: who is at the podium (name + role such as "Head Coach", "QB", "Offensive Coordinator").
-- headline: one line, the most useful takeaway for a fantasy manager.
-- summary: a thorough paragraph (4-7 sentences) of what was said, in your own words.
-- injuries: every injury, practice-participation or availability update mentioned, one per player.
-- fantasy: players whose role, usage, playing time or outlook moved; "up", "down", or "watch" with a one-sentence reason.
-- topics: the other subjects covered (scheme, depth chart, opponent, team news), each paraphrased in 1-2 sentences.
-- quotes: at most two short verbatim quotes (under 20 words each) that carry real information.
-- opponent: next opponent if discussed, else "".
-
-Paraphrase everything except the quotes. Leave a list empty rather than padding it."""
+Rules: one signal per player per topic. Skip players who were only mentioned in passing. Paraphrase everything except
+"quote". Leave a list empty rather than padding it. Never invent a quote."""
 
 
-def rosters() -> dict[str, list[str]]:
+def rosters() -> dict[str, dict[str, str]]:
+    """team -> {display name: gsis player_id} for the latest season rows."""
     try:
         d = json.loads(PLAYERS.read_text())["data"]
     except (OSError, KeyError, ValueError):
         return {}
-    out: dict[str, set[str]] = {}
-    for name, team, pos in zip(d["player_display_name"], d["team"], d["position"]):
-        out.setdefault(team, set()).add(f"{name} ({pos})")
-    return {t: sorted(v) for t, v in out.items()}
+    out: dict[str, dict[str, str]] = {}
+    for pid, name, team, pos in zip(d["player_id"], d["player_display_name"], d["team"], d["position"]):
+        if team and name:
+            out.setdefault(team, {})[name] = pid
+    return out
 
 
-def summarize(client, model: str, v: dict, roster: list[str]) -> dict:
-    prompt = (
-        f"Team: {v['team']}\nVideo title: {v['title']}\nDescription: {v['description']}\nTags: {', '.join(v['tags'])}\n"
-        f"Roster (skill players): {', '.join(roster) or 'n/a'}\n\n<transcript>\n{v['transcript']}\n</transcript>"
+def _norm(n: str) -> str:
+    return re.sub(r"[^a-z]", "", re.sub(r"\b(jr|sr|ii|iii|iv)\b\.?", "", n.lower()))
+
+
+def link_ids(items: list[dict], roster: dict[str, str]) -> None:
+    by = {_norm(k): v for k, v in roster.items()}
+    for it in items:
+        it["player_id"] = roster.get(it.get("player", "")) or by.get(_norm(it.get("player", "")), "")
+
+
+def summarize(model: str, v: dict, roster: dict[str, str]) -> tuple[dict, dict]:
+    import requests
+
+    key = os.environ["ANTHROPIC_API_KEY"]
+    msg = (
+        f"Team: {v['team']} (head coach {COACHES[v['team']]})\nVideo title: {v['title']}\nDescription: {v['description']}\n"
+        f"Posted: {v['date']} ({v.get('kind', '')})\nRoster: {', '.join(sorted(roster)) or 'n/a'}\n\n"
+        f"<transcript>\n{v['transcript']}\n</transcript>"
     )
-    resp = client.beta.messages.create(
-        model=model,
-        max_tokens=16000,
-        betas=["server-side-fallback-2026-07-01"],
-        fallbacks="default",
-        system=SYSTEM,
-        output_config={"effort": "medium", "format": {"type": "json_schema", "schema": SCHEMA}},
-        messages=[{"role": "user", "content": prompt}],
-    )
-    if resp.stop_reason == "refusal":
-        raise RuntimeError(f"refused ({getattr(resp.stop_details, 'category', None)})")
-    if resp.stop_reason == "max_tokens":
-        raise RuntimeError("hit max_tokens")
-    return json.loads(next(b.text for b in resp.content if b.type == "text"))
+    r = requests.post("https://api.anthropic.com/v1/messages", timeout=180,
+                      headers={"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json"},
+                      json={"model": model, "max_tokens": 6000, "system": SYSTEM,
+                            "messages": [{"role": "user", "content": msg}]})
+    if r.status_code != 200:
+        raise RuntimeError(f"Claude API {r.status_code}: {r.text[:200]}")
+    data = r.json()
+    txt = "".join(b.get("text", "") for b in data.get("content", []) if b.get("type") == "text").strip()
+    txt = re.sub(r"^```(?:json)?|```$", "", txt.strip()).strip()
+    out = json.loads(txt[txt.index("{"): txt.rindex("}") + 1])
+    for k in ("injuries", "signals", "topics"):
+        out[k] = [x for x in out.get(k) or [] if isinstance(x, dict)]
+    for sg in out["signals"]:
+        if sg.get("topic") not in SIGNAL_TOPICS:
+            sg["topic"] = "other"
+        if len((sg.get("quote") or "").split()) > 15:  # keep quotes short (no transcript republishing)
+            sg["quote"] = ""
+    link_ids(out["signals"], roster)
+    link_ids(out["injuries"], roster)
+    u = data.get("usage", {})
+    return out, {"input_tokens": u.get("input_tokens", 0), "output_tokens": u.get("output_tokens", 0)}
 
 
 # ---------- 4. write ----------
@@ -430,19 +437,19 @@ def main() -> None:
             log(f"  [dry] {v['date']} {v['team']} {v['title']} -> {len(v.get('transcript', '').split())} words")
         return
 
-    import anthropic
-
-    client = anthropic.Anthropic()
     ros = rosters()
+    tok = {"input_tokens": 0, "output_tokens": 0}
     by_date: dict[str, list[dict]] = {}
     for v in ready:
         try:
-            s = summarize(client, model, v, ros.get(v["team"], []))
-        except (anthropic.APIError, RuntimeError, ValueError, StopIteration) as e:
+            s, u = summarize(model, v, ros.get(v["team"], {}))
+            tok = {k: tok[k] + u[k] for k in tok}
+        except Exception as e:  # noqa: BLE001
             log(f"  {v['id']}: summary FAILED ({e})")
             continue
         entry = {k: v[k] for k in ("id", "team", "url", "title", "date", "duration", "thumb")}
         entry["kind"] = v.get("kind", "")
+        entry["coach"] = COACHES[v["team"]]
         entry.update(words=len(v["transcript"].split()), model=model, **s)
         by_date.setdefault(v["date"], []).append(entry)
         index["done"][v["id"]] = v["date"]
@@ -457,7 +464,8 @@ def main() -> None:
     index["dates"] = sorted({*index["dates"], *by_date}, reverse=True)
     index["updated_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
     INDEX.write_text(json.dumps(index, indent=1, sort_keys=True))
-    log(f"wrote {sum(map(len, by_date.values()))} summaries across {len(by_date)} day(s)")
+    log(f"wrote {sum(map(len, by_date.values()))} summaries across {len(by_date)} day(s); "
+        f"tokens in {tok['input_tokens']:,} / out {tok['output_tokens']:,}")
 
 
 if __name__ == "__main__":

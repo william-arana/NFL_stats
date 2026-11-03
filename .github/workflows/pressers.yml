@@ -1,33 +1,50 @@
 name: Pressers (test)
 
-# Head-coach press conferences: video sitemap -> official captions -> (later) Claude summary.
-# For now this is a dry run only: it checks every team's sitemap and caption track and logs
-# what it would pick (no Claude calls, nothing written, no transcripts stored).
-# The weekly schedule + publishing get added once the dry run looks right.
+# Head-coach press conferences: video sitemap -> official captions -> Claude signals.
+# Manual only for now. mode=dry: find videos + captions, no Claude calls, nothing written.
+# mode=run: Claude (PRESSERS_MODEL, default Haiku) writes data/pressers/*.json and commits them
+# to the branch it ran on. Transcripts are never written to this public repo.
 on:
-  push:
-    branches: [pressers]
-    paths: [scripts/update_pressers.py, .github/workflows/pressers.yml]
   workflow_dispatch:
     inputs:
       teams:
         description: "teams (space separated) or ALL"
         default: ALL
+      mode:
+        description: "dry or run"
+        default: dry
+      model:
+        description: "Claude model for mode=run"
+        default: claude-haiku-5-5
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  dry-run:
+  pressers:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -r requirements-pressers.txt && python -m playwright install --with-deps chromium
-      - name: Dry run
+      - name: Pressers
         env:
-          PRESSERS_TEAMS: ${{ inputs.teams || 'ALL' }}
-        run: python scripts/update_pressers.py --dry-run --list
+          PRESSERS_TEAMS: ${{ inputs.teams }}
+          PRESSERS_MODEL: ${{ inputs.model }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          if [ "$MODE" = "run" ]; then python scripts/update_pressers.py
+          else python scripts/update_pressers.py --dry-run --list; fi
+      - name: Commit
+        if: inputs.mode == 'run'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/pressers
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Pressers: $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
