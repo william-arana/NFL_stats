@@ -159,18 +159,6 @@
   XCOLS.WR.push(xw('sep','Separation',1,'sep_sum','ngs_tgt'),xw('cush','Cushion',1,'cush_sum','ngs_tgt'),xw('yacoe','YACOE',1,'yacoe_sum','ngs_rec'),xs('deep_tgt','Deep tgt',0),xs('rz_tgt','RZ tgt',0),xs('contested','Contested',0),xs('drops','Drops',0),xw('catchable_pct','Catchable %','%','catchable','targets'));
   XCOLS.TE=XCOLS.WR;
   const xfmt=(v,f)=>!num(v)?'<span class="dim">–</span>':f==='%'?pct(v):v.toFixed(f);
-  function bars(logs,sk,team){
-    const lw=D.META.last_completed_week;const W=Math.max(lw,1);const byW=new Map(logs.map(l=>[l.week,l[sk]]));const bye=byeWeek(team);
-    const vals=[...byW.values()].filter(num);const max=Math.max(20,...vals);const avg=mean(vals);
-    const cw=440/W,H=86,base=70,y=v=>base-(v/max)*56;
-    let s=`<svg class="bars" viewBox="0 0 440 ${H}" role="img" aria-label="Fantasy points by week">`;
-    if(num(avg))s+=`<line x1="0" x2="440" y1="${y(avg).toFixed(1)}" y2="${y(avg).toFixed(1)}" stroke-dasharray="3 3"><title>Season average ${avg.toFixed(1)}</title></line>`;
-    for(let w=1;w<=W;w++){const v=byW.get(w),x=(w-1)*cw+cw*.18,bw=cw*.64;
-      if(num(v)){const cls=num(avg)&&v>=avg*1.3?'hi':num(avg)&&v<avg*.6?'lo':'';s+=`<rect class="${cls}" x="${x.toFixed(1)}" y="${y(Math.max(v,0)).toFixed(1)}" width="${bw.toFixed(1)}" height="${(base-y(Math.max(v,0))).toFixed(1)}" rx="2"><title>Wk ${w}: ${v.toFixed(1)}</title></rect><text x="${(x+bw/2).toFixed(1)}" y="${(y(Math.max(v,0))-3).toFixed(1)}">${v.toFixed(v>=10?0:1)}</text>`}
-      else s+=`<text x="${(x+bw/2).toFixed(1)}" y="${base-3}" class="wk">${w===bye?'bye':'–'}</text>`;
-      s+=`<text class="wk" x="${(x+bw/2).toFixed(1)}" y="${H-3}">${w}</text>`}
-    return s+`<line x1="0" x2="440" y1="${base}" y2="${base}"/></svg>`;
-  }
   function scoringSeg(sc){return `<span class="seg" data-sc>${Object.entries(SCORING).map(([k,v])=>`<button type="button" data-v="${k}" aria-pressed="${k===sc}">${v.label}</button>`).join('')}</span>`}
   function ownerTag(key){return `<span data-own="${esc(key)}"></span>`}
   function playerHTML(id){
@@ -197,9 +185,8 @@
         <div><span>Snap %</span><b>${pct(s.snap)}</b><small>L3 ${pct(s.snap3)}</small></div>
         <div><span>Touches / g</span><b>${f1(s.opps)}</b><small>${s.pos==='QB'?'carries + targets':'L3 '+f1(s.opps3)}</small></div>
       </div></section>
-    <section><h4>${SCORING[sc].label} points by week <span class="sp"></span><span>high ${f1(s.best)} · low ${f1(s.worst)}${num(s.sd)?' · ±'+s.sd.toFixed(1):''}</span></h4>${bars(s.logs,sk,s.team)}</section>
     <section><h4>Season stats</h4><div class="scr"><table data-cols="card-season-${s.pos}"><thead><tr><th class="l"></th><th>FP</th>${cols.map(([,l])=>`<th>${l}</th>`).join('')}${xc.map(c=>`<th data-k="x-${c.k}" data-def-off="1">${c.l}</th>`).join('')}</tr></thead><tbody>${seasonRow('Per game',true)}${seasonRow('Total',false)}</tbody></table></div></section>
-    <section><h4>Game log</h4><div class="scr"><table data-cols="card-log-${s.pos}"><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>FP</th>${cols.map(([,l])=>`<th>${l}</th>`).join('')}${xc.map(c=>`<th data-k="x-${c.k}" data-def-off="1">${c.l}</th>`).join('')}</tr></thead><tbody>${logRows}</tbody></table></div><div class="note">Opponent rank = PPR points that defense allows to ${s.pos}s (green = generous). Click an opponent for its defense card.</div></section>
+    <section><h4>Game log <span class="sp"></span><span>high ${f1(s.best)} · low ${f1(s.worst)}${num(s.sd)?' · ±'+s.sd.toFixed(1):''}</span></h4><div class="scr"><table data-cols="card-log-${s.pos}"><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>FP</th>${cols.map(([,l])=>`<th>${l}</th>`).join('')}${xc.map(c=>`<th data-k="x-${c.k}" data-def-off="1">${c.l}</th>`).join('')}</tr></thead><tbody>${logRows}</tbody></table></div><div class="note">Opponent rank = PPR points that defense allows to ${s.pos}s (green = generous). Click an opponent for its defense card.</div></section>
     ${playsSec('p',id,[...s.logs].reverse().map(l=>[gameKey(l.team,l.week),l.week]).filter(x=>x[0]))}
     <section class="links">${obtn(s.team,esc(s.team)+' offense →')}${n?dbtn(n.opp,`Wk ${D.META.next_week}: ${esc(n.opp)} defense →`,'unit'):''}${dbtn(s.team,s.team+' D/ST','unit')}</section>
     <section><h4>News <span class="sp"></span><span data-news-src></span></h4><div data-news><span class="spin"></span>Loading news…</div></section>
@@ -269,8 +256,7 @@
       <div><span>40+ yd FG</span><b>${S('fg_40_49')+S('fg_50')}</b><small>50+: ${S('fg_50')}</small></div>
       <div><span>XP</span><b>${S('pat_made')}/${S('pat_att')}</b><small>${S('pat_missed')} missed</small></div>
       <div><span>Implied next</span><b>${n&&num(n.implied)?n.implied.toFixed(1):'–'}</b><small>team points (Vegas)</small></div></div></section>
-    <section><h4>Kicker points by week <span class="sp"></span><span>FG 0–39 3 · 40–49 4 · 50+ 5 · XP 1 · miss −1</span></h4>${bars(logs.map(r=>({week:r.week,v:r.k_pts})),'v',l.team)}</section>
-    <section><h4>Game log</h4><div class="scr"><table data-cols="card-k-log"><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>Pts</th><th>FG</th><th>0–39</th><th>40–49</th><th>50+</th><th>Long</th><th>XP</th></tr></thead><tbody>${logs.map(r=>`<tr><td class="l">${gbtn(gameKey(r.team,r.week),r.week)}</td><td class="l">${oppBtn(r.opponent_team,((gameOf(r.team,r.week)||{}).at?'@ ':'vs ')+r.opponent_team,null)}</td><td class="fp">${f1(r.k_pts)}</td><td>${r.fg_made||0}/${r.fg_att||0}</td><td>${r.fg_0_39||0}</td><td>${r.fg_40_49||0}</td><td>${r.fg_50||0}</td><td>${r.fg_long||'–'}</td><td>${r.pat_made||0}/${r.pat_att||0}</td></tr>`).join('')}</tbody></table></div></section>
+    <section><h4>Game log <span class="sp"></span><span>FG 0–39 3 · 40–49 4 · 50+ 5 · XP 1 · miss −1</span></h4><div class="scr"><table data-cols="card-k-log"><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>Pts</th><th>FG</th><th>0–39</th><th>40–49</th><th>50+</th><th>Long</th><th>XP</th></tr></thead><tbody>${logs.map(r=>`<tr><td class="l">${gbtn(gameKey(r.team,r.week),r.week)}</td><td class="l">${oppBtn(r.opponent_team,((gameOf(r.team,r.week)||{}).at?'@ ':'vs ')+r.opponent_team,null)}</td><td class="fp">${f1(r.k_pts)}</td><td>${r.fg_made||0}/${r.fg_att||0}</td><td>${r.fg_0_39||0}</td><td>${r.fg_40_49||0}</td><td>${r.fg_50||0}</td><td>${r.fg_long||'–'}</td><td>${r.pat_made||0}/${r.pat_att||0}</td></tr>`).join('')}</tbody></table></div></section>
     ${newsBlock()}${linksHTML(id,l.player_display_name,D.IDS[id],null)}`;
   }
   function defenderHTML(id){
