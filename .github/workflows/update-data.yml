@@ -7,7 +7,8 @@ name: Update data
 on:
   schedule:
     - cron: "17 15 * * 1"   # Mon, before MNF
-    - cron: "17 15 * * 2"   # Tue
+    - cron: "17 13 * * 2"   # Tue 5:17 AM PT (standard time); the recap starts when this finishes
+    - cron: "17 15 * * 2"   # Tue 7:17 AM PT: second pass in case MNF stats weren't in yet
     - cron: "17 21 * * 4"   # Thu, before TNF
     - cron: "17 15 * * 0"   # Sun, before early games
   workflow_dispatch:         # "Run workflow" button in the Actions tab
