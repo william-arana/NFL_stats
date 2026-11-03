@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Weekly rundown · NFL_stats</title>
+<!-- link previews -->
+<meta name="description" content="Weekly recap and preview for 67FFL: your lineup, top performers, injuries, around the league.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NFL_stats">
+<meta property="og:title" content="Weekly rundown · NFL_stats">
+<meta property="og:description" content="Weekly recap and preview for 67FFL: your lineup, top performers, injuries, around the league.">
+<meta property="og:url" content="https://william-arana.github.io/NFL_stats/articles.html">
+<meta property="og:image" content="https://william-arana.github.io/NFL_stats/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NFL_stats logo on a navy football field">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://william-arana.github.io/NFL_stats/assets/og.jpg">
+<meta name="theme-color" content="#0f1b33">
+<!-- /link previews -->
+<!-- app icon -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="NFL_stats">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- /app icon -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<link rel="stylesheet" href="assets/site.css?v=1.56">
+<script src="assets/site.js?v=1.56" defer></script>
+<script src="assets/cards.js?v=1.56" defer></script>
+<script src="assets/tables.js?v=1.56" defer></script>
+<style>
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;margin:0}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{padding-block:26px 16px;border-bottom:2px solid var(--margin)}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.98;margin:6px 0 8px;text-transform:uppercase}
+h1 span{color:var(--blue)}
+.picker{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.picker select{font:14px var(--f-body);padding:6px 10px;border:1px solid var(--rule);border-radius:6px;background:var(--sheet);color:var(--ink)}
+.picker .seg button{font:600 13px var(--f-body);padding:6px 12px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink-2);cursor:pointer}
+.picker .seg button:first-child{border-radius:6px 0 0 6px}.picker .seg button:last-child{border-radius:0 6px 6px 0;border-left:0}
+.picker .seg button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+article{max-width:760px;margin:22px auto 40px}
+.kicker{font:600 11.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--margin)}
+article h2.hl{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,4.4vw,40px);line-height:1.02;margin:6px 0 8px}
+.dek{font-size:17px;color:var(--ink-2);margin:0 0 10px}
+.byline{font:12px var(--f-mono);color:var(--ink-3);border-bottom:1px solid var(--rule);padding-bottom:12px;margin-bottom:6px}
+article section{padding:14px 0;border-bottom:1px solid var(--rule)}
+article section h3{font-family:var(--f-display);font-weight:700;font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:4px 0 8px}
+article section h4{font-size:15px;margin:12px 0 4px}
+article p{margin:0 0 10px}
+article ul{margin:0 0 10px;padding-left:20px}
+article li{margin:3px 0}
+article .pname{font:inherit;font-weight:600;color:var(--blue);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--blue) 35%,transparent);text-underline-offset:2px}
+.foot-note{font-size:12.5px;color:var(--ink-3);margin-top:14px}
+.empty{padding:40px 0;color:var(--ink-3);text-align:center}
+</style>
+</head>
+<body>
+<header class="sitenav"><div class="wrap">
+  <a class="brand" href="./" title="Home">NFL<span>_</span>stats</a>
+  <nav aria-label="Site"><a href="./">Home</a><a href="stats.html">Stats</a><a href="waivers.html">Waivers</a><a href="trade.html">Compare</a><a href="lab.html">Lab</a><a href="guide.html">Guide</a></nav>
+  <span class="upd" id="upd"></span>
+  <div class="navtools" id="navtools"></div>
+</div></header>
+<header class="top"><div class="wrap">
+  <div class="eyebrow">67FFL · weekly rundown</div>
+  <h1>The <span>Rundown</span></h1>
+  <div class="picker"><select id="pick" aria-label="Pick an issue"></select><span class="seg" id="kind"><button data-k="recap">Recap</button><button data-k="preview">Preview</button></span></div>
+</div></header>
+<div class="wrap"><article id="art"><div class="empty">Loading…</div></article></div>
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* tiny markdown: ### / #### headings, - bullets, **bold**, *italic*, paragraphs */
+function md(t){
+  const lines=String(t||'').replace(/\r/g,'').split('\n');let h='',list=false,para=[];
+  const inl=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/(^|[^*])\*(?!\s)(.+?)\*(?!\*)/g,'$1<i>$2</i>');
+  const flush=()=>{if(para.length){h+='<p>'+inl(para.join(' '))+'</p>';para=[]}};
+  for(const ln of lines){const l=ln.trim();
+    if(/^[-*] /.test(l)){flush();if(!list){h+='<ul>';list=true}h+='<li>'+inl(l.slice(2))+'</li>';continue}
+    if(list){h+='</ul>';list=false}
+    if(/^#{2,4} /.test(l)){flush();h+='<h4>'+inl(l.replace(/^#+ /,''))+'</h4>';continue}
+    if(!l){flush();continue}para.push(l)}
+  flush();if(list)h+='</ul>';return h}
+/* turn player / team names into card buttons (text outside tags only, longest names first) */
+function linkify(html,links){
+  const names=Object.keys(links||{}).filter(n=>n&&n.length>2).sort((a,b)=>b.length-a.length);if(!names.length)return html;
+  const re=new RegExp('('+names.map(n=>esc(n).replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')','g');
+  const byEsc=Object.fromEntries(names.map(n=>[esc(n),links[n]]));const seen=new Set();
+  return html.split(/(<[^>]+>)/).map(seg=>seg.startsWith('<')?seg:seg.replace(re,m=>`<button type="button" class="pname" data-card="${byEsc[m]}" data-name="${m}" aria-expanded="false">${m}</button>`)).join('');
+}
+let IDX=[],CUR=null;
+const q=new URLSearchParams(location.search);
+fetch('data/site/articles/index.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{articles:[]}).then(j=>{IDX=j.articles||[];
+  if(!IDX.length){$('#art').innerHTML='<div class="empty">No articles yet. The first recap posts Tuesday morning, the preview Thursday.</div>';return}
+  const want=q.get('f');CUR=IDX.find(a=>a.file===want)||IDX[0];draw()}).catch(()=>{$('#art').innerHTML='<div class="empty">Couldn\'t load the articles.</div>'});
+function draw(){
+  const weeks=[...new Set(IDX.map(a=>a.season+'-'+a.week))];
+  $('#pick').innerHTML=weeks.map(w=>{const [s,wk]=w.split('-');return `<option value="${w}" ${CUR.season+'-'+CUR.week===w?'selected':''}>Week ${wk} · ${s}</option>`}).join('');
+  $('#kind').querySelectorAll('button').forEach(b=>{const has=IDX.some(a=>a.season===CUR.season&&a.week===CUR.week&&a.kind===b.dataset.k);b.disabled=!has;b.style.opacity=has?1:.4;b.setAttribute('aria-pressed',b.dataset.k===CUR.kind)});
+  history.replaceState(history.state,'','?f='+encodeURIComponent(CUR.file)+location.hash);
+  fetch('data/site/articles/'+CUR.file,{cache:'no-cache'}).then(r=>r.json()).then(a=>{
+    const when=new Date(a.generated_utc.replace('Z',':00Z'));
+    $('#art').innerHTML=`<div class="kicker">${a.kind==='recap'?'Recap':'Preview'} · Week ${a.week}</div><h2 class="hl">${esc(a.headline||'')}</h2><p class="dek">${esc(a.dek||'')}</p>
+      <div class="byline">${a.writer==='claude'?'Written by Claude from this week\'s data':'Auto-generated from this week\'s data'} · ${when.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})} · ${esc(a.league)} · ${esc(a.my_team)}</div>
+      ${(a.sections||[]).filter(s=>s.md&&s.md.trim()).map(s=>`<section><h3>${esc(s.title)}</h3>${linkify(md(s.md),a.links)}</section>`).join('')}
+      <p class="foot-note">"Our projection" is NFL_stats' own weekly projection, built only from data available before kickoff (season and last-3 averages, Vegas implied totals, expected points, snap and touch-share trends; D/ST from the opponent's Vegas total). Fantasy points use your league's scoring from Sleeper.</p>`;
+  });
+}
+$('#pick').onchange=e=>{const [s,w]=e.target.value.split('-').map(Number);CUR=IDX.find(a=>a.season===s&&a.week===w&&a.kind===CUR.kind)||IDX.find(a=>a.season===s&&a.week===w);draw()};
+$('#kind').onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;CUR=IDX.find(a=>a.season===CUR.season&&a.week===CUR.week&&a.kind===b.dataset.k)||CUR;draw()};
+})();
+</script>
+</body>
+</html>

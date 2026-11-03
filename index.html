@@ -201,6 +201,16 @@ aside.rail{display:grid;gap:16px;min-width:0;position:sticky;top:12px}
 .trend .cnt{grid-row:1/3;grid-column:4;font-family:var(--f-mono);font-size:11px;color:var(--ink-2);text-align:right}
 .empty{padding:16px 14px;color:var(--ink-3);font-size:12.5px}
 .rfoot{font-size:11px;color:var(--ink-3);text-align:center}
+/* This week: the weekly rundown (recap / preview) */
+.rd{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.rd a.rd-c{display:block;text-decoration:none;color:var(--ink);background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--margin);border-radius:8px;padding:12px 14px;box-shadow:var(--shadow)}
+.rd a.rd-c.pv{border-left-color:var(--blue)}
+.rd a.rd-c:hover{border-color:var(--blue)}
+.rd .k{font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--margin)}.rd .pv .k{color:var(--blue)}
+.rd h3{font-family:var(--f-display);font-weight:800;font-size:22px;line-height:1.05;margin:4px 0 4px}
+.rd p{margin:0 0 6px;color:var(--ink-2);font-size:13.5px}
+.rd ul{margin:0;padding-left:18px;font-size:13px;color:var(--ink-2)}.rd li{margin:2px 0}
+.rd .go{font:600 12px var(--f-body);color:var(--blue)}
 </style>
 </head>
 <body>
@@ -225,6 +235,10 @@ aside.rail{display:grid;gap:16px;min-width:0;position:sticky;top:12px}
 
 <div class="wrap home">
   <main class="col">
+    <section id="rundown" hidden>
+      <h2 class="sec">This week <small><a href="articles.html">All issues →</a></small></h2>
+      <div class="rd" id="rd"></div>
+    </section>
     <section>
       <h2 class="sec">The pages</h2>
       <div class="cards">
@@ -453,6 +467,18 @@ function drawTrending(){
     return `<li><span class="n">${i+1}</span>${TM[it.team]?`<img class="tl" src="${TM[it.team].logo}" alt="${esc(it.team)}" loading="lazy">`:'<span></span>'}<span class="who">${k?`<button type="button" class="pname ${st==='fa'?'name-fa':''}" data-card="${k.startsWith('DEF:')?'d:'+k.slice(4):'p:'+esc(k)}" data-name="${esc(it.name)}" aria-expanded="false">${esc(it.name)}</button>`:`<span class="${st==='fa'?'name-fa':''}">${esc(it.name)}</span>`}<small>${esc(it.pos||'')}${it.team&&it.pos!=='DEF'?' · '+esc(it.team):''}</small>${st?NFLS.badge(st,ROST.league,it.name):''}${k&&window.NFLS?NFLS.plink(k,it.name):''}</span><span class="cnt">${fmtN(it.adds||0)}</span><span class="bar"><i style="width:${Math.max(4,(it.adds||0)/max*100).toFixed(1)}%"></i></span></li>`}).join('');
 }
 })();
+
+/* This week: latest recap + preview from data/site/articles (built Tue / Thu) */
+(function(){const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const strip=t=>String(t||'').replace(/\*\*(.+?)\*\*/g,'$1').replace(/\*(.+?)\*/g,'$1');
+  fetch('data/site/articles/index.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(async j=>{if(!j||!j.articles||!j.articles.length)return;
+    const pick=[j.articles.find(a=>a.kind==='preview'),j.articles.find(a=>a.kind==='recap')].filter(Boolean).sort((a,b)=>(b.season-a.season)||(b.week-a.week)||(a.kind==='preview'?-1:1));
+    const docs=await Promise.all(pick.map(a=>fetch('data/site/articles/'+a.file,{cache:'no-cache'}).then(r=>r.json()).catch(()=>null)));
+    const html=docs.filter(Boolean).map((d,i)=>{const s=(d.sections||[]).find(x=>x.md&&x.md.trim())||{md:''};
+      const bl=s.md.split('\n').map(l=>l.trim()).filter(l=>/^[-*] /.test(l)).slice(0,3).map(l=>strip(l.slice(2)));
+      const para=bl.length?'':strip(s.md.split('\n').find(l=>l.trim())||'').slice(0,220);
+      return `<a class="rd-c ${d.kind==='preview'?'pv':''}" href="articles.html?f=${encodeURIComponent(pick[i].file)}"><div class="k">${d.kind==='recap'?'Recap':'Preview'} · Week ${d.week}</div><h3>${esc(d.headline||'')}</h3><p>${esc(d.dek||'')}</p>${bl.length?`<ul>${bl.map(b=>`<li>${esc(b)}</li>`).join('')}</ul>`:`<p>${esc(para)}</p>`}<span class="go">Read →</span></a>`}).join('');
+    if(html){document.getElementById('rd').innerHTML=html;document.getElementById('rundown').hidden=false}}).catch(()=>{})})();
 </script>
 </body>
 </html>
