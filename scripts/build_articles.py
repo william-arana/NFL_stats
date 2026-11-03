@@ -405,7 +405,12 @@ Rules:
 - Trade fits: frame as ideas worth a look, mention the trade deadline week.
 - Style: sharp, conversational, data-first, like a smart friend who did the homework. Short paragraphs and bullets. Bold key numbers sparingly. No hype words, no emojis, no tables.
 - Skip a section (empty md) if its facts are empty.
-Return ONLY JSON: {"headline": str (max 12 words), "dek": str (one sentence), "sections": [{"id": str, "title": str, "md": str}]} using exactly the section ids and titles requested, in order."""
+Output format (plain text, no JSON, no code fences):
+HEADLINE: <max 12 words>
+DEK: <one sentence>
+=== <section id> ===
+<markdown for that section>
+…one "=== id ===" block per requested section id, in order (leave a block empty to skip it)."""
 
 
 def claude_write(facts, kind):
@@ -416,22 +421,25 @@ def claude_write(facts, kind):
     msg = f"Write this week's {kind} for week {facts['week']}.\nSections (in order): {json.dumps(want)}\n\nFacts:\n{json.dumps(facts, default=str)}"
     r = requests.post("https://api.anthropic.com/v1/messages", timeout=180,
                       headers={"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json"},
-                      json={"model": MODEL_ID, "max_tokens": 6000, "system": SYSTEM, "messages": [{"role": "user", "content": msg}]})
+                      json={"model": MODEL_ID, "max_tokens": 8000, "system": SYSTEM, "messages": [{"role": "user", "content": msg}]})
     if r.status_code != 200:
         print(f"Claude API {r.status_code}: {r.text[:300]}", file=sys.stderr)
         return None
     data = r.json()
     txt = "".join(b.get("text", "") for b in data.get("content", []) if b.get("type") == "text").strip()
-    txt = re.sub(r"^```(json)?|```$", "", txt).strip()
-    try:
-        art = json.loads(txt)
-    except json.JSONDecodeError:
-        m = re.search(r"\{.*\}", txt, re.S)
-        art = json.loads(m.group(0)) if m else None
-    if art:
-        u = data.get("usage", {})
-        art["usage"] = {"input_tokens": u.get("input_tokens"), "output_tokens": u.get("output_tokens"), "model": MODEL_ID}
-    return art
+    if data.get("stop_reason") == "max_tokens":
+        print("Claude hit max_tokens; using what came back", file=sys.stderr)
+    hl = re.search(r"^HEADLINE:\s*(.+)$", txt, re.M); dk = re.search(r"^DEK:\s*(.+)$", txt, re.M)
+    parts = re.split(r"^===\s*([a-z_]+)\s*===\s*$", txt, flags=re.M)
+    got = {parts[i]: parts[i + 1].strip() for i in range(1, len(parts) - 1, 2)}
+    if not hl or not got:
+        print("Couldn't parse Claude's reply; falling back to templates", file=sys.stderr)
+        return None
+    titles = dict(SECTIONS[kind])
+    u = data.get("usage", {})
+    return {"headline": hl.group(1).strip(), "dek": dk.group(1).strip() if dk else "",
+            "sections": [{"id": i, "title": titles[i], "md": got.get(i, "")} for i, _ in SECTIONS[kind]],
+            "usage": {"input_tokens": u.get("input_tokens"), "output_tokens": u.get("output_tokens"), "model": MODEL_ID}}
 
 
 def fmt_p(c):
@@ -493,7 +501,11 @@ def main():
     meta = J("meta.json")
     week = a.week or (meta["last_completed_week"] if a.kind == "recap" else meta["next_week"])
     facts = recap_facts(week, a) if a.kind == "recap" else preview_facts(week, a)
-    art = None if a.no_llm else claude_write(facts, a.kind)
+    try:
+        art = None if a.no_llm else claude_write(facts, a.kind)
+    except Exception as e:  # noqa: BLE001  never fail the run over the prose
+        print(f"Claude step failed ({e}); using templates", file=sys.stderr)
+        art = None
     writer = "claude" if art else "template"
     if not art:
         art = template_write(facts, a.kind)
