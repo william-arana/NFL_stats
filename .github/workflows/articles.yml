@@ -1,0 +1,64 @@
+name: Weekly articles
+
+# The Rundown (articles.html + the "This week" strip on Home), 67FFL.
+# Recap Tuesday after the morning data refresh; preview Thursday after the pre-TNF refresh.
+# Claude writes the prose from computed facts (secret ANTHROPIC_API_KEY); without it, template text.
+# Times are UTC; Pacific (standard time) in comments.
+on:
+  schedule:
+    - cron: "41 16 * * 2"   # Tue 8:41 AM PT: recap of the week that just finished
+    - cron: "7 22 * * 4"    # Thu 2:07 PM PT: preview of the coming week
+  workflow_dispatch:
+    inputs:
+      kind:
+        description: "recap or preview"
+        default: recap
+      week:
+        description: "week (blank = latest finished week for a recap, next week for a preview)"
+        default: ""
+      no_llm:
+        description: "true = template text only (no Claude call)"
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  article:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pandas requests
+      - name: Build
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          EVENT: ${{ github.event_name }}
+          SCHED: ${{ github.event.schedule }}
+          KIND: ${{ inputs.kind }}
+          WEEK: ${{ inputs.week }}
+          NO_LLM: ${{ inputs.no_llm }}
+        run: |
+          if [ "$EVENT" = "schedule" ]; then
+            [ "$SCHED" = "41 16 * * 2" ] && KIND=recap || KIND=preview
+          fi
+          args="--kind ${KIND:-recap}"
+          [ -n "$WEEK" ] && args="$args --week $WEEK"
+          [ "$NO_LLM" = "true" ] && args="$args --no-llm"
+          [ -z "$ANTHROPIC_API_KEY" ] && echo "::warning::ANTHROPIC_API_KEY secret not set: using template text"
+          python scripts/build_articles.py $args
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/site/articles
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Weekly article: $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done

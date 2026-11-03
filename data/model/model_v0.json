@@ -1,0 +1,83 @@
+{
+ "version": "v0",
+ "fit": "2022-2025 regular season, players with 3+ prior games and season avg >= 4 PPR",
+ "features": [
+  "ppr_avg",
+  "ppr_l3",
+  "implied",
+  "xfp_l3",
+  "xfp_avg",
+  "snap_trend",
+  "snap_avg",
+  "opp_share_trend",
+  "opp_share_avg",
+  "target_share_l3"
+ ],
+ "coef": {
+  "QB": {
+   "Intercept": -5.63009,
+   "ppr_avg": -0.1596,
+   "ppr_l3": 0.13487,
+   "implied": 0.59376,
+   "xfp_l3": -0.05938,
+   "xfp_avg": 0.33827,
+   "snap_trend": 14.11603,
+   "snap_avg": 2.1263,
+   "opp_share_trend": -27.78311,
+   "opp_share_avg": 26.72941,
+   "target_share_l3": -85.88195
+  },
+  "RB": {
+   "Intercept": -6.11291,
+   "ppr_avg": 0.18867,
+   "ppr_l3": 0.08426,
+   "implied": 0.27908,
+   "xfp_l3": -0.02811,
+   "xfp_avg": -0.05347,
+   "snap_trend": 12.46596,
+   "snap_avg": 6.83046,
+   "opp_share_trend": -5.62979,
+   "opp_share_avg": 19.47908,
+   "target_share_l3": 9.06983
+  },
+  "WR": {
+   "Intercept": -3.44934,
+   "ppr_avg": 0.26764,
+   "ppr_l3": 0.09159,
+   "implied": 0.13515,
+   "xfp_l3": -0.25855,
+   "xfp_avg": 0.41219,
+   "snap_trend": 3.53228,
+   "snap_avg": 2.8383,
+   "opp_share_trend": 30.24735,
+   "opp_share_avg": 21.49128,
+   "target_share_l3": 4.64294
+  },
+  "TE": {
+   "Intercept": -4.53807,
+   "ppr_avg": 0.13126,
+   "ppr_l3": 0.00418,
+   "implied": 0.18164,
+   "xfp_l3": 0.10226,
+   "xfp_avg": -0.24799,
+   "snap_trend": 7.9749,
+   "snap_avg": 3.64354,
+   "opp_share_trend": -19.42416,
+   "opp_share_avg": 65.72453,
+   "target_share_l3": 9.04324
+  },
+  "K": {
+   "Intercept": 3.37717,
+   "implied": 0.17502,
+   "k_avg": 0.07382
+  },
+  "DEF": {
+   "Intercept": 14.19391,
+   "dst_avg": 0.05505,
+   "opp_implied": -0.41499,
+   "o_sack_rate": 13.25698,
+   "o_give_pg": 0.51767
+  }
+ },
+ "def_note": "D/ST = 14.19 + 0.055 \u00d7 season avg \u2212 0.415 \u00d7 opponent implied + 13.26 \u00d7 opponent sack rate + 0.518 \u00d7 opponent giveaways/g (fit 2022\u20132025)"
+}
