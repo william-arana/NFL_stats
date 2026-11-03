@@ -238,7 +238,7 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const store={get(k,d){try{const v=localStorage.getItem('nfls-'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('nfls-'+k,JSON.stringify(v))}catch(e){}}};
 const setStatus=(t,cls)=>{$('#status').textContent=t;$('#dot').className='dot '+(cls||'')};
 
-const TABLES={avail:'Every offensive player and defense with their status in your selected league: fa / mine / taken',status:'Players on IR / PUP / NFI (s) and out for the season (season = true, with the news that says so)',players:'One row per offensive player per game',teams:'One row per team per game, offense + defense',schedule:'One row per game, with Vegas lines',games_long:'Schedule with one row per team (team / opp / implied)',meta:'Season, last completed week, next week'};
+const TABLES={avail:'Every offensive player, kicker and defense with their status in your selected league: fa / mine / taken',kickers:'One row per kicker per game: FGs by distance, XPs, kicker points (Sleeper default)',status:'Players on IR / PUP / NFI (s) and out for the season (season = true, with the news that says so)',players:'One row per offensive player per game',teams:'One row per team per game, offense + defense',schedule:'One row per game, with Vegas lines',games_long:'Schedule with one row per team (team / opp / implied)',meta:'Season, last completed week, next week'};
 let conn, DB, READY='', SCHEMA={}, RECIPES=[], META, SRC=null, NAMES=new Map(), ROST=null, LG=null;
 const CORE=new Set(Object.keys(TABLES));
 /* plain names for the pivot builder's field lists (the SQL keeps the real field names) */
@@ -284,7 +284,7 @@ const FIELD_NAMES={
   status:'League status (fa / mine / taken)',fantasy_team:'Fantasy team',league:'League',s:'Injury list (IR / PUP / NFI)',season:'Season',news_date:'News date',news:'News',
   last_completed_week:'Last completed week',next_week:'Next week'
 };
-const TABLE_NAMES={players:'Players, by game',teams:'Teams, by game',schedule:'Schedule',games_long:'Games, one row per team',avail:'League availability',status:'Injury lists'};
+const TABLE_NAMES={players:'Players, by game',kickers:'Kickers, by game',teams:'Teams, by game',schedule:'Schedule',games_long:'Games, one row per team',avail:'League availability',status:'Injury lists'};
 const fieldName=n=>FIELD_NAMES[n]||String(n).replace(/_/g,' ').replace(/^./,c=>c.toUpperCase());
 
 /* league availability: fill the availability table, then re-badge the current results */
@@ -306,7 +306,7 @@ function hasPlayer(){return RES&&RES.cols.some(c=>/^(player_id|gsis_id|player|pl
 function cardCell(c,v,txt){
   if(typeof v!=='string')return null;
   if(NAMES.has(v))return `<button type="button" class="pname" data-card="p:${esc(NAMES.get(v))}" data-name="${esc(v)}" aria-expanded="false">${txt}</button>`;
-  if(/^player_id$|^gsis_id$/i.test(c)&&/^00-\d{7}$/.test(v))return `<button type="button" class="pname" data-card="p:${esc(v)}" aria-expanded="false">${txt}</button>`;
+  if(/(^|_)player_id$|^gsis_id$/i.test(c)&&/^00-\d{7}$/.test(v))return `<button type="button" class="pname" data-card="p:${esc(v)}" aria-expanded="false">${txt}</button>`;
   if(TEAMCOL.test(c)&&/^[A-Z]{2,3}$/.test(v)){const k=OFFCOL.test(c)&&hasPlayer()?'o':'d';return `<button type="button" class="pname" data-card="${k}:${esc(v)}" aria-expanded="false">${txt}</button>`}
   if(/^game_id$/i.test(c)&&/^\d{4}_\d{2}_[A-Z]{2,3}_[A-Z]{2,3}$/.test(v))return `<button type="button" class="gl-g" data-card="g:${esc(v)}">${txt}</button>`;
   return null}
@@ -421,7 +421,10 @@ async function boot(){
     const [p,t,s,m,initSql,recTxt]=await Promise.all([get('players.json'),get('teams.json'),get('schedule.json'),get('meta.json'),
       fetch('lab/init.sql').then(r=>r.text()),fetch('lab/recipes.sql').then(r=>r.text())]);
     META=m;SRC={p,s};
-    for(const [name,j] of [['players',p],['teams',t],['schedule',s]]){
+    const opt=n=>get(n).catch(()=>null);const [kj,olj]=await Promise.all([opt('kickers.json'),opt('oline.json')]);
+    const KCOLS=['player_id','player_display_name','team','opponent_team','week','fg_made','fg_att','fg_long','fg_0_39','fg_40_49','fg_50','fg_missed','pat_made','pat_att','pat_missed','k_pts'];
+    const kEmpty={cols:KCOLS,rows:0,data:Object.fromEntries(KCOLS.map(c=>[c,[]]))};
+    for(const [name,j] of [['players',p],['teams',t],['schedule',s],['kickers',kj&&kj.rows?kj:kEmpty]]){
       const rows=new Array(j.rows);for(let i=0;i<j.rows;i++){const r={};for(const c of j.cols)r[c]=j.data[c][i];rows[i]=r}
       await db.registerFileText(name+'.json',JSON.stringify(rows));
       await conn.insertJSONFromPath(name+'.json',{name});
@@ -441,10 +444,19 @@ async function boot(){
         FROM (SELECT player_id, arg_max(player_display_name, week) AS player_display_name, arg_max(position, week) AS position, arg_max(team, week) AS team FROM players GROUP BY player_id) p
         LEFT JOIN availability a USING (player_id)
         UNION ALL
+        SELECT k.player_id, k.player_display_name, 'K', k.team,
+               CASE WHEN (SELECT count(*) FROM league_info) = 0 THEN NULL ELSE coalesce(a.status, 'fa') END, a.fantasy_team, (SELECT name FROM league_info)
+        FROM (SELECT player_id, arg_max(player_display_name, week) AS player_display_name, arg_max(team, week) AS team FROM kickers GROUP BY player_id) k
+        LEFT JOIN availability a USING (player_id)
+        UNION ALL
         SELECT 'DEF:' || t.team, t.team || ' D/ST', 'DEF', t.team,
                CASE WHEN (SELECT count(*) FROM league_info) = 0 THEN NULL ELSE coalesce(a.status, 'fa') END, a.fantasy_team, (SELECT name FROM league_info)
         FROM (SELECT DISTINCT team FROM teams) t LEFT JOIN availability a ON a.player_id = 'DEF:' || t.team`);
-    {const r=await conn.query('SELECT player_id, arg_max(player_display_name, week) AS n FROM players GROUP BY player_id');for(const x of r.toArray()){NAMES.set(x.n,x.player_id)}}
+    {const r=await conn.query('SELECT player_id, arg_max(player_display_name, week) AS n FROM players GROUP BY player_id UNION ALL SELECT player_id, arg_max(player_display_name, week) FROM kickers GROUP BY player_id');for(const x of r.toArray()){NAMES.set(x.n,x.player_id)}
+      if(olj&&olj.rows)for(let i=0;i<olj.rows;i++)NAMES.set(olj.data.name[i],olj.data.player_id[i]);
+      /* play-by-play uses short names (C.Boswell): link them when only one player has that short name */
+      const sh=new Map();for(const [n,id] of NAMES){const m=String(n).match(/^(\S)\S*\s+(.+)$/);if(!m)continue;const k=m[1]+'.'+m[2].replace(/\s+(Jr\.?|Sr\.?|II|III|IV)$/,'');sh.set(k,sh.has(k)&&sh.get(k)!==id?null:id)}
+      for(const [k,id] of sh)if(id&&!NAMES.has(k))NAMES.set(k,id)}
     for(const tname of Object.keys(TABLES)){const r=await conn.query(`DESCRIBE ${tname}`);SCHEMA[tname]=r.toArray().map(x=>({name:x.column_name,type:String(x.column_type)}))}
     RECIPES=parseRecipes(recTxt);
     $('#upd').textContent=`${m.season} · thru Wk ${m.last_completed_week}`;
