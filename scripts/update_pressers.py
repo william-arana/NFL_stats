@@ -108,7 +108,8 @@ def discover(team: str, since: date) -> list[dict]:
             continue
         title = unescape(v.findtext("v:title", "", NS)).strip()
         tags = [t.strip() for t in unescape(v.findtext("v:tag", "", NS)).split(",") if t.strip()]
-        pub = v.findtext("v:publication_date", "", NS)[:10]
+        pub_ts = v.findtext("v:publication_date", "", NS)
+        pub = pub_ts[:10]
         dur = int(v.findtext("v:duration", "0", NS) or 0)
         hay = " ".join([title, *tags])
         if not pub or date.fromisoformat(pub) < since or SKIP.search(hay):
@@ -121,36 +122,63 @@ def discover(team: str, since: date) -> list[dict]:
         desc = unescape(re.sub(r"<[^>]+>", "", v.findtext("v:description", "", NS))).strip()
         found.append({
             "id": f"{team}:{url.rstrip('/').rsplit('/', 1)[-1]}", "team": team, "url": url, "title": title,
-            "description": desc, "tags": tags, "date": pub, "duration": dur,
+            "description": desc, "tags": tags, "date": pub, "ts": pub_ts, "duration": dur,
             "hc": is_head_coach(team, title, desc, tags), "postgame": bool(POSTGAME.search(hay)),
             "thumb": v.findtext("v:thumbnail_loc", "", NS),
         })
     return found
 
 
-def pick_weekly(vids: list[dict]) -> list[dict]:
-    """Head coach only, two per week, anchored on the team's last game (its latest postgame video):
-    day_after = first HC presser after that game, first_practice = the next HC presser on a later day.
-    No postgame in the window (bye / sitemap gap): fall back to the two most recent HC pressers."""
-    hc = sorted((v for v in vids if v["hc"] and not v["postgame"]), key=lambda v: (v["date"], -v["duration"]))
-    games = sorted({v["date"] for v in vids if v["postgame"]}, reverse=True)
-    if games:
-        # latest game that already has HC pressers after it (run right after a game -> previous week)
-        for i, g in enumerate(games):
-            nxt = games[i - 1] if i else "9999"
-            week = [v for v in hc if g < v["date"] < nxt]
-            if week:
-                hc = week
-                break
-    else:
-        hc = hc[-6:]
+SCHEDULE = ROOT / "data" / "site" / "schedule.json"
+def kickoffs(team: str, now: datetime) -> list[datetime]:
+    """UTC kickoff times of the team's games that have started, newest first (nflverse: ET)."""
+    from zoneinfo import ZoneInfo
+    try:
+        d = json.loads(SCHEDULE.read_text())["data"]
+    except (OSError, KeyError, ValueError):
+        return []
+    et = ZoneInfo("America/New_York")
+    out = []
+    for day, tm, a, h in zip(d["gameday"], d["gametime"], d["away_team"], d["home_team"]):
+        if team in (a, h) and day and tm:
+            k = datetime.fromisoformat(f"{day}T{tm}").replace(tzinfo=et).astimezone(timezone.utc)
+            if k < now:
+                out.append(k)
+    return sorted(out, reverse=True)
+
+
+def _ts(v: dict) -> datetime:
+    try:
+        t = datetime.fromisoformat(v["ts"].replace("Z", "+00:00"))
+        return t if t.tzinfo else t.replace(tzinfo=timezone.utc)
+    except ValueError:
+        return datetime.fromisoformat(v["date"]).replace(tzinfo=timezone.utc)
+
+
+def pick_weekly(vids: list[dict], team: str = "", now: datetime | None = None) -> list[dict]:
+    """Head coach only, two per week, anchored on the team's last game (nflverse schedule):
+    day_after = first HC presser posted 12h+ after kickoff (so the postgame presser is skipped),
+    first_practice = the next HC presser on a later (ET) day. If the last game has no presser
+    after it yet (run right after a game), use the game before. No schedule: two most recent."""
+    from zoneinfo import ZoneInfo
+    et = ZoneInfo("America/New_York")
+    now = now or datetime.now(timezone.utc)
+    hc = sorted((v for v in vids if v["hc"] and not v["postgame"]), key=_ts)
+    ks = kickoffs(team, now) if team else []
+    window: list[dict] = []
+    for i, k in enumerate(ks[:3]):
+        end = ks[i - 1] if i else now + timedelta(days=1)
+        window = [v for v in hc if k + timedelta(hours=12) <= _ts(v) < end]
+        if window:
+            break
+    if not ks:
+        window = hc[-2:]
     picked: list[dict] = []
-    for v in (hc if games else hc[::-1]):
-        if all(p["date"] != v["date"] for p in picked):
+    for v in window:
+        if all(_ts(p).astimezone(et).date() != _ts(v).astimezone(et).date() for p in picked):
             picked.append(v)
         if len(picked) == 2:
             break
-    picked.sort(key=lambda v: v["date"])
     for v, kind in zip(picked, ["day_after", "first_practice"]):
         v["kind"] = kind
     return picked
@@ -230,9 +258,14 @@ def pick_transcript(sub_urls: list[str], mcp: str | None) -> str:
         segs = [l for l in get(su).splitlines() if l.startswith("http")]
         if not segs or (mcp and f"/{mcp}/" not in segs[0]):
             continue  # a preroll or a different video on the page
-        from concurrent.futures import ThreadPoolExecutor
-        with ThreadPoolExecutor(8) as ex:
-            parts = list(ex.map(lambda s: get(s, timeout=15), segs))
+        parts = []
+        for seg in segs:  # sequential: parallel fetches got 403s from the caption CDN
+            try:
+                parts.append(get(seg, timeout=15))
+            except Exception:  # noqa: BLE001
+                import time
+                time.sleep(2)
+                parts.append(get(seg, timeout=15))
         return vtt_to_text("\n".join(parts))
     return ""
 
@@ -352,7 +385,7 @@ def main() -> None:
         if "--list" in sys.argv:
             for v in sorted(allv, key=lambda v: v["date"]):
                 log(f"    {v['date']} {'HC ' if v['hc'] else '   '}{'PG ' if v['postgame'] else '   '}{v['duration']:>5}s {v['title'][:70]} | {', '.join(v['tags'])[:50]}")
-        vids = allv if every else pick_weekly(allv)
+        vids = allv if every else pick_weekly(allv, t)
         vids = [v for v in vids if v["id"] not in index["done"]]
         n_hc = sum(v["hc"] for v in allv)
         log(f"{t}: {len(allv)} press videos since {since}, {n_hc} head coach, picked: "
