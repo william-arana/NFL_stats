@@ -37,7 +37,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT_DIR = ROOT / "data" / "pressers"
+OUT_DIR = Path(os.environ["PRESSERS_OUT"]) if os.environ.get("PRESSERS_OUT") else ROOT / "data" / "pressers"
 INDEX = OUT_DIR / "index.json"
 PLAYERS = ROOT / "data" / "site" / "players.json"
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
@@ -98,9 +98,51 @@ def get(url: str, timeout: int = 30) -> str:
 
 # ---------- 1. discover ----------
 
-def discover(team: str, since: date) -> list[dict]:
+def video_sitemaps(domain: str) -> list[str]:
+    """Every video sitemap the club site lists (robots.txt -> sitemap indexes), for backfills:
+    the fast-changing one only covers the last few weeks."""
+    seen, out, todo = set(), [], []
+    try:
+        todo = [l.split(":", 1)[1].strip() for l in get(f"https://www.{domain}/robots.txt").splitlines()
+                if l.lower().startswith("sitemap:")]
+    except Exception as e:  # noqa: BLE001
+        log(f"{domain}: robots.txt failed ({e})")
+    todo += [f"https://www.{domain}/sitemap.xml", f"https://www.{domain}/sitemap-index.xml"]
+    for depth in range(3):
+        nxt = []
+        for u in todo:
+            if u in seen:
+                continue
+            seen.add(u)
+            try:
+                root = ET.fromstring(get(u))
+            except Exception:  # noqa: BLE001
+                continue
+            if root.tag.endswith("sitemapindex"):
+                nxt += [x.findtext("s:loc", "", NS) for x in root.findall("s:sitemap", NS)]
+            elif root.find("s:url/v:video", NS) is not None:
+                out.append(u)
+        todo = nxt
+    fast = f"https://www.{domain}/sitemap-video-fast-changing.xml"
+    return list(dict.fromkeys([fast, *out]))
+
+
+def discover(team: str, since: date, deep: bool = False) -> list[dict]:
     domain = TEAMS[team]
-    root = ET.fromstring(get(f"https://www.{domain}/sitemap-video-fast-changing.xml"))
+    maps = video_sitemaps(domain) if deep else [f"https://www.{domain}/sitemap-video-fast-changing.xml"]
+    if deep:
+        log(f"{team}: video sitemaps: {', '.join(m.rsplit('/', 1)[-1] for m in maps)}")
+    found, urls = [], set()
+    for sm in maps:
+        try:
+            found += _discover_one(team, sm, since, urls)
+        except Exception as e:  # noqa: BLE001
+            log(f"{team}: {sm} FAILED ({e})")
+    return found
+
+
+def _discover_one(team: str, sitemap: str, since: date, urls: set) -> list[dict]:
+    root = ET.fromstring(get(sitemap))
     found = []
     for u in root.findall("s:url", NS):
         v = u.find("v:video", NS)
@@ -119,6 +161,9 @@ def discover(team: str, since: date) -> list[dict]:
         if dur and not (MIN_SEC <= dur <= MAX_SEC):
             continue
         url = u.findtext("s:loc", "", NS)
+        if url in urls:
+            continue
+        urls.add(url)
         desc = unescape(re.sub(r"<[^>]+>", "", v.findtext("v:description", "", NS))).strip()
         found.append({
             "id": f"{team}:{url.rstrip('/').rsplit('/', 1)[-1]}", "team": team, "url": url, "title": title,
@@ -190,6 +235,27 @@ def pick_weekly(vids: list[dict], team: str = "", now: datetime | None = None) -
     for v, kind in zip(picked, ["day_after", "first_practice"]):
         v["kind"] = kind
     return picked
+
+
+def pick_backfill(vids: list[dict], team: str, weeks: range) -> list[dict]:
+    """Backfill: for each of the team's games in `weeks`, the same two HC pressers the weekly run
+    picks (day after the game, then first practice day), anchored on that game's kickoff."""
+    from zoneinfo import ZoneInfo
+    et = ZoneInfo("America/New_York")
+    d = json.loads(SCHEDULE.read_text())["data"]
+    games = sorted(
+        (datetime.fromisoformat(f"{day}T{tm}").replace(tzinfo=et).astimezone(timezone.utc), wk)
+        for wk, day, tm, a, h in zip(d["week"], d["gameday"], d["gametime"], d["away_team"], d["home_team"])
+        if team in (a, h) and day and tm)
+    out = []
+    for i, (k, wk) in enumerate(games):
+        if wk not in weeks:
+            continue
+        end = games[i + 1][0] if i + 1 < len(games) else datetime.now(timezone.utc)
+        for v in pick_weekly([v for v in vids if _ts(v) < end], team, now=end):
+            v["week"] = wk
+            out.append(v)
+    return list({v["id"]: v for v in out}.values())
 
 
 # ---------- 2. captions ----------
@@ -408,19 +474,25 @@ def main() -> None:
     cap = int(os.environ.get("PRESSERS_MAX", "150"))
     model = os.environ.get("PRESSERS_MODEL", "claude-haiku-5-5")
     since = datetime.now(timezone.utc).date() - timedelta(days=days)
+    bf = os.environ.get("PRESSERS_BACKFILL", "")  # e.g. "1-8": weeks to backfill
+    weeks = range(int(bf.split("-")[0]), int(bf.split("-")[-1]) + 1) if bf else None
+    if weeks:
+        sd = json.loads(SCHEDULE.read_text())["data"]
+        since = min(date.fromisoformat(g) for g, w in zip(sd["gameday"], sd["week"]) if g and w == weeks[0]) - timedelta(days=1)
+        cap = max(cap, 40 * len(teams) * len(weeks))
 
     index = load_index()
     new: list[dict] = []
     for t in teams:
         try:
-            allv = discover(t, since)
+            allv = discover(t, since, deep=bool(weeks))
         except Exception as e:  # noqa: BLE001
             log(f"{t}: sitemap FAILED ({e})")
             continue
         if "--list" in sys.argv:
             for v in sorted(allv, key=lambda v: v["date"]):
                 log(f"    {v['ts'][:19]} {'HC ' if v['hc'] else '   '}{'PG ' if v['postgame'] else '   '}{v['duration']:>5}s {v['title'][:70]} | {', '.join(v['tags'])[:50]}")
-        vids = allv if every else pick_weekly(allv, t)
+        vids = allv if every else pick_backfill(allv, t, weeks) if weeks else pick_weekly(allv, t)
         vids = [v for v in vids if v["id"] not in index["done"]]
         n_hc = sum(v["hc"] for v in allv)
         log(f"{t}: {len(allv)} press videos since {since}, {n_hc} head coach, picked: "
@@ -459,6 +531,8 @@ def main() -> None:
             continue
         entry = {k: v[k] for k in ("id", "team", "url", "title", "date", "duration", "thumb")}
         entry["kind"] = v.get("kind", "")
+        if v.get("week"):
+            entry["after_week"] = v["week"]
         entry["coach"] = COACHES[v["team"]]
         entry.update(words=len(v["transcript"].split()), model=model, **s)
         by_date.setdefault(v["date"], []).append(entry)
