@@ -110,6 +110,8 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 .pc-top img.logo{width:40px;height:40px;object-fit:contain;flex:none}
 .pc-top h3{margin:0;font-family:var(--f-display);font-weight:800;font-size:24px;line-height:1;text-transform:uppercase;letter-spacing:.01em}
 .pc-top .sub{font-family:var(--f-mono);font-size:11px;color:var(--ink-2);margin-top:3px;display:flex;flex-wrap:wrap;gap:2px 8px;align-items:center}
+.pc-top .sub .units a{font:600 11px var(--f-body);color:var(--blue);text-decoration:none;margin-right:6px}
+.pc-top .sub .units a:hover{text-decoration:underline}
 .pc-x,.pc-back{position:absolute;top:8px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink-2);border-radius:6px;cursor:pointer;font:600 12px var(--f-body);height:28px}
 .pc-x{right:8px;width:28px;font-size:17px;line-height:1}
 .pc-back{position:static;height:26px;padding:0 8px;margin-right:2px;flex:none}
