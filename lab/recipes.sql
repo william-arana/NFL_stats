@@ -297,9 +297,49 @@ SELECT defense, opponent,
 FROM j
 ORDER BY matchup_score DESC;
 
+-- @recipe role_signals
+-- @title Role signals that held up in backtests
+-- @blurb The usage signals that predicted next week's PPR better than season average + last 3 + Vegas in a 2022–2026 backtest: snap % trend (last 3 vs season), share of the team's carries + targets (trend), expected points (xFP, last 3 + season), PPR minus xFP (points drift back toward usage) and target share (WR/TE). Role score = the trends + xFP as z-scores within the position, minus half of the hot streak. Gains are real but small (about 0.05–0.2 pts a week per player). Set position, minimum snaps and available-only in the form above.
+WITH settings AS (SELECT 'ALL' AS pos, 0.3 AS min_snap_pct, 0 AS available_only),  -- pos: ALL, RB, WR or TE · available_only: 1 = free agents in your league
+lw AS (SELECT last_completed_week AS w FROM meta),
+team AS (SELECT team, week, sum(coalesce(carries,0) + coalesce(targets,0)) AS team_opps FROM players GROUP BY ALL),
+pw AS (
+  SELECT p.*, (coalesce(p.carries,0) + coalesce(p.targets,0)) / nullif(t.team_opps, 0) AS opp_share
+  FROM players p JOIN team t USING (team, week)
+  WHERE p.position IN ('RB','WR','TE')),
+s AS (
+  SELECT player_id, arg_max(player_display_name, week) AS player, arg_max(position, week) AS position, arg_max(team, week) AS team, count(*) AS g,
+    avg(offense_pct) AS snap_season, avg(offense_pct) FILTER (WHERE week > (SELECT w FROM lw) - 3) AS snap_l3,
+    avg(opp_share) AS share_season, avg(opp_share) FILTER (WHERE week > (SELECT w FROM lw) - 3) AS share_l3,
+    avg(xfp) AS xfp_season, avg(xfp) FILTER (WHERE week > (SELECT w FROM lw) - 3) AS xfp_l3,
+    avg(fantasy_points_ppr) AS ppr_season, avg(fantasy_points_ppr) - avg(xfp) AS ppr_minus_xfp,
+    avg(target_share) FILTER (WHERE week > (SELECT w FROM lw) - 3) AS tgt_share_l3
+  FROM pw GROUP BY player_id HAVING count(*) >= 3),
+z AS (
+  SELECT *, snap_l3 - snap_season AS snap_trend, share_l3 - share_season AS share_trend,
+    ((snap_l3 - snap_season) - avg(snap_l3 - snap_season) OVER w) / nullif(stddev_samp(snap_l3 - snap_season) OVER w, 0) AS z_snap,
+    ((share_l3 - share_season) - avg(share_l3 - share_season) OVER w) / nullif(stddev_samp(share_l3 - share_season) OVER w, 0) AS z_share,
+    (xfp_l3 - avg(xfp_l3) OVER w) / nullif(stddev_samp(xfp_l3) OVER w, 0) AS z_xfp,
+    (ppr_minus_xfp - avg(ppr_minus_xfp) OVER w) / nullif(stddev_samp(ppr_minus_xfp) OVER w, 0) AS z_hot
+  FROM s WINDOW w AS (PARTITION BY position))
+SELECT z.player, z.position, z.team, g.opp AS next_opp, z.g,
+  round(z.snap_season*100) AS snap_pct_season, round(z.snap_l3*100) AS snap_pct_l3, round(z.snap_trend*100) AS snap_trend,
+  round(z.share_season*100,1) AS opp_share_pct_season, round(z.share_l3*100,1) AS opp_share_pct_l3, round(z.share_trend*100,1) AS share_trend,
+  round(z.xfp_season,1) AS xfp_season, round(z.xfp_l3,1) AS xfp_l3, round(z.ppr_season,1) AS ppr_season, round(z.ppr_minus_xfp,1) AS ppr_minus_xfp,
+  round(z.tgt_share_l3*100) AS tgt_share_pct_l3,
+  round(coalesce(z.z_snap,0) + coalesce(z.z_share,0) + coalesce(z.z_xfp,0) - 0.5*coalesce(z.z_hot,0), 2) AS role_score,
+  a.status
+FROM z CROSS JOIN settings st
+LEFT JOIN games_long g ON g.team = z.team AND g.week = (SELECT next_week FROM meta)
+LEFT JOIN avail a USING (player_id)
+WHERE (st.pos = 'ALL' OR z.position = st.pos) AND z.snap_l3 >= st.min_snap_pct
+  AND (st.available_only = 0 OR coalesce(a.status, 'fa') = 'fa')
+ORDER BY role_score DESC
+LIMIT 60;
+
 -- @recipe usage_risers
 -- @title Usage risers (last 3 weeks vs before)
--- @blurb Players whose snap share and opportunities jumped recently. Usage moves before points do, so this is the earliest waiver signal.
+-- @blurb Players whose snap share and opportunities jumped recently. Usage moves before points do, so this is the earliest waiver signal. Backtest (2022–2026): snap % and touch-share trends beat season average + last 3 + Vegas for RB/WR/TE (about +0.1 pts a week per player).
 WITH lw AS (SELECT max(week) AS w FROM players),
 s AS (
   SELECT player_display_name AS player, position, arg_max(team, week) AS team,
@@ -322,7 +362,7 @@ LIMIT 40;
 
 -- @recipe buy_low
 -- @title Buy low: usage without the points
--- @blurb Players getting volume that should produce points (high expected points) who've scored less than expected. Points tend to catch up with usage.
+-- @blurb Players getting volume that should produce points (high expected points) who've scored less than expected. Points tend to catch up with usage. Backtest (2022–2026): PPR minus xFP held up as a regression signal for RB/WR/TE.
 SELECT player_display_name AS player, position, arg_max(team, week) AS team, count(*) AS g,
   round(avg(xfp),1) AS xfp_per_g, round(avg(fantasy_points_ppr),1) AS ppr_per_g,
   round(avg(xfp_diff),1) AS ppr_minus_xfp, round(avg(offense_pct)*100) AS snap_pct
@@ -356,7 +396,7 @@ LIMIT 50;
 
 -- @recipe dvp
 -- @title Defense vs position, next week
--- @blurb Fantasy points each defense allows per game by position, as z-scores, joined to who they play next. Positive = soft matchup for that position.
+-- @blurb Fantasy points each defense allows per game by position, as z-scores, joined to who they play next. Positive = soft matchup for that position. Backtest (2022–2026): points allowed to the position did not predict next week's points once Vegas totals were known (cut as a projection input). Good for context, not for start/sit.
 WITH a AS (
   SELECT opponent_team AS defense, position, sum(fantasy_points_ppr) / count(DISTINCT week) AS ppr_allowed
   FROM players GROUP BY ALL),
@@ -375,7 +415,7 @@ ORDER BY w.WR DESC;
 
 -- @recipe tiers
 -- @title Production vs good, average and bad defenses
--- @blurb Your "similarly rated teams" idea. Defenses are split into thirds by points allowed, then each player's PPR average is shown against each tier. A player who produces against good defenses is real.
+-- @blurb Your "similarly rated teams" idea. Defenses are split into thirds by points allowed, then each player's PPR average is shown against each tier. A player who produces against good defenses is real. Backtest (2022–2026): a player's split vs soft and tough defenses did not predict his next game (cut).
 WITH tier AS (
   SELECT team, ntile(3) OVER (ORDER BY avg(points_against)) AS t
   FROM teams GROUP BY team),
@@ -413,7 +453,7 @@ ORDER BY q.press_rate * d.pr_made DESC;
 
 -- @recipe implied
 -- @title Vegas: implied team totals this week
--- @blurb What Vegas expects each offense to score, next to how many points they've actually averaged.
+-- @blurb What Vegas expects each offense to score, next to how many points they've actually averaged. Backtest (2022–2026): the matchup signal that held up for players and kickers; point-allowed and lane/area matchup ratings added nothing on top of it.
 SELECT g.team, g.opp, g.is_home, round(g.implied,1) AS implied_pts, round(avg(t.points_for),1) AS avg_pts_scored,
   round(g.implied - avg(t.points_for),1) AS implied_vs_avg, g.spread_line, g.total_line
 FROM games_long g JOIN teams t ON t.team = g.team
@@ -423,7 +463,7 @@ ORDER BY implied_pts DESC;
 
 -- @recipe available_matchups
 -- @title Free agents with soft matchups this week
--- @blurb Uses the avail table (your selected league). Available RB/WR/TE who are getting used, ranked by recent expected points (z-score, counts double) plus half of how many points their next opponent allows to their position (z-score). Add a team filter like AND a.team = 'LV' to narrow it.
+-- @blurb Uses the avail table (your selected league). Available RB/WR/TE who are getting used, ranked by recent expected points (z-score, counts double) plus half of their team's Vegas implied total next week (z-score). The points-allowed matchup is still shown (matchup_z) but no longer in the score: it didn't predict next week's points in the 2022–2026 backtest; Vegas did. Add a team filter like AND a.team = 'LV' to narrow it.
 WITH dvp AS (
   SELECT opponent_team AS defense, position, sum(fantasy_points_ppr) / count(DISTINCT week) AS allowed
   FROM players GROUP BY ALL),
@@ -433,9 +473,9 @@ recent AS (
   FROM players WHERE week > (SELECT last_completed_week FROM meta) - 3 GROUP BY player_id)
 SELECT a.player_display_name AS player, a.position, a.team, g.opp AS next_opp,
   round(r.xfp_l3,1) AS xfp_l3, round(r.ppr_l3,1) AS ppr_l3, round(r.snap_l3*100) AS snap_pct_l3,
-  round(dz.matchup_z,2) AS matchup_z,
+  round(dz.matchup_z,2) AS matchup_z, round(g.implied,1) AS team_implied,
   round((r.xfp_l3 - avg(r.xfp_l3) OVER (PARTITION BY a.position)) / stddev_samp(r.xfp_l3) OVER (PARTITION BY a.position)
-        + 0.5 * dz.matchup_z, 2) AS pickup_score
+        + 0.5 * (g.implied - avg(g.implied) OVER ()) / stddev_samp(g.implied) OVER (), 2) AS pickup_score
 FROM avail a
 JOIN recent r USING (player_id)
 JOIN games_long g ON g.team = a.team AND g.week = (SELECT next_week FROM meta)
@@ -470,7 +510,7 @@ ORDER BY h.touches DESC, b.touches DESC;
 
 -- @recipe sell_high
 -- @title Sell high: scoring above their usage
--- @blurb Points per game well above expected points (xFP: what usage like his normally scores). Big gaps usually come from long or lucky touchdowns and tend to shrink. Good trade chips, or players not to chase on waivers. 4+ games, 8+ PPR/g.
+-- @blurb Points per game well above expected points (xFP: what usage like his normally scores). Big gaps usually come from long or lucky touchdowns and tend to shrink. Good trade chips, or players not to chase on waivers. 4+ games, 8+ PPR/g. Backtest (2022–2026): PPR minus xFP held up as a regression signal.
 WITH lw AS (SELECT max(week) AS w FROM players),
 s AS (
   SELECT player_id, any_value(player_display_name) AS player, any_value(position) AS position, arg_max(team, week) AS team, count(*) AS g,
@@ -519,7 +559,7 @@ LIMIT 50;
 
 -- @recipe def_run_direction
 -- @title Where each defense gets run on
--- @blurb Runs against each defense split by direction and gap (left end, left tackle, left guard, middle, right guard, right tackle, right end): carries, yards per carry, success rate (runs with positive EPA), 10+ yard runs, and yards per carry vs the league average for that gap. Pick a defense or leave Any for all 32. Uses the Lab's play-by-play (last 5 weeks), not opponent-adjusted yet. Left/right are from the offense's view.
+-- @blurb Runs against each defense split by direction and gap (left end, left tackle, left guard, middle, right guard, right tackle, right end): carries, yards per carry, success rate (runs with positive EPA), 10+ yard runs, and yards per carry vs the league average for that gap. Pick a defense or leave Any for all 32. Uses the Lab's play-by-play (last 5 weeks), not opponent-adjusted yet. Left/right are from the offense's view. Backtest (2022–2026): a defense's weak run lanes do not carry over from week to week (odd vs even weeks r = 0.03) and offenses don't steer runs toward them; a back's lane profile vs these numbers added nothing to projections. Descriptive only.
 WITH settings AS (SELECT NULL::VARCHAR AS defense),
 r AS (
   SELECT defteam AS defense,
