@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.49">
-<script src="assets/site.js?v=1.49" defer></script>
-<script src="assets/cards.js?v=1.49" defer></script>
-<script src="assets/glossary.js?v=1.49" defer></script>
-<script src="assets/tables.js?v=1.49" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.50">
+<script src="assets/site.js?v=1.50" defer></script>
+<script src="assets/cards.js?v=1.50" defer></script>
+<script src="assets/glossary.js?v=1.50" defer></script>
+<script src="assets/tables.js?v=1.50" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -89,7 +89,7 @@ td.heat{background-image:linear-gradient(rgba(var(--heat),var(--a,0)),rgba(var(-
 .pname:hover{color:var(--blue);text-decoration:underline}
 .xp{border:0;background:none;padding:0 4px 0 0;margin-left:-2px;color:var(--ink-3);cursor:pointer;font-size:12px;width:16px}
 .xp:hover,.xp[aria-expanded="true"]{color:var(--blue)}
-#p-tbl tbody td.stick:has(.xp){cursor:pointer}#p-tbl tbody td.stick:has(.xp):hover .xp{color:var(--blue)}
+#p-tbl tbody td.stick:has(.xp),#t-tbl tbody td.stick:has(.xp){cursor:pointer}#p-tbl tbody td.stick:has(.xp):hover .xp,#t-tbl tbody td.stick:has(.xp):hover .xp{color:var(--blue)}
 .pname.tm{font-weight:500}
 .pos{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
 .inj{font-family:var(--f-mono);font-size:10px;padding:1px 5px;border-radius:3px;background:var(--margin-soft);color:var(--margin);margin-left:6px}
@@ -356,7 +356,7 @@ function drawPlayers(){
   const LIM=400;let body='';
   data.slice(0,LIM).forEach((a,i)=>{
     const inj=INJ[a.id];
-    body+=`<tr data-id="${a.id}" class="${ps.open.has(a.id)?'open':''}"><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="xp" data-id="${a.id}" aria-expanded="${ps.open.has(a.id)}" title="${ps.open.has(a.id)?'Hide':'Show'} week-by-week rows" aria-label="Week-by-week rows for ${esc(a.name)}">${ps.open.has(a.id)?'▾':'▸'}</button><button type="button" class="pname ${avail(a.id)==='fa'?'name-fa':avail(a.id)==='mine'?'name-mine':''}" data-card="p:${a.id}" data-name="${esc(a.name)}" aria-expanded="false">${esc(a.name)}</button>${window.NFLS?NFLS.plink(a.id,a.name):''} <span class="pos">${a.pos}</span>${avBadge(a.id,a.name)}${inj?`<span class="inj" title="${esc(inj[1])} (Wk ${inj[2]} report)">${esc(inj[0].replace('Practice: ',''))}</span>`:''}</td><td class="l"><button type="button" class="pname tm" data-card="d:${a.team}" aria-expanded="false" title="${a.team} team card">${a.team}</button></td><td class="l">${(()=>{const n=nextOppOf(a.team);return n?oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,a.pos):'<span class="pos">bye</span>'})()}</td><td>${a.g}</td>${
+    body+=`<tr data-id="${a.id}" class="${ps.open.has(a.id)?'open':''}"><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="xp" data-id="${a.id}" aria-expanded="${ps.open.has(a.id)}" title="${ps.open.has(a.id)?'Hide':'Show'} week-by-week rows" aria-label="Week-by-week rows for ${esc(a.name)}">${ps.open.has(a.id)?'▾':'▸'}</button><button type="button" class="pname ${avail(a.id)==='fa'?'name-fa':avail(a.id)==='mine'?'name-mine':''}" data-card="p:${a.id}" data-name="${esc(a.name)}" aria-expanded="false">${esc(a.name)}</button>${window.NFLS?NFLS.plink(a.id,a.name):''} <span class="pos">${a.pos}</span>${avBadge(a.id,a.name)}${inj?`<span class="inj" title="${esc(inj[1])} (Wk ${inj[2]} report)">${esc(inj[0].replace('Practice: ',''))}</span>`:''}</td><td class="l"><button type="button" class="pname tm" data-card="o:${a.team}" aria-expanded="false" title="${a.team} offense card">${a.team}</button></td><td class="l">${(()=>{const n=nextOppOf(a.team);return n?oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,a.pos):'<span class="pos">bye</span>'})()}</td><td>${a.g}</td>${
       pcols(set).map(c=>{if(c.spark)return `<td class="l">${spark(a)}</td>`;const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;
         const cls=c.diff?(num(v)?(v>0?'pos-d':v<0?'neg-d':''):''):'';
         return `<td class="${al?'heat':''} ${cls}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${c.diff&&num(v)&&v>0?'+':''}${!num(v)&&NGS[c.k]?ngsNA(c.k,a.pos):fmt(v,c.d)}</td>`}).join('')}</tr>`;
@@ -383,7 +383,7 @@ const TSETS={
   rush:{label:'Pass rush matchup',cols:[{k:'def_pressures',label:'Pressures',d:1,heat:1,tip:'Sum of defender pressures (PFR)'},{k:'def_sacks',label:'Sacks',d:1,heat:1},{k:'def_qb_hits',label:'QB hits',d:1,heat:1},{k:'def_blitzes',label:'Blitzes',d:1,heat:1},{k:'pressures_allowed',label:'Prs alw',d:1,heat:1,invert:1,tip:'Times their QBs were pressured (PFR)'},{k:'sacks_suffered',label:'Sacks alw',d:1,heat:1,invert:1},{k:'press_alw_pct',label:'Prs % alw',d:'%',heat:1,invert:1,calc:1,tip:'Pressures allowed ÷ dropbacks'},{k:'sack_alw_pct',label:'Sack % alw',d:'%1',heat:1,invert:1,calc:1},{k:'d_blitz_pct',label:'Blitz %',d:'%',heat:1,calc:1,off:1,tip:'Dropbacks with 1+ blitzer (FTN)'},{k:'d_rushers_avg',label:'Avg rushers',d:2,heat:1,calc:1,off:1,tip:'Pass rushers per dropback (FTN)'},{k:'o_blitz_pct',label:'Blitzed %',d:'%',heat:1,calc:1,off:1,tip:'How often this offense gets blitzed'}]}
 };
 const TSUM=['o_plays','o_epa','o_succ','o_db','o_3d','o_3d_conv','o_expl','o_pa_db','o_pa_epa','o_blitz','o_rushers','o_rushers_n','o_box','o_box_n','o_rz','o_rz_td','d_plays','d_epa','d_succ','d_db','d_3d','d_3d_conv','d_expl','d_pa_db','d_pa_epa','d_blitz','d_rushers','d_rushers_n','d_box','d_box_n','d_rz','d_rz_td','ybc','pfr_carries','def_fumbles_forced','points_for','points_against','total_yards','passing_yards','rushing_yards','attempts','carries','sacks_suffered','passing_epa','rushing_epa','passing_tds','rushing_tds','def_sacks','def_qb_hits','def_interceptions','fumble_recovery_opp','def_tds','dst_pts','yards_allowed','pass_yards_allowed','rush_yards_allowed','epa_allowed','pressures_allowed','def_pressures','def_blitzes'];
-const ts={set:store.get('tset','defense'),mode:'pg',w0:1,w1:null,sort:null,dir:-1,heat:store.get('heat',true)};
+const ts={set:store.get('tset','defense'),mode:'pg',w0:1,w1:null,sort:null,dir:-1,heat:store.get('heat',true),open:new Set()};
 function Teams(){
   const weeks=[...new Set(T.map(r=>r.week))].sort((a,b)=>a-b);if(ts.w1==null)ts.w1=weeks[weeks.length-1];
   $('#panel').innerHTML=`<div class="controls">
@@ -391,7 +391,7 @@ function Teams(){
     <div class="ctl"><span>Show</span><div class="seg" id="t-mode"><button data-v="pg" aria-pressed="${ts.mode==='pg'}">Per game</button><button data-v="tot" aria-pressed="${ts.mode==='tot'}">Totals</button></div></div></div>
   <div class="sets"><span class="lbl">Columns</span>${Object.entries(TSETS).map(([k,v])=>`<button class="chip" data-set="${k}" aria-pressed="${ts.set===k}">${v.label}</button>`).join('')}<span class="spacer"></span><label class="chk" for="t-heat"><input type="checkbox" id="t-heat" ${ts.heat?'checked':''}>Shading</label><button class="btn" id="t-csv">Download CSV</button></div>
   <div class="summary" id="t-sum"></div><div class="tablewrap"><table id="t-tbl"></table></div>
-  <div class="foot"><span>Shading flips for stats where lower is better (points allowed, sacks allowed), so dark always means good for that team.</span><span>Next opponent comes from the schedule.</span></div>`;
+  <div class="foot"><span>Shading flips for stats where lower is better (points allowed, sacks allowed), so dark always means good for that team.</span><span>Next opponent comes from the schedule.</span><span>Click ▸ (or anywhere in the team cell except the name) for game-by-game rows. The team name opens its card.</span></div>`;
   $('#t-w0').onchange=e=>{ts.w0=+e.target.value;if(ts.w0>ts.w1){ts.w1=ts.w0;$('#t-w1').value=ts.w1}drawTeams()};
   $('#t-w1').onchange=e=>{ts.w1=+e.target.value;if(ts.w1<ts.w0){ts.w0=ts.w1;$('#t-w0').value=ts.w0}drawTeams()};
   $('#t-mode').onclick=e=>{const b=e.target.closest('button');if(!b)return;ts.mode=b.dataset.v;$('#t-mode').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));drawTeams()};
@@ -405,21 +405,30 @@ function drawTeams(){
   const set=TSETS[ts.set];const by=new Map();
   for(const r of T){if(r.week<ts.w0||r.week>ts.w1)continue;let a=by.get(r.team);if(!a){a={team:r.team,g:0,w:0,l:0,t:0};for(const k of TSUM)a[k]=0;by.set(r.team,a)}a.g++;for(const k of TSUM)if(num(r[k]))a[k]+=r[k];if(num(r.points_for)){if(r.points_for>r.points_against)a.w++;else if(r.points_for<r.points_against)a.l++;else a.t++}}
   const faced={};for(const r of T){if(r.week<ts.w0||r.week>ts.w1)continue;const f=faced[r.opponent_team]=faced[r.opponent_team]||{car:0,att:0};if(num(r.carries))f.car+=r.carries;if(num(r.attempts))f.att+=r.attempts}
-  const no=nextOpp();const data=[...by.values()].map(a=>{const f=faced[a.team]||{car:0,att:0};a.rush_att_allowed=f.car;a.pass_att_allowed=f.att;a.ypc_allowed=div(a.rush_yards_allowed,f.car);a.ypa_allowed=div(a.pass_yards_allowed,f.att);
+  const no=nextOpp();const data=[...by.values()].map(a=>{const f=faced[a.team]||{car:0,att:0};teamCalc(a,f);
     a.rec=`${a.w}-${a.l}${a.t?'-'+a.t:''}`;a.next=no[a.team]||'bye';
+    if(ts.mode==='pg')for(const k of [...TSUM,'tds','takeaways','rush_att_allowed','pass_att_allowed'])a[k]=a[k]/a.g;return a});
+  function teamCalc(a,f){a.rush_att_allowed=f.car;a.pass_att_allowed=f.att;a.ypc_allowed=div(a.rush_yards_allowed,f.car);a.ypa_allowed=div(a.pass_yards_allowed,f.att);
     a.pass_rate=div(a.attempts,a.attempts+a.carries);a.epa_play=div(a.passing_epa+a.rushing_epa,a.attempts+a.carries+a.sacks_suffered);
     a.tds=a.passing_tds+a.rushing_tds;a.takeaways=a.def_interceptions+a.fumble_recovery_opp;
     a.press_alw_pct=div(a.pressures_allowed,a.attempts+a.sacks_suffered);a.ybc_att=div(a.ybc,a.pfr_carries);a.ypc=div(a.rushing_yards,a.carries);a.rush_epa_play=div(a.rushing_epa,a.carries);a.sack_alw_pct=div(a.sacks_suffered,a.attempts+a.sacks_suffered);
     for(const p of ['o_','d_']){a[p+'epa_pl']=div(a[p+'epa'],a[p+'plays']);a[p+'succ_pct']=div(a[p+'succ'],a[p+'plays']);a[p+'3d_pct']=div(a[p+'3d_conv'],a[p+'3d']);a[p+'rz_pct']=div(a[p+'rz_td'],a[p+'rz']);
       a[p+'pa_pct']=div(a[p+'pa_db'],a[p+'db']);a[p+'pa_epa_db']=div(a[p+'pa_epa'],a[p+'pa_db']);a[p+'blitz_pct']=div(a[p+'blitz'],a[p+'rushers_n']);a[p+'rushers_avg']=div(a[p+'rushers'],a[p+'rushers_n']);a[p+'box_avg']=div(a[p+'box'],a[p+'box_n'])}
-    if(ts.mode==='pg')for(const k of [...TSUM,'tds','takeaways','rush_att_allowed','pass_att_allowed'])a[k]=a[k]/a.g;return a});
+    return a}
   const sk=ts.sort||set.cols[0].k;sortRows(data,sk,ts.dir);window._trows=data;
   const heat=ts.heat?heatAlpha(data,set.cols):{};
   $('#t-sum').innerHTML=`<span><b>${data.length}</b> teams</span><span>Weeks <b>${ts.w0}–${ts.w1}</b>, ${ts.mode==='pg'?'per game':'totals'}</span><span>Week ${META.next_week} opponent shown</span>`;
   $('#t-tbl').dataset.cols='stats-teams-'+ts.set;
   $('#t-tbl').innerHTML=`<thead><tr><th class="rank">#</th><th class="l stick" data-k="team">Team</th><th class="l" data-k="rec">${gl('rec','Record')}</th><th class="l" data-k="next">Wk ${META.next_week}</th>${set.cols.map(c=>`<th data-k="${c.k}" ${c.off?'data-def-off="1"':''} ${sk===c.k?`aria-sort="${ts.dir<0?'descending':'ascending'}"`:''}>${gl('t:'+c.k,c.label,c.tip)}</th>`).join('')}</tr></thead><tbody>${
-    data.map((a,i)=>`<tr><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="pname" data-card="d:${a.team}" aria-expanded="false">${a.team}</button></td><td class="l">${a.rec}</td><td class="l">${a.next==='bye'?'<span class="pos">bye</span>':gameBtn(a.team,META.next_week,a.next)}</td>${set.cols.map(c=>{const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;return `<td class="${al?'heat':''}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${fmt(v,c.d)}</td>`}).join('')}</tr>`).join('')}</tbody>`;
-  $('#t-tbl').onclick=e=>{const h=e.target.closest('th[data-k]');if(!h)return;const k=h.dataset.k;if(ts.sort===k||(!ts.sort&&k===set.cols[0].k))ts.dir*=-1;else{ts.sort=k;ts.dir=['team','rec','next'].includes(k)?1:-1}drawTeams()};
+    data.map((a,i)=>{const op=ts.open.has(a.team);let h=`<tr class="${op?'open':''}"><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="xp" data-id="${a.team}" aria-expanded="${op}" title="${op?'Hide':'Show'} game-by-game rows" aria-label="Game-by-game rows for ${a.team}">${op?'▾':'▸'}</button><button type="button" class="pname" data-card="${ts.set==='offense'||ts.set==='oline'?'o':'d'}:${a.team}" aria-expanded="false" title="${ts.set==='offense'||ts.set==='oline'?'Offense':'Defense'} card">${a.team}</button></td><td class="l">${a.rec}</td><td class="l">${a.next==='bye'?'<span class="pos">bye</span>':gameBtn(a.team,META.next_week,a.next)}</td>${set.cols.map(c=>{const v=a[c.k];const al=heat[c.k]?heat[c.k](v):0;return `<td class="${al?'heat':''}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${fmt(v,c.d)}</td>`}).join('')}</tr>`;
+      if(op)for(const r of T.filter(x=>x.team===a.team&&x.week>=ts.w0&&x.week<=ts.w1).sort((x,y)=>x.week-y.week)){
+        const w={...r};const o=T.find(x=>x.team===r.opponent_team&&x.week===r.week)||{};w.tds=(r.passing_tds||0)+(r.rushing_tds||0);w.takeaways=(r.def_interceptions||0)+(r.fumble_recovery_opp||0);teamCalc(w,{car:o.carries||0,att:o.attempts||0});
+        const res=num(r.points_for)&&num(r.points_against)?`${r.points_for>r.points_against?'W':r.points_for<r.points_against?'L':'T'} ${r.points_for}-${r.points_against}`:'';
+        const at=(G.find(g=>g.week===r.week&&g.away_team===r.team))?'@ ':'vs ';
+        h+=`<tr class="log"><td></td><td class="l stick">${gameBtn(r.team,r.week,'Wk '+r.week)} ${oppBtn(r.opponent_team,at+r.opponent_team,null)}</td><td class="l">${res}</td><td></td>${set.cols.map(c=>`<td>${fmt(w[c.k],c.d==='%'||c.d==='%1'?c.d:(Number.isInteger(w[c.k])?0:typeof c.d==='number'?Math.min(c.d,2):0))}</td>`).join('')}</tr>`}
+      return h}).join('')}</tbody>`;
+  $('#t-tbl').onclick=e=>{const x=e.target.closest('.xp')||(!e.target.closest('button,a,input,select')&&(c=>c&&c.querySelector('.xp'))(e.target.closest('tbody td.stick')));if(x){const t=x.dataset.id;ts.open.has(t)?ts.open.delete(t):ts.open.add(t);drawTeams();return}
+    const h=e.target.closest('th[data-k]');if(!h)return;const k=h.dataset.k;if(ts.sort===k||(!ts.sort&&k===set.cols[0].k))ts.dir*=-1;else{ts.sort=k;ts.dir=['team','rec','next'].includes(k)?1:-1}drawTeams()};
 }
 
 /* ---------- DEFENSE VS POSITION ---------- */
@@ -524,7 +533,7 @@ const XT={
 };
 /* links above a team-filtered roster tab: the team card, its other unit (offense ↔ defenders), and the unit it faces next week */
 function teamLinks(kind,team){
-  const tb=t=>`<button type="button" class="pname" data-card="d:${esc(t)}" aria-expanded="false">${esc(t)} team card</button>`;
+  const tb=t=>`<button type="button" class="pname" data-card="d:${esc(t)}" aria-expanded="false">${esc(t)} defense card</button><button type="button" class="pname" data-card="o:${esc(t)}" aria-expanded="false">${esc(t)} offense card</button>`;
   const L=[tb(team)];
   if(kind!=='offense')L.push(`<a href="#offense/${esc(team)}">${esc(team)} offense</a>`);
   if(kind!=='defenders')L.push(`<a href="#defenders/${esc(team)}">${esc(team)} defenders</a>`);
@@ -568,7 +577,7 @@ function XTab(kind,team){
     $('#x-sum').innerHTML=`<span><b>${data.length}</b> ${C.noun}</span><span>${pg?'Per game':'Season totals'}${C.sc?' · '+SCORING[ps.scoring].label:''} · through Week ${META.last_completed_week}</span>`;
     $('#x-links').innerHTML=s.team!=='ALL'?teamLinks(kind,s.team):'';
     const th=`<thead><tr><th class="rank">#</th><th class="l stick" data-k="name">Player</th><th class="l" data-k="pos">Pos</th><th class="l" data-k="team">Team</th>${C.next?`<th class="l" data-k="next_rk">${gl('next','Wk '+META.next_week)}</th>`:''}<th data-k="g">G</th>${C.cols.map(c=>`<th data-k="${c.k}" ${c.off?'data-def-off="1"':''} class="${c.txt?'l':''}" ${s.sort===c.k?`aria-sort="${s.dir<0?'descending':'ascending'}"`:''}>${gl(c.k,c.label,c.tip)}</th>`).join('')}</tr></thead>`;
-    const body=data.slice(0,400).map((a,i)=>`<tr><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="pname ${avail(a.id)==='fa'?'name-fa':avail(a.id)==='mine'?'name-mine':''}" data-card="p:${esc(a.id)}" data-name="${esc(a.name)}" aria-expanded="false">${esc(a.name)}</button>${avBadge(a.id,a.name)}${INJ[a.id]?`<span class="inj" title="${esc(INJ[a.id][1])} (Wk ${INJ[a.id][2]} report)">${esc(INJ[a.id][0].replace('Practice: ',''))}</span>`:''}</td><td class="l"><span class="pos">${esc(a.pos||'')}</span></td><td class="l"><button type="button" class="pname tm" data-card="d:${esc(a.team)}">${esc(a.team)}</button></td>${C.next?`<td class="l">${(()=>{const n=nextOppOf(a.team);return n?oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,a.pos):'<span class="pos">bye</span>'})()}</td>`:''}<td>${a.g}</td>${C.cols.map(c=>{const v=a[c.k];if(c.txt)return `<td class="l">${v?esc(v):'<span class="pos">–</span>'}</td>`;const al=heat[c.k]?heat[c.k](v):0;const cls=c.diff?(num(v)?(v>0?'pos-d':v<0?'neg-d':''):''):'';
+    const body=data.slice(0,400).map((a,i)=>`<tr><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="pname ${avail(a.id)==='fa'?'name-fa':avail(a.id)==='mine'?'name-mine':''}" data-card="p:${esc(a.id)}" data-name="${esc(a.name)}" aria-expanded="false">${esc(a.name)}</button>${avBadge(a.id,a.name)}${INJ[a.id]?`<span class="inj" title="${esc(INJ[a.id][1])} (Wk ${INJ[a.id][2]} report)">${esc(INJ[a.id][0].replace('Practice: ',''))}</span>`:''}</td><td class="l"><span class="pos">${esc(a.pos||'')}</span></td><td class="l"><button type="button" class="pname tm" data-card="${kind==='defenders'?'d':'o'}:${esc(a.team)}">${esc(a.team)}</button></td>${C.next?`<td class="l">${(()=>{const n=nextOppOf(a.team);return n?oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,a.pos):'<span class="pos">bye</span>'})()}</td>`:''}<td>${a.g}</td>${C.cols.map(c=>{const v=a[c.k];if(c.txt)return `<td class="l">${v?esc(v):'<span class="pos">–</span>'}</td>`;const al=heat[c.k]?heat[c.k](v):0;const cls=c.diff?(num(v)?(v>0?'pos-d':v<0?'neg-d':''):''):'';
       return `<td class="${al?'heat':''} ${cls}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${c.diff&&num(v)&&v>0?'+':''}${fmt(v,c.d)}</td>`}).join('')}</tr>`).join('');
     const tb=$('#x-tbl');tb.dataset.cols='stats-'+kind;
     tb.innerHTML=data.length?th+'<tbody>'+body+'</tbody>':'<tbody><tr><td class="empty">No one matches. Clear the search or lower "Min games".</td></tr></tbody>';

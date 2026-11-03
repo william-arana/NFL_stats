@@ -188,7 +188,7 @@
     const seasonRow=(lbl,isPg)=>`<tr${isPg?'':' class="tot"'}><td class="l">${lbl}</td><td class="fp">${f1(isPg?s.fpg:s.fp)}</td>${cols.map(([k])=>`<td>${cell(k,isPg||RATE.has(k)?pg(k):tot(k),isPg)}</td>`).join('')}${xc.map(c=>xcell(c,s.logs,isPg)).join('')}</tr>`;
     const logRows=s.logs.map(l=>`<tr><td class="l">${gbtn(gameKey(l.team,l.week),l.week)}</td><td class="l">${oppBtn(l.opponent_team,((gameOf(l.team,l.week)||{}).at?'@ ':'vs ')+l.opponent_team,null)}</td><td class="fp">${f1(l[sk])}</td>${cols.map(([k])=>`<td>${cell(k,l[k],false)}</td>`).join('')}${xc.map(c=>xcell(c,[l],false)).join('')}</tr>`).join('');
     return `<div class="pc-top">${s.headshot?`<img class="hs" src="${esc(s.headshot)}" alt="" loading="lazy" onerror="this.remove()">`:''}<div><h3>${esc(s.name)}</h3>
-      <div class="sub"><span>${s.pos} · ${dbtn(s.team,s.team,'tmlink')}</span><span>bye ${byeWeek(s.team)||'–'}</span>${n?`<span>${gbtn(n.g.game_id,'Wk '+D.META.next_week)} ${oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,s.pos)}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}${tradeAdd(id)}</div></div></div>
+      <div class="sub"><span>${s.pos} · ${obtn(s.team,esc(s.team),'tmlink')}</span><span>bye ${byeWeek(s.team)||'–'}</span>${n?`<span>${gbtn(n.g.game_id,'Wk '+D.META.next_week)} ${oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,s.pos)}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}${tradeAdd(id)}</div></div></div>
     <section><div class="tags">${inj?`<span class="tag inj" title="${esc(inj[1])} · Wk ${inj[2]} report">${esc(inj[0].replace('Practice: ','Practice '))} · ${esc(inj[1])}</span>`:''}${ownerTag(id)}<span class="sp" style="flex:1"></span>${scoringSeg(sc)}</div>
       <div class="tiles" style="margin-top:8px">
         <div><span>FP / game</span><b>${f1(s.fpg)}</b><small>${[s.rank?s.pos+s.rank:'',s.g+' g'].filter(Boolean).join(' · ')}</small></div>
@@ -201,7 +201,7 @@
     <section><h4>Season stats</h4><div class="scr"><table data-cols="card-season-${s.pos}"><thead><tr><th class="l"></th><th>FP</th>${cols.map(([,l])=>`<th>${l}</th>`).join('')}${xc.map(c=>`<th data-k="x-${c.k}" data-def-off="1">${c.l}</th>`).join('')}</tr></thead><tbody>${seasonRow('Per game',true)}${seasonRow('Total',false)}</tbody></table></div></section>
     <section><h4>Game log</h4><div class="scr"><table data-cols="card-log-${s.pos}"><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>FP</th>${cols.map(([,l])=>`<th>${l}</th>`).join('')}${xc.map(c=>`<th data-k="x-${c.k}" data-def-off="1">${c.l}</th>`).join('')}</tr></thead><tbody>${logRows}</tbody></table></div><div class="note">Opponent rank = PPR points that defense allows to ${s.pos}s (green = generous). Click an opponent for its defense card.</div></section>
     ${playsSec('p',id,[...s.logs].reverse().map(l=>[gameKey(l.team,l.week),l.week]).filter(x=>x[0]))}
-    <section class="links">${obtn(s.team,esc(s.team)+' offense card')}${n?`<a href="stats.html#defenders/${esc(n.opp)}">Wk ${D.META.next_week}: ${esc(n.opp)} defenders →</a>`:''}${dbtn(s.team,s.team+' team card')}</section>
+    <section class="links">${obtn(s.team,esc(s.team)+' offense →')}${n?dbtn(n.opp,`Wk ${D.META.next_week}: ${esc(n.opp)} defense →`,'unit'):''}${dbtn(s.team,s.team+' D/ST','unit')}</section>
     <section><h4>News <span class="sp"></span><span data-news-src></span></h4><div data-news><span class="spin"></span>Loading news…</div></section>
     ${linksHTML(id,s.name,espn,null)}`;
   }
@@ -218,7 +218,7 @@
     const rk=(r,label)=>`<span class="mrk ${rkClass(r,td.n)}" title="${label}">${ord(r)}</span>`;
     const logs=td.rows.map(r=>({week:r.week,fantasy_points_ppr:r.dst_pts}));
     return `<div class="pc-top">${tm.logo?`<img class="logo" src="${esc(tm.logo)}" alt="" loading="lazy" onerror="this.remove()">`:''}<div><h3>${esc(team)} D/ST</h3>
-      <div class="sub"><span>${esc(tm.name||team)} · ${td.rec}</span><span>bye ${byeWeek(team)||'–'}</span>${nx?`<span>${gbtn(nx.g.game_id,'Wk '+D.META.next_week)} ${nx.at?'@':'vs'} ${dbtn(nx.opp,nx.opp)}${num(nx.opp_implied)?` · opp implied ${nx.opp_implied.toFixed(1)}`:''}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}<span class="units">${obtn(team,'Offense card →')}</span></div></div></div>
+      <div class="sub"><span>${esc(tm.name||team)} · ${td.rec}</span><span>bye ${byeWeek(team)||'–'}</span>${nx?`<span>${gbtn(nx.g.game_id,'Wk '+D.META.next_week)} ${nx.at?'@':'vs'} ${dbtn(nx.opp,nx.opp)}${num(nx.opp_implied)?` · opp implied ${nx.opp_implied.toFixed(1)}`:''}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}<span class="units">${obtn(team,'Offense →')}</span></div></div></div>
     <section><div class="tags">${ownerTag('DEF:'+team)}</div>
       <div class="tiles" style="margin-top:8px"><div><span>D/ST pts / g</span><b>${f1(td.dst)}</b><small>${ord(td.rk.dst)} of ${td.n}</small></div><div><span>Last 3</span><b>${f1(ds.l3)}</b><small>${num(ds.sd)?'±'+ds.sd.toFixed(1)+' weekly':''}</small></div><div><span>Sacks / g</span><b>${f1(td.sk)}</b><small>${ord(td.rk.sk)}</small></div><div><span>Takeaways / g</span><b>${f1(td.tk)}</b><small>${ord(td.rk.tk)}</small></div></div></section>
     <section><h4>D/ST points by week</h4>${bars(logs,'fantasy_points_ppr',team)}</section>
@@ -232,6 +232,7 @@
       <tr><td class="l">Explosive plays / g</td><td>${f1(td.x2.expl)}</td><td>${td.x2.expl_rk?rk(td.x2.expl_rk,'1st = fewest 20+ yd plays allowed'):''}</td><td class="l">3rd down %</td><td>${pct(td.x2.third)}</td><td>${td.x2.third_rk?rk(td.x2.third_rk,'1st = lowest conversion rate allowed'):''}</td></tr>
     </tbody></table></div><div class="note">Defense ranks: green = strong defense (tough matchup), red = weak.</div></section>
     <section><h4>Game log</h4><div class="scr"><table data-cols="card-dst-log"><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>D/ST</th><th>Pts alw</th><th>Pass alw</th><th>Rush alw</th><th>Sk</th><th>Prs</th><th>INT</th><th>FR</th><th>TD</th></tr></thead><tbody>${td.rows.map(r=>`<tr><td class="l">${gbtn(gameKey(team,r.week),r.week)}</td><td class="l">${oppBtn(r.opponent_team,((gameOf(team,r.week)||{}).at?'@ ':'vs ')+r.opponent_team,null)}</td><td class="fp">${f1(r.dst_pts)}</td><td>${f0(r.points_against)}</td><td>${f0(r.pass_yards_allowed)}</td><td>${f0(r.rush_yards_allowed)}</td><td>${f0(r.def_sacks)}</td><td>${f0(r.def_pressures)}</td><td>${f0(r.def_interceptions)}</td><td>${f0(r.fumble_recovery_opp)}</td><td>${f0((r.def_tds||0)+(r.special_teams_tds||0))}</td></tr>`).join('')}</tbody></table></div></section>
+    ${defListHTML(team)}
     ${personnelHTML(team)}
     ${offenseHTML(team)}
     ${oppLineHTML(team)}
@@ -263,7 +264,7 @@
     const logs=X.K.get(id);const l=logs[logs.length-1];const S=k=>sum(logs.map(r=>r[k]));const g=logs.length;
     const fgm=S('fg_made'),fga=S('fg_att');const n=nextOpp(l.team);
     return `<div class="pc-top">${l.headshot_url?`<img class="hs" src="${esc(l.headshot_url)}" alt="" loading="lazy" onerror="this.remove()">`:''}<div><h3>${esc(l.player_display_name)}</h3>
-      <div class="sub"><span>K · ${dbtn(l.team,l.team,'tmlink')}</span><span>bye ${byeWeek(l.team)||'–'}</span>${nextLine(l.team)}</div></div></div>
+      <div class="sub"><span>K · ${obtn(l.team,esc(l.team),'tmlink')}</span><span>bye ${byeWeek(l.team)||'–'}</span>${nextLine(l.team)}</div></div></div>
     <section><div class="tags">${injTag(id)}${ownerTag(id)}</div><div class="tiles" style="margin-top:8px">
       <div><span>K pts / g</span><b>${f1(S('k_pts')/g)}</b><small>${g} g · Sleeper default</small></div>
       <div><span>FG</span><b>${fgm}/${fga}</b><small>${fga?Math.round(fgm/fga*100)+'%':''} · long ${Math.max(0,...logs.map(r=>r.fg_long||0))}</small></div>
@@ -286,14 +287,14 @@
       <div><span>INT · PD</span><b>${a.int} · ${a.pd}</b><small>${a.ff} forced fumbles</small></div>
       ${a.tgt?`<div><span>In coverage</span><b>${a.cmp}/${a.tgt}</b><small>${a.yds} yds · ${a.tda} TD · rtg ${num(a.rating)?a.rating.toFixed(0):'–'}</small></div>`:''}</div></section>
     <section><h4>Game log</h4><div class="scr"><table data-cols="card-def-log"><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>Snap %</th><th>Tkl</th><th>TFL</th><th>Sk</th><th>QB hits</th><th>Prs</th><th>INT</th><th>PD</th><th>Tgt</th><th>Cmp</th><th>Yds alw</th><th>TD alw</th></tr></thead><tbody>${logs.map(r=>`<tr><td class="l">${gbtn(gameKey(r.team,r.week),r.week)}</td><td class="l">${oppBtn(r.opponent_team,((gameOf(r.team,r.week)||{}).at?'@ ':'vs ')+r.opponent_team,null)}</td><td>${pct(r.snap_pct)}</td><td>${f0(r.tkl)}</td><td>${f0(r.tfl)}</td><td>${f1(r.sk)}</td><td>${f0(r.qbh)}</td><td>${f0(r.prs)}</td><td>${f0(r.int)}</td><td>${f0(r.pd)}</td><td>${f0(r.tgt)}</td><td>${f0(r.cmp)}</td><td>${f0(r.yds_alw)}</td><td>${f0(r.td_alw)}</td></tr>`).join('')}</tbody></table></div><div class="note">Pressures and coverage are Pro Football Reference charting (via nflverse).</div></section>
-    <section class="links"><a href="stats.html#defenders/${esc(l.team)}">All ${esc(l.team)} defenders →</a>${obtn(l.team,esc(l.team)+' offense card')}${(n=>n?obtn(n.opp,`Wk ${D.META.next_week}: ${esc(n.opp)} offense card`):'')(nextOpp(l.team))}</section>
+    <section class="links">${dbtn(l.team,esc(l.team)+' defense →','unit')}${obtn(l.team,esc(l.team)+' offense →')}${(n=>n?obtn(n.opp,`Wk ${D.META.next_week}: ${esc(n.opp)} offense →`):'')(nextOpp(l.team))}</section>
     ${newsBlock()}`;
   }
   function linemanHTML(id){
     const r=X.OL.get(id);const P=v=>num(v)?(v*100).toFixed(1)+'%':'–';
     const d=num(r.prs_on)&&num(r.prs_off)?r.prs_off-r.prs_on:null;
     return `<div class="pc-top"><div><h3>${esc(r.name)}</h3>
-      <div class="sub"><span>${esc(r.slot||r.pos)} · ${dbtn(r.team,r.team,'tmlink')}</span><span>bye ${byeWeek(r.team)||'–'}</span>${nextLine(r.team)}</div></div></div>
+      <div class="sub"><span>${esc(r.slot||r.pos)} · ${obtn(r.team,esc(r.team),'tmlink')}</span><span>bye ${byeWeek(r.team)||'–'}</span>${nextLine(r.team)}</div></div></div>
     <section><div class="tags">${injTag(id)}</div><div class="tiles" style="margin-top:8px">
       <div><span>Starts</span><b>${r.starts}</b><small>${r.g} games played</small></div>
       <div><span>Snap %</span><b>${pct(r.snap_pct)}</b><small>${r.snaps} snaps</small></div>
@@ -301,7 +302,7 @@
       <div><span>Sacks / g with</span><b>${f1(r.sk_on)}</b><small>without ${f1(r.sk_off)}</small></div>
       <div><span>YBC / carry with</span><b>${num(r.ybc_on)?r.ybc_on.toFixed(2):'–'}</b><small>without ${num(r.ybc_off)?r.ybc_off.toFixed(2):'–'}</small></div></div>
       <div class="note">${num(d)?`The line allowed pressure on ${Math.abs(d*100).toFixed(1)} pts ${d>0?'fewer':'more'} percent of dropbacks in his starts. `:''}Team-level with/without: free data has no per-lineman pressures allowed (that's PFF film charting / NFL tracking data). Small samples swing a lot.</div></section>
-    <section class="links"><a href="stats.html#oline/${esc(r.team)}">${esc(r.team)} O-line →</a>${obtn(r.team,esc(r.team)+' offense card')}${(n=>n?`<a href="stats.html#defenders/${esc(n.opp)}">Wk ${D.META.next_week}: ${esc(n.opp)} defenders →</a>`:'')(nextOpp(r.team))}</section>
+    <section class="links"><a href="stats.html#oline/${esc(r.team)}">${esc(r.team)} O-line →</a>${obtn(r.team,esc(r.team)+' offense →')}${(n=>n?dbtn(n.opp,`Wk ${D.META.next_week}: ${esc(n.opp)} defense →`,'unit'):'')(nextOpp(r.team))}</section>
     ${newsBlock()}`;
   }
   /* team pressure rates: allowed by the offense, generated by the defense (per dropback) */
@@ -319,7 +320,7 @@
     const nm=a=>`${pbtn(a.id,a.name)} <span class="dim">${esc(a.pos||'')}</span>`;
     return `<section><h4>Pass rush <span class="sp"></span><span>season</span></h4><div class="scr"><table data-cols="card-dst-rush"><thead><tr><th class="l">Player</th><th>Snap %</th><th>Prs</th><th>Sk</th><th>QB hits</th><th>TFL</th></tr></thead><tbody>${rush.map(a=>`<tr><td class="l">${nm(a)}</td><td>${pct(a.snap)}</td><td>${a.prs}</td><td>${f1(a.sk)}</td><td>${a.qbh}</td><td>${a.tfl}</td></tr>`).join('')}</tbody></table></div></section>
     ${cov.length?`<section><h4>Coverage: most yards allowed</h4><div class="scr"><table data-cols="card-dst-cov"><thead><tr><th class="l">Player</th><th>Tgt</th><th>Cmp</th><th>Yds</th><th>TD</th><th>INT</th><th>PD</th><th>Rtg</th></tr></thead><tbody>${cov.map(a=>`<tr><td class="l">${nm(a)}</td><td>${a.tgt}</td><td>${a.cmp}</td><td>${a.yds}</td><td>${a.tda}</td><td>${a.int}</td><td>${a.pd}</td><td>${num(a.rating)?a.rating.toFixed(0):'–'}</td></tr>`).join('')}</tbody></table></div><div class="note">Rating = passer rating when targeted (higher = easier to throw on). Pro Football Reference charting.</div></section>`:''}
-    <section class="links"><a href="stats.html#defenders/${esc(team)}">All ${esc(team)} defenders →</a>${obtn(team,esc(team)+' offense card')}</section>`;
+    <section class="links">${obtn(team,esc(team)+' offense →')}</section>`;
   }
   /* team card: the offense's fantasy players (current team), with next week's matchup rank, linked to the full Offense tab */
   function offenseHTML(team){
@@ -329,7 +330,7 @@
     if(!list.length)return '';
     list.sort((a,b)=>b.fpg-a.fpg);const top=list.slice(0,10);
     return `<section><h4>${esc(team)} offense <span class="sp"></span><span>${SCORING[sc].label} per game · season</span></h4><div class="scr"><table data-cols="card-team-off"><thead><tr><th class="l">Player</th><th>G</th><th>FP/g</th><th>Snap %</th><th>Tgt/g</th><th>Car/g</th>${nx?`<th class="l">Wk ${D.META.next_week}</th>`:''}</tr></thead><tbody>${top.map(a=>`<tr><td class="l">${pbtn(a.id,a.name)} <span class="dim">${a.pos}</span></td><td>${a.g}</td><td class="fp">${f1(a.fpg)}</td><td>${pct(a.snap)}</td><td>${f1(a.tgt)}</td><td>${f1(a.car)}</td>${nx?`<td class="l">${oppBtn(nx.opp,(nx.at?'@ ':'vs ')+nx.opp,a.pos)}</td>`:''}</tr>`).join('')}</tbody></table></div><div class="note">Top ${top.length} by fantasy points per game.${nx?` Rank = PPR points ${esc(nx.opp)} allows to that position (green = soft matchup).`:''}</div></section>
-    <section class="links">${obtn(team,esc(team)+' offense card')}<a href="stats.html#offense/${esc(team)}">All ${esc(team)} offense →</a><a href="stats.html#defenders/${esc(team)}">${esc(team)} defenders →</a>${nx?`<a href="stats.html#defenders/${esc(nx.opp)}">Wk ${D.META.next_week}: ${esc(nx.opp)} defenders →</a>`:''}</section>`;
+    <section class="links">${obtn(team,esc(team)+' offense →')}${nx?dbtn(nx.opp,`Wk ${D.META.next_week}: ${esc(nx.opp)} defense →`,'unit'):''}</section>`;
   }
   function oppLineHTML(team){
     const nx=nextOpp(team);if(!nx)return '';const opp=nx.opp;const ol=(X.OLT.get(opp)||[]);if(!ol.length)return '';
@@ -342,7 +343,7 @@
       <div><span>${esc(opp)} allows</span><b>${P(them.alw)}</b><small>${them.alw_rk?ord(them.alw_rk)+' of '+n+' (1st = fewest)':''}</small></div></div>
       <div class="scr" style="margin-top:8px"><table data-cols="card-opp-ol"><thead><tr><th class="l">Slot</th><th class="l">Lineman</th><th>Starts</th><th>Snap %</th><th>Prs % with</th><th>without</th><th class="l">Injury</th></tr></thead><tbody>${st.map(r=>`<tr><td class="l">${esc(r.slot||r.pos)}</td><td class="l">${pbtn(r.player_id,r.name)}</td><td>${r.starts}</td><td>${pct(r.snap_pct)}</td><td>${P(r.prs_on)}</td><td>${P(r.prs_off)}</td><td class="l dim">${esc(r.inj||'')}</td></tr>`).join('')}</tbody></table></div>
       <div class="note">Pressure rate = pressures ÷ dropbacks. With/without = the ${esc(opp)} line in games each starter started vs didn't (team-level; no free per-lineman pressure data).</div></section>
-    <section class="links"><a href="stats.html#oline/${esc(opp)}">${esc(opp)} O-line →</a>${obtn(opp,esc(opp)+' offense card')}${oppBtn(opp,esc(opp)+' D/ST card',null)}</section>`;
+    <section class="links"><a href="stats.html#oline/${esc(opp)}">${esc(opp)} O-line →</a>${obtn(opp,esc(opp)+' offense →')}${oppBtn(opp,esc(opp)+' D/ST card',null)}</section>`;
   }
   /* ---------- team offense card (o:<TEAM>) ----------
      Built like the game card: top 10 fantasy players by default, position chips show every player at that spot
@@ -355,6 +356,22 @@
     for(const [k,desc] of [['pf',1],['yds',1],['py',1],['ry',1],['epa',1],['succ',1],['third',1],['rz',1],['expl',1],['prs',0]])
       Object.keys(out).filter(t=>num(out[t][k])).sort((a,b)=>desc?out[b][k]-out[a][k]:out[a][k]-out[b][k]).forEach((t,i)=>out[t][k+'_rk']=i+1);
     return IX._to=out;
+  }
+  /* offense card: the team's O-line (depth chart order), with/without pressure rates */
+  function olineHTML(team){
+    const ol=(X.OLT.get(team)||[]);if(!ol.length)return '';const P=v=>num(v)?(v*100).toFixed(1)+'%':'–';
+    const order={LT:1,LG:2,C:3,RG:4,RT:5};const rows=[...ol].sort((a,b)=>(order[a.slot]||9)-(order[b.slot]||9)||(b.snap_pct||0)-(a.snap_pct||0));
+    return `<section><h4>O-line <span class="sp"></span><span>season</span></h4><div class="scr"><table data-cols="card-off-ol"><thead><tr><th class="l">Slot</th><th class="l">Lineman</th><th>Starts</th><th>Snap %</th><th>Prs % with</th><th>without</th><th>YBC with</th><th class="l">Injury</th></tr></thead><tbody>${rows.map(r=>`<tr><td class="l">${esc(r.slot||r.pos||'')}</td><td class="l">${pbtn(r.player_id,r.name)}</td><td>${f0(r.starts)}</td><td>${pct(r.snap_pct)}</td><td>${P(r.prs_on)}</td><td>${P(r.prs_off)}</td><td>${num(r.ybc_on)?r.ybc_on.toFixed(2):'–'}</td><td class="l dim">${esc(r.inj||'')}</td></tr>`).join('')}</tbody></table></div><div class="note">Slot = current depth chart (2 = backup). Pressure rate = pressures ÷ dropbacks for the team in games he started vs didn't; YBC = rushing yards before contact per carry when he started. Team-level: free data has no per-lineman pressures.</div></section>`;
+  }
+  /* D/ST card: every defender, built like the offense card's player list (top 10 by snaps, DL/LB/DB chips show everyone) */
+  function defListHTML(team){
+    const ds=(X.DT.get(team)||[]);if(!ds.length)return '';
+    const G={DE:'DL',DT:'DL',NT:'DL',DL:'DL',LB:'LB',OLB:'LB',ILB:'LB',MLB:'LB',CB:'DB',DB:'DB',SAF:'DB',S:'DB',FS:'DB',SS:'DB'};
+    const list=[...ds].sort((a,b)=>(b.snap||0)*b.g-(a.snap||0)*a.g);let top=0;
+    const rows=list.map(a=>{const inTop=a.g>=2&&top<10;if(inTop)top++;const g=a.g||1;
+      return `<tr data-t="${G[a.pos]||a.pos}" class="${inTop?'':'gc-x'}"><td class="l">${pbtn(a.id,a.name)} <span class="dim">${esc(a.pos||'')} · ${a.g} G · ${pct(a.snap)} snaps</span></td><td>${f1(a.tkl/g)} tkl</td><td>${f1(a.sk)} sk</td><td>${a.prs} prs</td><td>${a.int} INT · ${a.pd} PD</td></tr>`}).join('');
+    const chips=`<span class="gc-chips">${[['','Top 10'],['DL','DL'],['LB','LB'],['DB','DB']].map(([v,l])=>`<button type="button" data-gf="${v}" aria-pressed="${v===''}">${l}</button>`).join('')}</span>`;
+    return `<section class="gc-pl"><h4>Defenders <span class="sp"></span><span>season · tackles per game, other stats total</span></h4>${chips}<div class="scr"><table><tbody>${rows}</tbody></table></div><div class="note">Top 10 by snaps played. Tap a position to see everyone there.</div></section>`;
   }
   function offHTML(team){
     const tm=D.TM[team]||{name:team,nick:team};const sc=scoring(),sk=SCORING[sc].k;const nx=nextOpp(team);const lw=D.META.last_completed_week;
@@ -371,19 +388,20 @@
     const d=nx&&dvp()[nx.opp],dn=Object.keys(dvp()).length;
     const cell=p=>`<div><span>${p}</span><b>${d&&d[p]?d[p].v.toFixed(1):'–'}</b><span class="mrk ${d&&d[p]?rkClass(d[p].rk,dn):'mid'}">${d&&d[p]?ord(d[p].rk):''}</span></div>`;
     return `<div class="pc-top">${tm.logo?`<img class="logo" src="${esc(tm.logo)}" alt="" loading="lazy" onerror="this.remove()">`:''}<div><h3>${esc(team)} offense</h3>
-      <div class="sub"><span>${esc(tm.name||team)} · ${td.rec}</span><span>bye ${byeWeek(team)||'–'}</span>${nx?`<span>${gbtn(nx.g.game_id,'Wk '+D.META.next_week)} ${nx.at?'@':'vs'} ${dbtn(nx.opp,nx.opp)}${num(nx.implied)?` · implied ${nx.implied.toFixed(1)}`:''}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}<span class="units">${dbtn(team,'D/ST card →','unit')}</span></div></div></div>
+      <div class="sub"><span>${esc(tm.name||team)} · ${td.rec}</span><span>bye ${byeWeek(team)||'–'}</span>${nx?`<span>${gbtn(nx.g.game_id,'Wk '+D.META.next_week)} ${nx.at?'@':'vs'} ${dbtn(nx.opp,nx.opp)}${num(nx.implied)?` · implied ${nx.implied.toFixed(1)}`:''}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}<span class="units">${dbtn(team,'Defense →','unit')}</span></div></div></div>
     <section><div class="tags"><span class="sp" style="flex:1"></span>${scoringSeg(sc)}</div>
       <div class="tiles" style="margin-top:8px"><div><span>Points / g</span><b>${f1(o.pf)}</b><small>${o.pf_rk?ord(o.pf_rk)+' of '+n:''}</small></div><div><span>Yards / g</span><b>${f0(o.yds)}</b><small>${o.yds_rk?ord(o.yds_rk):''}</small></div><div><span>Pass yds / g</span><b>${f0(o.py)}</b><small>${o.py_rk?ord(o.py_rk):''}</small></div><div><span>Rush yds / g</span><b>${f0(o.ry)}</b><small>${o.ry_rk?ord(o.ry_rk):''}</small></div></div></section>
     <section class="gc-pl"><h4>Fantasy players <span class="sp"></span><span>${SCORING[sc].label} per game this season</span></h4>${chips}<div class="scr"><table><tbody>${plRows||'<tr><td class="dim">No player data yet.</td></tr>'}</tbody></table></div><div class="note">Top 10 shown (2+ games). Tap a position to see everyone there.${nx?` Rank = PPR points ${esc(nx.opp)} allows to that position (green = soft matchup).`:''}</div></section>
     ${nx?`<section><h4>Wk ${D.META.next_week} matchup: ${esc(nx.opp)} defense · PPR allowed per game</h4><div class="dvp">${['QB','RB','WR','TE'].map(cell).join('')}</div><div class="note">Rank 1st = gives up the most (good for ${esc(team)}).</div></section>
-    <section class="links">${dbtn(nx.opp,esc(nx.opp)+' D/ST card','unit')}<a href="stats.html#defenders/${esc(nx.opp)}">${esc(nx.opp)} defenders →</a>${gbtn(nx.g.game_id,'Game card','unit')}</section>`:''}
+    <section class="links">${dbtn(nx.opp,esc(nx.opp)+' defense →','unit')}${obtn(nx.opp,esc(nx.opp)+' offense →')}${gbtn(nx.g.game_id,'Game card','unit')}</section>`:''}
     <section><h4>Team offense per game</h4><div class="scr"><table><tbody>
       <tr><td class="l">EPA / play</td><td>${num(o.epa)?o.epa.toFixed(2):'–'}</td><td>${rk('epa','1st = best')}</td><td class="l">Red zone TD %</td><td>${P1(o.rz)}</td><td>${rk('rz','1st = best')}</td></tr>
       <tr><td class="l">Success rate</td><td>${P1(o.succ)}</td><td>${rk('succ','1st = best')}</td><td class="l">Explosive plays / g</td><td>${f1(o.expl)}</td><td>${rk('expl','1st = most 20+ yd plays')}</td></tr>
       <tr><td class="l">3rd down %</td><td>${P1(o.third)}</td><td>${rk('third','1st = best')}</td><td class="l">Pressure % allowed</td><td>${num(o.prs)?(o.prs*100).toFixed(1)+'%':'–'}</td><td>${rk('prs','1st = fewest')}</td></tr>
     </tbody></table></div><div class="note">Offense ranks: green = top 8, red = bottom 8.</div></section>
     <section><h4>Game log</h4><div class="scr"><table data-cols="card-off-log"><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>Pts</th><th>Yds</th><th>Pass</th><th>Rush</th><th>Sacked</th><th>Prs alw</th></tr></thead><tbody>${td.rows.map(r=>`<tr><td class="l">${gbtn(gameKey(team,r.week),r.week)}</td><td class="l">${oppBtn(r.opponent_team,((gameOf(team,r.week)||{}).at?'@ ':'vs ')+r.opponent_team,null)}</td><td class="fp">${f0(r.points_for)}</td><td>${f0(r.total_yards)}</td><td>${f0(r.passing_yards)}</td><td>${f0(r.rushing_yards)}</td><td>${f0(r.sacks_suffered)}</td><td>${f0(r.pressures_allowed)}</td></tr>`).join('')}</tbody></table></div></section>
-    <section class="links">${dbtn(team,esc(team)+' D/ST card','unit')}<a href="stats.html#offense/${esc(team)}">All ${esc(team)} offense →</a><a href="stats.html#oline/${esc(team)}">${esc(team)} O-line →</a></section>
+    ${olineHTML(team)}
+    <section class="links">${dbtn(team,esc(team)+' defense →','unit')}</section>
     <section><h4>Team news <span class="sp"></span><span data-news-src></span></h4><div data-news><span class="spin"></span>Loading news…</div></section>`;
   }
   /* ---------- game card (g:<nflverse game_id>) ---------- */
@@ -837,7 +855,7 @@
 
   /* markup helpers for pages */
   function pbtn(id,name,cls){return `<button type="button" class="pname ${cls||''}" data-card="p:${esc(id)}" data-name="${esc(name)}" aria-expanded="false">${esc(name)}</button>`}
-  function obtn(team,label){return `<button type="button" class="unit" data-card="o:${esc(team)}" aria-expanded="false">${label}</button>`}
+  function obtn(team,label,cls){return `<button type="button" class="${cls?'pname '+cls:'unit'}" data-card="o:${esc(team)}" aria-expanded="false">${label}</button>`}
   function dbtn(team,label,cls){return `<button type="button" class="pname ${cls||''}" data-card="d:${esc(team)}" aria-expanded="false">${esc(label||team)}</button>`}
   window.NFLSCards={provide,load,loadX,open,push,close,addPin,gbtn,gameKey,pbtn,dbtn,oppBtn,mrk,newsFor,playerSummary,defSummary,teamDefense,dvp,gameOf,nextOpp,byeWeek,scoring,SCORING,data:()=>D,index:()=>IX};
 })();

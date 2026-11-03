@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.49">
-<script src="assets/site.js?v=1.49" defer></script>
-<script src="assets/cards.js?v=1.49" defer></script>
-<script src="assets/glossary.js?v=1.49" defer></script>
-<script src="assets/tables.js?v=1.49" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.50">
+<script src="assets/site.js?v=1.50" defer></script>
+<script src="assets/cards.js?v=1.50" defer></script>
+<script src="assets/glossary.js?v=1.50" defer></script>
+<script src="assets/tables.js?v=1.50" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -295,11 +295,14 @@ async function applyLeague(lg){
 function hookLeague(){if(!window.NFLS)return setTimeout(hookLeague,50);NFLS.onLeague(lg=>{applyLeague(lg)})}
 /* result cells that name a player, team or game open the matching card */
 const TEAMCOL=/^(team|opponent_team|opp|opponent|recent_team|posteam|defteam|home_team|away_team|defense|faces_defense|dst|def|club_code)$/i;
+/* a player's own team (team / recent_team / posteam next to a player column) opens the offense card; opponents and defense-only results open the defense card */
+const OFFCOL=/^(team|recent_team|posteam|club_code)$/i;
+function hasPlayer(){return RES&&RES.cols.some(c=>/^(player_id|gsis_id|player|player_name|player_display_name|name|passer|rusher|receiver|ball_carrier|target)$/i.test(c))}
 function cardCell(c,v,txt){
   if(typeof v!=='string')return null;
   if(NAMES.has(v))return `<button type="button" class="pname" data-card="p:${esc(NAMES.get(v))}" data-name="${esc(v)}" aria-expanded="false">${txt}</button>`;
   if(/^player_id$|^gsis_id$/i.test(c)&&/^00-\d{7}$/.test(v))return `<button type="button" class="pname" data-card="p:${esc(v)}" aria-expanded="false">${txt}</button>`;
-  if(TEAMCOL.test(c)&&/^[A-Z]{2,3}$/.test(v))return `<button type="button" class="pname" data-card="d:${esc(v)}" aria-expanded="false">${txt}</button>`;
+  if(TEAMCOL.test(c)&&/^[A-Z]{2,3}$/.test(v)){const k=OFFCOL.test(c)&&hasPlayer()?'o':'d';return `<button type="button" class="pname" data-card="${k}:${esc(v)}" aria-expanded="false">${txt}</button>`}
   if(/^game_id$/i.test(c)&&/^\d{4}_\d{2}_[A-Z]{2,3}_[A-Z]{2,3}$/.test(v))return `<button type="button" class="gl-g" data-card="g:${esc(v)}">${txt}</button>`;
   return null}
 /* figure out which result column holds players (or defenses) so rows can show FA / MINE */
