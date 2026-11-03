@@ -1,12 +1,17 @@
 name: Weekly articles
 
 # The Rundown (articles.html + the "This week" strip on Home), 67FFL.
-# Recap Tuesday after the morning data refresh; preview Thursday after the pre-TNF refresh.
+# Recap Tuesday: starts as soon as a Tuesday data refresh finishes (5:17 AM PT, again 7:17 AM),
+# so it's up around 6 AM. Later Tuesday runs (and the 8:41 AM backup) skip if it already exists.
+# Preview Thursday after the pre-TNF refresh. Manual runs always (re)write.
 # Claude writes the prose from computed facts (secret ANTHROPIC_API_KEY); without it, template text.
 # Times are UTC; Pacific (standard time) in comments.
 on:
+  workflow_run:
+    workflows: ["Update data"]
+    types: [completed]
   schedule:
-    - cron: "41 16 * * 2"   # Tue 8:41 AM PT: recap of the week that just finished
+    - cron: "41 16 * * 2"   # Tue 8:41 AM PT: backup for the recap (skips if already written)
     - cron: "7 22 * * 4"    # Thu 2:07 PM PT: preview of the coming week
   workflow_dispatch:
     inputs:
@@ -29,6 +34,8 @@ concurrency:
 
 jobs:
   article:
+    # after "Update data": only if it succeeded (the Tuesday check is in the Build step)
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -49,7 +56,12 @@ jobs:
           if [ "$EVENT" = "schedule" ]; then
             [ "$SCHED" = "41 16 * * 2" ] && KIND=recap || KIND=preview
           fi
+          if [ "$EVENT" = "workflow_run" ]; then
+            [ "$(TZ=America/Los_Angeles date +%u)" != 2 ] && echo "Not Tuesday: no recap" && exit 0
+            KIND=recap
+          fi
           args="--kind ${KIND:-recap}"
+          [ "$EVENT" != "workflow_dispatch" ] && args="$args --skip-existing"
           [ -n "$WEEK" ] && args="$args --week $WEEK"
           [ "$NO_LLM" = "true" ] && args="$args --no-llm"
           [ -z "$ANTHROPIC_API_KEY" ] && echo "::warning::ANTHROPIC_API_KEY secret not set: using template text"
