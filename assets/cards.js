@@ -216,12 +216,10 @@
     const tm=D.TM[team]||{name:team,nick:team};const d=dvp()[team],td=teamDefense(team),n=Object.keys(dvp()).length;const nx=nextOpp(team);const ds=defSummary(team);
     const cell=p=>`<div style="${p===pos?'box-shadow:inset 0 0 0 2px var(--blue)':''}"><span>${p}</span><b>${d?d[p].v.toFixed(1):'–'}</b><span class="mrk ${d?rkClass(d[p].rk,n):'mid'}">${d?ord(d[p].rk):''}</span></div>`;
     const rk=(r,label)=>`<span class="mrk ${rkClass(r,td.n)}" title="${label}">${ord(r)}</span>`;
-    const logs=td.rows.map(r=>({week:r.week,fantasy_points_ppr:r.dst_pts}));
     return `<div class="pc-top">${tm.logo?`<img class="logo" src="${esc(tm.logo)}" alt="" loading="lazy" onerror="this.remove()">`:''}<div><h3>${esc(team)} D/ST</h3>
       <div class="sub"><span>${esc(tm.name||team)} · ${td.rec}</span><span>bye ${byeWeek(team)||'–'}</span>${nx?`<span>${gbtn(nx.g.game_id,'Wk '+D.META.next_week)} ${nx.at?'@':'vs'} ${dbtn(nx.opp,nx.opp)}${num(nx.opp_implied)?` · opp implied ${nx.opp_implied.toFixed(1)}`:''}</span>`:`<span>Wk ${D.META.next_week} bye</span>`}<span class="units">${obtn(team,'Offense →')}</span></div></div></div>
     <section><div class="tags">${ownerTag('DEF:'+team)}</div>
       <div class="tiles" style="margin-top:8px"><div><span>D/ST pts / g</span><b>${f1(td.dst)}</b><small>${ord(td.rk.dst)} of ${td.n}</small></div><div><span>Last 3</span><b>${f1(ds.l3)}</b><small>${num(ds.sd)?'±'+ds.sd.toFixed(1)+' weekly':''}</small></div><div><span>Sacks / g</span><b>${f1(td.sk)}</b><small>${ord(td.rk.sk)}</small></div><div><span>Takeaways / g</span><b>${f1(td.tk)}</b><small>${ord(td.rk.tk)}</small></div></div></section>
-    <section><h4>D/ST points by week</h4>${bars(logs,'fantasy_points_ppr',team)}</section>
     <section><h4>PPR points allowed per game · rank (1st = gives up most)</h4><div class="dvp">${['QB','RB','WR','TE'].map(cell).join('')}</div></section>
     <section><h4>Team defense per game</h4><div class="scr"><table><tbody>
       <tr><td class="l">Points allowed</td><td>${td.pa.toFixed(1)}</td><td>${rk(td.rk.pa,'1st = fewest allowed')}</td><td class="l">Pressures</td><td>${td.pr.toFixed(1)}</td><td>${rk(td.rk.pr,'1st = most')}</td></tr>
