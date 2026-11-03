@@ -166,9 +166,17 @@ def pick_weekly(vids: list[dict], team: str = "", now: datetime | None = None) -
     hc = sorted((v for v in vids if v["hc"] and not v["postgame"]), key=_ts)
     ks = kickoffs(team, now) if team else []
     window: list[dict] = []
+    def after_game(v: dict, k: datetime) -> bool:
+        # next ET calendar day, from 6 AM on (late postgame uploads land just after midnight);
+        # sitemaps without a time of day only give the date, so then just "a later date"
+        t, kd = _ts(v).astimezone(et), k.astimezone(et).date()
+        if (t.hour, t.minute, t.second) == (0, 0, 0) or (_ts(v).hour, _ts(v).minute) == (0, 0):
+            return t.date() > kd or _ts(v).date() > kd
+        return t.date() > kd and (t.date() > kd + timedelta(days=1) or t.hour >= 6)
+
     for i, k in enumerate(ks[:3]):
         end = ks[i - 1] if i else now + timedelta(days=1)
-        window = [v for v in hc if k + timedelta(hours=12) <= _ts(v) < end]
+        window = [v for v in hc if after_game(v, k) and _ts(v) < end]
         if window:
             break
     if not ks:
@@ -209,6 +217,16 @@ def _alarm(*_):
 
 
 def fetch_captions(videos: list[dict]) -> None:
+    _fetch_captions(videos)
+    retry = [v for v in videos if not v.get("transcript")]
+    if retry:
+        log(f"retrying {len(retry)} video(s) once")
+        for v in retry:
+            v.pop("error", None)
+        _fetch_captions(retry)
+
+
+def _fetch_captions(videos: list[dict]) -> None:
     """Fill v["transcript"] (or v["error"]) for each video, using one headless browser.
     Each video gets a 120 s watchdog so one stuck page can't eat the whole run."""
     import signal
@@ -384,7 +402,7 @@ def main() -> None:
             continue
         if "--list" in sys.argv:
             for v in sorted(allv, key=lambda v: v["date"]):
-                log(f"    {v['date']} {'HC ' if v['hc'] else '   '}{'PG ' if v['postgame'] else '   '}{v['duration']:>5}s {v['title'][:70]} | {', '.join(v['tags'])[:50]}")
+                log(f"    {v['ts'][:19]} {'HC ' if v['hc'] else '   '}{'PG ' if v['postgame'] else '   '}{v['duration']:>5}s {v['title'][:70]} | {', '.join(v['tags'])[:50]}")
         vids = allv if every else pick_weekly(allv, t)
         vids = [v for v in vids if v["id"] not in index["done"]]
         n_hc = sum(v["hc"] for v in allv)
