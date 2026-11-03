@@ -46,7 +46,12 @@ h1 span{color:var(--blue)}
 .dot.ok{background:var(--good)}.dot.err{background:var(--margin)}
 .layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px;padding-block:18px 60px}
 @media (max-width:900px){.layout{grid-template-columns:1fr}}
-aside{display:grid;gap:14px;align-content:start}
+aside{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;align-content:start;min-width:0}
+/* keep the left column inside its 250px track (Safari let long recipe / saved names push the boxes under the main column) */
+aside > .box{min-width:0;max-width:100%;overflow:hidden}
+aside .list{overflow-x:hidden}
+aside .item{white-space:normal;overflow-wrap:anywhere}
+aside .saved-row .item{white-space:nowrap}
 .box{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;box-shadow:var(--shadow)}
 .box h2{font-family:var(--f-display);font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.03em;margin:0;padding:10px 12px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:baseline}
 .box h2 small{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);text-transform:none;letter-spacing:0;font-weight:400}
