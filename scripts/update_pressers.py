@@ -1,0 +1,388 @@
+"""Weekly head-coach press-conference digest for the NFL_stats Pressers page.
+
+For each team site (all 32 run the same NFL club platform):
+  1. Read its video sitemap and keep press conferences / media sessions from the last few days.
+     Weekly mode (default): head coach only, two per team: the day-after-game presser and the
+     first-practice-day presser = the two most recent non-postgame HC pressers on different days.
+  2. Load each video page in headless Chromium, catch the caption playlist (subs.m3u8) and
+     stitch the WebVTT segments into a transcript.
+  3. Have Claude turn the transcript into a structured summary (injuries, roles, fantasy signals).
+
+Writes:
+  data/pressers/YYYY-MM-DD.json   that day's summaries, all teams
+  data/pressers/index.json        available dates + every video already processed
+
+Transcripts are only held in memory: the repo (and the site) publish summaries and short quotes,
+never the full captions.
+
+Run:  python scripts/update_pressers.py                     (teams from PRESSERS_TEAMS, default ALL)
+      python scripts/update_pressers.py LV KC DET           (just these teams)
+      python scripts/update_pressers.py LV --dry-run        (find videos + captions, no Claude calls, no writes)
+      --all             every press video (old daily behaviour), not just the weekly HC pick
+      --save-dir=DIR    also write each transcript to DIR/<date>/<team> <slug>.txt (private use only:
+                        never point this inside the public repo / site)
+Env:  ANTHROPIC_API_KEY, PRESSERS_MODEL (default claude-haiku-5-5), PRESSERS_DAYS (default 8),
+      PRESSERS_MAX (max new videos per run, default 150)
+"""
+from __future__ import annotations
+
+import json
+import os
+import re
+import sys
+import urllib.request
+from datetime import date, datetime, timedelta, timezone
+from html import unescape
+from pathlib import Path
+from xml.etree import ElementTree as ET
+
+ROOT = Path(__file__).resolve().parent.parent
+OUT_DIR = ROOT / "data" / "pressers"
+INDEX = OUT_DIR / "index.json"
+PLAYERS = ROOT / "data" / "site" / "players.json"
+UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
+
+TEAMS = {
+    "ARI": "azcardinals.com", "ATL": "atlantafalcons.com", "BAL": "baltimoreravens.com", "BUF": "buffalobills.com",
+    "CAR": "panthers.com", "CHI": "chicagobears.com", "CIN": "bengals.com", "CLE": "clevelandbrowns.com",
+    "DAL": "dallascowboys.com", "DEN": "denverbroncos.com", "DET": "detroitlions.com", "GB": "packers.com",
+    "HOU": "houstontexans.com", "IND": "colts.com", "JAX": "jaguars.com", "KC": "chiefs.com",
+    "LA": "therams.com", "LAC": "chargers.com", "LV": "raiders.com", "MIA": "miamidolphins.com",
+    "MIN": "vikings.com", "NE": "patriots.com", "NO": "neworleanssaints.com", "NYG": "giants.com",
+    "NYJ": "newyorkjets.com", "PHI": "philadelphiaeagles.com", "PIT": "steelers.com", "SEA": "seahawks.com",
+    "SF": "49ers.com", "TB": "buccaneers.com", "TEN": "tennesseetitans.com", "WAS": "commanders.com",
+}
+
+# Head coach per team (2026). Matched by last name in the title/description/tags.
+COACHES = {
+    "ARI": "Mike LaFleur", "ATL": "Kevin Stefanski", "BAL": "Jesse Minter", "BUF": "Joe Brady",
+    "CAR": "Dave Canales", "CHI": "Ben Johnson", "CIN": "Zac Taylor", "CLE": "Todd Monken",
+    "DAL": "Brian Schottenheimer", "DEN": "Sean Payton", "DET": "Dan Campbell", "GB": "Matt LaFleur",
+    "HOU": "DeMeco Ryans", "IND": "Shane Steichen", "JAX": "Liam Coen", "KC": "Andy Reid",
+    "LA": "Sean McVay", "LAC": "Jim Harbaugh", "LV": "Klint Kubiak", "MIA": "Jeff Hafley",
+    "MIN": "Kevin O'Connell", "NE": "Mike Vrabel", "NO": "Kellen Moore", "NYG": "John Harbaugh",
+    "NYJ": "Aaron Glenn", "PHI": "Nick Sirianni", "PIT": "Mike McCarthy", "SEA": "Mike Macdonald",
+    "SF": "Kyle Shanahan", "TB": "Todd Bowles", "TEN": "Robert Saleh", "WAS": "Dan Quinn",
+}
+POSTGAME = re.compile(r"post-?game", re.I)
+
+
+def is_head_coach(team: str, title: str, desc: str, tags: list[str]) -> bool:
+    hay = " ".join([title, desc, *tags])
+    last = COACHES[team].split()[-1]
+    pat = re.escape(last).replace("'", "['’]?")  # O'Connell / O’Connell / OConnell
+    return bool(re.search(rf"\b{pat}\b", hay, re.I) or re.search(r"\bhead coach\b|\bHC\b", title))
+
+
+# Each club tags its videos a little differently ("Press Conferences", "Media Pass", Detroit's
+# "Media Sessions", SF's "49ers Press Pass", the Giants' "Interviews"), so match tags and titles.
+PRESSER_TAG = re.compile(r"press conference|media pass|media session|press pass|^interviews$|media availability|scrums?$", re.I)
+PRESSER_TITLE = re.compile(r"press conference|presser|media availability|\bscrums?\b|postgame (?:press|interview|availability)", re.I)
+SKIP = re.compile(r"espa[nñ]ol|spanish|highlight|podcast|cheer|trailer|mic'?d up|sights (?:&|and) sounds", re.I)
+MIN_SEC, MAX_SEC = 60, 3600
+
+NS = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9", "v": "http://www.google.com/schemas/sitemap-video/1.1"}
+
+
+def log(msg: str) -> None:
+    print(f"[pressers] {msg}", flush=True)
+
+
+def get(url: str, timeout: int = 30) -> str:
+    req = urllib.request.Request(url, headers={"User-Agent": UA})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read().decode("utf-8", errors="replace")
+
+
+# ---------- 1. discover ----------
+
+def discover(team: str, since: date) -> list[dict]:
+    domain = TEAMS[team]
+    root = ET.fromstring(get(f"https://www.{domain}/sitemap-video-fast-changing.xml"))
+    found = []
+    for u in root.findall("s:url", NS):
+        v = u.find("v:video", NS)
+        if v is None:
+            continue
+        title = unescape(v.findtext("v:title", "", NS)).strip()
+        tags = [t.strip() for t in unescape(v.findtext("v:tag", "", NS)).split(",") if t.strip()]
+        pub = v.findtext("v:publication_date", "", NS)[:10]
+        dur = int(v.findtext("v:duration", "0", NS) or 0)
+        hay = " ".join([title, *tags])
+        if not pub or date.fromisoformat(pub) < since or SKIP.search(hay):
+            continue
+        if not (any(PRESSER_TAG.search(t) for t in tags) or PRESSER_TITLE.search(title)):
+            continue
+        if dur and not (MIN_SEC <= dur <= MAX_SEC):
+            continue
+        url = u.findtext("s:loc", "", NS)
+        desc = unescape(re.sub(r"<[^>]+>", "", v.findtext("v:description", "", NS))).strip()
+        found.append({
+            "id": f"{team}:{url.rstrip('/').rsplit('/', 1)[-1]}", "team": team, "url": url, "title": title,
+            "description": desc, "tags": tags, "date": pub, "duration": dur,
+            "hc": is_head_coach(team, title, desc, tags), "postgame": bool(POSTGAME.search(hay)),
+            "thumb": v.findtext("v:thumbnail_loc", "", NS),
+        })
+    return found
+
+
+def pick_weekly(vids: list[dict]) -> list[dict]:
+    """Head coach only, two per week, anchored on the team's last game (its latest postgame video):
+    day_after = first HC presser after that game, first_practice = the next HC presser on a later day.
+    No postgame in the window (bye / sitemap gap): fall back to the two most recent HC pressers."""
+    hc = sorted((v for v in vids if v["hc"] and not v["postgame"]), key=lambda v: (v["date"], -v["duration"]))
+    games = sorted({v["date"] for v in vids if v["postgame"]}, reverse=True)
+    if games:
+        # latest game that already has HC pressers after it (run right after a game -> previous week)
+        for i, g in enumerate(games):
+            nxt = games[i - 1] if i else "9999"
+            week = [v for v in hc if g < v["date"] < nxt]
+            if week:
+                hc = week
+                break
+    else:
+        hc = hc[-6:]
+    picked: list[dict] = []
+    for v in (hc if games else hc[::-1]):
+        if all(p["date"] != v["date"] for p in picked):
+            picked.append(v)
+        if len(picked) == 2:
+            break
+    picked.sort(key=lambda v: v["date"])
+    for v, kind in zip(picked, ["day_after", "first_practice"]):
+        v["kind"] = kind
+    return picked
+
+
+# ---------- 2. captions ----------
+
+def vtt_to_text(vtt: str) -> str:
+    """WebVTT segments -> plain transcript, one line per speaker turn (">>" in broadcast captions)."""
+    lines: list[str] = []
+    for raw in vtt.splitlines():
+        t = unescape(raw.strip())
+        if not t or t.startswith(("WEBVTT", "X-TIMESTAMP", "NOTE")) or "-->" in t or t.isdigit():
+            continue
+        if lines and lines[-1] == t:  # segment boundaries repeat the last cue
+            continue
+        lines.append(t)
+    text = re.sub(r"\s+", " ", " ".join(lines))
+    return re.sub(r"\s*>>\s*", "\n>> ", text).strip()
+
+
+def fetch_captions(videos: list[dict]) -> None:
+    """Fill v["transcript"] (or v["error"]) for each video, using one headless browser."""
+    from playwright.sync_api import sync_playwright
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(args=["--autoplay-policy=no-user-gesture-required"])
+        ctx = browser.new_context(user_agent=UA, viewport={"width": 1280, "height": 800})
+        for v in videos:
+            page = ctx.new_page()
+            subs: list[str] = []
+            page.on("request", lambda r: subs.append(r.url) if "subs.m3u8" in r.url else None)
+            try:
+                page.goto(v["url"], wait_until="domcontentloaded", timeout=45000)
+                # The page JSON pairs each slug with its MCP (video platform) id; the caption
+                # segments live under /<mcpID>/, which tells us which playlist is this video's.
+                slug = v["url"].rstrip("/").rsplit("/", 1)[-1]
+                html = page.content()
+                m = re.search(r'"slug":"%s".*?"mcpID":"(\d+)"' % re.escape(slug), html, re.S)
+                mcp = m.group(1) if m else None
+                for _ in range(40):
+                    if subs:
+                        break
+                    page.wait_for_timeout(500)
+                    if _ == 10:  # nudge the player if autoplay didn't start
+                        page.evaluate("try{document.querySelector('video')?.play?.()?.catch?.(()=>{})}catch(e){}")
+                v["transcript"] = pick_transcript(subs, mcp)
+                if not v["transcript"]:
+                    v["error"] = "no captions found"
+            except Exception as e:  # noqa: BLE001
+                v["error"] = f"{type(e).__name__}: {e}"[:200]
+            finally:
+                page.close()
+            log(f"  {v['id']}: {len(v.get('transcript', '').split())} words" + (f" ({v['error']})" if v.get("error") else ""))
+        browser.close()
+
+
+def pick_transcript(sub_urls: list[str], mcp: str | None) -> str:
+    for su in dict.fromkeys(sub_urls):
+        segs = [l for l in get(su).splitlines() if l.startswith("http")]
+        if not segs or (mcp and f"/{mcp}/" not in segs[0]):
+            continue  # a preroll or a different video on the page
+        return vtt_to_text("\n".join(get(s) for s in segs))
+    return ""
+
+
+# ---------- 3. summarize ----------
+
+SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "required": ["speakers", "headline", "summary", "injuries", "fantasy", "topics", "quotes", "opponent"],
+    "properties": {
+        "speakers": {"type": "array", "items": {
+            "type": "object", "additionalProperties": False, "required": ["name", "role"],
+            "properties": {"name": {"type": "string"}, "role": {"type": "string"}}}},
+        "headline": {"type": "string"},
+        "summary": {"type": "string"},
+        "injuries": {"type": "array", "items": {
+            "type": "object", "additionalProperties": False, "required": ["player", "status", "detail"],
+            "properties": {"player": {"type": "string"},
+                           "status": {"type": "string", "enum": ["out", "doubtful", "questionable", "limited", "full", "returning", "ir", "unclear"]},
+                           "detail": {"type": "string"}}}},
+        "fantasy": {"type": "array", "items": {
+            "type": "object", "additionalProperties": False, "required": ["player", "signal", "note"],
+            "properties": {"player": {"type": "string"},
+                           "signal": {"type": "string", "enum": ["up", "down", "watch"]},
+                           "note": {"type": "string"}}}},
+        "topics": {"type": "array", "items": {
+            "type": "object", "additionalProperties": False, "required": ["topic", "detail"],
+            "properties": {"topic": {"type": "string"}, "detail": {"type": "string"}}}},
+        "quotes": {"type": "array", "items": {"type": "string"}},
+        "opponent": {"type": "string"},
+    },
+}
+
+SYSTEM = """You write a fantasy-football scouting digest from NFL press conference transcripts.
+
+The transcript comes from auto-generated broadcast captions, so names are often misspelled or misheard. \
+Use the roster and the video title/description to correct them, and only name a player when you are confident who is meant. \
+Reporter questions start with ">>" too; attribute statements to the speaker answering, not the reporter.
+
+Fill the fields like this:
+- speakers: who is at the podium (name + role such as "Head Coach", "QB", "Offensive Coordinator").
+- headline: one line, the most useful takeaway for a fantasy manager.
+- summary: a thorough paragraph (4-7 sentences) of what was said, in your own words.
+- injuries: every injury, practice-participation or availability update mentioned, one per player.
+- fantasy: players whose role, usage, playing time or outlook moved; "up", "down", or "watch" with a one-sentence reason.
+- topics: the other subjects covered (scheme, depth chart, opponent, team news), each paraphrased in 1-2 sentences.
+- quotes: at most two short verbatim quotes (under 20 words each) that carry real information.
+- opponent: next opponent if discussed, else "".
+
+Paraphrase everything except the quotes. Leave a list empty rather than padding it."""
+
+
+def rosters() -> dict[str, list[str]]:
+    try:
+        d = json.loads(PLAYERS.read_text())["data"]
+    except (OSError, KeyError, ValueError):
+        return {}
+    out: dict[str, set[str]] = {}
+    for name, team, pos in zip(d["player_display_name"], d["team"], d["position"]):
+        out.setdefault(team, set()).add(f"{name} ({pos})")
+    return {t: sorted(v) for t, v in out.items()}
+
+
+def summarize(client, model: str, v: dict, roster: list[str]) -> dict:
+    prompt = (
+        f"Team: {v['team']}\nVideo title: {v['title']}\nDescription: {v['description']}\nTags: {', '.join(v['tags'])}\n"
+        f"Roster (skill players): {', '.join(roster) or 'n/a'}\n\n<transcript>\n{v['transcript']}\n</transcript>"
+    )
+    resp = client.beta.messages.create(
+        model=model,
+        max_tokens=16000,
+        betas=["server-side-fallback-2026-07-01"],
+        fallbacks="default",
+        system=SYSTEM,
+        output_config={"effort": "medium", "format": {"type": "json_schema", "schema": SCHEMA}},
+        messages=[{"role": "user", "content": prompt}],
+    )
+    if resp.stop_reason == "refusal":
+        raise RuntimeError(f"refused ({getattr(resp.stop_details, 'category', None)})")
+    if resp.stop_reason == "max_tokens":
+        raise RuntimeError("hit max_tokens")
+    return json.loads(next(b.text for b in resp.content if b.type == "text"))
+
+
+# ---------- 4. write ----------
+
+def load_index() -> dict:
+    try:
+        return json.loads(INDEX.read_text())
+    except (OSError, ValueError):
+        return {"dates": [], "done": {}}
+
+
+def main() -> None:
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    dry = "--dry-run" in sys.argv
+    every = "--all" in sys.argv
+    save_dir = next((Path(a.split("=", 1)[1]) for a in sys.argv if a.startswith("--save-dir=")), None)
+    env_teams = os.environ.get("PRESSERS_TEAMS", "ALL").replace(",", " ").split()
+    teams = [t.upper() for t in (args or env_teams)]
+    if teams == ["ALL"]:
+        teams = list(TEAMS)
+    days = int(os.environ.get("PRESSERS_DAYS", "8"))
+    cap = int(os.environ.get("PRESSERS_MAX", "150"))
+    model = os.environ.get("PRESSERS_MODEL", "claude-haiku-5-5")
+    since = datetime.now(timezone.utc).date() - timedelta(days=days)
+
+    index = load_index()
+    new: list[dict] = []
+    for t in teams:
+        try:
+            allv = discover(t, since)
+        except Exception as e:  # noqa: BLE001
+            log(f"{t}: sitemap FAILED ({e})")
+            continue
+        vids = allv if every else pick_weekly(allv)
+        vids = [v for v in vids if v["id"] not in index["done"]]
+        n_hc = sum(v["hc"] for v in allv)
+        log(f"{t}: {len(allv)} press videos since {since}, {n_hc} head coach, picked: "
+            + (", ".join(f"{v['date']} {v.get('kind', '')} '{v['title'][:60]}'" for v in vids) or "none"))
+        new += vids
+    if len(new) > cap:
+        log(f"capping {len(new)} -> {cap} videos this run (the rest wait for tomorrow)")
+        new = sorted(new, key=lambda v: v["date"], reverse=True)[:cap]
+    if not new:
+        log("nothing new")
+        return
+
+    fetch_captions(new)
+    ready = [v for v in new if v.get("transcript")]
+    log(f"captions: {len(ready)}/{len(new)}")
+    if save_dir:
+        for v in ready:
+            f = save_dir / v["date"] / f"{v['team']} {v['id'].split(':', 1)[1]}.txt"
+            f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_text(f"{v['title']}\n{v['url']}\n\n{v['transcript']}\n")
+        log(f"saved {len(ready)} transcripts under {save_dir}")
+    if dry:
+        for v in new:
+            log(f"  [dry] {v['date']} {v['team']} {v['title']} -> {len(v.get('transcript', '').split())} words")
+        return
+
+    import anthropic
+
+    client = anthropic.Anthropic()
+    ros = rosters()
+    by_date: dict[str, list[dict]] = {}
+    for v in ready:
+        try:
+            s = summarize(client, model, v, ros.get(v["team"], []))
+        except (anthropic.APIError, RuntimeError, ValueError, StopIteration) as e:
+            log(f"  {v['id']}: summary FAILED ({e})")
+            continue
+        entry = {k: v[k] for k in ("id", "team", "url", "title", "date", "duration", "thumb")}
+        entry["kind"] = v.get("kind", "")
+        entry.update(words=len(v["transcript"].split()), model=model, **s)
+        by_date.setdefault(v["date"], []).append(entry)
+        index["done"][v["id"]] = v["date"]
+        log(f"  {v['id']}: {s['headline'][:90]}")
+
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    for d, entries in by_date.items():
+        f = OUT_DIR / f"{d}.json"
+        old = json.loads(f.read_text()) if f.exists() else []
+        merged = {e["id"]: e for e in old + entries}
+        f.write_text(json.dumps(sorted(merged.values(), key=lambda e: (e["team"], e["id"])), ensure_ascii=False, indent=1))
+    index["dates"] = sorted({*index["dates"], *by_date}, reverse=True)
+    index["updated_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
+    INDEX.write_text(json.dumps(index, indent=1, sort_keys=True))
+    log(f"wrote {sum(map(len, by_date.values()))} summaries across {len(by_date)} day(s)")
+
+
+if __name__ == "__main__":
+    main()

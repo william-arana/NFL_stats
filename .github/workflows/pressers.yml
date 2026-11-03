@@ -1,0 +1,33 @@
+name: Pressers (test)
+
+# Head-coach press conferences: video sitemap -> official captions -> (later) Claude summary.
+# For now this is a dry run only: it checks every team's sitemap and caption track and logs
+# what it would pick (no Claude calls, nothing written, no transcripts stored).
+# The weekly schedule + publishing get added once the dry run looks right.
+on:
+  push:
+    branches: [pressers]
+    paths: [scripts/update_pressers.py, .github/workflows/pressers.yml]
+  workflow_dispatch:
+    inputs:
+      teams:
+        description: "teams (space separated) or ALL"
+        default: ALL
+
+permissions:
+  contents: read
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-pressers.txt && python -m playwright install --with-deps chromium
+      - name: Dry run
+        env:
+          PRESSERS_TEAMS: ${{ inputs.teams || 'ALL' }}
+        run: python scripts/update_pressers.py --dry-run
