@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.60">
-<script src="assets/site.js?v=1.60" defer></script>
-<script src="assets/cards.js?v=1.60" defer></script>
-<script src="assets/glossary.js?v=1.60" defer></script>
-<script src="assets/tables.js?v=1.60" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.62">
+<script src="assets/site.js?v=1.62" defer></script>
+<script src="assets/cards.js?v=1.62" defer></script>
+<script src="assets/glossary.js?v=1.62" defer></script>
+<script src="assets/tables.js?v=1.62" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -142,17 +142,36 @@ let _dvp;function dvp(){if(_dvp)return _dvp;const games={},pts={};for(const r of
   const out={};for(const t in pts){out[t]={};for(const p of ['QB','RB','WR','TE'])out[t][p]={v:pts[t][p]/games[t].size}}
   for(const p of ['QB','RB','WR','TE']){const vs=Object.values(out).map(o=>o[p].v);const m=mean(vs),sd=Math.sqrt(mean(vs.map(v=>(v-m)**2)))||1;Object.keys(out).sort((a,b)=>out[b][p].v-out[a][p].v).forEach((t,i)=>{out[t][p].rk=i+1;out[t][p].z=(out[t][p].v-m)/sd})}
   return _dvp=out}
+/* A game counts if he played ≥10% of snaps and didn't leave early hurt.
+   Early exit = under half his usual (median) snap share AND he then missed his team's next game,
+   or it's his latest game and he's on this week's injury report. */
+function qualify(a){
+  const lw=META.last_completed_week,logs=[...a.logs].sort((x,y)=>x.week-y.week);
+  const real=logs.filter(l=>num(l.offense_pct)&&l.offense_pct>=0.10);
+  const v=real.map(l=>l.offense_pct).sort((x,y)=>x-y);const med=v.length?v[Math.floor((v.length-1)/2)]:0;
+  const played=new Set(real.map(l=>l.week));
+  const teamNext=(team,wk)=>{let n=null;for(const g of G)if((g.home_team===team||g.away_team===team)&&g.week>wk&&g.week<=lw&&(n==null||g.week<n))n=g.week;return n};
+  return real.filter(l=>{
+    if(l.offense_pct>=0.5*med)return true;
+    const nw=teamNext(l.team,l.week);
+    if(nw!=null)return played.has(nw);
+    return !(a.inj&&/out|ir|doubtful|questionable|limited|did not/i.test(a.inj[0]));
+  });
+}
 function players(){
   const lw=META.last_completed_week,by=new Map();
   for(const r of P){let a=by.get(r.player_id);if(!a){a={id:r.player_id,name:r.player_display_name,pos:r.position,team:r.team,logs:[]};by.set(r.player_id,a)}a.team=r.team;a.logs.push(r)}
   const out=[];
   for(const a of by.values()){
-    const rec=a.logs.filter(l=>l.week>lw-3),bef=a.logs.filter(l=>l.week<=lw-3);
-    a.g=a.logs.length;a.g3=rec.length;
+    a.g=a.logs.length;a.g3=a.logs.filter(l=>l.week>lw-3).length;
+    // games that count: ≥10% of snaps and not an early exit (see qualify()); L3 = his last 3 of those in the last 6 weeks
+    const q=qualify(a),rec=q.filter(l=>l.week>lw-6).slice(-3),bef=q.filter(l=>!rec.includes(l));a.q3=rec.length;
     a.ppr3=mean(rec.map(l=>l.fantasy_points_ppr));a.xfp3=mean(rec.map(l=>l.xfp));a.snap3=mean(rec.map(l=>l.offense_pct));a.snapB=mean(bef.map(l=>l.offense_pct));
     a.opp3=mean(rec.map(l=>(l.carries||0)+(l.targets||0)));a.oppB=mean(bef.map(l=>(l.carries||0)+(l.targets||0)));a.tgt3=mean(rec.map(l=>l.target_share));
     a.ppr=mean(a.logs.map(l=>l.fantasy_points_ppr));
-    a.snapD=num(a.snap3)&&num(a.snapB)?a.snap3-a.snapB:null;a.oppD=num(a.opp3)&&num(a.oppB)?a.opp3-a.oppB:null;
+    if(rec.length<2){a.ppr3=a.xfp3=null} // one game isn't enough to rank him
+    const okD=rec.length>=2&&bef.length>=2; // trends need 2+ real games on both sides
+    a.snapD=okD&&num(a.snap3)&&num(a.snapB)?a.snap3-a.snapB:null;a.oppD=okD&&num(a.opp3)&&num(a.oppB)?a.opp3-a.oppB:null;
     const n=nextOpp(a.team);a.next=n;const d=n&&dvp()[n.opp];a.mz=d&&d[a.pos]?d[a.pos].z:null;a.mrk=d&&d[a.pos]?d[a.pos].rk:null;
     a.inj=INJ[a.id]||null;
     a.idle=a.g3===0; // hasn't played in the last 3 weeks: only shown when searched for
@@ -242,7 +261,7 @@ function draw(){
       <td class="l"><button type="button" class="opp" data-card="o:${a.team}" title="${a.team} offense card">${a.team}</button></td><td class="l">${a.next?OPPB(a.next.opp,a.next.at,a.pos)+mrk(a.mrk):'<span class="pos">bye</span>'}</td>
       ${cell(a,'score',`<span class="score">${a.score.toFixed(2)}</span>`)}${cell(a,'xfp3',f1(a.xfp3))}${cell(a,'ppr3',f1(a.ppr3))}${cell(a,'snap3',pct(a.snap3))}<td>${sgn(a.snapD,0,100)}</td>${cell(a,'opp3',f1(a.opp3))}<td>${sgn(a.oppD,1)}</td><td>${pct(a.tgt3)}</td><td>${f1(a.ppr)}</td>
       <td class="l"><div class="why">${why(a)}</div></td></tr>`}).join('')}</tbody></table></div>`:`<div class="empty">${q?`No player matches “${esc(st.q.trim())}”${st.pos!=='ALL'?' at '+st.pos+' (switch to All)':''}.`:'No free agents at this position played in the last 3 weeks.'}</div>`}
-  <div class="foot"><span><b>Score</b> = 0.45 × expected points (last 3 games) + 0.20 × actual PPR (last 3) + 0.15 × snap-share change + 0.10 × touch change + 0.10 × next-week matchup. Each piece is a z-score within the position, so 0 is average and +1 is one standard deviation above. Bye week −0.5; Out/IR/Doubtful −1.</span>
+  <div class="foot"><span><b>Score</b> = 0.45 × expected points (last 3 games) + 0.20 × actual PPR (last 3) + 0.15 × snap-share change + 0.10 × touch change + 0.10 × next-week matchup. Each piece is a z-score within the position, so 0 is average and +1 is one standard deviation above. L3 = his last 3 games that count (≥10% of snaps, not an early injury exit, within the last 6 weeks); needs 2+ of them, and the Δ columns compare against 2+ earlier games that count. Bye week −0.5; Out/IR/Doubtful −1.</span>
     <span>L3 = last 3 weeks. Δ = last 3 weeks vs. earlier in the season. Green rank next to the opponent = top-8 most PPR allowed to that position.</span></div></section>
 
   <section class="box"><div class="box-h"><h2>D/ST streamers</h2><span class="hint">${ROST?'Available defenses (plus yours) for':'All defenses for'} Week ${META.next_week}</span></div>
