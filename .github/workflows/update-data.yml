@@ -37,6 +37,9 @@ jobs:
       - name: Pull nflverse data
         run: python scripts/update_data.py
 
+      - name: Our projection for next week (Compare)
+        run: python scripts/build_site_projection.py
+
       - name: Build Lab datasets + Guide previews
         run: python scripts/build_lab_data.py
 
