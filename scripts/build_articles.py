@@ -223,6 +223,14 @@ def recap_facts(week, args):
     league = sleeper(f"/league/{lg['id']}") if not args.fixture else {"roster_positions": ["QB", "RB", "RB", "WR", "WR", "TE", "FLEX", "FLEX", "K", "DEF", "BN", "BN", "BN", "BN", "BN"]}
     slots = league["roster_positions"]
     mus = json.loads(Path(args.fixture).read_text()) if args.fixture else sleeper(f"/league/{lg['id']}/matchups/{week}")
+    # who owned whom THAT week (rosters change after the games): from the matchup rows, not today's snapshot
+    owner_of = {}
+    for m in mus:
+        tn = rosters.get(m["roster_id"], {}).get("team_name", f"Team {m['roster_id']}")
+        for sid in m.get("players") or []:
+            k = to_key(sid, smap)
+            if k:
+                owner_of[k] = tn
     o = ours(P, K, S, week, T)
     proj = dict(zip(o.key, o.ours_ppr)) if len(o) else {}
     tw = {m["roster_id"]: team_week(m, slots, idx, smap, proj) for m in mus}
@@ -388,6 +396,7 @@ SECTIONS = {
 }
 SYSTEM = """You write the weekly fantasy football rundown for William's private stats site (his 12-team PPR Sleeper league, 67FFL; his team is given in the facts).
 Rules:
+- Use ONLY the facts JSON. fantasy_team tags in a recap are the rosters as of that week; trust them.
 - Use ONLY the facts JSON. Never invent stats, injuries, quotes, game details or reasons that are not in the facts.
 - Write player names exactly as they appear in the facts (the site turns them into links). Team names as given.
 - "ours" is the site's own projection, built only from data available before the games. Say "our projection".
