@@ -154,6 +154,18 @@
       if(!j||!j.version||j.version===v||parseFloat(j.version.split('.')[1])<parseFloat(v.split('.')[1]))return;
       const k='nfls-upd-'+j.version;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){return}
       const u=new URL(location.href);u.searchParams.set('v',j.version);location.replace(u.pathname+u.search+u.hash)}).catch(()=>{})})();
+  /* every page except Home (which has its own in the big footer): version + "Check for updates" at the bottom */
+  function verFoot(){if(document.getElementById('ver')||document.querySelector('.verfoot'))return;
+    const me=document.querySelector('script[src*="assets/site.js"]');const v=(me&&(me.src.match(/[?&]v=([^&]+)/)||[])[1])||'?';
+    const f=document.createElement('footer');f.className='verfoot';
+    f.innerHTML=`<div class="wrap"><span>NFL_stats · data from <a href="https://github.com/nflverse" target="_blank" rel="noopener">nflverse</a> and Sleeper</span><span class="vf-r"><span class="vf-msg"></span><button type="button" class="vf-chk">Check for updates</button><b title="Site version: 1.&lt;pull request number&gt; of the last change">v${v}</b></span></div>`;
+    document.body.appendChild(f);const msg=f.querySelector('.vf-msg');
+    f.querySelector('.vf-chk').onclick=()=>{msg.textContent='Checking…';
+      fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(j=>{
+        if(j.version===v){msg.textContent='Up to date ('+j.date+')';return}
+        msg.textContent='Updating to v'+j.version+'…';const u=new URL(location.href);u.searchParams.set('v',j.version);location.replace(u.pathname+u.search+u.hash)
+      }).catch(()=>{msg.textContent="Couldn't check right now"})}}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',verFoot);else verFoot();
   window.NFLS={leagueUrl,appName,badge,plink,setTheme,loadLeagues,getLeague,rosterStatus,onLeague(cb){listeners.push(cb);if(leagueCfg)cb(getLeague())}};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
 })();
