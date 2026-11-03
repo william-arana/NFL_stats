@@ -1,0 +1,60 @@
+[
+ {
+  "id": "LAC:jim-harbaugh-press-conference-monday-week-9-2026",
+  "team": "LAC",
+  "url": "https://www.chargers.com/video/jim-harbaugh-press-conference-monday-week-9-2026",
+  "title": "Jim Harbaugh on Justin Herbert's Performance and Continued Team Improvement",
+  "date": "2026-11-03",
+  "duration": 842,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/chargers/rwu3oa8fuhttnx1p87wo.jpg",
+  "kind": "day_after",
+  "coach": "Jim Harbaugh",
+  "words": 1878,
+  "model": "claude-haiku-5-5",
+  "headline": "David Njoku's practice window is likely opening this week, while the offense's scoring drought and a three-back rotation under review leave Justin Herbert's and the backfield's usage uncertain.",
+  "summary": "Harbaugh said he expects the team's practice window for David Njoku to open this week, which he framed as a positive boost. Several other injured players were expected to keep ramping up or to start practicing, but the captions garble those names, so they can't be matched reliably to the roster. He praised the offensive linemen who moved positions, calling the versatility impressive. On the trade deadline, he said his focus was on the upcoming Texans game and that the organization is always looking to improve, and he said Khalil Mack wants to stay and is a pillar of the team. Asked about Justin Herbert's struggles, Harbaugh said Herbert mostly does his job very well, with a couple of throws he'd like back, and that the problems came in desperation moments trying to make a play. He said the offense is fully aware of the nine-quarter touchdown drought and that the focus is on finishing drives, with pre-snap penalties reduced to one per unit as a sign of progress. The running game was not good recently, and he said the team is looking at the ball-carrier rotation, possibly giving one back a longer run to build rhythm, though he also values a 'hot hand' approach. He praised cornerback Tarheeb Still as a stalwart and one of his favorite players, and credited the defense's play despite losing Derwin James.",
+  "injuries": [
+   {
+    "player": "David Njoku",
+    "status": "returning",
+    "detail": "Harbaugh said he will likely open the practice window for Njoku this week, a step toward his return.",
+    "player_id": "00-0033885"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Justin Herbert",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Harbaugh says Herbert mostly does his job well; struggles came in desperation moments, and the offense must finish drives.",
+    "note": "Herbert's fantasy value is tied to the offense converting drives into touchdowns, which has not happened recently.",
+    "quote": "most part, Justin does his job and he does it does it really well.",
+    "player_id": "00-0036355"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Running back rotation",
+    "detail": "Harbaugh said the running game was not good recently and the team is considering giving one back a longer stretch to build rhythm, while acknowledging three healthy backs playing well. Individual backs were not named clearly in the captions."
+   },
+   {
+    "topic": "Trade deadline",
+    "detail": "Harbaugh said his focus is on the Texans and that the organization is always looking to improve. He said Khalil Mack wants to stay and is a pillar of the team."
+   },
+   {
+    "topic": "Offensive line versatility",
+    "detail": "Harbaugh praised linemen who moved between left and right tackle as a good boost, and called Joe Alt an elite player. Names were garbled in the captions."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Harbaugh praised Tarheeb Still as a stalwart and a favorite player, and credited several defenders for strong play without Derwin James."
+   },
+   {
+    "topic": "Other injuries",
+    "detail": "Harbaugh said some players would continue ramping up or begin practicing, and that one player remained in concussion protocol. The captions garble those names, so they are not attributed to roster players."
+   }
+  ],
+  "opponent": "Texans"
+ }
+]

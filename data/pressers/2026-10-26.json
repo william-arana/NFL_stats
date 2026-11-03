@@ -1,0 +1,130 @@
+[
+ {
+  "id": "SEA:head-coach-mike-macdonald-i-m-proud-of-our-style-of-play",
+  "team": "SEA",
+  "url": "https://www.seahawks.com/video/head-coach-mike-macdonald-i-m-proud-of-our-style-of-play",
+  "title": "Head Coach Mike Macdonald: \"I'm Proud Of Our Style Of Play\"",
+  "date": "2026-10-26",
+  "duration": 1116,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/seahawks/xpfotoasfpkdhuirjlfi.jpg",
+  "kind": "day_after",
+  "coach": "Mike Macdonald",
+  "words": 3741,
+  "model": "claude-haiku-5-5",
+  "headline": "Price and Charbonnet could both return this week, Charles Cross's ankle is being taken day to day with no IR talk, and Rashid Shaheed's role is expected to grow.",
+  "summary": "Macdonald said the offense's turnaround came from refocusing on the team's identity, specifically the run game, third downs, and style of play, while red zone finishing remains a point of emphasis. He praised the defense's connected effort and said the staff manages extra prep days carefully, since overloading the week has led to mental fatigue. He described Nick Emmanwori's growing versatility, noting he splits time between the defensive backs room and other position groups and handles the extra workload without frustration. On injuries, he said Charles Cross has an ankle injury with no timeline yet, that IR has not been discussed, and that the staff is taking it day by day. Rashid Shaheed's early returns are positive with no new update. Velus Jones Jr. has a hamstring injury of unknown severity. Macdonald said Jadarian Price and Zach Charbonnet could both play, but declined to give a benchmark for Charbonnet. He said Shaheed's usage can expand, especially through the return units. He also credited George Holani's third-down pass protection and the offensive line's play, and called Byron Murphy II's interior work the starting point for the defensive front.",
+  "injuries": [
+   {
+    "player": "Charles Cross",
+    "status": "questionable",
+    "detail": "Ankle injury with no timeline yet; IR has not been discussed and the staff is taking it day by day.",
+    "player_id": ""
+   },
+   {
+    "player": "Rashid Shaheed",
+    "status": "unclear",
+    "detail": "No update from the morning; early returns are positive but the timeline is unknown.",
+    "player_id": "00-0037545"
+   },
+   {
+    "player": "Velus Jones Jr.",
+    "status": "unclear",
+    "detail": "Hamstring injury; severity not yet known.",
+    "player_id": "00-0037745"
+   },
+   {
+    "player": "Jadarian Price",
+    "status": "returning",
+    "detail": "Expected to practice this week; coach said he could play in this game.",
+    "player_id": "00-0041512"
+   },
+   {
+    "player": "Zach Charbonnet",
+    "status": "returning",
+    "detail": "Has started practicing after multiple weeks out; coach said he could play this week but gave no benchmark for readiness.",
+    "player_id": "00-0039165"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Rashid Shaheed",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Shaheed's role on offense and in the return game is expected to expand",
+    "note": "Macdonald says there is more to come in how the team uses him, which could add targets and return opportunities.",
+    "quote": "I think there's more there.",
+    "player_id": "00-0037545"
+   },
+   {
+    "player": "Rashid Shaheed",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Early injury returns are positive, but no timeline has been given",
+    "note": "Availability is still unclear, so his status should be monitored before lineups lock.",
+    "quote": "Again, early returns positive. How long that means? Not sure.",
+    "player_id": "00-0037545"
+   },
+   {
+    "player": "Velus Jones Jr.",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Hamstring severity is not yet known",
+    "note": "The hamstring injury could cost him time, so his practice reports matter for depth-chart decisions.",
+    "quote": "Yeah, he has a hamstring. We're not sure of the severity.",
+    "player_id": "00-0037745"
+   },
+   {
+    "player": "Jadarian Price",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Price is expected to practice this week and could play in this game",
+    "note": "A return this week would add a running back option, which matters for backfield share.",
+    "quote": "Could both play. Yes.",
+    "player_id": "00-0041512"
+   },
+   {
+    "player": "Zach Charbonnet",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Charbonnet could play this week, but the coach would not give a readiness benchmark",
+    "note": "His return is possible but unconfirmed, so practice participation will be the key indicator.",
+    "quote": "Could both play. Yes.",
+    "player_id": "00-0039165"
+   },
+   {
+    "player": "George Holani",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Holani has been strong in third-down pass protection",
+    "note": "Pass-protection work on third down can keep him on the field in passing situations.",
+    "quote": "I think George did a great job too on third down pass protection.",
+    "player_id": "00-0039299"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Nick Emmanwori",
+    "detail": "Macdonald praised his consistency and maturity while he bounces between the DB room, Chris Partridge, and Zach Orr's room, with the coach saying the extra workload requires responsibility and extra time."
+   },
+   {
+    "topic": "Defensive line and linebackers",
+    "detail": "Byron Murphy II's interior play is the starting point for the defense, and Tyrice Knight has been productive when given opportunities behind Drake Thomas, with Macdonald expecting a high level from the linebacker corps regardless of who plays."
+   },
+   {
+    "topic": "Practice schedule",
+    "detail": "The team has Tuesday off, uses an extra day on Wednesday as a recovery day, and the coach is wary of overloading the week mentally."
+   },
+   {
+    "topic": "Coaching staff",
+    "detail": "Macdonald discussed working with a new offensive coordinator for the third straight year and said communication and partnerships with Jay Harbaugh and Aden Durde drive the process."
+   }
+  ],
+  "opponent": ""
+ }
+]

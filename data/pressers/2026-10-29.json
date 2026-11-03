@@ -1,0 +1,110 @@
+[
+ {
+  "id": "SEA:head-coach-mike-macdonald-on-the-quenton-nelson-trade-preparing-for-week-8-press-conference-october-29-2026",
+  "team": "SEA",
+  "url": "https://www.seahawks.com/video/head-coach-mike-macdonald-on-the-quenton-nelson-trade-preparing-for-week-8-press-conference-october-29-2026",
+  "title": "Head Coach Mike Macdonald On The Quenton Nelson Trade, Preparing For Week 8",
+  "date": "2026-10-29",
+  "duration": 1249,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/seahawks/t0aiu9g33p1x7osrsuoe.jpg",
+  "kind": "first_practice",
+  "coach": "Mike Macdonald",
+  "words": 4259,
+  "model": "claude-haiku-5-5",
+  "headline": "Rashid Shaheed and Velus Jones Jr. both sat out Wednesday practice, Nelson is expected to start at left guard, and Zach Charbonnet and Jadarian Price are progressing.",
+  "summary": "Mike Macdonald said the Seahawks are excited about acquiring guard Quenton Nelson, whom he expects to play left guard, with Grey Zabel sliding to right guard. He praised the offensive line's best game of the season on Sunday night and said the trade is not a commentary on current players, several of whom, like Anthony Bradford, have earned starting-level roles. Macdonald expects Nelson to play Monday night and called a quick transition realistic, noting that much of the system carries over from his past. On injuries, he said Charles Cross will not practice and is not headed to injured reserve, and that Rashid Shaheed and Velus Jones Jr. will not practice Wednesday. He said Drake Thomas will practice, and the description notes Zach Charbonnet and Jadarian Price are progressing. He also said Josh Jones is the third tackle who would fill in for Cross. Looking ahead, Macdonald described the upcoming opponent as having a clear identity, the league's top rushing offense, and a returning pass rusher in Montez Sweat, and said the staff will prepare for the trick plays and third-down looks Ben Johnson's offense can present.",
+  "injuries": [
+   {
+    "player": "Rashid Shaheed",
+    "status": "out",
+    "detail": "Not expected to practice Wednesday; Macdonald said he doesn't believe Shaheed will be out there, while acknowledging he has been wrong before.",
+    "player_id": "00-0037545"
+   },
+   {
+    "player": "Velus Jones Jr.",
+    "status": "out",
+    "detail": "Not practicing Wednesday, per Macdonald.",
+    "player_id": "00-0037745"
+   },
+   {
+    "player": "Charles Cross",
+    "status": "out",
+    "detail": "Not practicing Wednesday, but Macdonald said he is coming along great and is not going on injured reserve as of now.",
+    "player_id": ""
+   },
+   {
+    "player": "Drake Thomas",
+    "status": "full",
+    "detail": "Macdonald said he will be out at practice Wednesday; the video description says he is progressing.",
+    "player_id": ""
+   },
+   {
+    "player": "Zach Charbonnet",
+    "status": "limited",
+    "detail": "Progressing in practice per the video description; the coach's answer on his Wednesday status is not clearly captured in the transcript.",
+    "player_id": "00-0039165"
+   },
+   {
+    "player": "Jadarian Price",
+    "status": "limited",
+    "detail": "Progressing in practice per the video description; not discussed directly in the transcript.",
+    "player_id": "00-0041512"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Rashid Shaheed",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Will not practice Wednesday and is uncertain for the upcoming game",
+    "note": "Missing practice with a hedged status keeps his Week 8 availability in question for a receiver who is already a fantasy watch.",
+    "quote": "I don't think he's going to practice today.",
+    "player_id": "00-0037545"
+   },
+   {
+    "player": "Velus Jones Jr.",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Will not practice Wednesday",
+    "note": "Missing practice signals an injury concern and reduces his likelihood of a clean Week 8 role.",
+    "quote": "Velus is not going to practice today.",
+    "player_id": "00-0037745"
+   },
+   {
+    "player": "Zach Charbonnet",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Progressing in practice, with his Week 8 status still to be confirmed",
+    "note": "Progression is encouraging for a lead back, but the coach's exact answer is not captured, so his practice status should be checked closely.",
+    "quote": "",
+    "player_id": "00-0039165"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive line",
+    "detail": "Quenton Nelson is expected to start at left guard, with Grey Zabel moving to right guard. Anthony Bradford will remain ready as a backup after earning a starting role, and Macdonald said he doesn't expect Bradford to be joyful about the change."
+   },
+   {
+    "topic": "Tackle depth",
+    "detail": "Josh Jones is the third tackle and would fill in at left tackle while Charles Cross is out."
+   },
+   {
+    "topic": "Opponent scheme",
+    "detail": "Macdonald praised the opponent's clear identity in all three phases and its strong rushing attack, which he called the league's best. He noted the team's trick-play and third-down preparation and said Montez Sweat's return would help their pass rush."
+   },
+   {
+    "topic": "Defensive usage",
+    "detail": "Macdonald said Byron Murphy II is used on pass rushes, and he defended the team's choice to stand players up as a deliberate strategy."
+   },
+   {
+    "topic": "Trade philosophy",
+    "detail": "Macdonald credited GM John for in-season trades, including Ernest Jones IV, Rashid Shaheed, and Leonard Williams, and said he sees it as the team's core approach."
+   }
+  ],
+  "opponent": "Chicago Bears (Monday night)"
+ }
+]

@@ -1,0 +1,82 @@
+[
+ {
+  "id": "DET:campbell-on-lb-jack-campbell",
+  "team": "DET",
+  "url": "https://www.detroitlions.com/video/campbell-on-lb-jack-campbell",
+  "title": "Campbell on LB Jack Campbell",
+  "date": "2026-11-02",
+  "duration": 623,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/lions/xcz6javyulz0isjyovf4.jpg",
+  "kind": "day_after",
+  "coach": "Dan Campbell",
+  "words": 1933,
+  "model": "claude-haiku-5-5",
+  "headline": "Campbell's update on LB Jack Campbell is positive, but Jacob Saylors is nursing an injury and misses Wednesday's practice, and a season-ending injury hit the team.",
+  "summary": "Campbell said the latest release on linebacker Jack Campbell is positive and asked fans to keep praying for him, though he would not share details. He reported that a significant injury (named as Jimmy Roller in the transcript) will end that player's season, and that Cade (ankle), DJ Reed (hip), and Saylors (undisclosed) will not practice Wednesday. Two players are in concussion protocol, and Campbell called the concussion situation unclear until the next day's evaluations. He said he visited Jack Campbell the previous night, found his family in good spirits, and described the situation as a small setback in recovery. At linebacker, he pointed to depth in Rodrigo, Barnes, and Nwosu, with Eamon having stepped up and Bocci ready, and said the staff would adjust as needed. On the Vikings game, Campbell said the team used unique backfield looks they had been holding for a while to counter Minnesota's blitz, and that it worked. He also said the team has acknowledged the emotional weight of Jack's situation while preparing for the next opponent, and discussed how Jack earned his captaincy.",
+  "injuries": [
+   {
+    "player": "Jimmy Roller (name as transcribed, unverified)",
+    "status": "ir",
+    "detail": "Requires surgery or possibly surgery; Campbell called it significant and said the player is out for the season.",
+    "player_id": ""
+   },
+   {
+    "player": "Jacob Saylors",
+    "status": "questionable",
+    "detail": "Has something minor; not expected to practice Wednesday.",
+    "player_id": "00-0038896"
+   },
+   {
+    "player": "Cade (as transcribed)",
+    "status": "doubtful",
+    "detail": "Ankle injury; not expected to practice Wednesday.",
+    "player_id": ""
+   },
+   {
+    "player": "DJ Reed (as transcribed)",
+    "status": "doubtful",
+    "detail": "Hip injury; not expected to practice Wednesday.",
+    "player_id": ""
+   },
+   {
+    "player": "Jack Campbell",
+    "status": "unclear",
+    "detail": "Injury described as a small setback; positive update released, specifics withheld; he was running tests.",
+    "player_id": ""
+   },
+   {
+    "player": "Branch and BB (as transcribed; concussion protocol)",
+    "status": "unclear",
+    "detail": "Both in concussion protocol; Campbell said the results are not final and they will be re-evaluated the next day.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Jacob Saylors",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Not expected to practice Wednesday due to a minor issue.",
+    "note": "A missed Wednesday practice is a short-term risk to his availability for the next game.",
+    "quote": "sailors has got a little something. I don't see him practicing Wednesday.",
+    "player_id": "00-0038896"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Linebacker depth",
+    "detail": "Campbell pointed to Rodrigo, Barnes, Nwosu, Eamon, and Bocci as depth; he and the staff will adjust as needed. Barnes has taken the green dot duties recently, and others could handle it too."
+   },
+   {
+    "topic": "Vikings game offense",
+    "detail": "The team used unique loaded backfield looks, some wing-T-like, to counter Minnesota's blitz; Campbell said the looks were planned and the team could execute them without major schematic changes."
+   },
+   {
+    "topic": "Concussion protocol and safety",
+    "detail": "Campbell said the concussion results are not final and will be re-checked the next day; he also discussed tackling technique, saying players should keep their eyes up and drop their level slightly, without going low into knees."
+   }
+  ],
+  "opponent": ""
+ }
+]
