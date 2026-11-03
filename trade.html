@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.57">
-<script src="assets/site.js?v=1.57" defer></script>
-<script src="assets/cards.js?v=1.57" defer></script>
-<script src="assets/glossary.js?v=1.57" defer></script>
-<script src="assets/tables.js?v=1.57" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.60">
+<script src="assets/site.js?v=1.60" defer></script>
+<script src="assets/cards.js?v=1.60" defer></script>
+<script src="assets/glossary.js?v=1.60" defer></script>
+<script src="assets/tables.js?v=1.60" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -84,7 +84,7 @@ main{display:grid;gap:18px;padding-block:18px 60px}
 .sel .x:hover{color:var(--margin)}
 .sel .sub{grid-column:2/5;font-size:11.5px;color:var(--ink-3)}
 .sel .empty{display:block;padding:22px 16px;text-align:center;color:var(--ink-3)}
-.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border-top:1px solid var(--rule)}
+.sum{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border-top:1px solid var(--rule)}
 .sum div{background:var(--paper);padding:8px 12px}
 .sum span{display:block;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
 .sum b{font-family:var(--f-display);font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
@@ -183,7 +183,7 @@ function waitCards(){if(!window.NFLSCards||!window.NFLS)return setTimeout(waitCa
   $('#upd').textContent=`${D.META.season} · thru Wk ${D.META.last_completed_week}`;
   for(const r of D.P)NAMES[r.player_id]={name:r.player_display_name,pos:r.position,team:r.team};
   for(const t of Object.keys(D.TM||{}))NAMES['DEF:'+t]={name:t+' D/ST',pos:'DEF',team:t};
-  readHash();NFLS.onLeague(lg=>{const was=LG&&LG.my_roster_id;LG=lg;ROST=null;if(!lg){draw();return}NFLS.rosterStatus().then(r=>{if(LG!==lg)return;ROST=r;defaultSides(was);draw()})});
+  readHash();NFLS.onLeague(lg=>{const was=LG&&LG.my_roster_id;LG=lg;ROST=null;loadLg(lg);if(!lg){draw();return}NFLS.rosterStatus().then(r=>{if(LG!==lg)return;ROST=r;defaultSides(was);draw()})});
   window.addEventListener('nfls-scoring',draw);
 }).catch(e=>{$('#main').innerHTML=`<div class="box"><div class="empty">Couldn't load the season data (${esc(e.message)}).</div></div>`})}
 waitCards();
@@ -213,7 +213,7 @@ function entry(k){
   if(isDef(k)){const t=k.slice(4);const s=C.defSummary(t);const lw=D.META.last_completed_week;
     const x={k,def:true,name:t+' D/ST',pos:'DEF',team:t,g:s.g,fpg:s.dst,l3:s.l3,xfp3:null,snap3:null,opps:null,tgt:null,best:s.best,sd:s.sd,rank:s.rk.dst,
       weeks:Object.fromEntries(s.rows.map(r=>[r.week,r.dst_pts])),extra:`${f1(s.sk)} sacks · ${f1(s.tk)} takeaways / g`};
-    Object.assign(x,fut0(x));x.ros=num(x.fpg)?x.fpg*x.left:null;return x}
+    Object.assign(x,fut0(x));x.ros=num(x.fpg)?x.fpg*x.left:null;x.proj=projOf(k);return applyLg(x)}
   const s=C.playerSummary(k);
   if(!s){const n=NAMES[k]||{};return {k,none:true,name:n.name||'Player '+k,pos:n.pos||'',team:n.team||'',fut:[],left:null,weeks:{}}}
   const x={k,name:s.name,pos:s.pos,team:s.team,g:s.g,fpg:s.fpg,l3:s.l3,xfp3:s.xfp3,snap3:s.snap3,opps:s.opps,tgt:s.tgt,best:s.best,sd:s.sd,rank:s.rank,
@@ -221,9 +221,53 @@ function entry(k){
   {const PG=(...ks)=>s.g?s.logs.reduce((a,l)=>a+ks.reduce((b,c)=>b+(num(l[c])?l[c]:0),0),0)/s.g:null;  // per-game box score
     Object.assign(x,{carg:PG('carries'),tgtg:PG('targets'),recg:PG('receptions'),ryg:PG('rushing_yards'),reyg:PG('receiving_yards'),
       tdg:PG('rushing_tds','receiving_tds','passing_tds'),pyg:PG('passing_yards'),rzg:PG('rz_tgt','rz_car'),xfpg:s.xfpg,snap:s.snap})}
-  Object.assign(x,fut0(x));x.ros=num(x.fpg)?x.fpg*x.left:null;return x;
+  Object.assign(x,fut0(x));x.ros=num(x.fpg)?x.fpg*x.left:null;x.proj=projOf(k);return applyLg(x);
 }
 const owner=k=>{if(!ROST)return null;const m=ROST.map.get(k);return m?m:{status:'fa',team:'Free agent'}};
+
+/* ---------- our projection (data/site/proj.json, built by scripts/build_site_projection.py) ---------- */
+let PROJ=null;fetch('data/site/proj.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(j=>{if(j){PROJ=j;draw()}}).catch(()=>{});
+const projOf=k=>PROJ&&PROJ.p?PROJ.p[k]:null;
+
+/* ---------- league scoring: the selected Sleeper league's own rules ----------
+   Exact points come from Sleeper's weekly matchups (every rostered player that week, the league's own scoring).
+   Anyone not rostered that week is scored here from the nflverse box score with the league's scoring_settings
+   (no 2-pt conversions / return TDs). D/ST without a Sleeper number uses the site's D/ST points. */
+const LGS={};
+let lgPref=(()=>{try{return localStorage.getItem('nfls-trade-lg')!=='0'}catch(e){return true}})();
+const lgAvail=()=>!!(LG&&LG.provider!=='yahoo');
+const lgOn=()=>lgPref&&lgAvail()&&LGS[LG.id]&&LGS[LG.id].ready;
+function lgCalc(ss,l){const g=k=>num(l[k])?l[k]:0,s=k=>ss[k]||0;
+  const py=g('passing_yards'),ry=g('rushing_yards'),cy=g('receiving_yards'),rec=g('receptions');
+  let p=s('pass_yd')*py+s('pass_td')*g('passing_tds')+s('pass_int')*g('passing_interceptions')+s('pass_cmp')*g('completions')+s('pass_att')*g('attempts')
+    +s('pass_inc')*(g('attempts')-g('completions'))+s('pass_sack')*g('sacks_suffered')
+    +s('rush_yd')*ry+s('rush_td')*g('rushing_tds')+s('rush_att')*g('carries')+s('rush_fd')*g('rushing_first_downs')
+    +s('rec')*rec+s('rec_yd')*cy+s('rec_td')*g('receiving_tds')+s('rec_fd')*g('receiving_first_downs')+s('rec_tgt')*g('targets')
+    +s('fum_lost')*(g('rushing_fumbles_lost')+g('receiving_fumbles_lost')+g('sack_fumbles_lost'))
+    +s({TE:'bonus_rec_te',RB:'bonus_rec_rb',WR:'bonus_rec_wr'}[l.position]||'_')*rec
+    +(py>=300?s('bonus_pass_yd_300'):0)+(py>=400?s('bonus_pass_yd_400'):0)+(ry>=100?s('bonus_rush_yd_100'):0)+(ry>=200?s('bonus_rush_yd_200'):0)
+    +(cy>=100?s('bonus_rec_yd_100'):0)+(cy>=200?s('bonus_rec_yd_200'):0);
+  return Math.round(p*100)/100}
+function loadLg(lg){if(!lg||lg.provider==='yahoo'||LGS[lg.id])return;const id=lg.id,lw=D.META.last_completed_week;const o=LGS[id]={ready:false};
+  const J=u=>fetch(u).then(r=>r.ok?r.json():Promise.reject(r.status));
+  const wk=[];for(let w=1;w<=lw;w++)wk.push(J(`https://api.sleeper.app/v1/league/${id}/matchups/${w}`).catch(()=>[]));
+  Promise.all([J(`https://api.sleeper.app/v1/league/${id}`),fetch('data/site/sleeper_map.json',{cache:'no-cache'}).then(r=>r.json()),Promise.all(wk)]).then(([L,sm,mus])=>{
+    const fix=sm.team_fix||{},key=s=>sm.map[s]||(/^[A-Z]{2,3}$/.test(s)?'DEF:'+(fix[s]||s):null);
+    const ex={};mus.forEach((rows,i)=>{for(const m of rows||[])for(const [sid,v] of Object.entries(m.players_points||{})){const k=key(sid);if(k&&num(v))(ex[k]=ex[k]||{})[i+1]=v}});
+    const ss=L.scoring_settings||{},pts={};let nEx=0,nCalc=0;
+    const put=(k,w,calc)=>{const e=ex[k]&&ex[k][w];const v=num(e)?e:calc;if(!num(v))return;(pts[k]=pts[k]||{})[w]=v;num(e)?nEx++:nCalc++};
+    for(const l of D.P)put(l.player_id,l.week,lgCalc(ss,l));
+    for(const r of D.T)put('DEF:'+r.team,r.week,r.dst_pts);
+    const byPos={};for(const k of Object.keys(pts)){const v=Object.values(pts[k]);if(v.length<2)continue;const pos=isDef(k)?'DEF':(NAMES[k]||{}).pos;if(pos)(byPos[pos]=byPos[pos]||[]).push([k,mean(v)])}
+    const rank={};for(const l of Object.values(byPos)){l.sort((a,b)=>b[1]-a[1]);l.forEach(([k],i)=>rank[k]=i+1)}
+    Object.assign(o,{ready:true,name:L.name||lg.name,pts,rank,nEx,nCalc,rec:ss.rec});if(LG&&LG.id===id)draw();
+  }).catch(()=>{o.failed=true;if(LG&&LG.id===id)draw()})}
+function applyLg(x){if(!lgOn()||x.none)return x;const o=LGS[LG.id];const W=o.pts[x.k]||{};const lw=D.META.last_completed_week;
+  const v=Object.values(W),rec=Object.entries(W).filter(([w])=>+w>lw-3).map(([,p])=>p);const m=mean(v);
+  return {...x,weeks:W,g:v.length,fpg:m,l3:mean(rec),best:v.length?Math.max(...v):null,sd:v.length>1?Math.sqrt(mean(v.map(p=>(p-m)**2))):null,rank:o.rank[x.k]||null,ros:num(m)?m*x.left:null}}
+const PROJ_TIP='NFL_stats projection v0 for next week in PPR points: season and last-3 averages, Vegas implied total, expected points, snap and touch-share trends, target share. Built only from games before kickoff.';
+function lgNote(){if(!lgOn())return '';const o=LGS[LG.id];const t=o.nEx+o.nCalc;return `<span>${esc(o.name)} scoring: ${t?Math.round(100*o.nEx/t):0}% of player-weeks are Sleeper's own league points (anyone rostered that week); the rest are scored here from the box score with your league's rules (no 2-pt conversions or return TDs).</span>`}
+const scLabel=()=>lgOn()?LGS[LG.id].name+' (Sleeper)':C.SCORING[C.scoring()].label;
 
 /* ---------- search ---------- */
 let UNIVERSE=null;
@@ -257,7 +301,7 @@ function sideBox(side){
     </div>
     <ul class="sel">${list.length?list.map(x=>{const o=owner(x.k);return `<li><span class="slot">${esc(x.pos)}</span><span class="nm">${nameBtn(x)}${x.inj?`<span class="inj" title="${esc(x.inj[1])}">${esc(x.inj[0].replace('Practice: ',''))}</span>`:''}</span><span class="v">${f1(x.fpg)}<small>/g</small></span><button type="button" class="x" data-rm="${esc(x.k)}" data-side="${side}" aria-label="Remove ${esc(x.name)}">×</button>
       <span class="sub">${esc(x.team)}${x.none?' · no stats this season':` · L3 ${f1(x.l3)} · ${x.left} games left${num(x.sos)?' · ROS matchups '+ord(Math.round(x.sos)):''}`}${o?` · <span class="own">${esc(o.status==='mine'?'yours':o.team)}</span>`:''}</span></li>`}).join(''):`<li class="empty">Add players from the roster above or search.</li>`}</ul>
-    <div class="sum"><div><span>FP / game</span><b class="t${side}">${f1(S('fpg'))}</b></div><div><span>Last 3 / game</span><b>${f1(S('l3'))}</b></div><div><span>Rest of season</span><b>${num(S('ros'))?Math.round(S('ros')):'–'}</b></div></div>
+    <div class="sum"><div><span>FP / game</span><b class="t${side}">${f1(S('fpg'))}</b></div><div><span>Last 3 / game</span><b>${f1(S('l3'))}</b></div><div><span>Proj${PROJ?' Wk '+PROJ.week:''}</span><b>${f1(S('proj'))}</b></div><div><span>Rest of season</span><b>${num(S('ros'))?Math.round(S('ros')):'–'}</b></div></div>
   </section>`;
 }
 function draw(){
@@ -266,15 +310,16 @@ function draw(){
   const S=(L,k)=>L.reduce((a,x)=>a+(num(x[k])?x[k]:0),0);
   const diff=(k,d=1)=>{const v=S(B,k)-S(A,k);return `<b class="${v>0?'tb':v<0?'ta':''}">${v>0?'+':''}${v.toFixed(d)}</b>`};
   const lw=D.META.last_completed_week,nw=D.META.next_week;
-  const sc=C.SCORING[C.scoring()].label;
+  const sc=scLabel();
   let html=`<div class="sides">${sideBox('a')}${sideBox('b')}</div>`;
   if(A.length&&B.length){
     html+=`<section class="box"><div class="box-h"><h2>The numbers</h2><span class="hint">Side B minus Side A · ${sc} scoring · positive = Side B scores more</span><span class="sp"></span>
-      <span class="seg" id="sc">${Object.entries(C.SCORING).map(([k,v])=>`<button data-v="${k}" aria-pressed="${C.scoring()===k}">${v.label}</button>`).join('')}</span>
+      <span class="seg" id="sc">${lgAvail()?`<button data-lg="1" aria-pressed="${!!lgOn()}" title="Your Sleeper league's own scoring rules">${esc((LGS[LG.id]&&LGS[LG.id].name)||LG.name)}${lgPref&&!lgOn()?(LGS[LG.id]&&LGS[LG.id].failed?' (unavailable)':' …'):''}</button>`:''}${Object.entries(C.SCORING).map(([k,v])=>`<button data-v="${k}" aria-pressed="${!lgOn()&&C.scoring()===k}">${v.label}</button>`).join('')}</span>
       <button class="btn" id="copy">Copy for Claude</button><span class="toast" id="toast"></span></div>
       <div class="verdict">
         <div><span>${gl('fpg','Points per game')}</span>${diff('fpg')}<small>A ${f1(S(A,'fpg'))} · B ${f1(S(B,'fpg'))}</small></div>
         <div><span>${gl('l3','Last 3 weeks / game')}</span>${diff('l3')}<small>A ${f1(S(A,'l3'))} · B ${f1(S(B,'l3'))}</small></div>
+        <div><span>${gl('proj','Our projection'+(PROJ?' Wk '+PROJ.week:''),PROJ_TIP)}</span>${diff('proj')}<small>A ${f1(S(A,'proj'))} · B ${f1(S(B,'proj'))} · PPR</small></div>
         <div><span>${gl('xfp3','Expected pts L3 (xFP)')}</span>${diff('xfp3')}<small>usage-based, PPR</small></div>
         <div><span>${gl('ros','Rest of season')}</span>${diff('ros',0)}<small>FP/g × games left through Wk ${LAST_WEEK}</small></div>
       </div></section>`;
@@ -294,9 +339,9 @@ function draw(){
 }
 function compareTable(all,A,B){
   const nw=D.META.next_week;
-  const cols=[['g','G',0],['fpg','FP/g',1,1],['l3','L3',1,1],['xfp3','xFP L3',1,1],['snap3','Snap L3','%',1],['opps','Touch/g',1,1],['carg','Rush att/g',1,1,'Rushing attempts per game'],['tgtg','Tgt/g',1,1,'Targets per game'],['recg','Rec/g',1,1,'Receptions per game'],['ryg','Rush yds/g',1,1,'Rushing yards per game'],['reyg','Rec yds/g',1,1,'Receiving yards per game'],['tdg','TD/g',2,1,'Rushing + receiving + passing TDs per game'],['tgt','Tgt %','%',1],['best','Best',1],['sd','±Wk',1,0,'Weekly swing (standard deviation). Lower = steadier'],['rank','Pos rk','rk',0,'Rank at the position by FP per game (D/ST: by D/ST points)'],['left','G left',0],['sos','ROS SoS','sos',0,'Average opponent rank for the rest of the season. 1st = easiest (gives up the most to this position; for D/ST, scores the fewest)'],['ros','ROS pts',0,1],
+  const cols=[['g','G',0],['fpg','FP/g',1,1],['l3','L3',1,1],['proj',PROJ?'Proj Wk '+PROJ.week:'Proj',1,1,PROJ_TIP],['xfp3','xFP L3',1,1],['snap3','Snap L3','%',1],['opps','Touch/g',1,1],['carg','Rush att/g',1,1,'Rushing attempts per game'],['tgtg','Tgt/g',1,1,'Targets per game'],['recg','Rec/g',1,1,'Receptions per game'],['ryg','Rush yds/g',1,1,'Rushing yards per game'],['reyg','Rec yds/g',1,1,'Receiving yards per game'],['tdg','TD/g',2,1,'Rushing + receiving + passing TDs per game'],['tgt','Tgt %','%',1],['best','Best',1],['sd','±Wk',1,0,'Weekly swing (standard deviation). Lower = steadier'],['rank','Pos rk','rk',0,'Rank at the position by FP per game (D/ST: by D/ST points)'],['left','G left',0],['sos','ROS SoS','sos',0,'Average opponent rank for the rest of the season. 1st = easiest (gives up the most to this position; for D/ST, scores the fewest)'],['ros','ROS pts',0,1],
     ['pyg','Pass yds/g',1,1,'Passing yards per game',1],['xfpg','xFP/g',1,1,'Expected PPR points per game, season',1],['snap','Snap %','%',1,'Offensive snap share, season',1],['rzg','RZ opps/g',1,1,'Red zone carries + targets per game',1]];
-  const SUMS=new Set(['fpg','l3','xfp3','opps','carg','tgtg','recg','ryg','reyg','tdg','pyg','xfpg','rzg','ros']);
+  const SUMS=new Set(['fpg','l3','proj','xfp3','opps','carg','tgtg','recg','ryg','reyg','tdg','pyg','xfpg','rzg','ros']);
   const heat={};for(const [k,,,h] of cols)if(h){const v=all.map(x=>x[k]).filter(num).sort((a,b)=>a-b);heat[k]=x=>{if(!num(x)||v.length<3)return 0;let lo=0;while(lo<v.length&&v[lo]<x)lo++;return lo/(v.length-1)*.45}}
   const cell=(x,[k,,d])=>{const v=x[k];if(!num(v))return '<td><span class="pos">–</span></td>';const al=heat[k]?heat[k](v):0;
     const t=d==='%'?pct(v):d==='rk'?(x.pos==='DEF'?'DST':x.pos)+v:d==='sos'?ord(Math.round(v)):d===0?Math.round(v):v.toFixed(d);
@@ -309,7 +354,7 @@ function compareTable(all,A,B){
   return `<section class="box"><div class="box-h"><h2>Side by side</h2><span class="hint">Shading ranks each column among these players: darker = higher</span></div>
     <div class="tablewrap"><table data-cols="trade-side" data-sort="local"><thead><tr><th class="l stick">Player</th><th class="l">Wk ${nw}</th><th class="l">Bye</th>${cols.map(([k,l,,,tip,off])=>`<th${off?' data-def-off="1"':''}>${gl(k,l,tip||undefined)}</th>`).join('')}<th class="l">Rostered by</th></tr></thead>
     <tbody>${grp(A,'a')}${grp(B,'b')}</tbody></table></div>
-    <div class="foot"><span>L3 = last 3 weeks. xFP = expected PPR points from usage (targets, carries, where on the field). ROS pts = points per game × games left through Week ${LAST_WEEK}; it doesn't adjust for matchups, so check ROS SoS alongside it.</span><span>ROS SoS: 1st = easiest remaining schedule. Players use PPR points allowed to their position; D/ST uses opponents' points scored per game.</span></div></section>`;
+    <div class="foot">${lgNote()}<span>Proj = our projection v0 for next week (PPR), built only from data before kickoff. L3 = last 3 weeks. xFP = expected PPR points from usage (targets, carries, where on the field). ROS pts = points per game × games left through Week ${LAST_WEEK}; it doesn't adjust for matchups, so check ROS SoS alongside it.</span><span>ROS SoS: 1st = easiest remaining schedule. Players use PPR points allowed to their position; D/ST uses opponents' points scored per game.</span></div></section>`;
 }
 function gridTable(all){
   const lw=D.META.last_completed_week,nw=D.META.next_week;const past=[],fut=[];for(let w=1;w<=lw;w++)past.push(w);for(let w=nw;w<=LAST_WEEK;w++)fut.push(w);
@@ -361,8 +406,8 @@ function fillNews(all){
 
 /* ---------- copy a plain-text summary to paste into Claude ---------- */
 function summaryText(){
-  const A=st.a.map(entry),B=st.b.map(entry);const sc=C.SCORING[C.scoring()].label;
-  const line=x=>`- ${x.name} (${x.pos}, ${x.team})${x.none?': no stats this season':`: ${f1(x.fpg)} ${sc}/g over ${x.g} games, last 3 ${f1(x.l3)}/g${num(x.xfp3)?`, xFP L3 ${f1(x.xfp3)}`:''}${num(x.snap3)?`, snap L3 ${pct(x.snap3)}`:''}, ${x.left} games left through Wk ${LAST_WEEK}, ROS schedule ${num(x.sos)?ord(Math.round(x.sos))+' easiest':'n/a'}${x.inj?`, injury: ${x.inj[0]} (${x.inj[1]})`:''}`}`;
+  const A=st.a.map(entry),B=st.b.map(entry);const sc=scLabel();
+  const line=x=>`- ${x.name} (${x.pos}, ${x.team})${x.none?': no stats this season':`: ${f1(x.fpg)} ${sc}/g over ${x.g} games, last 3 ${f1(x.l3)}/g${num(x.proj)?`, our projection Wk ${PROJ.week} ${f1(x.proj)} PPR`:''}${num(x.xfp3)?`, xFP L3 ${f1(x.xfp3)}`:''}${num(x.snap3)?`, snap L3 ${pct(x.snap3)}`:''}, ${x.left} games left through Wk ${LAST_WEEK}, ROS schedule ${num(x.sos)?ord(Math.round(x.sos))+' easiest':'n/a'}${x.inj?`, injury: ${x.inj[0]} (${x.inj[1]})`:''}`}`;
   const tid=t=>ROST&&t!=null?(ROST.rosters.find(r=>r.roster_id===t)||{}).team_name:null;
   return `Trade check${LG?` in my Sleeper league ${LG.name} (${LG.teams} teams)`:''}, ${sc} scoring, through Week ${D.META.last_completed_week} of ${D.META.season}.\n\nSide A${tid(st.ta)?' ('+tid(st.ta)+')':''} gives:\n${A.map(line).join('\n')}\n\nSide B${tid(st.tb)?' ('+tid(st.tb)+')':''} gives:\n${B.map(line).join('\n')}\n\nWho wins this trade and why? Check current injuries and news for each player, and how it changes each team's starting lineup.`;
 }
@@ -379,7 +424,7 @@ function wire(){
     box.onclick=e=>{const b=e.target.closest('[data-add]');if(b)add(side,b.dataset.add)}});
   document.querySelectorAll('[data-chips]').forEach(c=>c.onclick=e=>{const b=e.target.closest('[data-add]');if(b)add(c.dataset.chips,b.dataset.add)});
   document.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>remove(b.dataset.side,b.dataset.rm));
-  const sc=$('#sc');if(sc)sc.onclick=e=>{const b=e.target.closest('button');if(!b)return;try{localStorage.setItem('nfls-scoring',JSON.stringify(b.dataset.v))}catch(err){}draw()};
+  const sc=$('#sc');if(sc)sc.onclick=e=>{const b=e.target.closest('button');if(!b)return;lgPref=!!b.dataset.lg;try{localStorage.setItem('nfls-trade-lg',lgPref?'1':'0');if(!lgPref)localStorage.setItem('nfls-scoring',JSON.stringify(b.dataset.v))}catch(err){}draw()};
   const cp=$('#copy');if(cp)cp.onclick=()=>{const t=summaryText();const done=m=>{const x=$('#toast');if(x)x.textContent=m};try{navigator.clipboard.writeText(t).then(()=>done('Copied. Paste it into Claude.'),()=>done("Couldn't copy"))}catch(e){done("Couldn't copy")}};
 }
 addEventListener('hashchange',()=>{if(!D)return;readHash();defaultSides();draw()});
