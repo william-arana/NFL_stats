@@ -123,7 +123,7 @@ def discover(team: str, since: date) -> list[dict]:
         found.append({
             "id": f"{team}:{url.rstrip('/').rsplit('/', 1)[-1]}", "team": team, "url": url, "title": title,
             "description": desc, "tags": tags, "date": pub, "ts": pub_ts, "duration": dur,
-            "hc": is_head_coach(team, title, desc, tags), "postgame": bool(POSTGAME.search(hay)),
+            "hc": is_head_coach(team, title, desc, tags), "postgame": bool(POSTGAME.search(hay) or POSTGAME.search(url)),
             "thumb": v.findtext("v:thumbnail_loc", "", NS),
         })
     return found
