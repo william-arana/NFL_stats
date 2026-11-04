@@ -2,7 +2,7 @@
 import sys, time, re
 from playwright.sync_api import sync_playwright
 url = sys.argv[1]
-ALLOW = re.compile(r"chicagobears\.com|clubs\.nfl\.com|nfl\.com|lura\.live|anvato|uplynk|akamai|cloudfront|fonts\.|jwplayer|brightcove", re.I)
+ALLOW = re.compile(r"imasdk\.googleapis|chicagobears\.com|clubs\.nfl\.com|nfl\.com|lura\.live|anvato|uplynk|akamai|cloudfront|fonts\.|jwplayer|brightcove", re.I)
 with sync_playwright() as p:
     b = p.chromium.launch(args=["--autoplay-policy=no-user-gesture-required"])
     ctx = b.new_context(viewport={"width": 1280, "height": 800})
