@@ -1,0 +1,154 @@
+[
+ {
+  "id": "SEA:head-coach-mike-macdonald-gives-final-updates-ahead-of-week-8-vs-bears",
+  "team": "SEA",
+  "url": "https://www.seahawks.com/video/head-coach-mike-macdonald-gives-final-updates-ahead-of-week-8-vs-bears",
+  "title": "Head Coach Mike Macdonald Gives Final Updates Ahead Of Week 8 vs. Bears",
+  "date": "2026-10-31",
+  "duration": 597,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/seahawks/o6iroy6wgnl0utzf6tkn.jpg",
+  "kind": "first_practice",
+  "coach": "Mike Macdonald",
+  "words": 2128,
+  "model": "claude-haiku-5-5",
+  "headline": "Charbonnet has a set usage plan and is expected to play, Shaheed is out this week, and Josh Jones starts at left tackle while Drake Thomas starts at linebacker.",
+  "summary": "Macdonald said the team has a plan for Zach Charbonnet's usage in this game, though it may shift during play. He called Charbonnet a three-down back who catches out of the backfield, runs a full route tree, handles every rushing situation, and has been excellent in pass protection, and he praised the speed of Charbonnet's return from injury. Rashid Shaheed is progressing well but will miss this game, with his status to be reassessed next week. Macdonald confirmed Josh Jones will start at left tackle, citing his strong play when filling in last season, and he praised Quenton Nelson's poise and confidence as he settles in after a few days with the team. The offensive line has been reshuffled with new starters at left tackle, left guard and right guard, and the staff is working through how much of the new scheme to use. Drake Thomas will start, with Tyrice Knight having played well in his absence, though Macdonald said the team is willing to play both together. Any roster move involving a player not on the injury report would come Monday and be handled through transactions. Macdonald also said Tory Horton is getting more opportunity and he expects him to take advantage of it. He praised George Holani as an underrated pass blocker, and said Grey Zabel is handling a demotion-type change well.",
+  "injuries": [
+   {
+    "player": "Rashid Shaheed",
+    "status": "out",
+    "detail": "Progressing well but will not play this game; status to be reassessed next week.",
+    "player_id": "00-0037545"
+   },
+   {
+    "player": "Zach Charbonnet",
+    "status": "limited",
+    "detail": "Was limited in practice Thursday, but the plan is for him to play with a set workload; returning from injury on an accelerated timetable.",
+    "player_id": "00-0039165"
+   },
+   {
+    "player": "Charles Cross",
+    "status": "unclear",
+    "detail": "Josh Jones filled in for him last week, but the coach did not give his current status on the record.",
+    "player_id": "00-0037821"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Zach Charbonnet",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will play in this game under a pre-set plan for snaps and play types, though the plan may waver during the game",
+    "note": "A three-down back with a defined workload is strong fantasy usage, though the returning-from-injury caveat adds risk.",
+    "quote": "Well, we have a plan for Zach",
+    "player_id": "00-0039165"
+   },
+   {
+    "player": "Zach Charbonnet",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is a three-down back who will be used in passing situations, pass protection and all rushing situations",
+    "note": "Confirms he is the lead back in every package, which supports a high floor in PPR formats.",
+    "quote": "he's a three down back",
+    "player_id": "00-0039165"
+   },
+   {
+    "player": "Rashid Shaheed",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Will not play this game and will be reassessed next week",
+    "note": "Ruled out for this week, so no fantasy value until he returns.",
+    "quote": "right now he's out this game and we'll recalibrate next week.",
+    "player_id": "00-0037545"
+   },
+   {
+    "player": "Josh Jones",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will start at left tackle",
+    "note": "Starting at left tackle is a stable role for an offensive lineman, which is mostly relevant to team stability in this offense.",
+    "quote": "Josh play left tackle.",
+    "player_id": "00-0036363"
+   },
+   {
+    "player": "Drake Thomas",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will start this game ahead of Tyrice Knight",
+    "note": "Starting role confirmed; Knight remains part of the rotation, so tackle volume could be split.",
+    "quote": "Drake will start the game tonight.",
+    "player_id": ""
+   },
+   {
+    "player": "Tyrice Knight",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Will not start, but the team may play both linebackers together",
+    "note": "Still in the rotation, so he has some backup and situational value.",
+    "quote": "we'll put both guys out there at the same time.",
+    "player_id": ""
+   },
+   {
+    "player": "Tory Horton",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is getting more opportunity and is expected to take advantage of it",
+    "note": "Expanded role points to more targets, though the size of the increase was not quantified.",
+    "quote": "Expect him to take advantage of it.",
+    "player_id": "00-0040648"
+   },
+   {
+    "player": "George Holani",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Had good pickups in pass protection last week and has been an underrated pass blocker all season",
+    "note": "Pass-protection work supports his snaps in a back-up role, but it is not a sign of a bigger role.",
+    "quote": "He's an underrated pass blocker.",
+    "player_id": "00-0039299"
+   },
+   {
+    "player": "Quenton Nelson",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Has been integrated into the offensive line mix in a reshuffled lineup; the staff is calibrating how much of the new scheme to use",
+    "note": "Lineup changes along the line matter for run-game and pass-protection efficiency more than individual fantasy output.",
+    "quote": "Just like you can feel the poise, the confidence.",
+    "player_id": "00-0034342"
+   },
+   {
+    "player": "Grey Zabel",
+    "topic": "role",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Took a demotion-type change this week; the coach expects him to bounce back",
+    "note": "A reduced role on the line lowers his playing time and makes him a weaker start candidate.",
+    "quote": "he's excited and he's going to become even a better version",
+    "player_id": "00-0040639"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive line reshuffle",
+    "detail": "The line has new starters at left tackle, left guard and right guard, and the staff is working through how much of the new scheme to use."
+   },
+   {
+    "topic": "Roster moves",
+    "detail": "Any roster move involving a player not on the injury report would come Monday, and the coach said the transactions would speak for themselves."
+   },
+   {
+    "topic": "Running back room",
+    "detail": "The team is looking to play with urgency after recalibrating, and the coach described the backfield as in a good spot."
+   }
+  ],
+  "opponent": "Bears"
+ }
+]

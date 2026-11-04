@@ -501,6 +501,10 @@ def main() -> None:
             index["done"].update(json.loads((ROOT / "data" / "pressers" / "index.json").read_text()).get("done", {}))
         except (OSError, ValueError):
             pass
+    skip = os.environ.get("PRESSERS_SKIP", "").upper().split()  # e.g. CHI: page freezes the browser
+    if skip:
+        log(f"skipping {', '.join(skip)} (no working caption source yet)")
+        teams = [t for t in teams if t not in skip]
     only = os.environ.get("PRESSERS_ONLY", "").upper().split()
     if only and only != ["ALL"]:
         teams = [t for t in teams if t in only]
@@ -508,6 +512,9 @@ def main() -> None:
     for t in teams:
         try:
             allv = discover(t, since, deep=bool(weeks))
+            if not weeks and not any(v["hc"] for v in allv):
+                # some clubs (SF) leave pressers out of the fast sitemap: fall back to the full archive
+                allv = discover(t, since, deep=True)
         except Exception as e:  # noqa: BLE001
             log(f"{t}: sitemap FAILED ({e})")
             continue
