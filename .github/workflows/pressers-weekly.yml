@@ -6,6 +6,9 @@ name: Pressers weekly
 # Raw transcripts -> PRIVATE repo NFL_stats-transcripts (TRANSCRIPTS_TOKEN); signals -> data/pressers/ here.
 # Times are UTC; Pacific (standard time) in comments.
 on:
+  push:  # TEMP test trigger, removed before merge
+    branches: [pressers-weekly]
+    paths: [.github/workflows/pressers-weekly.yml]
   schedule:
     - cron: "23 3 * * 4"    # Wed 7:23 PM PT: after Wednesday pressers are posted
     - cron: "37 17 * * 4"   # Thu 9:37 AM PT: late uploads / TNF teams
