@@ -416,6 +416,121 @@
   "opponent": "Cleveland Browns"
  },
  {
+  "id": "CHI:ben-johnson-talks-confidence-in-qb-room-preparing-for-eagles-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-talks-confidence-in-qb-room-preparing-for-eagles-press-conference",
+  "title": "Ben Johnson talks confidence in QB room, preparing for Eagles | Press Conference",
+  "date": "2026-09-23",
+  "duration": 726,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/bears/woae7ezbgjqk0rarqzcn",
+  "kind": "first_practice",
+  "after_week": 2,
+  "coach": "Ben Johnson",
+  "words": 2704,
+  "model": "claude-haiku-5-5",
+  "headline": "Case Keenum is the only QB practicing Wednesday, so he is the likely Monday night starter while Tyson Bagent sits in the concussion protocol and Caleb Williams works in a limited walk-through role.",
+  "summary": "Ben Johnson said the Bears have three quarterbacks who have won games in the league and that the starter for Monday night against Philadelphia is not yet decided. He confirmed that Case Keenum is the only one practicing today. Tyson Bagent was placed in the concussion protocol after symptoms emerged, and Johnson said he has no role in the decision and will be told when Bagent is cleared. Caleb Williams is taking part in walk-throughs and contributing ideas, but he is still returning from an injury and Johnson called the adjustment unfamiliar. Johnson said the game plan will not change much regardless of who starts, and that the supporting cast must help the quarterback. On the roster, Shemar Turner and Noah Sewell began practicing, Ozzy Trapilo has moved off the limited list and is expected to practice in full, and Tyrique Stevenson is week to week. Johnson also said the Eagles are well coached and difficult to play, and that the Bears need to clean up the running game and red-zone execution from last week.",
+  "injuries": [
+   {
+    "player": "Tyson Bagent",
+    "status": "out",
+    "detail": "Placed in the concussion protocol after evaluation Tuesday; Johnson says the medical staff will decide his availability.",
+    "player_id": "00-0038416"
+   },
+   {
+    "player": "Caleb Williams",
+    "status": "limited",
+    "detail": "Taking part in walk-throughs and involved in the quarterback room, but not cleared for full team reps; Johnson called his return an adjustment.",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Tyrique Stevenson",
+    "status": "questionable",
+    "detail": "Johnson said he is week to week.",
+    "player_id": ""
+   },
+   {
+    "player": "Ozzy Trapilo",
+    "status": "full",
+    "detail": "No longer limited; expected to practice in full. Transcript reads 'Oz', assumed to be Ozzy Trapilo.",
+    "player_id": "00-0040740"
+   },
+   {
+    "player": "Shemar Turner",
+    "status": "returning",
+    "detail": "Starting to practice again, per the practice window update.",
+    "player_id": ""
+   },
+   {
+    "player": "Noah Sewell",
+    "status": "returning",
+    "detail": "Starting to practice again, per the practice window update.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Case Keenum",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Practicing Wednesday as the only available QB, making him the likely starter Monday night",
+    "note": "He is the only quarterback taking practice reps right now, so he has the clearest path to a start against the Eagles.",
+    "quote": "We know case is the one that's practicing today.",
+    "player_id": "00-0028986"
+   },
+   {
+    "player": "Caleb Williams",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Returning from injury; still in walk-throughs and not yet cleared for full practice",
+    "note": "His status is unclear for Monday night, so a late clearance would change the starter picture.",
+    "quote": "It is. And so we got to get a cadence and a rhythm.",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Colston Loveland",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Johnson says the tight end's light passing volume is about coverage and protection, and he will be targeted more",
+    "note": "Johnson said the coaching staff is actively working to get pass catchers involved, which could mean more targets.",
+    "quote": "We had plenty of opportunities against Carolina.",
+    "player_id": "00-0040126"
+   },
+   {
+    "player": "Ozzy Trapilo",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Expected to practice in full today and is close to being game-ready",
+    "note": "Removal of the limited tag suggests he is on track to play, but game readiness is still undecided.",
+    "quote": "I think he still is gaining confidence",
+    "player_id": "00-0040740"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Quarterback situation",
+    "detail": "Johnson expressed confidence in the three-QB room and said the team does not plan to add a quarterback this week."
+   },
+   {
+    "topic": "Eagles preview",
+    "detail": "Johnson praised Nick Sirianni and Vic Fangio, calling Philadelphia a sound team on both sides of the ball and on special teams."
+   },
+   {
+    "topic": "Long snapper",
+    "detail": "Johnson said the team made a change at long snapper for growing-pains reasons and that Scott is returning this week to help stabilize the position."
+   },
+   {
+    "topic": "Braxton",
+    "detail": "Johnson said Braxton has played well through two games and that the team has discussed platooning him with Theo Benedet to keep them fresh late in games. Position is unclear from the transcript."
+   }
+  ],
+  "opponent": "Philadelphia Eagles (Monday Night Football)"
+ },
+ {
   "id": "CLE:todd-monken-press-conference-september-23rd-2026",
   "team": "CLE",
   "url": "https://www.clevelandbrowns.com/video/todd-monken-press-conference-september-23rd-2026",

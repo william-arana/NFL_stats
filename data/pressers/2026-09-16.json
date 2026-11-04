@@ -216,6 +216,107 @@
   "opponent": "Carolina Panthers"
  },
  {
+  "id": "BAL:jesse-minter-shares-injury-updates-on-ja-kobi-lane-zay-flowers-t-j-tampa-ravens-press-conferences",
+  "team": "BAL",
+  "url": "https://www.baltimoreravens.com/video/jesse-minter-shares-injury-updates-on-ja-kobi-lane-zay-flowers-t-j-tampa-ravens-press-conferences",
+  "title": "Jesse Minter Shares Injury Updates on Ja'Kobi Lane, Zay Flowers, T.J. Tampa",
+  "date": "2026-09-16",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/ravens/jfri5gdfcvi6onjrcnsb",
+  "kind": "first_practice",
+  "after_week": 1,
+  "coach": "Jesse Minter",
+  "words": 2171,
+  "model": "claude-haiku-5-5",
+  "headline": "Ja'Kobi Lane heads to IR after surgery with a quick return possible, Zay Flowers and Nnamdi Madubuike are day-to-day, and Chris Moore is promoted to the 53-man roster.",
+  "summary": "Minter opened by saying Ja'Kobi Lane is headed to IR after a successful surgery that morning, and that he has a good chance to return fairly quickly. Minter said the team will aim for the minimum IR stay and may try to shave a week or two off it. He also announced that Chris Moore is being added to the 53-man roster, crediting his week one performance. On Zay Flowers, Minter said he is day to day and in a good place. On T.J. Tampa, Minter said he will be out for a while and the team is still working out the best approach. Minter also said Nnamdi Madubuike is day to day, with a decision to come at the end of the week. Looking ahead, Minter praised the Saints and Kellen Moore, pointing to Olave as one of the league's best receivers and to their tempo and multiple looks. He stressed that home-field energy matters and that defensive starts are a point of emphasis. He also said the staff will manage veterans' practice reps on a week-to-week basis, based on how they feel.",
+  "injuries": [
+   {
+    "player": "Ja'Kobi Lane",
+    "status": "ir",
+    "detail": "Had successful surgery this morning and is being placed on IR. Good chance to return fairly quickly, with the team aiming for the minimum IR stay.",
+    "player_id": "00-0040870"
+   },
+   {
+    "player": "Zay Flowers",
+    "status": "questionable",
+    "detail": "Described as day to day and in a good place.",
+    "player_id": "00-0039064"
+   },
+   {
+    "player": "Nnamdi Madubuike",
+    "status": "questionable",
+    "detail": "Described as day to day; status to be determined by the end of the week.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Chris Moore",
+    "topic": "trade_or_roster",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will be added to the 53-man roster",
+    "note": "Promotion and week one usage (explosive pass play and special teams) point to a continued role, though his fantasy relevance is still limited.",
+    "quote": "Chris certainly did that week one.",
+    "player_id": "00-0032398"
+   },
+   {
+    "player": "Ja'Kobi Lane",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Will be placed on IR after surgery; team is aiming for the minimum IR stay",
+    "note": "Lane is out for at least a few weeks, so he is not usable in fantasy lineups for now.",
+    "quote": "",
+    "player_id": "00-0040870"
+   },
+   {
+    "player": "Zay Flowers",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Is day to day and in a good place",
+    "note": "Flowers is a key receiver, so check his final injury report before the Saints game.",
+    "quote": "Day to day, day to day.",
+    "player_id": "00-0039064"
+   },
+   {
+    "player": "Nnamdi Madubuike",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Is day to day, with a decision at the end of the week",
+    "note": "Madubuike's status is uncertain, which affects defensive line usage and matchup value.",
+    "quote": "we'll see how it looks at the end of the week.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "T.J. Tampa",
+    "detail": "Minter said Tampa will be out for a while and the team is still deciding how to handle him. Tampa is not on the roster provided, so no player signal was recorded."
+   },
+   {
+    "topic": "Saints offense",
+    "detail": "Minter praised Kellen Moore and the Saints' skill players, including Olave, along with their tempo and multiple looks. He said the offense got going in the third quarter and is a significant challenge."
+   },
+   {
+    "topic": "Home-field and defensive starts",
+    "detail": "Minter stressed that home-field crowd energy matters and that starting the game strong on defense is a point of emphasis."
+   },
+   {
+    "topic": "Practice reps for veterans",
+    "detail": "Minter said veteran practice reps will be managed week to week based on how players feel coming out of games, with more mental work in walkthroughs."
+   },
+   {
+    "topic": "Receiver opportunity",
+    "detail": "Minter told receivers to take advantage of opportunities and play within the offense, saying the ball can go to anyone."
+   }
+  ],
+  "opponent": "New Orleans Saints"
+ },
+ {
   "id": "CAR:dave-canales-we-re-focused-on-consistency-heading-into-atlanta",
   "team": "CAR",
   "url": "https://www.panthers.com/video/dave-canales-we-re-focused-on-consistency-heading-into-atlanta",
