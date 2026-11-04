@@ -139,13 +139,6 @@ button[data-card].pname:hover,button[data-card].pname[aria-expanded="true"]{colo
 :is(.pc,.pw) tr.tot td{font-weight:600;border-top:1.5px solid var(--ink-3)}
 :is(.pc,.pw) td.fp{font-weight:700;color:var(--blue)}
 :is(.pc,.pw) td.dim,:is(.pc,.pw) .dim{color:var(--ink-3)}
-:is(.pc,.pw) .bars{display:block;width:100%;height:auto}
-:is(.pc,.pw) .bars rect{fill:var(--blue)}
-:is(.pc,.pw) .bars rect.hi{fill:var(--good)}
-:is(.pc,.pw) .bars rect.lo{fill:color-mix(in srgb,var(--blue) 45%,var(--sheet))}
-:is(.pc,.pw) .bars text{font-family:var(--f-mono);font-size:9px;fill:var(--ink-2);text-anchor:middle}
-:is(.pc,.pw) .bars text.wk{fill:var(--ink-3)}
-:is(.pc,.pw) .bars line{stroke:var(--rule)}
 :is(.pc,.pw) .seg{display:inline-flex;border:1px solid var(--rule);border-radius:5px;overflow:hidden;background:var(--sheet)}
 :is(.pc,.pw) .seg button{font:500 11px var(--f-body);padding:2px 8px;border:0;background:transparent;color:var(--ink-2);cursor:pointer;letter-spacing:0;text-transform:none}
 :is(.pc,.pw) .seg button[aria-pressed="true"]{background:var(--ink);color:var(--sheet)}

@@ -497,9 +497,15 @@ def main():
     ap.add_argument("--no-llm", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--fixture")
+    ap.add_argument("--skip-existing", action="store_true",
+                    help="do nothing if this week's article was already written by Claude (scheduled runs)")
     a = ap.parse_args()
     meta = J("meta.json")
     week = a.week or (meta["last_completed_week"] if a.kind == "recap" else meta["next_week"])
+    done = OUT / f"{meta['season']}-w{week:02d}-{a.kind}.json"
+    if a.skip_existing and done.exists() and json.loads(done.read_text()).get("writer") == "claude":
+        print(f"{done.name} already written, skipping (manual run overwrites)")
+        return
     facts = recap_facts(week, a) if a.kind == "recap" else preview_facts(week, a)
     try:
         art = None if a.no_llm else claude_write(facts, a.kind)
