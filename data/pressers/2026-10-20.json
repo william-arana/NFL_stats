@@ -44,6 +44,91 @@
   "opponent": "New England"
  },
  {
+  "id": "DET:campbell-on-week-7-preparation",
+  "team": "DET",
+  "url": "https://www.detroitlions.com/video/campbell-on-week-7-preparation",
+  "title": "Campbell on Week 7 preparation",
+  "date": "2026-10-20",
+  "duration": 690,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/lions/wwtbmlngft0wt2zk65jj.jpg",
+  "kind": "midweek",
+  "after_week": 5,
+  "coach": "Dan Campbell",
+  "words": 2453,
+  "model": "claude-haiku-5-5",
+  "headline": "Brian Branch is returning to the lineup, and Campbell says Keith Abney will keep playing, so the safety depth chart is set to shift.",
+  "summary": "Campbell called Green Bay a very good, playing-well-right-now team, citing their plus-six turnover margin, their opportunistic defense, and Jordan Love as the driver of the offense. He flagged Matthew Golden and Christian Watson as dangerous deep threats, with about half of their deep targets resulting in either DPI or a catch. He said the Packers will lean on the run game, expects Josh Jacobs back, and described Love's ability to extend plays as the key threat his front has to limit. On the Packers' coaching, he said they will likely keep their core concepts and just add wrinkles. Campbell said Skyler Gill-Howard's edge rush was a one-off he didn't expect to see much of going forward, though he praised his versatility and professionalism. He said division games matter a lot, and that this one is the first divisional game at home this season. On the safety spot, he said Brian Branch is returning, that Chuck Clark has been steady, and that Keith Abney is worth continuing to invest in. He said Branch's versatility lets him play high or underneath and gives the staff flexibility with the other safety. He also gave an update on the player referred to as Kirby, saying he is doing well and is in a good headspace, but he gave no timetable.",
+  "injuries": [
+   {
+    "player": "Brian Branch",
+    "status": "returning",
+    "detail": "Campbell said Branch is coming back, which creates a decision at the other safety spot.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Brian Branch",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Branch is returning to the lineup for Week 7 and gives the defense flexibility at safety.",
+    "note": "A return for a versatile safety adds a usable IDP and defensive piece back to the lineup.",
+    "quote": "Here's what's great about getting BB.",
+    "player_id": ""
+   },
+   {
+    "player": "Keith Abney",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Abney will play for Detroit and is worth continuing to invest in.",
+    "note": "Campbell's endorsement suggests Abney could have a meaningful role in the safety rotation, though Branch's return may cut into it.",
+    "quote": "Abney is is worth continuing to invest in.",
+    "player_id": ""
+   },
+   {
+    "player": "Chuck Clark",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Clark will be where he is supposed to be and remains a steady veteran in the safety rotation.",
+    "note": "Clark's role depends on how the safety snaps split once Branch returns.",
+    "quote": "Chuck has been really steady for us, man.",
+    "player_id": ""
+   },
+   {
+    "player": "Skyler Gill-Howard",
+    "topic": "usage",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Gill-Howard will not see a heavy dose of edge rushing going forward.",
+    "note": "His recent edge work was described as a curveball, so his rush snaps are unlikely to grow.",
+    "quote": "I don't think you're going to see some heavy dose of him out there.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Green Bay Packers offense",
+    "detail": "Campbell expects Love, Golden and Watson to create big plays, and says the Packers will look to establish the run with Josh Jacobs, who is expected back."
+   },
+   {
+    "topic": "Green Bay Packers defense",
+    "detail": "Campbell said the Packers' defense has been opportunistic and disguises well, with seven takeaways over the last two games, and Detroit's staff is reviewing past games for clues on how they may attack."
+   },
+   {
+    "topic": "Division importance",
+    "detail": "Campbell emphasized the importance of division games, noting Detroit went 2-4 in division last year and that this is the first divisional home game this season."
+   },
+   {
+    "topic": "Kirby update",
+    "detail": "Campbell said the player referred to as Kirby is doing well, gave no return timetable, and was not identifiable on the provided roster."
+   }
+  ],
+  "opponent": "Green Bay Packers"
+ },
+ {
   "id": "SF:shanahan-reflects-on-6-0-start-gritty-finish-over-commanders",
   "team": "SF",
   "url": "https://www.49ers.com/video/shanahan-reflects-on-6-0-start-gritty-finish-over-commanders",

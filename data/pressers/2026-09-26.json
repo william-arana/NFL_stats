@@ -1,0 +1,237 @@
+[
+ {
+  "id": "CHI:ben-johnson-players-are-fighting-to-be-on-that-grass-and-help-us-win-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-players-are-fighting-to-be-on-that-grass-and-help-us-win-press-conference",
+  "title": "Ben Johnson: Players are ‘fighting to be on that grass and help us win’ | Press Conference",
+  "date": "2026-09-26",
+  "duration": 479,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/bears/aayu2sf5rkg2bewlz0ut",
+  "kind": "final_practice",
+  "after_week": 2,
+  "coach": "Ben Johnson",
+  "words": 1721,
+  "model": "claude-haiku-5-5",
+  "headline": "Caleb Williams did not practice Saturday, and Tyson Bagent is cleared and in a QB1/QB2 mix for Monday night; the coach won't name the starter until the week plays out.",
+  "summary": "Coach Ben Johnson said the week has gone well, though there is still uncertainty about who will be active for Monday night. Tyson Bagent was cleared, returned to meetings Friday, and was set to practice Saturday, which Johnson called good for him. Caleb Williams was not practicing Saturday, and Johnson said he needed to see something from everyone on a big day. Johnson said the QB pecking order would stay fluid, with a decision coming after the week's plan plays out. He described Bagent as a cerebral, mentally prepared backup who could be the backup or part of the starting conversation, and said both QBs bring different skill sets. Tyrique Stevenson participated more than expected after a summer injury, and Johnson praised his toughness. Ozzy Trapilo will not play Monday. Kicker Cairo Santos is practicing Saturday and is expected to be available Monday, and a kickoff-rule discrepancy is expected to be resolved in a call that afternoon. Johnson also discussed his relationship with a veteran coach he brought in from New Orleans, saying he is a seasoned, accountable mentor.",
+  "injuries": [
+   {
+    "player": "Caleb Williams",
+    "status": "out",
+    "detail": "Not practicing Saturday; the coach did not give a reason or a Monday status.",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Tyson Bagent",
+    "status": "full",
+    "detail": "Cleared from concussion protocol and back at practice Saturday after joining meetings Friday.",
+    "player_id": "00-0038416"
+   },
+   {
+    "player": "Tyrique Stevenson",
+    "status": "returning",
+    "detail": "Nicked up over the summer but back on the field sooner than expected; participated more than anticipated this week.",
+    "player_id": ""
+   },
+   {
+    "player": "Ozzy Trapilo",
+    "status": "out",
+    "detail": "Coach said he does not plan to play him Monday night in any capacity.",
+    "player_id": "00-0040740"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Caleb Williams",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Will not practice Saturday; Monday availability unclear.",
+    "note": "A missed Saturday practice raises the chance of a QB change and creates uncertainty for Monday's passing volume.",
+    "quote": "Caleb, uh, will not be practicing today.",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Tyson Bagent",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is in the QB competition and could be the backup or start Monday night.",
+    "note": "A cleared backup QB who could start raises his chance of meaningful volume if Caleb Williams is limited or out.",
+    "quote": "if he plays Monday night, you know, we're, uh, we're expecting big things from him.",
+    "player_id": "00-0038416"
+   },
+   {
+    "player": "Tyrique Stevenson",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Participated more than expected this week after a summer injury.",
+    "note": "Stevenson appears on track for Monday, which supports his usual defensive snap share.",
+    "quote": "he was able to participate more yesterday than we thought going into the week.",
+    "player_id": ""
+   },
+   {
+    "player": "Ozzy Trapilo",
+    "topic": "role",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Will not play Monday night in any capacity.",
+    "note": "Trapilo is out for the Monday game, so he has no fantasy value this week.",
+    "quote": "Do you plan to play Ozzie in some capacity Monday? No.",
+    "player_id": "00-0040740"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Kicker",
+    "detail": "Cairo Santos is practicing Saturday and expected to be available Monday; a call on a kickoff-related discrepancy was expected that afternoon. Santos is not on the listed roster."
+   },
+   {
+    "topic": "Team culture",
+    "detail": "Johnson praised the roster's competitiveness, describing players as fighting to be on the field, and credited veteran staff with improving accountability."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "NO:kellen-moore-saints-raiders-preview-2026-week-3",
+  "team": "NO",
+  "url": "https://www.neworleanssaints.com/video/kellen-moore-saints-raiders-preview-2026-week-3",
+  "title": "Exclusive: Kellen Moore previews Saints' home opener vs. Raiders",
+  "date": "2026-09-26",
+  "duration": 111,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/saints/xmmzw17laffgimzspwmu",
+  "kind": "final_practice",
+  "after_week": 2,
+  "coach": "Kellen Moore",
+  "words": 479,
+  "model": "claude-haiku-5-5",
+  "headline": "Asim Richards is set to replace Kelvin Banks on the Saints' offensive line for the Raiders game, with Kellen Moore saying he'll have a full week to prepare.",
+  "summary": "Kellen Moore framed the home opener in the Caesars Superdome as a chance to build atmosphere, with the crowd feeding off strong play on the field. He said the team needs to execute well so the fans can get behind it. On the Raiders, who are 2-0 and tied for the league lead in sacks, Moore called them very talented, especially their four-man rush and pressure schemes. The Saints will need awareness, quick ball release, and solid protection. Asked about Asim Richards stepping in for Kelvin Banks, Moore pointed to Richards' work last year and his strong performance against Baltimore, and said he'll have a full week to get ready. On Kirk Cousins, Moore called him steady and calm, saying teammates play at a higher level around him, and credited Las Vegas for a strong start.",
+  "injuries": [
+   {
+    "player": "Kelvin Banks",
+    "status": "unclear",
+    "detail": "The question implied Banks is out and Asim Richards is replacing him, but Moore did not directly address Banks' status in this clip.",
+    "player_id": "00-0040125"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Asim Richards",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will start in place of Kelvin Banks against the Raiders, with a full week of preparation.",
+    "note": "Richards is an offensive lineman, so this is mainly a depth and line-stability note with limited direct fantasy value.",
+    "quote": "He'll have the full week. He'll be ready to go",
+    "player_id": "00-0038601"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Opponent",
+    "detail": "The Raiders are 2-0 and lead the league in sacks. Moore said their front four and pressure packages require ball-security awareness and quick throws from the Saints."
+   },
+   {
+    "topic": "Home opener",
+    "detail": "Moore is looking forward to the first home game in the Superdome and sees the crowd as a factor when the team plays well."
+   }
+  ],
+  "opponent": "Las Vegas Raiders"
+ },
+ {
+  "id": "PHI:nick-sirianni-press-conference-september-26-2026",
+  "team": "PHI",
+  "url": "https://www.philadelphiaeagles.com/video/nick-sirianni-press-conference-september-26-2026",
+  "title": "Nick Sirianni Press Conference: September 26, 2026",
+  "date": "2026-09-26",
+  "duration": 507,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/eagles/bumchv5qnfx1njaa8x71",
+  "kind": "final_practice",
+  "after_week": 2,
+  "coach": "Nick Sirianni",
+  "words": 1684,
+  "model": "claude-haiku-5-5",
+  "headline": "Jonathan Greenard had a good week but is still limited in practice, with his status to be decided after the final session; Makai Lemon's touches are expected to grow.",
+  "summary": "Sirianni said the team had a good week of practice overall, with one more practice day left before the Chicago trip, and that the tight ends in general had a good week. He called Jonathan Greenard's week good, said he brings energy and leadership from the sideline, and said the team would see where he stands at the end of Friday's practice. On Zach Ertz, he said Ertz had a good week, and he described the process of getting players who missed camp caught up on habits like tackling, strip attempts, and ball security. For Makai Lemon, Sirianni said he is improving each week, that the team wants individual success but team success comes first, and that his touches will come because he does the right thing when the ball is not going to him. He credited DeVonta Smith and Dontayvion Wicks for a good start and said Lemon's contributions don't show on the stat sheet. On the quarterback question, he praised Jalen Hurts as a partner. On play action, he said the sample size is small and the team is still figuring out its identity, and that the offense has been behind schedule too often to rely on play action. On the new interior linemen, he said Drew Kendall at center and a left guard in a new spot had a good week of preparation and need one more good practice. He declined to say much about the kickoff 12th-man issue beyond saying everything the team does is within the rules.",
+  "injuries": [
+   {
+    "player": "Jonathan Greenard",
+    "status": "limited",
+    "detail": "Still limited in practice; had a good week, and his availability will be determined after the final practice.",
+    "player_id": ""
+   },
+   {
+    "player": "Zach Ertz",
+    "status": "unclear",
+    "detail": "Had a good week of practice and is returning from time away from football; no game status given.",
+    "player_id": "00-0030061"
+   },
+   {
+    "player": "Kenny Moore",
+    "status": "unclear",
+    "detail": "Ramp-up after missing time was discussed in general terms; no specific status given.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Jonathan Greenard",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Availability for Monday Night Football is undecided and depends on Friday's practice.",
+    "note": "A limited designation with a deciding practice still pending keeps his Week 4 availability uncertain.",
+    "quote": "He's had a good week. We'll see where we are at the end of today.",
+    "player_id": ""
+   },
+   {
+    "player": "Zach Ertz",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Had a good week of practice; game availability and role not confirmed.",
+    "note": "A positive week for a returning tight end adds upside, but his snap share and target volume remain unknown.",
+    "quote": "Zach had a good week.",
+    "player_id": "00-0030061"
+   },
+   {
+    "player": "Makai Lemon",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Touches are expected to increase as the season goes on, though he is not getting many targets over the middle right now.",
+    "note": "The coach offered reassurance without any concrete usage change, so volume upside is still speculative.",
+    "quote": "",
+    "player_id": "00-0040867"
+   },
+   {
+    "player": "Drew Kendall",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Had a good week of preparation at center, after working in a new spot.",
+    "note": "He appears to be the starting center; interior line stability helps the offense but has little direct fantasy impact.",
+    "quote": "They've had a nice week and we'll see how that pays off.",
+    "player_id": "00-0040587"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Special teams",
+    "detail": "Asked about the special teams coordinators' talks on a 12th man on kickoffs, Sirianni said the team's approach is within the rules and it will keep doing what gives it the best chance to win."
+   },
+   {
+    "topic": "Offensive scheme",
+    "detail": "Play action is low league-wide, which Sirianni attributed to a small sample size, no-huddle use, and falling behind the sticks. He said the team is still figuring out what it does best and expects to revisit it later."
+   },
+   {
+    "topic": "Quarterback",
+    "detail": "Sirianni described the responsibility of the position and praised Jalen Hurts as a partner. No injury news was attached to Hurts."
+   }
+  ],
+  "opponent": "Chicago (Monday Night Football)"
+ }
+]

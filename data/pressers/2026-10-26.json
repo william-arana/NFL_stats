@@ -262,6 +262,139 @@
   "opponent": "Buffalo (road game on a short week)"
  },
  {
+  "id": "CAR:dave-canales-on-responding-to-adversity-and-preparing-for-the-packers",
+  "team": "CAR",
+  "url": "https://www.panthers.com/video/dave-canales-on-responding-to-adversity-and-preparing-for-the-packers",
+  "title": "Dave Canales on responding to adversity and preparing for the Packers",
+  "date": "2026-10-26",
+  "duration": 877,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/panthers/hlmh0c3qymo0jcu96umt.jpg",
+  "kind": "day_after",
+  "after_week": 7,
+  "coach": "Dave Canales",
+  "words": 3249,
+  "model": "claude-haiku-5-5",
+  "headline": "Taylor Moton is out for the season after surgery; Akayleb Evans, Bobby Brown, Jaelan Phillips and Damien Lewis are day-to-day, and David Moore keeps the punt return job.",
+  "summary": "Canales opened by saying the team had a short week and was moving straight into the Packers game, with the locker room conversations aimed at full focus on Green Bay. He confirmed Taylor Moton will have surgery on his ankle after a fibula fracture and ligament damage, which ends his season, and he praised Moton's return from blood clots and his support of teammates. On the Packers loss, Canales said he reviewed the full game and the run game, credited Green Bay's plan, and said the staff is working on run fits, leverage and reducing space rather than airing specifics. He said Lathan Ransom could help the run defense and that there are personnel options. He said Chau Smith-Wade will get his chance at some point, and that Corey Bullock is ready if needed while the team weighs corner options. On special teams, David Moore has returned punts the last two weeks because of his reliability with the ball. Canales also said Akayleb Evans, Bobby Brown, Jaelan Phillips and Damien Lewis are all day-to-day, with Phillips's recurring hamstring making his return for Green Bay a close call. Finally, he discussed Bryce Young's struggles against pressure, saying the offense will give him quicker options and keep a player checking the middle of the field.",
+  "injuries": [
+   {
+    "player": "Taylor Moton",
+    "status": "out",
+    "detail": "Fibula fracture plus ankle ligament damage; surgery on the ankle will end his season.",
+    "player_id": "00-0033284"
+   },
+   {
+    "player": "Akayleb Evans",
+    "status": "questionable",
+    "detail": "Arm/tricep injury; day-to-day with the team evaluating progress over the short week.",
+    "player_id": ""
+   },
+   {
+    "player": "Bobby Brown",
+    "status": "questionable",
+    "detail": "Hand injury; day-to-day and will be evaluated.",
+    "player_id": ""
+   },
+   {
+    "player": "Jaelan Phillips",
+    "status": "questionable",
+    "detail": "Recurring hamstring; the team is trying to get him back for the Packers game but the window is tight.",
+    "player_id": ""
+   },
+   {
+    "player": "Damien Lewis",
+    "status": "questionable",
+    "detail": "Knee injury; day-to-day, with the team checking if he can return.",
+    "player_id": "00-0036417"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Taylor Moton",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Out for the rest of the season after ankle surgery.",
+    "note": "Ends his season and affects the offensive line depth for the rest of the year.",
+    "quote": "that'll put him out for the rest of the year.",
+    "player_id": "00-0033284"
+   },
+   {
+    "player": "Lathan Ransom",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Could see a larger role in run defense; the coach called it a possibility.",
+    "note": "A potential increase in snaps depends on how the staff uses personnel against the run.",
+    "quote": "Yeah. I mean, that's a possibility.",
+    "player_id": ""
+   },
+   {
+    "player": "David Moore",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will keep the punt return job after handling it the last two weeks.",
+    "note": "Keeps a secure return role with extra touches on special teams.",
+    "quote": "gave him a guy I really trust",
+    "player_id": "00-0033589"
+   },
+   {
+    "player": "Chau Smith-Wade",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will get an opportunity at some point, with no firm timeline given.",
+    "note": "A chance at more defensive snaps is possible but not guaranteed.",
+    "quote": "Shaw get his opportunity at some point, you know?",
+    "player_id": ""
+   },
+   {
+    "player": "Corey Bullock",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Is ready if the team needs him at corner, but is not yet in the starting plan.",
+    "note": "Could be called up if injuries force more corner snaps.",
+    "quote": "he's ready if we need him.",
+    "player_id": "00-0039242"
+   },
+   {
+    "player": "Bryce Young",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "The offense will add quicker early options to help him against pressure.",
+    "note": "Quicker reads could help production if pressure keeps rising.",
+    "quote": "giving him some quicker options.",
+    "player_id": "00-0039150"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Packers and run defense",
+    "detail": "Canales said the staff reviewed the film and is focused on run fits, leverage and reducing space, crediting Green Bay's plan. He did not want to reveal specific adjustments."
+   },
+   {
+    "topic": "Short week and urgency",
+    "detail": "Canales said the team is focused on keeping urgency after wins and losses, pointing to the team's inconsistency across recent seasons."
+   },
+   {
+    "topic": "Packers defense",
+    "detail": "Canales said Jonathan Gannon has used different packages, including drop-outs and exotic pressures, that the offense must prepare for."
+   },
+   {
+    "topic": "Special teams",
+    "detail": "Canales said Trevor Etienne has been good catching at midfield, but the punt return decision is about who gives the best chance."
+   },
+   {
+    "topic": "Undrafted rookie",
+    "detail": "Canales praised a non-drafted rookie for special teams grit and his first NFL touchdown after the blowout loss."
+   }
+  ],
+  "opponent": "Green Bay Packers"
+ },
+ {
   "id": "CAR:dave-canales-reflects-on-panthers-run-defense",
   "team": "CAR",
   "url": "https://www.panthers.com/video/dave-canales-reflects-on-panthers-run-defense",
@@ -571,6 +704,74 @@
    {
     "topic": "Chiefs rivalry",
     "detail": "Payton said he doesn't see rivalry weeks in the NFL and treats divisional games as important, but not as special rivalry games."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "DEN:hc-sean-payton-on-denver-s-win-over-arizona-it-was-one-of-our-more-complete-games",
+  "team": "DEN",
+  "url": "https://www.denverbroncos.com/video/hc-sean-payton-on-denver-s-win-over-arizona-it-was-one-of-our-more-complete-games",
+  "title": "HC Sean Payton on Denver’s win over Arizona: ‘It was one of our more complete games’",
+  "date": "2026-10-26",
+  "duration": 328,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/broncos/qnbh8hq1dhbsjtcnseuh.jpg",
+  "kind": "postgame",
+  "after_week": 7,
+  "coach": "Sean Payton",
+  "words": 1014,
+  "model": "claude-haiku-5-5",
+  "headline": "Payton says Jonah Coleman needs more touches after a strong game, and he backed Bo Nix's run as a big play in a win he called one of the team's more complete.",
+  "summary": "Payton called the road win over Arizona one of the Broncos' more complete games, pointing to the kicking game, including a blocked punt that led to a touchdown, and a strong red zone defensive stand. He said the offense found explosive shots down the field, and he credited a good run plan that featured gap schemes and more base personnel to counter Arizona's nickel looks. On Bo Nix's long run, he said it answered the question of whether Nix can still run, and that the play came from a match coverage read rather than a designed scramble. He praised Jonah Coleman's performance and said the team needs to get him more touches. Payton also said the team's confidence in its starting quarterback never changed, and he praised the depth players who stepped up on defense, with Ja'Quan McMillian nearly making a couple of plays. He acknowledged the penalty count and an offensive decision he called a mistake, a late reverse that he said he should have avoided.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Jonah Coleman",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Coleman will get more touches in the running game going forward",
+    "note": "Payton's praise and stated plan to increase his touches suggest a larger workload that could boost his fantasy output.",
+    "quote": "Got to get him more touches. Definitely.",
+    "player_id": "00-0041496"
+   },
+   {
+    "player": "Bo Nix",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Nix's long run showed he can still run and was a good decision in a match coverage",
+    "note": "The coach's endorsement of Nix's mobility and decision making adds a rushing upside to his fantasy value.",
+    "quote": "I think it answers our question. Can he still run.",
+    "player_id": "00-0039732"
+   },
+   {
+    "player": "Ja'Quan McMillian",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "McMillian came close to making a couple of plays and is stepping up as depth",
+    "note": "Payton's praise for depth players stepping up suggests McMillian's role could grow, though this is not a clear starting change.",
+    "quote": "he's got good ball skills and a lot of guys played well",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Run game and scheme",
+    "detail": "Payton said the run plan worked well with gap schemes and more base personnel to avoid Arizona's nickel looks."
+   },
+   {
+    "topic": "Special teams",
+    "detail": "Payton highlighted a blocked punt that led to a third touchdown and a strong kick return to start the game."
+   },
+   {
+    "topic": "Red zone defense",
+    "detail": "Payton praised a red zone stand where the opponent went one of five, calling it big."
+   },
+   {
+    "topic": "Officiating and penalties",
+    "detail": "Payton acknowledged a high penalty count, took responsibility for a late play he said he should not have called, and said he wants to review the tape."
    }
   ],
   "opponent": ""
@@ -1067,6 +1268,57 @@
   "opponent": ""
  },
  {
+  "id": "KC:andy-reid-on-week-7-matchup-against-the-seahawks-postgame-press-conference-nfl-week-7",
+  "team": "KC",
+  "url": "https://www.chiefs.com/video/andy-reid-on-week-7-matchup-against-the-seahawks-postgame-press-conference-nfl-week-7",
+  "title": "Andy Reid on Week 7 Matchup Against the Seahawks | Postgame Press Conference - NFL Week 7",
+  "date": "2026-10-26",
+  "duration": 228,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/chiefs/rinzhbahdsc0i5n1zhjk.jpg",
+  "kind": "postgame",
+  "after_week": 7,
+  "coach": "Andy Reid",
+  "words": 695,
+  "model": "claude-haiku-5-5",
+  "headline": "Reid takes blame for a loss to Seattle across all three phases and says Nick Bolton's neck spasms shouldn't keep him out; Denver is next.",
+  "summary": "Reid opened by saying there was nothing significant to report on injuries, and that Nick Bolton has neck spasms he expects to work through. He said the team struggled in all three phases and that he takes full responsibility, adding that Seattle is a good team that played well and deserves credit. He pointed to third-down efficiency on both sides of the ball as the one stat that stood out, and said the locker room is strong enough to bounce back for next week's game against Denver. Asked how Seattle stifled both the run and the pass, he again accepted responsibility for putting players in the right spots. On the kicker's recent misses, Reid said the kicker has been among the most consistent in football but is off a bit right now and needs to be fixed. On defense, he said the team has to avoid third-and-long, which means winning on first and second down, and that penalties kept the offense from building on drives. Asked about the reported Josh Simmons situation, Reid said the player was placed on IR with a bad back and that the priority is getting that worked out, declining to say more.",
+  "injuries": [
+   {
+    "player": "Nick Bolton",
+    "status": "questionable",
+    "detail": "Neck spasms; Reid said he will work through them and expects him to be good.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Nick Bolton",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Expected to be fine despite neck spasms and will work through them.",
+    "note": "Neck spasms are a minor concern, but the coach's confidence keeps him in the starting-linebacker picture unless the week's practice reports say otherwise.",
+    "quote": "he'll work through that and be good",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offense and defense performance",
+    "detail": "Reid said the team struggled in all three phases, cited third-down efficiency on both sides, and said penalties and play calls hurt the offense. He said defensively the goal is to avoid third-and-long."
+   },
+   {
+    "topic": "Kicker",
+    "detail": "Reid said the kicker has been one of the most consistent in football but is off a bit right now and needs to be fixed. He did not describe a physical issue."
+   },
+   {
+    "topic": "Josh Simmons",
+    "detail": "Reid said the player was placed on IR with a bad back and that the focus is on getting that worked out. He declined to discuss the reported meeting further."
+   }
+  ],
+  "opponent": "Denver"
+ },
+ {
   "id": "LA:sean-mcvay-colby-parkinson-week-7-win-over-raiders-tight-end-depth-playing-resilient-press-conference",
   "team": "LA",
   "url": "https://www.therams.com/video/sean-mcvay-colby-parkinson-week-7-win-over-raiders-tight-end-depth-playing-resilient-press-conference",
@@ -1295,6 +1547,72 @@
    }
   ],
   "opponent": "New York Jets"
+ },
+ {
+  "id": "LV:klint-kubiak-postgame-presser-rams-nfl-week-7-2026-season",
+  "team": "LV",
+  "url": "https://www.raiders.com/video/klint-kubiak-postgame-presser-rams-nfl-week-7-2026-season",
+  "title": "Klint Kubiak Postgame Presser - 10.25.26 | Week 7",
+  "date": "2026-10-26",
+  "duration": 223,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/raiders/rxti2jh0nhtac1lpcgnh.jpg",
+  "kind": "postgame",
+  "after_week": 7,
+  "coach": "Klint Kubiak",
+  "words": 896,
+  "model": "claude-haiku-5-5",
+  "headline": "Kubiak says the Raiders' slow start and red zone failures sunk them, and Kirk Cousins is throwing too much in catch-up mode with no balance; no QB change was made to Fernando Mendoza.",
+  "summary": "Klint Kubiak opened by calling it a non-winning performance, saying the Raiders started too slowly and fell into a hole against a well-coached team, though the players fought in the second half. He said the defense's scheme-heavy opponent had many variables and credited their coaches, and he would not say blitzing was discussed. He called the red zone struggles very disappointing given the emphasis the team has put on it, saying the offense must make throws and catches on one-on-one opportunities. On the run defense, he deferred to the tape, noting the opponent moved the ball too well. Asked about Fernando Mendoza at quarterback in the second half, Kubiak said the team made the game competitive in the third quarter, and he answered no to a change. On the four-game losing streak and the franchise's future, he said the staff is reviewing film and working on the red zone, third-quarter issues, personnel and scheme, and that no one is coming to help them. He said his players were ready early but the offense executed poorly and the game slipped away after turnovers and points allowed. On the failed fourth-down attempts, he pointed to man coverage that the offense failed to beat. He said the team is throwing far too much to win in this league and needs to be more competitive early to get balance. He credited special teams as a consistent strength all year.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Kirk Cousins",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "negative",
+    "claim": "Offense is throwing too much because the team is playing from behind; wants more early competitiveness to restore balance",
+    "note": "Heavy pass volume from game script helps Cousins' passing totals, but the trailing script and pressure on him are a concern for efficiency and sacks.",
+    "quote": "Having to throw it as much as we're throwing it.",
+    "player_id": "00-0029604"
+   },
+   {
+    "player": "Fernando Mendoza",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "The team considered a QB change in the second half but made no change to Mendoza",
+    "note": "Mendoza was discussed as a possible in-game replacement but was not inserted, so he remains a backup-level option unless the starter struggles further.",
+    "quote": "Yeah, we made that. Made it a competitive game in the third quarter.",
+    "player_id": "00-0041562"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Red zone offense",
+    "detail": "Kubiak called the red zone failures very disappointing given the emphasis on it, saying the team must make one-on-one throws and catches."
+   },
+   {
+    "topic": "Slow starts and game flow",
+    "detail": "The team came out flat offensively; once the defense allowed scores after turnovers the game got away from them."
+   },
+   {
+    "topic": "Defense",
+    "detail": "The defense allowed 30-plus points and the run defense struggled; Kubiak deferred specifics to film review and cited the opponent's scheme."
+   },
+   {
+    "topic": "Fourth-down failures",
+    "detail": "Kubiak attributed the failed fourth-down attempts to man coverage the offense did not beat."
+   },
+   {
+    "topic": "Special teams",
+    "detail": "Kubiak praised special teams as a consistent strength all year, naming coaches Joe, Tim and Marquise."
+   },
+   {
+    "topic": "Season outlook",
+    "detail": "Asked about the four-game losing streak and the franchise's future, Kubiak said the staff must fix its problems internally, with no outside help coming."
+   }
+  ],
+  "opponent": ""
  },
  {
   "id": "MIA:hc-jeff-hafley-oct-26-press-conference",
@@ -2177,6 +2495,107 @@
    {
     "topic": "Injuries",
     "detail": "Bowles said no new injuries came out of the game and no one was known to be sidelined beyond the questionable players."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "TEN:robert-saleh-press-conference-tennessee-titans-x3742",
+  "team": "TEN",
+  "url": "https://www.tennesseetitans.com/video/robert-saleh-press-conference-tennessee-titans-x3742",
+  "title": "Robert Saleh Press Conference | Tennessee Titans",
+  "date": "2026-10-26",
+  "duration": 709,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/titans/usi8bmsqxvdxqxucvemf.jpg",
+  "kind": "postgame",
+  "after_week": 7,
+  "coach": "Robert Saleh",
+  "words": 2243,
+  "model": "claude-haiku-5-5",
+  "headline": "Saleh says Cam Ward played a good game but must fix footwork, and Michael Carter keeps the three-down role over Nick Singleton; Alontae Taylor's lack of snaps is a watch item.",
+  "summary": "Saleh opened by saying the defense let the team down after the offense tied the game in the fourth quarter, failing on the two late drives that could have won or forced overtime. He said the team has a finishing problem, going 1-4 in one-score games in the final five minutes, and that the locker room needs to hear that it is good enough to win those games. On Cam Ward, Saleh said he played a good, though not exceptional, game and has specific things to fix, including footwork that reverts under pressure, situational awareness, accuracy and decision-making. He called the footwork issues unacceptable, said the answer is reps and time on task, and said the coaching staff is working with him. Saleh defended the offensive line, receivers and play-calling as shared responsibility for Ward's production. On the backfield, Saleh said Michael Carter has more three-down value than Nick Singleton because of protection and route running, while Singleton is still developing in those areas. He said Alontae Taylor had no snaps because the nickel role is complicated, that Joshua Williams earned more playing time, and that Taylor is attacking the job and they will see where he is this week. On defense, Saleh said run defense, pass rush and coverage all fell short, with too many explosive plays and yards after catch, and that tackling was poor. He said Kevin Winston had a few plays he could have played better but nothing alarming, and that his first game back was not terrible.",
+  "injuries": [
+   {
+    "player": "Kevin Winston",
+    "status": "returning",
+    "detail": "Saleh described this as Winston's first game back after a stretch of missed time; no further specifics were given.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Cam Ward",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Ward will keep working on footwork and situational decisions; the coaching staff expects gradual improvement, with no change to his starting role mentioned.",
+    "note": "Saleh praised Ward's effort and talent but openly called out footwork and decision-making, so his fantasy ceiling depends on how fast those errors shrink.",
+    "quote": "I thought he played a good game. Not an exceptional game.",
+    "player_id": "00-0040676"
+   },
+   {
+    "player": "Michael Carter",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Carter is ahead of Nick Singleton on the depth chart because of his three-down value in protections, route running and production.",
+    "note": "Carter's passing-down and third-down work keeps him as the preferred back, which supports his touch share over Singleton.",
+    "quote": "he's got three down value with regards to protections",
+    "player_id": "00-0036924"
+   },
+   {
+    "player": "Nick Singleton",
+    "topic": "depth_chart",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Singleton is still behind Carter in pass protection and third-down work, so his role is limited for now.",
+    "note": "Singleton's snaps and touches are capped while Carter holds the three-down role, which hurts his weekly floor.",
+    "quote": "Nick is still growing in that regard.",
+    "player_id": ""
+   },
+   {
+    "player": "Alontae Taylor",
+    "topic": "usage",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Taylor got no snaps against Cleveland as the team worked to get him going at nickel; his status for the coming week is undetermined.",
+    "note": "Taylor's lack of defensive snaps makes him a deep-league or avoid option until his nickel role is clearer.",
+    "quote": "we'll see where he's at this week.",
+    "player_id": ""
+   },
+   {
+    "player": "Joshua Williams",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Joshua Williams earned more playing time after a strong showing against Indianapolis, and the team wants to keep giving him more run.",
+    "note": "Williams is earning more defensive snaps and may be the primary beneficiary of Taylor's lack of playing time.",
+    "quote": "thought he did a really nice job in the game against Indianapolis",
+    "player_id": ""
+   },
+   {
+    "player": "Kevin Winston",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Winston had a few plays he could have played better but his performance was not alarming.",
+    "note": "Saleh's neutral assessment suggests Winston keeps his role, but he is a minor fantasy factor on defense.",
+    "quote": "it wasn't, wasn't anything alarming.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Defense and tackling",
+    "detail": "Saleh said the defense failed in late situations, allowed too many explosive plays and yards after catch, and tackled poorly on the final play. He said the run defense and pass rush also underperformed."
+   },
+   {
+    "topic": "Finishing close games",
+    "detail": "Saleh said the team is 1-4 in one-score games in the last five minutes and called finishing the main problem. He said this has been a theme all year."
+   },
+   {
+    "topic": "QB sneak",
+    "detail": "Saleh said the team has the personnel to use a bigger player on quarterback sneaks, but Ward's sneak attempt did not work the day before."
    }
   ],
   "opponent": ""

@@ -818,6 +818,81 @@
   "opponent": "Los Angeles Rams"
  },
  {
+  "id": "DET:campbell-on-preparation-for-week-3-matchup",
+  "team": "DET",
+  "url": "https://www.detroitlions.com/video/campbell-on-preparation-for-week-3-matchup",
+  "title": "Campbell on preparation for Week 3 matchup",
+  "date": "2026-09-23",
+  "duration": 779,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/lions/jvtpxqqjbqoqwualz8dt",
+  "kind": "midweek",
+  "after_week": 2,
+  "coach": "Dan Campbell",
+  "words": 2684,
+  "model": "claude-haiku-5-5",
+  "headline": "McNeill sat part of Wednesday practice but is expected back at its end, and Campbell is leaning on backups Skyler Gill-Howard and Derrick Moore to lighten the defensive line's workload.",
+  "summary": "Campbell previewed the Jets game by saying he knows coach Aaron Glenn well and respects him, and that this Jets team is far more talented and physical than last year's. He described them as wanting to run the ball, hit explosive shots, and play a strong special teams game, and said Detroit should expect a tough game after the Jets' close opener. Alim McNeill was missing from the start of practice, but Campbell said it was nothing serious and he would return when practice ended. On line workload, McNeill and Aidan Hutchinson have played heavy snaps (McNeill about 150 over two games). Campbell said that reflects the overtime game and a short week, and that the goal is to keep them fresher as backups like Gill-Howard and Derrick Moore develop. He said Geno Smith plays well at Ford Field and that keeping him in the pocket is a major emphasis. Campbell also said familiarity with Glenn means the Lions expect wrinkles in fronts, pressures, and coverage disguises, so they will prepare for a wide range of looks. He dismissed the idea of a trap game, saying the Jets' defensive play-caller spent five years in Detroit, so players know the tape. On offense, he called the scoring inconsistent despite 31 points in two games, citing failed red-zone and third and fourth down conversions and turnovers. He also praised the young safety drafted recently for his range and versatility.",
+  "injuries": [
+   {
+    "player": "Alim McNeill",
+    "status": "limited",
+    "detail": "Missed the start of Wednesday's practice; Campbell said it was no big deal and he would be back when practice ended.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Alim McNeill",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will see his snaps managed to keep him fresh, with backups taking more reps.",
+    "note": "A heavy snap count can cap his box-score output and raises the chance of him being rested in games, which matters for IDP and DT streamers.",
+    "quote": "ideally, we don't want them out there that much",
+    "player_id": ""
+   },
+   {
+    "player": "Skyler Gill-Howard",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is the current backup defensive tackle and is expected to get more snaps as he grows.",
+    "note": "As McNeill's primary backup, he could see extra snaps and is a deeper-league option if the workload continues.",
+    "quote": "who's a young player who's ascending",
+    "player_id": ""
+   },
+   {
+    "player": "Derrick Moore",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Expected to get more reps as he develops behind the starting defensive tackles.",
+    "note": "He is a depth piece whose snaps could increase if the rotation expands, but he is unlikely to be a fantasy factor soon.",
+    "quote": "we got Derek Moore and we've got O'Neal",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Opponent scheme and familiarity",
+    "detail": "Campbell said the Jets are much more talented in year two, play physically, want to possess the ball, commit to the run, and hit shots downfield. He expects Glenn to add wrinkles against the Lions, since both staffs know each other's tendencies."
+   },
+   {
+    "topic": "Trap game and mindset",
+    "detail": "Campbell said the players understand the Jets' talent and that this will be a 60-minute brawl, not a trap game, and that the team cannot beat itself."
+   },
+   {
+    "topic": "Offensive consistency",
+    "detail": "Campbell cited red-zone failures, notably a first-and-goal at the one against New Orleans that ended in a field goal, along with third- and fourth-down conversion issues and failure to protect the ball, as the key fixes."
+   },
+   {
+    "topic": "Forced fumbles",
+    "detail": "Campbell said stripping the ball is emphasized every week, and he credited Glenn's teaching for the Jets' six forced fumbles in two games."
+   }
+  ],
+  "opponent": "New York Jets (coach Aaron Glenn, QB Geno Smith)"
+ },
+ {
   "id": "HOU:demeco-ryans-on-jonathan-taylor-c-j-stroud-the-colts",
   "team": "HOU",
   "url": "https://www.houstontexans.com/video/demeco-ryans-on-jonathan-taylor-c-j-stroud-the-colts",
@@ -1858,6 +1933,121 @@
    }
   ],
   "opponent": "Jacksonville Jaguars"
+ },
+ {
+  "id": "NO:kellen-moore-interview-saints-vs-raiders-2026-nfl-week-3-9-23-2026",
+  "team": "NO",
+  "url": "https://www.neworleanssaints.com/video/kellen-moore-interview-saints-vs-raiders-2026-nfl-week-3-9-23-2026",
+  "title": "Kellen Moore on Klint Kubiak, Kaden Elliss | Saints vs. Raiders 2026 NFL Week 3",
+  "date": "2026-09-23",
+  "duration": 952,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/saints/c3kl4xtsosko37doszxx",
+  "kind": "first_practice",
+  "after_week": 2,
+  "coach": "Kellen Moore",
+  "words": 3451,
+  "model": "claude-haiku-5-5",
+  "headline": "Saints Wednesday report: Barion Brown, Martin Emerson, and Travis Etienne all had hamstring or shoulder issues, while Kaden Elliss, Pete Werner, CJ Donaldson, and Kevin Austin Jr. drew praise for expanded roles.",
+  "summary": "Moore opened with the injury report: Barion Brown (hamstring, which he said came from the game), Martin Emerson (shoulder), and Jonas Sanker (knee), Nathan Shepherd (hip), and Chase Young (calf) did not practice. Christian Miller was limited with a toe injury, and Travis (presumably Etienne) was also listed with a hamstring issue. Moore said the Calvin situation popped up during practice and that the player had been working through it all week. The Saints signed long snapper Cal Adomitis to the active roster and placed Calvin on IR. On defense, Moore called Kaden Elliss one of the few players the pressure plan must start with because of his versatility as a blitzer and his matchup problems against running backs. He praised Pete Werner's steady play at middle linebacker, saying he deserved a game ball after an 11-tackle performance, and said Werner would get blitz chances as a counter to Elliss. Moore credited CJ Donaldson's third-down pass protection as a valuable hidden skill. He said Kevin Austin Jr. has prepared as if he were ready to start every week and handled the Baltimore situation well. On offense, Moore said the run game has been inconsistent and needs all 11 players to execute. He described the Raiders as fast, physical, and explosive, with havoc plays on defense, and called Nakobe Dean a very smart linebacker.",
+  "injuries": [
+   {
+    "player": "Barion Brown",
+    "status": "unclear",
+    "detail": "Hamstring; did not practice Wednesday. Coach said the injury came from the game.",
+    "player_id": "00-0041099"
+   },
+   {
+    "player": "Martin Emerson",
+    "status": "unclear",
+    "detail": "Shoulder; did not practice Wednesday.",
+    "player_id": ""
+   },
+   {
+    "player": "Travis Etienne",
+    "status": "unclear",
+    "detail": "Hamstring; listed on the report and did not practice. Name is inferred from the transcript's 'Travis'.",
+    "player_id": "00-0036973"
+   },
+   {
+    "player": "Jonas Sanker",
+    "status": "unclear",
+    "detail": "Knee; did not practice Wednesday.",
+    "player_id": ""
+   },
+   {
+    "player": "Nathan Shepherd",
+    "status": "unclear",
+    "detail": "Hip; did not practice Wednesday.",
+    "player_id": ""
+   },
+   {
+    "player": "Chase Young",
+    "status": "unclear",
+    "detail": "Calf; did not practice Wednesday.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Kaden Elliss",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will be a focal point of the Saints' pressure plan against the Raiders",
+    "note": "Moore treats Elliss as a must-account-for blitzer, which supports his sack and pressure upside in this matchup.",
+    "quote": "A handful of guys where the pressure plant has to start with him.",
+    "player_id": ""
+   },
+   {
+    "player": "Pete Werner",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Has settled in as the starting middle linebacker and will keep getting blitz chances",
+    "note": "Moore praised his play and said he'll see blitz opportunities as a counter to Elliss, which supports tackle and occasional sack upside.",
+    "quote": "He's done an awesome job.",
+    "player_id": ""
+   },
+   {
+    "player": "CJ Donaldson",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Valued for third-down pass protection",
+    "note": "Third-down protection work keeps Donaldson on the field in passing situations, which gives him useful fantasy floor in PPR formats.",
+    "quote": "I thought he did an awesome job to go against that Baltimore defense.",
+    "player_id": "00-0041326"
+   },
+   {
+    "player": "Kevin Austin Jr.",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Has prepared as if ready for a larger role; expected to get a significant opportunity this weekend",
+    "note": "Moore's comments suggest a bigger workload for Austin, but the report does not specify his snap share or target expectation.",
+    "quote": "He's prepared as if he's ready to play every single week.",
+    "player_id": "00-0037231"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Raiders opponent",
+    "detail": "Moore described Las Vegas as fast, physical, and explosive on offense, with turnovers, sacks, and havoc plays on defense. He called Nakobe Dean as smart a linebacker as he has seen and said the Raiders are 2-0 with decisive wins."
+   },
+   {
+    "topic": "Roster moves",
+    "detail": "Cal Adomitis was signed to the active roster as long snapper, and Calvin was placed on IR. Scott, the former long snapper, signed with Chicago."
+   },
+   {
+    "topic": "Run game",
+    "detail": "Moore said the run game has been inconsistent, with some moments working and others not, and that it requires all 11 players to execute the design."
+   },
+   {
+    "topic": "Superdome game",
+    "detail": "Moore expects a loud atmosphere at home Sunday and called the Superdome a special place. He also reflected on the Steve Gleason blocked punt anniversary."
+   }
+  ],
+  "opponent": "Las Vegas Raiders"
  },
  {
   "id": "NYG:coach-john-harbaugh-the-world-keeps-spinning",

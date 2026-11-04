@@ -1,5 +1,90 @@
 [
  {
+  "id": "CHI:ben-johnson-on-week-5-loss-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-on-week-5-loss-press-conference",
+  "title": "Ben Johnson on Week 5 loss | Press Conference",
+  "date": "2026-10-11",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bears/gyzpjvvm2qqnunlbmray.jpg",
+  "kind": "postgame",
+  "after_week": 5,
+  "coach": "Ben Johnson",
+  "words": 1408,
+  "model": "claude-haiku-5-5",
+  "headline": "Bears QB Caleb Williams is 'on track' but his return timing is uncertain, and Tyson Bagent was pulled after two interceptions in favor of Case Keenum.",
+  "summary": "Ben Johnson said the Bears did not show up against Green Bay: they committed five turnovers on offense, failed to execute in the run or pass game, and allowed four completions of 40+ yards on defense. He credited the Packers' aggressive plan and said Chicago had chances to get back into the game but didn't capitalize. Johnson took responsibility for the offensive play-calling and preparation, and praised Jonathan Gannon's defensive game plan. He said the QB change to Case Keenum came after Tyson Bagent's second interception, as a spark attempt, and that he had not yet diagnosed Bagent's interceptions. On Caleb Williams, Johnson said he is on track after returning to practice, and it will be close whether he plays against Atlanta or after. He had not yet received feedback from Williams' Sunday field workout. Johnson said the staff will decide the Week 6 starter after reviewing this game, and that the process won't change. Johnson also said the offense could stretch the field more going forward.",
+  "injuries": [
+   {
+    "player": "Tyrique Stevenson",
+    "status": "unclear",
+    "detail": "Listed among three injuries of note with a hamstring issue (transcript says 'Tyreke'); no timeline given.",
+    "player_id": ""
+   },
+   {
+    "player": "T.J. Edwards",
+    "status": "unclear",
+    "detail": "Hamstring injury, no timeline given.",
+    "player_id": ""
+   },
+   {
+    "player": "Dayo Odeyingbo",
+    "status": "unclear",
+    "detail": "Quad injury; Johnson said the team will see what it looks like Monday.",
+    "player_id": ""
+   },
+   {
+    "player": "Caleb Williams",
+    "status": "questionable",
+    "detail": "Returned to practice Friday and worked out on the field Sunday; Johnson said he is on track, with a return possible against Atlanta or the week after.",
+    "player_id": "00-0039918"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Tyson Bagent",
+    "topic": "depth_chart",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Was replaced by Case Keenum after his second interception and may not regain the starting job if Williams is out",
+    "note": "Bagent's benching after two interceptions makes him a poor starting option while Williams is out.",
+    "quote": "Tyson just could never feel like he got in a rhythm",
+    "player_id": "00-0038416"
+   },
+   {
+    "player": "Case Keenum",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Entered the game after Bagent's second interception and could start in Week 6 if Williams can't play",
+    "note": "Keenum's quick-hook role makes him the more likely QB option if Williams is out, though the staff has not decided.",
+    "quote": "let's, let's give Chase a case a chance out there",
+    "player_id": "00-0028986"
+   },
+   {
+    "player": "Caleb Williams",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Is on track to return, but it is unclear whether he plays against Atlanta or the following week",
+    "note": "His return timing is unresolved, so fantasy managers should monitor his Week 6 status before rostering or starting Bears QBs.",
+    "quote": "Yeah, he's on track. We'll, uh, we'll see where.",
+    "player_id": "00-0039918"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Defense",
+    "detail": "Johnson said the defense let too many balls over the top, allowing four 40-plus-yard passes, and that Green Bay's defense was fast and well-coached, with safeties and linebackers making real-time adjustments."
+   },
+   {
+    "topic": "Offense",
+    "detail": "The offense committed five turnovers, including three interceptions, and struggled in both the run and pass game. Johnson said he would look at his own play-calling and preparation first."
+   }
+  ],
+  "opponent": "Atlanta"
+ },
+ {
   "id": "CIN:zac-taylor-win-press-conference-dolphins-week-5-2026",
   "team": "CIN",
   "url": "https://www.bengals.com/video/zac-taylor-win-press-conference-dolphins-week-5-2026",
@@ -103,6 +188,207 @@
    }
   ],
   "opponent": "Baltimore"
+ },
+ {
+  "id": "HOU:demeco-ryans-on-first-win-will-anderson-jr-c-j-stroud-full-q-a",
+  "team": "HOU",
+  "url": "https://www.houstontexans.com/video/demeco-ryans-on-first-win-will-anderson-jr-c-j-stroud-full-q-a",
+  "title": "DeMeco Ryans on First Win, Will Anderson Jr. & C.J. Stroud | Full Q&A",
+  "date": "2026-10-11",
+  "duration": 462,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/texans/vrr7qo0cpd4p89siiwjw.jpg",
+  "kind": "postgame",
+  "after_week": 5,
+  "coach": "DeMeco Ryans",
+  "words": 1562,
+  "model": "claude-haiku-5-5",
+  "headline": "Texans earn first win; Stroud and Will Anderson praised, while David Montgomery is dealing with a groin injury and a shoulder issue under evaluation.",
+  "summary": "Ryans said the first win was a relief and credited faith and persistence through a difficult start to the season. He called it a complementary performance with all three phases working together, though the second half was where the team had struggled. He said the offense controlled the game, with stalls in the red zone from self-inflicted penalties leading to field goals. He praised C.J. Stroud for making plays when needed, including a rushing touchdown, and said Stroud's command and comfort in year two are showing. The defense forced turnovers and generated pressure, and Ryans highlighted Will Anderson's three-sack game and his ability to move between edge and interior spots. He said Azeez Al-Shaair is back in the lineup and is the defense's field general, and he gave Reed Blankenship credit for growing comfortable in coverage. On injuries, Ryans said Tank Dell is practicing again and the team hopes he returns to game action, while David Montgomery has a groin injury that may cost him time and a shoulder injury still being evaluated.",
+  "injuries": [
+   {
+    "player": "David Montgomery",
+    "status": "questionable",
+    "detail": "Groin injury that may cause him to miss time; shoulder injury still being evaluated for severity.",
+    "player_id": "00-0035685"
+   },
+   {
+    "player": "Tank Dell",
+    "status": "returning",
+    "detail": "Back on the field practicing; team is hopeful he returns to game action, with the week's progress still to be seen.",
+    "player_id": "00-0038977"
+   },
+   {
+    "player": "Azeez Al-Shaair",
+    "status": "returning",
+    "detail": "Back in the lineup after missing time, described as the defense's communicator and field general.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "C.J. Stroud",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Continues to lead the offense; more comfortable and confident in year two, distributing to open receivers.",
+    "note": "Stroud's rushing touchdown and efficient play reinforce his fantasy QB1 floor.",
+    "quote": "he's been leading our offense really well",
+    "player_id": "00-0039163"
+   },
+   {
+    "player": "Will Anderson",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will be moved around the defensive front, lining up inside over guards and center as well as on the edge.",
+    "note": "Three sacks and the flexible deployment make him a strong weekly pass-rush option.",
+    "quote": "The guy is a tenacious player. Relentless every single snap.",
+    "player_id": ""
+   },
+   {
+    "player": "David Montgomery",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "May miss time with a groin injury; shoulder injury still under evaluation.",
+    "note": "Injury uncertainty puts his workload and availability in doubt for upcoming weeks.",
+    "quote": "He has a groin injury. May miss some time.",
+    "player_id": "00-0035685"
+   },
+   {
+    "player": "Tank Dell",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "hedged",
+    "claim": "Practicing again; return to game action depends on how the week progresses.",
+    "note": "A return would boost the WR room and his fantasy outlook, but timing is still unclear.",
+    "quote": "we're happy to see tank back out on the field practicing",
+    "player_id": "00-0038977"
+   },
+   {
+    "player": "Azeez Al-Shaair",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Back in the defensive lineup as a key communicator and tackler.",
+    "note": "His return stabilizes the middle linebacker spot, mainly relevant for IDP managers.",
+    "quote": "So really happy to have Aziz back.",
+    "player_id": ""
+   },
+   {
+    "player": "Reed Blankenship",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Growing more comfortable in coverage and making plays.",
+    "note": "Expanded coverage role and physical play increase his fantasy value as a defensive back.",
+    "quote": "",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive line",
+    "detail": "Ryans praised the O-line for a strong run game and for allowing only one sack. He noted that big runs were called back."
+   },
+   {
+    "topic": "Trade speculation",
+    "detail": "Asked about Marvin Harrison Jr. trade rumors, Ryans gave a joking-sounding reply saying they traded for him. The transcript is ambiguous, so no trade should be assumed without confirmation."
+   },
+   {
+    "topic": "Wide receiver room",
+    "detail": "Ryans said the team is still open to adding to the receiver room, with Tank Dell's return still pending."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "LAC:head-coach-jim-harbaugh-postgame-press-conference-vs-broncos-week-5-2026",
+  "team": "LAC",
+  "url": "https://www.chargers.com/video/head-coach-jim-harbaugh-postgame-press-conference-vs-broncos-week-5-2026",
+  "title": "Head Coach Jim Harbaugh Postgame Press Conference vs. Broncos",
+  "date": "2026-10-11",
+  "duration": 518,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/chargers/pjr5dxarcrgumhdptz0f.jpg",
+  "kind": "postgame",
+  "after_week": 5,
+  "coach": "Jim Harbaugh",
+  "words": 1239,
+  "model": "claude-haiku-5-5",
+  "headline": "Harbaugh owns the failed fourth-and-1 go at the Denver 41 that swung momentum; Herbert's turnover streak was defended as a situational problem, and the team is 0-5 with Kansas City next.",
+  "summary": "Harbaugh took full responsibility for going for it on fourth-and-1 from the 41, calling it the wrong decision and saying he has never been more upset with himself. He said the players played hard on offense, defense, and special teams, and that the failed call turned momentum even though the team had a seven-point lead. Asked about the offense, he said the direction is improving, pointing to the young offensive linemen, the drives and touchdowns, and the effort of the running backs. He defended quarterback Justin Herbert, saying the late turnovers came from being put in fourth-and-6 situations where he had to take chances, and he took accountability for that. On the 0-5 start, he said he didn't have a clear message beyond players fighting. When asked about the offensive linemen missing from the lineup, including Rashawn Slater, he said he didn't know when they would return for Kansas City. He framed the path forward as staying the course and making sound critical decisions.",
+  "injuries": [
+   {
+    "player": "Rashawn Slater",
+    "status": "unclear",
+    "detail": "Reporter said he is among the missing linemen; Harbaugh did not address his status and said he didn't know if the linemen would be back for Kansas City.",
+    "player_id": "00-0037009"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Justin Herbert",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Late turnovers came from being put in fourth-and-6 situations where he had to force plays, not from his own decisions.",
+    "note": "Five straight games with a turnover is a concern for fantasy, but Harbaugh blamed game situations, so the QB's usage and risk profile should be watched.",
+    "quote": "Trying to trying to make a play.",
+    "player_id": "00-0036355"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Fourth-down decision",
+    "detail": "Harbaugh said going for fourth-and-1 at the Denver 41 was the wrong call, that he should have called timeout and punted after seeing the defensive alignment, and that he takes full blame."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Harbaugh praised the defense for multiple stops, three-and-outs, and a big turnover, and said it played its heart out."
+   },
+   {
+    "topic": "Offensive line",
+    "detail": "The team started a rookie offensive lineman, and Harbaugh praised the young linemen for their play, though he did not name them."
+   },
+   {
+    "topic": "Team outlook",
+    "detail": "Harbaugh said he had no clear message for a 0-5 team beyond players fighting hard, and that the plan is to keep working harder and smarter."
+   }
+  ],
+  "opponent": "Kansas City"
+ },
+ {
+  "id": "PHI:nick-sirianni-press-conference-october-11-2026",
+  "team": "PHI",
+  "url": "https://www.philadelphiaeagles.com/video/nick-sirianni-press-conference-october-11-2026",
+  "title": "Nick Sirianni Press Conference: October 11, 2026",
+  "date": "2026-10-11",
+  "duration": 580,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/eagles/hm2qhtd93nu1h1hm3jbc.jpg",
+  "kind": "day_after",
+  "after_week": 5,
+  "coach": "Nick Sirianni",
+  "words": 2025,
+  "model": "claude-haiku-5-5",
+  "headline": "Sirianni took full blame for the end-of-game decision in the 19-17 London loss to Jacksonville; no concrete player or injury news for fantasy purposes.",
+  "summary": "Sirianni took full responsibility for the final-minute decision that cost Philadelphia the 19-17 loss to Jacksonville in London, saying he did not make the right call and that the players fought hard. He declined to explain his thought process in detail, saying only that he had not done his job well enough in that situation. He acknowledged the clock-management options, including taking a knee or running the ball to set up a field goal, and said the loss of yards was a factor in the decision. He called the situation gray, said he had watched many similar late-game situations around the league, and said he would stand by owning the mistake. He praised the defense for keeping the team in the game and said the offense had struggled in the second half despite good first-half production. On the Jacksonville kickoff return, he said he would review the play and noted that the team had put extra players at safety on kickoffs. Asked whether injuries affected personnel on that play, he said no and expressed total faith in the players on the field. He framed accountability as a core program value and described the London atmosphere as strong, with the crowd largely on Philadelphia's side.",
+  "injuries": [],
+  "signals": [],
+  "topics": [
+   {
+    "topic": "End-of-game decision",
+    "detail": "Sirianni repeatedly owned the late-game decision and declined to detail his reasoning, saying he would stand by full accountability."
+   },
+   {
+    "topic": "Defense and second half",
+    "detail": "He praised the defense for keeping the team in the game, but said the offense needs to fix its second-half production, which he attributed to scheme and execution."
+   },
+   {
+    "topic": "Special teams",
+    "detail": "Sirianni said he would review the kickoff play and noted the team uses extra safeties on kickoffs; he denied injuries affected the personnel on the field."
+   }
+  ],
+  "opponent": ""
  },
  {
   "id": "WAS:hc-dan-quinn-10-11-26",

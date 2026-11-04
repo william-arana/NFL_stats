@@ -434,6 +434,101 @@
   "opponent": "Tampa Bay Buccaneers"
  },
  {
+  "id": "CIN:zac-taylor-preview-week-7-2026-ravens-press-conference",
+  "team": "CIN",
+  "url": "https://www.bengals.com/video/zac-taylor-preview-week-7-2026-ravens-press-conference",
+  "title": "Zac Taylor Previews Week 7 Against Ravens | PRESS CONFERENCE",
+  "date": "2026-10-21",
+  "duration": 786,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bengals/wyopqp1nzyi8xbw6erfw.jpg",
+  "kind": "midweek",
+  "after_week": 5,
+  "coach": "Zac Taylor",
+  "words": 2946,
+  "model": "claude-haiku-5-5",
+  "headline": "Taylor says Te' Higgins is a major outside weapon who has made big plays against Baltimore, and Boye Mafe is a key piece of the pass rush, while Andrei Iosivas remains on IR.",
+  "summary": "Taylor opened by saying most of the roster is trending in the right direction, with Kyle Dugger making good progress this week. He called Te' Higgins a major outside weapon and said he has made big plays against Baltimore over the years, so having him available is a plus. On the Ravens, Taylor said Baltimore has evolved under its new coaching staff while keeping several holdover players, and that forcing turnovers and winning the possession battle will be critical in a division game. He said Tyler Huntley and Lamar Jackson each present challenges, that he expects to prepare for Lamar, and that Baltimore's whole roster, not just the quarterback, is the threat. Taylor praised Kyle Hamilton as a versatile, underrated player who lines up everywhere and communicates at a high level with Roquan Smith. He called Chase Brown's growth in pass protection impressive, and said Andrei Iosivas is still on IR with a hand injury and making progress. On the defense, Taylor credited Boye Mafe, a Seattle free agent signing, for his versatility and his willingness to set the edge in the run game, and said the unselfish pass-rush group has helped the whole defense. He closed by praising Ted Karras's leadership and community work.",
+  "injuries": [
+   {
+    "player": "Kyle Dugger",
+    "status": "unclear",
+    "detail": "Coach said he is making really good progress this week; no designation given.",
+    "player_id": ""
+   },
+   {
+    "player": "Andrei Iosivas",
+    "status": "ir",
+    "detail": "Still on IR with a hand injury; Taylor said he is making good progress.",
+    "player_id": "00-0038619"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Te' Higgins",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Remains a major outside weapon for the offense against Baltimore.",
+    "note": "Taylor leaned on his track record of big plays against the Ravens, supporting his weekly ceiling as a top WR1 option.",
+    "quote": "he's you know, obviously a major weapon for us outside",
+    "player_id": ""
+   },
+   {
+    "player": "Boye Mafe",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Plays a central role in the defensive pass rush and the run game as a versatile edge player.",
+    "note": "Taylor framed him as a key part of the pass rush and run defense, which supports steady sack and tackle opportunities.",
+    "quote": "I think Boyer is a huge part of that.",
+    "player_id": ""
+   },
+   {
+    "player": "Chase Brown",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Has improved as a complete back, especially in pass protection.",
+    "note": "Pass-protection growth matters for snaps on third downs and clears a path to more passing-down work.",
+    "quote": "I just been really proud of the way that Chase has grown",
+    "player_id": "00-0038597"
+   },
+   {
+    "player": "Andrei Iosivas",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Remains on IR with a hand injury and no return date given.",
+    "note": "He is not available for fantasy lineups, and Taylor did not offer a timeline.",
+    "quote": "still has time on the IR, and, you know, it's with his hand",
+    "player_id": "00-0038619"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Baltimore Ravens quarterbacks",
+    "detail": "Taylor expects to prepare for Lamar Jackson but said Tyler Huntley is also a challenge; he said Baltimore does not need to change its offense with either quarterback."
+   },
+   {
+    "topic": "Kyle Hamilton and Baltimore defense",
+    "detail": "Taylor called Kyle Hamilton the most underrated player in football, noting his versatility at many positions and high football IQ, along with Roquan Smith's communication."
+   },
+   {
+    "topic": "Turnovers and possessions",
+    "detail": "Taylor said forcing turnovers is critical given Derrick Henry's fumbles, and that division games often come down to a possession or two."
+   },
+   {
+    "topic": "AFC North",
+    "detail": "Taylor said the division is strong and never has an easy win, and he is not surprised that every team is still above .500 after six weeks."
+   },
+   {
+    "topic": "Ted Karras",
+    "detail": "Taylor praised Karras as a leader and a community contributor, with no fantasy-relevant news."
+   }
+  ],
+  "opponent": "Baltimore Ravens"
+ },
+ {
   "id": "CLE:todd-monken-press-conference-october-21st-2026",
   "team": "CLE",
   "url": "https://www.clevelandbrowns.com/video/todd-monken-press-conference-october-21st-2026",
@@ -1626,6 +1721,75 @@
    }
   ],
   "opponent": ""
+ },
+ {
+  "id": "SEA:head-coach-mike-macdonald-previews-the-upcoming-week-7-matchup-vs-chiefs",
+  "team": "SEA",
+  "url": "https://www.seahawks.com/video/head-coach-mike-macdonald-previews-the-upcoming-week-7-matchup-vs-chiefs",
+  "title": "Head Coach Mike Macdonald Previews The Upcoming Week 7 Matchup vs. Chiefs",
+  "date": "2026-10-21",
+  "duration": 923,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/seahawks/ju93b5nxzoxcyneieieo.jpg",
+  "kind": "midweek",
+  "after_week": 6,
+  "coach": "Mike Macdonald",
+  "words": 3110,
+  "model": "claude-haiku-5-5",
+  "headline": "Drake Thomas will not practice Wednesday; Brady Russell stays in the two-back mix even with Robbie Ouzts unavailable.",
+  "summary": "Macdonald said Linebacker Drake Thomas will not practice Wednesday, and he gave no further detail on the injury. He said two-back personnel with Fullback Brady Russell is still on the table even though Robbie Ouzts is unavailable, calling Russell's play good for the team. On offense, he said Seattle will keep running wide zone within its core scheme, adding other run concepts based on each opponent. He described the offensive line and team as having strong effort and attitude but room to grow in decisiveness and trusting their talent. On defense, he stressed that run defense depends on team-wide fundamentals like block destruction, tackling, and leverage, and that the defensive line sets the tone. He praised Kansas City's Andy Reid, Eric Bieniemy, Steve Spagnola, and Patrick Mahomes, describing the Chiefs as the most explosive offense in the league and a well-coached, disciplined team. He also said Kenneth Walker's move to Kansas City brings mixed emotions, with respect and happiness for him but a need to stop him this week.",
+  "injuries": [
+   {
+    "player": "Drake Thomas",
+    "status": "out",
+    "detail": "Coach confirmed he will not practice Wednesday. No injury type or timetable was given.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Brady Russell",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Two-back personnel with Russell at fullback remains on the table for the Chiefs game, with Ouzts unavailable.",
+    "note": "Two-back sets with Russell at fullback could give him more snaps and touches in the run and passing game.",
+    "quote": "Brady's played good football for us.",
+    "player_id": "00-0038488"
+   },
+   {
+    "player": "Drake Thomas",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Will not practice on Wednesday.",
+    "note": "Missing practice raises questions about his availability and status for the Chiefs game.",
+    "quote": "Drake's not going to practice today. No.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Screens and defense vs. Chiefs",
+    "detail": "Macdonald said the defense has looked at screen plays, which are a team responsibility rather than an individual one. He noted that the Chiefs' screen game under Andy Reid is a challenge to identify and execute against."
+   },
+   {
+    "topic": "Chiefs offense",
+    "detail": "Macdonald praised Patrick Mahomes' health and decisiveness and said Kansas City is running more under center, which he credited to health and an RPO-heavy approach. He called the Chiefs the most explosive offense in the league with few penalties or turnovers."
+   },
+   {
+    "topic": "Kenneth Walker",
+    "detail": "Walker is now with Kansas City and is on track for a career-high carry total. Macdonald said he was not surprised by Walker's ability to handle the workload."
+   },
+   {
+    "topic": "Seahawks offensive line",
+    "detail": "Macdonald said the line has the effort and attitude he wants but needs to improve decisiveness and trust in its players this week."
+   },
+   {
+    "topic": "Robbie Ouzts",
+    "detail": "Ouzts is unavailable this year, which is part of why two-back personnel has been used less frequently (fewer than ten plays in recent games)."
+   }
+  ],
+  "opponent": "Kansas City Chiefs"
  },
  {
   "id": "SF:shanahan-talks-offense-s-second-half-struggles-previews-falcons",

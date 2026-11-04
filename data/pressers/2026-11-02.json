@@ -932,6 +932,84 @@
   "opponent": ""
  },
  {
+  "id": "DEN:hc-sean-payton-on-victory-over-chiefs-i-m-proud-of-just-the-grit",
+  "team": "DEN",
+  "url": "https://www.denverbroncos.com/video/hc-sean-payton-on-victory-over-chiefs-i-m-proud-of-just-the-grit",
+  "title": "HC Sean Payton on victory over Chiefs: ‘I’m proud of just the grit’",
+  "date": "2026-11-02",
+  "duration": 762,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/broncos/jjkylxy5kuflqfstxzcl.jpg",
+  "kind": "postgame",
+  "after_week": 8,
+  "coach": "Sean Payton",
+  "words": 1851,
+  "model": "claude-haiku-5-5",
+  "headline": "Payton credited Bo Nix's late read and a Troy Franklin deep post for the game-winning drive, and said the team's grit in close games is real; no injury updates were given.",
+  "summary": "Payton said he was proud of the team's grit in a 28-24 win over the Chiefs and called the game a fourth-quarter contest full of momentum swings. He praised the goal-line stand, saying the defense hung in there, and pointed to a Chiefs false start as a key moment. He described his emotions around the 200th win, mentioned that he had counted down 48 days since a bad Monday night loss, and said he hates losing more than he enjoys winning. On the fourth-and-two decision, he said the team had prepared plays it had shelved for weeks and was willing to be aggressive. He credited a one-play, two-minute drive that reached the Chiefs' two-yard line, where Bo Nix recognized the blitz and Troy Franklin got open on a deep post after the defense covered the other receivers. Payton also said the home crowd's booing after a failed third down did not shake the team, and he praised the running backs drafted this year, though he did not discuss any current backfield usage.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Troy Franklin",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Franklin was a key target on the late deep-post play that set up the Chiefs-game winning drive",
+    "note": "A clear sign Franklin is a trusted downfield option in late-game situations, which supports his big-play upside.",
+    "quote": "he got it right away because Bo recognized",
+    "player_id": "00-0039868"
+   },
+   {
+    "player": "Bo Nix",
+    "topic": "matchup",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Nix read the blitz correctly and got the ball to the open receiver on the key late drive",
+    "note": "Payton's praise of Nix's pre-snap recognition suggests he can exploit blitzes effectively in key moments.",
+    "quote": "Bo recognized. And when he caught it",
+    "player_id": "00-0039732"
+   },
+   {
+    "player": "Courtland Sutton",
+    "topic": "matchup",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Sutton was one of the receivers the offense targeted in the deep-post concept against Chiefs coverage",
+    "note": "Sutton was part of the route design that drew coverage away from the open target, but Payton gave him no specific role.",
+    "quote": "We carried Sutton. We carried Waddle",
+    "player_id": "00-0034348"
+   },
+   {
+    "player": "Jaylen Waddle",
+    "topic": "matchup",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Waddle was one of the receivers the offense targeted in the deep-post concept against Chiefs coverage",
+    "note": "Waddle was part of the route concept that drew coverage away from Franklin, but Payton did not single him out.",
+    "quote": "We carried Sutton. We carried Waddle",
+    "player_id": "00-0036613"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Goal-line stand and close-game grit",
+    "detail": "Payton praised the defense for holding on the goal-line stand and said the team's ability to win close games comes from experience and belief, while noting there is still much to fix."
+   },
+   {
+    "topic": "Fourth-down aggression and play-calling",
+    "detail": "Payton said the fourth-and-two call came from a set of plays that had been waiting for weeks, and he emptied the playbook bucket for the game."
+   },
+   {
+    "topic": "Crowd reaction",
+    "detail": "Payton said the home crowd's booing after a failed third down showed disappointment but not abandonment, and he called the Denver fan base special."
+   },
+   {
+    "topic": "Running back draft class",
+    "detail": "Payton said the team liked its running back draft class and expects the young backs to play long careers, though he gave no usage details."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "DET:campbell-on-lb-jack-campbell",
   "team": "DET",
   "url": "https://www.detroitlions.com/video/campbell-on-lb-jack-campbell",
@@ -1615,6 +1693,83 @@
   "opponent": ""
  },
  {
+  "id": "KC:andy-reid-we-have-to-learn-from-it-postgame-press-conference-nfl-week-8",
+  "team": "KC",
+  "url": "https://www.chiefs.com/video/andy-reid-we-have-to-learn-from-it-postgame-press-conference-nfl-week-8",
+  "title": "Andy Reid: 'We Have To Learn From It' | Postgame Press Conference - NFL Week 8",
+  "date": "2026-11-02",
+  "duration": 335,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/chiefs/novjh1ah2nyarwozrs6n.jpg",
+  "kind": "postgame",
+  "after_week": 8,
+  "coach": "Andy Reid",
+  "words": 1013,
+  "model": "claude-haiku-5-5",
+  "headline": "Chiefs lost to Denver with over 100 penalty yards and a late touchdown; Peter Woods has a stinger, and Kingsley Suamataia sat out for reasons Reid kept private.",
+  "summary": "Reid said the team battled hard but beat itself with penalties, totaling over 100 yards, which put them in a bad position and led to a late touchdown that decided the game. He pointed to some good individual efforts, including a young running back who had a strong day and helped set up scoring position on a kickoff. He said Peter Woods had a stinger and that there were no other injuries to report. On the late fourth-down and field goal decisions, Reid said those were hindsight and that the field goal was within Harrison's range. He said he saw the center move his head on the false start play but did not see a false start. He credited the defense's hands-up work against Bo Nix while saying the team still missed some tackles late. Reid declined to explain why Kingsley Suamataia did not play, saying it was between him and the player. He called Denver a great rival and said both teams were good. He praised the zero-blitz throw and catch involving Emmett Johnson and Patrick Mahomes. Reid said the young roster needs to learn from the loss and move on, and that his locker room will handle it the right way.",
+  "injuries": [
+   {
+    "player": "Peter Woods",
+    "status": "unclear",
+    "detail": "Had a stinger in this game; Reid said no other injuries to mention. Severity not stated.",
+    "player_id": ""
+   },
+   {
+    "player": "Kingsley Suamataia",
+    "status": "unclear",
+    "detail": "Did not play; Reid declined to give a reason, saying it was between him and the player.",
+    "player_id": "00-0039844"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Peter Woods",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Had a stinger in this game; availability for next week not addressed",
+    "note": "A stinger is usually short-term, but the coach gave no timeline, so monitor his practice reports.",
+    "quote": "with the exception of Peter Woods, uh, he had a stinger.",
+    "player_id": ""
+   },
+   {
+    "player": "Kingsley Suamataia",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Did not play this game for reasons Reid kept private",
+    "note": "Without a stated injury, his status and role going forward are unclear, so check the injury report before lineups lock.",
+    "quote": "It's just between Kingsley and I.",
+    "player_id": "00-0039844"
+   },
+   {
+    "player": "Emmett Johnson",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Got open against a zero-blitz and connected with Mahomes on a big throw",
+    "note": "The coach highlighted his play, which points to a featured role in the passing game against tight coverage.",
+    "quote": "",
+    "player_id": "00-0041013"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Penalties",
+    "detail": "Reid said over 100 penalty yards was the main reason the team lost; discipline must improve to win close games."
+   },
+   {
+    "topic": "Late-game decisions",
+    "detail": "Reid called the fourth-down spotting sequence and the choice to kick the field goal instead of going for it hindsight. He said the field goal was within range."
+   },
+   {
+    "topic": "Defense",
+    "detail": "The defense worked on getting hands up against Bo Nix's passes, and Reid said the team missed some tackles that could have stopped the late drive."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "LA:sean-mcvay-trent-mcduffie-wesley-bailey-injury-updates-key-defensive-stops-vs-chargers-takeaways-week-8-press-conference",
   "team": "LA",
   "url": "https://www.therams.com/video/sean-mcvay-trent-mcduffie-wesley-bailey-injury-updates-key-defensive-stops-vs-chargers-takeaways-week-8-press-conference",
@@ -1814,6 +1969,50 @@
   "opponent": ""
  },
  {
+  "id": "LAC:jim-harbaugh-postgame-press-conference-vs-rams-week-8-2026",
+  "team": "LAC",
+  "url": "https://www.chargers.com/video/jim-harbaugh-postgame-press-conference-vs-rams-week-8-2026",
+  "title": "Head Coach Jim Harbaugh Postgame Press Conference vs. Rams",
+  "date": "2026-11-02",
+  "duration": 453,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/chargers/i749xxyhsxlhkj2mvdvu.jpg",
+  "kind": "postgame",
+  "after_week": 8,
+  "coach": "Jim Harbaugh",
+  "words": 1177,
+  "model": "claude-haiku-5-5",
+  "headline": "Harbaugh said the offense is staying the same for now: he said there's no thought of sitting Justin Herbert, and he dodged questions on the offensive coordinator's future.",
+  "summary": "Harbaugh said the Chargers lost the Rams game because they couldn't finish drives with touchdowns, gave up two Rams touchdowns (one on the opening drive and one before halftime), and turned the ball over at key moments. He acknowledged the offense has gone nine quarters without a touchdown and said the players are the only ones who can fix it. When asked about Herbert's ten interceptions, Harbaugh said the team knows the issues and will look at film to address them. He said he would not evaluate Herbert's play until he had reviewed the tape. Asked whether Herbert should be moved to the sideline, Harbaugh answered 'No.' Harbaugh confirmed the offensive coordinator will keep calling plays, but he declined to discuss the coordinator's future or justify keeping him. He repeatedly stressed faith, effort and the idea that the team alone controls the outcome.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Justin Herbert",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Herbert will remain the starting quarterback; no benching or sideline change is planned",
+    "note": "Harbaugh flatly ruled out sitting Herbert despite his turnover problems, so the starter job looks secure for now, though the offense's struggles remain a concern.",
+    "quote": "No.",
+    "player_id": "00-0036355"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive coordinator",
+    "detail": "Harbaugh confirmed the offensive coordinator will keep calling plays but refused to discuss his future or defend the decision to keep him, which suggests possible fallout if the offense keeps struggling."
+   },
+   {
+    "topic": "Offensive struggles",
+    "detail": "The offense has gone nine quarters without a touchdown and has been hurt by turnovers. Harbaugh said the team is studying film and has not offered a specific schematic fix."
+   },
+   {
+    "topic": "Team confidence",
+    "detail": "Harbaugh said the team is 0-7 and needs faith and effort, not finger-pointing, and pointed to next week as the next opportunity."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "LV:klint-kubiak-recaps-week-8-win-jets-2026-season",
   "team": "LV",
   "url": "https://www.raiders.com/video/klint-kubiak-recaps-week-8-win-jets-2026-season",
@@ -1965,6 +2164,55 @@
   "opponent": ""
  },
  {
+  "id": "MIA:hc-jeff-hafley-nov-1-postgame-press-conference",
+  "team": "MIA",
+  "url": "https://www.miamidolphins.com/video/hc-jeff-hafley-nov-1-postgame-press-conference",
+  "title": "HC Jeff Hafley - Nov 1 | Postgame Press Conference",
+  "date": "2026-11-02",
+  "duration": 508,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/dolphins/dtdi2bsrugysngatpi4f.jpg",
+  "kind": "postgame",
+  "after_week": 8,
+  "coach": "Jeff Hafley",
+  "words": 1876,
+  "model": "claude-haiku-5-5",
+  "headline": "Dolphins lost 24-19 to the Patriots after blowing a halftime lead; Hafley gave no new player-specific usage or injury news beyond a player being cleared to play.",
+  "summary": "Hafley opened by crediting the Patriots as a well-coached team and attributed the loss to missed opportunities, saying Miami made its plays in the first half and New England made theirs in the second. He said he would keep his private conversation with a young, fiery player about reacting to situations, and noted the team had never been in a position of protecting a big halftime lead like this. He framed the collapse as a teaching moment about putting good teams away, and said the team must learn to handle momentum swings over four quarters. He said the final offensive series of the first half was efficient and that the team had been managing the clock well. He rejected weather as an excuse for the game conditions. On the pass rush, he said the defense had a chance for more sacks and fumbles in the second half, and he praised the defensive coaching and players collectively rather than singling anyone out. He called Drake Maye one of the better quarterbacks in the league, saying the Dolphins rattled him early but he extended plays with his feet and made explosive throws. He said a player who had been out was cleared through the medical process and was ready to go. He also praised quarterback Malik Willis for having a direct, honest conversation with a young player on the sideline.",
+  "injuries": [],
+  "signals": [],
+  "topics": [
+   {
+    "topic": "Second-half collapse",
+    "detail": "Hafley blamed missed opportunities and momentum swings rather than any single scheme or player issue, and said the team must learn to finish games."
+   },
+   {
+    "topic": "Pass rush",
+    "detail": "Miami had three first-half sacks but could not replicate them after halftime; Hafley said the defense and coaches had a good game plan and credited the group as a whole."
+   },
+   {
+    "topic": "Patriots QB Drake Maye",
+    "detail": "Hafley said Miami rattled Maye early, but he extended plays with his feet and made key explosive passes, including a 50-yard comeback."
+   },
+   {
+    "topic": "Player clearance",
+    "detail": "Hafley said a player went through all medical stages and was cleared to play; the player was not clearly identified in the captions and is not confirmed on the roster."
+   },
+   {
+    "topic": "Young player's emotions",
+    "detail": "Hafley declined to detail his conversation with a young player who showed fiery energy after a penalty, saying he will keep the discussion private."
+   },
+   {
+    "topic": "Weather",
+    "detail": "Hafley said weather was not a factor and refused to make excuses."
+   },
+   {
+    "topic": "Leadership",
+    "detail": "Hafley praised Malik Willis for having an honest sideline conversation with a young player about a mistake."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "MIN:kevin-o-connell-on-injuries-heading-into-week-9-kyler-murray-s-play-action-overcoming-first-loss",
   "team": "MIN",
   "url": "https://www.vikings.com/video/kevin-o-connell-on-injuries-heading-into-week-9-kyler-murray-s-play-action-overcoming-first-loss",
@@ -2060,6 +2308,103 @@
    }
   ],
   "opponent": "Buffalo Bills (Monday Night Football, Week 9)"
+ },
+ {
+  "id": "NE:head-coach-mike-vrabel-11-1-it-was-a-good-opportunity-for-us-to-not-be-frontrunners",
+  "team": "NE",
+  "url": "https://www.patriots.com/video/head-coach-mike-vrabel-11-1-it-was-a-good-opportunity-for-us-to-not-be-frontrunners",
+  "title": "Head Coach Mike Vrabel on being down at halftime 11/1: \"It was a good opportunity for us to not be frontrunners\"",
+  "date": "2026-11-02",
+  "duration": 409,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/patriots/yxwqdg8cehllriyb3kp8.jpg",
+  "kind": "postgame",
+  "after_week": 8,
+  "coach": "Mike Vrabel",
+  "words": 1412,
+  "model": "claude-haiku-5-5",
+  "headline": "Drake Maye kept the offense afloat without Hunter Henry and top WRs; Hunter Henry's status is unclear after leaving the game.",
+  "summary": "Vrabel said the Patriots were able to rally after a rough stretch by staying composed and getting connected at halftime, calling it a chance to show they are not frontrunners. He credited Miami as a young, competitive team and said New England's early drives stalled, with a missed field goal and too many long drives allowed. He pointed to the Kevin Byard interception returned for points as the kind of turnover the team needs more of, especially on the road. On the injury front, he said Hunter Henry's absence was felt, and that the offensive staff moved players around well. He praised Drake Maye for keeping the offense efficient without his top receivers and tight end, calling it the job description for an elite quarterback. Vrabel said a rotation of offensive linemen, including Ben Brown, was decided at halftime, and he gave a mixed review of the run game while praising Rhamondre Stevenson's all-around effort. He also noted Kyle Williams made a strong play in the second half.",
+  "injuries": [
+   {
+    "player": "Hunter Henry",
+    "status": "unclear",
+    "detail": "Left the game and was missed in the second half; Vrabel gave no timeline or injury specifics.",
+    "player_id": "00-0033090"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Drake Maye",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Vrabel views Maye as one of the league's best quarterbacks and expects him to keep leading the offense through missing weapons.",
+    "note": "Vrabel's praise and emphasis on Maye controlling the offense without his top receivers and tight end supports his fantasy stability.",
+    "quote": "That's what the job description requires.",
+    "player_id": "00-0039851"
+   },
+   {
+    "player": "Hunter Henry",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Henry's status for upcoming games was not clarified after he left the game.",
+    "note": "Without a timeline, his availability for next week is a question for managers of the Patriots' tight end position.",
+    "quote": "we missed Hunter.",
+    "player_id": "00-0033090"
+   },
+   {
+    "player": "Ben Brown",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Rotating offensive linemen, including Ben Brown, was a halftime decision and the plan for next week is still to be seen.",
+    "note": "Rotation at guard could limit snaps and reduce his consistency for fantasy purposes.",
+    "quote": "Just something that we decided on.",
+    "player_id": "00-0037413"
+   },
+   {
+    "player": "Kevin Byard",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Vrabel wants more turnovers like the Byard interception, which he tied to the offense capitalizing for points.",
+    "note": "Turnovers forced by the defense create more scoring opportunities for the offense, supporting defensive production.",
+    "quote": "the more that we can turn the football over.",
+    "player_id": ""
+   },
+   {
+    "player": "Rhamondre Stevenson",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Vrabel praised Stevenson's effort in pass protection, on special teams, and in the run game, and said the team has high expectations for him.",
+    "note": "Vrabel's praise reinforces Stevenson's role as the team's lead back in the run game.",
+    "quote": "I got a lot of respect for him.",
+    "player_id": "00-0036875"
+   },
+   {
+    "player": "Kyle Williams",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Williams made a big play in the second half, which Vrabel credited to good ball placement and execution.",
+    "note": "A key second-half play suggests a possible increase in his involvement in the passing game.",
+    "quote": "Great ball placement and good great good call.",
+    "player_id": "00-0040131"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Halftime adjustments and mindset",
+    "detail": "Vrabel said the team reconnected at halftime and wants to keep composure, finish drives, and avoid letting opponents move the ball easily."
+   },
+   {
+    "topic": "Weather and field conditions",
+    "detail": "Vrabel said both teams played in the same conditions and the field was fine, though rain affected some passing and handling plays."
+   }
+  ],
+  "opponent": ""
  },
  {
   "id": "NE:head-coach-mike-vrabel-11-2-i-ve-got-a-lot-of-confidence-in-what-drake-does",
@@ -2612,6 +2957,157 @@
    }
   ],
   "opponent": "Chicago"
+ },
+ {
+  "id": "TEN:robert-saleh-press-conference-tennessee-titans-x0923",
+  "team": "TEN",
+  "url": "https://www.tennesseetitans.com/video/robert-saleh-press-conference-tennessee-titans-x0923",
+  "title": "Robert Saleh Press Conference | Tennessee Titans",
+  "date": "2026-11-02",
+  "duration": 1064,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/titans/aeahfdzyiiyelnyzv9ct.jpg",
+  "kind": "postgame",
+  "after_week": 8,
+  "coach": "Robert Saleh",
+  "words": 3452,
+  "model": "claude-haiku-5-5",
+  "headline": "Saleh: no injury update until Wednesday after the bye; JFM is playing through a serious back injury at about 75%",
+  "summary": "Saleh opened by saying the team is still evaluating some injuries and won't have an update until Wednesday of next week, after the bye. He credited Cam Ward with finally getting the numbers he'd been working toward, citing teammates' plays, yards after catch, Tony Pollard's running, and play-action designs. He said the offense is still young and left yards on the field, with ball security and a late-game timing issue still needing cleanup. On penalties, he said the team ranks near the top of the league in fewest, and he called post-snap and pre-snap penalties the ones to eliminate while accepting some flags as the cost of an aggressive style. He said the veteran receivers have been dropping too many critical passes and that contested catches need work. On defense, he praised Amani Hooker's pre-snap diagnosis and Jacob Martin's effort, and he said the young group, including Gunnar Helm and the rookies, is still growing. He said John Franklin-Myers is battling a serious back injury and is still suiting up, and he said the first eight weeks have been adversity-heavy but the locker room is buying in.",
+  "injuries": [
+   {
+    "player": "John Franklin-Myers",
+    "status": "limited",
+    "detail": "Battling a very bad injury (described as low back) and playing; Saleh said he is around 75% and better than most.",
+    "player_id": ""
+   },
+   {
+    "player": "Carnell Tate",
+    "status": "out",
+    "detail": "Coming back from injury and expected to return once he's healthy; no timeline given.",
+    "player_id": "00-0041438"
+   },
+   {
+    "player": "Unspecified players",
+    "status": "unclear",
+    "detail": "Saleh said several players are still being evaluated, with a full update not coming until Wednesday after the bye.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Tony Pollard",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Recent uptick in production is tied to blocking schemes and his own tackle-breaking; expected to keep producing",
+    "note": "Pollard's recent rushing success is credited to both scheme changes and his own running, which supports continued volume.",
+    "quote": "Tony's been running the heck out of the ball",
+    "player_id": "00-0035261"
+   },
+   {
+    "player": "Amani Hooker",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Playing at a Pro Bowl level and stepped into a senior leadership role",
+    "note": "Five interceptions and a strong ball-hawking role make him a high-floor defensive playmaker in IDP and real-life terms.",
+    "quote": "he's really playing at a Pro Bowl level.",
+    "player_id": ""
+   },
+   {
+    "player": "Jacob Martin",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Earned opportunities in one-on-ones and is making plays through effort",
+    "note": "Martin's pressure and sacks are trending up, with the coach pointing to his effort as a reason to expect more production.",
+    "quote": "Jacob just plays his butt off.",
+    "player_id": ""
+   },
+   {
+    "player": "Gunnar Helm",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will continue to be involved in the passing game after getting more opportunities",
+    "note": "Coverage looks have opened the middle of the field for him, making the tight end role more reliable for fantasy.",
+    "quote": "Yeah, they'll continue to be involved.",
+    "player_id": "00-0040584"
+   },
+   {
+    "player": "Cam Ward",
+    "topic": "role",
+    "signal": "up",
+    "tone": "hedged",
+    "claim": "Improving every week, but ball security still needs cleanup",
+    "note": "The offense is trending better for Ward, but turnover risk and inconsistency remain a concern.",
+    "quote": "Cam's been getting better every week.",
+    "player_id": "00-0040676"
+   },
+   {
+    "player": "Carnell Tate",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Out for now and returning once healthy, with no timeline given",
+    "note": "No return date means Tate is unavailable and his role when he returns is unclear.",
+    "quote": "when he gets back healthy",
+    "player_id": "00-0041438"
+   },
+   {
+    "player": "Oluwafemi Oladejo",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Raw as a pass rusher but made some good plays, including a likely QB hit",
+    "note": "Oladejo has some upside as a rookie edge rusher, but the coach still sees him as developing.",
+    "quote": "he's raw from a pass rushing standpoint. He'll get there.",
+    "player_id": ""
+   },
+   {
+    "player": "Keldric Faulk",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Will keep finding opportunities in the rotation",
+    "note": "He is part of a young rotation with no clear workload increase, so his fantasy relevance is limited for now.",
+    "quote": "he'll continue to work in and find his opportunities",
+    "player_id": ""
+   },
+   {
+    "player": "Calvin Ridley",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Doing some good things but Saleh still expects more",
+    "note": "Drops by veteran receivers hurt the passing game, so Ridley's reliability is still a question.",
+    "quote": "Ridley's been doing some good things.",
+    "player_id": "00-0034837"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Penalties",
+    "detail": "Saleh said the team ranks among the top 10 in fewest penalties, and he called post-snap and pre-snap penalties the biggest concern while accepting some flags as the cost of an aggressive style."
+   },
+   {
+    "topic": "Receiver drops",
+    "detail": "Saleh said drops, especially from veteran receivers, happened too often in critical moments, and contested catches still need work."
+   },
+   {
+    "topic": "Late-game execution",
+    "detail": "The team had two late-game miscommunications and a timing issue on a fourth-down pass; Saleh said communication, snap timing, and winning one-on-ones all need work."
+   },
+   {
+    "topic": "Defensive aggression",
+    "detail": "Saleh said the defense forced takeaways and explosive plays by being more aggressive, but that exposed the back end, and the team needs to limit explosive plays on offense."
+   },
+   {
+    "topic": "Locker room and adversity",
+    "detail": "Saleh said the team has faced many close losses and the trade of a player, but the locker room is still buying in. He called the bye week necessary for players and coaches."
+   }
+  ],
+  "opponent": ""
  },
  {
   "id": "WAS:hc-dan-quinn-11-02-26",

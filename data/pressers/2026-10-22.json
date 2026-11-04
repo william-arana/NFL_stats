@@ -1,5 +1,118 @@
 [
  {
+  "id": "GB:matt-lafleur-says-st-brown-s-mentality-sets-him-apart-oct-22-2026",
+  "team": "GB",
+  "url": "https://www.packers.com/video/matt-lafleur-says-st-brown-s-mentality-sets-him-apart-oct-22-2026",
+  "title": "Matt LaFleur says St. Brown's 'mentality' sets him apart",
+  "date": "2026-10-22",
+  "duration": 461,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/packers/hwzwcjmiyzquyroltewd.jpg",
+  "kind": "midweek",
+  "after_week": 6,
+  "coach": "Matt LaFleur",
+  "words": 1420,
+  "model": "claude-haiku-5-5",
+  "headline": "Coach says no Sunday concern for Watson or Golden, Josh Jacobs is ramping up with the next two days key, and Jonathan Ford has gone to IR.",
+  "summary": "LaFleur said there is no concern for Sunday about Christian Watson or Matthew Golden. He said Jordan Love was beaten up after the game, took several hits, and was checked by the chiropractor, which is how the coach learned about his back. He described Josh Jacobs as being eased back in through strength and athletic training work, with the next two days of practice a big step toward full football activity. He would not commit to whether a player who had been limited would play, saying they would evaluate on the field. Jonathan Ford's move to IR surprised him, since Ford had been playing through an issue that eventually became too much. LaFleur called Jordan Riley's progress encouraging after a limited appearance last week, with more to be seen. He said he would not make much of Detroit's comments about its own improvement, and that his focus is on Green Bay's own alignment. On Goff, he praised the quarterback's decisiveness, poise under pressure, and trust in his playmakers, and said the key is moving defenders and not letting Goff set up comfortably. He also praised Amon-Ra St. Brown's mentality and said Detroit's Brian Branch would be a strong addition for their defense.",
+  "injuries": [
+   {
+    "player": "Christian Watson",
+    "status": "full",
+    "detail": "Coach said there is no concern for Sunday's game.",
+    "player_id": "00-0038124"
+   },
+   {
+    "player": "Matthew Golden",
+    "status": "full",
+    "detail": "Coach said there is no concern for Sunday's game.",
+    "player_id": "00-0040667"
+   },
+   {
+    "player": "Jordan Love",
+    "status": "unclear",
+    "detail": "Took several hits in the game and was seen by the chiropractor afterward; the coach did not give a practice or game status.",
+    "player_id": "00-0036264"
+   },
+   {
+    "player": "Josh Jacobs",
+    "status": "returning",
+    "detail": "Being ramped up through strength and athletic training; the next two practice days are seen as key to his return.",
+    "player_id": "00-0035700"
+   },
+   {
+    "player": "Jonathan Ford",
+    "status": "ir",
+    "detail": "Placed on IR after playing through an issue for some time; the move surprised the coach.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Josh Jacobs",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will continue ramping up over the next two practice days before a decision on his availability.",
+    "note": "His availability and workload depend on how the next two practices go, so there is no clear Sunday outlook yet.",
+    "quote": "",
+    "player_id": "00-0035700"
+   },
+   {
+    "player": "Christian Watson",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "No injury concern for Sunday's game.",
+    "note": "A clean bill of health on the injury front supports his normal expected role.",
+    "quote": "",
+    "player_id": "00-0038124"
+   },
+   {
+    "player": "Matthew Golden",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "No injury concern for Sunday's game.",
+    "note": "A clean bill of health on the injury front supports his normal expected role.",
+    "quote": "",
+    "player_id": "00-0040667"
+   },
+   {
+    "player": "Jonathan Ford",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Placed on IR and out for the foreseeable future.",
+    "note": "An IR placement removes him from the active roster and his expected contribution.",
+    "quote": "",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Detroit Lions offense",
+    "detail": "LaFleur praised Jared Goff's decisiveness, poise, and trust in playmakers, and said the defense needs to move players off their spots to disrupt him."
+   },
+   {
+    "topic": "Detroit Lions defense",
+    "detail": "Coach said getting Brian Branch back gives Detroit a versatile safety who can play man coverage and adds physicality."
+   },
+   {
+    "topic": "Amon-Ra St. Brown",
+    "detail": "LaFleur singled out St. Brown's mentality and competitiveness as what separates him from other receivers."
+   },
+   {
+    "topic": "Jordan Riley",
+    "detail": "Coach said Riley has shown a lot of progress after a limited appearance last week and could be ready if the progress continues."
+   },
+   {
+    "topic": "Practice reps and game planning",
+    "detail": "Coach said reps are limited league-wide this week and game planning for Detroit won't change much, with a focus on trusting rules and training against unscripted looks."
+   }
+  ],
+  "opponent": "Detroit Lions"
+ },
+ {
   "id": "PHI:nick-sirianni-press-conference-october-22-2026",
   "team": "PHI",
   "url": "https://www.philadelphiaeagles.com/video/nick-sirianni-press-conference-october-22-2026",

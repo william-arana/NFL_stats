@@ -780,6 +780,91 @@
   ]
  },
  {
+  "id": "DET:campbell-on-divisional-game",
+  "team": "DET",
+  "url": "https://www.detroitlions.com/video/campbell-on-divisional-game",
+  "title": "Campbell on divisional game",
+  "date": "2026-10-19",
+  "duration": 796,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/lions/wwtbmlngft0wt2zk65jj.jpg",
+  "kind": "first_practice",
+  "after_week": 5,
+  "coach": "Dan Campbell",
+  "words": 2641,
+  "model": "claude-haiku-5-5",
+  "headline": "Cade Mays is expected back and will play alongside Juice Scruggs, who is shared at center/guard; Penei Sewell is playing at a high level at left tackle heading into the first divisional game vs. Green Bay.",
+  "summary": "Campbell said the bye week gave the staff clarity on what to keep and cut in all three phases, and that the team is starting to find its identity while getting some players back. He called the Green Bay game the first divisional matchup, played at home at Ford Field, and said the NFC North is top-notch from top to bottom. On Cade Mays, he said the team plans to play both him and Juice Scruggs barring a setback, with the staff still deciding how to split them between center and guard. Campbell praised Scruggs as a team-first player who has improved every week, and said Christian Mahogany has had a couple of good weeks as a depth option. He described Penei Sewell's switch to left tackle as outstanding, saying Sewell looks smoother than before and has found another gear. On the Packers, Campbell said their defense's disguises and pre-snap shifts are hard to prepare for, and he credited coordinator Gannon's unit up front and in the back end. He also said the offensive line has improved and that Josh Jacobs' possible return would add a downhill element to the running game.",
+  "injuries": [
+   {
+    "player": "Cade Mays",
+    "status": "returning",
+    "detail": "Coming back from injury; the team plans to play him barring a negative development this week, with the staff still deciding how to use him at center versus guard alongside Scruggs.",
+    "player_id": "00-0037297"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Penei Sewell",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Sewell is playing at a high level at left tackle after the move from right tackle.",
+    "note": "Sewell's strong play and move to left tackle suggest a stable, high-end offensive line anchor for the Lions' run and pass game.",
+    "quote": "It's been outstanding. You know the switch has been outstanding.",
+    "player_id": "00-0036880"
+   },
+   {
+    "player": "Juice Scruggs",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Scruggs will be used at center and/or guard, with his snaps shared with Cade Mays depending on Mays' workload.",
+    "note": "Scruggs is playing well, but his exact snap share could shrink once Mays returns, which affects the line's consistency.",
+    "quote": "Juice is playing pretty good football for us right now.",
+    "player_id": "00-0038936"
+   },
+   {
+    "player": "Cade Mays",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Mays is expected to play Sunday barring setbacks in practice this week.",
+    "note": "Mays' return creates a snap-share question with Juice Scruggs and affects how much the interior line rotates.",
+    "quote": "we plan on playing both of those guys.",
+    "player_id": "00-0037297"
+   },
+   {
+    "player": "Christian Mahogany",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Mahogany has had a couple of good weeks and is part of the interior line depth.",
+    "note": "Mahogany's recent play gives the coaches more depth options on the interior line if Mays or Scruggs need rest.",
+    "quote": "Mahogany has had a couple of good weeks.",
+    "player_id": "00-0039408"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Green Bay defense",
+    "detail": "Campbell said the Packers' defense disguises well, with multiple defenders able to show one look and rotate out, and noted their front seven can set the edge and cause problems."
+   },
+   {
+    "topic": "Bye week and division",
+    "detail": "Campbell said the bye gave the staff clarity, and the Week 7 game is the team's first divisional matchup, with the NFC North very strong top to bottom."
+   },
+   {
+    "topic": "Josh Jacobs",
+    "detail": "Campbell said he expects the Packers to keep running similar concepts if Josh Jacobs returns, adding a downhill explosive element the team will need to account for."
+   },
+   {
+    "topic": "Rehab workload",
+    "detail": "Campbell said a rehabbing player will be pushed in practice early, with practice moved to Tuesday to give players a day off before the game, but he did not say that the workload would be full."
+   }
+  ],
+  "opponent": "Green Bay Packers"
+ },
+ {
   "id": "GB:matt-lafleur-he-balled-out-oct-19-2026",
   "team": "GB",
   "url": "https://www.packers.com/video/matt-lafleur-he-balled-out-oct-19-2026",
@@ -1319,6 +1404,143 @@
   "opponent": "Seattle (Sunday night game)"
  },
  {
+  "id": "KC:andy-reid-defensively-we-really-put-the-hammer-down-postgame-press-conference-nfl-week-6",
+  "team": "KC",
+  "url": "https://www.chiefs.com/video/andy-reid-defensively-we-really-put-the-hammer-down-postgame-press-conference-nfl-week-6",
+  "title": "Andy Reid: 'Defensively We Really Put the Hammer Down' | Postgame Press Conference - NFL Week 6",
+  "date": "2026-10-19",
+  "duration": 440,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/chiefs/dw6bnm7erj0egyhca176.jpg",
+  "kind": "postgame",
+  "after_week": 6,
+  "coach": "Andy Reid",
+  "words": 1407,
+  "model": "claude-haiku-5-5",
+  "headline": "Kenneth Walker III ran for 128 yards and touchdowns, Travis Kelce played through an ankle tweak, and Jaylon Moore is in concussion protocol.",
+  "summary": "Reid praised the crowd and the Chargers, then called the defensive performance a strong showing built on tackling and execution of Spagnuolo's scheme. He said both sides had mistakes, including penalties that set the offense back, and singled out Nikko Remigio for putting the ball on the ground and missing a couple of plays, which he called unusual for him. On injuries, he said Jaylon Moore has a concussion, Travis Kelce tweaked an ankle but kept playing and may be sore Tuesday, Jalen Royals was checked for a concussion and cleared, and Kingsley Suamataia was kicked in the calf but should be fine. He highlighted four sacks as a welcome change and credited Nick Bolton and Jack Cochrane, whose interception return he praised. Reid called Walker a stud who has a feel for setting up runs, and he credited Kelce for four catches for 53 yards and Noah Gray for three more catches with over 50 yards. On the offense, he said the team struggled in short-yardage and goal-line situations and that he took the blame for a called play that did not fit the coverage. He said Mahomes's interception was a case of holding the ball too long and needs to be released sooner, and he noted the 100th win milestone for Mahomes. Reid also said the young receivers stepped up in a rotation-heavy game plan.",
+  "injuries": [
+   {
+    "player": "Jaylon Moore",
+    "status": "unclear",
+    "detail": "Reid said he has a concussion (transcript reads 'Jalen Moore'; likely Jaylon Moore). No timeline given.",
+    "player_id": "00-0036557"
+   },
+   {
+    "player": "Travis Kelce",
+    "status": "limited",
+    "detail": "Tweaked his ankle but played through it; might be sore the next day.",
+    "player_id": "00-0030506"
+   },
+   {
+    "player": "Jalen Royals",
+    "status": "full",
+    "detail": "Went to be checked for a concussion and was cleared.",
+    "player_id": "00-0040646"
+   },
+   {
+    "player": "Kingsley Suamataia",
+    "status": "questionable",
+    "detail": "Kicked in the calf; Reid expects him to be okay.",
+    "player_id": "00-0039844"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Kenneth Walker III",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Continues to be a major part of the run game with a 100-plus yard, multi-touchdown performance.",
+    "note": "A 128-yard, multi-TD game keeps his workload and touchdown equity strong for fantasy.",
+    "quote": "he's a stud. I mean, he knows knows how to run the ball",
+    "player_id": "00-0038134"
+   },
+   {
+    "player": "Travis Kelce",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Ankle tweak was not serious enough to keep him out, but he may be sore Monday.",
+    "note": "He played through the ankle and produced four catches for 53 yards, but his practice status this week is worth tracking.",
+    "quote": "tweaked his ankle there continue to play. Uh, might be a little sore tomorrow",
+    "player_id": "00-0030506"
+   },
+   {
+    "player": "Nick Bolton",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Had another big game for the defense.",
+    "note": "Continued strong play makes him a reliable IDP option.",
+    "quote": "Nick Bolton, I thought had another big game for us",
+    "player_id": ""
+   },
+   {
+    "player": "Jack Cochrane",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Made an interception and ran it back well.",
+    "note": "Turnover production adds to his defensive fantasy value.",
+    "quote": "Cochran with the interception. And that was, that was great.",
+    "player_id": ""
+   },
+   {
+    "player": "Noah Gray",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Added three catches for more than 50 yards.",
+    "note": "Productive receiving game helps his role in the passing game.",
+    "quote": "Noah added another three on there for another 50 plus yards",
+    "player_id": "00-0036637"
+   },
+   {
+    "player": "Nikko Remigio",
+    "topic": "other",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Had fumbles and a couple of misses, which Reid called unusual for him.",
+    "note": "Ball security issues could cost him snaps or touches.",
+    "quote": "this was unusual for him to be putting the ball on the ground",
+    "player_id": "00-0038519"
+   },
+   {
+    "player": "Patrick Mahomes",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Should get rid of the ball sooner after the interception.",
+    "note": "The interception is a minor concern, and Reid was matter-of-fact about it.",
+    "quote": "just get rid of it sooner",
+    "player_id": "00-0033873"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Short-yardage and goal-line offense",
+    "detail": "Reid said the team struggled in short-yardage and goal-line situations. He took responsibility for a called play that did not fit the coverage."
+   },
+   {
+    "topic": "Defense and pass rush",
+    "detail": "The team recorded four sacks, and the secondary tightened up to give the pass rush more time. Reid credited the scheme and tackling."
+   },
+   {
+    "topic": "Penalties",
+    "detail": "Reid said penalties hurt the team by moving it backward at key moments."
+   },
+   {
+    "topic": "Receivers rotation",
+    "detail": "Reid praised the young receivers for stepping up and rotating in and out during a personnel-heavy game plan."
+   },
+   {
+    "topic": "Patrick Mahomes milestone",
+    "detail": "Reid acknowledged Mahomes reaching 100 wins, the fastest to do so, and called him a great leader."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "LA:sean-mcvay-tyler-higbee-quentin-lake-injury-updates-week-6-taking-accountability-positive-takeaways-press-conference",
   "team": "LA",
   "url": "https://www.therams.com/video/sean-mcvay-tyler-higbee-quentin-lake-injury-updates-week-6-taking-accountability-positive-takeaways-press-conference",
@@ -1476,6 +1698,50 @@
   "opponent": ""
  },
  {
+  "id": "LAC:jim-harbaugh-postgame-press-conference-vs-chiefs-week-6-2026",
+  "team": "LAC",
+  "url": "https://www.chargers.com/video/jim-harbaugh-postgame-press-conference-vs-chiefs-week-6-2026",
+  "title": "Head Coach Jim Harbaugh Postgame Press Conference vs. Chiefs",
+  "date": "2026-10-19",
+  "duration": 404,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/chargers/i5rsbwoty3xtfhdf3y1l.jpg",
+  "kind": "postgame",
+  "after_week": 6,
+  "coach": "Jim Harbaugh",
+  "words": 1004,
+  "model": "claude-haiku-5-5",
+  "headline": "LAC is 0-6 heading into the bye; Harbaugh says the offense isn't scoring enough and everything, including play-calling, is under evaluation, with no personnel decisions announced.",
+  "summary": "Harbaugh said he never expected to be addressing a 0-6 start going into the bye and was confident the team would win this game. He called scoring the bottom-line problem, especially on offense, and said the team must address everything. Asked whether Mike McDaniel will keep calling plays, he said everything is being reviewed, starting with himself, and that he will meet with the offensive coaches after watching the film. He said the effort and work in meetings and practice are there but not translating to the field, and he called the missed first-and-goal opportunity at the one a very big miss. On defense, he credited stops and a red-zone turnover against a highly productive Chiefs offense. Asked about injuries, he refused to use them as an excuse and said he views this as a team game. On Justin Herbert, he said Herbert did everything he could, had few chances, and that from the sideline he did not think the team put him in a position to succeed. Asked whether the offense can be fixed, he said absolutely, while acknowledging a lot of hard work has not yet translated. He declined to say whether a wholesale change is coming, saying only that all things will be evaluated.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Justin Herbert",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Coach says the team did not put Herbert in a position to succeed, implying offensive usage or protection will be reworked.",
+    "note": "Harbaugh framed the problem as the offense's design and execution rather than Herbert's play, but any scheme change could shift his volume and rhythm.",
+    "quote": "I did not think we were putting him in a position to be successful.",
+    "player_id": "00-0036355"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive play-calling and staff",
+    "detail": "Harbaugh would not commit to Mike McDaniel continuing to call plays, saying everything is being looked at and he will review the offense with coaches. Greg Roman questions were deflected."
+   },
+   {
+    "topic": "Offensive scoring",
+    "detail": "Harbaugh said the team is not scoring enough points and that the missed first-and-goal from the one was a big miss. He said he would review specific plays on film."
+   },
+   {
+    "topic": "Defense vs. Chiefs",
+    "detail": "Harbaugh praised the defense for stops and a red-zone turnover while facing Patrick Mahomes and the Chiefs' running game."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "LAC:jim-harbaugh-press-conference-monday-week-7-2026",
   "team": "LAC",
   "url": "https://www.chargers.com/video/jim-harbaugh-press-conference-monday-week-7-2026",
@@ -1566,6 +1832,118 @@
    {
     "topic": "Bye week",
     "detail": "Harbaugh expects the bye to serve as a mental and physical reset ahead of the final 11 games."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "LV:klint-kubiak-postgame-presser-nfl-week-6-bills-2026-season",
+  "team": "LV",
+  "url": "https://www.raiders.com/video/klint-kubiak-postgame-presser-nfl-week-6-bills-2026-season",
+  "title": "Klint Kubiak Postgame Presser - 10.18.26 | Week 6",
+  "date": "2026-10-19",
+  "duration": 290,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/raiders/w3fg0rzw2z1omufdtovi.jpg",
+  "kind": "postgame",
+  "after_week": 6,
+  "coach": "Klint Kubiak",
+  "words": 1082,
+  "model": "claude-haiku-5-5",
+  "headline": "Kubiak is frustrated with the red zone (2 of 5), penalties, and a slow start to the third quarter, but he praised Mike Washington Jr. as a spark in the run game and said Ashton Jeanty will also get touches.",
+  "summary": "Kubiak said he was very disappointed the Raiders lost to Buffalo, credited the Bills, and said the team failed to close the game despite some improvement. He said the team is 3-3 and rejects moral victories. He called the red zone performance (2 of 5) unacceptable and said the responsibility starts with him. He said he was encouraged by the run game, which he felt was better, and that the team played to its strengths late. He praised Mike Washington Jr. for giving the team a spark and said Washington, Dillon, and Ashton Jeanty would all play. On penalties, he said seven is too many, that the false start problem (three of them) is killing the team, and that he has not fixed it. He made Caleb Rogers the starter over Jackson Powers-Johnson, said that was his decision, and said the film would decide future lineups. He called Kirk Cousins gritty and said he is playing superb football.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Mike Washington Jr.",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will keep a meaningful role in the running game alongside Dillon and Ashton Jeanty",
+    "note": "Kubiak credited him with a spark and said he will be played with the other backs, so his touches may hold up.",
+    "quote": "he gave us a spark. He did some good stuff.",
+    "player_id": "00-0040878"
+   },
+   {
+    "player": "Ashton Jeanty",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will get playing time in a rotation with Mike Washington Jr. and Dillon",
+    "note": "Kubiak framed the backfield as a group share, which can limit Jeanty's workload.",
+    "quote": "we're going to play all those guys.",
+    "player_id": "00-0040122"
+   },
+   {
+    "player": "Caleb Rogers",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Started over Jackson Powers-Johnson; whether he keeps the job depends on film review",
+    "note": "The starting change may or may not be permanent, so this is a depth-chart question, not a clear fantasy signal.",
+    "quote": "let's go watch the film and see where we're at.",
+    "player_id": "00-0040150"
+   },
+   {
+    "player": "Jackson Powers-Johnson",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Lost his starting spot for Week 6; the change may not be permanent",
+    "note": "Kubiak did not say whether the move is permanent, so his starting status is uncertain.",
+    "quote": "let's go watch the film and see where we're at.",
+    "player_id": "00-0039735"
+   },
+   {
+    "player": "Brock Bowers",
+    "topic": "matchup",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Was schemed against by Buffalo and got his first catch late in the game",
+    "note": "Buffalo's game plan limited his early targets, which hurts his volume outlook against tough defenses.",
+    "quote": "they did a great job of playing him.",
+    "player_id": "00-0039338"
+   },
+   {
+    "player": "Kirk Cousins",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is playing at a high level right now",
+    "note": "Kubiak praised his play, which supports continued confidence in the passing game despite the interception.",
+    "quote": "He's playing he's playing superb football right now.",
+    "player_id": "00-0029604"
+   },
+   {
+    "player": "Tyler Linderbaum",
+    "topic": "other",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Was called for a false start on a fourth-down attempt; the penalty problem is not yet fixed",
+    "note": "Penalties are hurting drives, and the coach says the issue remains unresolved.",
+    "quote": "it's killing us, absolutely killing us.",
+    "player_id": "00-0037825"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Red zone",
+    "detail": "The Raiders converted 2 of 5 red-zone trips, which Kubiak called unacceptable and said starts with him."
+   },
+   {
+    "topic": "Penalties",
+    "detail": "Seven penalties in the game and three false starts; Kubiak said he has not fixed the issue and that he will review film for each player."
+   },
+   {
+    "topic": "Third quarter",
+    "detail": "A three-and-out to open the third quarter hurt momentum, and Kubiak said the team must close games out."
+   },
+   {
+    "topic": "Challenge decision",
+    "detail": "Kubiak said challenging a short-gain play in the third quarter was probably not worth it in hindsight."
+   },
+   {
+    "topic": "Kirk Cousins interception",
+    "detail": "Kubiak said Buffalo made a good play by stepping under the checkdown, and that the turnover gave points away."
    }
   ],
   "opponent": ""
@@ -1852,6 +2230,89 @@
    }
   ],
   "opponent": "Pittsburgh Steelers"
+ },
+ {
+  "id": "NYG:coach-john-harbaugh-it-s-all-right-there-for-us",
+  "team": "NYG",
+  "url": "https://www.giants.com/video/coach-john-harbaugh-it-s-all-right-there-for-us",
+  "title": "Coach John Harbaugh: ‘It’s all right there for us’",
+  "date": "2026-10-19",
+  "duration": 1029,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/giants/ndjeqihpl2ye5pivpcxn.jpg",
+  "kind": "day_after",
+  "after_week": 6,
+  "coach": "John Harbaugh",
+  "words": 3639,
+  "model": "claude-haiku-5-5",
+  "headline": "Harbaugh still undecided between Jameis Winston and J.J. McCarthy for Sunday at Houston, with the upcoming bye week a possible factor in any change.",
+  "summary": "Harbaugh said the staff is still working through the starting quarterback decision and has not settled on one. He said the process weighs what gives the team the best chance to move the ball, score, and protect the football, and he described it as an overview of past performance plus what the offense needs going forward. He praised Winston's body of work and said J.J. McCarthy has been with the team only a couple of weeks, so the staff is still building an offense he is comfortable running. Harbaugh said the situation allows more leeway than a normal quarterback change, and that the quarterback change would still be explained to the team. He acknowledged that the upcoming bye week is part of the consideration and that not announcing a starter early has some competitive value, though he would not say it was the whole reason. On the offense, he called a 60/40 or 55/45 balance sustainable but said a run-heavy, no-huddle style would not hold up over four quarters. He called the team a work in progress and said the run game has been disappointing, citing blocking and efficiency problems rather than effort. On Najee Harris, he said the four-way backfield rotation is earned and no back has yet earned a clear lead role. He said Andrew Thomas, Jermaine Eluemunor, and Darnell Mooney are making progress and are day to day, with more information expected Wednesday.",
+  "injuries": [
+   {
+    "player": "Andrew Thomas",
+    "status": "limited",
+    "detail": "Described as day to day and making progress; update expected Wednesday.",
+    "player_id": "00-0036386"
+   },
+   {
+    "player": "Jermaine Eluemunor",
+    "status": "limited",
+    "detail": "Described as day to day and making progress; update expected Wednesday.",
+    "player_id": "00-0033290"
+   },
+   {
+    "player": "Darnell Mooney",
+    "status": "limited",
+    "detail": "Described as day to day and making progress; update expected Wednesday.",
+    "player_id": "00-0036309"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Jameis Winston",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Still in contention to start this week; no final quarterback decision announced yet.",
+    "note": "The starting QB spot is unsettled, and a switch would change the passing volume and fantasy outlook for the whole offense.",
+    "quote": "We're working through that now.",
+    "player_id": "00-0031503"
+   },
+   {
+    "player": "J.J. McCarthy",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Still in contention to start this week, though he is new to the offense.",
+    "note": "McCarthy's rushing ability could raise his fantasy floor if he starts, but the staff is weighing his short time in the system.",
+    "quote": "J.J. just got here a couple of weeks ago",
+    "player_id": "00-0039923"
+   },
+   {
+    "player": "Najee Harris",
+    "topic": "usage",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "The four-man backfield rotation continues; no running back has earned a clear lead role yet.",
+    "note": "Harris's usage is limited by the rotation and the staff has not committed to giving any back a workhorse role.",
+    "quote": "our run game hasn't earned that yet",
+    "player_id": "00-0036893"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Run game",
+    "detail": "Harbaugh said the running game has underperformed expectations due to blocking, efficiency, and consistency issues, not effort. He wants it to improve significantly."
+   },
+   {
+    "topic": "Offensive philosophy",
+    "detail": "He said a one-dimensional run or fourth-quarter-style no-huddle offense is not sustainable. He favors a balanced approach that can shift from week to week."
+   },
+   {
+    "topic": "Bye week",
+    "detail": "The upcoming bye week is part of the quarterback discussion, and Harbaugh confirmed it is a consideration."
+   }
+  ],
+  "opponent": "Houston Texans"
  },
  {
   "id": "PHI:nick-sirianni-press-conference-october-19-2026",

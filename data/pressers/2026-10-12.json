@@ -1,5 +1,78 @@
 [
  {
+  "id": "ATL:hc-kevin-stefanski-reflects-on-sunday-night-football-matchup-vs-ravens-post-game-press-conference-week-5-falcons-vs-ravens",
+  "team": "ATL",
+  "url": "https://www.atlantafalcons.com/video/hc-kevin-stefanski-reflects-on-sunday-night-football-matchup-vs-ravens-post-game-press-conference-week-5-falcons-vs-ravens",
+  "title": "HC Kevin Stefanski reflects on Sunday Night Football matchup vs. Ravens |  Post-game Press Conference | Week 5 | Falcons vs. Ravens",
+  "date": "2026-10-12",
+  "duration": 293,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/falcons/kxrphpw0lnxcmgxd8myz.jpg",
+  "kind": "postgame",
+  "after_week": 5,
+  "coach": "Kevin Stefanski",
+  "words": 1070,
+  "model": "claude-haiku-5-5",
+  "headline": "Falcons lost to Baltimore in overtime; Michael Penix Jr. (rib) left the game and C.J. Henderson (groin) is hurt, with imaging pending on both.",
+  "summary": "Stefanski opened by giving injury updates: C.J. Henderson has a groin injury and Michael Penix Jr. has a rib injury, and both will be evaluated with imaging. He credited Baltimore as a good team and said Atlanta missed too many opportunities, especially in the late stages when it failed to put the game away. He said the margins were razor thin, as expected, and that the team has to make plays in those moments, with ownership shared across coaches, players, offense, defense and special teams. On Penix's exit, he said Penix was trying to get comfortable and could not, and he described Penix's play before the injury as a battle against a tough defense, with room to improve. He said the run defense and the run game were both disappointing and that the offense's red-zone scoring fell short, and he pointed to the overtime possession and third-down conversions as part of the story. Asked about the team's response to Penix's emotion, he said it was too early to know enough and that the staff will support everyone as more information comes in.",
+  "injuries": [
+   {
+    "player": "C.J. Henderson",
+    "status": "unclear",
+    "detail": "Groin injury; Stefanski said more would be known after imaging, no timeline given.",
+    "player_id": ""
+   },
+   {
+    "player": "Michael Penix Jr.",
+    "status": "unclear",
+    "detail": "Rib injury suffered in the game; he could not return after trying to get comfortable, and imaging is pending. No timeline given.",
+    "player_id": "00-0039917"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Michael Penix Jr.",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Rib injury is pending imaging; availability for the next game is unknown.",
+    "note": "A rib injury at QB creates real uncertainty about whether Penix starts next week, which affects the entire passing offense's fantasy value.",
+    "quote": "He was trying to work to get comfortable and could not.",
+    "player_id": "00-0039917"
+   },
+   {
+    "player": "C.J. Henderson",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Groin injury; imaging will determine his status.",
+    "note": "Groin injuries can linger, so his practice reports this week are worth tracking for defensive fantasy value.",
+    "quote": "We'll know more on both of those as we get imaging",
+    "player_id": ""
+   },
+   {
+    "player": "Michael Penix Jr.",
+    "topic": "matchup",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Penix played well against a tough defense but has areas to improve.",
+    "note": "Stefanski's assessment was mixed, which signals he may not be fully secure in the starting role despite the effort.",
+    "quote": "But I thought he battled.",
+    "player_id": "00-0039917"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Run game and red zone",
+    "detail": "Stefanski said the run game was held back in the red zone after recent success and that the team did not score enough points. He pointed to Baltimore's adjustments and the offense's inability to finish drives."
+   },
+   {
+    "topic": "Run defense and overtime",
+    "detail": "He said the run defense missed tackles and failed to get off blocks, and that the first overtime drive, which bled clock, was part of the problem before Atlanta's own possession ended without a score."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "ATL:head-coach-kevin-stefanski-media-availability-monday-october-12th-press-conference",
   "team": "ATL",
   "url": "https://www.atlantafalcons.com/video/head-coach-kevin-stefanski-media-availability-monday-october-12th-press-conference",
@@ -503,6 +576,68 @@
    {
     "topic": "Special teams",
     "detail": "Payton praised recent consistency and impact in the return and field-position game, though the punter discussed is not on the provided roster."
+   }
+  ],
+  "opponent": "Seattle"
+ },
+ {
+  "id": "DEN:hc-sean-payton-on-week-5-vs-chargers-a-hard-fought-win",
+  "team": "DEN",
+  "url": "https://www.denverbroncos.com/video/hc-sean-payton-on-week-5-vs-chargers-a-hard-fought-win",
+  "title": "HC Sean Payton on Week 5 vs. Chargers: ‘A hard-fought win’",
+  "date": "2026-10-12",
+  "duration": 704,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/broncos/emwgexbeiikrljq9ytjc.jpg",
+  "kind": "postgame",
+  "after_week": 5,
+  "coach": "Sean Payton",
+  "words": 1941,
+  "model": "claude-haiku-5-5",
+  "headline": "Payton says Bo Nix must clean up early-game pocket and internal-clock issues, while Dobbins' split-side zone runs and the run game picked up in the second half.",
+  "summary": "Payton called it a hard-fought win, pointing to three defensive takeaways and a fourth-down stop as the game-changers, and a special teams play with Mims late in the game. He said the offense struggled badly on third down, converting only one, and that the team needs to clean that up. He credited the running game with effectiveness late, though he admitted he was partly responsible for a delay-of-game penalty on the one-yard line that cost them a cleaner look. On Nix, Payton said the feet concerns are settling down and that early-game clean pockets are important so the internal clock doesn't speed him up, and he noted Nix's dropback percentage was a little lower. He said the coaching staff needs to make better protection calls against the edges and zone pressures, and that he has told Nix he is the guy they wanted. Payton also said the team is focused on reducing variables so players can play faster, and that the short week against Seattle means shifting focus right away.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Bo Nix",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Nix needs to settle his feet and create a cleaner early-game pocket so his internal clock doesn't speed him up; the staff will adjust protection calls",
+    "note": "Payton's comments suggest the offense's protection and Nix's pocket feel are still a work in progress, which could cap efficiency and big-play chances going into a short week.",
+    "quote": "I think he's settling that down.",
+    "player_id": "00-0039732"
+   },
+   {
+    "player": "J.K. Dobbins",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Dobbins had effective split-side zone runs and contributed important carries when the team needed them late",
+    "note": "Dobbins' production in the second half and the run game's late effectiveness support a continued featured rushing role.",
+    "quote": "he had some he had some, some decent, you know split side zone runs.",
+    "player_id": "00-0036158"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Defense",
+    "detail": "Payton praised the defense for three takeaways and a fourth-down stop, and said the Chargers' front was a strength they had to attack, with the team getting to the C gap several times late."
+   },
+   {
+    "topic": "Special teams and field position",
+    "detail": "Payton mentioned a late special teams play involving Marvin Mims as a big play and said field position swung in Denver's favor late, though it flipped against them in the second quarter."
+   },
+   {
+    "topic": "Third down and red zone",
+    "detail": "Payton said the offense converted just one third down and that the staff must get more conversions, and he took responsibility for a delay-of-game penalty after a timeout on the one-yard line."
+   },
+   {
+    "topic": "Short week and opponent",
+    "detail": "Denver faces Seattle on a short week, and Payton said the focus is on getting back to work quickly against a world champion team."
+   },
+   {
+    "topic": "Davis Webb",
+    "detail": "Payton said the play-calling process with Webb, who is still in the building giving advice, worked smoothly, and he praised Webb's conviction on certain calls."
    }
   ],
   "opponent": "Seattle"

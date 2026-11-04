@@ -492,6 +492,60 @@
   "opponent": "Minnesota Vikings"
  },
  {
+  "id": "CIN:zac-taylor-previews-week-2-2026-texans-press-conference",
+  "team": "CIN",
+  "url": "https://www.bengals.com/video/zac-taylor-previews-week-2-2026-texans-press-conference",
+  "title": "Zac Taylor Previews Week 2 Against Texans | PRESS CONFERENCE",
+  "date": "2026-09-16",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/bengals/zefviv12yitkuulazn1j",
+  "kind": "first_practice",
+  "after_week": 1,
+  "coach": "Zac Taylor",
+  "words": 2752,
+  "model": "claude-haiku-5-5",
+  "headline": "Zac Taylor vowed Ja'Marr Chase will see more touches after a quiet Week 1, and praised Mike Gesicki's chemistry with Joe Burrow ahead of the Texans.",
+  "summary": "Taylor said the Texans bring elite talent and simple, well-coached defense, with Will Anderson the headliner and Jalen Pitre a top nickel-type safety. He described the game as a must-win in a loud road environment that will require all three phases. On Ja'Marr Chase, Taylor called his lack of targets in Week 1 inexcusable and said the offense would find ways to involve him more, since he impacts games whether he gets the ball behind the line or ten yards downfield. He denied that Chase was used as a decoy, while acknowledging coverage sometimes shifts toward him. Taylor praised Mike Gesicki's route feel and chemistry with Burrow, saying the team trusts him to adjust on the fly. He also said the run game left yards on the table in Week 1 despite a good performance against Tampa's run defense. Taylor expressed respect for C.J. Stroud and Houston's offense, and noted Tampa Bay's strong recent run as a conference rival.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Ja'Marr Chase",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will be involved more in the game plan and get more touches going forward",
+    "note": "Taylor admitted Chase's low Week 1 volume was not justified, which points to a usage bump against Houston.",
+    "quote": "he's always a big part of the plan and we'll continue to do that.",
+    "player_id": "00-0036900"
+   },
+   {
+    "player": "Mike Gesicki",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Trusted by Burrow and the coaching staff to make plays on the fly, with a strong chemistry-based role in the passing game",
+    "note": "Taylor's praise and trust in Gesicki's chemistry with Burrow suggests a steady target role in the passing game.",
+    "quote": "And we trust him to do it.",
+    "player_id": "00-0034829"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Texans defense",
+    "detail": "Taylor said Houston has most starters back, is fast and physical, and features Will Anderson plus strong interior and linebacker play. Jalen Pitre was singled out as a top nickel."
+   },
+   {
+    "topic": "Tampa Bay and Week 1 run game",
+    "detail": "Taylor credited the offensive line and backs for running well against Tampa's run defense, but said there was more to get. Week 1 was a close win that also showed the team's offensive ceiling."
+   },
+   {
+    "topic": "Special teams",
+    "detail": "The kicker (Evan) earned special teams Player of the Week for two 55-plus-yard field goals that accounted for the six-point win. Taylor credited the operation and blockers."
+   }
+  ],
+  "opponent": "Houston Texans"
+ },
+ {
   "id": "CLE:todd-monken-press-conference-september-16th-2026",
   "team": "CLE",
   "url": "https://www.clevelandbrowns.com/video/todd-monken-press-conference-september-16th-2026",
@@ -1395,6 +1449,67 @@
   "opponent": "Chicago Bears"
  },
  {
+  "id": "NE:head-coach-mike-vrabel-9-16-we-want-to-be-aggressive-that-s-how-we-want-to-play",
+  "team": "NE",
+  "url": "https://www.patriots.com/video/head-coach-mike-vrabel-9-16-we-want-to-be-aggressive-that-s-how-we-want-to-play",
+  "title": "Head Coach Mike Vrabel 9/16: \"We want to be aggressive, that's how we want to play\"",
+  "date": "2026-09-16",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/patriots/guhfqsitodxj1mijpetk",
+  "kind": "midweek",
+  "after_week": 1,
+  "coach": "Mike Vrabel",
+  "words": 2467,
+  "model": "claude-haiku-5-5",
+  "headline": "Vrabel says the Patriots want aggressive play from Drake Maye, not recklessness, and TreVeyon Henderson is working back up but still limited.",
+  "summary": "Vrabel said there is a difference between being reckless and being aggressive, and the Patriots want to play aggressively. Good decisions still matter when a defensive look should take a shot away, and he said Maye's development comes from knowledge, skill, and repetitions. He described talking to players in team meetings, quarterback room sessions, and during the week rather than at a set time. On Maye's early week, he said practice is critical but Sunday's performance matters most, and the team felt it had good energy. He said Week 1 was not good enough, starting with himself, and the Patriots did not do enough to win the game. He said the focus now is on the Steelers. On Henderson, he said the running back would do more in practice that day and the staff would keep evaluating him. He also said the team needs to win at the line of scrimmage in the run game and block the nickel better.",
+  "injuries": [
+   {
+    "player": "TreVeyon Henderson",
+    "status": "limited",
+    "detail": "Practiced Monday and was expected to do more Wednesday; Vrabel said the staff will keep evaluating him.",
+    "player_id": "00-0040734"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Drake Maye",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Patriots want Maye to play aggressively while avoiding reckless decisions against Pittsburgh.",
+    "note": "Aggressive play-calling and deep shots could raise his big-play upside, but a more cautious approach could cap it.",
+    "quote": "We want to be aggressive.",
+    "player_id": "00-0039851"
+   },
+   {
+    "player": "TreVeyon Henderson",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Henderson progressing in practice and could do more; status still being evaluated.",
+    "note": "A limited practice week leaves his Week 2 availability and snap share uncertain for a backfield decision.",
+    "quote": "I think he'll be able to do some more.",
+    "player_id": "00-0040734"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Steelers defense and opponent",
+    "detail": "Vrabel said Pittsburgh's identity is big, long, and active on the edges, and the defense will look similar to what Patrick Graham ran before, though one week of film isn't enough to project fully."
+   },
+   {
+    "topic": "Defensive turnovers and pressure",
+    "detail": "Vrabel said forcing the quarterback into mistakes and knocking the ball out is a daily emphasis, and he was unsure what went wrong in last year's blitzes against Steelers QB Aaron Rodgers."
+   },
+   {
+    "topic": "Week 1 offense and play action",
+    "detail": "He said the Seattle play-action look should have gone to the back on one third-down attempt, and the protection held up well enough most of the time."
+   }
+  ],
+  "opponent": "Pittsburgh Steelers"
+ },
+ {
   "id": "NO:kellen-moore-interview-week-2-saints-vs-ravens-9-16-2026",
   "team": "NO",
   "url": "https://www.neworleanssaints.com/video/kellen-moore-interview-week-2-saints-vs-ravens-9-16-2026",
@@ -1961,6 +2076,125 @@
    }
   ],
   "opponent": "New England Patriots"
+ },
+ {
+  "id": "SEA:head-coach-mike-macdonald-on-sam-darnold-s-status-preparing-for-week-2-vs-az",
+  "team": "SEA",
+  "url": "https://www.seahawks.com/video/head-coach-mike-macdonald-on-sam-darnold-s-status-preparing-for-week-2-vs-az",
+  "title": "Head Coach Mike Macdonald On Sam Darnold's Status, Preparing For Week 2 vs. AZ.",
+  "date": "2026-09-16",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/seahawks/ygmlavbjcf8aloy3e54z",
+  "kind": "first_practice",
+  "after_week": 1,
+  "coach": "Mike Macdonald",
+  "words": 2776,
+  "model": "claude-haiku-5-5",
+  "headline": "Sam Darnold is out vs. Arizona with a glute injury; Drew Lock starts, Jalen Milroe is the backup, and Ernest Jones is good to go.",
+  "summary": "Macdonald confirmed Sam Darnold will not play this week because of a glute injury, though he doesn't plan to shut him down and will reevaluate him daily and into next week. Drew Lock will start, and the team will roll with Lock and Jalen Milroe at quarterback. Macdonald praised Lock as a joyful, professional player who is himself, and said his approach won't change. Milroe has worked hard and will get more reps this week, but Lock is expected to play the whole game. On game planning, he described a balance between focusing on the team's own preparation and aggressively attacking what the staff sees on Arizona's tape. He said Arizona's Sunday performance was a small sample, and the coaches are preparing for a full range of fronts, coverages and pressures. Ernest Jones was sick Monday but is good to go. Tory Horton and Nick Emmanwori were expected to practice Wednesday, and Macdonald said they are doing great. Nehemiah Pritchett had a strong game in relief, and Macdonald's message to the team is to stack plays, performances and practices.",
+  "injuries": [
+   {
+    "player": "Sam Darnold",
+    "status": "out",
+    "detail": "Glute injury; will not play Sunday vs. Arizona. Not being shut down, reevaluated daily and next week. No IR move expected. Macdonald says he is killing it in rehab.",
+    "player_id": "00-0034869"
+   },
+   {
+    "player": "Ernest Jones",
+    "status": "full",
+    "detail": "Was sick Monday and missed practice, but Macdonald says he is good to go.",
+    "player_id": ""
+   },
+   {
+    "player": "Tory Horton",
+    "status": "limited",
+    "detail": "Expected to practice Wednesday; Macdonald said he and Emmanwori are doing great, with availability to be determined from there.",
+    "player_id": "00-0040648"
+   },
+   {
+    "player": "Nick Emmanwori",
+    "status": "limited",
+    "detail": "Expected to practice Wednesday; Macdonald said he is doing great, with availability to be determined from there.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Drew Lock",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will start at quarterback this week and is expected to play the whole game.",
+    "note": "Lock is the starter, so he is the primary fantasy QB option with Darnold out.",
+    "quote": "He's our starter this week.",
+    "player_id": "00-0035704"
+   },
+   {
+    "player": "Sam Darnold",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Will not play this week against Arizona; availability for next week to be reevaluated.",
+    "note": "Darnold is out for Week 2, so he has no fantasy value this week.",
+    "quote": "But he won't play this week.",
+    "player_id": "00-0034869"
+   },
+   {
+    "player": "Nehemiah Pritchett",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Had a strong game when pressed into action and is being praised for earning opportunity.",
+    "note": "Macdonald's praise suggests Pritchett's role could carry forward, though it is not a clear promotion.",
+    "quote": "he did a tremendous job, played a great, great football game",
+    "player_id": ""
+   },
+   {
+    "player": "Ernest Jones",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is healthy and good to go after missing Monday's practice with illness.",
+    "note": "Jones is cleared to play, so he is not a fantasy concern this week.",
+    "quote": "He's he's good to go.",
+    "player_id": ""
+   },
+   {
+    "player": "Tory Horton",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Expected to practice Wednesday; availability this week is undetermined.",
+    "note": "Horton's status depends on practice participation, so monitor his Friday report.",
+    "quote": "Yeah, those guys are doing great.",
+    "player_id": "00-0040648"
+   },
+   {
+    "player": "Nick Emmanwori",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Expected to practice Wednesday; availability this week is undetermined.",
+    "note": "Emmanwori's status depends on practice participation, so monitor his Friday report.",
+    "quote": "Yeah, those guys are doing great.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Backup QB",
+    "detail": "Jalen Milroe is the backup and will get reps this week, though Macdonald said the plan is for Lock to play the whole game. Milroe is not on the provided roster."
+   },
+   {
+    "topic": "Game planning vs. Arizona",
+    "detail": "Macdonald emphasized a balance between self-focus and attacking Arizona's tape and structure. He said Arizona's defense has had turnover but still plays varied fronts, coverages and pressures."
+   },
+   {
+    "topic": "Officiating",
+    "detail": "Macdonald said the offsides call on Arizona's fourth down was legitimate and that officials will call penalties strictly by the letter of the law."
+   }
+  ],
+  "opponent": "Arizona"
  },
  {
   "id": "TB:todd-bowles-staying-disciplined-on-rushing-the-passer-press-conference",

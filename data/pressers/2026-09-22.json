@@ -131,6 +131,149 @@
   "opponent": "Atlanta (Thursday night; Penix mentioned as their quarterback)"
  },
  {
+  "id": "LA:sean-mcvay-standout-players-competing-with-joy-aaron-donald-impactful-return-press-conference",
+  "team": "LA",
+  "url": "https://www.therams.com/video/sean-mcvay-standout-players-competing-with-joy-aaron-donald-impactful-return-press-conference",
+  "title": "Sean McVay talks standout players in win over the Giants, competing with joy, Aaron Donald's impactful return & more",
+  "date": "2026-09-22",
+  "duration": 1207,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/rams/hrmjtfflhyla3xd3wxgp",
+  "kind": "day_after",
+  "after_week": 2,
+  "coach": "Sean McVay",
+  "words": 4581,
+  "model": "claude-haiku-5-5",
+  "headline": "Puka Nacua (groin/soft tissue) sat out Week 2 and is questionable for next week; Terrance Ferguson and Davante Adams earned strong praise.",
+  "summary": "McVay said the Rams have no new serious injuries after the 28-6 win over the Giants, only some bumps and bruises, and that players were still trickling in. Puka Nacua had soreness in his groin area that got worse after a Thursday practice he got through, and he was ruled out even though the staff hoped he could play. Jordan Whittington also missed the game. McVay said he hopes Nacua plays next week, but he will not count on it and will decide based on how he feels in pregame warmups. He praised Terrance Ferguson as tough, smart, and a stud who showed resilience after a drop and then caught a touchdown, and he called Ferguson's versatility and run blocking valuable. Davante Adams had a strong week of preparation and got involved early, and McVay credited Matthew Stafford and the protection for the connections. On defense, McVay credited an attacking mindset, a sticky secondary led by Trent McDuffie, and pressure from both the front and the edges. Aaron Donald's return after roughly 1,000 days was emotional, and McVay said Donald still has rhythm and reps to regain. Wesley Bailey got his first career sack after Myles Garrett's absence opened up snaps for the group. McVay called special teams a clear area for improvement, citing field position issues despite a strong punt from the opposing punter. He said Blake Corum and Kyren Williams splitting carries is the ideal approach.",
+  "injuries": [
+   {
+    "player": "Puka Nacua",
+    "status": "questionable",
+    "detail": "Missed Week 2 with groin/soft-tissue soreness that worsened after Thursday practice; McVay hopes he plays next week but will be cautious.",
+    "player_id": "00-0039075"
+   },
+   {
+    "player": "Jordan Whittington",
+    "status": "out",
+    "detail": "Already expected to miss the Giants game; McVay referenced him as out.",
+    "player_id": "00-0039751"
+   },
+   {
+    "player": "Myles Garrett",
+    "status": "unclear",
+    "detail": "A reporter's question referenced him being out, but McVay did not confirm or elaborate.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Puka Nacua",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Status for next week is uncertain; will be decided by pregame warmups.",
+    "note": "Missed Week 2 with soft-tissue injury, so his next-week availability is the key fantasy question.",
+    "quote": "you're going to err on the side of caution",
+    "player_id": "00-0039075"
+   },
+   {
+    "player": "Terrance Ferguson",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will keep getting opportunities at multiple positions and in third-down situations.",
+    "note": "His versatility and third-down role grew with Nacua out, and McVay expects further growth.",
+    "quote": "he's a stud",
+    "player_id": "00-0040737"
+   },
+   {
+    "player": "Davante Adams",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Was involved early and produced with Stafford; McVay expects him to remain a central target.",
+    "note": "Early target share and touchdowns make him a strong WR1 option going forward.",
+    "quote": "he had a good look in his eye and a great week of preparation",
+    "player_id": "00-0031381"
+   },
+   {
+    "player": "Wesley Bailey",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Got meaningful reps and a first career sack in Week 2 as part of the defensive line rotation.",
+    "note": "Defensive line rotation minutes can grow when starters are out, though he is a deep-league option.",
+    "quote": "That was awesome for him to be able to get his first career sack.",
+    "player_id": ""
+   },
+   {
+    "player": "Aaron Donald",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Played 30+ snaps in his return and will keep building rhythm with more reps.",
+    "note": "His snap count is rising as he returns, but his fantasy output is still uncertain.",
+    "quote": "Aaron Donald for you never ceases to amaze me.",
+    "player_id": ""
+   },
+   {
+    "player": "Trent McDuffie",
+    "topic": "matchup",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Had an outstanding performance in coverage against the Giants.",
+    "note": "Strong coverage play supports defensive scoring potential and points to a strong secondary.",
+    "quote": "Trent McDuffie was outstanding",
+    "player_id": ""
+   },
+   {
+    "player": "Blake Corum",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Will continue to split carries with Kyren Williams.",
+    "note": "The split keeps Corum a committee back rather than a feature runner.",
+    "quote": "we got two great backs and those guys being able to spell each other",
+    "player_id": "00-0039738"
+   },
+   {
+    "player": "Kyren Williams",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Will continue to split carries with Blake Corum.",
+    "note": "The committee caps touch volume, but Williams remains valuable in both phases.",
+    "quote": "Kyron is obviously such a stud, so valuable and in both phases",
+    "player_id": "00-0037840"
+   },
+   {
+    "player": "Kamren Curl",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Got more snaps this week alongside Josh Wallace.",
+    "note": "Increased defensive snaps are a minor signal, but he is primarily an IDP-relevant player.",
+    "quote": "Josh Wallace cam curls a staple for us.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Special teams",
+    "detail": "McVay said special teams had a rough day with field position issues and sees clear areas for improvement."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Credited an attacking, connected pass rush and sticky coverage that limited explosive plays against the Giants."
+   },
+   {
+    "topic": "Offensive line and Stafford",
+    "detail": "Protection allowed quick throws and some extra hitches; McVay credited the line for executing the plan against the Giants' edge rushers."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "NYG:coach-john-harbaugh-on-latest-with-qb-jaxson-dart",
   "team": "NYG",
   "url": "https://www.giants.com/video/coach-john-harbaugh-on-latest-with-qb-jaxson-dart",
@@ -192,5 +335,114 @@
    }
   ],
   "opponent": "Tennessee Titans"
+ },
+ {
+  "id": "NYG:postgame-press-conference-coach-john-harbaugh-on-jaxson-dart-s-status",
+  "team": "NYG",
+  "url": "https://www.giants.com/video/postgame-press-conference-coach-john-harbaugh-on-jaxson-dart-s-status",
+  "title": "Postgame Press Conference: Coach John Harbaugh on Jaxson Dart's status",
+  "date": "2026-09-22",
+  "duration": 482,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/giants/ls34kw3r7gnzelqm6tos",
+  "kind": "postgame",
+  "after_week": 2,
+  "coach": "John Harbaugh",
+  "words": 1880,
+  "model": "claude-haiku-5-5",
+  "headline": "Jaxson Dart has an apparent sprained MCL with an MRI pending, Jameis Winston took over at QB, and Malik Nabers returned after an injury.",
+  "summary": "Harbaugh said the Giants have a lot of work to do after the Week 2 loss to the Rams and will focus on becoming the team they need to be. Jaxson Dart's injury is in the neighborhood of a sprained MCL, but Harbaugh would not confirm details until an MRI the next day. He said the outcome is far less serious than the worst case, which he called good news. Jameis Winston came in at QB and, in Harbaugh's view, ran the offense well, but the team as a whole did not execute or make plays downfield. Brian Burns has a sprained ankle that Harbaugh described as low, and Andrew Thomas was also banged up late, with no clear status given. Harbaugh said Nabers' return was a positive development, and he dismissed the idea of a lull, blaming the lack of made plays. He also said the staff would second-guess its play calling, including the four straight runs from the 11-yard line after a recovered fumble, and that the interior of the Rams' pass rush was the biggest problem. The next game is in six days, and Harbaugh emphasized taking it one week at a time.",
+  "injuries": [
+   {
+    "player": "Jaxson Dart",
+    "status": "unclear",
+    "detail": "Reported sprained MCL; Harbaugh said an MRI would be done the next day and more information given then.",
+    "player_id": "00-0040691"
+   },
+   {
+    "player": "Brian Burns",
+    "status": "unclear",
+    "detail": "Sprained ankle, described by Harbaugh as a low ankle sprain; no timetable given.",
+    "player_id": ""
+   },
+   {
+    "player": "Andrew Thomas",
+    "status": "unclear",
+    "detail": "Banged up late in the game; Harbaugh said 'we'll see about that' with no status update.",
+    "player_id": "00-0036386"
+   },
+   {
+    "player": "Malik Nabers",
+    "status": "returning",
+    "detail": "Left the game and returned; Harbaugh said his return was good news.",
+    "player_id": "00-0039337"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Jaxson Dart",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Sprained MCL pending MRI; status to be clarified the day after the game",
+    "note": "A possible MCL sprain could cost him time, so his availability for the next game is the key question for managers.",
+    "quote": "we'll get an MRI tomorrow and have a really good feel for it",
+    "player_id": "00-0040691"
+   },
+   {
+    "player": "Jameis Winston",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Ran the offense well after entering for Dart; would be the replacement if Dart misses time",
+    "note": "If Dart is out, Winston becomes the starter, though this game's offense struggled overall.",
+    "quote": "He came in executed. He operated really well.",
+    "player_id": "00-0031503"
+   },
+   {
+    "player": "Brian Burns",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Sprained ankle; no timetable given",
+    "note": "Harbaugh said the sprain is low, which is encouraging, but his practice and game status are still unknown.",
+    "quote": "It's low.",
+    "player_id": ""
+   },
+   {
+    "player": "Andrew Thomas",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Banged up late in the game; status unknown",
+    "note": "Offensive line injuries could affect protection for the QB, so monitor his practice reports.",
+    "quote": "Yeah we'll see about that.",
+    "player_id": "00-0036386"
+   },
+   {
+    "player": "Malik Nabers",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Returned to the game after an injury",
+    "note": "His quick return removes a major worry for the passing game.",
+    "quote": "It made me really happy to see that",
+    "player_id": "00-0039337"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive execution",
+    "detail": "Harbaugh said the offense failed to complete passes, run effectively, or make downfield plays, and the team did not execute well enough to have a chance to win."
+   },
+   {
+    "topic": "Play calling",
+    "detail": "Harbaugh said the staff would second-guess its decisions, including running four straight times from the 11-yard line after a recovered fumble, and that the team needed answers in the red zone."
+   },
+   {
+    "topic": "Defensive pass rush",
+    "detail": "Harbaugh said the interior of the Rams' pass rush was the biggest problem, and the Giants want more sacks."
+   }
+  ],
+  "opponent": ""
  }
 ]

@@ -1,5 +1,99 @@
 [
  {
+  "id": "DAL:brian-schottenheimer-on-105-3-the-fan-9-24-26",
+  "team": "DAL",
+  "url": "https://www.dallascowboys.com/video/brian-schottenheimer-on-105-3-the-fan-9-24-26",
+  "title": "Brian Schottenheimer on 105.3 The Fan | 9-24-26",
+  "date": "2026-09-24",
+  "duration": 947,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/cowboys/ffvoxsffwkzvzx4x3vdp",
+  "kind": "midweek",
+  "after_week": 2,
+  "coach": "Brian Schottenheimer",
+  "words": 3519,
+  "model": "claude-haiku-5-5",
+  "headline": "Coach says CeeDee Lamb and George Pickens could alternate as the featured option week to week, while Donovan Ezeiruaku is playing at a high level and Caleb Downs is getting involved early.",
+  "summary": "Schottenheimer said the team is treating the trip to Baltimore like a short week, with the game plan finished before leaving so the staff can focus on acclimating. The group plans a Friday practice in Baltimore and a Saturday visit to the stadium, and he downplayed field concerns while saying the team has cleat options ready. On defense, the main task against Derrick Henry-type runners and Lamar Jackson is building a wall at the line and containing Jackson's movement, and he admitted the defense has not contained him well in the first two weeks. He said he handles motivation through one-on-one conversations and wants the team to keep improving through the early season. He said Kenny Clark is doing well and that the staff is managing rotations and play counts to keep the defensive line fresh. He praised Caleb Downs' practice habits and said Downs will be used early in games. He said CeeDee Lamb has been sharp in practice and that the Lamb and Pickens targets may swing from week to week. He also praised Donovan Ezeiruaku's pass-rush development and discussed Trey Hendrickson, the opposing edge rusher, as a matchup for Tyler Guyton.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "CeeDee Lamb",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Lamb and George Pickens may alternate as the top producer from week to week",
+    "note": "Lamb and Pickens may split the big-play and target share, so weekly volume is less predictable than usual.",
+    "quote": "if it's CD one week, it could be George the next week",
+    "player_id": "00-0036358"
+   },
+   {
+    "player": "George Pickens",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Pickens may be the featured receiver some weeks in place of Lamb",
+    "note": "Pickens may have a week-to-week role that varies with CeeDee Lamb's performance.",
+    "quote": "if it's CD one week, it could be George the next week",
+    "player_id": "00-0037247"
+   },
+   {
+    "player": "Caleb Downs",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Downs will be involved early in games through designed plays",
+    "note": "The staff wants Downs to be targeted and used early, which supports his impact even when his stat line is modest.",
+    "quote": "he's a guy also that you want to get involved early",
+    "player_id": ""
+   },
+   {
+    "player": "Donovan Ezeiruaku",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Ezeiruaku is developing quickly and playing at a high level as a pass rusher",
+    "note": "His rising pass-rush development makes him a candidate for more sacks and pressures as his role grows.",
+    "quote": "He's playing awesome. He really is.",
+    "player_id": ""
+   },
+   {
+    "player": "Kenny Clark",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Clark's snaps may be managed through rotations and play-count decisions",
+    "note": "Snap management could limit Clark's workload and reduce his defensive stat production.",
+    "quote": "We're looking at rotations and things like that.",
+    "player_id": ""
+   },
+   {
+    "player": "Tyler Guyton",
+    "topic": "matchup",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Guyton is expected to face Trey Hendrickson on the left side",
+    "note": "Guyton's pass-protection matchup against a strong edge rusher could affect the offensive line's week and the passing game.",
+    "quote": "it should be a great matchup between him and Tyler Guyton",
+    "player_id": "00-0039341"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Travel and game week logistics",
+    "detail": "The team flew to Baltimore on Thursday after moving the schedule up to prepare on a short week. The plan includes Friday practice, a Saturday stadium visit, and sleep and acclimation focus."
+   },
+   {
+    "topic": "Ravens matchup",
+    "detail": "Defensive priorities include stopping Derrick Henry-type runners and containing Lamar Jackson. Coach said the defense has to limit his movement and throws that can run past four or five seconds."
+   },
+   {
+    "topic": "Stats and grading",
+    "detail": "Coach commented on outside grading services such as PFF and Next Gen Stats, saying the coaching film evaluation matters more to him."
+   }
+  ],
+  "opponent": "Baltimore Ravens"
+ },
+ {
   "id": "PHI:nick-sirianni-press-conference-september-24-2026",
   "team": "PHI",
   "url": "https://www.philadelphiaeagles.com/video/nick-sirianni-press-conference-september-24-2026",
@@ -121,5 +215,84 @@
    }
   ],
   "opponent": "Chicago Bears"
+ },
+ {
+  "id": "PIT:watch-mike-mccarthy-media-availability-sept-24",
+  "team": "PIT",
+  "url": "https://www.steelers.com/video/watch-mike-mccarthy-media-availability-sept-24",
+  "title": "WATCH: Mike McCarthy Media Availability (Sept. 24)",
+  "date": "2026-09-24",
+  "duration": 386,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/steelers/wjyjqil0weucgrvu4sjm",
+  "kind": "midweek",
+  "after_week": 2,
+  "coach": "Mike McCarthy",
+  "words": 1493,
+  "model": "claude-haiku-5-5",
+  "headline": "McCarthy praised Pat Freiermuth's play and said the offense needs more ball distribution, while promising DK Metcalf will get targets Sunday despite recent struggles.",
+  "summary": "McCarthy said Asante Samuel Jr. has been consistent since day one of training camp, with two solid outings and a tough assignment this week. He was vague on an unnamed player (transcribed as 'Joey') who worked in a limited capacity, saying the player did the planned work and would be re-evaluated after more work Thursday. He said the Bengals' ability to stop the run without loading the box, including six-man front looks in the red zone, is being prepared for through situational work. On Aaron Rodgers, McCarthy said their conversations run longer because they have been apart for a while, and the staff is tailoring concepts to the perimeter players. He praised Patrick Graham's defensive staff for integrating players' individual skills into calls and in-game adjustments. McCarthy said Pat Freiermuth is playing well, has earned more opportunities, and he would like more ball distribution overall, including more targets for Freiermuth. On DK Metcalf, he said the team has support around him, the team will throw him the ball, and he will have opportunities Sunday. He described Wednesday's practice as the best of the year so far and said this is the next-to-last week of training camp.",
+  "injuries": [
+   {
+    "player": "Unidentified player (transcribed as 'Joey')",
+    "status": "unclear",
+    "detail": "Limited in some capacity on Wednesday; he did the planned work and was scheduled for more work Thursday. McCarthy did not give a clear status.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Pat Freiermuth",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Coach supports giving Freiermuth more targets and says he has earned more opportunities in the passing game",
+    "note": "Rodgers publicly wants more targets for him, and the coach agrees, which points to a larger role in the passing game.",
+    "quote": "Pat's playing really well. He's earned those opportunities.",
+    "player_id": "00-0036894"
+   },
+   {
+    "player": "DK Metcalf",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Coach says Metcalf will get targets and opportunities in Sunday's game despite recent struggles",
+    "note": "The coach publicly committed to using him after a rough stretch, which supports his target share in Week 3.",
+    "quote": "You know we're going to throw the ball to DK.",
+    "player_id": "00-0035640"
+   },
+   {
+    "player": "Asante Samuel Jr.",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Coach views Samuel as playing well and facing a big challenge this week",
+    "note": "Praise from the coach suggests a solid role at cornerback, but he is a defensive back with limited fantasy value.",
+    "quote": "He's been on the mark since, you know, day one.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Bengals defense",
+    "detail": "McCarthy said Cincinnati has been productive stopping the run without loading the box, and the offense is preparing for four-man, five-man, and six-man front looks, especially in the red zone."
+   },
+   {
+    "topic": "Quarterback Aaron Rodgers",
+    "detail": "Rodgers' long history with McCarthy makes the weekly play-calling conversations longer. The staff is focused on concepts and variations that fit the perimeter players."
+   },
+   {
+    "topic": "Defense under Patrick Graham",
+    "detail": "McCarthy credited the defensive staff for integrating players' skill sets into calls and in-game adjustments, and said communication has been strong."
+   },
+   {
+    "topic": "Cornerback depth",
+    "detail": "McCarthy said corner depth is improving, with Daylen Everette cited for a strong competitive day and a special-teams role. The receiver group presents a huge challenge this week."
+   },
+   {
+    "topic": "Practice and personnel",
+    "detail": "Wednesday was the best practice day of the year so far. McCarthy said the team will keep working different personnel combinations throughout the week."
+   }
+  ],
+  "opponent": "Cincinnati Bengals"
  }
 ]

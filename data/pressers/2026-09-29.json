@@ -1,5 +1,90 @@
 [
  {
+  "id": "CHI:ben-johnson-on-bears-victory-over-eagles-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-on-bears-victory-over-eagles-press-conference",
+  "title": "Ben Johnson on Bears' victory over Eagles | Press Conference",
+  "date": "2026-09-29",
+  "duration": 718,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/bears/dqra6rljqq7i0vwebxcr",
+  "kind": "postgame",
+  "after_week": 3,
+  "coach": "Ben Johnson",
+  "words": 2670,
+  "model": "claude-haiku-5-5",
+  "headline": "Case Keenum earned the start in the 27-7 win over the Eagles and played well; Caleb Williams' status for next week is an open question.",
+  "summary": "Johnson praised the team for bouncing back after its first loss, crediting preparation and a clean game with only five penalties. He said the defense was outstanding in the second half, with three takeaways and a plan that the coaches taught well, though he declined to single out one player. Offensively, the running game was slow early, so the team leaned on the passing game, which Johnson credited to Keenum's quick decisions, efficiency and ball security. He said Keenum ran the pregame quarterback meeting himself and called the week's choice an accumulation of practice reps, not a single moment. Johnson called the two-point sneak a Mike Martz-style play that worked after the defense stemmed late. Asked about next week, he said the staff would discuss it if Caleb Williams can't play, and he reaffirmed that Tyson Bagent is the number two quarterback. He also said Cam Lewis has a hip issue and the team will see how he progresses on a short week.",
+  "injuries": [
+   {
+    "player": "Cameron Lewis",
+    "status": "unclear",
+    "detail": "Johnson said Lewis has a hip problem and the staff will monitor his progress ahead of a short week; no designation was given.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Case Keenum",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Keenum earned the start this week and will be considered to start next week if Caleb Williams can't play",
+    "note": "Keenum's strong efficient performance makes him the clear alternative starter if Williams is out.",
+    "quote": "He played lights out.",
+    "player_id": "00-0028986"
+   },
+   {
+    "player": "Tyson Bagent",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Bagent is the team's number two quarterback behind Williams and Keenum",
+    "note": "Bagent is the backup option if Williams is out and Keenum is not starting, though Johnson did not name him directly as next week's starter.",
+    "quote": "is our number two quarterback.",
+    "player_id": "00-0038416"
+   },
+   {
+    "player": "Caleb Williams",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Williams' availability for next week is uncertain and the staff will decide the starter after discussion",
+    "note": "Johnson did not confirm an injury but did not rule out Williams missing time, which matters for Williams and Keenum managers.",
+    "quote": "we'll have a discussion as a coaching staff",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Cameron Lewis",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Lewis has a hip issue and his status depends on how he progresses during the short week",
+    "note": "Lewis' practice and game status are unclear, so monitor the injury report before Thursday.",
+    "quote": "Cam Lewis with a hip",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Running game",
+    "detail": "Johnson said the running game struggled early and the team stuck with it, eventually getting some production late in the game."
+   },
+   {
+    "topic": "Defense and takeaways",
+    "detail": "The defense played strongly in the second half and created takeaways, with Johnson saying the unit played together as one and focused on continuing that trend."
+   },
+   {
+    "topic": "Penalties and discipline",
+    "detail": "Johnson called the game the team's cleanest of the season with only five penalties, which he said was a big deal."
+   },
+   {
+    "topic": "End of first half",
+    "detail": "Johnson said the final play of the first half was close and he would need to see it again before judging whether the clock hit zero."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "CLE:todd-monken-press-conference-september-29th-2026",
   "team": "CLE",
   "url": "https://www.clevelandbrowns.com/video/todd-monken-press-conference-september-29th-2026",

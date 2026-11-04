@@ -494,6 +494,147 @@
   "opponent": "New York Jets"
  },
  {
+  "id": "CIN:zac-taylor-preview-week-4-2026-jaguars-press-conference",
+  "team": "CIN",
+  "url": "https://www.bengals.com/video/zac-taylor-preview-week-4-2026-jaguars-press-conference",
+  "title": "Zac Taylor Previews Week 4 against Jaguars | PRESS CONFERENCE",
+  "date": "2026-09-30",
+  "duration": 393,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/bengals/yq233cpf0avx6bqz3zjv",
+  "kind": "day_after",
+  "after_week": 3,
+  "coach": "Zac Taylor",
+  "words": 1562,
+  "model": "claude-haiku-5-5",
+  "headline": "Bryan Cook and Kyle Dugger sat out Wednesday's practice, so PJ Jules and DJ Turner are the safety and corner depth to watch before the Jaguars game.",
+  "summary": "Zac Taylor said Bryan Cook and Kyle Dugger would not practice Wednesday, with the staff taking things day to day and re-evaluating them Thursday. He pointed to PJ Jules, who has practiced the whole time, as reassurance for safety depth. Taylor praised the secondary's versatility and said DJ Turner has improved every year and has gotten chances in games, including covering specialty roles and filling in outside. On the receiver side, Mitchell Tinsley returned to the walkthrough after missing three weeks and should be up to speed quickly, while Colbie Young has earned his role after the receiver injuries. Tanner Hudson was added to the roster and is praised as always ready for his opportunity. Taylor described Jacksonville as well coached with strong talent, especially up front on defense, and said their defense is largely unchanged from last year. He also asked fans to be loud at home, as they were in Week 1. Asked about Jordan Battle as the primary communicator if Cook and Dugger can't play, Taylor expressed full confidence in him. A player he called close to returning will be evaluated next week after this week's window.",
+  "injuries": [
+   {
+    "player": "Bryan Cook",
+    "status": "unclear",
+    "detail": "Did not practice Wednesday; coach will reassess Thursday before deciding on Sunday.",
+    "player_id": ""
+   },
+   {
+    "player": "Kyle Dugger",
+    "status": "unclear",
+    "detail": "Did not practice Wednesday; coach will reassess Thursday before deciding on Sunday.",
+    "player_id": ""
+   },
+   {
+    "player": "Mitchell Tinsley",
+    "status": "returning",
+    "detail": "Missed three weeks, took part in Wednesday's walkthrough, and is being brought back up to speed quickly.",
+    "player_id": "00-0038839"
+   }
+  ],
+  "signals": [
+   {
+    "player": "PJ Jules",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Has practiced throughout and gives the staff confidence in safety depth if Cook or Dugger can't play",
+    "note": "A usable backup safety with consistent practice reps could take on more defensive snaps if the starters are limited.",
+    "quote": "",
+    "player_id": ""
+   },
+   {
+    "player": "Bryan Cook",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Did not practice Wednesday; availability for Sunday will be decided after Thursday's update",
+    "note": "A missed Wednesday practice raises the chance he is limited or out Sunday, which would shift safety snaps.",
+    "quote": "Cook and Dugger will not practice today.",
+    "player_id": ""
+   },
+   {
+    "player": "Kyle Dugger",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Did not practice Wednesday; availability for Sunday will be decided after Thursday's update",
+    "note": "A missed Wednesday practice raises the chance he is limited or out Sunday, which would shift safety snaps.",
+    "quote": "Cook and Dugger will not practice today.",
+    "player_id": ""
+   },
+   {
+    "player": "DJ Turner",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will keep getting game opportunities in the secondary, including outside corner and specialty roles",
+    "note": "The coach's confidence and his versatility across corner spots point to a larger defensive role, especially if injuries hit the secondary.",
+    "quote": "I do have a lot of confidence in D.J.",
+    "player_id": ""
+   },
+   {
+    "player": "Jordan Battle",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is the primary communicator in the secondary and would take on that role again if Cook and Dugger can't play",
+    "note": "A defensive call-signaling role supports his snap count and makes him more likely to see extra snaps if the starters are out.",
+    "quote": "I have a ton of confidence in JB",
+    "player_id": ""
+   },
+   {
+    "player": "Tanner Hudson",
+    "topic": "trade_or_roster",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Was added to the active roster because of the receiver injuries and is expected to get his opportunity",
+    "note": "A roster addition during receiver injuries gives him a path to targets, though his role is still undefined.",
+    "quote": "",
+    "player_id": "00-0034613"
+   },
+   {
+    "player": "Colbie Young",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Has earned an opportunity in the receiver room after an important role in the game plan; his weekly role is still undecided",
+    "note": "He's a receiver candidate filling for injured players, but the coach would not commit to a specific role for this week.",
+    "quote": "",
+    "player_id": "00-0041069"
+   },
+   {
+    "player": "Mitchell Tinsley",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Is back in the building after missing three weeks, took part in the walkthrough, and will be ready to help quickly",
+    "note": "A quick return from three missed weeks makes him a possible receiver contributor, though his snap count is still unknown.",
+    "quote": "He did the walk through today. Nothing to my eye caught me off guard.",
+    "player_id": "00-0038839"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Secondary depth and versatility",
+    "detail": "Taylor praised the defensive backs who can cover multiple spots and said he has confidence in the depth behind Cook and Dugger."
+   },
+   {
+    "topic": "Receiver room",
+    "detail": "Taylor said the staff is working through the receiver situation week to week after injuries, and added players were brought in to fill roles."
+   },
+   {
+    "topic": "Jacksonville defense",
+    "detail": "Taylor said Jacksonville's defense is largely unchanged from last year, with a strong front four and impactful linebackers."
+   },
+   {
+    "topic": "Home crowd",
+    "detail": "Taylor asked fans to be loud at home to disrupt communication, as they did in Week 1 against Tampa."
+   },
+   {
+    "topic": "Unnamed returning player",
+    "detail": "A player the transcript garbles as 'Jesse Taylor' was described as close to returning from injury and will be evaluated next week."
+   }
+  ],
+  "opponent": "Jacksonville Jaguars"
+ },
+ {
   "id": "DAL:brian-schottenheimer-it-s-going-to-turn-press-conference",
   "team": "DAL",
   "url": "https://www.dallascowboys.com/video/brian-schottenheimer-it-s-going-to-turn-press-conference",
@@ -860,6 +1001,103 @@
    }
   ],
   "opponent": "Carolina Panthers (at Charlotte, Sunday night)"
+ },
+ {
+  "id": "GB:matt-lafleur-s-message-going-into-week-4-all-areas-need-to-improve-sept-30-2026",
+  "team": "GB",
+  "url": "https://www.packers.com/video/matt-lafleur-s-message-going-into-week-4-all-areas-need-to-improve-sept-30-2026",
+  "title": "Matt LaFleur's message going into Week 4: 'All areas need to improve'",
+  "date": "2026-09-30",
+  "duration": 637,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/packers/hxpzwmcrs6sgh77ilzem",
+  "kind": "midweek",
+  "after_week": 3,
+  "coach": "Matt LaFleur",
+  "words": 2055,
+  "model": "claude-haiku-5-5",
+  "headline": "Jayden Reed is out for the season after neck surgery, so Bo Melton, J. Michael Sturdivant and Skyy Moore figure to split his work by committee.",
+  "summary": "LaFleur said Jayden Reed will be out for the season and will need surgery, which Reed told him about the day before; he described the neck as the injured area and said he had been told the long-term outlook is not career-threatening, though the absence will be significant. LaFleur called Reed an energy presence who will be missed. On the offensive line, Kevin Zeitler is a veteran being ramped up with no definitive timeline, and the coach said he will play once he is ready, with Laken Tomlinson and another lineman's fit still undetermined. LaFleur said the veterans should steady a young line, and he defended the decision to cut depth pieces, saying game action is the real evaluation. He ruled out moving Adam Stenavich to full-time line coach, citing confidence in the group and taking shared blame for the unit's struggles. He acknowledged the run game has not been productive and that all areas need to improve, while explaining that explosive plays depend on protection and game situations. For Reed's replacement, he said Skyy Moore is being integrated into the offense and the receiving and utility group will share the load. He described the upcoming opponent's young quarterback as having a live arm and mobility, with little NFL tape available. He said the locker room is positive and focused on improvement.",
+  "injuries": [
+   {
+    "player": "Jayden Reed",
+    "status": "ir",
+    "detail": "Season-ending, requires neck surgery; coach says he will be out a significant amount of time and the career outlook is not a concern per his understanding.",
+    "player_id": "00-0039146"
+   },
+   {
+    "player": "Kevin Zeitler",
+    "status": "limited",
+    "detail": "Newly signed veteran guard still in a ramp-up period; no set date for his first practice snaps or game role.",
+    "player_id": "00-0029592"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Jayden Reed",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Out for the season after neck surgery; will miss a significant amount of time.",
+    "note": "Losing Reed removes a major receiving and versatility weapon, so fantasy managers should drop his value to zero for this season.",
+    "quote": "It will be a season ending. Yeah. He'll be out.",
+    "player_id": "00-0039146"
+   },
+   {
+    "player": "Skyy Moore",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Being integrated into more offensive usage to replace Reed's role.",
+    "note": "Moore could see a bigger offensive role and possibly more targets, though the coach did not specify how much.",
+    "quote": "we're we're integrating Sky Moore into some of that stuff",
+    "player_id": "00-0038090"
+   },
+   {
+    "player": "Bo Melton",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Expected to share the load by committee in Reed's absence.",
+    "note": "Melton gains a possible role increase, but the committee approach limits his upside.",
+    "quote": "Bo Melton, J. Mike, all those guys are going to have to share the load.",
+    "player_id": "00-0037091"
+   },
+   {
+    "player": "J. Michael Sturdivant",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Expected to share the load by committee in Reed's absence.",
+    "note": "Sturdivant could pick up targets from Reed's departure, but the committee means no single player is guaranteed a big share.",
+    "quote": "Bo Melton, J. Mike, all those guys are going to have to share the load.",
+    "player_id": "00-0040948"
+   },
+   {
+    "player": "Kevin Zeitler",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will start at right guard only once he is fully ramped up; timing unclear.",
+    "note": "Zeitler is not a confirmed starter for the upcoming game, so the offensive line picture is still uncertain for fantasy purposes.",
+    "quote": "as soon as he feels good and ready to go, then he'll be in there.",
+    "player_id": "00-0029592"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive line",
+    "detail": "The coach said the unit's struggles are shared between coaches and players, with the scheme under review. Multiple veterans are being added to a young group and the staff is still working out where players like Tomlinson fit."
+   },
+   {
+    "topic": "Run game and explosives",
+    "detail": "LaFleur admitted the run game has not been effective and said the offense needs to improve in all areas. Explosive plays depend on pass protection, and the team will adjust week to week."
+   },
+   {
+    "topic": "Coaching staff",
+    "detail": "He ruled out making Adam Stenavich the full-time line coach, saying he has confidence in the current group and that the coaching staff takes blame."
+   }
+  ],
+  "opponent": "Tampa Bay Buccaneers"
  },
  {
   "id": "HOU:demeco-ryans-on-nico-collins-return-texans-vs-cowboys",

@@ -123,6 +123,53 @@
   "opponent": ""
  },
  {
+  "id": "NE:head-coach-mike-vrabel-9-9-we-never-accept-losing-but-we-have-to-embrace-moving-on",
+  "team": "NE",
+  "url": "https://www.patriots.com/video/head-coach-mike-vrabel-9-9-we-never-accept-losing-but-we-have-to-embrace-moving-on",
+  "title": "Head Coach Mike Vrabel 9/9: “We never accept losing, but we have to embrace moving on\"",
+  "date": "2026-09-10",
+  "duration": 368,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/patriots/bvdwl6zokgrwmp1vel5o",
+  "kind": "postgame",
+  "after_week": 1,
+  "coach": "Mike Vrabel",
+  "words": 1261,
+  "model": "claude-haiku-5-5",
+  "headline": "Patriots lost the Week 1 opener at Seattle after three Drake Maye interceptions and a failed late drive; Vrabel stressed turnovers and fourth-quarter execution, and expressed confidence in Maye.",
+  "summary": "Vrabel said New England didn't win the game in the second half, where it failed to make plays in critical situations. He called turnovers a broken record and said the team has to avoid giving the ball away and create more of its own. He credited the offense for battling back on fourth down and the defense for early stops, and said the team handled the road environment well enough, aside from a punt-team penalty and a false start. On the quarterback, he said the team has complete confidence in Drake Maye and that he will make many plays, while acknowledging three interceptions can't happen. He defended the late-game approach, saying the team wanted to be aggressive without being reckless, and that the third-and-long calls against heavy coverage made punting a possibility. On the defense, he said a fourth-down big play came from missed tackles and that Seattle's run defense (second in the league last year) made running hard. He said the team was not caught off guard by Seattle's blitzes and that it hit back, and that it has to move on and improve over a long season. He said he had no update on an injured player who was unable to return.",
+  "injuries": [
+   {
+    "player": "Unidentified player (name unclear in transcript)",
+    "status": "unclear",
+    "detail": "Coach had no update on a player who was unable to return to the game; the name is garbled in the captions, so the player cannot be confirmed.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Drake Maye",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Needs to cut down turnovers; coach says the team cannot keep throwing interceptions.",
+    "note": "Three interceptions in the opener is a concern for his fantasy floor, though Vrabel publicly backed him.",
+    "quote": "you can't throw three interceptions. You know Drake knows that.",
+    "player_id": "00-0039851"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Seattle defense",
+    "detail": "Vrabel said Seattle was second in the league in run defense last year and likely picked up where it left off. He also said Seattle blitzed often, including blitz-zero looks similar to those in the Super Bowl, but that New England was not caught off guard."
+   },
+   {
+    "topic": "Special teams and late-game execution",
+    "detail": "A punt-team issue and a false start were noted as mistakes. Vrabel also said the team could not end every possession with a kick and that the late third-and-long situations were hard against heavy coverage."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "SEA:head-coach-mike-macdonald-recaps-the-week-1-win-vs-patriots",
   "team": "SEA",
   "url": "https://www.seahawks.com/video/head-coach-mike-macdonald-recaps-the-week-1-win-vs-patriots",

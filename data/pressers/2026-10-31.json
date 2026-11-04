@@ -1,5 +1,100 @@
 [
  {
+  "id": "CHI:ben-johnson-we-have-to-play-the-best-we-ve-played-all-year-on-monday-night-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-we-have-to-play-the-best-we-ve-played-all-year-on-monday-night-press-conference",
+  "title": "Ben Johnson: 'We have to play the best we've played all year' on Monday night | Press Conference",
+  "date": "2026-10-31",
+  "duration": 862,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bears/dntsx5uaoaif9zkauwr5.jpg",
+  "kind": "final_practice",
+  "after_week": 7,
+  "coach": "Ben Johnson",
+  "words": 3216,
+  "model": "claude-haiku-5-5",
+  "headline": "Kyle Monangai is out Monday and Colston Loveland is expected to practice, while Zavier Scott should see more backfield work.",
+  "summary": "Johnson said Kyle Monangai, who did not practice this week, should be counted out for Monday night, and he is hopeful the back can return sooner rather than later. He said Colston Loveland is listed on the injury report but he hopes it is minor and expects him to practice that day. Zavier Scott has been getting more practice reps and playing time over the last few weeks, and Johnson said Scott could see more carries, with all three backs needed. Theo Benedet is starting at left tackle. Johnson said the team will need a clean game with no turnovers or penalties in a hostile road environment against the defending Super Bowl champion Seattle Seahawks. He also addressed the newly acquired defensive lineman, saying he expects the player's impact to be significant, though the transcript garbles his name and he may not play at his normal snap load in Week 1. Johnson also commented on Caleb Williams' cleats situation, saying he is all about the team and will not hurt it.",
+  "injuries": [
+   {
+    "player": "Kyle Monangai",
+    "status": "out",
+    "detail": "Has not practiced this week; Johnson said he would count him out for Monday night. Toe injury, not placed on IR for an extended stretch, with hope for a return sooner rather than later.",
+    "player_id": "00-0040236"
+   },
+   {
+    "player": "Colston Loveland",
+    "status": "limited",
+    "detail": "On the injury report; Johnson hopes it is a minor issue and expects him to practice Saturday.",
+    "player_id": "00-0040126"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Zavier Scott",
+    "topic": "role",
+    "signal": "up",
+    "tone": "hedged",
+    "claim": "Could get more backfield carries if the recent playing-time trend continues; Chicago needs all three backs to play.",
+    "note": "Growing practice reps and a possible larger backfield role give him some upside as a depth back.",
+    "quote": "I think we're going to need all three backs to play for us.",
+    "player_id": "00-0038440"
+   },
+   {
+    "player": "Kyle Monangai",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Will not play this week; not expected Monday night.",
+    "note": "Losing him removes a backfield option and pushes touches to the remaining backs.",
+    "quote": "I would count him out this week.",
+    "player_id": "00-0040236"
+   },
+   {
+    "player": "Colston Loveland",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Expected to practice Saturday; Johnson hopes the injury is minor.",
+    "note": "Practice participation this week will determine whether he is truly available Monday.",
+    "quote": "We're hoping it's a minor thing.",
+    "player_id": "00-0040126"
+   },
+   {
+    "player": "Theo Benedet",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Will start at left tackle this week.",
+    "note": "Confirmed starter on the offensive line, which supports pass-protection stability for the offense.",
+    "quote": "Yes.",
+    "player_id": "00-0039459"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Newly acquired defensive player",
+    "detail": "Johnson called the trade acquisition a dominant, impact player and said the team gave up steep draft capital for him. The transcript garbles his name, so it was not attributed to a roster player. Johnson said he's still learning the system and may not carry his normal snap load in Week 1."
+   },
+   {
+    "topic": "Caleb Williams cleats situation",
+    "detail": "Johnson was asked about the cleats issue and said Williams is all about the team and will not hurt it. Johnson said the team has been in daily contact with the GM about the situation."
+   },
+   {
+    "topic": "Defensive scheme and Dennis Allen",
+    "detail": "Johnson praised Dennis Allen's creativity and said the new defensive acquisition will help mask weaknesses elsewhere on defense and elevate the group."
+   },
+   {
+    "topic": "Draft and roster building",
+    "detail": "Johnson said the team has less high-end draft capital going forward but still believes in its draft and development process, and that practice squad players are ready to contribute."
+   },
+   {
+    "topic": "Monday night game plan",
+    "detail": "Johnson emphasized clean play, avoiding turnovers and penalties, and communication in a loud road environment; he called Seattle well-coached across all three phases."
+   }
+  ],
+  "opponent": "Seattle Seahawks"
+ },
+ {
   "id": "SEA:head-coach-mike-macdonald-gives-final-updates-ahead-of-week-8-vs-bears",
   "team": "SEA",
   "url": "https://www.seahawks.com/video/head-coach-mike-macdonald-gives-final-updates-ahead-of-week-8-vs-bears",
