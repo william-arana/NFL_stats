@@ -11,57 +11,57 @@
   "after_week": 4,
   "coach": "Sean McVay",
   "words": 5792,
-  "model": "claude-haiku-5-5",
-  "headline": "Aaron Donald (back), Colby Parkinson, and Jaylen Watson (shoulder) were limited Thursday, with Donald hoped to play Sunday; Myles Garrett's IR window is still undecided.",
-  "summary": "McVay said Aaron Donald, Colby Parkinson, and Jaylen Watson were limited in Thursday's practice, and that the expectation is they'll be ready if they keep progressing. Donald's back is the main thing to monitor, and McVay said the hope is that he plays Sunday. Parkinson is progressing in a positive direction, and the staff will manage his reps, while Watson will test his shoulder with a harness. Quentin Lake (hip) and Nathan Landman (shoulder) are being managed carefully after heavy snap counts, and McVay called both minor. Myles Garrett is making good progress in rehab, but McVay had not yet decided whether to open his return-to-practice window. Josaiah Stewart was also listed with injuries, and Davante Adams is taking a veteran rest day. McVay also praised Trent McDuffie's consistency and Stafford's leadership, and he discussed penalties, kickoff rule changes, and the Bills matchup.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Rams' injury report looks manageable: Aaron Donald, Colby Parkinson and Jaylen Watson are limited and expected to ramp up, while Davante Adams only had a veteran rest day.",
+  "summary": "McVay opened with the Thursday injury report: Jaylen Watson, Aaron Donald and Colby Parkinson were limited, Josaiah Stewart (groin), Quentin Lake (hip), Nate Landman (shoulder) and one more player (hamstring, name garbled) did not practice, and Davante Adams had a veteran rest day. He hopes the three limited players are ready for the Bills game and said the plan is to build them up through the week, with Donald's back response the thing to watch. He had no specific update on Myles Garrett beyond good rehab progress and good meeting-room work, and he has not decided whether to open his practice window. McVay called the Lake and Landman absences a snap-count management move and said Lake's hip came from an odd fall. He praised Trent McDuffie's consistency, Byron Young's improvement and humility, and Matthew Stafford's performance in key moments, but said the team has too many penalties, especially in the kicking game and in scoring position. He also covered the new kickoff rules, Joe Brady being the league's youngest head coach, and the signing of Eric Kendricks to the practice squad for defensive depth. In his own session Stafford said he needs to be more consistent, praised Josh Allen, and talked up the Bills' defense under coordinator Jim Leonhard.",
   "injuries": [
    {
     "player": "Aaron Donald",
     "status": "limited",
-    "detail": "Back. McVay said the hope is that he plays Sunday, and everything has been progressing in the right direction.",
+    "detail": "Back issue. Limited Thursday. McVay hopes he plays and said everything is progressing in the right direction.",
     "player_id": ""
    },
    {
     "player": "Colby Parkinson",
     "status": "limited",
-    "detail": "Progressing in a very positive direction; reps will be managed carefully through the week.",
+    "detail": "Limited Thursday and progressing very positively. The team will be careful with his reps.",
     "player_id": "00-0036244"
    },
    {
     "player": "Jaylen Watson",
     "status": "limited",
-    "detail": "Shoulder. Will test it with a shoulder harness in practice; expected to be ready if he progresses.",
-    "player_id": ""
-   },
-   {
-    "player": "Quentin Lake",
-    "status": "limited",
-    "detail": "Hip, described as a minor injury. He pushed through it after a fall, and the staff is being cautious given his snap count.",
-    "player_id": ""
-   },
-   {
-    "player": "Nathan Landman",
-    "status": "limited",
-    "detail": "Shoulder. Being managed carefully due to accumulated snaps.",
+    "detail": "Limited Thursday. McVay wants to see how he feels and mentioned a shoulder harness, so a shoulder issue is likely but not confirmed.",
     "player_id": ""
    },
    {
     "player": "Josaiah Stewart",
-    "status": "unclear",
-    "detail": "Listed with hamstring and groin issues in the transcribed injury report; exact practice status not clear from the transcript.",
+    "status": "out",
+    "detail": "Did not practice with a groin injury.",
     "player_id": ""
    },
    {
-    "player": "Myles Garrett",
-    "status": "ir",
-    "detail": "Rehab progressing well and he looks good in meetings. McVay had not yet decided when to open his return-to-practice window.",
+    "player": "Quentin Lake",
+    "status": "out",
+    "detail": "Did not practice with a minor hip injury from an awkward fall. McVay called it snap-count management and said he is tough.",
+    "player_id": ""
+   },
+   {
+    "player": "Nathan Landman",
+    "status": "out",
+    "detail": "Did not practice with a shoulder injury. McVay said the team is being smart given his heavy snap count.",
     "player_id": ""
    },
    {
     "player": "Davante Adams",
-    "status": "unclear",
-    "detail": "Veteran rest day, not an injury.",
+    "status": "out",
+    "detail": "Veteran rest day, not an injury designation.",
     "player_id": "00-0031381"
+   },
+   {
+    "player": "Myles Garrett",
+    "status": "unclear",
+    "detail": "McVay said rehab is progressing and he looks good in meetings, but had no specific update and had not decided on opening a practice window.",
+    "player_id": ""
    }
   ],
   "signals": [
@@ -70,18 +70,18 @@
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Hoped to play Sunday after a limited practice with a back issue.",
-    "note": "His availability for Sunday depends on how the back responds to the rest of the week.",
+    "claim": "Aaron Donald is expected to play in the next game if his back responds well this week.",
+    "note": "Limited rather than out is a good sign, but his availability depends on how the back responds.",
     "quote": "The hope is yes.",
     "player_id": ""
    },
    {
     "player": "Colby Parkinson",
     "topic": "injury",
-    "signal": "watch",
+    "signal": "up",
     "tone": "positive",
-    "claim": "Progressing positively, with reps managed carefully to be ready for game day.",
-    "note": "Limited practice reps could cap his workload, but he is trending toward playing.",
+    "claim": "Parkinson will build up through the week with managed reps and be ready for the game.",
+    "note": "He is trending toward playing at TE, though his workload may be monitored.",
     "quote": "Colby's progressing really in a very positive direction.",
     "player_id": "00-0036244"
    },
@@ -90,9 +90,9 @@
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Will be tested with a shoulder harness; availability depends on how he feels.",
-    "note": "A shoulder issue in a limited role makes him a game-day question.",
-    "quote": "want to see how Jalen feels.",
+    "claim": "Watson will be wrapped up through the week and should be ready if he progresses accordingly.",
+    "note": "Status depends on how he feels, and the transcript is unclear about the specific injury.",
+    "quote": "So want to see how Jalen feels.",
     "player_id": ""
    },
    {
@@ -100,64 +100,58 @@
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Rehab is progressing, but no decision yet on opening his return-to-practice window.",
-    "note": "A timeline to return is still unclear, so he is not a near-term fantasy option.",
+    "claim": "",
+    "note": "McVay had no concrete timetable or update on a return to practice.",
     "quote": "I'm not sure yet.",
     "player_id": ""
    },
    {
-    "player": "Trent McDuffie",
-    "topic": "other",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Has been consistent in meetings, practice, walkthroughs, and games all season.",
-    "note": "Praise for his consistency suggests a steady, reliable defensive role.",
-    "quote": "Consistency is the truest measurement of performance and couldn't be more impressed with him.",
+    "player": "Quentin Lake",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Lake's missed practice is precautionary and tied to his snap count.",
+    "note": "The hip issue is described as minor, so he is a low-risk watch for IDP.",
+    "quote": "We're just being smart with him.",
     "player_id": ""
    },
    {
     "player": "Matthew Stafford",
-    "topic": "other",
+    "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "McVay said Stafford is the right leader, and that he was at his best in the most important moments.",
-    "note": "Stafford's steadiness and late-game play suggest his offense will keep being aggressive.",
+    "claim": "Stafford remains the unquestioned starting QB.",
+    "note": "McVay praised his late-game performance and steadiness, so his job is secure.",
     "quote": "there's nobody that I'd rather have leading us.",
     "player_id": "00-0026498"
-   },
-   {
-    "player": "Byron Young",
-    "topic": "other",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "McVay called Young a stud who has delivered in crunch time and is highly valued by the team.",
-    "note": "Strong praise and a productive season suggest a continued impactful role on defense.",
-    "quote": "He's a stud. I mean, he's a great teammate.",
-    "player_id": ""
    }
   ],
   "topics": [
    {
     "topic": "Penalties",
-    "detail": "McVay said the team has had too many flags, mostly from decision making, especially in the kicking game and in scoring position. He wants to fix it without overcorrecting and making players hesitant. Stafford said the offense is hurting itself more than usual, and the penalties affected play-calling in the red zone."
+    "detail": "McVay is unhappy with the number of flags, especially procedural and judgment penalties, kicking-game penalties and offensive penalties in scoring position. He is emphasizing cleanup but does not want players to play less aggressively."
    },
    {
-    "topic": "Kickoff rule changes",
-    "detail": "McVay said the new kickoff rules have increased the stakes of late-half situations and created more plays in the kicking game, which has made it a bigger factor."
+    "topic": "Kickoff rules",
+    "detail": "The new kickoff rules matter a lot for late-half and late-game decisions because of the yardage at stake and the range kickers now convert from."
    },
    {
-    "topic": "Bills matchup",
-    "detail": "McVay said Josh Allen is one of the most talented quarterbacks in the NFL, and that the defense will face a big challenge. He also said Buffalo's defensive coordinator Jim Leonhard runs a physical front and disruptive schemes with many pre-snap picture changes."
+    "topic": "Eric Kendricks signing",
+    "detail": "The Rams signed Kendricks to the practice squad for defensive depth. McVay praised his experience and his understanding of the defense."
    },
    {
-    "topic": "Coaching staff and roster moves",
-    "detail": "McVay praised Joe Brady, who was named the league's youngest OC. The Rams signed Eric Kendricks to the practice squad for depth and experience."
+    "topic": "Offensive production (via Stafford)",
+    "detail": "Stafford said the offense improved in the final two drives by staying ahead of the chains and avoiding penalties. He singled out Tyler Higbee ('awesome') and Kyren Williams (great in the passing and run game). These were Stafford's comments, not McVay's."
    },
    {
-    "topic": "Stafford performance",
-    "detail": "McVay said Stafford has been good, but it is still a small sample size. Stafford said he has room to improve and wants to be more consistent, and he feels physically better than this time last season."
+    "topic": "Bills defense",
+    "detail": "Stafford said the Bills have a physical, disruptive front and a back end that changes looks at the snap under coordinator Jim Leonhard. He called Josh Allen one of the most talented QBs in the NFL."
+   },
+   {
+    "topic": "Trent McDuffie and Byron Young",
+    "detail": "McVay called McDuffie consistent and a 'total stud', and praised Byron Young's improvement every year and his impact this season."
    }
   ],
-  "opponent": "Buffalo Bills (Monday Night Football)"
+  "opponent": "Buffalo Bills"
  }
 ]

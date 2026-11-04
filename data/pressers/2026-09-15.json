@@ -11,14 +11,14 @@
   "after_week": 1,
   "coach": "Joe Brady",
   "words": 4566,
-  "model": "claude-haiku-5-5",
-  "headline": "Cook won't be restricted despite Sunday's fumble, Igbinosun and Hairston will keep sharing corner snaps, and TJ Sanders sat today with an illness.",
-  "summary": "Brady said the team is looking forward to Thursday's home opener in the new stadium, with the week's walk-through used to get players familiar with the building. He has no concerns about the new grass and credited the leadership for making sure the field was right. TJ Sanders was sent home with an illness, and everyone else is practicing. Brady called the Lions offense dynamic, praising Jared Goff and Jahmyr Gibbs, and said the defense must match its speed. He described Dan Campbell as authentic and aggressive, and said the Bills will keep their own identity rather than change because of Detroit. On the short week, he said the key is keeping players fresh, since many played more snaps than usual in week one. He said Frank Gore Jr. earned trust with his blocking and reliability, and that the Igbinosun and Hairston rotation is about getting every corner reps, not a demotion. Finally, he said James Cook will not be restricted in his usage despite the fumble, and that Josh Allen has earned trust to push the ball downfield.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Bills have no injury concerns beyond T.J. Sanders (illness) ahead of Thursday's opener; Brady backs James Cook despite the fumble and plans to keep pushing the ball downfield with Josh Allen.",
+  "summary": "Brady said the team walked through the new stadium one last time and has no concerns about the redone grass for Thursday night. T.J. Sanders was the only player not practicing, and Brady described it as an illness, not an injury, so he was sent home; everyone else was expected to practice. He praised Detroit's offense, calling Jahmyr Gibbs a true number one back, and noted his past with Dan Campbell, whom he described as aggressive and authentic. Brady explained that Davison Igbinosun rotating with Maxwell Hairston was about keeping players fresh and getting young players experience, and that it did not reflect poor play from Hairston. He said weekly snap splits will depend on matchups and injuries. He said he would put no restraints on giving James Cook the ball after Cook's fumble, saying Cook was angry about it and understands his importance. He defended Frank Gore Jr., who stepped in for Ty Johnson in key situations, as a dependable team guy whose limited past role reflected a talented RB room and not a lack of ability. On offense, he stressed staying aggressive with deep shots and trusting Josh Allen and receivers like DJ Moore in one-on-one situations, while staying controlled. He also said that using under-center looks can slow defenses and help the run game and play action, depending on the week.",
   "injuries": [
    {
     "player": "T.J. Sanders",
-    "status": "out",
-    "detail": "Sat out Monday's practice with an illness, not an injury, and was sent home. Everyone else is practicing.",
+    "status": "unclear",
+    "detail": "Did not practice Tuesday because of an illness, not an injury, and was sent home; no further timeline given.",
     "player_id": ""
    }
   ],
@@ -28,79 +28,99 @@
     "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will not be limited in touches despite the week-one fumble; the staff trusts him with the ball.",
-    "note": "Brady is backing Cook's workload, so his touch volume shouldn't drop even after a fumble.",
+    "claim": "Cook will continue to get the ball with no restrictions despite his fumble in Week 1.",
+    "note": "The fumble does not appear to threaten Cook's workload, so he should stay a lead back.",
     "quote": "I'm not going to have any restraints on giving James Cook the ball.",
     "player_id": "00-0037248"
    },
    {
     "player": "Frank Gore Jr.",
     "topic": "role",
-    "signal": "up",
+    "signal": "watch",
     "tone": "positive",
-    "claim": "Gore has earned trust in critical situations and will be used in big moments, including blocking.",
-    "note": "Gore's role in key downs and blocking situations gives him more chances for fantasy-relevant snaps.",
-    "quote": "I felt confident playing him in the playoff game.",
+    "claim": "Gore played in critical situations (blocking, a big catch) with Ty Johnson unavailable and has the coach's confidence.",
+    "note": "Gore has earned trust in a depth role, but this is more a blocking/depth signal than a fantasy-relevant workload.",
+    "quote": "Frank is a guy that just always does the things right.",
     "player_id": "00-0039471"
    },
    {
-    "player": "Davison Igbinosun",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Will keep getting series at corner alongside Maxwell Hairston, with the plan to rotate them.",
-    "note": "Igbinosun is getting regular game reps, which makes him a useful depth piece in a rotation.",
-    "quote": "JB had a really good camp",
-    "player_id": ""
-   },
-   {
     "player": "Maxwell Hairston",
-    "topic": "role",
+    "topic": "depth_chart",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Rotation with Igbinosun will continue week to week; it is not a sign he is playing poorly.",
-    "note": "The corner rotation caps Hairston's snaps, so watch whether it stays a split or changes with matchups.",
+    "claim": "Hairston will keep rotating with Davison Igbinosun, and snap splits will vary by matchup and injury.",
+    "note": "A rotating CB share could limit Hairston's volume for IDP leagues.",
     "quote": "Him rotating with IGB is not a product of hey, he's not playing well.",
     "player_id": ""
    },
    {
+    "player": "Davison Igbinosun",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Igbinosun got series in place of Hairston and played well in his first road game; the rotation may continue weekly.",
+    "note": "His snaps could grow in matchups the coaches deem favorable, which matters for IDP leagues.",
+    "quote": "",
+    "player_id": ""
+   },
+   {
     "player": "Josh Allen",
-    "topic": "usage",
+    "topic": "scheme",
     "signal": "up",
     "tone": "positive",
-    "claim": "Brady trusts Allen to take shots downfield when the opportunity is there, with the aim of making smart aggressive throws.",
-    "note": "Brady's comments point to continued aggressive downfield passing, which helps the passing game upside.",
-    "quote": "we got to pull the trigger and go be a sniper with it.",
+    "claim": "The offense will keep taking deep shots when they are available, with Allen trusted in one-on-one situations.",
+    "note": "An aggressive vertical approach supports Allen and the Bills' receivers' big-play upside.",
+    "quote": "",
     "player_id": "00-0034857"
+   },
+   {
+    "player": "DJ Moore",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Allen showed trust in Moore in one-on-one deep situations, including a pass-interference-drawing play.",
+    "note": "Moore is a candidate for downfield targets, though results on such plays can vary.",
+    "quote": "",
+    "player_id": "00-0034827"
+   },
+   {
+    "player": "T.J. Sanders",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Sanders missed Tuesday's practice due to illness and was sent home.",
+    "note": "His availability for Thursday is worth monitoring for the defensive line (IDP).",
+    "quote": "Not not his injury related more of an illness.",
+    "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Detroit Lions offense",
-    "detail": "Brady called Detroit dynamic, with Jared Goff running the offense and Jahmyr Gibbs as a true No. 1 back. He said the Lions kept their identity despite a new coordinator."
+    "topic": "Stadium and grass",
+    "detail": "Brady has no concerns about the redone grass for Thursday's first game in the new stadium and said the team is excited to play on it. He wants the team to treat it as just the next game and not put on a show."
    },
    {
-    "topic": "Dan Campbell",
-    "detail": "Brady was Campbell's assistant in New Orleans and described him as authentic and aggressive, willing to go for it on fourth down and run fake punts from anywhere."
+    "topic": "Short week",
+    "detail": "In Week 2, players have fewer accumulated reps and the key is keeping them fresh for Thursday. Brady said there will be no excuses."
    },
    {
-    "topic": "Short week and game atmosphere",
-    "detail": "Brady said the key is keeping players fresh after heavy week-one snap counts. He told the team to be poised in the noise of the new stadium and embrace the night."
-   },
-   {
-    "topic": "Field and grass",
-    "detail": "Brady said he has no concerns about the new grass for Thursday and that players are excited to be on it."
+    "topic": "Lions and Dan Campbell",
+    "detail": "Brady worked under Campbell in New Orleans and expects an aggressive team that goes for it on fourth down and runs fake punts. He said the Bills will stay true to their identity and not change much for Detroit."
    },
    {
     "topic": "Aidan Hutchinson",
-    "detail": "Brady called Hutchinson a player who can wreck a game with his motor and pass-rush arsenal, making him a major challenge for the offensive line."
+    "detail": "Brady called Hutchinson a game-wrecking pass rusher with a great motor and a strong run game, and said the Bills' line and offense must keep him from taking over."
    },
    {
-    "topic": "Special teams and penalties",
-    "detail": "Brady said special teams played winning football but not well enough, and he took responsibility. He noted a ten-men-on-field situation and two penalties as things to clean up."
+    "topic": "Under-center usage",
+    "detail": "Brady said working under center depends on the week and can ease things for linemen and quarterbacks and enable play action, while also slowing defenses a split second."
+   },
+   {
+    "topic": "Special teams",
+    "detail": "Brady said special teams played winning football but cited a ten-men-on-the-field issue and two penalties as things to clean up."
    }
   ],
-  "opponent": "Detroit Lions (Thursday night home opener)"
+  "opponent": "Detroit Lions"
  },
  {
   "id": "DEN:hc-sean-payton-on-making-corrections-offensively-there-were-a-number-of-places-we-have-to-look",
@@ -114,48 +134,48 @@
   "after_week": 1,
   "coach": "Sean Payton",
   "words": 1262,
-  "model": "claude-haiku-5-5",
-  "headline": "Payton was blunt that the Week 1 offense fell short on third downs and the run game, and he says the tape will decide the fixes; no injury news was given.",
-  "summary": "Payton said the loss was a bad night, that the team didn't execute well, and that he takes responsibility along with the coaching staff. He pointed to third-down efficiency and the rushing numbers as the main offensive problems, and said some called run plays turned into RPOs. He said the game became one-dimensional, with too much long yardage and too few runs, which he called the opposite of how you beat a good team on the road. On defense, he said the group missed too many tackles and gave up a big run when the edge wasn't set, though he didn't think that level of missed tackling should be expected early in the season. He called his first-half interventions difficult in the flow of a game and said the staff will review technique and film tomorrow. He also said he had expected the opponent to lean on its running game with heavy, under-center looks, and that he wasn't surprised by it. Payton said the team has a short week, so the first day will be spent on the tape before shifting to mental preparation.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Broncos' Week 1 offense was one-dimensional after an early Bo Nix interception: third downs and rushing numbers were poor, and Payton says the run game needs to be fixed.",
+  "summary": "Payton opened by calling it a bad evening in which Denver was beaten in every phase, and he put the blame on himself and the coaching staff. Offensively, he pointed to poor third-down and rushing numbers. He said some of the planned runs turned into RPOs, and that Denver threw a lot in long-yardage situations without enough runs. Kansas City ran the ball effectively with Kenneth Walker, helped by field position and time of possession, one big run where Denver failed to set the edge, and poor tackling. Denver got only two sacks because Patrick Mahomes got the ball out quickly with screens and hot throws. Payton said Nix's first interception came on a stiff man-coverage throw where the corner jumped inside with good technique, and that it was a four-man rush. He said it is harder to get Jalen (likely Jalen Hurts or a teammate, unclear) involved after a bad opener, and said they will evaluate on tape. He also noted that play-calling duties have changed hands, but said the frustration is the same either way. Denver had a delay of game and burned a timeout, which he said they need to clean up on a short week.",
   "injuries": [],
   "signals": [
    {
     "player": "Bo Nix",
-    "topic": "role",
+    "topic": "other",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "offensive mistakes, including the first-drive interception, will be reviewed on film before any changes are decided",
-    "note": "Payton did not blame Nix directly, but the early turnover and the pressure on the passing game are open questions for his usage next week.",
-    "quote": "Um well it was man, it was stiff, you know.",
+    "claim": "The first interception was a stiff throw into man coverage on a four-man rush, to be confirmed on film.",
+    "note": "Nix had an early pick and the offense was pushed into long-yardage dropbacks, so his Week 1 line is likely hurt by game script rather than just one throw.",
+    "quote": "it was stiff, you know. Uh, and corner jumped inside with good technique",
     "player_id": "00-0039732"
    },
    {
-    "player": "Jaylen Waddle",
-    "topic": "usage",
+    "player": "Brandon Jones",
+    "topic": "other",
     "signal": "watch",
-    "tone": "hedged",
-    "claim": "his early-game involvement will be evaluated on tape; no concrete change was announced",
-    "note": "Payton was asked about getting Waddle involved early and gave a noncommittal answer, so his target share is uncertain until the staff reviews the film.",
-    "quote": "sometimes you have openers and they and they go well",
-    "player_id": "00-0036613"
+    "tone": "neutral",
+    "claim": "",
+    "note": "Denver's defense had a chance to swing momentum after his interception, but the offense went backwards on the ensuing possession.",
+    "quote": "",
+    "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Third down and rushing offense",
-    "detail": "Payton called third-down and rushing numbers the clearest problems, and said the offense became one-dimensional after the early struggles."
+    "topic": "Run game and game script",
+    "detail": "Payton said Denver's rushing numbers were poor. The game became one-dimensional, with many long-yardage throws and too few runs, and some planned runs turned into RPOs."
    },
    {
-    "topic": "Defensive tackling",
-    "detail": "Payton said the defense missed too many tackles and that a big run came after the edge wasn't set; he will review technique on film."
+    "topic": "Defense and tackling",
+    "detail": "Payton was frustrated with missed tackles and a failure to set the edge on a big Walker run, and said he does not expect this level of tackling struggle. He also said Kansas City's quick passing game neutralized the pass rush against its young tackles."
    },
    {
-    "topic": "Opponent personnel and run game",
-    "detail": "Payton said the opponent's commitment to under-center, heavy personnel and the running game was expected from the scouting reports."
+    "topic": "Play-calling and game management",
+    "detail": "Payton said the frustration of a loss like this is the same whether he calls plays or not. Denver had a delay of game and used a timeout, which he said must improve."
    },
    {
-    "topic": "Play-calling and short week",
-    "detail": "Asked about the play-calling change, Payton said the frustration is the same whether he calls plays or not. He said the staff must use Tuesday to watch the tape before shifting to mental preparation."
+    "topic": "Short week",
+    "detail": "The team will review the tape collectively the next day, and the mental side of preparation picks up early in the week."
    }
   ],
   "opponent": ""
@@ -172,45 +192,59 @@
   "after_week": 1,
   "coach": "Dan Campbell",
   "words": 2250,
-  "model": "claude-haiku-5-5",
-  "headline": "Campbell says the injured 'Izzy' is trending the right way but not fully cleared for the Week 2 TNF game at Buffalo, with a good chance to play.",
-  "summary": "Campbell said Buffalo used 13 personnel (three tight ends) about half the time last week, the most in the NFL, and that the Lions expect to see it again. He praised Buffalo's tight ends as three distinct roles (a blocker, a mismatch in the passing game, and a hybrid player) and said Houston often uses nickel against 13 personnel, so the Lions can narrow their calls. He said the Lions are preparing for a loud, first-game environment at a new stadium and told young players to embrace it while staying composed. On the tight end usage from the Saints game, Campbell said the team has spent the offseason avoiding predictability and being sitting ducks against the run and heavy sets. He called the quarterback the key to Buffalo's offense and said the Lions must make him play the long way. Campbell said Izzy practiced through the weekend, took reps the day before, and is trending well but not fully there yet, with a good chance to play. He praised Amon-Ra St. Brown as detail-oriented, consistent, and a competitor. Finally, Campbell said the cap room from restructured contracts gives the team flexibility, but he does not currently foresee a major upgrade.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Christian Izien is trending toward playing at Buffalo (not fully cleared, 'good chance'). Coach Campbell raved about Amon-Ra St. Brown's consistency and toughness.",
+  "summary": "Campbell spent most of the session on the Bills. He said they lean on 13 personnel (three tight ends with distinct roles) and that their quarterback's run/pass versatility is the central problem for the Lions defense. He said the Lions expect a lot of heavy sets, play-action, boots and quarterback runs. He called the Saints' tight end production against Detroit not a concern, though some things need cleaning up. On injuries, Christian Izien was close to playing last week and has looked good since. He took reps Monday and is trending the right way but isn't fully there yet, though Campbell sees a good chance he plays Week 2. Campbell praised Amon-Ra St. Brown as detail-oriented, consistent and a 'pit bull' on contested balls. He gave a non-committal answer on Levi's release and return to the practice squad. He said the cap room created by the contract restructures (apparently St. Brown and Penei Sewell) gives flexibility but he doesn't foresee a significant upgrade. He also told the young players to embrace the loud atmosphere of the Bills' new stadium.",
   "injuries": [
    {
     "player": "Christian Izien",
     "status": "questionable",
-    "detail": "Campbell called him 'Izzy' and said he is trending the right way but not fully there; he took reps Saturday and has a good chance to play. Name match is inferred from the 'secondary' context and is not fully confirmed.",
+    "detail": "Held out of last week's game (close on Friday, extra days given). He looked good over the weekend, took reps Monday and is trending the right way but not totally there. Campbell sees a good chance he plays.",
     "player_id": ""
    }
   ],
   "signals": [
    {
+    "player": "Christian Izien",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "hedged",
+    "claim": "Izien has a good chance to play against Buffalo in Week 2.",
+    "note": "He is practicing and trending toward a return, but he isn't fully cleared yet, so watch for his practice participation and the final injury report.",
+    "quote": "I'd say he's trending the right way but not totally there yet.",
+    "player_id": ""
+   },
+   {
     "player": "Amon-Ra St. Brown",
-    "topic": "role",
+    "topic": "other",
     "signal": "up",
     "tone": "positive",
     "claim": "",
-    "note": "Campbell framed him as a dependable, consistent, competitive receiver, which supports his reliable target role in the passing game.",
-    "quote": "he's Mr. Consistent. Mr. dependable. He's reliable",
+    "note": "Campbell calls him the team's most dependable receiver and a go-to in contested situations, which reinforces his locked-in WR1 role.",
+    "quote": "He's Mr. Consistent. Mr. dependable. He's reliable",
     "player_id": "00-0036963"
    }
   ],
   "topics": [
    {
-    "topic": "Buffalo personnel and tight ends",
-    "detail": "Buffalo used 13 personnel about 50% of the time last week and has three tight ends with distinct roles, which Campbell expects to see again. Houston often uses nickel against 13 personnel, which Campbell said helps narrow defensive calls."
+    "topic": "Bills personnel and scheme",
+    "detail": "Buffalo uses three distinct tight ends (a blocker, a mismatch pass-catcher and a do-it-all hybrid) in 13 personnel. Campbell expects heavy sets, run-heavy looks, play-action and boots, and occasional formation breaks. He said the Lions want to avoid being predictable against it."
    },
    {
-    "topic": "Buffalo quarterback and scheme",
-    "detail": "Campbell said the Bills' quarterback creates many problems with runs, RPOs, and quarterback draws. He said the Lions must check every box and capitalize on mistakes."
+    "topic": "Bills quarterback",
+    "detail": "Campbell said the Bills' quarterback is the key to everything and stresses every part of a defense with the run game, RPOs, read-runs, draws and scrambles. Detroit must make him go 'the long, hard way' and capitalize on mistakes. He expects quarterback runs, as in the December 2024 meeting."
    },
    {
-    "topic": "Game environment",
-    "detail": "Campbell said the game is at a new Buffalo stadium during the home opener and expects a loud crowd. He told young players to embrace it and stay composed."
+    "topic": "Road environment",
+    "detail": "Campbell will tell the young players to embrace the noise in Buffalo's new stadium, keep their composure and focus on one play at a time."
    },
    {
-    "topic": "Roster and cap",
-    "detail": "Campbell said a player described as 'Levi' was cut last week and then added to the practice squad. He declined to detail the move beyond saying he is glad the player is back. Restructured contracts give the Lions cap flexibility, but he does not foresee a significant upgrade before the deadline."
+    "topic": "Roster move",
+    "detail": "Asked about Levi, who was cut and then re-signed to the practice squad, Campbell would say only that the team communicated with him and he is back and welcome. He gave no detail on a future role."
+   },
+   {
+    "topic": "Cap flexibility",
+    "detail": "After the contract restructures, Campbell said the team has options and flexibility but doesn't see a significant upgrade coming."
    }
   ],
   "opponent": "Buffalo Bills"
@@ -227,33 +261,33 @@
   "after_week": 1,
   "coach": "Andy Reid",
   "words": 2233,
-  "model": "claude-haiku-5-5",
-  "headline": "Kenneth Walker III had a huge game as the lead back (173 yards per the coach's remark), and Patrick Mahomes returned from his knee injury with a limited start (2-of-12 passing to open).",
-  "summary": "Andy Reid praised the offensive line and the team's young players after the Week 1 win over Denver on Monday Night Football. He said the early run game was intentional to settle the young players and get Mahomes back into the flow, and he credited RPO looks that helped. He called Walker's day spectacular and said the staff hoped he would be the main back, while Emmett Johnson also did well when he got chances. Reid said Mahomes showed some rust after his time away, with early passing struggles (2-of-12 to start) that he partly blamed on the play calls, and he said Mahomes ran a few times and handled himself well. He said Kelce, at his age, had three catches for 71 yards and a fourth-down touchdown was executed well. On defense, Reid praised Mansoor Delane's interception, Chris Jones's pressure, and the linebackers and secondary, and said getting L'Jarius Sneed back on the field was big for him, though he expected Sneed to be sore. He said rookies and young players like Mason Thomas and Kahlil Benson must keep growing, and that the team has a lot of room to improve. He said the team has a short week to prepare for its next opponent, and he called Denver well coached under Sean Payton.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Kenneth Walker III was the clear lead back with 173 yards, and Emmett Johnson also impressed. Mahomes is back after shaking off rust, and Kelce had 3 catches for 71 yards.",
+  "summary": "Andy Reid was upbeat after the Week 1 win over Denver, praising the offensive and defensive lines and the way the young players contributed. Kenneth Walker III was the featured back with 173 yards, and Reid called the fourth-and-1 touchdown play 'a thing of beauty'. Emmett Johnson also got praise for his contact balance when he got in the game. Patrick Mahomes returned and shook off rust, starting 2 for 12. Reid took the blame for the play calls and said Mahomes ran a couple of times and should have slid more. Travis Kelce had 3 catches for 71 yards. The defense held Denver under 200 yards, with a Mansoor Delane interception, steady pressure from Chris Jones and the line, and seven tackles each from L'Jarius Sneed and Drue Tranquill (in Reid's words, Sneed and Tranquill together had seven). Rookies Peter Woods and R Mason Thomas and tackle Kahlil Benson were highlighted for stepping up. Reid listed two injuries to check over the next day or so: a shoulder for 'Dylan' and a knee for 'McDonald'. He added that the team has a short week ahead.",
   "injuries": [
    {
-    "player": "Unidentified player (name garbled in captions as 'Dylan')",
+    "player": "Dylan (unidentified)",
     "status": "unclear",
-    "detail": "Reid said he hurt his shoulder and the team will see how it progresses; identity uncertain from the transcript.",
+    "detail": "Reid said he hurt his shoulder and the team will see where it goes. The name is not on the roster, so the player is unconfirmed.",
     "player_id": ""
    },
    {
-    "player": "Unidentified player (name garbled in captions as 'McDonald' / 'Cooper')",
+    "player": "McDonald (unidentified)",
     "status": "unclear",
-    "detail": "Reid said he hurt his knee and the team will evaluate over the next day or so; identity uncertain from the transcript.",
+    "detail": "Reid said he hurt his knee and the team will know more in a day or so. The name is not on the roster, so the player is unconfirmed.",
+    "player_id": ""
+   },
+   {
+    "player": "L'Jarius Sneed",
+    "status": "returning",
+    "detail": "Back on the field and productive; Reid said he will be 'real sore tomorrow'.",
     "player_id": ""
    },
    {
     "player": "Patrick Mahomes",
     "status": "returning",
-    "detail": "Back in the lineup after a knee issue; Reid said he needed to knock off rust but ran the ball a couple of times.",
+    "detail": "Returned to game action after missing time. Reid said he needed to knock off rust and had no stated limitations.",
     "player_id": "00-0033873"
-   },
-   {
-    "player": "L'Jarius Sneed",
-    "status": "limited",
-    "detail": "Returned to the field after time away; Reid said he will be sore the next day.",
-    "player_id": ""
    }
   ],
   "signals": [
@@ -262,19 +296,29 @@
     "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Was the main ball carrier in the game and is expected to keep a big role in the run game",
-    "note": "A huge workload and productive day make him a strong must-start candidate if the lead-back role continues.",
-    "quote": "What a day he had.",
+    "claim": "Walker is the main back in the offense and will keep getting featured work, including in short-yardage and goal-line situations.",
+    "note": "173 yards and a goal-line role make him an RB1 going forward.",
+    "quote": "And for him to play the way he did I thought was spectacular.",
     "player_id": "00-0038134"
+   },
+   {
+    "player": "Emmett Johnson",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "",
+    "note": "Johnson impressed in limited work, but Walker is clearly the lead back, so Johnson is a handcuff or depth option.",
+    "quote": "",
+    "player_id": "00-0041013"
    },
    {
     "player": "Patrick Mahomes",
     "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "Returned from knee issue and may still be shaking off rust as the season continues",
-    "note": "He is back in the lineup, but his slow start and rust mean his fantasy floor is uncertain for the next few weeks.",
-    "quote": "knock a little rust off. He hadn't had a chance to play",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Mahomes is healthy enough to play a full game, including running the ball and absorbing contact.",
+    "note": "Reid has no restrictions on Mahomes, and his early rust was blamed on play calls, which eases concern.",
+    "quote": "once you put him in the game he's going to play.",
     "player_id": "00-0033873"
    },
    {
@@ -282,78 +326,88 @@
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Produced three catches for 71 yards and is still a productive target",
-    "note": "Solid usage in a meaningful game suggests he remains a reliable tight end option.",
-    "quote": "Three for 71 yards a pretty good for an old man",
+    "claim": "Kelce remains a productive part of the passing game.",
+    "note": "3 catches for 71 yards in Week 1 supports his TE1 outlook.",
+    "quote": "pretty good for an old man that people look cross-eyed at",
     "player_id": "00-0030506"
-   },
-   {
-    "player": "Emmett Johnson",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Got chances behind Walker and contributed well when given opportunities",
-    "note": "Strong contact-balance play makes him a potential handcuff or flex option if Walker's workload shifts.",
-    "quote": "Both those guys are contact balance is ridiculous.",
-    "player_id": "00-0041013"
    },
    {
     "player": "Mansoor Delane",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Made an early interception and is trusted as a defensive back",
-    "note": "An early-game playmaking defensive contribution signals a growing role in the secondary.",
-    "quote": "that was a great job. Great way to start the game",
+    "claim": "",
+    "note": "An early interception and an attempted return give the rookie corner IDP value and show a role in the secondary.",
+    "quote": "",
     "player_id": ""
    },
    {
     "player": "Chris Jones",
-    "topic": "usage",
+    "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Had another strong game with pressure from the defensive line",
-    "note": "Consistent interior pressure supports his value in IDP and sack-oriented formats.",
-    "quote": "Chris um, again, had a, had a nice day with pressure",
+    "claim": "Jones will keep generating interior pressure.",
+    "note": "Consistent pressure from Jones supports his IDP value.",
+    "quote": "",
     "player_id": ""
    },
    {
-    "player": "Kahlil Benson",
-    "topic": "role",
-    "signal": "watch",
+    "player": "L'Jarius Sneed",
+    "topic": "injury",
+    "signal": "up",
     "tone": "positive",
-    "claim": "Handled an assignment against a top pass rusher at left tackle and is expected to keep growing",
-    "note": "A young offensive line starter improving his protection work matters for the passing game's stability.",
+    "claim": "Sneed is back in the lineup and was productive.",
+    "note": "He is healthy and productive for IDP formats.",
     "quote": "",
-    "player_id": "00-0041019"
+    "player_id": ""
    },
    {
     "player": "R Mason Thomas",
     "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Thomas will keep contributing as an edge rusher.",
+    "note": "His speed off the edge could earn him more pass-rush snaps, which helps IDP value.",
+    "quote": "",
+    "player_id": ""
+   },
+   {
+    "player": "Peter Woods",
+    "topic": "role",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Showed speed off the edge and generated pressure as a rookie",
-    "note": "Early rotational edge rushing could lead to more snaps if production continues.",
-    "quote": "he gives you that speed off the edge.",
+    "claim": "",
+    "note": "Woods made a play deflecting the ball, a sign the young defensive linemen are in the rotation.",
+    "quote": "",
     "player_id": ""
+   },
+   {
+    "player": "Kahlil Benson",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Benson will keep contributing at left tackle.",
+    "note": "Benson held up against an All-Pro, which matters for Mahomes's protection and the run game.",
+    "quote": "",
+    "player_id": "00-0041019"
    }
   ],
   "topics": [
    {
-    "topic": "Run game and early plan",
-    "detail": "Reid said the early run calls were intentional to get the young players settled and to get Mahomes back into the flow, and he called it a positive for play action."
+    "topic": "Offensive line",
+    "detail": "Reid said the line's goals were to keep Mahomes clean and get the runner over 100 yards, and it did both."
    },
    {
     "topic": "Fourth-down goal-line play",
-    "detail": "Reid said the team had practiced the fourth-down goal-line play in camp and loaded up with big bodies, and that the trick play with Walker worked well."
+    "detail": "A fourth-and-1 touchdown play, loaded with big players and run as man against man, was installed in training camp and executed cleanly."
    },
    {
     "topic": "Defense",
-    "detail": "Reid credited the defensive coordinator's game plan and said the defense held the opponent to under 200 yards, with strong run defense and smooth transition to play-action defense."
+    "detail": "Denver was held under 200 yards. Reid praised the defensive line against the run and play action, and the secondary."
    },
    {
-    "topic": "Next opponent and schedule",
-    "detail": "Reid said the team has a short week to prepare for its next game and that there are 16 games left in the season."
+    "topic": "Next game",
+    "detail": "Reid said the team has a short week to prepare for a 'real good football team' and no opponent is clearly named."
    }
   ],
   "opponent": ""
@@ -370,49 +424,52 @@
   "after_week": 1,
   "coach": "Jeff Hafley",
   "words": 2694,
-  "model": "claude-haiku-5-5",
-  "headline": "Caleb Douglas drew praise after tying a Dolphins rookie-debut receiving-yards record, while Chop Robinson was criticized for early hesitancy.",
-  "summary": "Hafley said the defense's run-stopping problems were mostly early-game tentativeness, with players playing too safe, misaligning, and not attacking downhill. Once they got physical, the run defense was much better, and he called it a tale of two halves that still needs coaching fixes in alignment and fits. He praised Chris Johnson's versatility at nickel, noting he was good against the run and made a tackle and a pass breakup, and said the two big plays where he was beaten were help and leverage errors by others. On the offense, Hafley said the three rookie receivers were a work in progress, with Chris Bell's downfield blocking and Caleb Douglas's standout plays encouraging. He said Malik Willis's off-schedule plays were a mix of good and not good enough, and the group will work on it together. Hafley criticized the start from Chop Robinson, who he said was hesitant early and needs to start faster and stay consistent. He was blunt that special teams coverage and fundamentals were not good enough, especially after a strong start to the second half that was undone by poor field position. He explained that Jacob Rodriguez is the backup long snapper because he has done it before and is good at it. Hafley called Caleb Douglas's debut a good one for a rookie and said the focus now is consistency next week.",
-  "injuries": [],
+  "model": "claude-sonnet-5-5",
+  "headline": "Kyle Lewis (knee) is out this week and maybe a few more; rookie WR Caleb Douglas drew praise after a strong debut, and QB Malik Willis got a mixed review on off-schedule plays.",
+  "summary": "Hafley said the team doesn't yet have full clarity on Kyle Lewis's knee. Lewis is out this week for sure and could miss a few weeks. He blamed the early run-defense problems on a tentative, play-it-safe approach, with misalignments and missed run fits, and said the second half was much better. He defended nickel Chris Johnson, saying Johnson had good moments and that on two touchdowns his help wasn't where it should have been. He called the rookie receivers a work in progress, praising Chris Bell's blocking and Caleb Douglas's plays while citing missed signals and imprecise routes. On Malik Willis, he said there were good off-schedule plays early and also some where the receiver and QB weren't on the same page. He said Chop Robinson and the edge group were too hesitant early before improving, and that the group must start faster. He called special teams (kick returns, punt coverage, field position) not good enough. He said backup long snapper Jacob Rodriguez nearly had to snap after the long snapper (Tucker) had a shoulder issue, though Tucker stayed in the game. He declined to say more about a taunting call and said any fine would come from the league.",
+  "injuries": [
+   {
+    "player": "Kyle Lewis",
+    "status": "out",
+    "detail": "Knee injury. Out this week for sure and possibly a few weeks. Severity not yet clear.",
+    "player_id": ""
+   },
+   {
+    "player": "Tucker (long snapper)",
+    "status": "unclear",
+    "detail": "Shoulder issue after a tackle. Rodriguez nearly took over snapping, but Tucker continued and played.",
+    "player_id": ""
+   }
+  ],
   "signals": [
    {
     "player": "Caleb Douglas",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Douglas's strong debut earned praise and he is expected to keep building on it, with consistency as the next test",
-    "note": "Tying a Dolphins rookie debut receiving-yards record with the coach's praise suggests a real target role going forward.",
-    "quote": "I think it's a good debut for a rookie.",
+    "claim": "Will keep a significant receiver role after a strong debut, with a push to be more consistent.",
+    "note": "A rookie WR who tied the Dolphins' debut receiving-yards record is likely to keep his snaps and target share.",
+    "quote": "he's got a chance to be a good football player",
     "player_id": "00-0041523"
-   },
-   {
-    "player": "Chris Johnson",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Johnson showed versatility inside and outside and is viewed as a confident, developing defender",
-    "note": "Hafley's praise for his nickel play and versatility supports his role staying solid in the defense.",
-    "quote": "Chris showed a lot of flashes and played a solid game.",
-    "player_id": ""
    },
    {
     "player": "Chris Bell",
     "topic": "usage",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Bell's downfield blocking was noted as a positive, but route and chemistry issues remain",
-    "note": "Blocking credit helps his usage, but receiver production in this offense is still a work in progress.",
-    "quote": "There are some shots of Chris Bell blocking down the field, knocking some guys down.",
+    "claim": "Is part of the group of three rookie receivers getting heavy snaps.",
+    "note": "Hafley praised his blocking rather than his production, so his fantasy value is unclear.",
+    "quote": "there are some shots of Chris Bell blocking down the field, knocking some guys down",
     "player_id": "00-0041525"
    },
    {
-    "player": "Chop Robinson",
-    "topic": "usage",
-    "signal": "down",
-    "tone": "negative",
-    "claim": "Robinson was hesitant early and needs to play more violently and start faster this week",
-    "note": "Criticism of early hesitancy could cost him snaps or role if he doesn't play with more aggression.",
-    "quote": "I thought he was a little hesitant.",
+    "player": "Chris Johnson",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Will keep playing nickel and a versatile defensive back role while developing.",
+    "note": "Hafley defended him, which matters for IDP, but the rookie will have good and bad plays.",
+    "quote": "Chris did a lot of good things yesterday",
     "player_id": ""
    },
    {
@@ -420,34 +477,48 @@
     "topic": "scheme",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Off-schedule plays were a mix of good and not good enough, and he and the receivers will keep working on it",
-    "note": "Scramble and off-schedule production remains inconsistent, which limits the upside of his rushing and passing ceiling.",
-    "quote": "And then there's some that weren't good enough.",
+    "claim": "Willis and the receivers will keep working on chemistry on off-schedule plays.",
+    "note": "Off-schedule play is a QB strength, but timing with the rookie receivers is inconsistent.",
+    "quote": "early on there were some really good off schedule plays where he stepped up",
     "player_id": "00-0038128"
    },
    {
+    "player": "Chop Robinson",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will be asked to start games faster and play more violently and consistently.",
+    "note": "His pass-rush production may be inconsistent until he sets the edge from the first snap.",
+    "quote": "I thought he was a little hesitant",
+    "player_id": ""
+   },
+   {
     "player": "Jacob Rodriguez",
-    "topic": "role",
+    "topic": "depth_chart",
     "signal": "watch",
     "tone": "neutral",
-    "claim": "Rodriguez was used as the backup long snapper because he has done it before and is good at it",
-    "note": "A backup snapping role is a specialist duty that doesn't affect his fantasy value directly, but it signals his versatility.",
-    "quote": "Jacob's doing it in the past and he's good at it.",
+    "claim": "Is the emergency backup long snapper.",
+    "note": "Matters only if the long snapper is injured, in which case Rodriguez would be pulled from his defensive role.",
+    "quote": "had done it in the past and he's good at it",
     "player_id": ""
    }
   ],
   "topics": [
    {
     "topic": "Run defense",
-    "detail": "Hafley said the early-game run defense was too tentative and misaligned, and the second half was much better. The staff wants more consistent fits and alignment."
+    "detail": "Early on the defense played tentatively and safe, with misalignments and missed run fits. It was far more physical and downhill in the second half, and coaching fixes are needed."
    },
    {
     "topic": "Special teams",
-    "detail": "Coverage and fundamentals were a problem, including poor field position after kickoffs and punts. Hafley called it not good enough."
+    "detail": "Hafley called the coverage and return units not good enough. A kickoff return to the 50 shifted momentum after the Dolphins had pulled to 17-13, and field position was lopsided (Raiders about the 48, Dolphins about the 30). He stressed edge-setting discipline and assignments."
    },
    {
-    "topic": "Kyle Lewis injury",
-    "detail": "Hafley said a player named Kyle Lewis will miss this week with a knee injury and the length of absence is unclear. Lewis is not on the listed roster, so this could not be tied to a roster player."
+    "topic": "Rookie development",
+    "detail": "With several rookies playing, he expects good and tough moments. He plans to coach them honestly, review film play by play regardless of the result, and protect their confidence."
+   },
+   {
+    "topic": "Taunting call",
+    "detail": "He declined to discuss the taunting penalty and said any fine would come from the league, not him."
    }
   ],
   "opponent": ""

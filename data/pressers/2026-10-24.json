@@ -11,36 +11,32 @@
   "after_week": 6,
   "coach": "Nick Sirianni",
   "words": 1902,
-  "model": "claude-haiku-5-5",
-  "headline": "Sirianni gave no injury clarity on DeVonta Smith's hamstring but praised Eli Stowers' practice week and Makai Lemon's playmaking; Tanner McKee has moved up to No. 2 QB behind Jalen Hurts.",
-  "summary": "Sirianni said rookie TE Eli Stowers had a good practice week and looked fast and athletic, though he stopped short of saying how that will translate to game usage. He described the bye-week self-scouting as an ongoing process, with an extra day helping the staff review things. He called Marquise Brown (the \"Hollywood\" reporters referenced, which is an inference) a great professional who made a standout practice catch and will add speed. On Makai Lemon, he said the staff wants to get him the football, that he is a playmaker with phenomenal hands, and that the game plan will determine how he is used. He said DeVonta Smith's hamstring has been a problem since summer, that he is one of the hardest-working players, and that the staff will see where he is. Tanner McKee rose to the No. 2 QB spot through growing comfort in the system and developmental reps, and he stayed committed through the change. On backups, Sirianni said the staff is still learning about the other backup quarterbacks, who are getting scout-team and developmental reps. The Cowboys are the opponent in the Monday Night Football game.",
+  "model": "claude-sonnet-5-5",
+  "headline": "DeVonta Smith's hamstring remains unresolved with no clear plan. Makai Lemon is set to be featured against Dallas, and Tanner McKee is confirmed as the No. 2 QB.",
+  "summary": "Sirianni spoke ahead of Monday Night Football against the Cowboys, with the team struggling and the coach saying everything is \"on the table.\" He said the extra day this week allowed for self-scouting and that the staff has adjusted schemes, schedules and practice, without giving specifics. He praised rookie TE Eli Stowers for a good week of practice, saying he looks fast and athletic and that the team needs everyone to develop. Marquise Brown was described as a true professional with great speed who made a standout catch in practice, but Sirianni gave no sign his playing time will increase. Makai Lemon got the strongest endorsement: Sirianni wants to get him the ball, calls him a playmaker and says his ceiling is very high, though the usage depends on how the game unfolds. Asked whether DeVonta Smith might be shut down because of his lingering hamstring problem, Sirianni did not commit either way. He said only \"we'll see where that goes\" and praised Smith's preparation. He credited Tanner McKee's growth and focus for becoming the No. 2 QB, and said the team is learning more about its other backup QBs.",
   "injuries": [
    {
     "player": "DeVonta Smith",
     "status": "unclear",
-    "detail": "Hamstring issue that has lingered since the summer; Sirianni said only that the staff will see where he is, with no timeline.",
+    "detail": "A reporter asked about shutting him down because of a hamstring issue lingering since the summer. Sirianni did not rule it in or out, only saying the team will see where it goes.",
     "player_id": "00-0036912"
+   },
+   {
+    "player": "Eli Stowers",
+    "status": "returning",
+    "detail": "The reporter framed him as back compared to the summer. Sirianni gave no injury details and said only that he had a nice week of practice.",
+    "player_id": "00-0041483"
    }
   ],
   "signals": [
-   {
-    "player": "Eli Stowers",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Practice performance has been encouraging; the staff is excited about his development, but no specific usage change was announced",
-    "note": "A strong practice week from a rookie TE could mean more opportunities, but Sirianni gave no concrete role details.",
-    "quote": "",
-    "player_id": "00-0041483"
-   },
    {
     "player": "Makai Lemon",
     "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "The team wants to get him the football and sees him as a key playmaker, with usage dependent on the game plan",
-    "note": "Sirianni's praise suggests Lemon will be a featured target, though the exact volume depends on game flow.",
-    "quote": "We know he's one of our playmakers.",
+    "claim": "Lemon will be a featured target in the game plan against Dallas, with the team looking to get him the ball.",
+    "note": "Sirianni called him a playmaker and wants him involved, which matters most if Smith is limited or out.",
+    "quote": "we want to get him the football. We know he's one of our playmakers.",
     "player_id": "00-0040867"
    },
    {
@@ -48,9 +44,9 @@
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Hamstring has not fully cleared since summer; availability is unclear",
-    "note": "Smith's status is uncertain for Monday, so check the final injury report before lineup lock.",
-    "quote": "it's been unfortunate there",
+    "claim": "",
+    "note": "The hamstring issue has lingered since the summer and Sirianni gave no clear plan, so his status needs monitoring.",
+    "quote": "we'll see where that goes.",
     "player_id": "00-0036912"
    },
    {
@@ -58,9 +54,9 @@
     "topic": "depth_chart",
     "signal": "up",
     "tone": "positive",
-    "claim": "He is the No. 2 quarterback, having moved up from No. 3 through development in the system",
-    "note": "Being the QB2 matters for backup-value and injury-insurance considerations.",
-    "quote": "Tanner didn't budge, you know.",
+    "claim": "McKee is the No. 2 quarterback behind Jalen Hurts.",
+    "note": "He is the first man up if Hurts is hurt, which gives him value to handcuff.",
+    "quote": "Tanner didn't budge, you know. He didn't blink.",
     "player_id": "00-0038400"
    },
    {
@@ -68,24 +64,34 @@
     "topic": "usage",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Coach praised his talent and speed, but gave no explicit playing-time commitment",
-    "note": "Reporters raised a playing-time question; the praise is encouraging, but no role change was confirmed.",
-    "quote": "he's highly talented. Um, and and will bring some great speed to our team.",
+    "claim": "",
+    "note": "Sirianni praised his attitude and talent but gave no commitment to more playing time, so he stays a speculative stash.",
+    "quote": "he is a great professional.",
     "player_id": "00-0035662"
+   },
+   {
+    "player": "Eli Stowers",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Stowers will be part of the group the team needs to contribute going forward.",
+    "note": "The praise is general and there is no stated role, so he is only worth monitoring for now.",
+    "quote": "he looks fast, uh, athletic",
+    "player_id": "00-0041483"
    }
   ],
   "topics": [
    {
     "topic": "Self-scouting and adjustments",
-    "detail": "Sirianni said the bye week and the extra day allowed productive self-scouting, and that the staff has adjusted schemes, schedules, and practice in ways he would not detail."
+    "detail": "Sirianni said the extra day allowed for self-scouting and that schemes, schedules and practice have all been adjusted, though he stayed general. He said the team's core values stay the same."
    },
    {
-    "topic": "Rookie adjustment to the NFL",
-    "detail": "Sirianni compared the NFL's parity to college, emphasized the marathon nature of the season, and said young players must adapt to tighter coverage and contested catches."
+    "topic": "Young players dealing with losing",
+    "detail": "Sirianni said the team is losing more than its young players are used to. He compared it to his own 2-5 start in 2021 and said the focus is on process, learning from adversity and the length of an NFL season. He noted receivers must adjust to tighter coverage and more contested catches."
    },
    {
     "topic": "Backup quarterbacks",
-    "detail": "The staff is still evaluating the backup quarterbacks, who are getting scout-team and developmental reps. Sirianni did not name a clear order beyond McKee at No. 2."
+    "detail": "Sirianni said the team is learning more about its other quarterbacks as they take scout-team and developmental reps. He described them as having different skill sets and good athleticism."
    }
   ],
   "opponent": "Dallas Cowboys"

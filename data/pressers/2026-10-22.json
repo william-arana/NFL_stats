@@ -11,103 +11,125 @@
   "after_week": 6,
   "coach": "Matt LaFleur",
   "words": 1420,
-  "model": "claude-haiku-5-5",
-  "headline": "Coach says no Sunday concern for Watson or Golden, Josh Jacobs is ramping up with the next two days key, and Jonathan Ford has gone to IR.",
-  "summary": "LaFleur said there is no concern for Sunday about Christian Watson or Matthew Golden. He said Jordan Love was beaten up after the game, took several hits, and was checked by the chiropractor, which is how the coach learned about his back. He described Josh Jacobs as being eased back in through strength and athletic training work, with the next two days of practice a big step toward full football activity. He would not commit to whether a player who had been limited would play, saying they would evaluate on the field. Jonathan Ford's move to IR surprised him, since Ford had been playing through an issue that eventually became too much. LaFleur called Jordan Riley's progress encouraging after a limited appearance last week, with more to be seen. He said he would not make much of Detroit's comments about its own improvement, and that his focus is on Green Bay's own alignment. On Goff, he praised the quarterback's decisiveness, poise under pressure, and trust in his playmakers, and said the key is moving defenders and not letting Goff set up comfortably. He also praised Amon-Ra St. Brown's mentality and said Detroit's Brian Branch would be a strong addition for their defense.",
+  "model": "claude-sonnet-5-5",
+  "headline": "LaFleur has no concern about Watson or Golden for Sunday's game at Detroit, Jordan Love's back is a watch-list item, and Zeitler is being ramped up.",
+  "summary": "LaFleur was asked about Christian Watson and Matthew Golden for Sunday and said there is no concern. A \"Jordan\" came to the staff after the last game with a back problem. The coach said he took some shots and was seen with the chiropractor, and from context this is most likely QB Jordan Love. When asked whether Love would be limited today, LaFleur said only that the team will see on the field. Kevin Zeitler is being ramped up through the strength and athletic training staff, and the coach said the next two days of practice matter. A start decision will rest on conversations and the eyeball test. Jonathan Ford was placed on IR after playing through an issue until he couldn't. Luke Musgrave is unlikely to play this season, though LaFleur wouldn't close the door. LaFleur spent much of the session praising Detroit: Jared Goff is decisive and poised under pressure, Brian Branch is back and one of the league's best safeties, Jahmyr Gibbs is a dynamic threat as a runner and receiver, and Amon-Ra St. Brown's mentality sets him apart. He also said the practice schedule is built around getting players' bodies right rather than maximizing reps.",
   "injuries": [
-   {
-    "player": "Christian Watson",
-    "status": "full",
-    "detail": "Coach said there is no concern for Sunday's game.",
-    "player_id": "00-0038124"
-   },
-   {
-    "player": "Matthew Golden",
-    "status": "full",
-    "detail": "Coach said there is no concern for Sunday's game.",
-    "player_id": "00-0040667"
-   },
    {
     "player": "Jordan Love",
     "status": "unclear",
-    "detail": "Took several hits in the game and was seen by the chiropractor afterward; the coach did not give a practice or game status.",
+    "detail": "Back issue after taking shots in the last game and seeing the chiropractor; asked whether he'd be limited, LaFleur said they'd see at practice. The captions only say \"Jordan\" and \"Love\", so this identification is inferred.",
     "player_id": "00-0036264"
-   },
-   {
-    "player": "Josh Jacobs",
-    "status": "returning",
-    "detail": "Being ramped up through strength and athletic training; the next two practice days are seen as key to his return.",
-    "player_id": "00-0035700"
    },
    {
     "player": "Jonathan Ford",
     "status": "ir",
-    "detail": "Placed on IR after playing through an issue for some time; the move surprised the coach.",
+    "detail": "Placed on IR as a surprise; LaFleur said he had been feeling it for some time and played through it until he couldn't.",
     "player_id": ""
+   },
+   {
+    "player": "Kevin Zeitler",
+    "status": "returning",
+    "detail": "Being ramped up through strength and athletic training staff work; decision on whether he starts or plays is still pending.",
+    "player_id": "00-0029592"
+   },
+   {
+    "player": "Christian Watson",
+    "status": "unclear",
+    "detail": "Asked about concern for Sunday, LaFleur answered \"No.\" The injury is not specified.",
+    "player_id": "00-0038124"
+   },
+   {
+    "player": "Matthew Golden",
+    "status": "unclear",
+    "detail": "Asked about concern for Sunday along with Watson, LaFleur answered \"No.\" The injury is not specified.",
+    "player_id": "00-0040667"
    }
   ],
   "signals": [
    {
-    "player": "Josh Jacobs",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "Will continue ramping up over the next two practice days before a decision on his availability.",
-    "note": "His availability and workload depend on how the next two practices go, so there is no clear Sunday outlook yet.",
-    "quote": "",
-    "player_id": "00-0035700"
-   },
-   {
     "player": "Christian Watson",
     "topic": "injury",
-    "signal": "up",
+    "signal": "watch",
     "tone": "positive",
-    "claim": "No injury concern for Sunday's game.",
-    "note": "A clean bill of health on the injury front supports his normal expected role.",
-    "quote": "",
+    "claim": "Watson is not a concern for Sunday's game against the Lions.",
+    "note": "The coach isn't worried about his availability, but check the final injury report.",
+    "quote": "No.",
     "player_id": "00-0038124"
    },
    {
     "player": "Matthew Golden",
     "topic": "injury",
-    "signal": "up",
+    "signal": "watch",
     "tone": "positive",
-    "claim": "No injury concern for Sunday's game.",
-    "note": "A clean bill of health on the injury front supports his normal expected role.",
-    "quote": "",
+    "claim": "Golden is not a concern for Sunday's game against the Lions.",
+    "note": "The coach isn't worried about his availability, but check the final injury report.",
+    "quote": "No.",
     "player_id": "00-0040667"
+   },
+   {
+    "player": "Jordan Love",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Love's practice participation this week will be determined on the field, and he may be limited.",
+    "note": "A back issue on the starting QB is worth monitoring through the practice reports before locking in a lineup.",
+    "quote": "Well I think we'll see when we get out there on the field.",
+    "player_id": "00-0036264"
+   },
+   {
+    "player": "Kevin Zeitler",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Zeitler is being ramped up this week and a decision on whether he starts or plays comes after more practice.",
+    "note": "His return would help the offensive line, which matters for the run game and Love's protection.",
+    "quote": "He's everything you want in a player.",
+    "player_id": "00-0029592"
    },
    {
     "player": "Jonathan Ford",
     "topic": "injury",
     "signal": "down",
     "tone": "neutral",
-    "claim": "Placed on IR and out for the foreseeable future.",
-    "note": "An IR placement removes him from the active roster and his expected contribution.",
-    "quote": "",
+    "claim": "Ford is on injured reserve and will miss time.",
+    "note": "A depth loss on defense; little direct fantasy impact except for IDP.",
+    "quote": "got to a point where he couldn't play through it.",
     "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Detroit Lions offense",
-    "detail": "LaFleur praised Jared Goff's decisiveness, poise, and trust in playmakers, and said the defense needs to move players off their spots to disrupt him."
+    "topic": "Practice approach",
+    "detail": "LaFleur said the reduced practice time is about getting players' bodies in the right position and keeping them feeling good. He acknowledged that reps are at a premium but said there is no substitute for them."
    },
    {
-    "topic": "Detroit Lions defense",
-    "detail": "Coach said getting Brian Branch back gives Detroit a versatile safety who can play man coverage and adds physicality."
+    "topic": "Preparing for an opponent coming off a bye",
+    "detail": "He said it doesn't change his approach much. Early-season-style unscripted looks are possible, so the team has to trust its rules and training."
+   },
+   {
+    "topic": "Luke Musgrave",
+    "detail": "Asked whether Musgrave will play this season, LaFleur said no until proven otherwise but wouldn't close the door."
+   },
+   {
+    "topic": "Unnamed player returning from injury",
+    "detail": "The captions name him \"Jordan Riley\", a name not on the roster, so he can't be identified with confidence. LaFleur said he has shown a ton of progress, got his feet wet last week, and could be ready if the progress continues."
+   },
+   {
+    "topic": "Detroit defense",
+    "detail": "LaFleur called Brian Branch one of the league's best safeties. He said Branch brings physicality and toughness and is comfortable playing man-to-man on receivers."
+   },
+   {
+    "topic": "Jared Goff",
+    "detail": "LaFleur said the way to slow Goff is to move him off his spot and pressure him. He called Goff decisive, poised and quick to let the ball go, and said he doesn't pre-read throws."
+   },
+   {
+    "topic": "Jahmyr Gibbs",
+    "detail": "LaFleur said defenders must keep their leverage and never relax against a back who can reverse field and score. He described Gibbs as a threat out of the backfield who could line up at slot receiver for most teams."
    },
    {
     "topic": "Amon-Ra St. Brown",
-    "detail": "LaFleur singled out St. Brown's mentality and competitiveness as what separates him from other receivers."
-   },
-   {
-    "topic": "Jordan Riley",
-    "detail": "Coach said Riley has shown a lot of progress after a limited appearance last week and could be ready if the progress continues."
-   },
-   {
-    "topic": "Practice reps and game planning",
-    "detail": "Coach said reps are limited league-wide this week and game planning for Detroit won't change much, with a focus on trusting rules and training against unscripted looks."
+    "detail": "LaFleur said St. Brown can run any route, but his mentality and mindset set him apart from most players, calling him \"a dog\"."
    }
   ],
   "opponent": "Detroit Lions"
@@ -124,20 +146,20 @@
   "after_week": 6,
   "coach": "Nick Sirianni",
   "words": 2600,
-  "model": "claude-haiku-5-5",
-  "headline": "Saquon Barkley's return is still undetermined; Sirianni says it depends on how the week progresses, and Zach Ertz has been impressing in practice.",
-  "summary": "Sirianni called Saquon Barkley a phenomenal player and captain, and said getting him back would be huge, but he would not commit to a timeline and said they will see where things stand as the week goes on. He said a run game that converts on third down keeps the play-action passing game working, and that the backs in the room have stepped up during injuries. On Jalen Hurts, he declined to discuss his timetable or the NFLPA's call for an investigation, saying he cares deeply about Hurts's well-being and that it is fluid. He declined to discuss the reported $250,000 fine or his conversations with the league and referees association. He praised Tanner McKee's intelligence and toughness and said McKee should keep rising, with every rep counting. On the offense, he said the staff must balance a system with attacking defenses using players' strengths, and that players matter more than plays. He acknowledged the team has lost four straight games and that it needs to get back on track. He praised Zach Ertz's practices and said he has had great reps with the first team and useful looks as a scout-team player. On the Cowboys, he said Christian Parker's familiarity with the Eagles is limited to his role in the building, since he was not in offensive meetings, and that film study is the main way to beat him.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Saquon Barkley could return this week, but Sirianni gave no firm timeline; Tanner McKee is the full-week starter at QB while Jalen Hurts' blood clot situation stays off the table.",
+  "summary": "Sirianni praised Saquon Barkley as a phenomenal player and captain and said he was looking forward to seeing him on the field at practice. He kept his status open, saying only that they will see where he is as the week goes on. He said adding a back of Barkley's caliber would be a huge plus, and he credited the backs who stepped in while the room was beat up. He said Tanner McKee has the intelligence, toughness and work ethic to keep rising, and that every rep counts as he gets a full week of work as the starter. Sirianni declined to discuss Jalen Hurts' medical situation, how often Hurts will be around the team, the NFLPA's call for an investigation, or the $250,000 fine. He said he misses Hurts and that the situation is fluid. He said the offense will stay flexible, with players over plays, and that the team has to get back on track after losing four in a row. On Zach Ertz, he said he is still with the team, is out of practice-squad elevations, has practiced well, and has looked great with the ones and on the scout team. He said he loves having Ertz but can't predict what comes next. He also covered facing Cowboys DC Christian Parker, a former Eagles assistant. He said familiarity helps both sides, but week-to-week film and putting a seed of doubt in the defense matter more.",
   "injuries": [
    {
     "player": "Saquon Barkley",
-    "status": "questionable",
-    "detail": "Return is uncertain; Sirianni said they'll see where he is as the week progresses and he was looking forward to seeing him at practice.",
+    "status": "unclear",
+    "detail": "Sirianni was looking forward to seeing him at practice and said they will see where he is as the week progresses. No timeline was given, but the comments suggest he is possibly returning to practice.",
     "player_id": "00-0034844"
    },
    {
     "player": "Jalen Hurts",
     "status": "unclear",
-    "detail": "Sirianni would not discuss his recovery or timetable, saying it is fluid and that everyone's recovery differs. He is not around the team daily.",
+    "detail": "Sirianni declined to discuss the blood clot situation. He said recovery timelines vary and his involvement with the team is fluid.",
     "player_id": "00-0036389"
    }
   ],
@@ -147,9 +169,9 @@
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Return to game action depends on how the week progresses; no commitment made",
-    "note": "A return would boost the backfield and the play-action game, but the timeline is still unclear.",
-    "quote": "we'll see where we are as the week progresses",
+    "claim": "Barkley may return to practice this week and his game availability will be determined as the week progresses.",
+    "note": "A Barkley return would reclaim the lead RB role, but there is no confirmation, so check practice reports before setting lineups.",
+    "quote": "we'll see where we are at the end of it",
     "player_id": "00-0034844"
    },
    {
@@ -157,9 +179,9 @@
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Expected to keep improving and reach a higher ceiling with a full week of reps",
-    "note": "Sirianni expects McKee to keep developing, which supports the passing outlook with a full practice week.",
-    "quote": "will continue to rise and reach a ceiling",
+    "claim": "McKee will continue as the starting QB and get a full week of reps and meetings.",
+    "note": "He is the starter with a full week of preparation, and Sirianni was glowing about his intangibles and ceiling.",
+    "quote": "every rep counts and every rep matters.",
     "player_id": "00-0038400"
    },
    {
@@ -167,34 +189,38 @@
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "No timetable given; coach declined to discuss return",
-    "note": "Without a clear timeline, Hurts's fantasy outlook stays unresolved and the backup situation matters.",
-    "quote": "we'll see. I think that's fluid",
+    "claim": "",
+    "note": "Sirianni would not share details on Hurts' timeline or involvement, so he is not a near-term fantasy option.",
+    "quote": "I miss Jaylen, miss being around him on a daily basis.",
     "player_id": "00-0036389"
    },
    {
     "player": "Zach Ertz",
-    "topic": "role",
-    "signal": "up",
+    "topic": "depth_chart",
+    "signal": "watch",
     "tone": "positive",
-    "claim": "Has been having really good practices and great reps with the first team",
-    "note": "Ertz is getting strong practice reps, which could matter for tight end usage if his status improves.",
-    "quote": "he's had great reps",
+    "claim": "Ertz remains on the team but is out of elevations, and his future role is unclear.",
+    "note": "Ertz has looked good in practice but is not in a set game role. Sirianni gave no promise of promotion.",
+    "quote": "I love having Zach on this football team.",
     "player_id": "00-0030061"
    }
   ],
   "topics": [
    {
-    "topic": "Offensive scheme",
-    "detail": "Sirianni said the staff balances a system with attacking defenses using players' strengths, and that players matter more than plays. The team has lost four straight and needs to get back on track."
+    "topic": "Offensive approach",
+    "detail": "Sirianni said the offense is built on players over plays, and the scheme will adapt to the opponent and the team's strengths. The run game, third-down conversions and manageable situations drive the play-action game."
    },
    {
-    "topic": "Dallas Cowboys",
-    "detail": "Sirianni praised Christian Parker, who is now the Cowboys defensive coordinator, and said he wasn't in offensive meetings. He said film study is the key to beating a defense familiar with the team."
+    "topic": "Cowboys DC Christian Parker",
+    "detail": "Parker previously worked on the Eagles' defensive staff. Sirianni said he did not sit in offensive meetings, and the two teams have so much film on each other that the key is planting a seed of doubt in the defense."
    },
    {
-    "topic": "League and off-field matters",
-    "detail": "Sirianni declined to discuss the reported $250,000 fine, his talks with the league or referees association, and the NFLPA's call for an investigation into Hurts's blood clot diagnosis."
+    "topic": "Team situation",
+    "detail": "The Eagles have lost four straight and Sirianni said they need to get back on track. He also said he still enjoys coaching and is working to grow as a coach and person."
+   },
+   {
+    "topic": "Fine and league communications",
+    "detail": "Sirianni declined to discuss the $250,000 fine or his conversations with the league and referees."
    }
   ],
   "opponent": "Dallas Cowboys"

@@ -11,31 +11,31 @@
   "after_week": 7,
   "coach": "Ben Johnson",
   "words": 3216,
-  "model": "claude-haiku-5-5",
-  "headline": "Kyle Monangai is out Monday and Colston Loveland is expected to practice, while Zavier Scott should see more backfield work.",
-  "summary": "Johnson said Kyle Monangai, who did not practice this week, should be counted out for Monday night, and he is hopeful the back can return sooner rather than later. He said Colston Loveland is listed on the injury report but he hopes it is minor and expects him to practice that day. Zavier Scott has been getting more practice reps and playing time over the last few weeks, and Johnson said Scott could see more carries, with all three backs needed. Theo Benedet is starting at left tackle. Johnson said the team will need a clean game with no turnovers or penalties in a hostile road environment against the defending Super Bowl champion Seattle Seahawks. He also addressed the newly acquired defensive lineman, saying he expects the player's impact to be significant, though the transcript garbles his name and he may not play at his normal snap load in Week 1. Johnson also commented on Caleb Williams' cleats situation, saying he is all about the team and will not hurt it.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Kyle Monangai is out for Monday night at Seattle, Zavier Scott could see more backfield work, and Colston Loveland is on the injury report with what Johnson hopes is a minor issue.",
+  "summary": "Johnson's press conference centered on the trade for Jeffery Simmons, who is not on the provided roster. Johnson called him a dominant, production-driven defender who will elevate those around him, and said he may not play his usual ~87% snap share in his first week. Johnson said he would count Kyle Monangai (toe) out this week. The team chose not to put him on IR and is hopeful he returns sooner rather than later, but Johnson gave no timetable. Zavier Scott has been active for three weeks and is getting more practice reps. Johnson said he might get more carries and that the team will probably need all three backs given the recent play-time trend. Colston Loveland showed up on the injury report, and Johnson hopes it is minor and expects him to practice. Theo Benedet will start at left tackle. Johnson stressed that Monday night in Seattle against the defending Super Bowl champions requires the team's best play, clean football and sharp communication in a loud stadium, with no turnovers or penalties.",
   "injuries": [
    {
     "player": "Kyle Monangai",
     "status": "out",
-    "detail": "Has not practiced this week; Johnson said he would count him out for Monday night. Toe injury, not placed on IR for an extended stretch, with hope for a return sooner rather than later.",
+    "detail": "Toe injury. Johnson would count him out this week, has no timetable, and the team did not use IR. He remains hopeful of a return soon.",
     "player_id": "00-0040236"
    },
    {
     "player": "Colston Loveland",
-    "status": "limited",
-    "detail": "On the injury report; Johnson hopes it is a minor issue and expects him to practice Saturday.",
+    "status": "unclear",
+    "detail": "On the injury report. Johnson hopes it is minor and expects him to practice Saturday, then will see how it looks.",
     "player_id": "00-0040126"
    }
   ],
   "signals": [
    {
     "player": "Zavier Scott",
-    "topic": "role",
+    "topic": "usage",
     "signal": "up",
-    "tone": "hedged",
-    "claim": "Could get more backfield carries if the recent playing-time trend continues; Chicago needs all three backs to play.",
-    "note": "Growing practice reps and a possible larger backfield role give him some upside as a depth back.",
+    "tone": "positive",
+    "claim": "Scott may get more carries and snaps in the backfield this week and in coming games.",
+    "note": "With Monangai out and Johnson citing a play-time trend that needs three backs, Scott is a potential deep-league RB add or stash.",
     "quote": "I think we're going to need all three backs to play for us.",
     "player_id": "00-0038440"
    },
@@ -44,8 +44,8 @@
     "topic": "injury",
     "signal": "down",
     "tone": "negative",
-    "claim": "Will not play this week; not expected Monday night.",
-    "note": "Losing him removes a backfield option and pushes touches to the remaining backs.",
+    "claim": "Monangai will not play Monday night against Seattle.",
+    "note": "He is out for Week 9 with no return timeline, so bench or replace him.",
     "quote": "I would count him out this week.",
     "player_id": "00-0040236"
    },
@@ -54,45 +54,41 @@
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Expected to practice Saturday; Johnson hopes the injury is minor.",
-    "note": "Practice participation this week will determine whether he is truly available Monday.",
+    "claim": "Loveland will practice Saturday, and the injury is expected to be minor.",
+    "note": "Check his final practice participation and game-day status before Monday night.",
     "quote": "We're hoping it's a minor thing.",
     "player_id": "00-0040126"
    },
    {
     "player": "Theo Benedet",
-    "topic": "role",
-    "signal": "watch",
+    "topic": "depth_chart",
+    "signal": "up",
     "tone": "neutral",
-    "claim": "Will start at left tackle this week.",
-    "note": "Confirmed starter on the offensive line, which supports pass-protection stability for the offense.",
+    "claim": "Benedet will start at left tackle against Seattle.",
+    "note": "He protects Caleb Williams' blind side on Monday night, which matters for Chicago's pass game against a strong defense.",
     "quote": "Yes.",
     "player_id": "00-0039459"
    }
   ],
   "topics": [
    {
-    "topic": "Newly acquired defensive player",
-    "detail": "Johnson called the trade acquisition a dominant, impact player and said the team gave up steep draft capital for him. The transcript garbles his name, so it was not attributed to a roster player. Johnson said he's still learning the system and may not carry his normal snap load in Week 1."
+    "topic": "Simmons trade",
+    "detail": "Chicago traded for Jeffery Simmons, giving up significant draft capital. Johnson expects him to play Monday, possibly below his ~87% snap share in week one, and to boost the whole defense and Dennis Allen's scheme."
    },
    {
-    "topic": "Caleb Williams cleats situation",
-    "detail": "Johnson was asked about the cleats issue and said Williams is all about the team and will not hurt it. Johnson said the team has been in daily contact with the GM about the situation."
+    "topic": "Seattle matchup",
+    "detail": "Johnson called Seattle a well-coached team strong in all three phases, with a good defense and running game. He said Chicago must play and coach its best and avoid turnovers and penalties."
    },
    {
-    "topic": "Defensive scheme and Dennis Allen",
-    "detail": "Johnson praised Dennis Allen's creativity and said the new defensive acquisition will help mask weaknesses elsewhere on defense and elevate the group."
+    "topic": "Crowd noise and communication",
+    "detail": "Johnson called communication the top priority for the loud Monday night road game. He praised Garrett Bradbury as loud and fearless, a key to getting everyone on the same page."
    },
    {
-    "topic": "Draft and roster building",
-    "detail": "Johnson said the team has less high-end draft capital going forward but still believes in its draft and development process, and that practice squad players are ready to contribute."
-   },
-   {
-    "topic": "Monday night game plan",
-    "detail": "Johnson emphasized clean play, avoiding turnovers and penalties, and communication in a loud road environment; he called Seattle well-coached across all three phases."
+    "topic": "Roster building",
+    "detail": "Johnson said the Simmons trade means less high-end draft capital, but he trusts the team's draft-and-develop process. He pointed to practice squad players who are ready to play."
    }
   ],
-  "opponent": "Seattle Seahawks"
+  "opponent": "Seattle Seahawks (Monday night, on the road)"
  },
  {
   "id": "SEA:head-coach-mike-macdonald-gives-final-updates-ahead-of-week-8-vs-bears",
@@ -102,30 +98,25 @@
   "date": "2026-10-31",
   "duration": 597,
   "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/seahawks/o6iroy6wgnl0utzf6tkn.jpg",
-  "kind": "first_practice",
+  "kind": "final_practice",
+  "after_week": 7,
   "coach": "Mike Macdonald",
   "words": 2128,
-  "model": "claude-haiku-5-5",
-  "headline": "Charbonnet has a set usage plan and is expected to play, Shaheed is out this week, and Josh Jones starts at left tackle while Drake Thomas starts at linebacker.",
-  "summary": "Macdonald said the team has a plan for Zach Charbonnet's usage in this game, though it may shift during play. He called Charbonnet a three-down back who catches out of the backfield, runs a full route tree, handles every rushing situation, and has been excellent in pass protection, and he praised the speed of Charbonnet's return from injury. Rashid Shaheed is progressing well but will miss this game, with his status to be reassessed next week. Macdonald confirmed Josh Jones will start at left tackle, citing his strong play when filling in last season, and he praised Quenton Nelson's poise and confidence as he settles in after a few days with the team. The offensive line has been reshuffled with new starters at left tackle, left guard and right guard, and the staff is working through how much of the new scheme to use. Drake Thomas will start, with Tyrice Knight having played well in his absence, though Macdonald said the team is willing to play both together. Any roster move involving a player not on the injury report would come Monday and be handled through transactions. Macdonald also said Tory Horton is getting more opportunity and he expects him to take advantage of it. He praised George Holani as an underrated pass blocker, and said Grey Zabel is handling a demotion-type change well.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Zach Charbonnet is back with a defined plan as a true three-down back, Shaheed is out this week, and Tory Horton gets more work.",
+  "summary": "Macdonald said the offensive line is being reshuffled, with newly acquired guard Quenton Nelson folded in quickly and Josh Jones at left tackle. He praised Nelson's poise and said he is only a few days into the team. Zach Charbonnet is coming back from injury on an accelerated timeline. Macdonald said there is a specific plan for how much he plays and which plays he gets, though it might waver during the game. He called Charbonnet a three-down back who runs a significant route tree, handles every kind of run and is excellent in pass protection. Rashid Shaheed is out this game and the team will recalibrate next week. Drake Thomas returns and will start at linebacker, though Macdonald said he is not hesitant to play both Thomas and Tyrice Knight together. Macdonald said Tory Horton gets more opportunity and he expects him to take advantage. He declined to explain a possible Monday roster move involving a player referred to as 'JD', saying the transactions would speak for themselves. He was non-committal and positive about Grey Zabel, who was bumped in the line shuffle.",
   "injuries": [
    {
     "player": "Rashid Shaheed",
     "status": "out",
-    "detail": "Progressing well but will not play this game; status to be reassessed next week.",
+    "detail": "Out for this game and progressing well. Macdonald said the team will recalibrate next week, so Week 9 is not guaranteed.",
     "player_id": "00-0037545"
    },
    {
     "player": "Zach Charbonnet",
-    "status": "limited",
-    "detail": "Was limited in practice Thursday, but the plan is for him to play with a set workload; returning from injury on an accelerated timetable.",
+    "status": "returning",
+    "detail": "Returning from injury on an accelerated timetable. He was limited the previous day as part of the plan and is now set to play.",
     "player_id": "00-0039165"
-   },
-   {
-    "player": "Charles Cross",
-    "status": "unclear",
-    "detail": "Josh Jones filled in for him last week, but the coach did not give his current status on the record.",
-    "player_id": "00-0037821"
    }
   ],
   "signals": [
@@ -134,48 +125,68 @@
     "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will play in this game under a pre-set plan for snaps and play types, though the plan may waver during the game",
-    "note": "A three-down back with a defined workload is strong fantasy usage, though the returning-from-injury caveat adds risk.",
-    "quote": "Well, we have a plan for Zach",
+    "claim": "Will play this week on a pre-planned snap count and set of play types, possibly adjusted during the game.",
+    "note": "He is back as a three-down back, but the planned workload may be managed, so expect a limited share at first.",
+    "quote": "now we're at the stage of the plan where he's going to play",
     "player_id": "00-0039165"
    },
    {
-    "player": "Zach Charbonnet",
+    "player": "Quenton Nelson",
+    "topic": "trade_or_roster",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will be worked into the shuffled offensive line this week.",
+    "note": "A new veteran guard reshapes the line, which affects the run game and pass protection for the skill players.",
+    "quote": "you can feel the poise, the confidence",
+    "player_id": "00-0034342"
+   },
+   {
+    "player": "Josh Jones",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Is a three-down back who will be used in passing situations, pass protection and all rushing situations",
-    "note": "Confirms he is the lead back in every package, which supports a high floor in PPR formats.",
-    "quote": "he's a three down back",
-    "player_id": "00-0039165"
+    "claim": "Will play left tackle this week.",
+    "note": "A swing tackle starting on the blind side is a modest risk to line stability and pass protection.",
+    "quote": "Josh play left tackle.",
+    "player_id": "00-0036363"
+   },
+   {
+    "player": "Grey Zabel",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "",
+    "note": "He was bumped in the line shuffle, so his alignment or role is changing even though the coach praised him.",
+    "quote": "",
+    "player_id": "00-0040639"
    },
    {
     "player": "Rashid Shaheed",
     "topic": "injury",
     "signal": "down",
     "tone": "neutral",
-    "claim": "Will not play this game and will be reassessed next week",
-    "note": "Ruled out for this week, so no fantasy value until he returns.",
-    "quote": "right now he's out this game and we'll recalibrate next week.",
+    "claim": "Will miss this game and his status for next week will be reassessed.",
+    "note": "WR reps shift to others this week, and his return is not guaranteed for Week 9.",
+    "quote": "right now he's out this game and we'll recalibrate next week",
     "player_id": "00-0037545"
    },
    {
-    "player": "Josh Jones",
-    "topic": "depth_chart",
+    "player": "Tory Horton",
+    "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will start at left tackle",
-    "note": "Starting at left tackle is a stable role for an offensive lineman, which is mostly relevant to team stability in this offense.",
-    "quote": "Josh play left tackle.",
-    "player_id": "00-0036363"
+    "claim": "Will see an increased role in the offense this week.",
+    "note": "With Shaheed out, Horton is positioned for more targets and snaps.",
+    "quote": "expect him to take advantage of it",
+    "player_id": "00-0040648"
    },
    {
     "player": "Drake Thomas",
     "topic": "depth_chart",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will start this game ahead of Tyrice Knight",
-    "note": "Starting role confirmed; Knight remains part of the rotation, so tackle volume could be split.",
+    "claim": "Will start at linebacker this week.",
+    "note": "He is back as the starter, which affects LB tackle volume.",
     "quote": "Drake will start the game tonight.",
     "player_id": ""
    },
@@ -183,67 +194,47 @@
     "player": "Tyrice Knight",
     "topic": "depth_chart",
     "signal": "watch",
-    "tone": "positive",
-    "claim": "Will not start, but the team may play both linebackers together",
-    "note": "Still in the rotation, so he has some backup and situational value.",
-    "quote": "we'll put both guys out there at the same time.",
+    "tone": "hedged",
+    "claim": "May still share the field with Thomas in some packages.",
+    "note": "He played well in Thomas's absence, but his snaps depend on how often both play together.",
+    "quote": "we'll put both guys out there at the same time",
     "player_id": ""
    },
    {
-    "player": "Tory Horton",
-    "topic": "usage",
+    "player": "Nick Emmanwori",
+    "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Is getting more opportunity and is expected to take advantage of it",
-    "note": "Expanded role points to more targets, though the size of the increase was not quantified.",
-    "quote": "Expect him to take advantage of it.",
-    "player_id": "00-0040648"
+    "claim": "Will continue to be used at tight end as a physical blocker and receiver.",
+    "note": "He gets TE usage while Elijah Arroyo is out, but his fantasy value is mostly as a blocker with some receiving upside.",
+    "quote": "we expect the same just moving forward.",
+    "player_id": ""
    },
    {
     "player": "George Holani",
     "topic": "usage",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Had good pickups in pass protection last week and has been an underrated pass blocker all season",
-    "note": "Pass-protection work supports his snaps in a back-up role, but it is not a sign of a bigger role.",
+    "claim": "",
+    "note": "He earned praise for pass protection and could keep a third-down or backup role with Charbonnet back.",
     "quote": "He's an underrated pass blocker.",
     "player_id": "00-0039299"
-   },
-   {
-    "player": "Quenton Nelson",
-    "topic": "role",
-    "signal": "watch",
-    "tone": "positive",
-    "claim": "Has been integrated into the offensive line mix in a reshuffled lineup; the staff is calibrating how much of the new scheme to use",
-    "note": "Lineup changes along the line matter for run-game and pass-protection efficiency more than individual fantasy output.",
-    "quote": "Just like you can feel the poise, the confidence.",
-    "player_id": "00-0034342"
-   },
-   {
-    "player": "Grey Zabel",
-    "topic": "role",
-    "signal": "down",
-    "tone": "hedged",
-    "claim": "Took a demotion-type change this week; the coach expects him to bounce back",
-    "note": "A reduced role on the line lowers his playing time and makes him a weaker start candidate.",
-    "quote": "he's excited and he's going to become even a better version",
-    "player_id": "00-0040639"
    }
   ],
   "topics": [
    {
-    "topic": "Offensive line reshuffle",
-    "detail": "The line has new starters at left tackle, left guard and right guard, and the staff is working through how much of the new scheme to use."
+    "topic": "Roster move on Monday",
+    "detail": "Macdonald said a possible roster move involving a player referred to as 'JD' would come Monday and refused to give a reason, saying the transactions will speak for themselves. The player is not identifiable from the captions."
    },
    {
-    "topic": "Roster moves",
-    "detail": "Any roster move involving a player not on the injury report would come Monday, and the coach said the transactions would speak for themselves."
+    "topic": "Offensive line shuffle",
+    "detail": "The line has a new left tackle, left guard and right guard. Coaches calibrated how much to ask of Nelson this week and Macdonald said they will problem-solve during the game against a good opponent."
    },
    {
     "topic": "Running back room",
-    "detail": "The team is looking to play with urgency after recalibrating, and the coach described the backfield as in a good spot."
+    "detail": "Macdonald said the team is up against the ropes after a home win and there is urgency to grow. He praised Charbonnet's work ethic and said he works in the shadows."
    }
   ],
-  "opponent": "Bears"
+  "opponent": "Chicago Bears"
  }
 ]

@@ -11,44 +11,83 @@
   "after_week": 4,
   "coach": "Sean McVay",
   "words": 1829,
-  "model": "claude-haiku-5-5",
-  "headline": "Aaron Donald is good to go and Colby Parkinson is cleared; Quentin Lake is questionable but trending up. A knee-surgery player will likely not have his IR clock started next week.",
-  "summary": "McVay gave an injury update ahead of Monday's game against Buffalo. Aaron Donald was a DNP but is expected to play, with no game status assigned. Quentin Lake is the only player who will be listed as questionable, though McVay feels he is trending in the right direction. Colby Parkinson and another player referred to as 'Jalen' are cleared. McVay also discussed a player recovering from knee surgery, who is making good progress and is week-to-week. It is more likely than not that the team does not start that player's return clock next week, so he can fully recover. McVay distinguished return-to-play from return-to-performance, saying the player must hit benchmarks and football-related activities first. The lack of training camp practice was mainly due to knee irritation, which he expects to be resolved. On the Bills, McVay praised Josh Allen's growth in timing, rhythm, reading coverage and involving all eligible receivers, calling him a very special and difficult player to defend. He also discussed two-point conversion decisions, favoring getting the seven and keeping the game tied or with a chance to win, while stressing that analytics are one input among many and that game flow matters.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Rams look mostly healthy for Monday night against Buffalo: Aaron Donald and Colby Parkinson are good to go, and only Quentin Lake is listed as questionable. A player coming off knee surgery likely won't have his return clock started next week.",
+  "summary": "McVay said Aaron Donald did not practice but is fine and has no injury designation for the game. Quentin Lake is the only Ram listed as questionable, and McVay said he feels good and is trending in the right direction. A reporter asked about Colby Parkinson and another player named \"Jalen\", and McVay said both are good to go. McVay did not name the player recovering from knee surgery. He said the surgery went well and the timeline is week to week, but it's more likely the team does not start his clock next week. He stressed the difference between return to play and return to performance, and said the player needs to hit benchmarks and do football activities before the team talks about him playing. He praised Josh Allen as a smarter, more rhythm-based passer who beats defenses with his arm and legs, and called him very special and troublesome to defend. The rest of the session covered the analytics debate on going for two when down 14. McVay said he would kick the extra point and decide on the next possession. He added that game flow, personnel and the people playing matter alongside analytics.",
   "injuries": [
    {
     "player": "Aaron Donald",
     "status": "full",
-    "detail": "Was a DNP on the latest report but McVay says he is good to go for the game with no game status listed.",
+    "detail": "Did not practice (DNP) but is fine, expected to play Monday, and carries no injury designation.",
     "player_id": ""
    },
    {
     "player": "Quentin Lake",
     "status": "questionable",
-    "detail": "The only player who will be listed as questionable; McVay says he is trending in the right direction.",
+    "detail": "Only Ram listed as questionable. McVay said he feels good and is trending in the right direction.",
     "player_id": ""
    },
    {
     "player": "Colby Parkinson",
     "status": "full",
-    "detail": "McVay said he is good to go.",
+    "detail": "Asked about alongside another player; McVay said they are good to go.",
     "player_id": "00-0036244"
    },
    {
-    "player": "Unnamed knee-surgery player (not named in transcript)",
-    "status": "ir",
-    "detail": "Making good progress after surgery, week-to-week. McVay says it is more likely his return clock does not start next week.",
+    "player": "Unnamed player (knee surgery)",
+    "status": "unclear",
+    "detail": "Surgery went well and progress is good, but the timeline is week to week. McVay said it's more likely the team does not start his clock next week. The goal is return to performance, not just return to play.",
     "player_id": ""
    }
   ],
-  "signals": [],
+  "signals": [
+   {
+    "player": "Aaron Donald",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will play Monday against the Bills with no injury designation.",
+    "note": "Missing practice looks like rest, not a concern, so his availability is not at risk.",
+    "quote": "Aaron was a DNP, but he's good.",
+    "player_id": ""
+   },
+   {
+    "player": "Quentin Lake",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Questionable for Monday but trending toward playing.",
+    "note": "Defensive back with a questionable tag; check final status before kickoff if you use him in IDP.",
+    "quote": "he's trending in the right direction",
+    "player_id": ""
+   },
+   {
+    "player": "Colby Parkinson",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is healthy and available for Monday's game.",
+    "note": "No injury concern for the tight end this week.",
+    "quote": "They're good to go.",
+    "player_id": "00-0036244"
+   }
+  ],
   "topics": [
    {
     "topic": "Josh Allen / Bills offense",
-    "detail": "McVay praised Allen's improved mind, timing, rhythm, and ability to activate all eligible receivers, calling him a very special and troublesome player to defend."
+    "detail": "McVay praised Allen's growth in timing, rhythm, reading coverage and using all five eligible receivers, plus his off-schedule ability. He called him a very special and troublesome player to defend and said the team is excited for the challenge."
    },
    {
-    "topic": "Two-point decisions and analytics",
-    "detail": "McVay said his approach is to take the seven and keep the game tied or give the team a chance to win in overtime. He said analytics drive many decisions but game flow and personnel also matter."
+    "topic": "Knee surgery recovery timeline",
+    "detail": "McVay did not name the player, but described a week-to-week recovery with a likely delay in starting his return clock. He said the player's limited training camp practice came from knee irritation that the surgery fixed, which should speed up his ramp-up. He wants the player doing football drills before a return."
+   },
+   {
+    "topic": "Analytics and decision-making",
+    "detail": "McVay would kick the extra point when down 14 and decide on a two-point try later. He said analytics are a major input but not the only one, alongside game flow, matchups and personnel. He credited Dan Shamash for communication in those moments."
+   },
+   {
+    "topic": "Mike Ditka",
+    "detail": "McVay offered condolences and praised Ditka's toughness, leadership and legacy, noting he never knew him personally."
    }
   ],
   "opponent": "Buffalo Bills"

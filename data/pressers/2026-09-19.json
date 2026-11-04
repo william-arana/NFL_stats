@@ -11,24 +11,109 @@
   "after_week": 1,
   "coach": "Sean McVay",
   "words": 1465,
-  "model": "claude-haiku-5-5",
-  "headline": "Puka Nacua is questionable for Monday night with groin soreness after sitting practice, while Aaron Donald's return is progressing well ahead of the Giants game.",
-  "summary": "McVay opened with the injury report: Kinchens is out with a hamstring injury, Landman is limited, Speights is full, and Jordan Whittington is doubtful with a quad issue. Puka Nacua did not practice and is questionable, with McVay saying he has some soreness in his groin and that whether he plays is still to be determined. McVay said the Nacua issue is separate from an earlier one and that he did not feel fully like himself at a recent practice, so the team has been managing him carefully. McVay said Aaron Donald looks really good and is excited to play, and he indicated Donald's plan is to play. McVay praised Kevin Dotson and Steve Avila as productive, physical guards and included Coleman Shelton and the tackles in his praise of the interior line. He called Wesley Bailey a physical, stout player who earned his roster spot through practice and preseason play. McVay also said a player he referred to as Miles was placed on IR and had surgery that went well. He framed the Monday night game as a home opener and his 10th season as head coach.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Puka Nacua is questionable for Monday night with a new groin/hip soreness and did not practice, so his status is uncertain. Jordan Whittington is doubtful, and Aaron Donald is set to make his return.",
+  "summary": "McVay opened with the final injury report. Puka Nacua was a DNP and is questionable with soreness (McVay said groin, and also referred to it as a hip), and whether he plays is still to be determined. McVay called it a separate issue from the earlier one, saying Nacua had a good practice but did not feel fully like himself or able to open up to full speed. Jordan Whittington is doubtful with a quad injury. Kamren Kinchens is out with a hamstring injury, Omar Speights is full, and Nathan Landman and a player McVay called Cam Kerr are limited. The other DNPs were rest days. McVay praised Aaron Donald, who is returning and expected to play, and said he has provided a spark. Miles (Garrett) is on IR after surgery, which makes Donald's return more important. McVay also praised the interior offensive line (Kevin Dotson, Steve Avila, Coleman Shelton) and the tackles, and said Wesley Bailey earned a roster spot with his preseason play. The opponent is the Giants, coached by John Harbaugh, on Monday Night Football.",
   "injuries": [
    {
     "player": "Puka Nacua",
     "status": "questionable",
-    "detail": "Did not practice; coach cites groin soreness and says a separate issue from earlier, with his availability still to be determined.",
+    "detail": "DNP with soreness (groin/hip), a separate issue from the earlier one. McVay is being cautious with him as a skill player, and his game status is to be determined.",
     "player_id": "00-0039075"
    },
    {
-    "player": "Alex Bachman",
-    "status": "unclear",
-    "detail": "Placeholder removed",
-    "player_id": "00-0035602"
+    "player": "Jordan Whittington",
+    "status": "doubtful",
+    "detail": "Quad injury; McVay called him doubtful for the game.",
+    "player_id": "00-0039751"
+   },
+   {
+    "player": "Kamren Kinchens",
+    "status": "out",
+    "detail": "Hamstring injury; DNP and out for the game.",
+    "player_id": ""
+   },
+   {
+    "player": "Omar Speights",
+    "status": "full",
+    "detail": "Listed as a full participant.",
+    "player_id": ""
+   },
+   {
+    "player": "Nathan Landman",
+    "status": "limited",
+    "detail": "Listed as limited.",
+    "player_id": ""
+   },
+   {
+    "player": "Aaron Donald",
+    "status": "returning",
+    "detail": "Returning to the team and expected to play, with McVay saying he looks really good.",
+    "player_id": ""
    }
   ],
-  "signals": [],
-  "topics": []
+  "signals": [
+   {
+    "player": "Puka Nacua",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Nacua's availability for Monday night is undetermined, and he will not practice on the final practice day.",
+    "note": "The Rams' top receiver is a true game-time decision, so fantasy managers should have a backup plan.",
+    "quote": "whether or not he plays, um, you know, is to be determined.",
+    "player_id": "00-0039075"
+   },
+   {
+    "player": "Jordan Whittington",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Whittington is doubtful and unlikely to play Monday night.",
+    "note": "His absence thins the receiver depth, especially if Nacua is also out.",
+    "quote": "Jordan Whittington is doubtful for the game.",
+    "player_id": "00-0039751"
+   },
+   {
+    "player": "Aaron Donald",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Donald will return and play in Monday night's game.",
+    "note": "His return strengthens the Rams' defensive front and is a boost to their defensive fantasy outlook.",
+    "quote": "If he said it, he's going.",
+    "player_id": ""
+   },
+   {
+    "player": "Wesley Bailey",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Bailey earned a spot on the 53-man roster with his preseason play.",
+    "note": "He is a depth piece on the defensive line who could get some snaps, with Donald back and Miles on IR.",
+    "quote": "",
+    "player_id": ""
+   },
+   {
+    "player": "Myles Garrett",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Miles (likely Garrett) is on IR after surgery that went well, and the team looks forward to his return.",
+    "note": "McVay said only 'Miles', so the identity is uncertain, and his absence matters for the defensive line.",
+    "quote": "Surgery went well like we talked about.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive line",
+    "detail": "McVay praised guards Kevin Dotson and Steve Avila, along with center Coleman Shelton and tackles Alaric Jackson and Warren McClendon, saying the interior is key to the offense and provides physicality and pocket protection."
+   },
+   {
+    "topic": "Monday Night opener",
+    "detail": "McVay is excited for the home opener in his 10th season and noted the Giants play a distinctive style under John Harbaugh, shown in their opener against the Cowboys."
+   }
+  ],
+  "opponent": "New York Giants"
  }
 ]

@@ -11,38 +11,32 @@
   "after_week": 7,
   "coach": "Mike LaFleur",
   "words": 1790,
-  "model": "claude-haiku-5-5",
-  "headline": "Jeremiyah Love is expected to play Sunday after two weeks out, while Hjalte Froholdt is limited with a tweak and Hayden Conner would step in at center.",
-  "summary": "LaFleur said the running game has improved since the muddy-field games, but it is still a work in progress and depends on building continuity among the mix of backs and linemen. He expects Jeremiyah Love to play Sunday and said Love will be good, though no player is at 100% this early in the season. Elijah Wilkinson is healthy enough to be full on Friday despite a rib issue that is a pain-tolerance matter. Hjalte Froholdt is limited after a tweak suffered Thursday, and the staff will reassess him Friday and Saturday. If Froholdt can't go, Hayden Conner would move into the middle. LaFleur said the staff prepares for every lineup scenario. He also described Will Johnson as having a strong demeanor and an edge in practice, and said he is positioned to play if called upon. LaFleur said he expects the recently added veteran receiver to be fully involved, though he is working with the scout team and needs more time with the first-team offense. In the red zone discussion, LaFleur said points and wins are what matter, and that the offense has to finish drives starting with him. He also gave a thoughtful answer on how the market devalues linebackers and said he thinks the position is beginning to rise again.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Jeremiyah Love is expected to return from a two-week ankle absence and play Sunday vs. Dallas; the OL is shaky, with Jon Gaines out and Hjalte Froholdt limited.",
+  "summary": "LaFleur opened by saying Jon Gaines is out for the game; the caption also names a second player who is out, but the name is garbled. He said the run game has improved since the muddy-run discussion but still has a long way to go, and he framed it as a matter of mindset and continuity with a shuffled group of linemen. Jeremiyah Love is expected to play Sunday after missing two weeks with an ankle injury. LaFleur said no one is truly at 100% by November 1st and that Love feels as good as he can, and he stressed that a back has to be dynamic when planting and cutting. Elijah Wilkinson should be full today, and LaFleur said a rib issue is only a matter of pain tolerance. Hjalte Froholdt was limited after a minor tweak and will be monitored through Saturday. Hayden Conner would be the backup center, and LaFleur praised new tackle Jedrick Wills Jr.'s demeanor and said he is positioned to be ready if called on. LaFleur also said new WR Zay Jones is catching the ball well while running with the look squad. He called the red zone a point of emphasis and said he has to find a way to score more touchdowns. The rest was a general discussion of linebacker value.",
   "injuries": [
    {
     "player": "Jon Gaines",
     "status": "out",
-    "detail": "Opening remark in the captions says Gaines and Walter Nolen will both be out Sunday; captions are garbled, so confirm.",
+    "detail": "Listed as out for the Dallas game.",
     "player_id": "00-0038571"
-   },
-   {
-    "player": "Walter Nolen",
-    "status": "out",
-    "detail": "Opening remark in the captions says Nolen and Gaines will both be out Sunday; captions are garbled, so confirm.",
-    "player_id": ""
    },
    {
     "player": "Jeremiyah Love",
     "status": "returning",
-    "detail": "Missed about two weeks; LaFleur said he will play Sunday and is now full go rather than limited.",
+    "detail": "Missed two weeks with an ankle injury. LaFleur expects him to play Sunday and said he feels as good as he can, though no one is truly at 100%.",
     "player_id": "00-0041027"
    },
    {
     "player": "Elijah Wilkinson",
     "status": "full",
-    "detail": "Rib soreness from earlier in the week; listed as full on Friday, and LaFleur said it can't get worse.",
+    "detail": "Expected to be full today. A rib issue was described as a pain-tolerance matter that can't get worse.",
     "player_id": "00-0033676"
    },
    {
     "player": "Hjalte Froholdt",
     "status": "limited",
-    "detail": "Tweaked something Thursday; LaFleur will reassess Friday and Saturday before deciding on Sunday.",
+    "detail": "Limited Thursday after a minor tweak. His Sunday status will be decided after Friday and Saturday.",
     "player_id": "00-0035258"
    }
   ],
@@ -52,54 +46,68 @@
     "topic": "injury",
     "signal": "up",
     "tone": "positive",
-    "claim": "will play Sunday after being out two weeks and is now full go",
-    "note": "Returning starter-level back, so his snaps and touches are a key Week 8 variable for RB lineup decisions.",
+    "claim": "Love will play against Dallas on Sunday after missing two weeks with an ankle injury.",
+    "note": "The lead back is expected to return, though his explosiveness and cutting on the ankle are worth watching.",
     "quote": "Yeah. He'll be good.",
     "player_id": "00-0041027"
+   },
+   {
+    "player": "Hjalte Froholdt",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Froholdt's availability for Sunday will be determined after Friday and Saturday.",
+    "note": "Another OL question mark behind a thin line affects the run game and pass protection.",
+    "quote": "we'll, we'll, you know, see where he's at today",
+    "player_id": "00-0035258"
+   },
+   {
+    "player": "Hayden Conner",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Conner is the backup center and would step in if the center is hurt.",
+    "note": "He could play if the interior line takes another injury.",
+    "quote": "Haden would jump in inside in there",
+    "player_id": "00-0040219"
+   },
+   {
+    "player": "Jedrick Wills Jr.",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Wills is ready to play if his number is called, given the line injuries.",
+    "note": "He is depth at tackle and could see snaps if more linemen go down.",
+    "quote": "I've loved his demeanor.",
+    "player_id": "00-0036267"
    },
    {
     "player": "Elijah Wilkinson",
     "topic": "injury",
     "signal": "watch",
-    "tone": "neutral",
-    "claim": "is full on Friday and is expected to be available Sunday despite a rib issue",
-    "note": "Rib soreness is a minor concern, and his full practice status keeps his availability on track.",
-    "quote": "as far as my knowledge, it can't get any worse.",
-    "player_id": "00-0033676"
-   },
-   {
-    "player": "Hayden Conner",
-    "topic": "depth_chart",
-    "signal": "up",
-    "tone": "neutral",
-    "claim": "would step in at center if Froholdt can't play",
-    "note": "Conner's backup center role matters only if Froholdt misses, which could mean a larger role on the interior line.",
-    "quote": "obviously Haden would jump in inside in there",
-    "player_id": "00-0040219"
-   },
-   {
-    "player": "Will Johnson",
-    "topic": "role",
-    "signal": "watch",
     "tone": "positive",
-    "claim": "is positioned to be ready if his number is called",
-    "note": "Johnson is a depth piece who could see gameday usage if injuries or rotations open a spot.",
-    "quote": "he's put himself in a position to be ready",
-    "player_id": ""
+    "claim": "Wilkinson will be a full participant today and is expected to play.",
+    "note": "He is a healthy OL body on a banged-up line.",
+    "quote": "He'll be full today.",
+    "player_id": "00-0033676"
    }
   ],
   "topics": [
    {
-    "topic": "Running game",
-    "detail": "LaFleur said the run game has improved since the muddy-field games, but it is still a work in progress that depends on continuity and mindset."
+    "topic": "Run game",
+    "detail": "LaFleur said the run game has improved since the muddy-run discussion but has a long way to go. He called it a matter of mindset and continuity with the mix of linemen available."
    },
    {
     "topic": "Red zone",
-    "detail": "Red zone finishing is the team's focus this week, and LaFleur said points and wins are the metrics that matter."
+    "detail": "Red zone work is emphasized every Friday. LaFleur said he has to find a way, starting with himself, to put the ball in the end zone."
+   },
+   {
+    "topic": "New WR Zay Jones",
+    "detail": "Jones is catching balls well from different quarterbacks while running with the look squad. He is still learning the offense's terminology, helped by his history with some of the Cardinals staff and players."
    },
    {
     "topic": "Linebacker value",
-    "detail": "LaFleur discussed how the league has undervalued linebackers and said the position is starting to rise again."
+    "detail": "LaFleur said the position is extremely valuable and feels the market is creeping back up, but he did not tie it to Arizona's roster."
    }
   ],
   "opponent": "Dallas Cowboys"
@@ -116,19 +124,26 @@
   "after_week": 7,
   "coach": "Kevin Stefanski",
   "words": 2342,
-  "model": "claude-haiku-5-5",
-  "headline": "Stefanski expects a returning player (name garbled in captions, not on the roster) to play next week, and praised rookies Kendal Daniels and Harold Perkins and C.J. Henderson's play.",
-  "summary": "Stefanski said C.J. Henderson has been very valuable to the team, both schematically and in what he adds to the building, and has been playing well. He credited rookies Kendal Daniels and Harold Perkins, drafted on day three, for handling expanded roles that go beyond their college experience, and said both have been focused on the team since arriving. He said the team is planning for a player named James (garbled in the captions and not on the provided roster) to be back on the 53-man roster and make the trip next week, with the plan being for him to play right away. He praised the player's work over the last month and said adding him to the pass rush is a positive. On the hook-and-lateral, he said the risk is real but the play has been called in situations where it fits, and that it is more about creating difficult looks for the defense. He was asked about Ontario Thompson, a name not on the roster, and said he had no update on his status or designation. He also described how red zone play differs (tighter windows, vertical separation, and run-game blocking challenges) and said Fridays are the main red zone practice day.",
-  "injuries": [],
+  "model": "claude-sonnet-5-5",
+  "headline": "Defensive rookies Kendal Daniels and Harold Perkins are praised as early-career starters, and James Pierce is set to return to the 53-man roster and play next week. Pierce is not on the provided roster, so no signal is attached to him.",
+  "summary": "Stefanski opened with a question about a player's hand or arm injury, joked about the 'Thanos' club and said the player has played with a similar cast in the past. His answer was 'we'll see', so the status is unclear and the player is not identified. He called C.J. Henderson very valuable schematically and said he has been playing well. He praised rookies Kendal Daniels and Harold Perkins as day-three picks who are already playing like starters and handling extra versatility, and he credited the players first and the staff second. He confirmed the team plans to activate James Pierce to the 53-man roster next week, that Pierce will travel to Madrid, and that the plan is for him to play next week. He added that Pierce will be a positive addition to the pass rush plan. He had no update on Ontario Thompson's designation. The rest of the session covered red zone philosophy (Fridays are red zone day, defenses change play calls around the 11-yard line, and it is harder to find windows in the run game), the hook-and-lateral trick play, Madrid travel planning, and his own growth as a head coach.",
+  "injuries": [
+   {
+    "player": "Unidentified player (hand/arm cast)",
+    "status": "unclear",
+    "detail": "Asked about a player wearing a club-like cast on his hand or arm. Stefanski said he has played with a similar cast before and that 'we'll see' about this week. The player was not named on the transcript.",
+    "player_id": ""
+   }
+  ],
   "signals": [
    {
     "player": "C.J. Henderson",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "has been very valuable schematically and playing well this season",
-    "note": "Coach praise for a key defensive back signals a continued starting or featured role.",
-    "quote": "he's been, he's been playing well",
+    "claim": "Henderson will keep a valuable scheme role in the defense.",
+    "note": "Henderson is a trusted, well-performing piece of the defense, which helps his IDP outlook and playing time.",
+    "quote": "he's been, he's been playing well.",
     "player_id": ""
    },
    {
@@ -136,9 +151,9 @@
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "rookie drafted on day three is playing a starter-level role and is being asked to do more than in college",
-    "note": "Coach credited the rookie's coachability and training, suggesting his expanded role is stable.",
-    "quote": "they've been all about ball and focused on helping this football team",
+    "claim": "Daniels will keep playing as a starter and in multiple defensive roles.",
+    "note": "He is a rookie starter used in several positions, which supports his IDP snap floor.",
+    "quote": "the more versatile you are, the more you can do.",
     "player_id": ""
    },
    {
@@ -146,28 +161,32 @@
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "rookie drafted on day three is playing a starter-level role and is being asked to cover and play line roles he didn't play in college",
-    "note": "Coach credited the rookie's coachability and training, suggesting his expanded role is stable.",
-    "quote": "they've been all about ball and focused on helping this football team",
+    "claim": "Perkins will keep playing as a starter and in multiple defensive roles.",
+    "note": "He is a rookie starter asked to do more than he did in college, which supports his IDP snap floor.",
+    "quote": "the minute they got here on campus, they've been all about ball",
     "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Returning player (name garbled, not on roster)",
-    "detail": "Stefanski expects a player the captions render as James to be on the 53-man roster and traveling next week, with the plan for him to play right away. He said the player has done everything asked and was comfortable with the league process around his situation."
+    "topic": "James Pierce return",
+    "detail": "Stefanski said the team plans to put Pierce on the 53-man roster next week, that he will travel to Madrid, and that the plan is for him to play next week. He said Pierce has done everything asked of him and called the league's process and the team's handling of the situation comfortable."
+   },
+   {
+    "topic": "Ontario Thompson",
+    "detail": "Stefanski had no update on Thompson and did not know his exact roster designation."
+   },
+   {
+    "topic": "Red zone approach",
+    "detail": "Fridays are red zone practice days, with some work on Thursday. Defenses change their play calls around the 11-yard line, and the run game gets harder because safeties are close to the line of scrimmage. He said red zone success is volatile from year to year."
    },
    {
     "topic": "Hook and lateral",
-    "detail": "Stefanski said the play has been called in certain situations where it fits, and that its risk is real but it makes the offense harder to defend."
-   },
-   {
-    "topic": "Red zone",
-    "detail": "He explained that red zone windows are tighter, the run game is harder because safeties crowd the line, and defenses change coverages often. Fridays are the main red zone practice day."
+    "detail": "The play has been on the call sheet for years. Turnover risk is real, but it is called situationally when the defensive look is right."
    },
    {
     "topic": "Madrid trip",
-    "detail": "The team's travel plan for the Madrid game was set collaboratively by Stefanski and staff, based on past approaches and the team's comfort with its schedule."
+    "detail": "The travel schedule was set collaboratively after studying how other teams handled international trips, and Stefanski is comfortable with the plan."
    }
   ],
   "opponent": ""
@@ -184,26 +203,26 @@
   "after_week": 7,
   "coach": "Jesse Minter",
   "words": 542,
-  "model": "claude-haiku-5-5",
-  "headline": "Lamar Jackson is expected to return and play against the Bills, with the coach saying he looked full in all three practices this week.",
-  "summary": "Coach Jesse Minter opened by saying the team is excited for a chance to play a strong opponent in a difficult environment, and he praised the week of preparation. He said the team expects Lamar Jackson to play this week after a good week of practice, and he believes Jackson was full in all three practice days. Minter credited Jackson for working through an injury to get back on the field. He said Jackson will look like himself and play his usual style of football, and he dismissed the idea that Jackson would be a passive or 'statue' presence. Minter also said Jackson's return will give the team a boost. He praised the backup quarterback for keeping the team in position to win the last three games, but he emphasized that the team does not need to lean on Jackson alone. On G Olaivavega Ioane, Minter said Ioane has worked hard to try to be available, but the final decision will come in the next couple of hours and the injury report will show it. Minter said Jaylinn Hawkins will be out this week.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Lamar Jackson expected to return this week vs. Buffalo after a full practice week; Vega Ioane has a chance but is still undecided.",
+  "summary": "Coach Minter opened by saying the team expects Lamar Jackson to play this week, and that Jackson likely showed as a full participant in all three practices. He credited Jackson for his work rehabbing the injury and said he expects Jackson to look like his usual self, playing his own style of football and not being a 'statue.' Minter said Jackson's return gives the team an energy jolt, but he also said the team should not lean on Jackson as a crutch. He praised the backup QB (called 'Snoop', most likely Tyler Huntley) for putting the team in position to win most of the last three games. On guard Vega Ioane, Minter said he has put in work to potentially play and the decision would come in the next couple of hours, with the injury report to follow. Asked about Jaylinn Hawkins, he said flatly that Hawkins will be out this week. The opponent is Buffalo, which Minter called a really good team in a really good environment.",
   "injuries": [
    {
     "player": "Lamar Jackson",
-    "status": "full",
-    "detail": "Coach expects him to play this week after a good week of practice; likely full in all three practice days, returning from an injury he has worked through.",
+    "status": "returning",
+    "detail": "Expected to play this week; likely full in all three practices after dealing with an injury.",
     "player_id": "00-0034796"
    },
    {
     "player": "Olaivavega Ioane",
-    "status": "questionable",
-    "detail": "Has worked hard to try to play against the Bills; final decision pending over the next couple hours and the injury report.",
+    "status": "unclear",
+    "detail": "Has worked to try to get back and could play, but the decision is pending the injury report.",
     "player_id": "00-0040866"
    },
    {
     "player": "Jaylinn Hawkins",
     "status": "out",
-    "detail": "Coach said he will be out this week.",
+    "detail": "Minter said he will be out this week.",
     "player_id": ""
    }
   ],
@@ -213,9 +232,19 @@
     "topic": "injury",
     "signal": "up",
     "tone": "positive",
-    "claim": "expected to play this week after a full week of practice",
-    "note": "A return to the starting lineup restores the high-upside QB floor and passing-game volume for the offense.",
-    "quote": "",
+    "claim": "Will start at QB this week against Buffalo after practicing fully all week.",
+    "note": "Jackson is healthy enough to return as the starter, which restores the Baltimore offense's fantasy upside, including his rushing.",
+    "quote": "we do think we'll have Lamar this week",
+    "player_id": "00-0034796"
+   },
+   {
+    "player": "Lamar Jackson",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Jackson will play his usual mobile style and will not be limited to a pocket-passer role.",
+    "note": "A mobile Jackson keeps his rushing floor and the offense's usual ceiling intact.",
+    "quote": "I think he'll look like Lamar Jackson.",
     "player_id": "00-0034796"
    },
    {
@@ -223,26 +252,30 @@
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "playing status against the Bills is still undecided",
-    "note": "Only relevant to deeper lineups; check the final injury report before lock.",
+    "claim": "Ioane may play this week, with a decision coming after the injury report.",
+    "note": "His availability affects the interior offensive line, which matters for the run game and for protecting Jackson.",
     "quote": "We'll figure that out over the next couple hours.",
     "player_id": "00-0040866"
    },
    {
-    "player": "Jaylinn Hawkins",
-    "topic": "injury",
+    "player": "Tyler Huntley",
+    "topic": "role",
     "signal": "down",
-    "tone": "negative",
-    "claim": "will be out this week",
-    "note": "Hawkins is ruled out, so he has no fantasy value this week.",
-    "quote": "Yeah, Hawk will be out this week.",
-    "player_id": ""
+    "tone": "positive",
+    "claim": "Huntley, likely the backup QB referred to as 'Snoop', returns to the bench once Jackson is back.",
+    "note": "His short-term fantasy value drops with Jackson back as the starter.",
+    "quote": "I thought Snoop over the last three games put us in position to be successful",
+    "player_id": "00-0035993"
    }
   ],
   "topics": [
    {
-    "topic": "Opponent and environment",
-    "detail": "Minter described the upcoming game as a chance to play a really good team in a strong environment, which matches the Buffalo Bills matchup in the video description."
+    "topic": "Team mindset",
+    "detail": "Minter is proud of how the team prepared and worked this week. He said Jackson's return will energize the group, but the team should not become dependent on him."
+   },
+   {
+    "topic": "Secondary injury",
+    "detail": "Jaylinn Hawkins will miss this week's game."
    }
   ],
   "opponent": "Buffalo Bills"
@@ -259,81 +292,105 @@
   "after_week": 6,
   "coach": "Joe Brady",
   "words": 1306,
-  "model": "claude-haiku-5-5",
-  "headline": "Damar Hamlin gets the starting safety job Sunday vs. Baltimore, and several starters (Kincaid, DJ Moore, Spencer Brown, Dee Alford) are questionable with lower-body issues.",
-  "summary": "Brady opened with the injury report: Dalton Kincaid, DJ Moore, Spencer Brown, and Dee Alford are questionable, Greg Gaines is also listed as questionable, and Tyrell Shavers is out. He said the group tweaked a lower-body issue in practice. On Spencer Brown, Brady said he trusts the left tackle's preparation and experience to perform even without many practice reps, so he expects him to be able to play. Brady said no one is fully healthy this late in the season and that Baltimore will present the best version of Lamar Jackson. He praised three strong practice days after the bye and the team's attention to detail. Damar Hamlin will start at safety, and Brady said the team has several options at nickel and will use versatile players to cover different fits. On Baltimore's defense, Brady said new coordinator Jesse Minter has adjusted the scheme from his Chargers and Michigan stops, and that the Bills must prepare for new wrinkles and a different look from Baltimore's past defenses. Brady said self-scouting led to focused improvement without losing the defense's identity. He also flagged Zay Flowers as a major challenge who can line up inside or outside and has strong chemistry with Jackson. Brady closed by saying Hamlin has earned the start, handles multiple positions, and will make the most of the extra snaps.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Damar Hamlin starts at safety vs. Baltimore, but TE Dalton Kincaid, WR DJ Moore and LT Spencer Brown are all questionable and WR Tyrell Shavers is out.",
+  "summary": "Brady opened with the injury report: Kincaid, DJ Moore, Spencer Brown, Dee Alford and Greg Gaines are questionable, and Tyrell Shavers is out. He said someone tweaked a lower body in practice today, without making clear who. He said he trusts Brown to play without a full practice week because of his experience, his preparation and his high level of play. Brady said the team used the bye well, had three strong practice days, and showed good attention to detail after the self-scout. Damar Hamlin will start at safety. Brady praised his versatility, said he has played nickel without hesitation in the past, and said he has earned the larger role. If Alford can't play, Brady gave no specific nickel plan beyond saying several players can move inside or outside. He called the Ravens' defense different from past Baltimore units because new head coach Jesse Minter brings the scheme he ran at Michigan and with the Chargers, combined with Anthony Weaver, whose Dolphins defense did well against Buffalo last year. He also said Baltimore will bring the best version of Lamar Jackson, and that the Bills will have their hands full with Zay Flowers.",
   "injuries": [
    {
     "player": "Dalton Kincaid",
     "status": "questionable",
-    "detail": "Listed questionable on the injury report; lower-body tweak mentioned generally in practice.",
+    "detail": "Listed questionable on the final practice report; no details given.",
     "player_id": "00-0038933"
    },
    {
     "player": "DJ Moore",
     "status": "questionable",
-    "detail": "Listed questionable on the injury report.",
+    "detail": "Listed questionable on the final practice report; no details given.",
     "player_id": "00-0034827"
    },
    {
     "player": "Spencer Brown",
     "status": "questionable",
-    "detail": "Listed questionable; Brady expressed trust he will be able to play despite limited practice reps.",
+    "detail": "Questionable. Brady has a lot of trust in him to play without a full week of practice reps.",
     "player_id": "00-0036976"
    },
    {
     "player": "Dee Alford",
     "status": "questionable",
-    "detail": "Listed questionable on the injury report.",
+    "detail": "Questionable. His availability affects the nickel spot in the secondary.",
     "player_id": ""
    },
    {
     "player": "Greg Gaines",
     "status": "questionable",
-    "detail": "Listed questionable; name is not on the roster, so the player may be a transcription error.",
+    "detail": "Listed questionable; no details given.",
     "player_id": ""
    },
    {
     "player": "Tyrell Shavers",
     "status": "out",
-    "detail": "Ruled out; name is not on the roster, so the player may be a transcription error.",
+    "detail": "Ruled out. Brady said someone 'tweaked the lower body' in practice today, but he did not clearly tie it to Shavers.",
     "player_id": ""
    }
   ],
   "signals": [
    {
+    "player": "Spencer Brown",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Brown is questionable but is expected to be trusted to play Sunday despite limited practice reps.",
+    "note": "His availability affects the pass protection and run blocking around Josh Allen and James Cook.",
+    "quote": "I have a lot of trust in his preparation",
+    "player_id": "00-0036976"
+   },
+   {
+    "player": "Dalton Kincaid",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Kincaid is questionable for Sunday against Baltimore.",
+    "note": "His status is uncertain, so check the inactive list before locking in a TE.",
+    "quote": "",
+    "player_id": "00-0038933"
+   },
+   {
+    "player": "DJ Moore",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "DJ Moore is questionable for Sunday against Baltimore.",
+    "note": "If he sits, the target share behind Khalil Shakir and Keon Coleman could shift.",
+    "quote": "",
+    "player_id": "00-0034827"
+   },
+   {
     "player": "Damar Hamlin",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "will start at safety this week and get a large share of defensive snaps",
-    "note": "A confirmed starting role with expanded playing time makes him a potential source of tackles and splash plays.",
-    "quote": "Uh, Damar Hamlin will start at safety.",
+    "claim": "Hamlin will start at safety Sunday and play a lot of snaps.",
+    "note": "This matters mainly for IDP leagues, since a starting safety role raises his tackle opportunities.",
+    "quote": "Damar Hamlin will start at safety.",
     "player_id": ""
-   },
-   {
-    "player": "Spencer Brown",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "expected to play Sunday despite being listed questionable",
-    "note": "Brady sounded confident in Brown's ability to play through limited reps, but the questionable tag keeps his status open until gameday.",
-    "quote": "I have a lot of trust in his preparation",
-    "player_id": "00-0036976"
    }
   ],
   "topics": [
    {
-    "topic": "Defensive scheme vs. Baltimore",
-    "detail": "Brady said Baltimore's defense under new coordinator Jesse Minter has changed from his prior stops, with new wrinkles the Bills must prepare for."
+    "topic": "Ravens defense",
+    "detail": "Brady said the unit is not simply the old Baltimore scheme. New head coach Jesse Minter brings the scheme he ran at Michigan and with the Chargers, and Anthony Weaver's Dolphins defense did well against Buffalo last year."
    },
    {
-    "topic": "Self-scouting and practice",
-    "detail": "Brady praised the defense's intentional approach to self-scouting changes and the strong communication and focus during the bye week."
+    "topic": "Bye week and self-scout",
+    "detail": "Brady liked the team's attention to detail and communication this week. He said the defense is working on what the self-scout showed without losing its identity."
    },
    {
-    "topic": "Zay Flowers and Lamar Jackson",
-    "detail": "Brady called Zay Flowers a major challenge who can play inside or outside and expects the best version of Lamar Jackson."
+    "topic": "Nickel and secondary depth",
+    "detail": "If Alford can't go, Brady said the Bills have several options and that players can move inside or outside. He added that coverages and fits change when players move between those spots."
+   },
+   {
+    "topic": "Ravens offense",
+    "detail": "Brady expects the best version of Lamar Jackson and said Zay Flowers is electric with the ball in his hands. He also said Flowers can play inside or outside and has strong chemistry with Jackson, so the Bills will 'have our hands full with him'."
    }
   ],
   "opponent": "Baltimore Ravens"
@@ -350,15 +407,21 @@
   "after_week": 8,
   "coach": "Dave Canales",
   "words": 4209,
-  "model": "claude-haiku-5-5",
-  "headline": "Canales overhauls the defensive staff with Todd Walsh as interim coordinator; Will Lee's hamstring timeline is pending, and the offense is being asked to balance its vertical passing with quicker concepts.",
-  "summary": "Dave Canales said the defensive coordinator change was his decision, made after gathering information over time and weighing the schedule, the team's divisional position, and the need to get the most from the roster. He framed the move as laying groundwork for the style of football he wants, with the run game and winning first and second down as the foundation. Todd Walsh takes over as interim coordinator, and Canales praised his experience, his connection with players, and his scheme knowledge. Renaldo Hill will take over the secondary, and A.C. Carter moves to coach the front and defensive tackles, freeing Walsh for more coordinator duties. Canales said the locker room reaction is still being gauged and that staff staffing is being discussed through the weekend. On offense, he acknowledged that the vertical passing game has run into protection problems and that opponents are starting to attack it, so the staff wants more balance through quicker, shallower concepts. He said the offensive line is being reevaluated each week and that Brady Christensen is \"doing great\" and is one possibility for the lineup. He also said the extra days before Monday will be used to regroup ahead of the Broncos game.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Panthers fired DC Ejiro Evero and another defensive coach; Todd Wash takes over as interim play-caller, and the offense still needs to fix its protection issues. CB Will Lee has a hamstring injury with no timeline yet.",
+  "summary": "Canales opened by announcing the dismissals of defensive coordinator EJ Ibarra and Jonathan Cooley. He said the decision was his, made after gathering information over time and weighing the games remaining and the team's spot in the division. Todd Wash will take over the defense and call it from here on out. Canales praised Wash's experience, his understanding of front and run-game mechanics, and his connection with the players. He wants the defense to play fast, physical and connected, starting with the run game and owning first and second down. Staff roles are being reshuffled: Renaldo Hill takes over the secondary and A.C. Carter moves to the front and defensive tackles. On offense, he acknowledged that opponents are now taking away the vertical passing game and that protection has been inconsistent. He said the offense needs a more rhythmic, balanced approach and a better run game. He said the line has to be clean at the snap to give Bryce Young time. Will Lee's hamstring injury and the offensive line injuries were discussed; Brady Christensen is doing well and could be in the mix. Carolina has extra days to prepare for the Broncos.",
   "injuries": [
    {
     "player": "Will Lee",
     "status": "unclear",
-    "detail": "Hamstring injury; Canales said a clearer timeline will come shortly after evaluation and would not say whether he is an IR candidate.",
+    "detail": "Hamstring injury. Canales said the team will know more about the timeline shortly and does not yet know whether he is an IR candidate.",
     "player_id": ""
+   },
+   {
+    "player": "Corey Bullock",
+    "status": "unclear",
+    "detail": "A reporter said he went down with an injury. Canales did not give a specific update, only that the team is evaluating the line.",
+    "player_id": "00-0039242"
    }
   ],
   "signals": [
@@ -367,34 +430,48 @@
     "topic": "scheme",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Offense will add more quick, shallower passing concepts to balance the vertical game and reduce protection problems.",
-    "note": "Changes to the passing approach and the protection plan could affect Young's efficiency and his downfield target volume.",
-    "quote": "we're going to need to be balanced and not so predictable in those spots",
+    "claim": "The offense will look for a more balanced, rhythmic pass game with quicker timing and cleaner protection at the snap to give Young time.",
+    "note": "Opponents are taking away the vertical shots and protection is shaky, so Young's deep-ball upside is uncertain while quicker throws could raise his floor.",
+    "quote": "",
     "player_id": "00-0039150"
    },
    {
     "player": "Will Lee",
     "topic": "injury",
-    "signal": "watch",
+    "signal": "down",
     "tone": "hedged",
-    "claim": "Lee has a hamstring injury, and his timeline will be clarified after evaluation.",
-    "note": "He is a corner the team is still counting on, and his availability is uncertain until the evaluation is finished.",
-    "quote": "had a hamstring injury. We'll know more about his, uh, timeline",
+    "claim": "Lee has a hamstring injury, and the team will have a clearer timeline soon, including whether he goes on IR.",
+    "note": "The CB depth is thin, which could mean pressure on the Panthers' pass defense.",
+    "quote": "",
     "player_id": ""
+   },
+   {
+    "player": "Corey Bullock",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "The Panthers are evaluating offensive line options and looking for the best five to put out there.",
+    "note": "Line instability hurts the offense's pass protection and run-game efficiency.",
+    "quote": "",
+    "player_id": "00-0039242"
    }
   ],
   "topics": [
    {
-    "topic": "Defensive staff",
-    "detail": "Todd Walsh is interim defensive coordinator, Renaldo Hill takes over the secondary, and A.C. Carter takes over the front and defensive tackles. Canales said the decision was his and that the goal is unity across the defense."
+    "topic": "Defensive coaching changes",
+    "detail": "EJ Ibarra and Jonathan Cooley were let go. Todd Wash is now interim coordinator and play-caller, Renaldo Hill takes the secondary, and A.C. Carter takes the front and defensive tackles."
    },
    {
-    "topic": "Offensive line and protection",
-    "detail": "Canales said the staff is evaluating film each week to find the best five linemen, with a focus on pass protection, stunt pickup, and a clean start. Brady Christensen is described as doing great and is a possibility for the mix, though no timetable was given."
+    "topic": "Offensive line",
+    "detail": "The Panthers are looking at all options for reinforcements. Brady Christensen is 'doing great' and is one of the possibilities for the mix."
    },
    {
-    "topic": "Schedule and preparation",
-    "detail": "Extra days before Monday are being used to get the staff and roster on the same page before the Broncos game, with Canales calling the matchup the most urgent thing right now."
+    "topic": "Run game and balance",
+    "detail": "Canales said the run game must keep improving and find consistency so the team can play balanced offense. He said that the vertical passing game has to be balanced with shorter, rhythm throws."
+   },
+   {
+    "topic": "Accountability and pressure",
+    "detail": "Canales said the urgency comes from himself and the staff, not from ownership. He said the offense is held to the same standard and that the firings were not about offensive struggles."
    }
   ],
   "opponent": "Denver Broncos"
@@ -411,65 +488,75 @@
   "after_week": 7,
   "coach": "Todd Monken",
   "words": 2935,
-  "model": "claude-haiku-5-5",
-  "headline": "Michael Hall is back in the rotation for the Steelers game, while Tytus Howard's status remains unresolved until Saturday morning.",
-  "summary": "Monken said the staff will have a clearer read on Tytus Howard in the morning, with another practice Saturday to work through it, and that Howard's performance in practice has been fine. He said Michael Hall tried to play last week but could not, and that Hall's return is a real boost to a defensive line that has depth thanks to the elevated player who filled in up front. Monken said Hall's disruption will help fix the fit problems that let Tennessee run the ball, and he praised Hall for returning to finish a prior game after being knocked out. On Jared Verse's comments calling Pittsburgh dirty, Monken said he had not seen them, has great respect for the Steelers' physical style, and expects a loud environment because CLE is playing better. He credited the offense's improvement against Tennessee to collective effort in protection, ball distribution, and staying ahead of the chains rather than any single player. Monken said the team's mindset is to move on quickly from mistakes, taking things one play at a time. He said he has not yet decided on the backup quarterback plan for the Pittsburgh game and will designate one of four options later.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Tytus Howard's status for Pittsburgh is still unresolved, with a clearer picture expected Saturday morning. Michael Hall is back in the DL rotation, and Deshaun Watson is coming off his most complete game.",
+  "summary": "Monken said the team will know more about Tytus Howard's availability in the morning and still has a Saturday practice to work through it. The question about Howard was garbled, so how much practice time he has missed is unclear. He praised a young offensive lineman who stepped in recently, saying reps in the offseason are paying off, but the transcript doesn't make clear who that player is. Michael Hall is back in the defensive line rotation after trying to play last week, and Monken said he helps with run-fit disruption after Tennessee's strong rushing day. Monken described the Tennessee game as one of 'misfits' that the team can clean up. He also called Watson's last game probably his most complete, and said the whole offense played better, including protection, getting the ball out, running the ball and staying ahead of the chains. On Pittsburgh, he praised their two-back versatility and power running, and said he respects the Steelers' physicality. He had not seen Jared Verse's comments calling Pittsburgh dirty and wouldn't speak for him. He had not yet settled on the backup QB or the game-day inactives, only that one of four options will be designated.",
   "injuries": [
    {
     "player": "Tytus Howard",
     "status": "unclear",
-    "detail": "Monken said there is no firm answer yet; the staff will know more in the morning and practice again Saturday. Practice performance described as fine.",
+    "detail": "Monken said the team will have a better idea in the morning and has a Saturday practice to work through it. He indicated there is enough time. The question was garbled, so the extent of his practice participation is unclear.",
     "player_id": "00-0035234"
    },
    {
     "player": "Michael Hall",
     "status": "returning",
-    "detail": "Hall tried to go last week but could not play. He has no injury designation for this game, and Monken said he feels really good and is excited to have him back.",
+    "detail": "Tried to play last week but couldn't. He appears set to play against Pittsburgh with no injury designation. He has been out since being knocked out in the Week 4 Pittsburgh game.",
     "player_id": ""
    }
   ],
   "signals": [
    {
     "player": "Michael Hall",
-    "topic": "injury",
+    "topic": "depth_chart",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will be back in the defensive rotation for the Steelers game",
-    "note": "A returning defensive lineman should add snaps and run-stopping value, and Monken framed his return as a real boost.",
+    "claim": "Hall returns to the defensive line rotation against Pittsburgh and helps tighten up the run defense.",
+    "note": "His return bolsters the run defense and DL depth, which matters for IDP and for the Browns' defensive matchup against Pittsburgh's two-back run game.",
     "quote": "So really excited to have him back in the rotation.",
     "player_id": ""
    },
    {
+    "player": "Tytus Howard",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Howard's availability will be clearer Saturday morning after one more practice.",
+    "note": "His status affects Cleveland's offensive line and pass protection, so check the final report before setting lineups.",
+    "quote": "we'll have a better idea in the morning",
+    "player_id": "00-0035234"
+   },
+   {
     "player": "Deshaun Watson",
-    "topic": "matchup",
+    "topic": "other",
     "signal": "up",
     "tone": "positive",
-    "claim": "Coming off what Monken called his most complete game; offense as a whole improved",
-    "note": "Monken credited the offense collectively, but the QB's recent level of play supports continued passing production against Pittsburgh.",
-    "quote": "probably his most complete game and thus complete.",
+    "claim": "Watson is building on his most complete game, and the offense continues to improve around him.",
+    "note": "Better protection and offensive execution support Watson's outlook, though Monken credited the whole offense rather than just him.",
+    "quote": "last game was you know probably his most complete game",
     "player_id": "00-0033537"
    }
   ],
   "topics": [
    {
-    "topic": "Run defense",
-    "detail": "Monken acknowledged Tennessee's run success came from misfits and that the defense must be cleaner with fits, which Hall's return should help."
+    "topic": "Opponent: Pittsburgh",
+    "detail": "Monken praised Pittsburgh's versatility and its use of two running backs, one of them a powerful runner. He said run defense is a priority after Tennessee's big rushing day, which he put down to misfits."
+   },
+   {
+    "topic": "Offensive improvement",
+    "detail": "He credited better protection, quicker ball release, a stronger run game and staying ahead of the chains. He said no single player played significantly better from one week to the next."
    },
    {
     "topic": "Personnel philosophy",
-    "detail": "Monken prefers versatile multiple personnel groups, but says personnel and situational football (short yardage, goal line, four-minute) dictate usage."
+    "detail": "Monken prefers to be multiple in personnel, run schemes and pass schemes, but said you play your best players. Having three-down tight ends, backs and receivers reduces the need to rotate players by situation."
    },
    {
     "topic": "Jared Verse comments",
-    "detail": "Monken said he had not seen Verse's comments about Pittsburgh, respects the Steelers' physical style, and said he speaks for himself."
+    "detail": "He hadn't seen Verse's comments calling the Steelers dirty and said Verse speaks for himself. He said he respects Pittsburgh's physical style and wants Cleveland to be that kind of team."
    },
    {
-    "topic": "Travel and short week",
-    "detail": "Monken said he does not consider travel, short weeks, or international games a major factor and focuses on what the team can control."
-   },
-   {
-    "topic": "Backup quarterback",
-    "detail": "Monken has not finalized the plan for Dillon Gabriel or the backup quarterback and will need to designate one of four backups for the game."
+    "topic": "Backup QB / inactives",
+    "detail": "Monken said he hasn't yet decided the plan for Dillon Gabriel or the inactive list. He said the team has four QBs and must designate one as the backup."
    }
   ],
   "opponent": "Pittsburgh Steelers"
@@ -486,62 +573,56 @@
   "after_week": 7,
   "coach": "Brian Schottenheimer",
   "words": 3777,
-  "model": "claude-haiku-5-5",
-  "headline": "Coach Schottenheimer says DeMarvion Overshown is back and Tyler Smith is playing well, with Dak Prescott's trust and the run-heavy approach both reaffirmed ahead of Week 8 at Arizona.",
-  "summary": "Schottenheimer said his team is balancing run and pass, and that the commitment to the run came after struggles against Tampa Bay and Green Bay. He credited a much-improved offensive line, with Tyler Smith back for his third week and playing well, for the physical run game against Philadelphia. He described protection improvements as a function of the group playing together more, and said defenses are using twists and stunts to stress protections. He defended Dak Prescott's awareness on the late-game run call that kept the Cowboys' field position in mind, and said he has more confidence in Prescott than anyone. On defense he said health is the big driver, with bodies returning, and singled out Joey Porter Jr., Shemar James, and Quinnen Williams as playing well. He previewed Arizona by praising Budda Baker and Trey McBride and noting the Cardinals' multi-safety looks, and said the Cowboys have struggled against them recently and need to take care of the ball.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Cowboys are committed to run/pass balance after the Eagles win; Tyler Smith's return is helping the OL, and the defense is getting healthier (Demo back, Joey Porter Jr. now comfortable) ahead of Arizona and Trey McBride.",
+  "summary": "Schottenheimer said the offense played with much more balance against Philadelphia after the running game stalled in the Tampa and Green Bay losses, and he wants to hurt teams both running and throwing. He credited the offensive line's best game of the season to Tyler Smith's return and the group playing together, noting they were physically dominant against a strong Eagles front. He defended play calls like runs on third-and-long and in the red zone, saying Dak Prescott totally understands and he has more confidence in Dak than anyone. He explained the end-of-half timeout sequence, saying the team wants to stay on the ball and snap in the 28-32 second range but was a bit slow on the double move to CeeDee Lamb. On defense he called the unit inconsistent but pointed to a strong second half and to improving health as the big reason for optimism. He singled out Joey Porter Jr. as finally comfortable in the system, DeMarvion Overshown's return as huge, Shemar James playing great, and Quinnen Williams playing like himself. For Arizona, he praised Budda Baker and the multiple three-safety looks of Nick Rallis' defense, called Trey McBride dynamic and the focal point of the offense, and said ball security will decide the game given Dallas is 1-8 in the last nine against the Cardinals.",
   "injuries": [
    {
     "player": "DeMarvion Overshown",
     "status": "returning",
-    "detail": "Back from injury and described as a big boost to the defense's health; the coach said getting him back was huge.",
+    "detail": "Coach said it was great seeing 'Demo' come back and that his return was huge for the defense.",
     "player_id": ""
-   },
-   {
-    "player": "Tyler Smith",
-    "status": "returning",
-    "detail": "Played in his third week back and is described as playing great football; he helped the line perform well against Philadelphia.",
-    "player_id": "00-0037243"
    }
   ],
   "signals": [
+   {
+    "player": "Tyler Smith",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Tyler Smith, back for his third game, is playing great and anchoring a improved offensive line.",
+    "note": "A stabilized line with Smith back supports the run game and Dak's pass protection, lifting offensive skill players.",
+    "quote": "I think Tyler's playing great football right now",
+    "player_id": "00-0037243"
+   },
    {
     "player": "Dak Prescott",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Coach fully trusts Prescott's situational awareness; late-game run calls were not a lack of confidence in him.",
-    "note": "Reinforces that Prescott's passing volume is not being curtailed by a run-first identity.",
+    "claim": "Dallas has full confidence in Dak and run calls in tough spots were not a slight against him.",
+    "note": "Coach strongly backs Dak, though the balanced approach may limit extreme pass volume.",
     "quote": "I have more confidence in that guy than, than, uh, than anybody in the world.",
     "player_id": "00-0033077"
-   },
-   {
-    "player": "Tyler Smith",
-    "topic": "injury",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Smith is back in the lineup and playing at a high level.",
-    "note": "A healthy, high-performing left tackle or guard helps the run game and pass protection that feeds Dallas's skill players.",
-    "quote": "I think Tyler's playing great football right now",
-    "player_id": "00-0037243"
-   },
-   {
-    "player": "DeMarvion Overshown",
-    "topic": "injury",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Overshown is back and is part of the defense's improved health.",
-    "note": "Returning linebacker adds to a defense that had been inconsistent, which matters for DST and game-script considerations.",
-    "quote": "getting D-mo back was huge",
-    "player_id": ""
    },
    {
     "player": "Joey Porter Jr.",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Porter is now comfortable in the system and understands it fully.",
-    "note": "A cornerback settling in suggests more consistent defensive usage and a stronger secondary.",
-    "quote": "this guy is finally comfortable playing as a cowboy",
+    "claim": "Porter is now comfortable in the defensive system and should play more confidently.",
+    "note": "Relevant for IDP and for matchups against opposing receivers.",
+    "quote": "this guy is finally comfortable playing as a cowboy.",
+    "player_id": ""
+   },
+   {
+    "player": "DeMarvion Overshown",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Overshown is back and helping the defense.",
+    "note": "His return boosts the linebacker group for IDP value.",
+    "quote": "getting, you know, D-mo back was huge",
     "player_id": ""
    },
    {
@@ -549,8 +630,8 @@
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "James is playing great and is a significant contributor to the defense.",
-    "note": "Strong play at his role supports his continued defensive snaps.",
+    "claim": "James is playing great at linebacker.",
+    "note": "IDP managers should view him as a productive, trusted starter.",
     "quote": "Shemar James is playing great.",
     "player_id": ""
    },
@@ -559,36 +640,56 @@
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Williams is playing like his best self on the defensive front.",
-    "note": "A productive interior lineman helps create pressure that supports defensive fantasy outcomes.",
+    "claim": "Williams is playing at his usual high level.",
+    "note": "Positive sign for his IDP production and the front's pressure.",
     "quote": "You're feeling Quinnen Williams playing like Quinnen Williams.",
     "player_id": ""
+   },
+   {
+    "player": "Hunter Luepke",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Luepke nearly scored on a red-zone run call against the Eagles.",
+    "note": "He is used on short-yardage and red-zone carries, a minor touchdown-dependent role.",
+    "quote": "Hunter almost got through there and almost had a chance to go and score.",
+    "player_id": "00-0038738"
+   },
+   {
+    "player": "CeeDee Lamb",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Dallas targeted Lamb on a double move at the end of the first half but didn't snap quickly enough to capitalize fully.",
+    "note": "Shows he remains a primary read in two-minute situations.",
+    "quote": "",
+    "player_id": "00-0036358"
    }
   ],
   "topics": [
    {
-    "topic": "Run-first philosophy",
-    "detail": "Schottenheimer described a balanced offense that wants to hurt teams both running and throwing, and admitted a strong commitment to the run after poor running games against Tampa Bay and Green Bay."
+    "topic": "Run/pass balance",
+    "detail": "After the Tampa and Green Bay games where the run game stalled, Dallas committed to balance and wants to beat teams both ways. He grew up as the son of Marty Ball but wants to run effectively when defenses expect it."
    },
    {
     "topic": "Offensive line",
-    "detail": "The line had its best game of the season against Philadelphia, which the coach attributed to the group gelling and accepting a physical challenge; he also said pass protection improves with more time together against stunts."
+    "detail": "Best game of the season against Philadelphia's front, with Tyler Smith's return and continuity helping. Teams use twists and stunts to stress protection, and more time together improves it."
    },
    {
-    "topic": "Late-game clock and timeouts",
-    "detail": "The coach said the team wants to stay on the ball in tempo situations and that the ideal snap timing is roughly 28 to 32 seconds on the play clock; a late-half drive was slowed by a delayed snap."
+    "topic": "Tempo and clock management",
+    "detail": "Target snap time is about 28-32 seconds on a 40-second clock in hurry-up. The end-of-half drive was good but a few seconds were wasted due to a scrum."
    },
    {
     "topic": "Defense",
-    "detail": "The coach said the defense has been inconsistent, with problems on third downs and in the red zone, but the second half against Philadelphia was strong and health is driving optimism."
+    "detail": "Inconsistent, but second half against Philadelphia was strong after the opening touchdown drive. Red zone defense needs to tighten. Health is the main reason for optimism."
    },
    {
-    "topic": "Arizona Cardinals preview",
-    "detail": "He praised Budda Baker as a versatile player who leads the team in tackles, sacks, and interceptions, and highlighted Trey McBride as a dynamic tight end who gets heavy targets. He noted Arizona's exotic three-safety looks and said Arizona has had the Cowboys' number recently, so ball security is the key."
+    "topic": "Arizona defense",
+    "detail": "Budda Baker leads the team in tackles, sacks and interceptions. Nick Rallis uses three safeties and exotic looks, similar to Green Bay's, to frustrate offenses."
    },
    {
-    "topic": "Coaching and mindset",
-    "detail": "He said the job is not more stressful than expected and that the team is motivated by the pursuit of perfection, while acknowledging there are still many things to clean up."
+    "topic": "Arizona offense",
+    "detail": "Trey McBride is a dynamic, powerful runner after the catch and the offense runs through him. Respect for Jacoby Brissett and Drew Petzing's replacement LaFleur's first-year job; Arizona has beaten Dallas the last four times at AT&T Stadium."
    }
   ],
   "opponent": "Arizona Cardinals"
@@ -734,14 +835,14 @@
   "after_week": 7,
   "coach": "Sean Payton",
   "words": 2082,
-  "model": "claude-haiku-5-5",
-  "headline": "RJ Harvey's status is unknown with no update, while Dobbins is in a deep three-back rotation and Trautman and Engram are being used in jumbo packages.",
-  "summary": "Payton said the Broncos have a deep running back room with three backs, which makes balancing the rotation harder than with two. He said Dobbins is doing well, that his production has peaked, and that analytics on burst and speed support the depth. Asked about RJ Harvey, he said there was no status update. He described target planning for receivers and tight ends as more fixed than running back touches, which can shift with the flow of a game. On red-zone defense, he credited stopping the run and getting off the field on third down. He explained that jumbo personnel is game-dependent and sometimes used to force the base defense into a look the team wants to run, with Trautman and Engram as examples. He framed the Chiefs game as a divisional matchup that matters and said the team does not break the season into quarters. Against Seattle's run game, he said pursuit to the ball was the main emphasis.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Payton gave little actionable injury news: RJ Harvey has 'no status' for now, the backfield stays a deep three-back rotation with J.K. Dobbins doing well, and Denver prepares for a divisional Week 8 game against the Chiefs.",
+  "summary": "Payton was asked whether Dobbins is on a load-management plan. He said three backs make it harder to balance touches than two, that Dobbins is doing well, and that the room is deep and he likes how they play. He added that Dobbins' analytical numbers (burst and speed) have peaked. Asked about RJ Harvey's status, he said only 'No status right now.' On spreading the ball around, he said he talks often with pass catchers about their targets, installs plays so certain players see looks, and a hot-hand element exists but is easier to apply at running back than at receiver. He explained that jumbo packages are game-plan dependent, used to force a defense into its base personnel for runs designed against base, and he mentioned Trautman and Engram as the tight ends who might otherwise draw sub packages. He said red-zone defense starts with stopping the run and winning third down. He called the Chiefs game an important divisional game and said Denver doesn't compartmentalize the season into quarters. He wants better pursuit to the ball against the run than in Week 1, and he praised kicker Will Lutz's consistency and playoff experience. The rest was reminiscing about scouting Patrick Mahomes and admiration for the Chiefs' creativity.",
   "injuries": [
    {
     "player": "RJ Harvey",
     "status": "unclear",
-    "detail": "Payton said there was no status to report on Harvey.",
+    "detail": "Asked about his status, Payton said 'No status right now,' giving no update on health or availability.",
     "player_id": "00-0040730"
    }
   ],
@@ -750,10 +851,10 @@
     "player": "J.K. Dobbins",
     "topic": "usage",
     "signal": "watch",
-    "tone": "positive",
-    "claim": "Will stay in a three-back rotation with no specific load-management plan described",
-    "note": "A deep backfield makes his weekly snap and touch share uncertain even though he is performing well.",
-    "quote": "he's doing well",
+    "tone": "hedged",
+    "claim": "Dobbins will remain part of a three-back rotation rather than get a clear lead role; no load-management plan was confirmed.",
+    "note": "Payton called the backfield deep and didn't commit to a workload for Dobbins, which caps his touch certainty.",
+    "quote": "it's much easier with two to get the, the balance. But and he's doing well.",
     "player_id": "00-0036158"
    },
    {
@@ -761,44 +862,32 @@
     "topic": "injury",
     "signal": "watch",
     "tone": "neutral",
-    "claim": "No injury status available as of this press conference",
-    "note": "Without a status update, his availability for Sunday is unclear and affects the backfield outlook.",
+    "claim": "",
+    "note": "Payton offered no update, so Harvey's availability and role for Week 8 remain uncertain.",
     "quote": "No status right now.",
     "player_id": "00-0040730"
-   },
-   {
-    "player": "Adam Trautman",
-    "topic": "usage",
-    "signal": "watch",
-    "tone": "neutral",
-    "claim": "Used in jumbo or heavy personnel packages designed to force base-defense looks",
-    "note": "Jumbo packages can add tight end snaps and goal-line work, though the usage is situational.",
-    "quote": "if we put, um, Trout and Evan in the game",
-    "player_id": "00-0036422"
-   },
-   {
-    "player": "Evan Engram",
-    "topic": "usage",
-    "signal": "watch",
-    "tone": "neutral",
-    "claim": "Used in jumbo or heavy personnel packages designed to force base-defense looks",
-    "note": "Jumbo usage gives him situational snaps, but it is game-dependent and not a consistent role.",
-    "quote": "if we put, um, Trout and Evan in the game",
-    "player_id": "00-0033881"
    }
   ],
   "topics": [
    {
+    "topic": "Hot hand / target distribution",
+    "detail": "Payton said he talks often with players about targets and gets certain looks into the plan. A hot-hand approach exists but is easier at running back than at receiver, where roles are tied to the game plan."
+   },
+   {
+    "topic": "Jumbo and heavy personnel",
+    "detail": "Heavy sets are used to get the defense into base personnel for runs designed against base. Trautman and Engram on the field can invite a sub defense, so jumbo is used when Denver wants the base look."
+   },
+   {
     "topic": "Red-zone defense",
-    "detail": "Payton credited the unit's red-zone success to stopping the run and winning on third downs inside the red zone."
+    "detail": "Denver's red-zone success starts with stopping the run and getting off the field on third down in the red zone."
    },
    {
-    "topic": "Run defense vs. Seattle",
-    "detail": "Payton said pursuit to the ball was the main emphasis after Seattle ran effectively, and he sees improvement since Week 1."
+    "topic": "Run defense",
+    "detail": "The focus this week is pursuit and effort to the ball, which Payton says can be better than in Week 1 against the Chiefs, using Seattle's performance as a model."
    },
    {
-    "topic": "Kicker",
-    "detail": "Payton discussed the kicker competition that led to signing Will Lutz after the final cut, though Lutz is not on the roster provided."
+    "topic": "Kicker Will Lutz",
+    "detail": "Payton praised Lutz's consistency, big kicks and playoff experience, and told the story of signing him after final cuts."
    }
   ],
   "opponent": "Kansas City Chiefs"
@@ -815,105 +904,105 @@
   "after_week": 7,
   "coach": "Dan Campbell",
   "words": 2212,
-  "model": "claude-haiku-5-5",
-  "headline": "Kerby Joseph has no limitations for the Vikings game after playing every defensive rep in the second half; Gibbs praised as a complete back; Pacheco still rehabbing toward a possible mid-December return.",
-  "summary": "Campbell said Kerby Joseph has progressed well through individual and group work, with team reps still to come, and that he will be in full practice next week. He dismissed the sleeve Joseph wore as a routine swelling precaution. After a conservative first half, Joseph played nearly every defensive rep in the second half, and Campbell said there are no limitations on him for this game. Campbell praised Jahmyr Gibbs as a complete back who takes pride in running, receiving, pass protection and physicality. On Vikings edge rusher Dallas Turner, Campbell called him a rising, difficult threat who is hard for tackles to handle one-on-one. He said Cade Mays took more reps than Brian Branch in practice and should benefit from a second week back. On the injury front, Isiah Pacheco is progressing well with a chance to return in mid-to-late December, and Devin White is also doing pretty well. Thomas Harper is close to being ready and is being held as a precaution. Campbell said the division matchup matters, with Minnesota 2-0 in the NFC North, and that the team must play cleaner football, while trade-deadline activity continues daily.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Brian Branch has no limitations against Minnesota, and Cade Mays gets a second week back. Isiah Pacheco could return in mid-to-late December.",
+  "summary": "Campbell said Brian Branch is in a good place after playing every defensive snap in the second half last week. He called the volume \"perfect\" and said Branch has no limitations against Minnesota. Safety Kerby Joseph is being brought back slowly: he has done only individual and group work, with no team reps yet. The plan is for him to be in real practice next week, and the sleeve he wore was just a normal way to manage swelling. Campbell praised Jahmyr Gibbs as a complete back who takes everything personally and keeps improving, including in pass protection. He said Minnesota's blitz-heavy, man-coverage defense will test the tackles, guards, Cade Mays and the backs, and that running the ball well will be critical. Mays is back for a second week and took more reps than Branch did, which Campbell expects to help his conditioning. Isiah Pacheco is progressing well, with a chance to return in mid-to-late December. Devin White is \"doing pretty good,\" and Thomas Harper is close to ready but being handled cautiously. On the trade deadline, Campbell said the front office is working daily, and the Germany trip won't affect it.",
   "injuries": [
    {
-    "player": "Kerby Joseph",
+    "player": "Brian Branch",
     "status": "full",
-    "detail": "Progressed through individual and group work; coach says no limitations for this game after near-full defensive workload last game. Full team reps expected next week.",
+    "detail": "Played every defensive snap in the second half last week, roughly 38-45 reps. Campbell said there are no limitations going into the Minnesota game.",
     "player_id": ""
    },
    {
-    "player": "Isiah Pacheco",
-    "status": "ir",
-    "detail": "Rehab progressing well; coach sees a chance he returns around mid-December, so not expected for this game.",
-    "player_id": ""
-   },
-   {
-    "player": "Devin White",
-    "status": "unclear",
-    "detail": "Coach said he is doing pretty well, with no timeline or designation given.",
-    "player_id": ""
-   },
-   {
-    "player": "Thomas Harper",
-    "status": "questionable",
-    "detail": "Close to being ready and on call if needed; being handled cautiously, physically doing well.",
+    "player": "Kerby Joseph",
+    "status": "limited",
+    "detail": "Has done only individual and group work, with no team reps yet. He wore a sleeve to reduce swelling, which Campbell called routine. The plan is real practice next week, with rehab and conditioning work continuing.",
     "player_id": ""
    },
    {
     "player": "Cade Mays",
     "status": "returning",
-    "detail": "Second week back from injury, took more practice reps than Brian Branch; coach expects him to feel better for this game.",
+    "detail": "Back for a second week after getting a lot of work last week. He took more reps than Branch, and Campbell expects him to feel better for it.",
     "player_id": "00-0037297"
+   },
+   {
+    "player": "Isiah Pacheco",
+    "status": "ir",
+    "detail": "Rehab is progressing well. Campbell said there is a chance he returns in mid-to-late December, and that it comes down to letting him keep healing.",
+    "player_id": ""
+   },
+   {
+    "player": "Devin White",
+    "status": "unclear",
+    "detail": "Campbell only said he is \"doing pretty good\" and gave no timeline.",
+    "player_id": ""
+   },
+   {
+    "player": "Thomas Harper",
+    "status": "returning",
+    "detail": "Physically doing well and close to ready if needed. The team is playing it safe and may keep him on call.",
+    "player_id": ""
    }
   ],
   "signals": [
    {
-    "player": "Jahmyr Gibbs",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Will continue to be used as a complete back in run, receiving, and pass-protection roles.",
-    "note": "Praise for pass protection and all-around usage supports steady three-down volume for Gibbs in this game.",
-    "quote": "He wants to be a complete back.",
-    "player_id": "00-0039139"
-   },
-   {
-    "player": "Kerby Joseph",
+    "player": "Brian Branch",
     "topic": "injury",
     "signal": "up",
     "tone": "positive",
-    "claim": "Has no limitations going into this game after playing nearly every defensive rep last week.",
-    "note": "A full workload for Joseph means he should be a normal defensive contributor.",
-    "quote": "there's no limitations on, on him going into this game.",
+    "claim": "Will play without restrictions against Minnesota after playing every defensive rep in the second half last week.",
+    "note": "He is fully unleashed in the defense and should have a full snap share, which helps IDP value.",
+    "quote": "there's no limitations on, on him going into this game",
     "player_id": ""
    },
    {
     "player": "Cade Mays",
     "topic": "injury",
-    "signal": "watch",
+    "signal": "up",
     "tone": "positive",
-    "claim": "Should feel better this game after taking more practice reps than Branch.",
-    "note": "Mays is still working back from injury, so his snaps and effectiveness this week are worth monitoring.",
-    "quote": "he's going to feel better going into this game",
+    "claim": "Will play at guard against Minnesota with a game of work behind him, and is expected to be in better shape.",
+    "note": "A healthier interior line supports the run game and Gibbs against a blitz-heavy defense.",
+    "quote": "It's vital.",
     "player_id": "00-0037297"
    },
    {
-    "player": "Devin White",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "Is doing pretty well in rehab, with no return date given.",
-    "note": "No clear availability update, so White remains an unknown until the game-day report.",
-    "quote": "Devin White's doing pretty good too.",
-    "player_id": ""
+    "player": "Jahmyr Gibbs",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will keep a full every-down role as a runner, receiver and pass protector.",
+    "note": "Campbell's praise of his pass protection suggests he can stay on the field in blitz-heavy situations.",
+    "quote": "he wants to be a complete back",
+    "player_id": "00-0039139"
    },
    {
     "player": "Thomas Harper",
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Is close to ready and on call, but being held back as a precaution.",
-    "note": "Harper's status is uncertain, so check the injury report before lineups lock.",
+    "claim": "Is close to ready and could be available if needed, but may be held back as a precaution.",
+    "note": "Little fantasy impact, but he could return to the defense soon.",
     "quote": "I think he's close to being ready to go.",
     "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Vikings defense",
-    "detail": "Campbell said Minnesota's defense has been difficult for six weeks, with edge rusher Dallas Turner a rising threat, and the tackles must win one-on-one matchups. Running the ball well and handling run pressure on early downs is key to easing third-down pressure."
+    "topic": "Minnesota's defense and the run game",
+    "detail": "Campbell said Minnesota's man-heavy, blitz-heavy scheme eases some players' burden but stresses others. He expects one-on-one matchups on the edges, and said the tackles, guards, Cade Mays and the backs all need big games. Running the ball well on early downs is the key, and the team must handle pressures and finish downfield."
    },
    {
-    "topic": "Trade deadline and Germany game",
-    "detail": "Brad Holmes and the front office are working on trades daily, and Campbell said the Germany game's time difference won't affect any deals."
+    "topic": "Tackles vs. Dallas Turner",
+    "detail": "Campbell called Dallas Turner a strong run defender and pass rusher who has taken another step this year. He said Blake Miller and Penei Sewell have their hands full but will be ready."
+   },
+   {
+    "topic": "Trade deadline",
+    "detail": "The front office is working on trades every day, and Campbell said the Germany trip and time difference won't affect any deal."
    },
    {
     "topic": "Division stakes",
-    "detail": "Campbell said the game is important for a division race and an early 2-0 lead in the division, while stressing playing clean, disciplined football for four quarters."
+    "detail": "Minnesota is 2-0 in the division. A win would put Detroit in position to stay in the hunt, and Campbell wants clean, disciplined football for four quarters."
    }
   ],
   "opponent": "Minnesota Vikings"
@@ -930,21 +1019,15 @@
   "after_week": 8,
   "coach": "Matt LaFleur",
   "words": 2740,
-  "model": "claude-haiku-5-5",
-  "headline": "Christian Watson returned to the game after a precautionary CT scan, and Ty'Ron Hopper had a big game, but the run game remains a major concern.",
-  "summary": "LaFleur praised the defense for holding a Carolina offense with a lot of explosive plays, especially in the second half when the offense struggled. He said the team handled its injury problems by having players step up, and he highlighted John Williams playing center for the second time and Ty'Ron Hopper's multi-takeaway game. He explained the offensive line shuffle as keeping Larkin in the lineup while Aaron Banks returned, and said Zeitler moved to right guard, a spot he had rarely practiced. On the closing drive he called the run game going backwards disappointing and said he had seen little reason for optimism there. He described Christian Watson's collapse-and-return as a precautionary situation that he cleared before going back in. LaFleur credited Jordan Love for carrying the offense despite the interception, and he praised Jonathan Gannon's aggressive, pressure-heavy defensive scheme. He also defended keeping Coleman Owen after his opening-kickoff fumble, saying he had done a good job since.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Packers' run game is a real problem (LaFleur: 'not a lot' to be optimistic about), so Jordan Love's arm carries the offense; Christian Watson returned after an ambulance scare and Ty'Ron Hopper starred on defense.",
+  "summary": "LaFleur praised the defense for its aggressive, pressure-heavy performance in the 27-19 Thursday night win over Carolina, which led the league in explosive passes but was held in check. He singled out Ty'Ron Hopper for a huge night and credited defensive coordinator Jonathan Gannon and the staff, noting six players each had a sack. On offense he was blunt that the run game has been ineffective, including a failed attempt to run out the clock late, and said he sees little reason for optimism right now even though pass protection has improved. The offensive line was reshuffled: John Williams played center, Larkin moved to right guard, and Aaron Banks returned, with Kevin Zeitler on the bench but still trusted. Christian Watson was taken away in an ambulance after landing on the ball and coughing up blood, cleared a CT scan, and went back into the game and played well. LaFleur defended Jordan Love, saying he carries the burden of the offense and was good apart from a late interception, and explained that many quick throws came from Carolina's scheme. J. Michael Sturdivant made a notable catch, and LaFleur backed returner Coleman Owen after a fumble on the opening kickoff, refusing to pull him. He also said the team overcame losing the turnover battle by two.",
   "injuries": [
    {
     "player": "Christian Watson",
-    "status": "full",
-    "detail": "Left the game after landing on the ball and coughing blood; taken for precautionary checks and a CT scan, then cleared and returned to play.",
-    "player_id": "00-0038124"
-   },
-   {
-    "player": "Aaron Banks",
     "status": "returning",
-    "detail": "Back in the lineup after returning, which allowed Zeitler to move to right guard.",
-    "player_id": "00-0036551"
+    "detail": "Left in an ambulance after landing on the ball and coughing up blood; precautionary CT scan cleared, he returned to the game and had a big night.",
+    "player_id": "00-0038124"
    }
   ],
   "signals": [
@@ -953,88 +1036,108 @@
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Hopper's standout performance was a big moment; he produced a sack, multiple passes defended, and an interception.",
-    "note": "A strong showing with multiple defensive stats suggests a bigger role on a defense that is generating pressure.",
+    "claim": "Hopper will continue to be an impactful, productive linebacker in the defense.",
+    "note": "Big IDP performance (sack, multiple PBUs, interception) with LaFleur heaping praise on him.",
     "quote": "Tyrone Hopper I can't say enough great things about him.",
     "player_id": ""
    },
    {
     "player": "Christian Watson",
     "topic": "injury",
-    "signal": "watch",
+    "signal": "up",
     "tone": "positive",
-    "claim": "Watson was cleared after precautionary checks and CT scan and returned to the game.",
-    "note": "He is healthy enough to play through a scary hit, but the coach said he had missed a lot of time, so workload should be monitored.",
-    "quote": "I can't imagine what he would have had had he not missed so much time.",
+    "claim": "Watson was cleared after a scare and is healthy enough to keep playing a significant role.",
+    "note": "He returned and produced a strong game; LaFleur said he would have had more had he not missed time.",
+    "quote": "He had a heck of a night",
     "player_id": "00-0038124"
    },
    {
     "player": "Jordan Love",
     "topic": "usage",
-    "signal": "up",
+    "signal": "watch",
     "tone": "positive",
-    "claim": "Love is carrying the offense's load while the run game struggles.",
-    "note": "With the run game not producing, Love's volume and passing production should stay high.",
+    "claim": "Love will keep carrying the offense through the passing game while the run game struggles.",
+    "note": "Pass-heavy script supports Love's volume, though the late interception and quick-throw scheme limit the upside.",
     "quote": "he's carrying the burden of everything right now.",
     "player_id": "00-0036264"
    },
    {
-    "player": "John Williams",
-    "topic": "depth_chart",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Williams played center for the second time, and the coach highlighted his effort.",
-    "note": "Williams' versatility keeps him in the mix on the interior line, though he is mainly a depth option for fantasy purposes.",
-    "quote": "I can't say enough about guys like John Williams going in there playing center",
-    "player_id": "00-0040023"
+    "player": "Josh Jacobs",
+    "topic": "usage",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "The run game remains ineffective and the team has yet to find something to rely on.",
+    "note": "Rushing struggles and LaFleur's lack of optimism cap Jacobs' efficiency outlook.",
+    "quote": "",
+    "player_id": "00-0035700"
    },
    {
-    "player": "Zeitler",
-    "topic": "depth_chart",
+    "player": "J. Michael Sturdivant",
+    "topic": "role",
     "signal": "watch",
-    "tone": "neutral",
-    "claim": "Zeitler was moved from left guard to right guard, a spot he had little practice time at.",
-    "note": "The position change is a lineup question rather than a fantasy-relevant trend, but it could shift as Banks returns.",
-    "quote": "Not that not that's not to take anything away from Zeitler.",
-    "player_id": ""
+    "tone": "positive",
+    "claim": "Sturdivant stepped up with a big reception when called upon amid injuries at receiver.",
+    "note": "Shows he can be a depth option for the passing game, but his role is unclear.",
+    "quote": "Jay Mike going in there and catching a big, uh, having a big reception",
+    "player_id": "00-0040948"
    },
    {
     "player": "Aaron Banks",
     "topic": "depth_chart",
-    "signal": "watch",
-    "tone": "neutral",
-    "claim": "Banks returned and his return factored into the offensive line change.",
-    "note": "Banks' return is a lineup change that affects interior line stability, not a direct fantasy piece.",
-    "quote": "And I thought Aaron Banks coming back.",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Banks returned and is in the starting offensive line group over Zeitler.",
+    "note": "Offensive line configuration affects pass protection and the run game.",
+    "quote": "I thought Aaron Banks coming back. So we went with that route.",
     "player_id": "00-0036551"
+   },
+   {
+    "player": "Kevin Zeitler",
+    "topic": "depth_chart",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Zeitler was left out of the starting lineup in this configuration but remains trusted.",
+    "note": "Lower line depth affects the run-blocking outlook slightly.",
+    "quote": "Not that not that's not to take anything away from Zeitler.",
+    "player_id": "00-0029592"
+   },
+   {
+    "player": "John Williams",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Williams started at center for the second time amid line injuries.",
+    "note": "Center play affects the line cohesion and run game.",
+    "quote": "John Williams going in there playing center for the for the second time",
+    "player_id": "00-0040023"
    },
    {
     "player": "Coleman Owen",
     "topic": "role",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Owen will keep his role despite the opening-kickoff fumble.",
-    "note": "The coach stuck with him after the fumble, so his role seems secure, though he is not a major fantasy asset.",
-    "quote": "And I think Coleman's come in and he's done a great job for us.",
+    "claim": "Owen keeps the return job despite fumbling the opening kickoff.",
+    "note": "Retains special-teams role, which could matter for return yardage.",
+    "quote": "to, to pull the hook that quickly, I just didn't think was right.",
     "player_id": "00-0040352"
    }
   ],
   "topics": [
    {
-    "topic": "Run game",
-    "detail": "LaFleur said the run game has not yet produced a reliable option and that the offense went backwards on the closing drive. He said the team must find something it can rely on."
-   },
-   {
     "topic": "Defense",
-    "detail": "The defense was praised for aggressive pressure and holding Carolina's explosive passing game in check, with Jonathan Gannon's scheme getting credit."
+    "detail": "Aggressive, pressure-heavy scheme under Jonathan Gannon limited Carolina's explosive passes; six players had a sack. LaFleur praised inside linebacker coach Sam Clucas's group."
    },
    {
-    "topic": "Offensive line",
-    "detail": "Pass protection has improved, which the coach said is helping the team survive while the run game is worked on."
+    "topic": "Run game",
+    "detail": "A late-game attempt to run out the clock went backwards. LaFleur said it is an area of emphasis and he isn't optimistic right now, while pass protection has improved."
    },
    {
-    "topic": "Turnovers and red zone",
-    "detail": "The team lost the turnover battle by two and still won, and the coach was pleased with how the team responded to adversity."
+    "topic": "Passing scheme",
+    "detail": "Lots of quick throws came from Carolina's coverage, which kept everything in front and took away intermediate routes."
+   },
+   {
+    "topic": "Turnovers and adversity",
+    "detail": "Green Bay lost the turnover battle by two but still won, which LaFleur called rare and a sign of resilience."
    }
   ],
   "opponent": ""
@@ -1051,89 +1154,109 @@
   "after_week": 7,
   "coach": "Shane Steichen",
   "words": 1038,
-  "model": "claude-haiku-5-5",
-  "headline": "Gould and Walley are out for Week 8 at Jacksonville, Warren and Gardner are cleared, and Seth McGowan's carries are expected to keep growing.",
-  "summary": "Steichen ruled out wide receiver Anthony Gould and cornerback Justin Walley for Sunday's game in Jacksonville, and said tight end Tyler Warren and cornerback Sauce Gardner are good to go with no limits. He said Josh Downs and Jonathan Taylor are both playing Sunday despite Downs reportedly requesting a trade, and that he told Downs he is a professional and needs to show up. He described the Jaguars as the top run defense in the league, physical and gap-sound, with a strong defensive coordinator who mixes fronts and pressure. Steichen said rookie Seth McGowan earned more carries last week against that run defense and will continue to be integrated into the offense because of his physical style. He praised Jalen Farmer's physicality, energy, and growing command of the run and pass protection communication, and said he is excited to see him play Sunday. Steichen said the team reminded itself of the importance of beating the division's top team and framed the season as having ten games left. He also said Taylor has taken on more leadership, and that the team must step up after losing two of its best leaders.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Josh Downs (reported trade request) and Jonathan Taylor are both set to play Sunday at Jacksonville, Tyler Warren is good to go, and rookie RB Seth McGowan's role is set to keep growing against the league's top run defense.",
+  "summary": "Steichen opened by ruling out Anthony Gould and Justin Walley, and said Tyler Warren and Sauce Gardner are good to go for Sunday. He confirmed that Josh (almost certainly Josh Downs), who reportedly requested a trade, practiced this week and will play his normal snaps. He said he had private conversations with the player, told him to be a professional, and expects him at his best. He gave the same answer for Jonathan Taylor, whom he also praised for stepping up as a leader after the team lost two of its leaders. Steichen called Jacksonville's run defense gap sound, physical, and well-coached, with varied fronts and pressure packages. Asked about McGowan's recent uptick in carries, he said the team will keep integrating the physical rookie, citing his juice and growth. He was also upbeat about Jalen Farmer, praising his physicality, energy, and growth in communication and pass protection, and said he is looking forward to seeing him play. Steichen framed the game as a chance to get within reach of the division lead, with the team one game out and ten left.",
   "injuries": [
    {
     "player": "Anthony Gould",
     "status": "out",
-    "detail": "Ruled out for Week 8 at Jacksonville.",
+    "detail": "Ruled out for the Week 8 game at Jacksonville.",
     "player_id": "00-0039816"
    },
    {
     "player": "Justin Walley",
     "status": "out",
-    "detail": "Ruled out for Week 8 at Jacksonville.",
+    "detail": "Ruled out for the Week 8 game at Jacksonville.",
     "player_id": ""
    },
    {
     "player": "Tyler Warren",
     "status": "full",
-    "detail": "Good to go for the divisional game; monitored through the week but no limitations stated.",
+    "detail": "Good to go for Sunday; the team monitored him through the week.",
     "player_id": "00-0040128"
    },
    {
     "player": "Sauce Gardner",
     "status": "full",
-    "detail": "Good to go for the divisional game after returning from a previous injury; coach said he is fine.",
+    "detail": "Good to go for Sunday; the team monitored him through the week.",
     "player_id": ""
    }
   ],
   "signals": [
    {
-    "player": "Seth McGowan",
-    "topic": "usage",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Will continue to be integrated more into the offense, after an uptick in carries last weekend.",
-    "note": "A physical rookie back earning more carries against a tough run defense suggests a growing workload.",
-    "quote": "we're going to continue to integrate him in the offense",
-    "player_id": "00-0041125"
-   },
-   {
     "player": "Josh Downs",
-    "topic": "role",
+    "topic": "trade_or_roster",
     "signal": "watch",
     "tone": "neutral",
-    "claim": "Will play Sunday and get his normal snap count despite the reported trade request.",
-    "note": "Confirmed playing and expected to be at his best, but the trade situation adds uncertainty to his focus and usage.",
-    "quote": "he's playing Sunday",
+    "claim": "Will play Sunday against Jacksonville with his normal snap count despite the reported trade request.",
+    "note": "He is expected to play a full role, but the trade request leaves his future with the team uncertain.",
+    "quote": "He's a pro. He practiced this week. He's ready to go.",
     "player_id": "00-0038997"
    },
    {
     "player": "Jonathan Taylor",
     "topic": "role",
-    "signal": "up",
+    "signal": "watch",
     "tone": "positive",
-    "claim": "Will play Sunday and is taking on more leadership after the loss of two leaders.",
-    "note": "Confirmed playing, and the coach expects him to step into a larger leadership role.",
-    "quote": "I have no doubt that JT will do that",
+    "claim": "Will play Sunday at Jacksonville and is expected to take on more of a leadership role.",
+    "note": "Taylor is a go, but he faces the league's top run defense, which caps his matchup upside.",
+    "quote": "Yeah same for JT.",
     "player_id": "00-0036223"
    },
    {
-    "player": "Jalen Farmer",
-    "topic": "role",
+    "player": "Seth McGowan",
+    "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Expected to see on-field action Sunday after a strong week and preseason.",
-    "note": "Coach is excited about his physicality and growth in run and pass protection, which could mean a real role in the game.",
-    "quote": "I'm excited for farmer",
+    "claim": "Will continue to be integrated into the offense with a growing role as a physical runner.",
+    "note": "His carries are trending up, which makes him a stash or flex-watch candidate, though the matchup is tough.",
+    "quote": "we're going to continue to integrate him in the offense.",
+    "player_id": "00-0041125"
+   },
+   {
+    "player": "Tyler Warren",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will play Sunday without limitation after his injury.",
+    "note": "The starting tight end is cleared, so he can go back into lineups.",
+    "quote": "Yeah they're good to go.",
+    "player_id": "00-0040128"
+   },
+   {
+    "player": "Anthony Gould",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Will not play Sunday at Jacksonville.",
+    "note": "He is unavailable, so any depth receiver or return work goes to others.",
+    "quote": "",
+    "player_id": "00-0039816"
+   },
+   {
+    "player": "Jalen Farmer",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will see game action Sunday in an expanded opportunity on the offensive line.",
+    "note": "Better line cohesion and run blocking help the run game, so it is worth watching for Taylor and McGowan.",
+    "quote": "I'm excited for farmer.",
     "player_id": "00-0041517"
    }
   ],
   "topics": [
    {
-    "topic": "Jacksonville run defense",
-    "detail": "Steichen called the Jaguars the top run defense in the league: connected, physical, gap-sound, mixing fronts and pressure, and playing well right now."
+    "topic": "Jaguars run defense",
+    "detail": "Steichen called Jacksonville's run defense connected, physical, and gap sound, with mixed fronts and pressures. He praised their coordinator and said they are playing very well."
    },
    {
-    "topic": "Team leadership",
-    "detail": "Steichen said the team had a tough early week after losing key players but got back into rhythm with a good week of practice. He said leaders must step up after losing two of the best leaders, without naming them."
+    "topic": "Team mindset",
+    "detail": "The team lost two of its leaders this week, and the early part of the week was tough. They recovered with a good week of practice. Steichen reminded the team they are one game out of the division with ten left."
    },
    {
     "topic": "Trade request handling",
-    "detail": "Steichen said he had private conversations with Downs and told him to be professional and show up to play, and said he has been in similar situations before."
+    "detail": "Steichen said he told the player that he is a professional who must show up and play. He said the situation is unique and that leadership has to keep the team committed and connected."
    }
   ],
   "opponent": "Jacksonville Jaguars"
@@ -1150,58 +1273,75 @@
   "after_week": 6,
   "coach": "Liam Coen",
   "words": 3010,
-  "model": "claude-haiku-5-5",
-  "headline": "Coen says the Colts game plan is essentially set by Friday; Chris Rodriguez Jr. is earning a bigger role and Kaevon Merriweather has handled his safety duties well.",
-  "summary": "Coen said the game plan for Sunday's game against Indianapolis is about 99% complete as of Friday, with Saturday reserved for situational football, a game-management meeting, and walk-through reps. He described the team's practices since the bye as the best of the season, with sharp execution and strong competitiveness. He praised the Colts as a well-coached team in all three phases, and said he expects his players to bring their best effort on Sunday. On the wet-ball conditions, he said the offense has worked on ball security and hand technique, with Trevor Lawrence comfortable throwing in the rain while the pass catchers need to focus on their hands. He said the Colts' injuries in the nickel group make it hard to predict whether they'll play it safe or blitz aggressively. He praised Kaevon Merriweather for stepping in at safety and handling the moment. He also said Chris Rodriguez Jr. has earned trust in pass protection and in passing situations, which suggests he could be needed this Sunday. Coen praised rookie offensive lineman Emmanuel Pregnon's physicality and pass-protection growth, though the transcript's name captions are unclear. He also said he has not game-planned for Thursday night yet, as he prefers to focus on the current opponent.",
-  "injuries": [],
+  "model": "claude-sonnet-5-5",
+  "headline": "Chris Rodriguez Jr. is earning more trust, including in pass protection, and Coen hopes to need him against the Colts in a wet, windy game; Emmanuel Pregnon is progressing as a rookie OL.",
+  "summary": "Coen said the Jaguars had their best practice in a long time on Thursday after the bye, with Wednesday also physical. The game plan for the Colts is finished. Saturday will focus on situational football, and Coen expects wind and rain to affect the game, so the team drilled wet-ball work all week. He said the wet ball is more of a concern for pass catchers than for Trevor Lawrence, who has big hands and threw well in the rain last year. He praised Chris Rodriguez Jr., saying he has shown more trust in pass protection and in understanding his role beyond first and second down, and he hopes to need him Sunday given the expected game type. He praised rookie guard Emmanuel Pregnon as a physical people mover who is improving in pass protection, with room to grow at the second level. He praised Kaevon Merriweather for stepping in amid injuries. On the Colts, Coen called them a very well-coached team and said injuries to their nickel defenders make their defensive approach hard to predict. He also said he doesn't game plan the following Thursday night opponent ahead of time.",
+  "injuries": [
+   {
+    "player": "Kaevon Merriweather",
+    "status": "unclear",
+    "detail": "Coen said Merriweather has stepped in because of injuries in the secondary. He did not give a specific injury designation or name who is hurt.",
+    "player_id": ""
+   }
+  ],
   "signals": [
    {
     "player": "Chris Rodriguez Jr.",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Coen hopes to need Rodriguez in a meaningful role this Sunday given the game's expected script",
-    "note": "Coen's trust in Rodriguez for passing downs and pass protection points to a larger share of backfield work.",
-    "quote": "I've been pleased with him, especially obviously the relationship prior.",
+    "claim": "Rodriguez will be trusted in pass-protection and passing-down situations and is expected to be needed in the run game Sunday against the Colts.",
+    "note": "Earning pass-down trust broadens his role beyond early-down running, and a wet, windy game script could favor rushing volume.",
+    "quote": "",
     "player_id": "00-0038611"
-   },
-   {
-    "player": "Kaevon Merriweather",
-    "topic": "role",
-    "signal": "watch",
-    "tone": "positive",
-    "claim": "Merriweather has stepped up as a replacement at safety and has been handling the role well",
-    "note": "Coen's praise suggests Merriweather keeps a sizable defensive role, which matters mainly for IDP and defensive-scoring formats.",
-    "quote": "The game wasn't ever too big for Kayvon.",
-    "player_id": ""
    },
    {
     "player": "Emmanuel Pregnon",
     "topic": "role",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Pregnon has improved in pass protection and is still developing as a rookie offensive lineman",
-    "note": "Pregnon's growth matters for the offensive line's stability, though it has little direct fantasy impact.",
-    "quote": "He's definitely brought a physicality to our group and a people mover to our group.",
+    "claim": "Pregnon will keep starting at offensive line as a rookie while developing his blocking at the second level.",
+    "note": "A physical run blocker improving in pass protection is mildly good for the Jaguars' run game and pass protection.",
+    "quote": "",
     "player_id": "00-0041050"
+   },
+   {
+    "player": "Trevor Lawrence",
+    "topic": "matchup",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Lawrence is not expected to be hurt much by wet conditions Sunday.",
+    "note": "Wet, windy weather could limit the passing game overall, but Coen has little concern about Lawrence's ball security.",
+    "quote": "Trevor threw it really good last time in the rain specifically.",
+    "player_id": "00-0036971"
+   },
+   {
+    "player": "Kaevon Merriweather",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Merriweather will continue to fill in at safety while the team deals with injuries.",
+    "note": "Mainly relevant to IDP leagues, as he is playing a larger defensive role.",
+    "quote": "he's done a nice job stepping in for us.",
+    "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Game plan and preparation",
-    "detail": "Coen said the game plan is about 99% done by Friday, and Saturday will focus on situational football, walk-throughs, and weather-related adjustments. He prefers not to game-plan for future opponents while still working on the current one."
+    "topic": "Weather and wet-ball preparation",
+    "detail": "The offense practiced with wet balls on Wednesday and Thursday, focusing on ball security, routes on air and hand use. Coen expects wind and rain Sunday, and said pass catchers' focus on their hands is a big part of the game plan."
    },
    {
-    "topic": "Weather and ball handling",
-    "detail": "The offense has practiced with a wet ball and ball-security drills, with a focus on pass-catcher hands and blocking hands. Coen said Trevor Lawrence is comfortable throwing in the rain, and the staff expects rain and wind to be factors Sunday."
+    "topic": "Practice and game plan status",
+    "detail": "The post-bye practices were energetic, with Thursday described as their best in a long time. The game plan is about 99% done, and Saturday will focus on situational football."
    },
    {
     "topic": "Colts scouting",
-    "detail": "Coen praised Indianapolis as a well-coached team in all three phases and noted that the injuries in their nickel group create uncertainty about how they'll play coverage and pressure."
+    "detail": "Coen called the Colts well coached in all three phases, with good run schemes, offensive line and tight ends. Their nickel injuries make their defensive approach hard to predict, and he expects a mix of protecting and pressuring."
    },
    {
-    "topic": "Team practice tone",
-    "detail": "Coen said the team's practice energy after the bye was the best of the season, with sharp individual periods and physical play."
+    "topic": "Thursday night game prep",
+    "detail": "Coen has not looked ahead to the Thursday night opponent because as a play caller he can't game plan two opponents at once. Assistants did background work during the bye, and he expects carryover from earlier game plans."
    }
   ],
   "opponent": "Indianapolis Colts"
@@ -1218,73 +1358,73 @@
   "after_week": 7,
   "coach": "Andy Reid",
   "words": 348,
-  "model": "claude-haiku-5-5",
-  "headline": "Andy Reid says Rashee Rice is optimistic to play, while Mansoor Delane (same shoulder) missed practice with no status yet; R. Mason Thomas will join the team in Denver after missing practice for personal reasons.",
-  "summary": "Reid opened by saying Mansoor Delane did not practice Friday and the team will see how he responds before the game, with no official status yet. Asked about the shoulder, Reid confirmed it is the same shoulder. R. Mason Thomas was absent from practice for personal reasons, but Reid said he will meet the team in Denver and is expected to play. Reid said the team had a good week of practice and is looking forward to the challenge of playing the Broncos in a strong road atmosphere. He said he is optimistic Rashee Rice will be available. Reid also praised a defender returning from the commissioner's list as a Pro Bowl-caliber player who brings energy, though the name was not clearly matched to the roster. He confirmed a kicker named Harrison will handle kicking duties this weekend and that the kicker's status is week to week. Finally, asked whether the standings make this game feel different, Reid framed it as two good teams meeting in an AFC West rivalry.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Mansoor Delane (shoulder) missed Friday's practice with no game status set, while Rashee Rice looks on track to play and R Mason Thomas is expected to play at Denver.",
+  "summary": "Reid opened with the injury report. Rookie corner Mansoor Delane did not practice, and Reid confirmed it is the same shoulder issue as before. He has not listed Delane as in or out and will reassess after practice. R Mason Thomas was away from the team for personal reasons, but Reid said he will meet the team in Denver and expects him to play. Asked if he was optimistic that Rashee Rice would be available, Reid answered with a quick, positive yes. Reid called Denver a good team in a great atmosphere and said the team had a good week of practice. He confirmed the kicker for the weekend will be Harrison. He described Denver's returning player, who is coming off the commissioner's list, as an energetic, Pro Bowl-caliber player. He framed the game as two good AFC West teams playing each other and played down any extra significance from the standings.",
   "injuries": [
    {
     "player": "Mansoor Delane",
-    "status": "questionable",
-    "detail": "Did not practice Friday; Reid said he will see how he responds, no official status yet. Reporter asked about the same shoulder and Reid confirmed it is the same shoulder.",
+    "status": "unclear",
+    "detail": "Did not practice Friday with the same shoulder issue; Reid has no in/out designation yet and will see how he is after practice.",
     "player_id": ""
+   },
+   {
+    "player": "Rashee Rice",
+    "status": "unclear",
+    "detail": "Asked whether he was optimistic Rice will be up, Reid said yes. The injury or availability issue was not described in the transcript.",
+    "player_id": "00-0039067"
    },
    {
     "player": "R Mason Thomas",
     "status": "unclear",
-    "detail": "Missed Friday practice for personal reasons; Reid said he will meet the team in Denver and expects him to play.",
+    "detail": "Missed practice for personal reasons, not injury. He will meet the team in Denver and Reid expects him to play.",
     "player_id": ""
-   },
-   {
-    "player": "Rashee Rice",
-    "status": "questionable",
-    "detail": "Reid said he is optimistic Rice will be up for the game; no official designation given.",
-    "player_id": "00-0039067"
    }
   ],
   "signals": [
-   {
-    "player": "Rashee Rice",
-    "topic": "injury",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Reid is optimistic Rice will be available for the Broncos game",
-    "note": "Rice's availability is a key factor for his weekly usability, and Reid's optimism is a positive sign.",
-    "quote": "Yeah, yeah.",
-    "player_id": "00-0039067"
-   },
    {
     "player": "Mansoor Delane",
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Delane's status for the Broncos game is undetermined after missing practice with a shoulder issue",
-    "note": "Missing practice with a shoulder injury makes his availability uncertain, so monitor final injury reports.",
-    "quote": "Yeah. Same shoulder.",
+    "claim": "Delane's availability against Denver is undecided after he missed Friday's practice with a shoulder issue.",
+    "note": "A shoulder issue that kept him out of practice makes him a risk for the Denver game, which affects Chiefs defensive and pass-coverage outlooks.",
+    "quote": "we'll just see how he does here going forward.",
     "player_id": ""
    },
    {
+    "player": "Rashee Rice",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Rice is expected to be available to play against the Broncos.",
+    "note": "Reid's optimism suggests Rice is on track for the game, which is good for the KC pass-catching group.",
+    "quote": "Yeah, yeah.",
+    "player_id": "00-0039067"
+   },
+   {
     "player": "R Mason Thomas",
-    "topic": "trade_or_roster",
+    "topic": "other",
     "signal": "watch",
-    "tone": "neutral",
-    "claim": "Thomas is expected to play in Denver despite missing practice for personal reasons",
-    "note": "Reid expects him to play, so his availability looks likely barring a late change.",
-    "quote": "Yes.",
+    "tone": "positive",
+    "claim": "Thomas will join the team in Denver and play against the Broncos despite missing Friday's practice.",
+    "note": "His absence was personal rather than injury-related, and Reid expects him to play, so there is little concern for his availability.",
+    "quote": "he'll meet us there in Denver.",
     "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Opponent and rivalry",
-    "detail": "Reid described the Broncos as a good football team and framed the matchup as a meaningful AFC West rivalry game in a strong road environment."
+    "topic": "Opponent: Denver Broncos",
+    "detail": "Reid called Denver a good football team with a great atmosphere. He said the Broncos' player returning from the commissioner's list brings energy and is Pro Bowl caliber."
    },
    {
     "topic": "Kicker",
-    "detail": "Reid confirmed a player named Harrison will kick this weekend, and noted kicking availability is week to week."
+    "detail": "Reid confirmed that Harrison will kick this weekend."
    },
    {
-    "topic": "Defensive addition",
-    "detail": "Reid praised a defender reinstated from the commissioner's list as a Pro Bowl-caliber player who brings energy to the defense; the player could not be clearly matched to the roster."
+    "topic": "Game framing",
+    "detail": "Reid said the game is simply two good AFC West teams playing each other, and he did not treat it as a special separation game despite the tight standings."
    }
   ],
   "opponent": "Denver Broncos"
@@ -1301,32 +1441,32 @@
   "after_week": 7,
   "coach": "Sean McVay",
   "words": 1754,
-  "model": "claude-haiku-5-5",
-  "headline": "Center Coleman Shelton is questionable with a hip injury; Dylan McMahon would start at center if he sits, and Trent McDuffie (groin) and Jordan Whittington (back from injury) are both questionable.",
-  "summary": "McVay opened with the Week 8 injury update ahead of Sunday's game against the Chargers. Coleman Shelton (hip) is limited and listed as questionable, and Colby Parkinson is questionable and did not practice. Trent McDuffie is limited with a groin issue, listed questionable, with McVay hopeful but still monitoring him. Jordan Whittington is back at practice and listed questionable. McVay said Dylan McMahon has gotten a lot of extra work at center this week and would step in if Shelton can't play, with Ryan Wendell rotating centers and others able to fill in. On the defense, he praised the unit's physicality, situational play, red-zone and third-down stops, and connected fundamentals over the last two games, and he said the group's turnover emphasis needs consistency. On offense, he said early-down efficiency and the threat of both run and pass are what has worked best, and that losing key playmakers changes personnel groupings but gives other players chances, including tight ends and both backs. He also discussed the 48-man gameday roster and contingency planning for in-game injuries, though he did not reveal the specific elevation decisions. The Chargers are coming off a bye and McVay expects a tough challenge.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Rams injury report: Coleman Shelton (hip), Colby Parkinson and Trent McDuffie (groin) all questionable vs. Chargers, and Jordan Whittington is back but questionable. Dylan McMahon is ready to step in at center.",
+  "summary": "McVay opened with the injury report. Coleman Shelton was limited and is questionable with a hip issue. Colby Parkinson did not practice and is questionable. Long snapper Joe Cardona is doubtful with an ankle, so Jake McQuade would step in. Trent McDuffie was limited and is questionable with a groin issue, with McVay hopeful but still monitoring. Jordan Whittington's injury locked up within the last 30 minutes, and McVay called him tough, listing him as questionable. If Shelton can't go, Dylan McMahon would start at center. McMahon got plenty of work this week because of how Shelton has been managed. McVay praised the defense's physicality, situational play and red-zone stops over the last two weeks. He said last week's offense worked because of efficiency on early downs, which set up play action. He also said the absence of top playmakers changes personnel groupings, but other players have stepped up, including tight ends, both running backs and receivers, while Puka Nacua will still get his share.",
   "injuries": [
    {
     "player": "Coleman Shelton",
     "status": "questionable",
-    "detail": "Hip. Limited in practice; listed questionable for the Chargers game. Dylan McMahon is the likely replacement at center.",
+    "detail": "Limited at practice with a hip issue; listed questionable for the game.",
     "player_id": "00-0034114"
    },
    {
     "player": "Colby Parkinson",
     "status": "questionable",
-    "detail": "Did not practice (DNP) and is listed questionable for the game. The specific injury was not stated.",
+    "detail": "Did not practice (DNP) and is listed questionable.",
     "player_id": "00-0036244"
    },
    {
     "player": "Trent McDuffie",
     "status": "questionable",
-    "detail": "Groin. Limited in practice; listed questionable, with McVay hopeful but monitoring him.",
+    "detail": "Limited with a groin issue and listed questionable. McVay is hopeful but will keep monitoring him.",
     "player_id": ""
    },
    {
     "player": "Jordan Whittington",
-    "status": "returning",
-    "detail": "Back at practice after being cleared within the last 30 minutes before the presser; listed questionable for the game.",
+    "status": "questionable",
+    "detail": "Injury locked up within the last 30 minutes of practice; listed questionable.",
     "player_id": "00-0039751"
    }
   ],
@@ -1336,9 +1476,9 @@
     "topic": "depth_chart",
     "signal": "up",
     "tone": "positive",
-    "claim": "Would start at center if Coleman Shelton cannot play Sunday",
-    "note": "Gets extra snaps and a starting role if Shelton is out, though a center's fantasy value is typically minimal.",
-    "quote": "",
+    "claim": "Dylan McMahon will start at center if Coleman Shelton can't play.",
+    "note": "If Shelton sits, McMahon steps into the starting center job, which affects the offensive line and run game.",
+    "quote": "he would be the guy that would step up",
     "player_id": "00-0039830"
    },
    {
@@ -1346,62 +1486,52 @@
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Listed questionable with a hip injury; status for Sunday is uncertain",
-    "note": "Shelton's availability determines whether McMahon starts at center; this affects offensive line stability more than fantasy scoring.",
-    "quote": "Coleman will be limited listed as questionable for the game with his hip.",
+    "claim": "Shelton is questionable with a hip issue after a limited practice, and his status for Sunday is uncertain.",
+    "note": "His availability determines the Rams' center and affects offensive line continuity.",
+    "quote": "",
     "player_id": "00-0034114"
-   },
-   {
-    "player": "Trent McDuffie",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "Listed questionable with a groin injury after limited practice",
-    "note": "Groin issues can linger, so his availability is a possible concern for the defense in the Chargers game.",
-    "quote": "Trent will be limited today and questionable for the game with his groin.",
-    "player_id": ""
-   },
-   {
-    "player": "Jordan Whittington",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "positive",
-    "claim": "Back from injury and listed questionable for Sunday",
-    "note": "Returning from injury means his role and snap count are unclear until game day.",
-    "quote": "Jordan Whittington is back just locked up within the last 30 minutes.",
-    "player_id": "00-0039751"
    },
    {
     "player": "Colby Parkinson",
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Did not practice and is listed questionable for the game",
-    "note": "A missed practice day makes his Sunday status a question for tight end usage.",
-    "quote": "Colby Parkinson will be listed as questionable. He'll be a DNP.",
+    "claim": "Parkinson is questionable after a DNP.",
+    "note": "Parkinson is a tight end in an offense where McVay highlighted tight ends making more plays, so his status matters.",
+    "quote": "",
     "player_id": "00-0036244"
+   },
+   {
+    "player": "Puka Nacua",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Puka Nacua will get his share of targets and production in the pass game.",
+    "note": "He remains a top option with other playmakers missing.",
+    "quote": "obviously Puka will get his share as well",
+    "player_id": "00-0039075"
    }
   ],
   "topics": [
    {
-    "topic": "Long snapper",
-    "detail": "Joe Cardona is doubtful with an ankle injury, so Jake McQuade would be the long snapper for the game. Cardona is not on the provided roster."
+    "topic": "Special teams",
+    "detail": "Long snapper Joe Cardona is doubtful with an ankle injury, so Jake McQuade would be the long snapper."
+   },
+   {
+    "topic": "Game-day roster",
+    "detail": "McVay is working through the 48-man game-day roster and the backup roles on offense and defense. Whether to elevate a player depends on how Whittington's availability affects those spots."
    },
    {
     "topic": "Defense",
-    "detail": "McVay praised the defense's physicality, red-zone and third-down play, and fundamentals over the last two weeks, while noting the need for more turnovers."
+    "detail": "McVay praised the physicality, the situational play (red area and third downs) and keeping teams out of the end zone. He wants more turnovers, which he said come in bunches, and he stressed taking care of the ball on offense."
    },
    {
-    "topic": "Offense",
-    "detail": "McVay said early-down efficiency and balancing run and pass are key. Playmakers out of the lineup have given tight ends and both backs more work."
+    "topic": "Offensive approach",
+    "detail": "Efficiency on early downs helped the Rams marry the run and pass and use play action. McVay values consistently moving the ball and scoring more than run-pass balance."
    },
    {
-    "topic": "Aaron Donald",
-    "detail": "McVay praised Donald's maturity and leadership since his return after stepping away. No fantasy-relevant news was given."
-   },
-   {
-    "topic": "Gameday roster",
-    "detail": "McVay discussed roster and elevation decisions for the 48-man gameday list but did not commit to any elevations."
+    "topic": "Offensive personnel",
+    "detail": "The absence of key playmakers changes personnel groupings, but other players are stepping up, including tight ends, both running backs and receivers."
    }
   ],
   "opponent": "Los Angeles Chargers"
@@ -1418,36 +1548,27 @@
   "after_week": 6,
   "coach": "Jim Harbaugh",
   "words": 435,
-  "model": "claude-haiku-5-5",
-  "headline": "Harbaugh signaled a returning player and a fresh setback but avoided naming anyone, and the garbled captions make the injury news impossible to pin to specific players.",
-  "summary": "Harbaugh said it was good to have a returning player back on the field and that the team's preparation after the bye week had been strong. Asked about the mental side of the game, he said he works to eliminate worry and that the players follow a simple approach of working and not worrying. On Rams quarterback Matthew Stafford, he called him one of the best and said stopping him takes playing very well and staying connected across all three levels of the field. When pressed on a setback in rehab, he confirmed that a setback had occurred but gave no details. He would not say who would play on Sunday. The transcript is too garbled to reliably identify which players he was discussing, so no player-specific signals are reported.",
-  "injuries": [
-   {
-    "player": "Unidentified returning player (caption reads 'Joel'; possible match is Joe Alt but unconfirmed)",
-    "status": "returning",
-    "detail": "Harbaugh said it was good to have him back on the field, and he was not on the injury report.",
-    "player_id": ""
-   },
-   {
-    "player": "Unidentified player(s) with a rehab setback",
-    "status": "unclear",
-    "detail": "A reporter described a hamstring injury added to a quad issue after a rehab setback. Harbaugh confirmed a setback but gave no names or details. A later answer said 'they're both out for this Sunday,' but the referent is unclear.",
-    "player_id": ""
-   }
-  ],
+  "model": "claude-sonnet-5-5",
+  "headline": "Harbaugh was vague on who returns this week; two unnamed players with setbacks (a hamstring on top of a quad injury) are both out Sunday vs. the Rams.",
+  "summary": "Harbaugh spoke after the bye week and said the team is feeling good about its preparation and is in a good place heading into the Rams game. He was glad to have some players back from injury and said a player (name garbled in the captions) was not even on the injury report. Asked whether a specific player would settle in at right tackle, he declined to say who would line up on Sunday. He described Matthew Stafford as one of the best and said stopping him takes connected play at all three levels of the defense, since Stafford can get the ball to every part of the field. On the mental side, he said he does not worry and the team's approach is simply to work and not worry. Near the end he said one player had a setback in rehab, and a follow-up question indicated a hamstring injury on top of a quad problem. He said he knew that both players he was asked about are out for Sunday. The captions never make clear which players he meant, so no injury is attributed to a named player.",
+  "injuries": [],
   "signals": [],
   "topics": [
    {
-    "topic": "Rams matchup / Matthew Stafford",
-    "detail": "Harbaugh praised Stafford as one of the best and said defending him requires excellent play and strong connection across all three levels of the field."
+    "topic": "Post-bye health",
+    "detail": "Harbaugh is happy to be getting players back from injury after the bye. The captions garble the names, so who is returning is unclear."
    },
    {
-    "topic": "Post-bye week preparation",
-    "detail": "Harbaugh described the week as a productive regroup and retooling period with a strong preparation focus."
+    "topic": "Right tackle",
+    "detail": "Harbaugh declined to confirm who will start at right tackle, saying he does not want to say who is lining up on Sunday."
    },
    {
-    "topic": "Locker room mindset",
-    "detail": "Harbaugh said he works to eliminate worry and that the team's simple approach is to work and not worry."
+    "topic": "Rams QB Matthew Stafford",
+    "detail": "Harbaugh called Stafford one of the best and said defending him requires playing well and staying connected at all three levels, because he can distribute the ball to all parts of the field."
+   },
+   {
+    "topic": "Setbacks",
+    "detail": "Two players, unnamed in the transcript, had setbacks (one in rehab, with a hamstring injury added to a quad injury), and Harbaugh said both are out for Sunday."
    }
   ],
   "opponent": "Los Angeles Rams"
@@ -1464,107 +1585,107 @@
   "after_week": 7,
   "coach": "Klint Kubiak",
   "words": 1257,
-  "model": "claude-haiku-5-5",
-  "headline": "JJ Pegues is questionable and Patrick Johnson is out vs. the Jets; Tre Tucker and Darien Porter could see snaps, with a final decision on the elevation and activation questions due Saturday.",
-  "summary": "Kubiak opened by listing JJ as questionable and Patrick Johnson as out for the Jets game. He said the team has until tomorrow to decide who gets activated, including a decision on Jack Bech, and that the practice-squad player who was elevated last week may be elevated again depending on Saturday's update. He would not commit on playing time for Dante or for Tre Tucker, saying Tucker could see some action Sunday. He praised Ashton Jeanty, Maxx Crosby and Dylan Laube for their work as newly named captains and called Crosby the standard-setter on defense. On offense he expects Jalen Nailor to keep making plays as Kirk Cousins works through his progressions, and he described Tucker's conditioning as a standout trait that has been evident since April. Kubiak said the Darien Porter and outside corner rotation is intentional because the roster has several capable players, though he would prefer two starters. He also said Nakobe Dean's leadership role is growing and that the team is preparing for an early outdoor kick, drawing on the New England experience. Asked about the run game, he pointed to belief in players and coaches rather than specific changes.",
+  "model": "claude-sonnet-5-5",
+  "headline": "JJ (likely Jack Bech? unclear) is questionable and Patrick Johnson is out for Week 8 vs. the Jets; Trey (likely Trey Zuhn) could see OL snaps, and Jalen Nailor is expected to make plays with Kirk Cousins.",
+  "summary": "Kubiak opened by saying JJ is questionable and Patrick Johnson is out for Sunday's game against the Jets. He gave no firm answers on roster elevations or activations, saying the team has until tomorrow to decide on a possible activation and that a practice-squad elevation to replace Johnson would be decided then. He said Dante's playing time is still to be determined. He named Ashton, Maxx and Dylan as captains, calling it a body of work, and praised Maxx Crosby's preparation and leadership. On the passing game, he said Jalen Nailor is expected to make plays and that the connection with Kirk Cousins needs time on task, with receivers getting open and Cousins going through his progressions. He praised Tre Tucker's conditioning, said starting NFL receivers must be able to play about 70 plays at full speed, and noted he has stood out since April. On the offensive line, Trey has battled back from an injury and could play Sunday. He gave general answers on the run defense, saying it is team defense, and on the run game, saying the offense just needs to perform, and he praised Nakobe Dean as the defensive leader who will be given more responsibility as he produces.",
   "injuries": [
    {
     "player": "JJ Pegues",
     "status": "questionable",
-    "detail": "Kubiak listed JJ as questionable for the Jets game; the transcript gives only the nickname, so the player is inferred from the roster.",
+    "detail": "Listed as questionable for Sunday vs. the Jets; the transcript says only 'JJ', so this identification is probable but not certain (video title says JPJ, which may be Jackson Powers-Johnson).",
     "player_id": ""
    },
    {
     "player": "Patrick Johnson",
     "status": "out",
-    "detail": "Kubiak said Patrick Johnson is out for the Jets matchup.",
+    "detail": "Ruled out for Sunday's game.",
     "player_id": ""
+   },
+   {
+    "player": "Trey Zuhn",
+    "status": "returning",
+    "detail": "Had an injury a few weeks ago and has battled back and is getting healthy; could play Sunday.",
+    "player_id": "00-0040871"
    }
   ],
   "signals": [
    {
     "player": "Jalen Nailor",
-    "topic": "matchup",
+    "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Expected to keep making big plays downfield with Kirk Cousins as separation continues",
-    "note": "Coach expects Nailor to convert his separation into production, which supports his deep-target upside.",
+    "claim": "Nailor is expected to make plays in the passing game as he and Kirk Cousins build chemistry.",
+    "note": "The coach is publicly backing Nailor as a downfield target who is getting open, so a big play could come.",
     "quote": "we're expecting Jalen to make plays",
     "player_id": "00-0037291"
    },
    {
     "player": "Tre Tucker",
     "topic": "role",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "Could see some playing time Sunday after returning from an earlier injury",
-    "note": "Coach praised his work and conditioning but gave no firm role, so his Sunday snap count is still unclear.",
-    "quote": "Could be.",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Tucker is viewed as a starting-caliber NFL receiver whose conditioning lets him play a high snap count at full speed.",
+    "note": "Positive praise for his fitness and speed supports a steady snap share.",
+    "quote": "He's stood out since April.",
     "player_id": "00-0038563"
    },
    {
-    "player": "Darien Porter",
+    "player": "Trey Zuhn",
     "topic": "depth_chart",
     "signal": "watch",
+    "tone": "hedged",
+    "claim": "Zuhn could play on the offensive line on Sunday after returning from injury.",
+    "note": "Offensive line shuffling could affect the run game and pass protection, though the coach was noncommittal.",
+    "quote": "Could be.",
+    "player_id": "00-0040871"
+   },
+   {
+    "player": "Kirk Cousins",
+    "topic": "usage",
+    "signal": "watch",
     "tone": "neutral",
-    "claim": "Will keep rotating with other outside corners rather than locking into one starting spot",
-    "note": "Rotation at outside corner limits his consistency, making him a weak fantasy option.",
-    "quote": "you are going to rotate guys",
-    "player_id": ""
+    "claim": "Cousins needs to go through his progressions and connect on big plays with his receivers.",
+    "note": "The coach put some responsibility on Cousins for the passing game's lack of big plays.",
+    "quote": "Kirk's got to go through his progressions.",
+    "player_id": "00-0029604"
    },
    {
     "player": "Nakobe Dean",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "His responsibilities as defensive leader keep growing, and more is being added to his plate",
-    "note": "Increasing responsibility points to a featured defensive role, though it is not a direct fantasy input.",
-    "quote": "we continue to put more on his plate",
+    "claim": "Dean is the defensive leader and will be given more responsibility as he produces.",
+    "note": "A growing role at middle linebacker supports more tackle opportunities.",
+    "quote": "he's been our leader.",
     "player_id": ""
    },
    {
     "player": "Maxx Crosby",
-    "topic": "role",
-    "signal": "up",
+    "topic": "other",
+    "signal": "watch",
     "tone": "positive",
-    "claim": "Named a captain this week for his leadership and consistent work",
-    "note": "Captain status and his sustained intensity confirm his central role on defense.",
-    "quote": "those are guys that have been, you know, great leaders",
+    "claim": "Crosby is named a captain and sets the standard for preparation on defense.",
+    "note": "No health concern was raised and he remains the focal point of the defense.",
+    "quote": "First guy in the building.",
     "player_id": ""
-   },
-   {
-    "player": "Ashton Jeanty",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Named a captain this week as a reward for his body of work",
-    "note": "Captain recognition confirms his standing within the offense.",
-    "quote": "excited for Max, excited for Ashton",
-    "player_id": "00-0040122"
-   },
-   {
-    "player": "Dylan Laube",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Named one of the first two-time captains, valued for versatility and special teams",
-    "note": "Coach values his special teams play and versatility, which supports his role on offense and in kicking units.",
-    "quote": "versatility is key",
-    "player_id": "00-0039407"
    }
   ],
   "topics": [
    {
-    "topic": "Week 8 opponent and conditions",
-    "detail": "The Raiders play the Jets on Sunday in an outdoor early kickoff. Kubiak said the team is applying lessons from the New England game on getting ready early."
+    "topic": "Roster moves",
+    "detail": "The team has until tomorrow to decide on a possible activation and on whether to elevate a practice-squad player to replace Patrick Johnson; Dante's playing time is still TBD."
    },
    {
-    "topic": "Run game and defensive front",
-    "detail": "Stopping the run and improving the ground game were this week's emphases. Kubiak credited team defense and belief in players and coaches rather than naming specific changes."
+    "topic": "Run game and run defense",
+    "detail": "Stopping the run and getting the run game going were emphases after practice, but the coach offered only general answers about belief and team defense."
    },
    {
-    "topic": "Roster competition",
-    "detail": "Kubiak said competition at several positions is ongoing with a young roster, and he expects a final decision on the Jack Bech activation and the elevation question by Saturday."
+    "topic": "Weather/environment",
+    "detail": "The early-kick outdoor game draws on lessons from the New England game, with an emphasis on starting fast."
+   },
+   {
+    "topic": "Secondary rotation",
+    "detail": "Kubiak said rotating cornerbacks and receivers is normal because multiple players can play, though ideally two would play every snap."
    }
   ],
   "opponent": "New York Jets"
@@ -1581,20 +1702,20 @@
   "after_week": 7,
   "coach": "Kevin O'Connell",
   "words": 1726,
-  "model": "claude-haiku-5-5",
-  "headline": "Jordan Mason is set to take a bigger share of the backfield touches while Aaron Jones manages a flared-up knee; Max Bredeson and Myles Price keep expanded roles.",
-  "summary": "Kevin O'Connell opened with a game-status update: one player, transcribed as 'Jay Ward,' had knee soreness, practiced limited, and is questionable for the Detroit game, with a post-practice update expected. Everyone else practiced fully or had a planned rest day. On the backfield, he said last week's split was roughly 60-70% to Jordan Mason and the remainder to Aaron Jones, and the staff wants Mason to be a focal point to get him back in rhythm, while Jones keeps a significant role. He said Jones's knee was feeling good coming out of the bye, but a hit or a fall flared it up, and he expects Jones to put it behind him as the season goes. He called the Lions' defensive front very good, with depth and a strong interior, and said getting Aidan Hutchinson back elevates that group. On Kyler Murray, he said conversations focus on risk within play calls when protecting leads, while staying aggressive in the pass game. He praised rookie Max Bredeson, who has played well as the fullback and in 21 and 22 personnel despite the loss of CJ, and said the fullback role also carries special teams value with only 48 active players. He called the NFC North the best division in football and noted a tough upcoming stretch including a Monday night game and a trip to Lambeau. Finally, he credited Myles Price's development as a returner, citing his kick returns and a punt return that flipped the field, and called Price a huge part of the team's success this year.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Jordan Mason is set to be a focal point of the Vikings backfield, with Aaron Jones still in a significant role but dealing with a knee issue that flared up. Jay Ward is the only player listed questionable for Detroit.",
+  "summary": "O'Connell said Jay Ward is the team's only questionable player for the Week 8 game at Detroit. Ward had knee soreness, was limited in practice, and is expected to play. Everyone else either practiced fully or had a planned rest day. On the backfield, last week's Aaron Jones/Jordan Mason split was roughly 60-70 to 30. O'Connell said the staff wants Jordan to be a focal point and to get enough touches to get back in sync, while Jones keeps a significant role. Jones' knee flared up after the bye, possibly from a hit or going to the ground, and O'Connell expects him to put it behind him. He praised Detroit's defensive front, citing the edge rushers, interior depth, and the return of a key player. On Kyler Murray, he said the protect-the-ball conversation is mostly about play-calling risk. They still want to be aggressive in the pass game but ask Kyler to be smart and keep completing passes. He called rookie fullback Max Bredeson a trusted starter in 21 and 22 personnel who also contributes on special teams. He also praised returner Myles Price and called the NFC North the best division in football.",
   "injuries": [
    {
-    "player": "Unidentified player (transcribed as 'Jay Ward'; not on roster)",
+    "player": "Jay Ward",
     "status": "questionable",
-    "detail": "Knee soreness from the previous day; practiced limited Wednesday and is expected to get a post-practice update before Sunday.",
+    "detail": "Knee soreness yesterday; limited in practice today. O'Connell expects him to play and called him the only questionable player.",
     "player_id": ""
    },
    {
     "player": "Aaron Jones",
     "status": "unclear",
-    "detail": "Knee flared up after a hit or a fall; coach expects him to put it behind him over time, with no specific practice status given.",
+    "detail": "Knee flared up after the bye, possibly from a hit or going to the ground. O'Connell expects him to put it behind him and did not list him as questionable.",
     "player_id": "00-0033293"
    }
   ],
@@ -1604,18 +1725,28 @@
     "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will be a focal point of the backfield and get enough touches to get back in sync, with the split about 60-70% over Aaron Jones.",
-    "note": "A larger share of carries and targets from the backfield makes Mason a strong RB1 option in this matchup.",
+    "claim": "Mason will be a focal point of the backfield and get enough touches to get back in sync, likely a larger share than last week's roughly 30%.",
+    "note": "Mason is positioned for a bigger and growing role, which raises his fantasy value if the split keeps shifting his way.",
     "quote": "we want to make sure JP is a focal point for what we're doing",
     "player_id": "00-0037525"
+   },
+   {
+    "player": "Aaron Jones",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Jones will keep a significant role, but his share is expected to be managed and will follow the flow of the game.",
+    "note": "Jones' touches may be capped in a committee, which limits his ceiling.",
+    "quote": "he's still going to have a, you know, significant role",
+    "player_id": "00-0033293"
    },
    {
     "player": "Aaron Jones",
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Knee soreness is expected to be managed and he is expected to put it behind him at some point; his workload is reduced versus Mason.",
-    "note": "Knee flare-ups plus a reduced role make Jones a risky start until the injury report clarifies.",
+    "claim": "Jones' knee will improve and he will be able to put it behind him over time.",
+    "note": "A recurring knee issue is a risk to his workload and availability.",
     "quote": "I think he'll be able to put it behind him at some point.",
     "player_id": "00-0033293"
    },
@@ -1624,40 +1755,44 @@
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will continue as the starting fullback in 21 and 22 personnel and contribute on special teams.",
-    "note": "A stable fullback role with special teams snaps adds to his value, mainly in deeper formats.",
-    "quote": "he's been huge from a standpoint of allowing us to feel",
+    "claim": "Bredeson remains the starting fullback in 21 and 22 personnel and a special teams contributor.",
+    "note": "His role is secure, but fullback usage rarely produces fantasy points.",
+    "quote": "we've got total trust in him.",
     "player_id": "00-0041081"
-   },
-   {
-    "player": "Myles Price",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Has been a huge part of the return units this season, with a strong year on kick and punt returns.",
-    "note": "A key returner with big-play punt and kick return ability can produce return-yard upside in fantasy formats that score returns.",
-    "quote": "Huge part of it. Having a fantastic year.",
-    "player_id": "00-0040506"
    },
    {
     "player": "Kyler Murray",
     "topic": "scheme",
     "signal": "watch",
     "tone": "neutral",
-    "claim": "Play-calling when ahead will balance aggression with ball security, with the coach discussing risk in calls while still activating the pass game.",
-    "note": "Ball-security emphasis when leading could trim some deep-shot upside, but the pass game remains active.",
-    "quote": "we still want to be aggressive from a call standpoint",
+    "claim": "The offense will stay aggressive in its pass-game calls when leading, while Kyler is asked to be smart and keep completing passes.",
+    "note": "Protecting the ball in game script may mean more completions and fewer deep shots when the Vikings are ahead.",
+    "quote": "So we want to still be aggressive from a call standpoint",
     "player_id": "00-0035228"
+   },
+   {
+    "player": "Myles Price",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Price remains the primary kick and punt returner.",
+    "note": "His value is mostly in return-yardage leagues, with field-flipping returns that help set up scoring.",
+    "quote": "Having a fantastic year.",
+    "player_id": "00-0040506"
    }
   ],
   "topics": [
    {
-    "topic": "Lions defense",
-    "detail": "O'Connell praised Detroit's front, citing a deep interior and a strong cornerback opposite Hutchinson, plus a linebacking group that has played together for a long time. He said Hutchinson's return raises the group."
+    "topic": "Detroit defense",
+    "detail": "O'Connell called the Lions' front really good, with a strong edge rush, interior depth, and a mix of size, strength, and twitch. He said the return of Branch elevates the group."
    },
    {
     "topic": "NFC North",
-    "detail": "He called the NFC North the best division in football because of depth, coaching, quarterback play, and defenses, and said the next few weeks include a Monday night home game and a trip to Lambeau."
+    "detail": "O'Connell called the division the best in football. The upcoming stretch is at Detroit, then a Monday night home game against a top AFC team, then a trip to Lambeau. He said games come down to inches and eliminating negative plays."
+   },
+   {
+    "topic": "Special teams and roster",
+    "detail": "With only 48 active on game day, a fullback takes a roster spot from another position, so Bredeson's special teams contribution matters. The fullback role also had to adjust after losing CJ."
    }
   ],
   "opponent": "Detroit Lions"
@@ -1674,49 +1809,55 @@
   "after_week": 7,
   "coach": "Mike Vrabel",
   "words": 836,
-  "model": "claude-haiku-5-5",
-  "headline": "A.J. Brown is questionable for Sunday at Miami after not finishing Wednesday's practice; a final call comes Saturday, and TreVeyon Henderson and Christian Elliss are also questionable.",
-  "summary": "Vrabel said A.J. Brown is listed as questionable and that the staff will see how he comes in Saturday before deciding. Brown could not practice or finish practice on Wednesday, and the team is continuing to treat him. Vrabel said the medical picture and the workload question are separate issues, and he called Brown one of the team's best players whom they want on the field. He framed the week around a road division game in Miami and declined to look past it. He named TreVeyon Henderson and Christian Elliss as questionable, describing them as part of the usual group of Wednesday-style status players. Asked about Christian Barmore's early-down role, he said the goal is to make Barmore's primary job affecting the quarterback while finding roles for everyone. With Romeo Doubs and Matt Pryor reportedly on IR, Vrabel said they expect to have 11 offensive players available, and that a practice-squad player such as Lan Larison or an offensive lineman would be ready if needed. He said every player prepares as a starter.",
+  "model": "claude-sonnet-5-5",
+  "headline": "A.J. Brown is questionable for the Week 9 trip to Miami after being unable to finish Wednesday's practice; with Romeo Doubs and Matt Pryor on IR, the WR room is thin, and TreVeyon Henderson is also questionable.",
+  "summary": "Vrabel said A.J. Brown is questionable, and a decision will come after seeing how he is tomorrow. Brown could not finish practice on Wednesday, and the team is still treating him. Vrabel dodged a question about whether Brown was rushed back and said the two issues are separate. Asked about Brown's heavy snap load, he said the team wants its best players on the field and counts Brown as one of them. He listed TreVeyon Henderson and Christian Elliss as questionable too, calling them 'the usual suspects' and saying he did not want to misspeak. Vrabel promised 11 players on offense and said everyone prepares as a starter, with practice-squad players like Lan Larison ready if called on. On Christian Barmore, he said the goal is to have him affect the quarterback as his primary role while finding roles for everyone. He declined to say whether Ben Brown's return to practice changes the guard plan, and he offered no strong theory on the rise in in-season trades.",
   "injuries": [
    {
     "player": "A.J. Brown",
     "status": "questionable",
-    "detail": "Could not practice or finish practice Wednesday; team is treating him, final decision after Saturday's workout.",
+    "detail": "Was unable to finish Wednesday's practice. The team continues to treat him, and a decision comes after Saturday's practice.",
     "player_id": "00-0035676"
    },
    {
     "player": "TreVeyon Henderson",
     "status": "questionable",
-    "detail": "Coach said he will be questionable for Sunday's game in Miami.",
+    "detail": "Vrabel said he will be questionable, with no further detail.",
     "player_id": "00-0040734"
    },
    {
     "player": "Christian Elliss",
     "status": "questionable",
-    "detail": "Coach said he will be questionable; named among the usual status players.",
+    "detail": "Vrabel said he will be questionable, with no further detail.",
     "player_id": ""
    },
    {
     "player": "Romeo Doubs",
-    "status": "unclear",
-    "detail": "Reporter said he is on IR; coach did not dispute it but did not confirm it directly.",
+    "status": "ir",
+    "detail": "Referenced as on IR in a reporter's question; Vrabel did not dispute it.",
     "player_id": "00-0037816"
    },
    {
     "player": "Matt Pryor",
-    "status": "unclear",
-    "detail": "Reporter said he is on IR; coach did not dispute it but did not confirm it directly.",
+    "status": "ir",
+    "detail": "Referenced as on IR in a reporter's question; Vrabel did not dispute it.",
     "player_id": "00-0034417"
+   },
+   {
+    "player": "Ben Brown",
+    "status": "returning",
+    "detail": "A reporter noted he is back at practice this week. Vrabel did not comment on the guard plan.",
+    "player_id": "00-0037413"
    }
   ],
   "signals": [
    {
     "player": "A.J. Brown",
     "topic": "injury",
-    "signal": "watch",
+    "signal": "down",
     "tone": "hedged",
-    "claim": "Status is questionable for Sunday at Miami; final decision after Saturday's practice.",
-    "note": "Brown's availability is the biggest fantasy question this week, and a late decision could affect lineup planning.",
+    "claim": "Brown's availability for Sunday at Miami will be decided after tomorrow's practice.",
+    "note": "With Doubs out, Brown is the clear top target, so his questionable tag is a major risk for the passing game and needs monitoring before kickoff.",
     "quote": "His status is questionable like some other players.",
     "player_id": "00-0035676"
    },
@@ -1725,27 +1866,37 @@
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Listed as questionable for the Miami game.",
-    "note": "Henderson's status affects his workload and fantasy floor, so monitor the final injury report.",
-    "quote": "I mean I think Treveon will be questionable.",
+    "claim": "Henderson will carry a questionable designation into the Miami game.",
+    "note": "A questionable tag could cut his backfield workload and may help Rhamondre Stevenson, so check his status before kickoff.",
+    "quote": "I think Treveon will be questionable.",
     "player_id": "00-0040734"
+   },
+   {
+    "player": "Christian Barmore",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Barmore's primary role is as a pass rusher, and he is being used less on early downs.",
+    "note": "A pass-rush-focused role may help IDP sack and pressure upside while lowering his tackle and run-stop volume.",
+    "quote": "try to make that his primary role and try to play everybody",
+    "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Opponent and roster depth",
-    "detail": "Coach framed the week around a road division game at Miami and said the team is aiming for 11 offensive players available. Practice-squad players, including Lan Larison or an offensive lineman, would be ready if needed."
+    "topic": "Offensive depth",
+    "detail": "Vrabel said the team expects to field 11 offensive players, stressed that everyone prepares as a starter, and named practice-squad WR Lan Larison as a possible call-up. He also said offensive linemen must be ready to step in."
    },
    {
-    "topic": "Christian Barmore role",
-    "detail": "Asked about a reduced early-down role, Vrabel said the aim is to make Barmore's primary job affecting the quarterback and to find roles for everyone."
+    "topic": "Offensive line",
+    "detail": "Asked whether Ben Brown's return would change the guard plan, Vrabel gave no information."
    },
    {
-    "topic": "In-season trades",
-    "detail": "Asked why in-season trades have increased, Vrabel said he had not thought much about it and speculated that teams are more comfortable moving players."
+    "topic": "League trends",
+    "detail": "Vrabel had no firm theory on the rise in in-season trades. He guessed teams are more comfortable moving on from players and follow one another's lead."
    }
   ],
-  "opponent": "Miami"
+  "opponent": "Miami Dolphins"
  },
  {
   "id": "NYJ:aaron-glenn-jets-press-conference-10-30-2026-week-8",
@@ -1759,111 +1910,129 @@
   "after_week": 7,
   "coach": "Aaron Glenn",
   "words": 2032,
-  "model": "claude-haiku-5-5",
-  "headline": "Breece Hall limited again and David Bailey doubtful for Sunday; T'Vondre Sweat is out, which pushes more snaps to the edge group",
-  "summary": "Glenn opened with the injury report: T'Vondre Sweat will not practice and will miss the game, and the transcript also suggests Max Mitchell and Joe Tippmann will not practice, though the captions are unclear on those two. David Bailey will not practice today and is doubtful for Sunday, so Glenn will treat him as a game-time decision. Breece Hall and Dylan Parham are limited, and Braelon Allen is full. Glenn called Hall a key cog and said he has specific checkpoints to clear each time he's out there. On the defense, he said Sweat's absence is a big loss but the backups are ready, and that the edge group will have to play more if Bailey can't go. He praised Darrell Jackson Jr.'s growth, noting he now plays multiple techniques along the line and is getting better each week. On the tight end room, Glenn said the group has improved a lot and that the Jets have played a lot of 13 personnel with two tight ends. He also said the Jets need to set the edge better against the run after Miami's perimeter plays, and he expects Maxx Crosby to be a challenge for the Raiders' pass rush and disruptive player.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Breece Hall was limited again but is expected to be a key piece Sunday. T'Vondre Sweat, Joe Tippmann and Max Mitchell are out, and edge rusher David Bailey is doubtful against the Raiders.",
+  "summary": "Glenn opened with the Friday injury report. Sweat, Joe (likely Tippmann) and Max Mitchell are out, and David Bailey is doubtful and will be a game-time decision. Breece Hall and Dylan Parham were limited, and Braelon Allen was full. Glenn said one player will be questionable, but the caption garbles the name. Asked why Hall has been limited for so long, he called Hall a key cog and said he has to hit certain checkpoints. Glenn said losing Sweat hurts because he wants a strong defensive middle with Sweat, Demario Davis and Minkah Fitzpatrick, but he trusts the depth behind them. If Bailey can't go, the remaining edge rushers will have to play more. He praised Darrell Jackson Jr.'s growth as he moves around the defensive line. He also said the tight end room has improved a lot, with 13 personnel used often and lots of mixing and matching. He previewed the Raiders by discussing Kirk Cousins, Maxx Crosby, setting the edge and Fernando Mendoza, and he deflected a question about comments from Ashton Jeanty.",
   "injuries": [
    {
     "player": "T'Vondre Sweat",
     "status": "out",
-    "detail": "Will not practice this week and will be out for Sunday's game; Glenn said losing him is a huge deal for the middle of the defense.",
+    "detail": "Will not practice and is out for the game. Glenn called losing him a huge deal for the defensive middle.",
     "player_id": ""
+   },
+   {
+    "player": "Joe Tippmann",
+    "status": "out",
+    "detail": "Named as 'Joe' among the players who are out. The caption is garbled, but this is most likely Tippmann.",
+    "player_id": "00-0039145"
+   },
+   {
+    "player": "Max Mitchell",
+    "status": "out",
+    "detail": "Did not practice and is out for Sunday.",
+    "player_id": "00-0038114"
    },
    {
     "player": "David Bailey",
     "status": "doubtful",
-    "detail": "Did not practice Friday and is doubtful for the game; Glenn is treating it as a game-time decision.",
+    "detail": "Did not practice. Glenn called him doubtful and said it will be more of a game-time decision.",
     "player_id": ""
    },
    {
     "player": "Breece Hall",
     "status": "limited",
-    "detail": "Limited in Friday's practice; Glenn said he has checkpoints to clear each time he goes out.",
+    "detail": "Limited again. Glenn said he must hit certain checkpoints and is a key piece of the offense.",
     "player_id": "00-0038120"
    },
    {
     "player": "Dylan Parham",
     "status": "limited",
-    "detail": "Limited in Friday's practice.",
+    "detail": "Limited in Friday practice.",
     "player_id": "00-0037255"
    },
    {
     "player": "Braelon Allen",
     "status": "full",
-    "detail": "Full participant in Friday's practice.",
+    "detail": "Expected to be full participation, per Glenn.",
     "player_id": "00-0039794"
-   },
-   {
-    "player": "Joe Tippmann",
-    "status": "unclear",
-    "detail": "Transcript suggests he will not practice, but the captions are garbled on the name and status.",
-    "player_id": "00-0039145"
-   },
-   {
-    "player": "Max Mitchell",
-    "status": "unclear",
-    "detail": "Transcript suggests he will not practice, but the status is not clearly stated.",
-    "player_id": "00-0038114"
    }
   ],
   "signals": [
-   {
-    "player": "Darrell Jackson Jr.",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Is growing into a multi-position role on the defensive line, playing the shade, three, four-I and five technique",
-    "note": "Glenn's praise and his expanding alignments suggest a bigger rotational role, which could raise his snap share if the edge depth gets thin.",
-    "quote": "each week he's just getting better and better",
-    "player_id": ""
-   },
    {
     "player": "Breece Hall",
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Limited in practice Friday and must hit checkpoints before he is cleared",
-    "note": "Repeated limited practices make his Sunday workload uncertain for a key offensive piece.",
-    "quote": "he's a key cog in what we're doing",
+    "claim": "Hall is being brought along carefully and must hit certain checkpoints to be cleared for Sunday.",
+    "note": "Another limited practice for a key back raises some game-day risk, so check final inactives before locking him in.",
+    "quote": "he's a key cog in what we're doing.",
     "player_id": "00-0038120"
-   },
-   {
-    "player": "David Bailey",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "Doubtful for Sunday; Glenn will decide on a game-time basis",
-    "note": "If Bailey sits, the edge rotation shifts and the defensive snap distribution changes.",
-    "quote": "he'll be doubtful when it comes to the game",
-    "player_id": ""
    },
    {
     "player": "T'Vondre Sweat",
     "topic": "injury",
     "signal": "down",
     "tone": "negative",
-    "claim": "Will miss Sunday's game",
-    "note": "His absence weakens the interior run defense and affects Jets defensive production for the week.",
-    "quote": "losing him. I mean, that's always a huge deal for us",
+    "claim": "Sweat will miss Sunday's game.",
+    "note": "IDP managers lose a starting interior defender, and the run defense gets thinner.",
+    "quote": "and losing him. I mean, that's always a huge deal for us.",
     "player_id": ""
+   },
+   {
+    "player": "David Bailey",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Bailey is doubtful and will likely miss Sunday, though the decision will be made at game time.",
+    "note": "IDP managers should plan without him, and the other edge rushers should see more snaps if he's out.",
+    "quote": "but he'll be doubtful when it comes to the game.",
+    "player_id": ""
+   },
+   {
+    "player": "Darrell Jackson Jr.",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Jackson will keep working at multiple defensive line spots and is trending upward.",
+    "note": "He is a growing DL piece, which matters for IDP, especially with Sweat out.",
+    "quote": "each week he is getting better and better",
+    "player_id": ""
+   },
+   {
+    "player": "Braelon Allen",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Allen is expected to be full participation heading into Sunday.",
+    "note": "He looks healthy, which makes him a handcuff if Hall is limited or held back.",
+    "quote": "",
+    "player_id": "00-0039794"
    }
   ],
   "topics": [
    {
-    "topic": "Tight ends",
-    "detail": "Glenn said the tight end room has drastically improved since training camp and the Jets use multiple tight ends in 13 personnel, which gives them flexibility in mixing players."
+    "topic": "Tight end usage",
+    "detail": "Glenn said the tight end room has improved a lot since camp and the team plays plenty of 13 personnel. He said there is a lot of mixing and matching available, and often four tight ends are active."
    },
    {
-    "topic": "Run defense and edge",
-    "detail": "Glenn said setting the edge is the foundation of the defense and the Jets want to keep plays from happening on the perimeter after Miami's edge success."
+    "topic": "Edge setting",
+    "detail": "After Miami got the edge on them last week, Glenn called setting the edge the basis of the defense. He wants outside runs forced inside to the big interior linemen."
    },
    {
-    "topic": "Opponent: Raiders",
-    "detail": "Glenn praised Kirk Cousins's experience and said the Jets want to disrupt the pocket and reroute receivers. He also called Maxx Crosby relentless and instinctive, and said Crosby will likely draw significant attention."
+    "topic": "Raiders QB Kirk Cousins",
+    "detail": "Glenn said Cousins processes very well and has seen every kind of pressure. The plan is to disrupt the pocket and reroute receivers."
    },
    {
-    "topic": "IR returns",
-    "detail": "Glenn said the plan is for the two players on injured reserve to return, but rehab timelines will determine it as the season progresses."
+    "topic": "Maxx Crosby",
+    "detail": "Glenn called Crosby relentless, long and instinctive, and said the Jets expect to see a lot of him. He said he talked to one of his players about matching up with Crosby, and that some help will be needed."
+   },
+   {
+    "topic": "Ball distribution",
+    "detail": "Asked about getting a player the ball more, Glenn said there is only one ball and many people need touches, including Garrett Wilson, Braelon Allen and Mason Taylor. He said they must find ways to get that player involved, but others can make plays too."
+   },
+   {
+    "topic": "IR and Mendoza",
+    "detail": "Two players on IR (Yamada and McCrary, per the question) are planned to return as rehab allows. Glenn praised Fernando Mendoza's toughness and leadership and said he doesn't know whether Mendoza will play."
    }
   ],
   "opponent": "Las Vegas Raiders"
@@ -1880,26 +2049,26 @@
   "after_week": 7,
   "coach": "Nick Sirianni",
   "words": 1975,
-  "model": "claude-haiku-5-5",
-  "headline": "Saquon Barkley's Week 9 status remains unresolved; Sirianni said the RB room is banged up but Elijah Mitchell is back from a camp injury.",
-  "summary": "Sirianni spent much of the session defending the team's weekly process, saying preparation and practice focus matter even though results don't always follow. He acknowledged the team needs to 'pick up our detail' as a whole, while stressing that effort from players and coaches has not been the problem. On running back, he said the group is beat up by injuries but he feels good about the depth. He would not confirm whether Saquon Barkley will play Sunday, saying the decision will come at the end of the week. He praised Elijah Mitchell, who was hurt in camp, and said he's glad to have him back, and spoke positively about Jaydon Blue's ability. On leadership, he pointed to Barkley, Jordan Davis, Zach Ertz and others, plus younger players like Nolan Smith as future leaders. On the trade deadline, he said conversations with Howie Roseman are about the same as in his first five years, with the focus on consistency regardless of results. He said the run game is a staff-wide group effort. Looking ahead to the Commanders, he said pass protection is even more important given Washington's aggressive defense and confusion looks, and that the protection meeting is the first meeting each week.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Saquon Barkley's availability for Sunday night is still unresolved (Sirianni: 'we'll see'), with Elijah Mitchell and Jaydon Blue set to carry the RB load if he sits.",
+  "summary": "Sirianni spent much of the session on process. He said 'what happens Monday to Saturday is usually what happens Sunday' and that the team's detail has to improve, while insisting nobody is slacking in effort. Asked whether Saquon Barkley can play this week, he did not commit and said they would see at the end of the week. He said he feels good about the RB room's depth even though it has been hit hard by injuries. He singled out Elijah Mitchell, who is back after getting dinged up in camp, and Jaydon Blue as the backs ready to step in. On leadership, he praised Barkley, Jordan Davis, Jordan Mailata, Cooper DeJean, Quinyon Mitchell, Dallas Goedert and Landon Dickerson, and noted that DeVonta Smith has been banged up. He said trade-deadline talks with Howie Roseman follow the same process as in past years, regardless of record. He called the run game a group staff effort. He also said pass protection is always important, and the team will need to be technically sound against Washington's pressure and confusion looks.",
   "injuries": [
    {
     "player": "Saquon Barkley",
     "status": "unclear",
-    "detail": "Sirianni declined to confirm whether he will play Sunday, saying the decision comes at the end of the week.",
+    "detail": "Sirianni wouldn't say whether he plays Sunday; 'we'll see' at the end of the week. The RB room is described as beat up.",
     "player_id": "00-0034844"
    },
    {
     "player": "Elijah Mitchell",
     "status": "returning",
-    "detail": "Was dinged up in training camp; Sirianni said he is glad to have him back.",
+    "detail": "Got dinged up in camp; Sirianni is glad to have him back and expects him to play in the thin RB room.",
     "player_id": "00-0036567"
    },
    {
     "player": "DeVonta Smith",
-    "status": "limited",
-    "detail": "Sirianni said Smith has been banged up, without a specific designation.",
+    "status": "unclear",
+    "detail": "Mentioned in passing as having been banged up; no specifics or game status given.",
     "player_id": "00-0036912"
    }
   ],
@@ -1909,55 +2078,65 @@
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Final availability for Sunday's game against Washington will be decided at the end of the week.",
-    "note": "Barkley's status is the biggest swing factor for the backfield, and no clarity was given.",
-    "quote": "we'll see at the end of the you know at the end of this",
+    "claim": "Barkley's availability for Sunday night will be decided at the end of the week.",
+    "note": "Sirianni gave no confirmation either way, so Barkley's status is a late-week decision and he is a risk until it is announced.",
+    "quote": "It's a good way to ask if Saquon is playing this week.",
     "player_id": "00-0034844"
    },
    {
     "player": "Elijah Mitchell",
-    "topic": "depth_chart",
+    "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Back in the rotation after a camp injury, and the coach expects him to be a contributor in the RB room.",
-    "note": "With the room thin, Mitchell's return adds immediate depth behind Barkley.",
-    "quote": "just really glad to have him back",
+    "claim": "Mitchell will have a significant role in the RB room given the injuries.",
+    "note": "He is healthy again and Sirianni singled him out, which makes him a likely volume back if Barkley is limited or out.",
+    "quote": "I was really excited about Elijah throughout camp.",
     "player_id": "00-0036567"
    },
    {
     "player": "Jaydon Blue",
-    "topic": "role",
-    "signal": "watch",
+    "topic": "usage",
+    "signal": "up",
     "tone": "positive",
-    "claim": "Expected to be a key part of a depleted RB group, though no snap or role change was specified.",
-    "note": "Blue is one of the young backs being called on while the room is injured, so his workload could rise.",
-    "quote": "always have like, uh, Jaden and the things that he can do",
+    "claim": "Blue will be used in the offense for his skill set while the RB room is thin.",
+    "note": "Sirianni cited the things he can do, so he could see a bigger complementary role if Barkley is short-handed.",
+    "quote": "",
     "player_id": "00-0040586"
+   },
+   {
+    "player": "DeVonta Smith",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "",
+    "note": "Smith was called banged up with no detail, so monitor the final injury report.",
+    "quote": "I know Smitty's been banged up.",
+    "player_id": "00-0036912"
    }
   ],
   "topics": [
    {
-    "topic": "Process and preparation",
-    "detail": "Sirianni said the team needs to tighten its detail in meetings and practice, but insisted effort is not the issue and results are not the only measure."
-   },
-   {
-    "topic": "Trade deadline",
-    "detail": "Sirianni said conversations with Howie Roseman about acquiring or trading players are much the same as in past seasons, with the emphasis on consistency through wins and losses."
+    "topic": "Process and detail",
+    "detail": "Sirianni said the team's detail must improve across the board and that focus in meetings and practice drives results. He said he is 'results aware' but 'process driven' and denied any effort problem."
    },
    {
     "topic": "Leadership",
-    "detail": "He pointed to Barkley, Jordan Davis, Zach Ertz, Moro Ojomo, Cooper DeJean, Quinyon Mitchell, Dallas Goedert, Landon Dickerson, and Nolan Smith as current and future leaders."
+    "detail": "With several elected captains injured, he pointed to healthy veterans like Barkley, Mailata, Jordan Davis, DeJean, Mitchell, Goedert and Dickerson. He named Nolan Smith as a future leader."
    },
    {
-    "topic": "Run game",
-    "detail": "The run game is a staff-wide group effort rather than being led by one coach."
+    "topic": "Trade deadline",
+    "detail": "He said conversations with Howie Roseman about buying or selling are the same as in his first five years, driven by consistent process regardless of record. He gave no hints about specific moves."
+   },
+   {
+    "topic": "Run game planning",
+    "detail": "He declined to name one coach who leads the run game and called it a group staff effort, as with the pass game and protections."
    },
    {
     "topic": "Pass protection vs. Washington",
-    "detail": "Sirianni said Washington's aggressive, confusing looks make pass protection more important this week, and that protection is the first meeting each week."
+    "detail": "He said pass pro matters more against an aggressive defense that creates confusion. He stressed avoiding technical errors on stunts and with free runners. Protection is always the first meeting of the week."
    }
   ],
-  "opponent": "Washington Commanders (Sunday Night Football)"
+  "opponent": "Washington Commanders"
  },
  {
   "id": "TB:todd-bowles-on-preparing-for-matchup-vs-falcons-press-conference",
@@ -1971,23 +2150,36 @@
   "after_week": 7,
   "coach": "Todd Bowles",
   "words": 331,
-  "model": "claude-haiku-5-5",
-  "headline": "Transcript is too garbled to identify the injured player; Bowles hedged on a possible return, and said Tampa Bay needs to win at home.",
-  "summary": "Bowles addressed an unnamed player's foot injury, which is the main fantasy-relevant item. The captions say the player was not practicing, had a setback, and cleared concussion protocol, so the foot was the remaining issue. Bowles said there is a chance he plays Monday and that the team will see how he feels and recovers over the next two days. Later in the exchange, the captions suggest the player moved from not practicing to limited, then full. Bowles said the team has already done its wet-ball preparation for a possible rainy Sunday. On home-field results, he said the team does not want to lose its fans' support and that it needs to win at home. Because the auto-captions misspell or drop names, I could not reliably tie the injury comments to a roster player, so I have not assigned any player-level signals.",
-  "injuries": [],
+  "model": "claude-sonnet-5-5",
+  "headline": "Transcript is too fragmentary to tie most injury news to named players. The one clear item is that a player called 'Mike' is out this week, and Bowles expects another unnamed player to be 'full go' against the Falcons.",
+  "summary": "The captions drop most of the reporters' questions and almost never name the player being discussed, so much of the injury news can't be attributed with confidence. Bowles said a player called 'Mike' will be out this week after a setback, and that the player was never at full speed and is still recovering. Another player who sat out Friday had already cleared concussion protocol, so what held him back was a foot issue. Bowles also said there is a chance a player gets back on the field, but it depends on how he feels and recovers over the next two days. One player was described as full in practice, and Bowles said another will be 'full go'. On the weather, Bowles said Tampa Bay has done its wet-ball work early in the week because rain is possible Sunday. He closed by saying the team hasn't won at home and needs to, so the fans get behind the team instead of the visitors' fans being heard.",
+  "injuries": [
+   {
+    "player": "Mike (unidentified, not on roster)",
+    "status": "out",
+    "detail": "Bowles said he will be out this week after a setback; he was never full speed and is still recovering.",
+    "player_id": ""
+   },
+   {
+    "player": "Unidentified player",
+    "status": "unclear",
+    "detail": "Cleared concussion protocol, but a foot issue kept him from practicing Friday; Bowles said there is a chance he plays and will see how he recovers over the next two days.",
+    "player_id": ""
+   }
+  ],
   "signals": [],
   "topics": [
    {
-    "topic": "Injury update",
-    "detail": "Bowles discussed a player with a foot injury who had a setback and was not practicing for a stretch, while also clearing concussion protocol. The captions are garbled on the name (one fragment reads 'Mike'), and the status moved between out, limited, and full, so treat any availability claim as unverified until the official injury report."
+    "topic": "Weather",
+    "detail": "Rain is possible Sunday. Bowles said the team has done all its wet-ball work early in the week."
    },
    {
-    "topic": "Weather prep",
-    "detail": "Asked about a possibly rainy Sunday, Bowles said the team has already done its wet-ball work early in the week."
+    "topic": "Home field",
+    "detail": "Bowles said Tampa Bay has not won at home and needs to. He wants the team to dominate its home field and does not think opposing fans affect the players."
    },
    {
-    "topic": "Home record",
-    "detail": "Bowles said Tampa Bay has not won at home this season and needs to win at home to get fans behind the team, and he did not think opposing fans affect the team's play."
+    "topic": "Opponent",
+    "detail": "Week 8 is another division game, against the Atlanta Falcons on Sunday."
    }
   ],
   "opponent": "Atlanta Falcons"
@@ -2004,73 +2196,107 @@
   "after_week": 7,
   "coach": "Robert Saleh",
   "words": 1170,
-  "model": "claude-haiku-5-5",
-  "headline": "Carnell Tate (shoulder) sat Friday with his game status uncertain, while Alontae Taylor is nearing a return and competing with Marcus Harris for the nickel job.",
-  "summary": "Saleh opened by saying Carnell Tate, who was listed as \"Taj\" in the captions, and a second player whose name was garbled, would not practice Friday, and that their game status was in doubt until after the workout. He said the team would push Tate in a limited workout to see how the shoulder responds, and called the situation complicated for a young player. Saleh believes Tate hurt the shoulder on a fumble and that players often don't feel injuries until the next morning. On the defense, he said blitz usage is decided game by game, not because of a lost pass rusher, and that the team is weighing packages with two corners, nickel, dime, or even a three-defensive-lineman look, since Jeff's absence is a factor. Alontae Taylor had a strong week, especially in pads, and is getting closer to playing. Saleh described nickel as a linebacker-like role and said Taylor still has to take the job from Marcus Harris, who has played well. Saleh said Taylor's extra snaps last week reflected earned reps and improved communication. On Cam Ward being the franchise face, Saleh said that is a natural expectation for any quarterback but that the focus is on Ward's daily development. Saleh closed by celebrating a high school coach of the week.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Rookie WR Carnell Tate (shoulder) and a player Saleh called 'Taj' (likely Tyjae Spears) are in doubt for the game, Jeffery Simmons is gone, and Alontae Taylor is close to returning at nickel.",
+  "summary": "Saleh opened by saying three players, which the captions render as 'Taj,' Tate and Townsend, did not practice Friday and have their status 'in doubt.' He was unsure whether that meant an official 'doubtful' tag. On Tate, he said missing a full week of practice is complicated for a young player. The team would work him out Friday to push the injury and see how he responds. He said the injury likely happened on the fumble, when the player landed on his shoulder, and he did not feel it until the next morning. On defense, Saleh said the team will not blitz more just because Jeffery Simmons is gone. Pressure varies by game, and the opponent's elite skill players mean extra blitzers create more one-on-ones in the back end. He is open to different packages, including dime, five or seven DBs, and possibly a three-lineman front. Alontae Taylor had a great week of practice, showed physicality in pads, and is 'getting closer' to playing. He still has to take the nickel job from Marcus Harris, who has been playing well. Saleh also said another player earned more snaps last week and the staff is looking for the best three defensive backs. On Cam Ward, Saleh said the goal is getting him better every day rather than making him the face of the franchise.",
   "injuries": [
    {
     "player": "Carnell Tate",
     "status": "doubtful",
-    "detail": "Did not practice Friday with a shoulder injury suffered on a fumble. Saleh said his game status is in doubt and will be clearer after the Friday workout, which is a limited attempt to test him. Coach was unsure whether 'in doubt' meant doubtful.",
+    "detail": "Did not practice Friday. Saleh said his status is 'in doubt' and that he would be worked out to test a shoulder injury, likely suffered landing on the fumble. Saleh was unsure whether that makes him officially doubtful.",
     "player_id": "00-0041438"
    },
    {
-    "player": "Alontae Taylor",
-    "status": "limited",
-    "detail": "Had a strong practice week, including a physical day in pads, and is getting closer to playing. Saleh did not confirm he would play this weekend.",
-    "player_id": ""
+    "player": "Tyjae Spears",
+    "status": "unclear",
+    "detail": "Captions have the coach saying 'Taj,' which most likely refers to Spears. He did not practice Friday and his status is in doubt, with no injury detail given.",
+    "player_id": "00-0039032"
    },
    {
     "player": "Jeffery Simmons",
-    "status": "unclear",
-    "detail": "Referenced only as 'Jeff' and described as 'being gone,' so it is unclear whether he is injured or unavailable for another reason. Reporter's question suggests he is a key pass rusher, and the defense is adjusting for his absence.",
+    "status": "out",
+    "detail": "Referred to as 'Jeff' and described as gone. The team is adjusting its pass rush without him, and no reason was given.",
+    "player_id": ""
+   },
+   {
+    "player": "Alontae Taylor",
+    "status": "returning",
+    "detail": "Had a great week of practice, including in pads Thursday, and is 'getting closer.' Saleh said they would see how Friday goes.",
     "player_id": ""
    }
   ],
   "signals": [
    {
+    "player": "Carnell Tate",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Tate is unlikely to play this week unless he shows enough progress in Friday's workout.",
+    "note": "The rookie WR missed practice with a shoulder issue and is in doubt, so consider a backup option.",
+    "quote": "their status for the game is in doubt",
+    "player_id": "00-0041438"
+   },
+   {
+    "player": "Tyjae Spears",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Spears (if 'Taj' is Spears) is in doubt for the game after missing Friday's practice.",
+    "note": "The name is uncertain from the captions, so confirm against the official report before acting.",
+    "quote": "",
+    "player_id": "00-0039032"
+   },
+   {
     "player": "Alontae Taylor",
-    "topic": "role",
-    "signal": "up",
+    "topic": "depth_chart",
+    "signal": "watch",
     "tone": "positive",
-    "claim": "Is in line to compete for the nickel role, and must take it from Marcus Harris.",
-    "note": "A healthy return to the nickel job would make him a candidate for defensive snaps and tackle opportunities, though the role is not yet secured.",
-    "quote": "he's getting closer. Um, you know, he's been doing",
+    "claim": "Taylor is nearing a return and will compete with Marcus Harris for the nickel job.",
+    "note": "Matters mostly for IDP: a returning nickel corner could take snaps from Harris.",
+    "quote": "he's getting closer",
     "player_id": ""
    },
    {
     "player": "Marcus Harris",
-    "topic": "role",
+    "topic": "depth_chart",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Has been playing well and is still the nickel incumbent, but faces competition from Alontae Taylor.",
-    "note": "His nickel snaps are at risk if Taylor returns healthy and continues to progress.",
-    "quote": "Marcus has been playing good football.",
+    "claim": "Harris remains the nickel starter for now, but Taylor is working to take the job.",
+    "note": "His IDP role is secure only if Taylor does not return and win the spot this week.",
+    "quote": "Marcus has been playing good football",
     "player_id": ""
    },
    {
-    "player": "Carnell Tate",
+    "player": "Jeffery Simmons",
     "topic": "injury",
     "signal": "down",
-    "tone": "hedged",
-    "claim": "Will be limited Friday, with his game status to be determined after the workout.",
-    "note": "Doubt for Week game status makes him a risky start until the team gives a clearer update.",
-    "quote": "It gets a little complicated there, especially for a young guy.",
-    "player_id": "00-0041438"
+    "tone": "neutral",
+    "claim": "The Titans will play without Simmons and will not necessarily blitz more to compensate.",
+    "note": "The loss hurts the Titans' pass rush and could lower the team's sack upside for DST and IDP purposes.",
+    "quote": "",
+    "player_id": ""
    }
   ],
   "topics": [
    {
     "topic": "Defensive scheme",
-    "detail": "Saleh says blitz rates will vary by opponent and game plan, not by personnel losses. He is weighing nickel, dime, and five-DB packages, and a three-defensive-lineman look is possible."
+    "detail": "Saleh said the team will not necessarily blitz more without Simmons, since extra blitzers leave the back end in one-on-one coverage against elite skill players. He is considering dime, five- or seven-DB looks, and possibly a three-lineman package."
    },
    {
-    "topic": "Quarterback Cam Ward",
-    "detail": "Saleh said being the franchise face is a natural goal for any quarterback, but the focus is on his daily development."
+    "topic": "Secondary snaps",
+    "detail": "A defensive back earned more snaps than another player last week. Saleh called it 'a little bit of both' a lasting change and a week-to-week call, and said the staff is searching for the best three players across two corners and nickel. The captions garble the names, so they are not identified."
    },
    {
-    "topic": "Practice and locker room",
-    "detail": "Saleh said Thursday's practice and Friday's walk-through were strong, and the team expects to win on the road."
+    "topic": "Cam Ward",
+    "detail": "Asked about Ward becoming the face of the franchise, Saleh said the focus is getting him better every day and keeping him focused on being his best self."
+   },
+   {
+    "topic": "Specialists",
+    "detail": "Saleh praised the newly signed Thomas Morstead and joked that Joey Slye has competition in the weight room. This suggests a change at punter."
+   },
+   {
+    "topic": "Team mood",
+    "detail": "Saleh said practice was great after the initial shock of recent news and expects Friday's practice to be great too. The team then travels for the game."
    }
   ],
   "opponent": ""

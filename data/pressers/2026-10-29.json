@@ -11,32 +11,42 @@
   "after_week": 7,
   "coach": "Jeff Hafley",
   "words": 4044,
-  "model": "claude-haiku-5-5",
-  "headline": "Kadyn Proctor is in concussion protocol and out of practice; Malik Willis's rushing is being praised as critical, and Jordyn Brooks and Caleb Douglas are getting good reviews.",
-  "summary": "Hafley opened by saying Kadyn Proctor and an unnamed player called 'Juju' are in concussion protocol after being symptomatic earlier in the week, so they will not practice Wednesday. Everyone else on the 53-man roster is expected to practice, and he clarified that IR players like Trey Moore are not included. He said Jarrett Kingston will work as the third guard and will take reps at guard in practice after Jonah Savaiinaea's injury. On the trade deadline, he declined an either/or answer, saying the team listens on everything but is focused on the current group. He praised the energy coming out of the bye week and stressed starting fast and playing all four quarters. He spoke highly of Jordyn Brooks's physicality, Caleb Douglas's clean play and run-game toughness, and Michael Taaffe's aggressive interception. He credited Malik Willis's running as a critical weapon in the win and said Jacob Rodriguez's four-tackle game reflected limited opportunities rather than poor play. He also reviewed special teams as improved and penalty-free, aside from one hold.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Both Jonah Savaiinaea and Kadyn Proctor are in the concussion protocol and sat out Wednesday's practice, with Jarrett Kingston taking the guard spot. Malik Willis's running was called a critical weapon ahead of the Patriots.",
+  "summary": "Hafley said two players, referred to as 'Juju' (most likely Jonah Savaiinaea) and Kadyn Proctor, are in the concussion protocol. Both were symptomatic earlier in the week and did not practice. Everyone else on the 53-man roster was expected to practice. Jarrett Kingston, who replaced the injured guard in the last game, will be the guard in practice. On the trade deadline, he gave no specifics and said he and the GM talk about everything. He praised Malik Willis's decisiveness and said his ability to run was critical, including a huge fourth-down conversion and a draw. Jordyn Brooks was called a pro who played fast and physical, and rookie WR Caleb Douglas drew praise for clean alignment, run-game physicality and his red-zone work, with the hope of getting him the ball more. He also said a young TE (apparently Seydou Traore) earned 11 offensive snaps because of his special-teams physicality. Hafley was relaxed about Jacob Rodriguez's low tackle total, saying it depends on how offenses attack the defense. The next game is a divisional matchup with the Patriots, led by former coach Mike Vrabel. Hafley said he respects them, expects AJ Brown to be a focus of the game plan, and called special teams improved.",
   "injuries": [
    {
-    "player": "Kadyn Proctor",
-    "status": "out",
-    "detail": "In concussion protocol after being symptomatic earlier in the week; will not practice Wednesday.",
-    "player_id": "00-0041521"
+    "player": "Jonah Savaiinaea",
+    "status": "unclear",
+    "detail": "Referred to as 'Juju'. In the concussion protocol, was symptomatic earlier in the week, and did not practice Wednesday. The name match is probable but not certain.",
+    "player_id": "00-0040742"
    },
    {
-    "player": "Juju (name unclear; not on provided roster)",
-    "status": "out",
-    "detail": "In concussion protocol after being symptomatic earlier in the week; will not practice Wednesday.",
-    "player_id": ""
+    "player": "Kadyn Proctor",
+    "status": "unclear",
+    "detail": "In the concussion protocol, was symptomatic earlier in the week, and did not practice Wednesday.",
+    "player_id": "00-0041521"
    }
   ],
   "signals": [
+   {
+    "player": "Jarrett Kingston",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "neutral",
+    "claim": "Kingston will be the guard in practice and is the next man up at guard while Savaiinaea is in the concussion protocol.",
+    "note": "He is stepping into an expanded OL role, which matters for Miami's run-blocking.",
+    "quote": "Kingston will be in today.",
+    "player_id": "00-0039832"
+   },
    {
     "player": "Malik Willis",
     "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "His rushing ability is a critical weapon in the offense and will stay part of the game plan",
-    "note": "Designed QB runs and scramble production add rushing floor and touchdown upside for fantasy.",
-    "quote": "Can it be critical? Yeah, it was critical.",
+    "claim": "Willis's designed runs and scrambles will remain a meaningful part of the offense.",
+    "note": "His rushing gives him extra fantasy value, and the coach called the draw a weapon that is hard to defend.",
+    "quote": "it's a weapon that's hard to defend but it's critical",
     "player_id": "00-0038128"
    },
    {
@@ -44,9 +54,9 @@
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "He has been playing fast and physical and has been a consistent contributor each week",
-    "note": "Hafley says he pops every week, which supports a stable linebacker role and tackle volume.",
-    "quote": "I think he pops every week when he's out there.",
+    "claim": "Brooks will continue as a fast, physical every-week defensive leader.",
+    "note": "This is a positive IDP read on his play and health.",
+    "quote": "I thought he looked fast last week. I thought he was flying to the ball.",
     "player_id": ""
    },
    {
@@ -54,58 +64,66 @@
     "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "The team hopes to get him the ball more after his red zone route and catch-and-run",
-    "note": "Increased targets for a rookie receiver with touchdown production and a red zone role could make him a deeper fantasy option.",
+    "claim": "Miami hopes to get Douglas the ball more going forward.",
+    "note": "He was clean with alignment and shifts, improved as a run blocker, and scored touchdowns, which supports a growing WR role.",
     "quote": "hopefully we'll get a chance to get him the ball more.",
     "player_id": "00-0041523"
    },
    {
-    "player": "Michael Taaffe",
-    "topic": "other",
+    "player": "Seydou Traore",
+    "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Coaches fully support his aggressive play-making, including his interception, and want more of it",
-    "note": "Shows the coaching staff is encouraging ballhawk instincts, which can lead to more splash plays.",
-    "quote": "I want our players to be aggressive. I don't want them to play timid.",
-    "player_id": ""
-   },
-   {
-    "player": "Jarrett Kingston",
-    "topic": "depth_chart",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "He is the third guard and will play guard in practice today",
-    "note": "Stepping into the interior line rotation after Savaiinaea's injury gives him snaps and a possible role.",
-    "quote": "Kingston will be in today. He'll be the guard today.",
-    "player_id": "00-0039832"
+    "claim": "Traore earned 11 offensive snaps and could keep a role on offense as he develops.",
+    "note": "Special-teams physicality is earning him offensive snaps, though the volume is small. The name match is inferred from 'Troy' and 'say do' in the captions.",
+    "quote": "we felt comfortable with him mentally and physically",
+    "player_id": "00-0041579"
    },
    {
     "player": "Jacob Rodriguez",
     "topic": "usage",
     "signal": "watch",
-    "tone": "neutral",
-    "claim": "His four-tackle game reflected fewer opportunities based on where opponents attacked, not poor play",
-    "note": "Tackle totals depend on offensive plays and perimeter attacks, so volume is volatile week to week.",
-    "quote": "he's not going to have 18 tackles in a game every game.",
+    "tone": "positive",
+    "claim": "Rodriguez's low tackle total reflects how offenses attacked the defense, not a decline in his play.",
+    "note": "Tackle volume for IDP managers depends on where opponents run and throw.",
+    "quote": "I thought he played a solid game.",
+    "player_id": ""
+   },
+   {
+    "player": "Michael Taaffe",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Hafley supports aggressive, shot-taking play from DBs like Taaffe after his interception.",
+    "note": "This is a small IDP positive for a young DB who is being encouraged to gamble.",
+    "quote": "I want our players to be aggressive.",
     "player_id": ""
    }
   ],
   "topics": [
    {
     "topic": "Trade deadline",
-    "detail": "Hafley said the team listens on everything but is sticking with its current roster, declining to give a clear yes or no on veteran additions."
+    "detail": "Hafley would not choose between listening on everything or standing pat. He said he and the GM discuss everything, much of it confidential, and that he loves this young team."
+   },
+   {
+    "topic": "Team energy and focus",
+    "detail": "He sensed strong energy and focus coming off the win and the bye. He wants the team to stay even-keeled and aim to be better each day."
+   },
+   {
+    "topic": "Run and pass game balance",
+    "detail": "A strong run game pulls linebackers and safeties forward, which opens space for the pass and for explosive plays."
+   },
+   {
+    "topic": "Patriots and AJ Brown",
+    "detail": "Hafley has high respect for Brown despite his slow start and expects him to be a focus of the game plan. He also praised Mike Vrabel and the physical, fundamental way the Patriots play."
+   },
+   {
+    "topic": "Division game and starting fast",
+    "detail": "He stressed teaching the young team the importance of division games and playing a full game, not just starting fast."
    },
    {
     "topic": "Special teams",
-    "detail": "Hafley said special teams improved, with good returns, good field position, and only one penalty (a hold), and he wants to keep developing new players in those units."
-   },
-   {
-    "topic": "Defensive scheme",
-    "detail": "He explained that a strong run game creates separation between linebackers and safeties, opening up passing lanes for opponents, so defenders must avoid overaggressive play."
-   },
-   {
-    "topic": "Division play",
-    "detail": "He emphasized that division games matter for a young team, with the focus on development and starting 1-0 in the division."
+    "detail": "He thought special teams improved, with one hold penalty, good field position and solid coverage. A kicker hit some kickoffs well."
    }
   ],
   "opponent": "New England Patriots"
@@ -118,45 +136,59 @@
   "date": "2026-10-29",
   "duration": 224,
   "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/steelers/epof0pbivgtuseqngdpl.jpg",
-  "kind": "first_practice",
+  "kind": "midweek",
+  "after_week": 7,
   "coach": "Mike McCarthy",
   "words": 831,
-  "model": "claude-haiku-5-5",
-  "headline": "McCarthy praised safety Jaquan Brisker's growing comfort and steady play, and said the injured-reserve players all have a chance to return, ahead of the Week 8 Browns game.",
-  "summary": "McCarthy said the Steelers value home-field energy at Acrisure Stadium and recognize that winning home games matters, with the Browns coming in as a tough test. On the offense's 27th-ranked red zone production, he pointed to the need to get into scoring position and to convert more trips into touchdowns, and said the week's game plan addresses that. He credited the Browns' habit of winning late in games as a reflection of how the NFL is played today, and said the team has prepared for those moments through training. He praised Jaquan Brisker, saying he is growing more comfortable with his assignments, his play-making ability is real, and the calls reflect that. McCarthy also said the defense's communication is improving every week, starting inside. When asked about the offense's inconsistency across games, he said it is part of the season and that the team is working on it daily, with no specific fix named. He would not name a specific player to expand his role beyond saying the younger player needs to keep practicing hard. On the players placed on injured reserve, he said he believes all of them have a chance to return, and did not suggest any season-ending injuries.",
-  "injuries": [],
+  "model": "claude-sonnet-5-5",
+  "headline": "Steelers prepping for Browns in Week 8; McCarthy says Brisker is growing into the defense, red zone offense is a focus, and all recent IR players have a chance to return.",
+  "summary": "McCarthy opened by praising the North Shore crowd and stressing the importance of protecting home games, with the Steelers undefeated at home. Asked about the 27th-ranked red zone offense, he said the team wants more touchdowns, needs to improve in both the run and pass game, and feels very good about this week's package against a tough situational defense. On the Browns winning all five of their games in the fourth quarter, he said late-game wins are the nature of today's NFL and that the Steelers have emphasized winning in the final series since their first team meeting. He highlighted Jaquan Brisker's availability, said he looks more comfortable in what the defense asks of him, noted the play-calling now reflects that, and said defensive communication is improving weekly, starting inside with Patrick Queen. On the offense's slow starts against Cleveland last time, he conceded it's a season-long issue they work on daily but gave no specifics. Asked about a receiver named Marquez, whom Rodgers wants to see on the field, he only asked for hard practice every day and noted his history with Rodgers. He said he doesn't see any of the recent IR placements as clearly season-ending and believes they all have a chance to return, without naming anyone.",
+  "injuries": [
+   {
+    "player": "Recent IR group (unnamed)",
+    "status": "ir",
+    "detail": "McCarthy said all players recently placed on injured reserve have a chance to return this season; no names or timelines given.",
+    "player_id": ""
+   }
+  ],
   "signals": [
    {
     "player": "Jaquan Brisker",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Brisker's role is expanding as he grows more comfortable with the calls and the defense's assignments",
-    "note": "Coach praised his steadiness, big-play ability, and comfort with the calls, and the reporter noted he played nearly every snap, which supports a stable, high-usage role for IDP and defensive scoring purposes.",
-    "quote": "you see him more and more comfortable",
+    "claim": "Brisker will remain a near every-down safety as he grows more comfortable in the scheme.",
+    "note": "He played nearly every defensive snap and the coach says play calls are reflecting his comfort, which is good for IDP value.",
+    "quote": "you see him more and more comfortable for what we're asking him to do",
+    "player_id": ""
+   },
+   {
+    "player": "Patrick Queen",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Queen is the center of defensive communication that is improving each week.",
+    "note": "His role as the defensive signal-caller supports his continued heavy usage for IDP purposes.",
+    "quote": "the communication really throughout our whole defense is, is getting better each and every week",
     "player_id": ""
    }
   ],
   "topics": [
    {
     "topic": "Red zone offense",
-    "detail": "Asked about the offense ranking 27th in red zone, McCarthy said the team wants to score more touchdowns and that the plan this week addresses it, without naming a specific fix."
-   },
-   {
-    "topic": "Late-game wins",
-    "detail": "McCarthy said winning in the fourth quarter is how the league is played today and that the team has prepared for those moments through training, not a special message."
+    "detail": "Steelers rank 27th in red zone offense; McCarthy wants more touchdowns, says run and pass both need work, and likes this week's package."
    },
    {
     "topic": "Offensive consistency",
-    "detail": "Asked about the offense being quiet until the fourth quarter in the last Browns game, McCarthy said it is part of the season and that the team has a good plan for this week."
+    "detail": "McCarthy acknowledged the slow offense for much of the last Browns game and called it a daily work item, with no specific adjustments named."
+   },
+   {
+    "topic": "Late-game situations",
+    "detail": "Browns are 5-for-5 in fourth-quarter wins; McCarthy says winning the final series has been a team theme since the first meeting."
    },
    {
     "topic": "Injured reserve",
-    "detail": "McCarthy said he believes all the players recently placed on injured reserve have a chance to return. He did not name them, so no player-specific timeline was given."
-   },
-   {
-    "topic": "Home field",
-    "detail": "McCarthy stressed the value of the fans and the North Shore environment and said the team wants to win its home games."
+    "detail": "Recent IR players all have a chance to return, per the coach."
    }
   ],
   "opponent": "Cleveland Browns"
@@ -170,53 +202,53 @@
   "duration": 1249,
   "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/seahawks/t0aiu9g33p1x7osrsuoe.jpg",
   "kind": "first_practice",
-  "after_week": 8,
+  "after_week": 7,
   "coach": "Mike Macdonald",
   "words": 4259,
-  "model": "claude-haiku-5-5",
-  "headline": "Quenton Nelson is expected to start at left guard and play Monday night, pushing Grey Zabel to right guard and leaving Anthony Bradford displaced; Charles Cross, Rashid Shaheed and Velus Jones Jr. won't practice Wednesday.",
-  "summary": "Macdonald said the team is excited to add Quenton Nelson, praised John Schneider's front office for the deal, and called the offensive line's recent game its best of the season. He stressed that the move was not a comment on current players, but acknowledged it affects players who have earned roles. Nelson will play left guard, with Grey Zabel sliding to right guard because of his experience on that side, and Macdonald expects Nelson to play Monday night despite the short transition. Charles Cross is coming along well but won't practice today, and Macdonald said he is not currently headed to injured reserve. Josh Jones will fill in at left tackle as the third tackle. Rashid Shaheed is not expected to practice, and Velus Jones Jr. will also sit out. Drake Thomas will practice, and Macdonald addressed Zach Charbonnet's status only briefly. Macdonald said Bradford has been a starting-level player who will stay ready, though the situation is not easy for him. He also previewed the Chicago Bears, praising their clear identity on offense, defense and special teams, and noted that Montez Sweat's return will help their pass rush.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Quenton Nelson starts at left guard Monday night with Grey Zabel moving to right guard, and Anthony Bradford loses his starting job. Charles Cross, Rashid Shaheed and Velus Jones Jr. are not practicing, and Cross is not going to IR.",
+  "summary": "Macdonald opened by welcoming the newly acquired guard Quenton Nelson, who will practice today. He said the line played its best game of the season Sunday night, and that the trade is no commentary on the existing linemen. Nelson will play left guard and Grey Zabel will slide to right guard, where he has plenty of experience. Macdonald said the team expects Nelson to play Monday night and called that realistic even with only a couple of practices. He was candid that benching Anthony Bradford is not an easy situation, since Bradford earned a starting-level role, but said he will stay ready. Charles Cross is 'coming along great' but will not practice today, and for now he is not going on injured reserve. Josh Jones is the third tackle. Rashid Shaheed and Velus Jones Jr. are not expected to practice, while Drake Thomas will be out there today. On the Bears, Macdonald praised their identity in all three phases and the league-leading rush offense under Ben Johnson. He also noted Montez Sweat's return and the Jeffrey Simmons addition, and he declined to explain why Byron Murphy was stood up on some pass rushes.",
   "injuries": [
    {
     "player": "Charles Cross",
-    "status": "out",
-    "detail": "Not practicing Wednesday; Macdonald says he is coming along great and is not currently headed to injured reserve.",
+    "status": "unclear",
+    "detail": "Not practicing today but 'coming along great.' Macdonald said he is not going on injured reserve as of now.",
     "player_id": "00-0037821"
    },
    {
     "player": "Rashid Shaheed",
-    "status": "out",
-    "detail": "Macdonald does not believe he will practice today, though he acknowledged he has been wrong before.",
+    "status": "unclear",
+    "detail": "Doing well, but Macdonald does not expect him to practice today, while allowing he could be wrong.",
     "player_id": "00-0037545"
    },
    {
     "player": "Velus Jones Jr.",
-    "status": "out",
-    "detail": "Not practicing today.",
+    "status": "unclear",
+    "detail": "Will not practice today; no further detail given.",
     "player_id": "00-0037745"
    },
    {
     "player": "Drake Thomas",
-    "status": "full",
-    "detail": "Will practice today; described as progressing.",
+    "status": "returning",
+    "detail": "Expected to practice today.",
     "player_id": ""
    },
    {
     "player": "Zach Charbonnet",
-    "status": "limited",
-    "detail": "Described as progressing in practice; the coach's direct answer on his status is not clearly captured in the transcript.",
+    "status": "unclear",
+    "detail": "He was asked about practice and his status for the week, but no answer is captured in the transcript.",
     "player_id": "00-0039165"
    }
   ],
   "signals": [
    {
     "player": "Quenton Nelson",
-    "topic": "depth_chart",
+    "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will start at left guard; expected to play Monday night.",
-    "note": "Immediate starter on the interior line, which supports run-blocking and pulling production for the offense.",
-    "quote": "he's going to play left guard",
+    "claim": "Will start at left guard and is expected to play Monday night after only a couple of practices.",
+    "note": "A Hall-of-Fame-caliber guard should help both the run game and pass protection, which is good for Seattle's backs and quarterback.",
+    "quote": "he's going to play left guard.",
     "player_id": "00-0034342"
    },
    {
@@ -224,48 +256,58 @@
     "topic": "depth_chart",
     "signal": "watch",
     "tone": "neutral",
-    "claim": "Moves from left guard to right guard.",
-    "note": "The position change is a short-term adjustment, and his fantasy relevance depends on how the line blocks as a unit.",
-    "quote": "he's had a lot of experience playing on the right side",
+    "claim": "Will move from left guard to right guard to make room for Nelson.",
+    "note": "The shuffled line needs time to gel, but Zabel's past right-side experience should ease the transition.",
+    "quote": "he's had a lot of experience playing on the right side.",
     "player_id": "00-0040639"
    },
    {
     "player": "Anthony Bradford",
-    "topic": "role",
+    "topic": "depth_chart",
     "signal": "down",
     "tone": "hedged",
-    "claim": "Will remain on the roster as a backup and be ready to play if needed.",
-    "note": "He loses the starting role he had earned, so his usage and fantasy relevance are likely to decline.",
-    "quote": "he's going to be a great teammate and he's going to stay ready",
+    "claim": "Loses his starting guard spot to Nelson but will stay ready as depth.",
+    "note": "He is now one injury away from starting again, but he is no longer a regular starter on the line.",
+    "quote": "you're a play away from him playing every play again.",
     "player_id": "00-0039020"
+   },
+   {
+    "player": "Charles Cross",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Will not practice today and is not going on injured reserve for now.",
+    "note": "His absence hurts pass protection and keeps his Monday availability in doubt, but the IR denial suggests a short-term issue.",
+    "quote": "As of right now, he's not going on injured reserve.",
+    "player_id": "00-0037821"
    },
    {
     "player": "Josh Jones",
     "topic": "depth_chart",
     "signal": "up",
     "tone": "neutral",
-    "claim": "Will start at left tackle while Charles Cross is out.",
-    "note": "Left tackle play for a starting-level spot matters for pass protection, though he is not a fantasy-relevant player.",
+    "claim": "Is the next tackle up and fills in for Cross while he is out.",
+    "note": "He will protect the quarterback in Cross's place.",
     "quote": "Josh is our is our third tackle.",
     "player_id": "00-0036363"
    },
    {
     "player": "Rashid Shaheed",
     "topic": "injury",
-    "signal": "down",
+    "signal": "watch",
     "tone": "hedged",
-    "claim": "Not expected to practice Wednesday.",
-    "note": "Missing practice raises questions about his availability and whether he plays Monday.",
+    "claim": "Will not practice today.",
+    "note": "Any missed practice time puts the WR's Monday status in question and cuts his fantasy confidence.",
     "quote": "I don't think he's going to practice today.",
     "player_id": "00-0037545"
    },
    {
     "player": "Velus Jones Jr.",
     "topic": "injury",
-    "signal": "down",
-    "tone": "negative",
-    "claim": "Will not practice Wednesday.",
-    "note": "Missing practice adds to the uncertainty about his Monday availability.",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Will not practice today.",
+    "note": "A missed practice is worth monitoring for his return or special-teams role, but the fantasy impact is low.",
     "quote": "Velus is not going to practice today.",
     "player_id": "00-0037745"
    },
@@ -274,34 +316,42 @@
     "topic": "injury",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will practice Wednesday.",
-    "note": "Practicing is a positive availability sign for the linebacker.",
+    "claim": "Will practice today.",
+    "note": "A return to practice is a good sign for the linebacker's availability against Chicago.",
     "quote": "Drake will be out there today.",
     "player_id": ""
    },
    {
     "player": "Byron Murphy",
-    "topic": "usage",
+    "topic": "scheme",
     "signal": "watch",
-    "tone": "neutral",
-    "claim": "Used in standing-up pass-rush alignments, which the coach says have an added benefit.",
-    "note": "Pass-rush usage matters for sack and pressure upside, though the coach was vague on the details.",
+    "tone": "hedged",
+    "claim": "The defense will keep standing him up on some pass rushes for an unstated added benefit.",
+    "note": "Alignment changes can shift his pass-rush chances, but Macdonald gave no specifics.",
     "quote": "",
     "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Offensive line reshuffle",
-    "detail": "Nelson's arrival forces a shift that moves Zabel to right guard and displaces Bradford. Macdonald calls it a process and says the line is still adjusting."
+    "topic": "Offensive line shakeup",
+    "detail": "Macdonald said the line played its best game Sunday, and that the Nelson trade is not a criticism of the current linemen. Chemistry will need work after a few shifts, but he expects the group to mesh quickly."
    },
    {
-    "topic": "Trade involving Jeffrey Simmons",
-    "detail": "Macdonald says the Bears have a player involved in a trade this week, and he expects Simmons to play, so the defense will need a plan for him."
+    "topic": "Bears offense",
+    "detail": "He described the Bears as having a clear identity in all three phases and the league's top rushing offense, built on physical runners, a good line, strong tight ends and receivers who block. He praised Ben Johnson's use of personnel and noted their trick plays."
    },
    {
-    "topic": "Chicago Bears preview",
-    "detail": "Macdonald praised their clear identity across all three phases and noted Montez Sweat is back from injury, which strengthens their pass rush. He also called Ben Johnson's offense well-utilized and evolving, with an emphasis on decisive, physical running."
+    "topic": "Bears defense",
+    "detail": "Montez Sweat is returning after missing the season, and Jeffrey Simmons has been added, which Macdonald said Seattle must plan for. He said the Bears are strong on third down under Coach Allen."
+   },
+   {
+    "topic": "Seahawks defensive approach",
+    "detail": "Seattle will stay in its 'wheelhouse' scheme instead of changing each week, relying on four-down fronts and edge defenders who play decisively and violently. Macdonald said the team's rules matter more than any trick-play worry."
+   },
+   {
+    "topic": "In-season trades",
+    "detail": "Macdonald called midseason acquisitions under GM John Schneider 'almost a prerequisite' and said he judges each move by whether it moves the needle for the team."
    }
   ],
   "opponent": "Chicago Bears"
@@ -315,35 +365,35 @@
   "duration": 735,
   "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/titans/zdl2m1qaujwnindxzugo.jpg",
   "kind": "first_practice",
-  "after_week": 8,
+  "after_week": 7,
   "coach": "Robert Saleh",
   "words": 2460,
-  "model": "claude-haiku-5-5",
-  "headline": "Jeffery Simmons has been traded, so Keldric Faulk and Oluwafemi Oladejo should see more defensive line snaps; Pollard and Tate sat Thursday and John Franklin-Myers is limited.",
-  "summary": "Saleh said the injury report was unchanged from Wednesday, with Tony Pollard and Carnell Tate not practicing and John Franklin-Myers limited. He confirmed the Jeffery Simmons trade was real and framed it as a necessary rebuild move after a 1-6 start, saying the team had been losing close games and that other teams had been 'fishing' for players. He said the defensive line will open up opportunities, especially more third-down passing snaps for Keldric Faulk and more time for Oladejo, and that backups deserve a chance. He said Simmons is still battling an injury and he expects him to finish strong, though he declined to detail it. Saleh denied the trade reflected any judgment on Cam Ward, saying it was about building a competitive roster. He also pointed to Cincinnati as the next opponent, and said the team will keep grinding through the week. He expressed confidence in owner Amy Strunk's support and in the organization's direction, and gave a brief scouting note on a newly acquired defensive tackle.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Titans traded DT Jeffery Simmons; Keldric Faulk and Oluwafemi Oladejo get more D-line snaps, while Carnell Tate sat out practice and Tyjae Spears and 'Tony' may be hurt too.",
+  "summary": "Saleh opened with injuries: Carnell Tate, \"Tony\" and \"Taj\" did not practice, and John Franklin-Myers should be limited. Most of the session was about the trade of Jeffery Simmons, which he called shocking, \"unfortunately necessary\" and the hard part of the business. He said the 1-6 team couldn't close out games and a team eventually offered a package the Titans couldn't turn down. He said the trade was about accelerating the rebuild through an influx of young talent and had nothing to do with Cam Ward. He pointed to more opportunity on the defensive line, naming Keldric Faulk on third-down passing situations and Femi (Oluwafemi Oladejo), and said the backups believe they are capable starters. He said Simmons had been battling something he wouldn't detail and had still been playing well for his condition. He noted that opposing offenses will no longer slide protection toward Simmons, so the coaches have more film work to do. He named JC Latham, Peter Skoronski, Calvin Ridley, Cam Ward and Amani Hooker among the leaders who will fill the void. He praised owner Amy Adams Strunk's support and gave a brief positive scouting report on Jonah Laulu, who came in the deal. He said the team will keep working this week ahead of Cincinnati on Sunday.",
   "injuries": [
    {
-    "player": "Tony Pollard",
-    "status": "out",
-    "detail": "Will not practice Thursday; the report is unchanged from Wednesday.",
-    "player_id": "00-0035261"
+    "player": "Carnell Tate",
+    "status": "unclear",
+    "detail": "Did not practice Thursday; no reason or timeline given.",
+    "player_id": "00-0041438"
    },
    {
-    "player": "Carnell Tate",
-    "status": "out",
-    "detail": "Will not practice Thursday.",
-    "player_id": "00-0041438"
+    "player": "Tyjae Spears",
+    "status": "unclear",
+    "detail": "Coach said 'Taj' will not practice today. The name is a caption guess for Spears, and no reason was given.",
+    "player_id": "00-0039032"
+   },
+   {
+    "player": "Tony Pollard",
+    "status": "unclear",
+    "detail": "Coach said 'Tony' will not practice today. This may be Pollard (a later 'Tony' reference to offensive veterans fits him), but it could be another Tony such as Tony Adams. No reason was given.",
+    "player_id": "00-0035261"
    },
    {
     "player": "John Franklin-Myers",
     "status": "limited",
-    "detail": "Expected to be limited in practice.",
-    "player_id": ""
-   },
-   {
-    "player": "Jeffery Simmons",
-    "status": "unclear",
-    "detail": "Traded away, so no longer part of the team; Saleh said he had been battling an injury involving his back, with details not disclosed.",
+    "detail": "Coach expects him to be limited in practice.",
     "player_id": ""
    }
   ],
@@ -352,10 +402,10 @@
     "player": "Jeffery Simmons",
     "topic": "trade_or_roster",
     "signal": "down",
-    "tone": "neutral",
-    "claim": "Traded away and no longer with the Titans.",
-    "note": "His departure removes a key interior pass rusher and the double-team attention he drew from the defensive line.",
-    "quote": "He's gone.",
+    "tone": "positive",
+    "claim": "Simmons has been traded and will no longer play for the Titans.",
+    "note": "Tennessee's defensive line loses its anchor, which hurts the unit's IDP and D/ST outlook.",
+    "quote": "he's an elite football player and, uh, he's an even better person",
     "player_id": ""
    },
    {
@@ -363,8 +413,8 @@
     "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will get more third-down passing snaps on the defensive line.",
-    "note": "With Simmons gone, Faulk should see more pass-rush snaps, which helps his sack and tackle upside.",
+    "claim": "Faulk will get more snaps on third-down passing situations.",
+    "note": "His pass-rush snaps should rise, which helps IDP value.",
     "quote": "There's going to be more opportunities for Keldric to get on the field.",
     "player_id": ""
    },
@@ -373,34 +423,66 @@
     "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will get more opportunities on the defensive line.",
-    "note": "Expanded defensive line rotation could give him more snaps and a chance to produce.",
+    "claim": "Oladejo (Femi) will see more defensive snaps with Simmons gone.",
+    "note": "He is a sleeper for more playing time on the defensive line.",
     "quote": "There's going to be more opportunities for, uh, Femi to get on there.",
     "player_id": ""
    },
    {
-    "player": "Cam Ward",
-    "topic": "trade_or_roster",
+    "player": "John Franklin-Myers",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Franklin-Myers will be limited at Thursday's practice.",
+    "note": "With Simmons gone, his availability matters more for the defensive line.",
+    "quote": "I think we jfm should be limited.",
+    "player_id": ""
+   },
+   {
+    "player": "Carnell Tate",
+    "topic": "injury",
     "signal": "watch",
     "tone": "neutral",
-    "claim": "The Simmons trade has nothing to do with Cam Ward's standing with the team.",
-    "note": "Saleh addressed speculation about Ward's future, which matters for confidence in his starting role.",
+    "claim": "Tate did not practice Thursday.",
+    "note": "The rookie WR's Week 9 availability is in question, so check Friday's report.",
+    "quote": "Carnell won't practice today.",
+    "player_id": "00-0041438"
+   },
+   {
+    "player": "Cam Ward",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "The trade says nothing about the team's view of Ward, and the rebuild around him continues.",
+    "note": "No change to Ward's role, but the front office is prioritizing young talent over winning now.",
     "quote": "This has nothing to do with cam",
     "player_id": "00-0040676"
    }
   ],
   "topics": [
    {
-    "topic": "Simmons trade context",
-    "detail": "Saleh said the team was shopped to by other teams after a 1-6 start, and that the trade was necessary to add young talent and accelerate the rebuild. He said he was not surprised but that it was the first time it felt real."
+    "topic": "Trade rationale",
+    "detail": "Saleh said the Simmons trade was unfortunate but necessary. The 1-6 Titans haven't been closing games, and a team offered a package they couldn't refuse. He compared it to trades by Cleveland, Detroit (Goff) and Seattle (Russell) and said it accelerates the rebuild."
    },
    {
-    "topic": "Defensive line plan",
-    "detail": "Saleh expects defensive coaches to study how opponents slide protection now that Simmons is no longer drawing double teams, and wants backups to take advantage of their opportunities."
+    "topic": "Simmons' health",
+    "detail": "Saleh said Simmons has been battling something he wouldn't detail, that his current best is better than most players', and that he expects him to finish strong. He said the bye week will help."
    },
    {
-    "topic": "Jonah Lalu scouting",
-    "detail": "Saleh described the newly acquired defensive tackle as a big, athletic player who fits the team's defensive tackle profile, and said the staff is looking forward to seeing him."
+    "topic": "Defensive scheme",
+    "detail": "Offenses used to slide protection toward Simmons, which made it easy to know where to attack. Without him the coaches have to study protections and slides on tape and put players in the best position."
+   },
+   {
+    "topic": "Leadership",
+    "detail": "Saleh named JC Latham, Peter Skoronski, Calvin Ridley, Cam Ward and Amani Hooker as leaders, along with a defensive line he called full of alphas."
+   },
+   {
+    "topic": "Ownership and job security",
+    "detail": "Saleh praised Amy Adams Strunk's support and said she backs developing the roster, but he acknowledged winning is what counts."
+   },
+   {
+    "topic": "Jonah Laulu",
+    "detail": "Saleh called him a big, athletic defensive tackle who fits what the Titans want and said they look forward to getting a look at him."
    }
   ],
   "opponent": "Cincinnati"

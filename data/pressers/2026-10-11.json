@@ -11,75 +11,77 @@
   "after_week": 5,
   "coach": "Ben Johnson",
   "words": 1408,
-  "model": "claude-haiku-5-5",
-  "headline": "Bears QB Caleb Williams is 'on track' but his return timing is uncertain, and Tyson Bagent was pulled after two interceptions in favor of Case Keenum.",
-  "summary": "Ben Johnson said the Bears did not show up against Green Bay: they committed five turnovers on offense, failed to execute in the run or pass game, and allowed four completions of 40+ yards on defense. He credited the Packers' aggressive plan and said Chicago had chances to get back into the game but didn't capitalize. Johnson took responsibility for the offensive play-calling and preparation, and praised Jonathan Gannon's defensive game plan. He said the QB change to Case Keenum came after Tyson Bagent's second interception, as a spark attempt, and that he had not yet diagnosed Bagent's interceptions. On Caleb Williams, Johnson said he is on track after returning to practice, and it will be close whether he plays against Atlanta or after. He had not yet received feedback from Williams' Sunday field workout. Johnson said the staff will decide the Week 6 starter after reviewing this game, and that the process won't change. Johnson also said the offense could stretch the field more going forward.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Bears QB situation in flux: Tyson Bagent was benched for Case Keenum after his second interception, and Caleb Williams is 'on track' and 'close' to returning for Atlanta, though Johnson wouldn't commit to Week 6.",
+  "summary": "Johnson said the Bears' Week 5 loss in Green Bay came down to things that worked in their three wins not showing up: five offensive turnovers (three Bagent interceptions), poor execution in both the run and pass game, and four 40+ yard pass plays allowed on defense. He took blame for the offensive struggles, including the early run game and play-calling, and credited Jonathan Gannon's defense for keeping Chicago off balance. Bagent was pulled for Case Keenum after the second interception because Johnson wanted a spark and Bagent never found rhythm. Caleb Williams practiced Friday and worked out Sunday morning; Johnson called him 'on track' and said a return for Atlanta is close but not certain. He wouldn't say whether Bagent or Keenum would start in Week 6 if Williams can't go, saying the staff will decide this week. Injuries of note are a hamstring for a player whose name was garbled (likely Tyrique Stevenson, unconfirmed), a hamstring for T.J. Edwards, and a quad for Dayo Odeyingbo, all to be evaluated Monday. Johnson said the process doesn't change and said he believes in the staff and players. He suggested the offense could look to stretch the field more going forward.",
   "injuries": [
-   {
-    "player": "Tyrique Stevenson",
-    "status": "unclear",
-    "detail": "Listed among three injuries of note with a hamstring issue (transcript says 'Tyreke'); no timeline given.",
-    "player_id": ""
-   },
    {
     "player": "T.J. Edwards",
     "status": "unclear",
-    "detail": "Hamstring injury, no timeline given.",
+    "detail": "Hamstring injury suffered in the game; to be evaluated tomorrow.",
     "player_id": ""
    },
    {
     "player": "Dayo Odeyingbo",
     "status": "unclear",
-    "detail": "Quad injury; Johnson said the team will see what it looks like Monday.",
+    "detail": "Quad injury suffered in the game; to be evaluated tomorrow.",
     "player_id": ""
    },
    {
     "player": "Caleb Williams",
-    "status": "questionable",
-    "detail": "Returned to practice Friday and worked out on the field Sunday; Johnson said he is on track, with a return possible against Atlanta or the week after.",
+    "status": "returning",
+    "detail": "Back at practice Friday and worked out Sunday morning; Johnson said he's on track and a return for Atlanta is close but uncertain.",
     "player_id": "00-0039918"
    }
   ],
   "signals": [
    {
+    "player": "Caleb Williams",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Williams could return for Week 6 at Atlanta, but it may be after that.",
+    "note": "Williams' availability for Week 6 is uncertain, so keep him on your radar and check practice reports.",
+    "quote": "",
+    "player_id": "00-0039918"
+   },
+   {
     "player": "Tyson Bagent",
     "topic": "depth_chart",
     "signal": "down",
-    "tone": "neutral",
-    "claim": "Was replaced by Case Keenum after his second interception and may not regain the starting job if Williams is out",
-    "note": "Bagent's benching after two interceptions makes him a poor starting option while Williams is out.",
-    "quote": "Tyson just could never feel like he got in a rhythm",
+    "tone": "negative",
+    "claim": "Bagent was benched after his second interception and is not assured of starting if Williams is out in Week 6.",
+    "note": "Bagent threw three interceptions and was pulled, so he's a poor fantasy option and his starting job is uncertain.",
+    "quote": "It was Tyson just could never feel like he got in a rhythm",
     "player_id": "00-0038416"
    },
    {
     "player": "Case Keenum",
     "topic": "depth_chart",
     "signal": "watch",
-    "tone": "positive",
-    "claim": "Entered the game after Bagent's second interception and could start in Week 6 if Williams can't play",
-    "note": "Keenum's quick-hook role makes him the more likely QB option if Williams is out, though the staff has not decided.",
-    "quote": "let's, let's give Chase a case a chance out there",
+    "tone": "neutral",
+    "claim": "Keenum came in after Bagent's second interception and could start in Week 6 if Williams can't play.",
+    "note": "If Williams misses Week 6, Keenum could be in the QB mix, which affects Bears pass catchers.",
+    "quote": "",
     "player_id": "00-0028986"
-   },
-   {
-    "player": "Caleb Williams",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "Is on track to return, but it is unclear whether he plays against Atlanta or the following week",
-    "note": "His return timing is unresolved, so fantasy managers should monitor his Week 6 status before rostering or starting Bears QBs.",
-    "quote": "Yeah, he's on track. We'll, uh, we'll see where.",
-    "player_id": "00-0039918"
    }
   ],
   "topics": [
    {
-    "topic": "Defense",
-    "detail": "Johnson said the defense let too many balls over the top, allowing four 40-plus-yard passes, and that Green Bay's defense was fast and well-coached, with safeties and linebackers making real-time adjustments."
+    "topic": "Turnovers and execution",
+    "detail": "Five offensive turnovers and poor execution in the run and pass game sank the offense. Johnson put the early run-game struggles and play-calling on himself."
    },
    {
-    "topic": "Offense",
-    "detail": "The offense committed five turnovers, including three interceptions, and struggled in both the run and pass game. Johnson said he would look at his own play-calling and preparation first."
+    "topic": "Defense",
+    "detail": "Chicago allowed four passes of 40+ yards and gave up chunk completions behind the secondary, including a bad angle on a long touchdown on third and 22."
+   },
+   {
+    "topic": "Green Bay's defense",
+    "detail": "Johnson called it a fast group with active safeties, a strong nickel, and a communicating linebacker who made adjustments at the line."
+   },
+   {
+    "topic": "Offensive approach",
+    "detail": "Johnson said the horizontal attack wasn't unusual, but the offense can look to stretch the field more going forward."
    }
   ],
   "opponent": "Atlanta"
@@ -92,99 +94,125 @@
   "date": "2026-10-11",
   "duration": 368,
   "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bengals/mhia9nfdx73k2lpziia5.jpg",
-  "kind": "day_after",
-  "after_week": 4,
+  "kind": "postgame",
+  "after_week": 5,
   "coach": "Zac Taylor",
   "words": 1560,
-  "model": "claude-haiku-5-5",
-  "headline": "Tee Higgins played through a questionable tag, Ja'Marr Chase cleared protocol, and Joe Burrow's thumb jam is minor; the Bengals now get a bye before at Baltimore.",
-  "summary": "Taylor credited Miami for fighting to the end and praised Jeff Hafley's work with the Dolphins. He listed the Bengals' issues: two personal fouls, two red-zone fumbles, a kickoff caught on the four, a field-goal penalty that led to a touchdown, and over 200 rushing yards allowed. He said the bye arrives at a good time after three straight close games, and the team will regroup at 3-2 before Baltimore in two weeks. He said the defense's late turnover made the final margin feel safer. On the run game, he said the ground success was mostly how the game unfolded, with Miami playing underneath and in shells, and he called the team's backs a strength he trusts. He downplayed Burrow's hand injury as a jammed thumb on his non-throwing hand. He said Tee Higgins had wanted to play and showed it in practice, and that Ja'Marr Chase had cleared concussion protocol on Saturday. He praised Tanner Hudson as dependable and versatile, able to play multiple spots, and said he needed the defense to settle on its nickel and base personnel. He called the heat historically extreme and said the players fought through exhaustion.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Bengals beat Miami 31-24 and head into the bye at 3-2. Samaje Perine had the hot hand in the run game, and Ja'Marr Chase and Tee Higgins played through injury designations.",
+  "summary": "Zac Taylor was glad to win a tight game but frustrated with the sloppiness. He listed two personal fouls, two red-zone fumbles, a kickoff caught at the 4-yard line, a field-goal penalty that led to a Miami touchdown, and over 200 rushing yards allowed. He said the bye comes at a great time for a worn-out team after three down-to-the-wire games and a brutally hot day. He praised the run game and the linemen's practice week, and said Perine finished runs well while he still has a lot of confidence in Chase Brown. Taylor described the volume of runs as how the game played out, because Miami gave up underneath throws and light boxes, not as a planned blueprint. Boye Mafe got praise for relentless energy, run-game physicality and pass-rush impact. Ja'Marr Chase cleared concussion protocol on Saturday, and Tee Higgins insisted on playing after Taylor wanted to see him practice. Joe Burrow only jammed the thumb on his non-throwing hand. Tanner Hudson was called dependable for filling in at tight end whenever Erick All or Mike Gesicki leave the field. Next up is Baltimore in two weeks, and Taylor warned that the mobile quarterback there can hurt them the way Miami's did.",
   "injuries": [
    {
-    "player": "Tee Higgins",
-    "status": "full",
-    "detail": "Was questionable entering the game, insisted on playing, and played; Taylor praised his mindset and practice week.",
-    "player_id": "00-0036410"
-   },
-   {
     "player": "Ja'Marr Chase",
-    "status": "full",
-    "detail": "Had to clear protocol on Saturday and was available to play.",
+    "status": "returning",
+    "detail": "Questionable going into the game. Cleared concussion protocol on Saturday and played, making plays.",
     "player_id": "00-0036900"
    },
    {
+    "player": "Tee Higgins",
+    "status": "returning",
+    "detail": "Questionable going into the game. Taylor needed to see him practice, and he did, then played and made plays.",
+    "player_id": "00-0036410"
+   },
+   {
     "player": "Joe Burrow",
-    "status": "full",
-    "detail": "Jammed thumb on his non-throwing hand after a fumble; Taylor said it was nothing serious and he has only a small bandage.",
+    "status": "unclear",
+    "detail": "Appeared to have a wrap on his left hand. Taylor said he jammed the thumb on his non-throwing hand and called it nothing, just a little bandage.",
     "player_id": "00-0036442"
-   },
-   {
-    "player": "Erick All",
-    "status": "unclear",
-    "detail": "Went down briefly during the game and returned; Taylor didn't describe the severity.",
-    "player_id": "00-0039814"
-   },
-   {
-    "player": "Mike Gesicki",
-    "status": "unclear",
-    "detail": "Went down briefly during the game and returned; Taylor didn't describe the severity.",
-    "player_id": "00-0034829"
    }
   ],
   "signals": [
    {
-    "player": "Tee Higgins",
-    "topic": "injury",
+    "player": "Samaje Perine",
+    "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Played through questionable status and was productive in the game",
-    "note": "He showed he was healthy enough to play through the questionable tag, which keeps him in the WR1 mix.",
-    "quote": "Tee tee really his mindset all along was I'm playing now.",
-    "player_id": "00-0036410"
-   },
-   {
-    "player": "Tanner Hudson",
-    "topic": "role",
-    "signal": "watch",
-    "tone": "positive",
-    "claim": "Is a dependable multi-position backup who plays wherever needed",
-    "note": "He is a rotational tight end and situational piece, so his snaps are tied to injuries and personnel needs.",
-    "quote": "He's just Mr. Dependable.",
-    "player_id": "00-0034613"
-   },
-   {
-    "player": "Boye Mafe",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Is physical in the run game and affects the passer",
-    "note": "Taylor praised his effort and pass rush, which supports his edge-rush role and sack/pressure upside.",
-    "quote": "Does a great job affecting the passer.",
-    "player_id": ""
+    "claim": "Perine's strong run-game finishing could earn him continued run-game work alongside Chase Brown.",
+    "note": "Perine appears to have had the hot hand in a run-heavy win, but Taylor framed the backfield split loosely, so treat the touch share as unsettled.",
+    "quote": "finishing an extra 2 or 3.",
+    "player_id": "00-0033526"
    },
    {
     "player": "Chase Brown",
     "topic": "usage",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Shares backfield work with another back, and the coach trusts both",
-    "note": "The backfield split remains shared, so his touch volume may depend on game flow.",
-    "quote": "Sometimes we got two great backs that you've got to trust in.",
+    "claim": "",
+    "note": "Taylor called him one of two great backs and said the touch split can go either way, so his share may fluctuate with game flow.",
+    "quote": "Got a lot of confidence in Chase.",
     "player_id": "00-0038597"
+   },
+   {
+    "player": "Boye Mafe",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Mafe will keep a significant role as an edge rusher and run defender.",
+    "note": "Good for his IDP value: strong game, praised for pass-rush impact and physicality.",
+    "quote": "Does a great job affecting the passer.",
+    "player_id": ""
+   },
+   {
+    "player": "Ja'Marr Chase",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Chase cleared concussion protocol and is healthy enough to play, with the bye week coming.",
+    "note": "The injury concern appears resolved and he gets extra rest before Baltimore.",
+    "quote": "Jamaar had to clear protocol, I think, on Saturday.",
+    "player_id": "00-0036900"
+   },
+   {
+    "player": "Tee Higgins",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Higgins practiced, played through his injury and produced.",
+    "note": "He was questionable but Taylor praised his toughness, and the bye gives him time to recover.",
+    "quote": "I need to see him do it, you know, in practice.",
+    "player_id": "00-0036410"
+   },
+   {
+    "player": "Joe Burrow",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Burrow's jammed thumb on his non-throwing hand is not a concern.",
+    "note": "Minor and not on his throwing hand, with the bye week to recover.",
+    "quote": "",
+    "player_id": "00-0036442"
+   },
+   {
+    "player": "Tanner Hudson",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Hudson will keep filling in at tight end when Erick All or Mike Gesicki leave the field.",
+    "note": "Taylor trusts him in every tight end role, but he is a depth piece with limited fantasy value unless a tight end is hurt.",
+    "quote": "he's just Mr. Dependable.",
+    "player_id": "00-0034613"
    }
   ],
   "topics": [
    {
-    "topic": "Penalties and turnovers",
-    "detail": "Taylor stressed cleaning up two personal fouls, two red-zone fumbles, a kickoff return, and a field-goal penalty that led to a touchdown."
+    "topic": "Sloppy play",
+    "detail": "Taylor listed two personal fouls, two red-zone fumbles, a kickoff caught on the 4-yard line and a field-goal penalty that gave Miami a touchdown. He said the team is better than that and has plenty to clean up."
    },
    {
-    "topic": "Bye week",
-    "detail": "The bye comes after three close games, and Taylor said the team will regroup at 3-2."
+    "topic": "Run defense",
+    "detail": "Cincinnati allowed over 200 rushing yards, partly because of big quarterback runs. Taylor said they have to do a better job, especially since they face a quarterback in two weeks who can do the same."
    },
    {
-    "topic": "Defense",
-    "detail": "Taylor credited a late defensive turnover, and said the team must limit the more than 200 rushing yards allowed, including Miami's quarterback runs."
+    "topic": "Run game approach",
+    "detail": "Taylor said the run volume was how the game played out, with Miami dropping into shells and giving up underneath throws, not a planned blueprint. He will take the offense game to game."
+   },
+   {
+    "topic": "Bye week and heat",
+    "detail": "He said the bye comes at the right time for a tired team after three close games and one of the hottest October games in Miami history. He praised the players for battling through it."
+   },
+   {
+    "topic": "Hudson and the defense",
+    "detail": "Taylor said he needs the defense to decide who Hudson is, meaning whether they will be in base or nickel when he is on the field."
    }
   ],
   "opponent": "Baltimore"
@@ -201,78 +229,94 @@
   "after_week": 5,
   "coach": "DeMeco Ryans",
   "words": 1562,
-  "model": "claude-haiku-5-5",
-  "headline": "Texans earn first win; Stroud and Will Anderson praised, while David Montgomery is dealing with a groin injury and a shoulder issue under evaluation.",
-  "summary": "Ryans said the first win was a relief and credited faith and persistence through a difficult start to the season. He called it a complementary performance with all three phases working together, though the second half was where the team had struggled. He said the offense controlled the game, with stalls in the red zone from self-inflicted penalties leading to field goals. He praised C.J. Stroud for making plays when needed, including a rushing touchdown, and said Stroud's command and comfort in year two are showing. The defense forced turnovers and generated pressure, and Ryans highlighted Will Anderson's three-sack game and his ability to move between edge and interior spots. He said Azeez Al-Shaair is back in the lineup and is the defense's field general, and he gave Reed Blankenship credit for growing comfortable in coverage. On injuries, Ryans said Tank Dell is practicing again and the team hopes he returns to game action, while David Montgomery has a groin injury that may cost him time and a shoulder injury still being evaluated.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Texans got their first win over the Titans, but David Montgomery has a groin injury and may miss time, and Ryans appeared to confirm Marvin Harrison Jr. was acquired by trade.",
+  "summary": "Ryans was happy to get the first win after a difficult start and said all three phases played complementary football. The offense controlled the game, though self-inflicted penalties stalled a couple of red-zone drives that ended in field goals. He praised C.J. Stroud for his decisions, his rushing touchdown and his year-two comfort and command at the line. The defense created turnovers, and Will Anderson Jr. had three sacks while being moved around the line, including inside. Azeez Al-Shaair's return was highlighted as a stabilizing presence in the middle, and Reed Blankenship was praised for his physical play and growing comfort in coverage. On injuries, Montgomery has a groin injury and may miss time, and a second player's shoulder is still being evaluated. Tank Dell is back practicing and Ryans is hopeful he returns to game action. Asked about trade rumors, Ryans first dodged the question, then said they traded for Marvin Harrison.",
   "injuries": [
    {
     "player": "David Montgomery",
     "status": "questionable",
-    "detail": "Groin injury that may cause him to miss time; shoulder injury still being evaluated for severity.",
+    "detail": "Groin injury still being evaluated; Ryans said he may miss some time.",
     "player_id": "00-0035685"
+   },
+   {
+    "player": "Unclear (caption says 'Peachtree', possibly Jalen Pitre)",
+    "status": "unclear",
+    "detail": "Shoulder injury still being looked at to determine how significant it is.",
+    "player_id": ""
    },
    {
     "player": "Tank Dell",
     "status": "returning",
-    "detail": "Back on the field practicing; team is hopeful he returns to game action, with the week's progress still to be seen.",
+    "detail": "Back on the practice field; his progress this week will determine his availability, and Ryans is hopeful he returns to game action.",
     "player_id": "00-0038977"
    },
    {
     "player": "Azeez Al-Shaair",
     "status": "returning",
-    "detail": "Back in the lineup after missing time, described as the defense's communicator and field general.",
+    "detail": "Back in the lineup and praised as the defense's communicator and field general.",
     "player_id": ""
    }
   ],
   "signals": [
    {
-    "player": "C.J. Stroud",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Continues to lead the offense; more comfortable and confident in year two, distributing to open receivers.",
-    "note": "Stroud's rushing touchdown and efficient play reinforce his fantasy QB1 floor.",
-    "quote": "he's been leading our offense really well",
-    "player_id": "00-0039163"
-   },
-   {
-    "player": "Will Anderson",
-    "topic": "usage",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Will be moved around the defensive front, lining up inside over guards and center as well as on the edge.",
-    "note": "Three sacks and the flexible deployment make him a strong weekly pass-rush option.",
-    "quote": "The guy is a tenacious player. Relentless every single snap.",
-    "player_id": ""
-   },
-   {
     "player": "David Montgomery",
     "topic": "injury",
     "signal": "down",
-    "tone": "hedged",
-    "claim": "May miss time with a groin injury; shoulder injury still under evaluation.",
-    "note": "Injury uncertainty puts his workload and availability in doubt for upcoming weeks.",
+    "tone": "negative",
+    "claim": "Montgomery may miss time with a groin injury.",
+    "note": "His availability is in doubt, so fantasy managers should have a backup RB plan until there is more clarity.",
     "quote": "He has a groin injury. May miss some time.",
     "player_id": "00-0035685"
    },
    {
+    "player": "Marvin Harrison Jr.",
+    "topic": "trade_or_roster",
+    "signal": "up",
+    "tone": "neutral",
+    "claim": "Houston has acquired Marvin Harrison Jr. from Arizona via trade.",
+    "note": "If confirmed, he adds a WR to a thin receiver room and could take targets quickly. The delivery was casual, so check official reports.",
+    "quote": "We traded for Marvin Harrison.",
+    "player_id": "00-0039849"
+   },
+   {
     "player": "Tank Dell",
     "topic": "injury",
-    "signal": "up",
+    "signal": "watch",
     "tone": "hedged",
-    "claim": "Practicing again; return to game action depends on how the week progresses.",
-    "note": "A return would boost the WR room and his fantasy outlook, but timing is still unclear.",
-    "quote": "we're happy to see tank back out on the field practicing",
+    "claim": "Dell may return to game action if his practice progress continues this week.",
+    "note": "A return would add a WR option, but his status depends on how the week goes.",
+    "quote": "happy to see tank back out on the field practicing",
     "player_id": "00-0038977"
    },
    {
-    "player": "Azeez Al-Shaair",
+    "player": "Will Anderson",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Back in the defensive lineup as a key communicator and tackler.",
-    "note": "His return stabilizes the middle linebacker spot, mainly relevant for IDP managers.",
-    "quote": "So really happy to have Aziz back.",
+    "claim": "Anderson will keep being moved across the defensive line, on the edge and inside, to create pass-rush matchups.",
+    "note": "A three-sack game plus a flexible rush role supports his sack upside for IDP.",
+    "quote": "So to see him go out and dominate the game by getting three sacks",
+    "player_id": ""
+   },
+   {
+    "player": "C.J. Stroud",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Stroud will continue to lead the offense with more command and pre-snap control in year two.",
+    "note": "Ryans praised his decision-making and comfort, and his rushing touchdown adds some rushing upside.",
+    "quote": "You see his comfort level. You see his confidence. You see his command",
+    "player_id": "00-0039163"
+   },
+   {
+    "player": "Azeez Al-Shaair",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Al-Shaair is back in the starting middle linebacker role, running the defense's communication.",
+    "note": "His return should bring back his tackle volume for IDP leagues.",
+    "quote": "Aziz is our field general. He's our communicator.",
     "player_id": ""
    },
    {
@@ -280,24 +324,28 @@
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Growing more comfortable in coverage and making plays.",
-    "note": "Expanded coverage role and physical play increase his fantasy value as a defensive back.",
-    "quote": "",
+    "claim": "Blankenship is becoming more comfortable in coverage and should keep making plays.",
+    "note": "His improved comfort and physical style point to more IDP production at safety.",
+    "quote": "I just love the physical style, which Reed plays with",
     "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Offensive line",
-    "detail": "Ryans praised the O-line for a strong run game and for allowing only one sack. He noted that big runs were called back."
+    "topic": "Offensive line and run game",
+    "detail": "Ryans said the O-line played well and the run game was good despite a couple of big runs called back. The line allowed only one sack."
    },
    {
-    "topic": "Trade speculation",
-    "detail": "Asked about Marvin Harrison Jr. trade rumors, Ryans gave a joking-sounding reply saying they traded for him. The transcript is ambiguous, so no trade should be assumed without confirmation."
+    "topic": "Defense",
+    "detail": "The defense took the ball away, with Jake Hansen getting a takeaway and Dominique Robinson forcing a fumble the team recovered. Ryans credited the D-line's pressure for giving the DBs more freedom in coverage."
    },
    {
-    "topic": "Wide receiver room",
-    "detail": "Ryans said the team is still open to adding to the receiver room, with Tank Dell's return still pending."
+    "topic": "Offensive improvement",
+    "detail": "Ryans credited offensive coordinator Kelly (name as captioned) for mixing up the offense and said Stroud's growth has raised the level of the players around him."
+   },
+   {
+    "topic": "Second-half execution",
+    "detail": "Second halves had been a weakness this season, but the team finished the game well. Red-zone penalties cost them touchdowns in the first half."
    }
   ],
   "opponent": ""
@@ -314,14 +362,14 @@
   "after_week": 5,
   "coach": "Jim Harbaugh",
   "words": 1239,
-  "model": "claude-haiku-5-5",
-  "headline": "Harbaugh owns the failed fourth-and-1 go at the Denver 41 that swung momentum; Herbert's turnover streak was defended as a situational problem, and the team is 0-5 with Kansas City next.",
-  "summary": "Harbaugh took full responsibility for going for it on fourth-and-1 from the 41, calling it the wrong decision and saying he has never been more upset with himself. He said the players played hard on offense, defense, and special teams, and that the failed call turned momentum even though the team had a seven-point lead. Asked about the offense, he said the direction is improving, pointing to the young offensive linemen, the drives and touchdowns, and the effort of the running backs. He defended quarterback Justin Herbert, saying the late turnovers came from being put in fourth-and-6 situations where he had to take chances, and he took accountability for that. On the 0-5 start, he said he didn't have a clear message beyond players fighting. When asked about the offensive linemen missing from the lineup, including Rashawn Slater, he said he didn't know when they would return for Kansas City. He framed the path forward as staying the course and making sound critical decisions.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Harbaugh took full blame for a failed fourth-and-1 at the 41 in a loss that drops LAC to 0-5; Slater and several other offensive linemen and receivers are out, and he gave no timeline for the linemen's return before Kansas City.",
+  "summary": "Harbaugh opened by saying going for it on fourth-and-1 at the 41-yard line was the wrong decision. He said he was never angrier at himself and takes 100% accountability for swinging the game's momentum. He praised the team's effort across offense, defense and special teams, and said the defense produced multiple three-and-outs, a big turnover and sudden-change stops. He said the offense is improving, pointing to touchdown drives against one of the league's top defenses and to the young offensive linemen, who he said acquitted themselves well. The team started four rookie offensive linemen and was without Rashawn Slater and other players, and receivers are thin. Asked about Justin Herbert's late turnovers and his five straight games with a turnover, he blamed the situations his decisions put Herbert in, such as having to throw on fourth-and-6. Asked whether the lineman would be back for Kansas City, he said he didn't know. He offered no scheme or play-calling changes and said the plan is to stay the course, work hard and get the critical coaching decisions right.",
   "injuries": [
    {
     "player": "Rashawn Slater",
-    "status": "unclear",
-    "detail": "Reporter said he is among the missing linemen; Harbaugh did not address his status and said he didn't know if the linemen would be back for Kansas City.",
+    "status": "out",
+    "detail": "Missing the Denver game; Harbaugh gave no return timeline and said he didn't know if the linemen would be back for Kansas City.",
     "player_id": "00-0037009"
    }
   ],
@@ -331,31 +379,41 @@
     "topic": "other",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Late turnovers came from being put in fourth-and-6 situations where he had to force plays, not from his own decisions.",
-    "note": "Five straight games with a turnover is a concern for fantasy, but Harbaugh blamed game situations, so the QB's usage and risk profile should be watched.",
-    "quote": "Trying to trying to make a play.",
+    "claim": "Harbaugh blames the coaching decision, not Herbert, for the late turnovers and the five-game turnover streak.",
+    "note": "Herbert is turning it over weekly behind a patchwork offensive line, but Harbaugh is backing him publicly and not changing the plan.",
+    "quote": "",
     "player_id": "00-0036355"
+   },
+   {
+    "player": "Rashawn Slater",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Slater and other offensive linemen may or may not return for the Kansas City game; no timeline given.",
+    "note": "Without Slater the line stays young and thin, which hurts pass protection and the run game for the whole offense.",
+    "quote": "I don't know. We'll we'll see.",
+    "player_id": "00-0037009"
    }
   ],
   "topics": [
    {
     "topic": "Fourth-down decision",
-    "detail": "Harbaugh said going for fourth-and-1 at the Denver 41 was the wrong call, that he should have called timeout and punted after seeing the defensive alignment, and that he takes full blame."
-   },
-   {
-    "topic": "Defense",
-    "detail": "Harbaugh praised the defense for multiple stops, three-and-outs, and a big turnover, and said it played its heart out."
+    "detail": "Harbaugh said he should have called timeout and punted after seeing the defense gap down on fourth-and-1 at the 41. He called it the turning point and said he put the team in a bad position."
    },
    {
     "topic": "Offensive line",
-    "detail": "The team started a rookie offensive lineman, and Harbaugh praised the young linemen for their play, though he did not name them."
+    "detail": "LAC started four rookie offensive linemen because Slater and others were out, and Harbaugh praised them for helping produce touchdown drives."
    },
    {
-    "topic": "Team outlook",
-    "detail": "Harbaugh said he had no clear message for a 0-5 team beyond players fighting hard, and that the plan is to keep working harder and smarter."
+    "topic": "Team direction",
+    "detail": "At 0-5, Harbaugh said he has no special message beyond fighting hard and said he will stay the course with no major offensive changes."
+   },
+   {
+    "topic": "Defense",
+    "detail": "He praised the defense for multiple three-and-outs, a big turnover and sudden-change stops."
    }
   ],
-  "opponent": "Kansas City"
+  "opponent": "Kansas City Chiefs"
  },
  {
   "id": "PHI:nick-sirianni-press-conference-october-11-2026",
@@ -369,23 +427,38 @@
   "after_week": 5,
   "coach": "Nick Sirianni",
   "words": 2025,
-  "model": "claude-haiku-5-5",
-  "headline": "Sirianni took full blame for the end-of-game decision in the 19-17 London loss to Jacksonville; no concrete player or injury news for fantasy purposes.",
-  "summary": "Sirianni took full responsibility for the final-minute decision that cost Philadelphia the 19-17 loss to Jacksonville in London, saying he did not make the right call and that the players fought hard. He declined to explain his thought process in detail, saying only that he had not done his job well enough in that situation. He acknowledged the clock-management options, including taking a knee or running the ball to set up a field goal, and said the loss of yards was a factor in the decision. He called the situation gray, said he had watched many similar late-game situations around the league, and said he would stand by owning the mistake. He praised the defense for keeping the team in the game and said the offense had struggled in the second half despite good first-half production. On the Jacksonville kickoff return, he said he would review the play and noted that the team had put extra players at safety on kickoffs. Asked whether injuries affected personnel on that play, he said no and expressed total faith in the players on the field. He framed accountability as a core program value and described the London atmosphere as strong, with the crowd largely on Philadelphia's side.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Sirianni owned the late kickoff decision in the 19-17 London loss to Jacksonville and admitted the second-half offense has to be fixed, but he gave no player-specific fantasy news.",
+  "summary": "Sirianni opened by taking full blame for the 19-17 loss to Jacksonville. He said he made the wrong decision on the end-of-game kickoff (not kicking it out of bounds) and declined to explain the reasoning or whether he followed the pre-set process. He praised the defense for keeping Philadelphia in the game and said the offense did enough late to win it. He explained that the offense ran the ball at the end hoping for a first down so it could call a timeout with about five seconds left, but Jacksonville stopped it and held its timeouts. He said kneeling to run the clock was possible but risked losing two to four yards on a long field goal. He acknowledged the offense has struggled in the second half after good first halves, said the team played a little differently today, and said the coaches must look at themselves first and figure out how to finish games. He said injuries to personnel did not affect the kickoff coverage, and that he has total faith in everyone on the field. He called the team mentally and physically tough and praised the London atmosphere and traveling fans. He also noted that the team lost many key players this week, though he did not name them.",
   "injuries": [],
-  "signals": [],
+  "signals": [
+   {
+    "player": "Andrew Mukuba",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "",
+    "note": "Made a standout tackle on a Jaguars tight end at the end of the first half, a sign of defensive energy. It carries little fantasy value except for IDP leagues.",
+    "quote": "",
+    "player_id": ""
+   }
+  ],
   "topics": [
    {
-    "topic": "End-of-game decision",
-    "detail": "Sirianni repeatedly owned the late-game decision and declined to detail his reasoning, saying he would stand by full accountability."
+    "topic": "End-of-game kickoff decision",
+    "detail": "Sirianni said he made the wrong decision by not kicking the ball out of bounds, put it fully on himself, and refused to detail the reasoning or whether he followed the pre-set process. Jacksonville returned the kick and then hit the winning field goal."
    },
    {
-    "topic": "Defense and second half",
-    "detail": "He praised the defense for keeping the team in the game, but said the offense needs to fix its second-half production, which he attributed to scheme and execution."
+    "topic": "Second-half offense",
+    "detail": "Sirianni said the offense has been strong in the first half but has struggled to close games in the second. He said the coaches must examine how they put players in position to succeed and called it something that will keep hurting them if not fixed."
    },
    {
-    "topic": "Special teams",
-    "detail": "Sirianni said he would review the kickoff play and noted the team uses extra safeties on kickoffs; he denied injuries affected the personnel on the field."
+    "topic": "Late-game clock management",
+    "detail": "The offense ran the ball at the end hoping for a first down, which would have allowed a timeout with about five seconds left. Jacksonville stopped the run and still had its timeouts. Sirianni said kneeling to bleed the clock would have cost yardage on a long field goal attempt."
+   },
+   {
+    "topic": "Team state and injuries",
+    "detail": "Sirianni said the team dealt with speculation about giving up on the season and the loss of many key players. He said the team is together and tough, and that injuries did not affect the kickoff coverage unit."
    }
   ],
   "opponent": ""
@@ -398,71 +471,63 @@
   "date": "2026-10-11",
   "duration": 0,
   "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/commanders/njjgp5byfctzsek8cvyu.jpg",
-  "kind": "day_after",
-  "after_week": 4,
+  "kind": "postgame",
+  "after_week": 5,
   "coach": "Dan Quinn",
   "words": 1912,
-  "model": "claude-haiku-5-5",
-  "headline": "Quinn takes full blame for the end-of-game clock decision in a tie, while Jayden Daniels returned from missed time and played sharply.",
-  "summary": "Quinn called the game a hard-fought tie that felt like a loss. He said the late-game decision to run for more yards instead of clocking the ball or throwing it out was his responsibility, not Daniels'. He said the team had the chance to win in all three phases and did not seize it, and he praised Daniels' overtime forced fumble on defense. On Daniels, Quinn said it was great to have him back, and he highlighted his line-of-scrimmage reads against blitzes, his willingness to use his legs without forcing it, and his accurate throws to Terry McLaurin and Treylon Burks in crunch time. On defense, Quinn said the unit needs to close out games and shut the door when leading, and that the team is digging in on its response after second-half collapses. He said the penalties, especially pre-snap ones, are being addressed but that he has not yet reviewed the Amik Robertson pass interference call at the goal line. He acknowledged injuries in the secondary and at receiver, and said the team handled the depth challenge well. He said the team will rebound, and that the end-of-game situation will be drilled more heavily in practice.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Jayden Daniels returned and played sharp in a 'gutting' tie; Quinn took blame for the end-of-game clock mismanagement and flagged secondary and defensive late-game collapses.",
+  "summary": "Quinn opened by calling the game a hard-fought tie that feels like a loss, and took full responsibility for the final sequence, saying he should have clocked the ball earlier rather than trying to gain more yards for a kick. He said Jayden Daniels was not at fault for the sequencing, noting it was either an out-of-bounds throw or a clock and that it was his call. Quinn praised Daniels in his return, citing his work at the line of scrimmage against blitzes, his smart use of his legs without forcing plays, and accurate throws in crunch time to Terry McLaurin and another target (transcribed as 'Burke'). The defense held up through much of the third quarter but then allowed three straight touchdown drives, which Quinn attributed to failing to close out when the opponent was in hurry-up mode and to being unable to stop scrambling plays or cover premium tight ends and receivers. He said the team was dealing with injuries at receiver and safety coming off the London trip, and praised how players prepared despite uncertainty about who would be available. He said he hadn't yet reviewed the penalties (including Amik Robertson's goal-line pass interference) or the early pre-snap flags. He said the team will keep practicing two-minute situations and is resilient after five games of adversity.",
   "injuries": [
    {
-    "player": "Jayden Daniels",
-    "status": "full",
-    "detail": "Returned after missing time and played the full game, which Quinn called sharp.",
-    "player_id": "00-0039910"
-   },
-   {
-    "player": "Unnamed secondary and receiver players",
+    "player": "Amik Robertson",
     "status": "unclear",
-    "detail": "Quinn said the team dealt with injuries in the secondary and at receiver and had to ready multiple players late in the week, but did not name them.",
+    "detail": "Not an injury; he was flagged for goal-line pass interference, which Quinn hadn't reviewed yet.",
     "player_id": ""
    }
   ],
   "signals": [
    {
     "player": "Jayden Daniels",
-    "topic": "usage",
+    "topic": "injury",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will keep using his legs when needed, without forcing runs, and manage the offense sharply",
-    "note": "Quinn's praise for his legs and decision-making suggests a stable dual-threat role, which supports rushing upside.",
-    "quote": "",
+    "claim": "Daniels is back on the field and looked sharp after missing time.",
+    "note": "A healthy, effective Daniels who used his legs selectively and delivered in crunch time is a strong sign for the WAS passing game and his fantasy floor.",
+    "quote": "I thought for somebody that's missed time I thought he played sharp.",
     "player_id": "00-0039910"
    },
    {
     "player": "Terry McLaurin",
-    "topic": "role",
+    "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Was a key target for Daniels in crunch-time moments",
-    "note": "Quinn singled him out for accurate late-game delivery, reinforcing his place in the high-leverage passing game.",
-    "quote": "you look at Terry, deliver the ball in the right location",
+    "claim": "McLaurin is a go-to target in crunch-time moments, with Daniels delivering the ball to him in the right location.",
+    "note": "Quinn singled him out as a late-game connection with Daniels, supporting his target share and reliability.",
+    "quote": "",
     "player_id": "00-0035659"
-   },
-   {
-    "player": "Treylon Burks",
-    "topic": "role",
-    "signal": "watch",
-    "tone": "positive",
-    "claim": "Was targeted in crunch-time situations, with Daniels delivering the ball in the right location",
-    "note": "Mentioned alongside McLaurin as a late-game option, but the mention was brief, so his role remains uncertain.",
-    "quote": "same thing to Burke",
-    "player_id": "00-0037742"
    }
   ],
   "topics": [
    {
-    "topic": "End-of-game clock management",
-    "detail": "Quinn said the team should have clocked the ball early instead of trying to gain more yards for a kick, and that he has no timeouts-related excuses. He said the situation will be drilled more in walkthroughs, practices, and two-minute work."
+    "topic": "End-of-game management",
+    "detail": "Quinn said he should have called a clock early and kicked instead of trying to gain more yards after the first-down run; he called it his responsibility alone and said the team will keep drilling two-minute situations."
    },
    {
     "topic": "Defense",
-    "detail": "Quinn said the defense allowed three straight touchdown drives after holding the opponent to about six points through most of the third quarter. He said the team has been digging in on its response and needs to close out games with a lead."
+    "detail": "The defense allowed three straight touchdown drives late after a strong third quarter, failing to close out. Quinn pointed to scrambling plays and premium opposing tight ends and receivers as issues."
    },
    {
-    "topic": "Penalties and officiating",
-    "detail": "Quinn said he wants pre-snap penalties corrected and has not yet formed an assessment. He had not yet reviewed the Amik Robertson goal-line pass interference call."
+    "topic": "Injuries and depth",
+    "detail": "The team dealt with injuries at receiver and safety coming off London, and Quinn praised players for preparing despite uncertainty about availability."
+   },
+   {
+    "topic": "Penalties",
+    "detail": "Quinn wants to review the early pre-snap penalties and hasn't assessed the Robertson pass interference call yet."
+   },
+   {
+    "topic": "Overtime play",
+    "detail": "Quinn praised a player (transcribed as 'pain') for an incredible forced fumble in overtime that gave the team a chance."
    }
   ],
   "opponent": ""

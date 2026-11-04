@@ -11,44 +11,58 @@
   "after_week": 1,
   "coach": "Sean McVay",
   "words": 4566,
-  "model": "claude-haiku-5-5",
-  "headline": "McVay owned a humbling Week 1 loss to the 49ers in Melbourne and gave no clear injury update on Myles Garrett's knee, so keep Garrett on watch for Week 2.",
-  "summary": "McVay called the Week 1 loss to San Francisco humbling and said he took responsibility, pointing to his own preparation and communication, and saying the team was outplayed in all three phases. He said the offense never found continuity, failed to finish the few good drives with points (including a failed goal-line sneak from the one-yard line), and that the defense could not get off the field on key chances. He said the kicking game also struggled. He rejected the idea that the team's travel plan caused the result, noting the staff had used the same approach for a London trip the year before and won. He said the players were ready and that preseason strategy was not the issue. Asked about Garrett's knee, McVay said the team did not discuss it much on the field and that they would review the tape. The next game is Monday night in Week 2 against the Giants, with McVay stressing the need to get healthy and play faster.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Rams lost Week 1 to the 49ers in Melbourne; McVay took the blame and gave no personnel news, so the offense's lack of rhythm and Myles Garrett's knee are the things to watch.",
+  "summary": "McVay opened by calling the loss humbling and said he did not get the team ready. He said the 49ers outplayed the Rams in every phase, including special teams. He said it was a three-point game at halftime. The turning point, in his telling, was a drive that reached the goal line and failed on a QB sneak, after which the 49ers went 99 yards for a touchdown and the game got out of hand. He said the offense never found continuity, never distributed the field, and had communication problems on both sides of the ball. He rejected travel and the no-preseason-games approach as excuses and said the team was rested and ready. He gave no injury updates, no depth chart changes and no usage changes for any player. He said the team has time to clean things up before next Monday night.",
   "injuries": [
    {
     "player": "Myles Garrett",
     "status": "unclear",
-    "detail": "Asked whether Garrett was struggling with his knee during the game, McVay did not give a status and said it was not discussed much on the field; the team would review the tape.",
+    "detail": "McVay did not address it. Reporters asked Stafford and Garrett about a knee problem, and Garrett said he was focused on staying healthy and was not the player he wanted to be. The severity is unknown.",
     "player_id": ""
    }
   ],
   "signals": [
    {
+    "player": "Matthew Stafford",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "The passing game should improve once the offense fixes its rhythm and communication issues.",
+    "note": "The offense struggled to move the ball and finish drives, which lowers confidence in the passing game until it shows improvement.",
+    "quote": "we were never able to really get any continuity going offensively",
+    "player_id": "00-0026498"
+   },
+   {
     "player": "Myles Garrett",
     "topic": "injury",
     "signal": "watch",
-    "tone": "hedged",
-    "claim": "Garrett's knee status is unresolved; coach would review tape before giving more detail",
-    "note": "A knee issue for a premier pass rusher heading into a Monday night game is a real availability risk until updated.",
-    "quote": "We didn't talk too much about it on the field.",
+    "tone": "neutral",
+    "claim": "",
+    "note": "A knee issue was raised by reporters and addressed only by the players, not McVay. His availability and effectiveness in Week 2 are worth monitoring.",
+    "quote": "",
     "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Pass rush and scheme",
-    "detail": "McVay said the 49ers chipped, stayed tighter in their formations, and got the ball out quickly to limit the Rams' interior rush, and the staff will study how to attack that going forward."
+    "topic": "Turning point",
+    "detail": "McVay said the game flipped after the offense reached the goal line and failed on a QB sneak, then the 49ers went 99 yards for a touchdown. He added that the offense had only a couple of good drives."
    },
    {
-    "topic": "Travel and preparation",
-    "detail": "McVay said the travel plan and early arrival in Melbourne were not the reason for the loss and that the staff's approach mirrored a previous successful international trip."
+    "topic": "Travel and preseason",
+    "detail": "McVay said travel, the Australia trip and the decision to play no preseason games did not affect the result. He said the team was ready and simply did not play well enough."
    },
    {
-    "topic": "Schedule",
-    "detail": "The team next plays Monday night in Week 2, a short turnaround McVay described as not ideal, with the focus on cleaning up film and getting healthy."
+    "topic": "Special teams and defense",
+    "detail": "McVay said the Rams were not efficient in the kicking game and the 49ers had a big return. He also said the defense had chances but could not get off the field."
+   },
+   {
+    "topic": "Accountability and next steps",
+    "detail": "McVay said the loss starts with him and he will review the film to put players in better positions. He said the team would get back to work, with the next game next Monday night."
    }
   ],
-  "opponent": "Giants"
+  "opponent": ""
  },
  {
   "id": "SF:shanahan-talks-injuries-purdys-big-game-historic-win-over-rams-49ers-nfl",
@@ -62,49 +76,55 @@
   "after_week": 1,
   "coach": "Kyle Shanahan",
   "words": 2798,
-  "model": "claude-haiku-5-5",
-  "headline": "Purdy and Mike Evans were the offensive standouts in the Week 1 win over the Rams in Melbourne; Stribling's ankle and Jake Tonges's knee are the injury concerns to monitor.",
-  "summary": "Shanahan said Stribling left with an ankle injury and did not return, and the team has not yet determined the injury's magnitude, though the Achilles checked out intact. Tonges also left with a knee injury and did not return; Shanahan said it is not an ACL or MCL, but more information is still needed. Trent Williams and Christian McCaffrey both left with cramps and came back, with McCaffrey not missing much time. He praised Brock Purdy's performance, calling him unbelievable and crediting his big throws and his ability to extend plays with his legs. Mike Evans was a key target, converting several third downs and making a red-zone fade, and Shanahan said he loves calling plays for him. Renardo Green returned from a hamstring injury and played well, which Shanahan called huge. He also said the plan was to balance the run game between McCaffrey and Deebo Samuel, and the offensive line protected well against a strong Rams pass rush. On the trip, Shanahan said the early arrival and week-long stay mirrored how the team handles East Coast trips, and he said the Melbourne crowd was loud and the field was in good shape.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Win over the Rams in Melbourne came with injury worries: WR De'Zhaun Stribling (ankle) and TE Jake Tonges (knee) both left and didn't return. Purdy and Mike Evans starred, and the plan is a more balanced backfield.",
+  "summary": "Shanahan opened with the game's injuries. Stribling (ankle) and Tonges (knee) did not return, while Trent Williams and Christian McCaffrey left with cramps and came back. Stribling's Achilles was checked and is intact, but the team doesn't know how bad the ankle is. Shanahan was more grim about a knee injury at the end, saying it 'wasn't good' and 'not an ACL, MCL, I believe,' but there are issues still to sort out. The question didn't name the player, though it most likely concerned Tonges. He raved about Brock Purdy's play, especially the 99-yard drive where Purdy made off-schedule plays and ran for first downs. He also praised Purdy's long touchdown to Mike Evans, helped by strong protection against the Rams' pass rush. Shanahan said he loves calling plays for Evans, who moved the chains on third downs and gave the offense a red-zone fade option. The coach said the goal was to balance the backfield more, with Kaelon Black, McCaffrey and Deebo Samuel all sharing the load. He was glad to have Kittle, Greenlaw and Deebo back healthy and highlighted Renardo Green's return from a hamstring injury with an interception. He also called Fred Warner everything to him after Warner passed Patrick Willis for the franchise tackle record. The rest covered the Melbourne experience, the crowd and the travel, and the team now heads home to prepare for Week 2.",
   "injuries": [
    {
     "player": "De'Zhaun Stribling",
     "status": "unclear",
-    "detail": "Left the game with an ankle injury and did not return; Achilles checked intact, but the severity of the ankle injury is not yet known.",
+    "detail": "Left with an ankle injury and did not return. His Achilles was checked and is intact, but the severity of the ankle injury is unknown.",
     "player_id": ""
    },
    {
     "player": "Jake Tonges",
     "status": "unclear",
-    "detail": "Left the game with a knee injury and did not return; Shanahan said it is not an ACL or MCL, but there are still issues to be evaluated.",
+    "detail": "Left with a knee injury and did not return. A later answer on a knee injury said it 'wasn't good' and is not an ACL or MCL, but issues remain and the team doesn't yet know more. The question didn't name the player, so this is probably Tonges.",
     "player_id": ""
    },
    {
     "player": "Trent Williams",
     "status": "full",
-    "detail": "Left the game with cramps but returned to play.",
+    "detail": "Left briefly with cramps and came back.",
     "player_id": "00-0027857"
    },
    {
     "player": "Christian McCaffrey",
     "status": "full",
-    "detail": "Left the game with cramps, came back quickly, and missed little time.",
+    "detail": "Left briefly with cramps, returned quickly and missed little.",
     "player_id": "00-0033280"
    },
    {
     "player": "Renardo Green",
-    "status": "full",
-    "detail": "Returned from a hamstring injury that had kept him out until this week and played through the game without re-injury.",
+    "status": "returning",
+    "detail": "Returned from a hamstring injury that kept him out until this week, played at a high level and finished the game healthy.",
     "player_id": ""
+   },
+   {
+    "player": "George Kittle",
+    "status": "returning",
+    "detail": "Back on the field after missing a playoff game last season. Shanahan said his impact was felt all game.",
+    "player_id": "00-0033288"
    }
   ],
   "signals": [
    {
     "player": "Brock Purdy",
-    "topic": "usage",
+    "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Played at a high level in Week 1, making big throws and extending plays with his legs.",
-    "note": "Shanahan's strong praise and the off-schedule plays point to Purdy remaining a reliable fantasy QB1 option.",
+    "claim": "Purdy remains the engine of the offense and can deliver on off-schedule plays and quick-game answers against a strong pass rush.",
+    "note": "Shanahan raved about Purdy's performance, including his running and the long touchdown, so his fantasy outlook looks strong.",
     "quote": "Brock was unbelievable today.",
     "player_id": "00-0037834"
    },
@@ -113,29 +133,29 @@
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will remain a featured target in the passing game, with Shanahan planning to use him on third downs and in the red zone.",
-    "note": "Evans converted key third downs and red-zone looks, supporting a strong fantasy WR1 outlook.",
+    "claim": "Evans will be a featured target on third downs and in the red zone, including on fades.",
+    "note": "He got the first two third-down targets, had a big second-and-long, and was the target on the long touchdown, so he looks like a key part of the offense.",
     "quote": "I love calling plays for Mike.",
     "player_id": "00-0031408"
    },
    {
-    "player": "Renardo Green",
-    "topic": "injury",
+    "player": "Kaelon Black",
+    "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Is healthy after the hamstring injury and played at a high level in Week 1.",
-    "note": "Shanahan's praise and the clean return suggest Green is ready for a full role in the defense.",
-    "quote": "It was huge for Renardo.",
-    "player_id": ""
+    "claim": "Black will continue to share backfield carries with McCaffrey as the team tries to balance the run game.",
+    "note": "Shanahan said both backs ran well and the balance was a stated goal, so Black has some standalone value and cuts into McCaffrey's workload.",
+    "quote": "that was a goal for us coming into this, trying to balance it out more",
+    "player_id": "00-0041052"
    },
    {
     "player": "Christian McCaffrey",
-    "topic": "injury",
+    "topic": "usage",
     "signal": "watch",
-    "tone": "neutral",
-    "claim": "Cramps did not cost him significant time; he returned quickly.",
-    "note": "The cramps were a minor issue, but managers should check his status for Week 2.",
-    "quote": "He came back quick",
+    "tone": "hedged",
+    "claim": "McCaffrey's workload will be more balanced with Black and Deebo getting carries.",
+    "note": "He is healthy after cramps, but the stated plan to spread carries caps his usage a bit.",
+    "quote": "he didn't miss much.",
     "player_id": "00-0033280"
    },
    {
@@ -143,24 +163,52 @@
     "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will get more carries as the team looks to balance its run game.",
-    "note": "Deebo getting more carries adds rushing upside to his fantasy value beyond the receiving role.",
-    "quote": "getting Deebo some carries",
+    "claim": "Deebo will keep getting some carries as part of the balanced offense.",
+    "note": "Shanahan mentioned using him in the run game and he returned healthy, adding a touchdown on an off-schedule play from Purdy.",
+    "quote": "whether it was getting Deebo some carries",
     "player_id": "00-0035719"
+   },
+   {
+    "player": "Renardo Green",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Green has recovered from his hamstring injury and is a full-time contributor again.",
+    "note": "He is a defensive player, but Shanahan was excited about his step forward this year, which matters in IDP leagues.",
+    "quote": "to play at the level he did, I thought was huge.",
+    "player_id": ""
+   },
+   {
+    "player": "George Kittle",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Kittle is back from injury and is playing at full capacity.",
+    "note": "With Tonges hurt, Kittle's role as the top tight end looks even more valuable.",
+    "quote": "Their impact you could feel throughout the whole game",
+    "player_id": "00-0033288"
    }
   ],
   "topics": [
    {
-    "topic": "Rams game and pass rush",
-    "detail": "Shanahan credited the offensive line for protecting Purdy against a strong Rams pass rush and said the Rams' missing Aaron Donald did not change the game plan."
-   },
-   {
-    "topic": "Melbourne trip",
-    "detail": "Shanahan described the trip as a longer flight than usual, with a time change, and said the team's week-long stay in a hotel mirrors its East Coast routine."
+    "topic": "Offensive line",
+    "detail": "Shanahan praised the line for holding up against the Rams' pass rush, especially on the long touchdown to Evans where Purdy had time on a seven-step drop. He said they needed to get the ball out quickly most of the game."
    },
    {
     "topic": "Fred Warner",
-    "detail": "Shanahan praised Fred Warner, who passed Patrick Willis for the most tackles in franchise history."
+    "detail": "Warner passed Patrick Willis for the most tackles in franchise history. Shanahan said he means everything to him."
+   },
+   {
+    "topic": "Game momentum",
+    "detail": "Shanahan pointed to the opening kick return of the third quarter, the 99-yard touchdown drive, and a fourth-and-goal stop inside the one as turning points. He said the team missed some chances in the second quarter."
+   },
+   {
+    "topic": "Australia trip",
+    "detail": "He enjoyed the experience and the crowd of 100,021. He said the early arrival helped, and that the team would rather play 17 home games and does not like travel. Next up is Week 2, with a few extra days to recover."
+   },
+   {
+    "topic": "Rams defensive line",
+    "detail": "Aaron Donald not playing did not change the game plan. Shanahan said they treated both ends the same way."
    }
   ],
   "opponent": ""

@@ -11,14 +11,14 @@
   "after_week": 1,
   "coach": "Sean Payton",
   "words": 2521,
-  "model": "claude-haiku-5-5",
-  "headline": "Payton says Marvin Mims Jr. is set to return punts and kickoffs, but his status for Sunday vs. Jacksonville remains unclear.",
-  "summary": "Payton said the Broncos are using a recovery-focused schedule after Monday night games, with a Saturday practice that is heavier than normal. He described Jacksonville's defense as well coached and purposeful, especially in generating takeaways from zone coverage and disrupting the ball. He called their front seven very talented and said stopping the run gives any team a balanced foundation. On offense, he said the Broncos need patience against Jacksonville's zones, with ball security required at the catch point. Payton said the Week 1 loss did not go the way anyone wanted and took responsibility for it, and he said Bo Nix's tape review involved many players who felt the same way. On Marvin Mims Jr., Payton said he will return punts and kickoffs, though kickoff usage varies by game plan. When asked whether Mims could miss Sunday, Payton did not give a clear answer. He also said the team is only at the start of its preparation, with the first practice held that day.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Payton says Marvin Mims remains the featured punt returner and kickoff rotation piece, but the Week 2 status question on Mims was left open as Denver faces a talented Jacksonville front seven after a rough opener.",
+  "summary": "Payton opened by explaining that Denver's short week after a Monday night game is treated like a Wednesday, with recovery prioritized and a somewhat heavier Saturday practice. He took collective blame for the poor opener, saying there was dirt on many hands starting with him, and he deflected questions about Bo Nix by noting many players felt the same way after watching the tape. He praised Jacksonville's defense as well coached and purposeful in creating takeaways, and said patience and ball security at the reception point will be needed against their zone-heavy approach. He called the Jaguars' run front really talented, noting the ends, nose and three-technique, and said the ability to stop the run is a good sign for them. Asked whether he can spark the run game, he said it is both patience and forcing it, comparing it to body shots in boxing. On special teams, he said Marvin Mims will return punts and kickoffs, with the kickoff role varying by game plan. When asked if Mims is in jeopardy for Sunday, he gave a dismissive answer that it's only Wednesday, so no status was given. He also revealed he has a 4-5 disc issue in his back that made standing for the long game painful, but said it's improving. The rest covered Jacksonville's use of Travis Hunter as primarily a defender, Liam Coen's use of his offense, and reminiscences about Brian Dawkins.",
   "injuries": [
    {
     "player": "Marvin Mims Jr.",
     "status": "unclear",
-    "detail": "Asked if he is in jeopardy of missing Sunday's game; Payton did not give a clear answer and deflected to the calendar. Mims was hurt later in the prior game.",
+    "detail": "Hurt later in the opener; asked if he is in jeopardy of missing Sunday, Payton replied it's only Wednesday and gave no update.",
     "player_id": "00-0038976"
    }
   ],
@@ -26,36 +26,54 @@
    {
     "player": "Marvin Mims Jr.",
     "topic": "role",
-    "signal": "up",
+    "signal": "watch",
     "tone": "neutral",
-    "claim": "Will return punts and kickoffs in this game",
-    "note": "A confirmed return role adds expected opportunities for return-yardage production, though kickoff usage can change by game plan.",
+    "claim": "Mims will continue as Denver's punt returner and a rotational kickoff returner, with kickoff usage varying by game plan.",
+    "note": "Return role is secure for fantasy formats that reward return yards, but his health for Sunday is unresolved.",
     "quote": "He's going to be returning punts and kickoffs.",
     "player_id": "00-0038976"
    },
    {
+    "player": "Marvin Mims Jr.",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "",
+    "note": "Payton declined to clarify Mims's availability for Week 2, so monitor practice reports.",
+    "quote": "",
+    "player_id": "00-0038976"
+   },
+   {
     "player": "Bo Nix",
-    "topic": "matchup",
+    "topic": "other",
     "signal": "watch",
     "tone": "neutral",
-    "claim": "Offense must be patient and protect the ball at the catch point against Jacksonville's zones",
-    "note": "Jacksonville's takeaway-focused defense makes turnovers the main risk for Nix's passing production.",
-    "quote": "right at that reception point, ball security is required.",
+    "claim": "",
+    "note": "Payton shared blame for the poor opener and did not criticize Nix, but Jacksonville's takeaway-heavy defense is a tough matchup.",
+    "quote": "there was dirt on a ton of people's hands starting with me.",
     "player_id": "00-0039732"
    }
   ],
   "topics": [
    {
-    "topic": "Practice schedule",
-    "detail": "Payton said the team is using a Wednesday-style schedule after Monday night games to prioritize recovery, with Saturday a bit heavier than usual."
-   },
-   {
     "topic": "Jacksonville defense",
-    "detail": "Payton praised Jacksonville's coaching, coverage, and takeaway emphasis, noting their zone coverage and ball disruption are deliberate and well-coached."
+    "detail": "Payton praised the Jaguars' takeaway ability, zone discipline and talented front seven, saying patience and ball security will be key for the offense."
    },
    {
-    "topic": "Liam Coen",
-    "detail": "Payton said Jacksonville's offensive approach from Coen is built around players' strengths and that the team has turned around quickly."
+    "topic": "Run game",
+    "detail": "He expects a tough run-game matchup against a strong Jacksonville front and said sparking the run takes both patience and forcing it."
+   },
+   {
+    "topic": "Practice schedule",
+    "detail": "Denver is on a short week after a Monday night game, prioritizing recovery with a slightly heavier Saturday practice."
+   },
+   {
+    "topic": "Payton's health",
+    "detail": "Payton said a 4-5 disc issue made standing for the game painful, but he is improving."
+   },
+   {
+    "topic": "Travis Hunter",
+    "detail": "Payton said Denver views Hunter primarily as a cornerback with some offensive versatility."
    }
   ],
   "opponent": "Jacksonville Jaguars"
@@ -72,66 +90,94 @@
   "after_week": 1,
   "coach": "Matt LaFleur",
   "words": 1428,
-  "model": "claude-haiku-5-5",
-  "headline": "LaFleur expressed confidence in MarShawn Lloyd's workload, while Lukas Van Ness and Javon Hargrave are in the concussion protocol.",
-  "summary": "LaFleur said Lukas Van Ness entered the concussion protocol Monday and Javon Hargrave yesterday, and that the effects appeared to be residual from an earlier incident. He stressed that the long-term outlook is unknown with concussions, which is why the protocol exists. On the offensive side, he said internal interior pressure makes it hard for a quarterback to stay in a clean pocket, and that more multi-tight-end personnel forces more preparation. He said Aaron Banks had a good day at work on Wednesday and hopes he can build on it, and he acknowledged that interior linemen have been in and out of the lineup over the past couple of years. He praised MarShawn Lloyd's toughness after the Week 1 game, saying Lloyd handled the hits he took and has shown a lot of confidence that he can handle a heavy load, which gives LaFleur confidence in him. LaFleur also praised Matthew Golden's downfield blocking on a long play, saying the team wants those blocks because they turn explosive plays into touchdowns. On the red zone, he said staying on schedule is the key, since tighter coverage and less field make throwing harder. He said that if Van Ness can't play, one of two backup defensive linemen who had strong camps should be ready to step in.",
+  "model": "claude-sonnet-5-5",
+  "headline": "MarShawn Lloyd handled his Week 1 workload and hits, and LaFleur says he's building him up, while Van Ness and Hargrave are in concussion protocol and Aaron Banks' availability remains week to week.",
+  "summary": "LaFleur confirmed Lukas Van Ness entered the concussion protocol Monday and Javon Hargrave on Wednesday, described as residual effects of earlier contact, and said you never know how long concussions will last. Aaron Banks had a good day of work and the team hopes he can practice Thursday, but LaFleur admitted offensive line availability has been an ongoing issue and he can't promise it won't be a season-long thing. On MarShawn Lloyd, he said the Vikings game script limited the run game, but Lloyd did a good job handling the hits and has built up through the offseason, camp and preseason, which gives the coach confidence. He praised the kicker for handling long field goal attempts early but said the offense needs to do a better job so the kicker isn't kicking from so far. He talked about how a steady run game keeps the offense on schedule and avoids obvious passing downs, especially in the tight red zone. He praised Matthew Golden for a downfield block on Christian Watson's long play and said the team wants every player to chase the ball. On Micah Parsons, LaFleur hadn't asked about his status and suggested it could be a couple of weeks. He expects the backups behind Van Ness to be ready if he can't play. He also noted the Jets use many personnel groupings and tight ends, which adds prep.",
   "injuries": [
    {
     "player": "Lukas Van Ness",
     "status": "unclear",
-    "detail": "In the concussion protocol since Monday; LaFleur said one of two backups should be ready if he can't go.",
+    "detail": "In concussion protocol since Monday; no timeline given. LaFleur said you never know with concussions.",
     "player_id": ""
    },
    {
     "player": "Javon Hargrave",
     "status": "unclear",
-    "detail": "Placed in the concussion protocol yesterday; LaFleur called the effects residual.",
+    "detail": "Entered concussion protocol Wednesday; residual effects of earlier contact; no timeline given.",
     "player_id": ""
    },
    {
     "player": "Aaron Banks",
     "status": "unclear",
-    "detail": "Availability has been in question; he had a good day at work yesterday and LaFleur hopes he builds on it today.",
+    "detail": "Had a good day at work Wednesday and hopes to practice Thursday; availability may be week to week.",
     "player_id": "00-0036551"
    }
   ],
   "signals": [
    {
     "player": "MarShawn Lloyd",
-    "topic": "role",
+    "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Trusted to take a heavy carry load after handling the hits he took in Week 1",
-    "note": "LaFleur's stated confidence in Lloyd's ability to take the carries points to a workhorse role in the run game.",
-    "quote": "he's shown a lot of confidence that he's able to do it",
+    "claim": "Lloyd is being built up to take a larger share of the carries.",
+    "note": "The coach's confidence in Lloyd handling hits suggests his role in the backfield could grow.",
+    "quote": "",
     "player_id": "00-0039811"
    },
    {
     "player": "Matthew Golden",
-    "topic": "other",
+    "topic": "role",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Praised for downfield blocking that the team values in big plays",
-    "note": "Praise for effort and blocking is a positive sign for his role, but it doesn't clearly signal a bigger targets or usage role.",
-    "quote": "",
+    "claim": "",
+    "note": "Golden's downfield block on Watson's long play drew praise, though it says little about his target share.",
+    "quote": "that was a great job by him",
     "player_id": "00-0040667"
+   },
+   {
+    "player": "Aaron Banks",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Banks may be in and out of the lineup over the season.",
+    "note": "Offensive line availability may affect the Packers' run game and pass protection.",
+    "quote": "I sure hope not. But, unfortunately, over the last couple of years, I've learned",
+    "player_id": "00-0036551"
+   },
+   {
+    "player": "Lukas Van Ness",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Van Ness's availability for Week 2 is uncertain while he's in concussion protocol.",
+    "note": "Matters for IDP and defensive matchup considerations.",
+    "quote": "You never know with concussion. That's why there's a protocol.",
+    "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Red zone philosophy",
-    "detail": "LaFleur said the red zone is tighter and harder to throw in, so the offense has to stay on schedule to avoid predictable passing downs."
+    "topic": "Kicker",
+    "detail": "LaFleur praised the kicker's confidence on long field goals but said the offense should put him in better positions and that he must keep building."
    },
    {
-    "topic": "Defensive personnel",
-    "detail": "He noted that teams using more tight ends force more preparation, and that he missed a five-player defensive look from an earlier game."
+    "topic": "Run game and red zone",
+    "detail": "A steady run game keeps the offense on schedule and avoids passing situations where coverage is heavier, which is especially important in the tight red zone."
    },
    {
-    "topic": "Backup defensive line",
-    "detail": "LaFleur said two backup defensive linemen had strong camps and one should be ready if Van Ness can't play. He did not name them."
+    "topic": "Micah Parsons",
+    "detail": "LaFleur hadn't asked about Parsons' status and indicated it could be a couple of weeks before he's ready."
+   },
+   {
+    "topic": "Jets personnel",
+    "detail": "The Jets use many personnel groupings and plenty of tight ends, which increases the preparation needed."
+   },
+   {
+    "topic": "Defensive line depth",
+    "detail": "If Van Ness can't play, LaFleur expects Mosby or Kelly, who had great camps, to be ready."
    }
   ],
-  "opponent": ""
+  "opponent": "New York Jets"
  },
  {
   "id": "PIT:watch-mike-mccarthy-media-availability-sept-17",
@@ -145,73 +191,83 @@
   "after_week": 1,
   "coach": "Mike McCarthy",
   "words": 944,
-  "model": "claude-haiku-5-5",
-  "headline": "Nick Herbig is being used both on the line and off the ball, a usage pattern McCarthy praised and expects to continue; Troy Fautanu has a limited plan and Joey (name unverified) is still working through a conditioning issue.",
-  "summary": "McCarthy said the unnamed player referred to as Joey had a good day Wednesday, completed everything scheduled, and has a plan that he is working through, with more work expected Thursday. The injury report lists conditioning, and McCarthy declined to discuss his back, so the back is not confirmed as cleared. He called the ramp-up of that player a case-by-case process and did not commit to a timeline. McCarthy said Troy Fautanu is on a limited plan for Thursday and hopes he can get through practice. He said Max Iheanachor is improving but needs more reps, and that Thursday is a big day for him after missing a lot of padded work. He praised Nick Herbig as a dynamic playmaker, citing how the team is using him on the ball, off the ball, and in space to create targeting problems for the offense. On T.J. Watt, he said Watt's respect in the locker room is well earned and that he gave a strong pregame speech. Asked about Payton Wilson and speed at middle linebacker, McCarthy said the defense gives flexibility in schemes and personnel groups, so the focus is on how each week's game plan fits the players.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Joey is ramping up from a conditioning designation, Troy Fautanu is on a limited plan, and Nick Herbig is being used on and off the ball.",
+  "summary": "McCarthy was pleased with Joey's work on Wednesday. Joey did everything scheduled and is expected to do more Thursday. The injury report listed him as conditioning, and McCarthy gave no timeline for a full return, saying every player's situation is different. He did not say whether Joey would play Sunday. Troy Fautanu is on a limited plan, and McCarthy only hoped he would get through practice. Max Iheanachor is improving but needs reps after missing padded work. McCarthy praised T.J. Watt's leadership, including the pregame speech, and said he played huge on Sunday. He said Nick Herbig is being used on the edge, on the ball and in space to create targeting problems for offenses, and he expects that to continue. On the Patriots, he praised Drake Maye as more established, composed, comfortable in the pocket and an effective runner. He said linebacker speed gives the defense schematic and personnel flexibility, with the plan set week to week.",
   "injuries": [
    {
-    "player": "Joey (name unverified, not on roster list)",
+    "player": "Joey (outside CB, last name unconfirmed, not on roster)",
     "status": "limited",
-    "detail": "Missed practice for conditioning reasons; he completed his plan Wednesday and is scheduled to do more Thursday. McCarthy would not discuss the back designation, so it is not confirmed as cleared.",
+    "detail": "Listed as conditioning on the injury report. He completed all of his scheduled work Wednesday and is scheduled to do more Thursday. There is no timeline for a full return.",
     "player_id": ""
    },
    {
     "player": "Troy Fautanu",
     "status": "limited",
-    "detail": "Working on a limited plan Thursday; McCarthy hopes he gets through practice. Starting status for Sunday is still in question.",
+    "detail": "On a limited plan Thursday. McCarthy hopes he can get through practice, and his ability to start Sunday depends on that.",
     "player_id": "00-0039871"
    },
    {
     "player": "Max Iheanachor",
     "status": "unclear",
-    "detail": "Missed a lot of padded work and needs reps; Thursday is described as a big day for him. No formal designation was given.",
+    "detail": "Missed padded work and needs reps. McCarthy called Thursday a big day for him and wants to see continued progress.",
     "player_id": "00-0041482"
    }
   ],
   "signals": [
    {
-    "player": "Nick Herbig",
-    "topic": "usage",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Will continue to be used both as an edge rusher and off the ball to create targeting challenges for the offense.",
-    "note": "Dual alignment gives him more snaps and pass-rush and tackle opportunities, which raises his fantasy ceiling.",
-    "quote": "he's a dynamic player. He's a, he's a playmaker.",
-    "player_id": ""
-   },
-   {
     "player": "Troy Fautanu",
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Is on a limited practice plan Thursday and must progress for him to start Sunday.",
-    "note": "Lineup status is uncertain, so check the Friday injury report before starting him or any backup.",
+    "claim": "Will be limited in Thursday's practice, and his Sunday start depends on getting through it.",
+    "note": "His availability matters for the Steelers' offensive line, so check the final injury report before Sunday.",
     "quote": "we have a limited plan for Troy today",
     "player_id": "00-0039871"
    },
    {
     "player": "Max Iheanachor",
-    "topic": "role",
+    "topic": "depth_chart",
     "signal": "watch",
-    "tone": "hedged",
-    "claim": "Is improving but needs more reps after missing padded work.",
-    "note": "His game-day role is unclear, and he needs reps before he can be trusted in a lineup.",
-    "quote": "he needs he needs reps, you know, needs reps",
+    "tone": "neutral",
+    "claim": "Needs more practice reps after missing padded work and is expected to keep progressing.",
+    "note": "He is still building up, so his role on the offensive line is unsettled.",
+    "quote": "This will be a big day for Max",
     "player_id": "00-0041482"
+   },
+   {
+    "player": "Nick Herbig",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will keep playing both edge rusher and off-ball linebacker, including in space.",
+    "note": "His multi-position role boosts his IDP value through more snaps and varied ways to produce.",
+    "quote": "he's a dynamic player. He's a, he's a playmaker.",
+    "player_id": ""
+   },
+   {
+    "player": "T.J. Watt",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "McCarthy praised his leadership and Week 1 performance, so his IDP value is secure.",
+    "quote": "he exceeds his reputation.",
+    "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Joey (unverified name) conditioning and ramp-up",
-    "detail": "McCarthy said the player is on a conditioning plan and will do more work Thursday. He would not discuss the back designation and declined to project a return timeline."
-   },
-   {
-    "topic": "Patriots opponent and Drake Maye",
-    "detail": "McCarthy praised Patriots QB Drake Maye for his maturity, pocket composure, accuracy, and ability to throw before running. He called him an effective runner."
+    "topic": "Opponent: Patriots QB Drake Maye",
+    "detail": "McCarthy said Maye has grown and gained big-game experience. He is composed, handles the offensive system, can make every throw, is comfortable in the pocket, looks to throw before running, and is an effective runner."
    },
    {
     "topic": "Linebacker flexibility",
-    "detail": "McCarthy said the defense gives flexibility in schematic and personnel choices, which is why players like Payton Wilson can move around. Decisions depend on each week's game plan."
+    "detail": "Asked about speed at linebacker, McCarthy said the group gives the defense schematic and personnel flexibility. The plan is set each week based on how those players line up against the opponent."
+   },
+   {
+    "topic": "Joey's ramp-up",
+    "detail": "McCarthy declined to say whether the issue would linger for weeks. He said the response so far was encouraging and that he did not discuss a back issue."
    }
   ],
   "opponent": "New England Patriots"

@@ -7,123 +7,123 @@
   "date": "2026-10-13",
   "duration": 902,
   "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/panthers/wffqxoizu7on4q3zrkdy.jpg",
-  "kind": "first_practice",
+  "kind": "midweek",
   "after_week": 4,
   "coach": "Dave Canales",
   "words": 3297,
-  "model": "claude-haiku-5-5",
-  "headline": "Panthers' returning trio (Moton, Wharton, Etienne) looked good in padded practice but none is cleared yet; Jalen Coker looked great but is limited coming off a quad and ankle issue, with the full injury report due Thursday.",
-  "summary": "Canales called the first post-bye padded practice spirited and high-energy, with the team looking fresh and the returning players clearly excited to be back on the field. He said Taylor Moton, Tershawn Wharton and Trevor Etienne all got significant reps and looked good, but he will not decide on their Sunday status until he sees how their bodies respond to the physical session, with the full injury report coming tomorrow. He explained the schedule: a light Monday with meetings, a padded Tuesday to knock off rust, a recovery day Wednesday, and a high-mileage Thursday. A player who was placed on IR had a shoulder surgery that will be season-ending, while his knee issue is non-surgical rehab, and he will stay connected to the team. On rookie Zakee Wheatley, Canales said he has been a strong open-field tackler and has magnificent hands, with the next step being converting chances downfield. He praised Bryce Young's RPO execution against Detroit, explaining that the concept works when linebackers and nickels must choose between run fits and route coverage, and said Chuba Hubbard's downhill running fits that concept. On Darren Waller, Canales said he is pleased with his production, which has created horizontal and vertical stretch and favorable matchups, but there is still more to unlock. He also said front-office talks about roster moves happen constantly, and he is focused on Philadelphia.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Moton, Wharton and Etienne practiced in full pads off IR with a decision on Sunday pending; Coker looked great at practice; Waller's role is expected to grow.",
+  "summary": "Canales said the first practice after the bye was spirited but not clean, with Taylor Moton, Tershawn Wharton and Trevor Etienne back on the field after being on IR. All three got a significant number of reps in a padded, physical practice, and the team will wait to see how they respond before making any decisions on Sunday; the full injury report comes tomorrow. Michael Jackson was placed on IR with a shoulder injury that needs surgery, so he is out for the season, while his knee issue is non-surgical. Canales praised Bryce Young's ability to throw from different platforms and said the RPO game worked against Detroit because the Lions kept linebackers in the box, with Chuba Hubbard's downhill, decisive running a good fit for those concepts. He said Darren Waller has been a mismatch against linebackers and safeties, that there is still more to unlock, and that his presence helps 12 personnel and opens space for others. Jalen Coker looked great and had a nice day, but he is on a high practice load coming off quad and ankle injuries, and his status will be clarified tomorrow. Canales also praised rookie Zakee Wheatley's tackling and hands, and said he is always talking with the GM about possible roster moves ahead of the trade deadline. The Panthers play Philadelphia in Week 6.",
   "injuries": [
    {
     "player": "Taylor Moton",
     "status": "returning",
-    "detail": "Activated off IR; got significant reps in padded practice and looked good, but final status awaits the full injury report and his response to physical work.",
+    "detail": "Back at practice off IR with a significant number of reps in a padded practice; Sunday availability depends on how he responds, with the injury report due tomorrow.",
     "player_id": "00-0033284"
    },
    {
     "player": "Tershawn Wharton",
     "status": "returning",
-    "detail": "Returning from IR; got significant reps and looked good, but Canales has not said when he will be activated.",
+    "detail": "Practiced off IR with a significant number of reps; Sunday status undecided pending his response to the physical practice.",
     "player_id": ""
    },
    {
     "player": "Trevor Etienne",
     "status": "returning",
-    "detail": "Returning from IR; ran well and got plenty of reps, with status to be determined after how he responds to padded work.",
+    "detail": "Practiced off IR, took returns and looked good running; Sunday status undecided pending his response to the physical practice.",
     "player_id": "00-0040644"
+   },
+   {
+    "player": "Michael Jackson",
+    "status": "ir",
+    "detail": "Placed on IR with a shoulder injury that requires surgery, so he is out for the season; the knee issue is non-surgical rehab.",
+    "player_id": ""
    },
    {
     "player": "Jalen Coker",
     "status": "limited",
-    "detail": "Coming off a quad and ankle issue and carried a high practice load; looked great, and questionable/doubtful designation to come with the injury report.",
+    "detail": "Looked great in practice but is on a high load coming off quad and ankle injuries; specific game designation to come tomorrow.",
     "player_id": "00-0039491"
-   },
-   {
-    "player": "Unidentified player (caption: 'Kim Jackson')",
-    "status": "ir",
-    "detail": "Placed on IR; shoulder injury requires season-ending surgery, and a separate knee issue is non-surgical rehab. Name unclear in the auto-captions.",
-    "player_id": ""
    }
   ],
   "signals": [
-   {
-    "player": "Bryce Young",
-    "topic": "usage",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "RPO game and playmaking from multiple platforms are a key part of the offense going forward",
-    "note": "Canales highlighted RPO concepts as a regular, growing part of the offense, which supports Young's efficiency and rushing-free passing upside.",
-    "quote": "just got that kind of point guard ability",
-    "player_id": "00-0039150"
-   },
-   {
-    "player": "Chuba Hubbard",
-    "topic": "usage",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "his downhill running style makes him a strong fit for RPO concepts",
-    "note": "Canales said the run-game RPO structure fits Hubbard's style, which can add volume and efficiency to his rushing role.",
-    "quote": "He's aggressive. He's downhill decisive.",
-    "player_id": "00-0036555"
-   },
    {
     "player": "Darren Waller",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "creates horizontal and vertical stretch and favorable nickel and 12-personnel matchups",
-    "note": "Canales is pleased with his production and sees room for more uses, supporting his target share and touchdown potential.",
-    "quote": "upwards of 19 plus miles per hour in the route",
+    "claim": "Waller's role in the passing game will expand, with more ways to use him beyond what he has done so far.",
+    "note": "He is third on the team in receiving yards and tied for the lead in receiving touchdowns, and the coach says there is more to come, which supports his TE fantasy value.",
+    "quote": "",
     "player_id": "00-0031610"
+   },
+   {
+    "player": "Bryce Young",
+    "topic": "scheme",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "The RPO game will remain a part of the offense, with Young throwing accurately from varied platforms whenever the defense gives the space.",
+    "note": "His accuracy off-platform and RPO reads support his fantasy outlook, though the coach said RPOs depend on how the defense plays them.",
+    "quote": "",
+    "player_id": "00-0039150"
+   },
+   {
+    "player": "Chuba Hubbard",
+    "topic": "scheme",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Hubbard's downhill, decisive running style makes him a good fit for the RPO concepts the team uses.",
+    "note": "He benefits when defenses leave voids in the RPO game, which helps his rushing efficiency.",
+    "quote": "He's aggressive. He's downhill decisive. So it's a good combo.",
+    "player_id": "00-0036555"
    },
    {
     "player": "Jalen Coker",
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "status to be clarified in tomorrow's injury report after a high practice load",
-    "note": "Coker's practice performance was strong, but his quad and ankle designation determines his Sunday availability.",
-    "quote": "Coker looked great.",
+    "claim": "Coker's game status will be clarified on tomorrow's injury report after his high practice load coming off quad and ankle injuries.",
+    "note": "He looked good in practice, but he is managing quad and ankle issues, so check the injury report before setting lineups.",
+    "quote": "",
     "player_id": "00-0039491"
+   },
+   {
+    "player": "Trevor Etienne",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Etienne may or may not be ready for Sunday depending on how his body responds to the padded practice.",
+    "note": "He is returning from IR and looked good, but his activation is not confirmed, so his role is uncertain.",
+    "quote": "",
+    "player_id": "00-0040644"
    },
    {
     "player": "Zakee Wheatley",
     "topic": "role",
     "signal": "watch",
     "tone": "positive",
-    "claim": "strong open-field tackling and hands, with downfield playmaking as the next step",
-    "note": "Rookie defensive back's development is progressing, though his fantasy relevance remains limited to IDP or deep formats.",
-    "quote": "he's got magnificent hands",
-    "player_id": ""
-   },
-   {
-    "player": "Tershawn Wharton",
-    "topic": "depth_chart",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "not yet activated; timeline unclear",
-    "note": "Canales has not said when Wharton returns to the defensive line rotation, which affects defensive line depth.",
-    "quote": "Without knowing when Turk might be activated again",
+    "claim": "Wheatley is a safety-turned-defender with receiver background who may be used on special teams as a receiver, though the coach was non-committal.",
+    "note": "He is more of an IDP/dynasty note; the coach praised his hands and said the next step is making plays on the ball.",
+    "quote": "He's he's a special talent.",
     "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Post-bye schedule",
-    "detail": "Canales explained the week's plan: meetings Monday, a padded Tuesday, a recovery Wednesday, and a high-mileage Thursday, with rest used to help players recover legs."
+    "topic": "Practice schedule",
+    "detail": "The team practiced in pads on Tuesday after the bye, with Wednesday off and a high-mileage Thursday to follow, then the normal routine."
    },
    {
-    "topic": "Roster and trade talks",
-    "detail": "Canales said he and GM Dan Morey discuss roster moves all the time, and he may watch college players as potential additions, without giving specifics."
+    "topic": "Roster moves",
+    "detail": "Canales said he talks with the GM all the time about possible moves ahead of the trade deadline but would not discuss specific positions."
    },
    {
-    "topic": "Bryce Young attention",
-    "detail": "Canales said Young is not chasing outside attention and remains focused on preparation, with growth coming weekly as he learns defenses and teammates."
+    "topic": "Defensive line",
+    "detail": "Wharton brings a different style from Derrick Brown, Bobby Brown and Lee Hunter, with quickness and leverage at the line of scrimmage, and is disruptive against both the run and the pass."
    },
    {
-    "topic": "Eagles preparation",
-    "detail": "Canales said his study process starts with the broadcast of the upcoming opponent, which helps him gauge the story and confidence of the team."
+    "topic": "Opponent prep",
+    "detail": "Canales starts his weekly prep by watching the TV broadcast of the opponent, here the Eagles, to get a feel for their story and confidence."
    }
   ],
   "opponent": "Philadelphia Eagles"
@@ -140,50 +140,52 @@
   "after_week": 5,
   "coach": "Sean Payton",
   "words": 2824,
-  "model": "claude-haiku-5-5",
-  "headline": "Payton says Bo Nix must balance aggression with lower-risk throws, a watch item for his fantasy outlook against Seattle",
-  "summary": "Payton said the short week is being handled with walk-through reps on what the team has already practiced, and he noted that playing at home helps. He called Seattle's defense complete in every statistical area, with a strong front, excellent coverage fits, good run defense, and a effective pressure package under coordinator Mike Macdonald. On quarterback play, he said Bo Nix and he are constantly working to make throws less risky through earlier progressions and first or second reads, while avoiding falling so far behind that the game forces a different style. He said the running game had more consistency in the last game, though rhythm depends on getting enough touches. He framed the defense's turnover success as purposeful coaching, citing late-game punch-outs and momentum swings. On end-of-game situations, he said the staff reviews league-wide examples each week and keeps reminding play-callers of clock and timeout scenarios. Asked about the crowd, he said the atmosphere has been fantastic and the team has stopped using crowd-noise tactics. He also acknowledged that Seattle's pressure looks on third down are a real issue that the team has to solve.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Payton gave no injury or depth-chart news on a short week before Thursday's home game vs. Seattle; he did praise the running game's late consistency and said Bo Nix is still working on risk and aggression.",
+  "summary": "Payton opened by noting a short week with two days of work, so installation will lean on walk-throughs and material the team has already practiced. He called Seattle's defense complete in every area, citing its front, coverage fits, run defense out of seven-and-a-half-man fronts, and pressure package, and he praised Mike Macdonald. He said the Broncos should expect a physical game against the defending Super Bowl champions and declined to share game-plan keys. On Bo Nix, he said they are trying to find cleaner first- and second-progression throws that lower the risk, while still allowing scrambling plays. He said he doesn't want to over-coach the position on game day, and that a balance of aggression and caution is the goal. He said the running game was more consistent late Sunday and that the team was able to get enough touches to find a rhythm. He added that Denver has been hit with a lot of pressure on third down, and that it will keep coming until they show they can beat it. He also called the home crowd noise fantastic, praised Sam Darnold's fit and improvement in Seattle, and spoke about the value of takeaways, including a punch-out by Talanoa Hufanga.",
   "injuries": [],
   "signals": [
    {
     "player": "Bo Nix",
-    "topic": "usage",
+    "topic": "scheme",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Nix will be steered toward quicker, lower-risk progression throws, with more aggression only when the game situation calls for it.",
-    "note": "A shift toward safer throws could limit explosive plays and passing-yardage upside, but it also suggests a more stable floor.",
-    "quote": "we're constantly grinding to come to calm it down",
+    "claim": "Offense will try to build more first- or second-read throws to cut Nix's risk-taking, while he keeps making off-script plays.",
+    "note": "The coaching staff is trying to tighten Nix's decision-making against a strong Seattle pressure defense, so his turnover risk and aggressiveness are worth watching.",
+    "quote": "we're constantly grinding to come to calm it down and, and, and create some matchups",
     "player_id": "00-0039732"
+   },
+   {
+    "player": "Talanoa Hufanga",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "Payton cited Hufanga's early-game punch-out as a purposeful, momentum-swinging takeaway, which is a plus for his IDP value.",
+    "quote": "It happened with Huff early in the game last week.",
+    "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Seattle defense",
-    "detail": "Payton praised Seattle's complete defense, including a strong front, excellent coverage fits, and a strong pressure package. He said defensive coordinator Mike Macdonald has built a talented unit quickly."
+    "topic": "Short week prep",
+    "detail": "The Broncos have two days of work before Thursday. Payton said they will lean on walk-throughs and previously practiced material, and he's glad the game is at home."
    },
    {
-    "topic": "Short week preparation",
-    "detail": "The team has two days of work before the game, mostly walk-through reps on previously practiced concepts. The game is at home, which Payton sees as helpful."
+    "topic": "Seattle defense",
+    "detail": "Payton called Seattle's defense complete, with a good front, strong coverage fits, a good run defense and a good pressure package. He credited Mike Macdonald for building it quickly."
    },
    {
     "topic": "Running game",
-    "detail": "Payton said the running game was more consistent last game, but rhythm depends on enough touches. He did not name a specific back."
-   },
-   {
-    "topic": "Turnovers and takeaways",
-    "detail": "Payton said forcing takeaways is purposeful coaching, including late-game punch-outs, and that the momentum swings are significant."
-   },
-   {
-    "topic": "Crowd noise and home field",
-    "detail": "Payton said the crowd has been fantastic and that the team has stopped the crowd-noise tactics, relying on the crowd being quiet when asked."
+    "detail": "Payton said the run game had more consistency late in Sunday's game and that a rhythm requires enough touches. He did not name a specific back or discuss roles."
    },
    {
     "topic": "Third-down pressure",
-    "detail": "Payton acknowledged Seattle's third-down pressure is a real issue, and said the team will keep facing these looks until it has ways to beat them."
+    "detail": "Payton acknowledged that Denver has faced heavy pressure looks on third down and said teams will keep sending it until the offense proves it can beat it."
    },
    {
-    "topic": "Sam Darnold",
-    "detail": "Payton praised Darnold's growth, calling his new situation career-changing and saying his confidence and decisiveness are much improved. Darnold is not on the Broncos roster, so this is context only."
+    "topic": "Crowd noise",
+    "detail": "Payton called the home crowd's atmosphere fantastic and noted that the crowd quiets down when asked."
    }
   ],
   "opponent": "Seattle Seahawks"
@@ -200,31 +202,48 @@
   "after_week": 5,
   "coach": "Sean McVay",
   "words": 1469,
-  "model": "claude-haiku-5-5",
-  "headline": "McVay says he regrets the third-and-five call and the kick instead of going for it, and no injuries were discussed in the 37-34 OT loss to Buffalo.",
-  "summary": "McVay said he was proud of the group's battle on both sides of the ball and in coverage units, but the kicking game, especially a PAT that wasn't close to good enough, cost the Rams the game. He took responsibility for the third-and-five play call, saying he wished he had called a better play and gone for it on third down instead of kicking. He said he would evaluate everything and review film on the penalties and pre-snap mistakes, which he said were a focus this week, though he didn't have a clear answer on why they persisted. He acknowledged the early kick coverage was poor but said the group fixed it afterward. McVay said he was very upset, said the team can't let this loss beat them twice, and said the team needs to regroup and reset. He ruled out going for two after the late touchdown.",
+  "model": "claude-sonnet-5-5",
+  "headline": "McVay owns a costly late-game decision after the 37-34 OT loss to Buffalo; Puka Nacua's 17-catch game shows he is the focal point of the offense, and there were no injury updates.",
+  "summary": "McVay was visibly frustrated after the overtime loss, saying he was proud of the team's fight but sick over how it ended. He blamed himself for kicking a field goal on a third-and-five situation instead of calling a better play and going for it. He said the kicking game, including the early kick coverage and the field goal, cost them. He could not explain why the pre-snap penalties persisted despite a week of emphasis and said he would review the film. He said he never considered a two-point try after the late regulation touchdown. Stafford, in the same session, said the team fought hard and scored plenty in the second half, but the penalties, the crowd noise and the short week made things hard. He praised Buffalo and Josh Allen's ability to make plays with his feet. Stafford singled out Puka Nacua's 17-catch night, saying he can access all areas of the field and is excellent on screens, over the middle and on the perimeter. No injuries were discussed.",
   "injuries": [],
-  "signals": [],
+  "signals": [
+   {
+    "player": "Puka Nacua",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Nacua remains the primary target who is used on screens, over the middle and on the perimeter",
+    "note": "A 17-catch game and Stafford's praise reinforce Nacua as a target hog and a weekly WR1, especially on a short week.",
+    "quote": "he can access all areas of the field",
+    "player_id": "00-0039075"
+   },
+   {
+    "player": "Matthew Stafford",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Stafford said crowd noise hurt pre-snap communication on the late quick-snap touchdown and that he can do a better job of cleaning up false starts",
+    "note": "Pre-snap penalties and noise were a recurring problem, which could hurt offensive rhythm in loud road environments.",
+    "quote": "obviously loud environment. I can do a better job of cleaning that up",
+    "player_id": "00-0026498"
+   }
+  ],
   "topics": [
    {
-    "topic": "Special teams and third-and-five decision",
-    "detail": "McVay blamed himself for the third-and-five call and the decision to kick the PAT rather than go for it, and said he would evaluate everything."
+    "topic": "Late-game decisions",
+    "detail": "McVay took the blame for kicking a field goal rather than going for it on third-and-five, and said he did not consider a two-point try after the late regulation touchdown. Stafford said they quick-snapped near the goal line, trusting their guys when they had Buffalo reeling."
    },
    {
-    "topic": "Penalties and pre-snap mistakes",
-    "detail": "McVay said he needed to review the penalties and pre-snap issues and admitted he had no clear explanation, a recurring problem he said he can do better at helping players clean up."
+    "topic": "Penalties and discipline",
+    "detail": "McVay could not explain why the pre-snap issues continued despite the emphasis during the week and said he would study the film. Stafford pointed to the loud environment and false starts."
    },
    {
-    "topic": "Kick coverage",
-    "detail": "McVay said the opening kick coverage was not good, but it was fixed, and there were some positives from the coverage unit."
+    "topic": "Special teams",
+    "detail": "McVay said the kick coverage start and the field goal were not good enough, though he felt the coverage got cleaned up and he saw some positives."
    },
    {
-    "topic": "Final drive",
-    "detail": "Stafford said the final drive was about getting close for a field goal or making a play on a run, and that the team wanted to be smart with the ball. Stafford also said the team didn't use a timeout on the goal-line play, instead trusting the players to run the play quickly."
-   },
-   {
-    "topic": "Puka Nacua production",
-    "detail": "Stafford, not McVay, praised Puka Nacua after a question about his 17 catches, saying he can access all areas of the field and is strong in the screen game and on the perimeter."
+    "topic": "Short week and mindset",
+    "detail": "Both McVay and Stafford said they must reset quickly on a short week and avoid letting the loss beat them twice."
    }
   ],
   "opponent": ""

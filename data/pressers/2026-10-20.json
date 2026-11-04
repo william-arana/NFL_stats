@@ -11,37 +11,45 @@
   "after_week": 6,
   "coach": "Ben Johnson",
   "words": 1864,
-  "model": "claude-haiku-5-5",
-  "headline": "Johnson previews a short-week Thursday game vs. New England and praises Caleb Williams' Sunday performance; no injury news given.",
-  "summary": "Johnson opened by saying the team is installing the game plan for a short week and a Thursday game against New England, which he called a physical, well-coached opponent led by a coach-of-the-year head coach. On Caleb Williams, he dismissed the idea that Williams had improved by sitting or watching from the sideline, saying the same growth was visible in camp, and he said the key is stringing good performances together. He described New England's defense as talented up front, especially on the inside, with strong linebackers and edge players, and noted Kevin Byard's fit in their scheme and Christian Gonzalez's unclear alignment. On the offense, he said Drake Maye combines an elite deep ball with running ability, and that Josh McDaniels keeps the offense putting up points. He credited Dennis Allen's defensive pressure package, especially on third down, and said players understand the system better in year two. On special teams and the overall Sunday win, he stressed that swarming, ball security, and takeaways must become a weekly standard rather than a one-week spike. He closed by saying the team must play clean, after a high-penalty game last week, to beat a good opponent on a short week.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Short-week prep for Thursday vs. New England; Johnson gave no injury or role updates, only that Caleb Williams needs to stack strong performances.",
+  "summary": "Johnson opened by saying the Bears are finalizing a game plan for a Thursday matchup against a New England team he respects, citing Mike Vrabel's coaching and the team's physical, smart style. He said Caleb Williams had a good performance Sunday, but he played down the idea that sitting out helped him grow, noting similar traits showed up in camp. His message for Williams and the rest of the team is to string good performances together back to back. He described New England's defense as talented and hard to move on the interior, with strong linebackers and edge players who will test the Bears' tackles one-on-one. He also praised Kevin Byard and said the staff is unsure where Christian Gonzalez will line up. On offense, he called Drake Maye a dangerous mix of elite deep-ball throwing and running ability, and said the Patriots' offense has been explosive during a three-game win streak. He credited Dennis Allen's defense for playing faster and tighter in coverage in year two of the system, and said the special teams and defense were swarming and protective of the ball. He stressed that the team must play clean on the short week, because last week's high penalty count would hurt against a good opponent. He gave no injury updates or specific depth chart changes.",
   "injuries": [],
   "signals": [
    {
     "player": "Caleb Williams",
-    "topic": "usage",
-    "signal": "up",
+    "topic": "other",
+    "signal": "watch",
     "tone": "positive",
-    "claim": "Williams put together a good performance Sunday and the team wants to string consistent performances together",
-    "note": "Coach praised his recent play and downplayed any idea that his development came from sitting out, so the current form looks secure heading into a short-week game.",
-    "quote": "he put together a good performance and the key with him",
+    "claim": "",
+    "note": "Johnson called Williams' Sunday performance good but wants consistency, with no sign of a change in his role or workload.",
+    "quote": "",
     "player_id": "00-0039918"
    }
   ],
   "topics": [
    {
-    "topic": "Defense / Dennis Allen",
-    "detail": "Johnson credited coordinator Dennis Allen's third-down pressure package and said players understand the system better this year, with more tight coverage and less room for the quarterback to escape."
+    "topic": "Opponent: New England defense",
+    "detail": "Johnson called the Patriots strong up the middle, with high-level linebackers and good edge players who will test the Bears' tackles one-on-one. He praised Kevin Byard's fit and said it's unclear where Christian Gonzalez will line up."
    },
    {
-    "topic": "Special teams and team identity",
-    "detail": "Johnson highlighted nine players to the ball on several special-teams plays and wants swarming, ball security, and takeaways every week, not just a one-game effort."
+    "topic": "Opponent: New England offense",
+    "detail": "Drake Maye is an elite deep thrower who can also hurt teams with his legs. The Patriots have won three straight with many explosive plays, and Josh McDaniels does a good job of putting players in the right spots even with offensive line injuries."
    },
    {
-    "topic": "New England preview",
-    "detail": "Johnson called New England's front seven difficult to move, with a challenge for the tackles, and said Drake Maye and Josh McDaniels' offense are scoring in bunches on a three-game winning streak."
+    "topic": "Bears defense",
+    "detail": "Johnson said Dennis Allen's pressure package, especially on third down, is working. He sees players who understand the scheme better, play faster and cover tighter in year two, and he said that leaves less room for quarterbacks to escape."
+   },
+   {
+    "topic": "Short week and discipline",
+    "detail": "With a Thursday game, Johnson plans to streamline the game plan and have players play fast and clean. He called last week's penalty total a concern and said the team has to keep up the same relentless effort."
+   },
+   {
+    "topic": "Depth and next-man-up",
+    "detail": "Johnson said backups across the offensive line, receivers, defensive backs and pass rushers get coached up and must be ready. He expressed confidence in them but named no specific players."
    }
   ],
-  "opponent": "New England"
+  "opponent": "New England Patriots"
  },
  {
   "id": "DET:campbell-on-week-7-preparation",
@@ -55,75 +63,81 @@
   "after_week": 5,
   "coach": "Dan Campbell",
   "words": 2453,
-  "model": "claude-haiku-5-5",
-  "headline": "Brian Branch is returning to the lineup, and Campbell says Keith Abney will keep playing, so the safety depth chart is set to shift.",
-  "summary": "Campbell called Green Bay a very good, playing-well-right-now team, citing their plus-six turnover margin, their opportunistic defense, and Jordan Love as the driver of the offense. He flagged Matthew Golden and Christian Watson as dangerous deep threats, with about half of their deep targets resulting in either DPI or a catch. He said the Packers will lean on the run game, expects Josh Jacobs back, and described Love's ability to extend plays as the key threat his front has to limit. On the Packers' coaching, he said they will likely keep their core concepts and just add wrinkles. Campbell said Skyler Gill-Howard's edge rush was a one-off he didn't expect to see much of going forward, though he praised his versatility and professionalism. He said division games matter a lot, and that this one is the first divisional game at home this season. On the safety spot, he said Brian Branch is returning, that Chuck Clark has been steady, and that Keith Abney is worth continuing to invest in. He said Branch's versatility lets him play high or underneath and gives the staff flexibility with the other safety. He also gave an update on the player referred to as Kirby, saying he is doing well and is in a good headspace, but he gave no timetable.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Brian Branch is returning at safety for Week 7 vs. GB, with Chuck Clark and Keith Abney competing to play next to him. Gill-Howard won't see a heavy edge role.",
+  "summary": "Campbell spent most of the session praising the Packers, who are on a hot streak with a plus-6 turnover margin over the last two games and seven takeaways. He called Jordan Love the 'secret sauce' and said the Love-Watson-Golden trio is a dangerous deep threat. He said roughly half of their deep shots end in a catch or a pass-interference call. He expects the Packers to lean on the run and anticipates Jacobs will be back. He wants the Lions' front to get pressure but stay disciplined, because Love is most dangerous when he extends plays. Campbell likes the matchup with the current Lions front better than in past meetings. He said Skyler Gill-Howard's edge rush was a one-off curveball born of a thin rotation, and he doesn't expect a heavy dose of it. He confirmed Brian Branch is coming back, said Chuck Clark has been steady and Keith Abney will play, and said Branch's versatility lets whoever plays next to him do their job. On 'Kirby' (apparently Kerby Joseph), he gave no timetable and said only that he's in a good head space and it's day to day.",
   "injuries": [
    {
     "player": "Brian Branch",
     "status": "returning",
-    "detail": "Campbell said Branch is coming back, which creates a decision at the other safety spot.",
+    "detail": "Campbell said he is coming back and referred to 'getting BB' back at safety for the Packers game.",
+    "player_id": ""
+   },
+   {
+    "player": "Kerby Joseph",
+    "status": "unclear",
+    "detail": "Asked about 'Kirby' (likely Kerby Joseph, not on the provided roster). Campbell said he's doing well and in a good head space, but gave no timetable and is taking it one day at a time.",
     "player_id": ""
    }
   ],
   "signals": [
    {
     "player": "Brian Branch",
-    "topic": "injury",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Branch is returning to the lineup for Week 7 and gives the defense flexibility at safety.",
-    "note": "A return for a versatile safety adds a usable IDP and defensive piece back to the lineup.",
-    "quote": "Here's what's great about getting BB.",
-    "player_id": ""
-   },
-   {
-    "player": "Keith Abney",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Abney will play for Detroit and is worth continuing to invest in.",
-    "note": "Campbell's endorsement suggests Abney could have a meaningful role in the safety rotation, though Branch's return may cut into it.",
-    "quote": "Abney is is worth continuing to invest in.",
+    "claim": "Will return to the safety rotation this week and play both deep (top-down) and underneath roles.",
+    "note": "His return should lift the Lions' defensive back usage and gives IDP managers a versatile safety back in the lineup.",
+    "quote": "Here's what's great about getting BB. BB gives you the flexibility",
     "player_id": ""
    },
    {
     "player": "Chuck Clark",
-    "topic": "role",
+    "topic": "depth_chart",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Clark will be where he is supposed to be and remains a steady veteran in the safety rotation.",
-    "note": "Clark's role depends on how the safety snaps split once Branch returns.",
-    "quote": "Chuck has been really steady for us, man.",
+    "claim": "Will be part of the safety group alongside Branch and could start at the other safety spot.",
+    "note": "Campbell praised him as a steady veteran, but he didn't commit to a starter next to Branch.",
+    "quote": "Chuck has been really steady for us, man. He's smart.",
+    "player_id": ""
+   },
+   {
+    "player": "Keith Abney",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will play for the Lions at safety and continues to be invested in.",
+    "note": "Abney has a defined role in the safety rotation, which matters in deeper IDP leagues.",
+    "quote": "Abney is is worth continuing to invest in. He's going to play for us.",
     "player_id": ""
    },
    {
     "player": "Skyler Gill-Howard",
     "topic": "usage",
     "signal": "down",
-    "tone": "neutral",
-    "claim": "Gill-Howard will not see a heavy dose of edge rushing going forward.",
-    "note": "His recent edge work was described as a curveball, so his rush snaps are unlikely to grow.",
+    "tone": "hedged",
+    "claim": "Will not get a heavy dose of snaps rushing off the edge.",
+    "note": "His edge rush was a situational curveball, so don't expect a bigger pass-rush role from it.",
     "quote": "I don't think you're going to see some heavy dose of him out there.",
     "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Green Bay Packers offense",
-    "detail": "Campbell expects Love, Golden and Watson to create big plays, and says the Packers will look to establish the run with Josh Jacobs, who is expected back."
+    "topic": "Packers offense",
+    "detail": "Campbell called Love the 'secret sauce' and the Love-Watson-Golden group dangerous down the field. He said about 50% of their deep shots end in a catch or DPI. He expects Jacobs back and a commitment to the run, with Kraft playing well after injury."
    },
    {
-    "topic": "Green Bay Packers defense",
-    "detail": "Campbell said the Packers' defense has been opportunistic and disguises well, with seven takeaways over the last two games, and Detroit's staff is reviewing past games for clues on how they may attack."
+    "topic": "Packers defense",
+    "detail": "He described a disguise-heavy, opportunistic unit under Gannon with seven takeaways over the last two weeks. He also credited improved offensive line play and strong special teams."
    },
    {
-    "topic": "Division importance",
-    "detail": "Campbell emphasized the importance of division games, noting Detroit went 2-4 in division last year and that this is the first divisional home game this season."
+    "topic": "Pass rush plan",
+    "detail": "Love is slippery and most dangerous when he buys time, so the Lions need to get to him while staying disciplined. Campbell said he likes the Lions' chances better with their current front."
    },
    {
-    "topic": "Kirby update",
-    "detail": "Campbell said the player referred to as Kirby is doing well, gave no return timetable, and was not identifiable on the provided roster."
+    "topic": "Division games",
+    "detail": "Campbell stressed that division games count as 'a game and a half' after the Lions went 2-4 in the division last year. He declined to lean into the rivalry and said he respects the Packers."
    }
   ],
   "opponent": "Green Bay Packers"
@@ -137,130 +151,142 @@
   "duration": 603,
   "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/49ers/xzrplgy184zcgjlyf3hz.jpg",
   "kind": "day_after",
-  "after_week": 7,
+  "after_week": 6,
   "coach": "Kyle Shanahan",
   "words": 2434,
-  "model": "claude-haiku-5-5",
-  "headline": "Mike Evans (Achilles tendinitis) is questionable after leaving early, Demarcus Robinson won't play this week, and Romello Height and Ashtyn Davis earned bigger roles in the win.",
-  "summary": "Shanahan said Mike Evans's Achilles tendinitis, which had bothered him all week, flared up during the game and kept him out after the first half. He described it as soreness rather than something needing more testing, and said Evans felt confident enough to play but the coach knew he might not last. Shanahan was frustrated by three-and-outs and penalties that stalled the offense in the second half, while praising the defense for holding on despite losing Upton Stout and Luke Gifford. He said Romello Height had a big impact, and Ashtyn Davis stepped in at corner and played pivotal snaps in the fourth quarter. On Christian McCaffrey, he said the team used him in the slot and at receiver to mix up receiver options. He said Demarcus Robinson won't be ready this week, and that a Deebo Samuel return is possible around the bye week. He also said a receiver returning from a long injury is expected back soon and the team has enough depth for now. Shanahan closed by saying he was proud of the team's competitive stamina in finishing the 6-0 start.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Mike Evans' Achilles tendinitis flared up and knocked him out after the first half. Shanahan hopes he plays next week but admits he may not, and Demarcus Robinson won't be ready this week.",
+  "summary": "Shanahan praised the team's competitive stamina in the 6-0 win over Washington, even though the offense went three-and-out on its last three drives and the defense had to close the game out. Mike Evans played after missing practice all week because of Achilles tendinitis, but it acted up too much and he left at halftime. Shanahan says it isn't expected to be long-term and no more testing is planned, but Evans is week to week and the team may rest him until after the bye if needed. Luke Gifford (groin) and Upton Stout (shoulder) also left and didn't return. That pushed Jalen Graham into more base-defense snaps and Ashtyn Davis into a key role in the fourth quarter. Demarcus Robinson isn't expected back this week, and Shanahan said Deebo Samuel Sr. is likely to return after the bye. A practice-squad receiver was elevated because the group is thin. Shanahan also praised Malik Mustapha and Romello Height, and said a bad punt-return decision will be reviewed.",
   "injuries": [
    {
     "player": "Mike Evans",
     "status": "questionable",
-    "detail": "Achilles tendinitis that flared up during the game; left and did not return. Coach hopes he recovers during the week and could play next week, with the bye week as a fallback.",
+    "detail": "Achilles tendinitis that kept him out of practice all week; he left in the second half. Shanahan hopes he can play next week but said the team may wait until after the bye.",
     "player_id": "00-0031408"
-   },
-   {
-    "player": "Demarcus Robinson",
-    "status": "out",
-    "detail": "Shanahan does not expect him to be ready this week.",
-    "player_id": "00-0032775"
    },
    {
     "player": "Luke Gifford",
     "status": "unclear",
-    "detail": "Groin injury; did not return after leaving the game.",
+    "detail": "Left with a groin injury and didn't return. No further update was given.",
     "player_id": ""
    },
    {
     "player": "Upton Stout",
     "status": "unclear",
-    "detail": "Shoulder injury; did not return after leaving the game.",
+    "detail": "Left with a shoulder injury and didn't return. No further update was given.",
     "player_id": ""
+   },
+   {
+    "player": "Demarcus Robinson",
+    "status": "doubtful",
+    "detail": "Shanahan said he doesn't think Robinson will be ready this week.",
+    "player_id": "00-0032775"
    },
    {
     "player": "Deebo Samuel Sr.",
     "status": "returning",
-    "detail": "Shanahan said a return is most likely after the bye week.",
+    "detail": "Shanahan wouldn't be surprised if he is back, most likely after the bye week.",
     "player_id": "00-0035719"
    }
   ],
   "signals": [
    {
-    "player": "Romello Height",
-    "topic": "usage",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Had a big impact on defense and is helping the team finish games",
-    "note": "Shanahan praised his play and he looked like he made a number of plays, supporting a larger defensive role.",
-    "quote": "he looked like he had a big impact.",
-    "player_id": ""
+    "player": "Mike Evans",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Evans may miss next week's game; the team hopes he plays but could hold him out until after the bye.",
+    "note": "His Achilles tendinitis already cost him half a game, so his availability next week is uncertain.",
+    "quote": "hopefully he'll be able to play next week. But if not",
+    "player_id": "00-0031408"
    },
    {
     "player": "Ashtyn Davis",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Stepped in at corner and played pivotal snaps in the fourth quarter",
-    "note": "Filling in for injured defenders gave him a bigger role on defense, and the coach was pleased with his performance.",
-    "quote": "I thought he did a really good job at it.",
+    "claim": "Davis stepped into a bigger defensive role, playing nickel in three-safety looks, after Stout left.",
+    "note": "He could keep a role in the secondary, which matters for IDP leagues, if Stout's shoulder keeps him out.",
+    "quote": "He was the next man up in this situation",
     "player_id": ""
    },
    {
-    "player": "Christian McCaffrey",
+    "player": "Jalen Graham",
     "topic": "usage",
     "signal": "up",
-    "tone": "positive",
-    "claim": "Used in the slot and at receiver, mixing in run and pass plays",
-    "note": "Versatile usage gives him more touches and routes while the receiver room is thin.",
-    "quote": "he blocked very good as a receiver and Caitlyn ran the ball well.",
-    "player_id": "00-0033280"
-   },
-   {
-    "player": "Mike Evans",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "Hopes he recovers during the week and is able to play next week",
-    "note": "Achilles tendinitis flare-up left him questionable, which affects his availability and the receiver rotation.",
-    "quote": "",
-    "player_id": "00-0031408"
+    "tone": "neutral",
+    "claim": "Graham played extra snaps in base defense after the linebacker injuries.",
+    "note": "His snaps depend on how long Gifford is out, and he is an IDP watch.",
+    "quote": "Jalen Graham having to get in there",
+    "player_id": ""
    },
    {
     "player": "Malik Mustapha",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Has made big game-changing plays in each of the last two weeks",
-    "note": "Making high-impact plays suggests a growing role on defense.",
+    "claim": "Mustapha keeps making game-changing plays and stays in a prominent defensive role.",
+    "note": "Back-to-back big plays and a positive tone from Shanahan make him an IDP safety to monitor.",
     "quote": "He's been awesome every time he's gone out there.",
     "player_id": ""
    },
    {
-    "player": "Jalen Graham",
+    "player": "Romello Height",
     "topic": "role",
     "signal": "up",
-    "tone": "neutral",
-    "claim": "Played a lot of base defense after injuries to other defenders",
-    "note": "Extra snaps in base packages after injuries could mean a bigger defensive role going forward.",
-    "quote": "Played a lot in the base stuff.",
+    "tone": "positive",
+    "claim": "Height has had a big impact in the late-game pass rush for several weeks.",
+    "note": "Shanahan likes what he's seen, which supports continued edge snaps for IDP purposes.",
+    "quote": "it seemed like he was all over the place",
     "player_id": ""
+   },
+   {
+    "player": "Demarcus Robinson",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Robinson will not be ready to play this week.",
+    "note": "The WR group stays thin, which leaves more targets for whoever is healthy.",
+    "quote": "I don't think he'll be ready this week.",
+    "player_id": "00-0032775"
+   },
+   {
+    "player": "Deebo Samuel Sr.",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Samuel is likely to return after the bye week.",
+    "note": "He is a potential return to the receiver group, but not before the bye.",
+    "quote": "I don't be surprised if we got Deebo",
+    "player_id": "00-0035719"
+   },
+   {
+    "player": "Jacob Cowing",
+    "topic": "role",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "The punt-return job will be evaluated after a bad decision on one punt.",
+    "note": "A minor role risk for his return value.",
+    "quote": "that was a bad decision by him.",
+    "player_id": "00-0039365"
    }
   ],
   "topics": [
    {
-    "topic": "Defense",
-    "detail": "Shanahan praised the young defense for energy and for holding on despite penalties and injuries, and said the older players set the standard."
+    "topic": "Offensive struggles",
+    "detail": "After a strong opening drive of the second half, the next three drives ended in three-and-outs. Two sacks and a hot route that got caught up were the main problems. Shanahan said he should have called a run on one second-and-four."
    },
    {
-    "topic": "Offense",
-    "detail": "Shanahan was frustrated with three-and-outs and penalties that stalled drives in the second half, though he noted the offense had good early drives."
+    "topic": "Receiver depth",
+    "detail": "Shanahan said the receiver group is short, a practice-squad receiver was elevated, and the team has enough in the building. Shanahan also mentioned a receiver named Christian who had two good practices and was a close call to play; he is a possibility next week. Another player named Christian was used in the slot and at wideout, and blocked well on run plays."
    },
    {
     "topic": "Special teams",
-    "detail": "Shanahan said the punt returner made a bad decision on one return and needs to be evaluated this week."
+    "detail": "Shanahan criticized the kicker for another missed extra point and a punt returner for a bad decision to field a punt."
    },
    {
-    "topic": "Kicking",
-    "detail": "Shanahan said the kicker missed another extra point and that must improve, since the miss could have been costly."
-   },
-   {
-    "topic": "Receiver",
-    "detail": "A receiver who had two practices this week was discussed as a possibility for next week, but the team decided to wait another week."
-   },
-   {
-    "topic": "Defensive line",
-    "detail": "A defensive lineman returned from a long injury recovery with his first sack in his second game back, and Shanahan is glad to see him healthy."
+    "topic": "Defensive line return",
+    "detail": "A defensive lineman in his second game back from a long injury recovery got a sack. Shanahan called his return huge and hopes he avoids setbacks."
    }
   ],
   "opponent": ""
@@ -277,67 +303,91 @@
   "after_week": 6,
   "coach": "Dan Quinn",
   "words": 3684,
-  "model": "claude-haiku-5-5",
-  "headline": "Terry McLaurin is out for the season with a torn patellar tendon, and Dan Quinn expects Van Jefferson and other receivers to take on bigger roles.",
-  "summary": "Quinn opened by saying captain Terry McLaurin tore his patellar tendon, will have surgery, and is out for the rest of the season, which he called a gut punch. He described the team's first six games as adversity-filled and said the reset and response are what he is focused on during the bye. Quinn praised the second half against San Francisco as much stronger than the first half and said getting the whole game in sync is the key. He said the offensive line performance fell below the standard he expects and that the staff will keep searching for the right interior combination. He said the bye will be used for a self-scout to streamline the playbook into a smaller set of things the team can execute, with tweaks rather than a new system. On defense, he wants better pre-snap communication and fewer explosive pass plays. On Jayden Daniels, he said the offense will be better when Daniels is fully back and expects more keepers and out-of-pocket plays off play action. He said injury updates on other players, including Javon and Treylon Burks, would come Monday after more imaging.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Terry McLaurin is out for the season with a torn patellar tendon, so Van Jefferson and other deep-speed WRs should see bigger roles after the bye.",
+  "summary": "Dan Quinn opened by announcing that Terry McLaurin has a torn patellar tendon, will have surgery and will miss the rest of the season. Quinn called it a gut punch for a captain and leader. He said the receiver room is deep and the team will lean on several players to fill McLaurin's different roles. He named Van Jefferson (excellent camp) and a receiver who sounds like Jaylin Lane (deep plays), and said Treylon Burks has some of the same traits. McLaurin's superpower is contested catches, which others only partly replace. Imaging on other injuries, including Burks, is still ongoing, and Quinn will give updates Monday. After the loss to San Francisco and a 1-5 style start of adversity, the bye week is a self-scout. Quinn expects smaller tweaks, a more streamlined and decisive offense and defense, and no new system, and he warned that players who don't execute could lose reps. He was critical of the offensive line's performance and said the team is still searching for the right interior combination. On Jayden Daniels, he wants more scramble-to-throw plays, more keepers off play action, and better staying through his reads, while praising his elite throws.",
   "injuries": [
    {
     "player": "Terry McLaurin",
-    "status": "out",
-    "detail": "Torn patellar tendon; will have surgery and is out for the rest of the season.",
+    "status": "ir",
+    "detail": "Torn patellar tendon, surgery planned, out for the rest of the season.",
     "player_id": "00-0035659"
    },
    {
     "player": "Treylon Burks",
     "status": "unclear",
-    "detail": "Asked about his injury status; Quinn did not have an update and said more information would come Monday.",
+    "detail": "Quinn had no update. Imaging is still ongoing, with more news expected Monday.",
     "player_id": "00-0037742"
-   },
-   {
-    "player": "Jayden Daniels",
-    "status": "returning",
-    "detail": "Quinn said the offense will get more into its flow as Daniels gets back, implying he is still working back to full health.",
-    "player_id": "00-0039910"
    }
   ],
   "signals": [
+   {
+    "player": "Terry McLaurin",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "McLaurin will have surgery and miss the rest of the 2026 season.",
+    "note": "Season-ending loss of the team's top receiver. Drop him in redraft and expect target redistribution.",
+    "quote": "he's going to miss the rest of the season",
+    "player_id": "00-0035659"
+   },
    {
     "player": "Van Jefferson",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Will likely be elevated into a bigger role at receiver after McLaurin's injury, as he has already been once this season.",
-    "note": "With McLaurin out, Jefferson is a leading candidate to pick up targets and deep-threat snaps.",
-    "quote": "",
+    "claim": "Jefferson will be elevated into a bigger receiver role with McLaurin out.",
+    "note": "He is the first receiver Quinn named as a likely beneficiary, which makes him a waiver add.",
+    "quote": "I agree that he had an excellent camp",
     "player_id": "00-0036415"
    },
    {
-    "player": "Jayden Daniels",
-    "topic": "usage",
+    "player": "Jaylin Lane",
+    "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Expects Daniels to run more keepers and out-of-pocket plays off the play-action game as he develops.",
-    "note": "More designed runs and scramble opportunities would boost Daniels' rushing floor and fantasy ceiling.",
-    "quote": "",
+    "claim": "Lane (likely the 'Jalen' Quinn named) may take on deep-ball duties that McLaurin handled.",
+    "note": "Deep-play speed could earn him more snaps, but the name is a caption guess and the role is not defined.",
+    "quote": "You feel some of the deep plays with Jalen.",
+    "player_id": "00-0040164"
+   },
+   {
+    "player": "Treylon Burks",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Burks could take on some of McLaurin's role, depending on his health.",
+    "note": "Quinn named him among the deep-speed options, but his injury status is unresolved.",
+    "quote": "Burks has some of that.",
+    "player_id": "00-0037742"
+   },
+   {
+    "player": "Jayden Daniels",
+    "topic": "scheme",
+    "signal": "up",
+    "tone": "hedged",
+    "claim": "Daniels will keep running scrambles and play-action keepers, and the team will emphasize out-of-pocket plays.",
+    "note": "His rushing upside stays in the plan, though Quinn wants cleaner reads and more consistency.",
+    "quote": "I'm expecting, you know, his out of pocket, you know, plays to continue",
     "player_id": "00-0039910"
    }
   ],
   "topics": [
    {
+    "topic": "Bye-week self-scout",
+    "detail": "Quinn expects smaller tweaks, not a new system or new plays. The goal is a more streamlined, decisive and precise execution, and he said there will be 'no more trial' at this point."
+   },
+   {
     "topic": "Offensive line",
-    "detail": "Quinn said the line's performance was below the team's standard, especially in pass protection, and that he will keep trying combinations on the interior."
+    "detail": "Quinn said the line's performance fell below the team's standard in both pass and run blocking. He will keep looking for the right interior combination."
    },
    {
     "topic": "Defense",
-    "detail": "Quinn wants better pre-snap urgency and call communication and fewer explosive pass plays allowed, especially on first and second down."
+    "detail": "He wants better pre-snap communication and urgency, and fewer explosive plays allowed in the pass game. He said players who don't meet the standard could lose reps."
    },
    {
-    "topic": "Bye week and self-scout",
-    "detail": "Changes are expected to be smaller tweaks and streamlining rather than a new system or new plays, with a focus on being more decisive and precise."
-   },
-   {
-    "topic": "Turnovers",
-    "detail": "Quinn said the team's plus-six turnover differential is not yet translating to wins and that the complementary football needs to be sharper."
+    "topic": "Team outlook",
+    "detail": "Quinn said the team has a plus turnover margin (+6) but isn't converting it into wins. He cited a slow start against San Francisco and a stronger second half, and a chance to win the division."
    }
   ],
   "opponent": ""

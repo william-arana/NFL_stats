@@ -11,66 +11,74 @@
   "after_week": 7,
   "coach": "Dave Canales",
   "words": 2247,
-  "model": "claude-haiku-5-5",
-  "headline": "Damien Lewis and Akayleb Evans are day-to-day for Thursday at Green Bay; if Evans can't go, Marco Wilson is the likely replacement at corner.",
-  "summary": "Canales framed the short week as a challenge: several players are day-to-day, and the staff will test them Tuesday to decide who can play Thursday night at Lambeau. He said the coaches are weighing who fits the game plan best, not just who is the logical next man up. Offensive line and cornerback depth both came up, with Canales naming Marco Wilson as a quicker, athletic option at corner if Evans is out. On the locker room, he described focus and intentionality after the loss, and stressed fundamentals, turnovers, and special teams as the reset. He expects the Packers to lean on the run after Carolina's recent run defense performance and says Jordan Love will still push the ball downfield. He called the 2025 win in Green Bay a useful template but said this is a different team. He also noted Josh Jacobs' return and said Carolina must tackle well and maintain leverage against him.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Panthers enter a short week against the Packers with Damien Lewis and a corner (likely Akayleb Evans, 'AK') day to day; no one is ruled out yet, and testing on Tuesday decides availability.",
+  "summary": "Canales framed Thursday night at Lambeau as another championship opportunity. He praised the Packers as an explosive offense that also leads the NFL in turnovers. He said several injured players are day to day and that tomorrow brings heavy testing to see whether they can move and do their jobs. No one has been ruled out yet. Because of the injuries he is weighing backups by game-plan fit instead of picking the most obvious replacement. He named Jake Curhan and Corey Bullock as offensive line options, and Marco Wilson as a quicker corner option if AK can't go. The rest of the session was about refocusing after a bad loss: recapturing their process, fundamentals, and ball security. He also talked about stopping the run and tackling Josh Jacobs, who returns for Green Bay, and expects the Packers to run the ball after seeing the Panthers give up about 250 rushing yards. Carolina's own offensive plans got almost no discussion.",
   "injuries": [
    {
     "player": "Damien Lewis",
     "status": "questionable",
-    "detail": "Day-to-day; did not practice Monday and will be tested Tuesday before a decision on Thursday.",
+    "detail": "Did not practice Tuesday and is day to day. He will be tested tomorrow to see if he can move and do his job. Canales has not ruled anyone out.",
     "player_id": "00-0036417"
    },
    {
     "player": "Akayleb Evans",
     "status": "questionable",
-    "detail": "Day-to-day; did not practice Monday and will be tested Tuesday. Coach referred to him as an 'AK' corner who may not play, so depth at corner is in play.",
+    "detail": "Did not practice and is day to day. The coach refers to him as 'AK' and the transcript misspells him as 'Caleb Evans'. He will be tested tomorrow.",
     "player_id": ""
    }
   ],
   "signals": [
    {
-    "player": "Marco Wilson",
+    "player": "Jake Curhan",
     "topic": "depth_chart",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Could start at cornerback if Akayleb Evans can't play Thursday",
-    "note": "A starting job would give Wilson a larger snap share and more defensive stat opportunities.",
-    "quote": "Marco Wilson's a quicker athletic mover you know",
-    "player_id": ""
+    "claim": "Jake Curhan could step in on the offensive line if a starter can't go on Thursday.",
+    "note": "Offensive line depth is thin, and the run game's quality depends on who fills in for the injured linemen.",
+    "quote": "who's played quality ball for us and we've won games with Jake",
+    "player_id": "00-0036795"
    },
    {
-    "player": "Damien Lewis",
-    "topic": "injury",
+    "player": "Corey Bullock",
+    "topic": "depth_chart",
     "signal": "watch",
-    "tone": "hedged",
-    "claim": "Availability for Thursday to be determined by Tuesday testing",
-    "note": "Lewis's status is uncertain, so his role on the offensive line depends on the Tuesday test.",
-    "quote": "we need to know by tomorrow if guys can move around",
-    "player_id": "00-0036417"
+    "tone": "neutral",
+    "claim": "Corey Bullock is an offensive line option if a lineman is out Thursday.",
+    "note": "He is a fill-in candidate along the line, so Carolina's run-blocking could change if he plays.",
+    "quote": "",
+    "player_id": "00-0039242"
    },
    {
-    "player": "Akayleb Evans",
-    "topic": "injury",
+    "player": "Marco Wilson",
+    "topic": "depth_chart",
     "signal": "watch",
-    "tone": "hedged",
-    "claim": "Day-to-day with testing Tuesday; could miss Thursday's game",
-    "note": "If Evans sits, Carolina's cornerback group shifts and the replacement's role grows.",
-    "quote": "a lot of testing tomorrow because we need to know",
+    "tone": "neutral",
+    "claim": "Marco Wilson could start or take extra snaps at corner if Akayleb Evans can't play.",
+    "note": "He is a depth corner who could see a bigger role against Green Bay's pass-heavy offense.",
+    "quote": "Marco Wilson's a quicker athletic mover",
     "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Game plan and run game",
-    "detail": "Canales expects Green Bay to run often given Carolina's run defense results, and wants to establish the run to set up deep passes. He also emphasized tackling and leverage against Josh Jacobs."
+    "topic": "Packers run game",
+    "detail": "Josh Jacobs returns for Green Bay. Canales expects similar run schemes, stresses team tackling and leverage, and notes that Jacobs can also hurt them as a receiver out of the backfield."
    },
    {
-    "topic": "Locker room and short week",
-    "detail": "Canales described focus and intentionality after the loss and avoided calling the quick turnaround an emotional factor, while acknowledging the competitive fire on both sides."
+    "topic": "Defensive game plan",
+    "detail": "Carolina allowed about 250 rushing yards last game, and Canales expects Green Bay to try to run on them. He also expects Jordan Love to throw deep, since the Packers have the league's highest pass rate."
+   },
+   {
+    "topic": "Team mindset",
+    "detail": "The focus is on recapturing their process, fundamentals, ball security, alignments, and special teams coverage after a tough division loss. Canales said the team is 'humbled'."
+   },
+   {
+    "topic": "Short-week logistics",
+    "detail": "Day-to-day injured players will be tested tomorrow, and the team is preparing both the possible returners and the backups."
    }
   ],
-  "opponent": "Green Bay Packers (Thursday night at Lambeau Field)"
+  "opponent": "Green Bay Packers"
  },
  {
   "id": "GB:matt-lafleur-on-the-panthers-we-ve-got-a-great-challenge-ahead-of-us-oct-27-2026",
@@ -84,99 +92,163 @@
   "after_week": 7,
   "coach": "Matt LaFleur",
   "words": 3547,
-  "model": "claude-haiku-5-5",
-  "headline": "Zaire Franklin is out for Thursday's Carolina game, Sean Rhyan is likely headed to IR, and Savion Williams is earning a bigger role as a downfield weapon.",
-  "summary": "LaFleur said the Packers are working through injuries on a short week and that practices this week are mostly walk-throughs, with a short indy session planned. Zaire Franklin will not play Thursday. Sean Rhyan is likely heading to IR, though LaFleur said the team has more time before deciding. Travis Glover missed practice after a knee injury he suffered late in the last game, and LaFleur said he's hopeful for him. Josh Jacobs looked physical and tough in his return, but LaFleur acknowledged the run game has had breakdowns and said the problem falls on the whole unit. Kevin Zeitler is still ramping back up after missing the offseason and training camp, and he'll play when he's ready, with LaFleur saying he'd be ready if needed. LaFleur said Savion Williams has given the offense a spark, making key plays on third downs and playing as a physical presence. Kaleb Johnson's playing time depends on special teams and pass protection, not only his role as a backup. LaFleur described Carolina as a tough, well-coached defense, and said Bryce Young is playing well with plenty of weapons.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Josh Jacobs is working back from rust, Savion Williams is a rising downfield target, and the O-line is thin: Glover is hurt, Rhyan's IR status is undecided, and Zeitler is ready if needed for Thursday at Carolina.",
+  "summary": "LaFleur used a short-week Tuesday session to preview Thursday night's game against the Panthers. He praised John Williams for stepping in for the first time, but he wouldn't commit to Williams starting Thursday. Sean Rhyan's possible move to IR is undecided, and Travis Glover, who played every snap and hurt his knee, missed practice and is only 'hopeful' for Thursday. Kevin Zeitler is ready to play if needed, with no rush to force him in. Josh Jacobs was described as shaking off rust. LaFleur blamed the weak run numbers on the whole offense (play calls, leverage, bad looks) rather than on Jacobs. Savion Williams was singled out for providing a spark on third downs and was told to 'be the goon,' and Kaleb Johnson's game-day role is tied to special teams and pass protection. Zaire Franklin will miss another game. LaFleur was upbeat but guarded about the pass-rush unit and penalties, and about the Micah Parsons timeline ('there's a chance' he practices next week). He called Carolina a dangerous, motivated team led by a well-playing Bryce Young.",
   "injuries": [
    {
-    "player": "Zaire Franklin",
-    "status": "out",
-    "detail": "Will be out again for Thursday's game against Carolina.",
-    "player_id": ""
-   },
-   {
     "player": "Sean Rhyan",
-    "status": "ir",
-    "detail": "Likely headed to IR, though LaFleur said the team still has time to determine that.",
+    "status": "unclear",
+    "detail": "Reporter asked if he's headed to IR; LaFleur said there's still time before they decide.",
     "player_id": "00-0037076"
    },
    {
     "player": "Travis Glover",
-    "status": "unclear",
-    "detail": "Knee injury suffered in the last game; didn't practice this week. LaFleur is hopeful but didn't give a timeline.",
+    "status": "questionable",
+    "detail": "Knee injury discovered the morning after the game (he played every snap). Not able to practice Tuesday; LaFleur is hopeful for Thursday but still working through it.",
     "player_id": "00-0039819"
    },
    {
+    "player": "Zaire Franklin",
+    "status": "out",
+    "detail": "Will be out again on the short week.",
+    "player_id": ""
+   },
+   {
     "player": "Kevin Zeitler",
-    "status": "limited",
-    "detail": "Gradually working back after missing the offseason and camp; will play when ready, and the team feels confident he can go if needed.",
+    "status": "returning",
+    "detail": "Has not played yet this season after joining without an offseason or camp; gradually working back in and ready if needed.",
     "player_id": "00-0029592"
+   },
+   {
+    "player": "Micah Parsons",
+    "status": "unclear",
+    "detail": "Asked about him as 'Mica'. LaFleur hopes he starts practicing next week and said 'there's a chance,' but it is up to the medical staff.",
+    "player_id": ""
    }
   ],
   "signals": [
    {
-    "player": "Savion Williams",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Has given the offense a spark and is becoming a key downfield and third-down contributor",
-    "note": "His downfield production and physical play make him a viable target for the passing game.",
-    "quote": "I told him today I was like hey man you got to be the goon.",
-    "player_id": "00-0040009"
-   },
-   {
-    "player": "Kaleb Johnson",
-    "topic": "usage",
-    "signal": "down",
-    "tone": "hedged",
-    "claim": "Playing time depends on special teams contributions and pass protection, not just his backup role",
-    "note": "He hasn't earned a bigger role, so his fantasy value stays limited.",
-    "quote": "there's a lot of factors that go into whether or not you're suiting up",
-    "player_id": "00-0040142"
-   },
-   {
-    "player": "Josh Jacobs",
-    "topic": "role",
+    "player": "John Williams",
+    "topic": "depth_chart",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Physical in his return, but the run game has struggled and LaFleur is blaming the whole offense",
-    "note": "Jacobs is healthy and productive, but the rushing efficiency is a concern that could limit his volume.",
-    "quote": "I loved how he brought a lot of just physicality toughness.",
-    "player_id": "00-0035700"
-   },
-   {
-    "player": "Kevin Zeitler",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "Will play when he's ready; the team is confident he can play Thursday if needed",
-    "note": "His availability is uncertain, but he's a depth piece rather than a fantasy factor.",
-    "quote": "I think if we need him. Absolutely. I feel confident with him.",
-    "player_id": "00-0029592"
+    "claim": "",
+    "note": "Impressed in his first action, but LaFleur wouldn't confirm he starts Thursday; the line is still being sorted.",
+    "quote": "Pretty impressive to be able to go in there the first time",
+    "player_id": "00-0040023"
    },
    {
     "player": "Brandon Cisse",
     "topic": "role",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Praised for his mental toughness and resilience after a rookie penalty and a big play allowed",
-    "note": "LaFleur trusts him after a tough outing, which is relevant to his role in the secondary.",
-    "quote": "I think he's mentally tough. He's definitely wired the right way.",
+    "claim": "",
+    "note": "LaFleur backs the rookie CB after a tough penalty and says he has the mentality to bounce back; no role change implied.",
+    "quote": "He's definitely wired the right way.",
+    "player_id": ""
+   },
+   {
+    "player": "Sean Rhyan",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Rhyan's IR decision will be made in the coming days.",
+    "note": "Another interior O-line loss could affect the run game and pass protection.",
+    "quote": "we got some time yet before we determine that",
+    "player_id": "00-0037076"
+   },
+   {
+    "player": "Travis Glover",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Glover is hopeful to play Thursday after missing Tuesday's practice.",
+    "note": "A tackle injury on a short week threatens O-line stability for both the run and pass games.",
+    "quote": "certainly hopeful for him",
+    "player_id": "00-0039819"
+   },
+   {
+    "player": "Kevin Zeitler",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Zeitler will play Thursday if the team needs him.",
+    "note": "He's a ready fill-in for injured linemen and a possible lift for the offense.",
+    "quote": "I think if we need him. Absolutely. I feel confident with him.",
+    "player_id": "00-0029592"
+   },
+   {
+    "player": "Josh Jacobs",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Jacobs remains the lead back; touches may be play-dependent in his second game back.",
+    "note": "LaFleur praised his physicality and blamed the weak run numbers (11 carries) on the whole offense; the matchup against a Carolina defense that stops the run is a concern.",
+    "quote": "I loved how he brought a lot of just physicality toughness.",
+    "player_id": "00-0035700"
+   },
+   {
+    "player": "Kaleb Johnson",
+    "topic": "role",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Johnson's game-day opportunities depend on special teams contributions and pass protection.",
+    "note": "He's not the starter and has work to do to earn a role, so he's a low-confidence fantasy bench option.",
+    "quote": "making sure that we're, we're rock solid on some of the pass protection stuff",
+    "player_id": "00-0040142"
+   },
+   {
+    "player": "Savion Williams",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Williams will keep a physical downfield and third-down role in the passing game.",
+    "note": "He has made plays on multiple third downs the last two weeks; LaFleur wants more of his size and physicality.",
+    "quote": "He's a big guy that is physical and we need that from him.",
+    "player_id": "00-0040009"
+   },
+   {
+    "player": "Zaire Franklin",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Franklin will not play Thursday.",
+    "note": "The linebacker is unavailable on a short week.",
+    "quote": "No, he'll be out.",
+    "player_id": ""
+   },
+   {
+    "player": "Isaiah McDuffie",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "",
+    "note": "He wore the green dot (defensive play-caller) and LaFleur praised how he handled it.",
+    "quote": "I thought he did a really good job.",
     "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Opponent: Carolina",
-    "detail": "LaFleur expects a motivated Panthers team coming off a loss, noting Carolina beat Green Bay last year. He praised Bryce Young and the Panthers' playmakers and called the defense difficult to attack."
+    "topic": "Opponent: Panthers",
+    "detail": "Thursday night at Carolina. LaFleur called them a motivated, dangerous team coming off a turnover-filled loss. He noted Bryce Young is playing well, the Panthers have plenty of weapons and a good line, and their tough defense, run by Ejiro Evero, has been hit with injuries."
+   },
+   {
+    "topic": "Run game",
+    "detail": "LaFleur said run-game struggles fall on everyone: play calls, line play, tight ends and receivers. He cited breakdowns, missed targets and bad looks. Carolina's defense commits to stopping the run, so patience and consistency from all 11 are needed."
+   },
+   {
+    "topic": "Penalties and pass rush",
+    "detail": "LaFleur said the pass rush has had good moments but needs to grow. He stressed teaching a 'strike zone' to avoid roughing-the-passer penalties and praised Karl Brooks for avoiding landing on the QB with body weight."
    },
    {
     "topic": "Officiating",
-    "detail": "LaFleur said the team uses the league clip review process to learn and coach better, but he doesn't expect it to improve officiating much."
+    "detail": "LaFleur described how teams submit clips to the league office and get a yes/no response. He called officiating hard, wants consistency, and said it mostly helps with player education. He said he's moving on from the frustrations after Thursday's loss."
    },
    {
-    "topic": "Pass rush",
-    "detail": "LaFleur said the pass rush has had good moments but needs to improve, and he emphasized strike-zone technique to avoid roughing penalties."
+    "topic": "Trick play",
+    "detail": "The hook-and-ladder with Matthew Golden and MarShawn Lloyd didn't work as hoped, but it still gained positive yardage. LaFleur called it a play seen around the league in longer-yardage situations."
    }
   ],
   "opponent": "Carolina Panthers"
@@ -193,15 +265,21 @@
   "after_week": 7,
   "coach": "Nick Sirianni",
   "words": 2244,
-  "model": "claude-haiku-5-5",
-  "headline": "Saquon Barkley tweaked his back on an early 29-yard run and was on a pitch count, playing less than planned before exiting early in the second half.",
-  "summary": "Sirianni said the run defense gave up a lot of yards Monday night because of a mix of coaching, execution, getting off blocks, and missed tackles, and he credited the Cowboys for a good game. He said the team reviews every missed tackle and will rep those fixes in practice, and he took responsibility for providing the tools. On the lack of pass pressure, he described multiple contributing causes rather than one, and said the staff will look for common themes. On Saquon Barkley, he said the team monitored him closely on a pitch count and put his health first, and that he came out early in the second half. Barkley tweaked his back on a 29-yard run, and Sirianni said he played less than initially expected but was productive when he touched the ball. Sirianni said playing without six day-one offensive starters is part of NFL life and not an excuse, and that depth players get development opportunities. Offensively, he cited efficient running, play action, tempo, red-zone finishing, and third-down conversions (he thought just over 40%) as positives that still need work. He also discussed leadership development for young players and shared the postgame message of consistency, growth, and gratitude, saying the division race is still wide open with ten games left.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Saquon Barkley played through a back tweak on a pitch count in the loss to Dallas and was productive, but he saw fewer snaps than planned; the Eagles' run defense and pass rush remain concerns.",
+  "summary": "Sirianni recapped the Monday night loss to the Cowboys by blaming himself and the staff for the run defense, citing poor block destruction, missed tackles, and a lack of execution. He said Dallas stayed ahead of the sticks, ran play action well, and kept the defense off balance, and he did not pin the season-long lack of pass-rush pressure on a single cause. Saquon Barkley played on a pitch count after a back issue, was monitored constantly, came out early in the second half, and ended up with fewer snaps than the team initially planned. Sirianni praised Barkley's toughness and said he was productive whenever he touched the ball, including a 29-yard run. He acknowledged that six day-one starters were down on offense by the end of the game, but called it life in the NFL and refused to use it as an excuse. He said early offensive success came from an efficient run game, tempo calls, run/play-action, explosives in the run game, red-zone finishing, and third-down conversions of just over 40%. He also talked about developing leadership with younger players, staying the same version of yourself, and called the division wide open with ten games left.",
   "injuries": [
    {
     "player": "Saquon Barkley",
     "status": "limited",
-    "detail": "Tweaked his back on an early 29-yard run and was on a pitch count, leaving early in the second half; Sirianni said he was ready to play and was productive when he touched the ball.",
+    "detail": "Tweaked his back on his first run, a 29-yarder. He played on a pitch count, came out early in the second half, and played less than initially planned. Sirianni said the doctors and trainers felt he was ready to go.",
     "player_id": "00-0034844"
+   },
+   {
+    "player": "Lane Johnson",
+    "status": "unclear",
+    "detail": "A reporter cited Lane Johnson's injury as part of lost locker-room leadership. Sirianni did not give a status.",
+    "player_id": "00-0030561"
    }
   ],
   "signals": [
@@ -209,37 +287,33 @@
     "player": "Saquon Barkley",
     "topic": "usage",
     "signal": "watch",
-    "tone": "hedged",
-    "claim": "Played less than the team initially planned after the back tweak and early-second-half exit, with a pitch count in place.",
-    "note": "A back tweak and pitch count raise questions about his workload and whether he will be fully unrestricted next week, which affects his volume for fantasy.",
-    "quote": "he definitely played a little less than what we initially thought.",
+    "tone": "positive",
+    "claim": "Barkley's snaps were managed on a pitch count against Dallas and ended up lower than the team initially planned.",
+    "note": "Barkley is productive but his workload is tied to his back health, so monitor his practice status and snap count for next week.",
+    "quote": "he definitely played a little less than what we initially thought",
     "player_id": "00-0034844"
    }
   ],
   "topics": [
    {
     "topic": "Run defense",
-    "detail": "Sirianni blamed a mix of coaching, execution, getting off blocks, and missed tackles for allowing many rushing yards, and said the team will drill tackling in practice."
+    "detail": "Sirianni took responsibility for giving up a lot of rushing yards and cited block destruction, tackling, and positioning. He said the team reviews every missed tackle and works on fixes in practice."
    },
    {
     "topic": "Pass rush",
-    "detail": "Asked about season-long quick-pressure rates, Sirianni said there is no single cause and the staff will look for common themes to improve."
+    "detail": "Asked about weak pressure rates all season, he said there is no single cause and the team will look at common themes. Dallas stayed in manageable third downs and used play action to keep the defense off balance."
    },
    {
-    "topic": "Offense",
-    "detail": "Positives included efficient run game, play action, tempo calls, and red-zone finishing, but third-down conversion (about 40%) still needs improvement."
+    "topic": "Depth and injuries",
+    "detail": "Six day-one offensive starters were down by the end of the game. Sirianni called it part of the NFL and stressed developing depth without making excuses."
    },
    {
-    "topic": "Roster depth",
-    "detail": "The team played without six day-one offensive starters, which Sirianni framed as part of NFL life and an opportunity for depth players, not an excuse."
+    "topic": "Offensive approach",
+    "detail": "Early success came from run efficiency, tempo calls, run/play-action, explosive runs, red-zone finishing, and third-down conversion of just over 40%. He wants better on third down."
    },
    {
-    "topic": "Locker room leadership",
-    "detail": "Sirianni said he works with captains and veterans on leadership development and leading by example, tailored to each player's situation."
-   },
-   {
-    "topic": "Postgame message",
-    "detail": "He emphasized consistency, growth, and gratitude, said the division race is wide open with ten games left, and credited the Cowboys."
+    "topic": "Team message",
+    "detail": "He urged the team to stay the same version of itself, compared this stretch to the 2021 finish that propelled the franchise, and said Barkley spoke to the team. He called the division wide open with ten games left."
    }
   ],
   "opponent": ""

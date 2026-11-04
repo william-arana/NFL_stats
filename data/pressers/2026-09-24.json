@@ -11,29 +11,29 @@
   "after_week": 2,
   "coach": "Brian Schottenheimer",
   "words": 3519,
-  "model": "claude-haiku-5-5",
-  "headline": "Coach says CeeDee Lamb and George Pickens could alternate as the featured option week to week, while Donovan Ezeiruaku is playing at a high level and Caleb Downs is getting involved early.",
-  "summary": "Schottenheimer said the team is treating the trip to Baltimore like a short week, with the game plan finished before leaving so the staff can focus on acclimating. The group plans a Friday practice in Baltimore and a Saturday visit to the stadium, and he downplayed field concerns while saying the team has cleat options ready. On defense, the main task against Derrick Henry-type runners and Lamar Jackson is building a wall at the line and containing Jackson's movement, and he admitted the defense has not contained him well in the first two weeks. He said he handles motivation through one-on-one conversations and wants the team to keep improving through the early season. He said Kenny Clark is doing well and that the staff is managing rotations and play counts to keep the defensive line fresh. He praised Caleb Downs' practice habits and said Downs will be used early in games. He said CeeDee Lamb has been sharp in practice and that the Lamb and Pickens targets may swing from week to week. He also praised Donovan Ezeiruaku's pass-rush development and discussed Trey Hendrickson, the opposing edge rusher, as a matchup for Tyler Guyton.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Cowboys travel to Rio to face Baltimore in Week 3; Schottenheimer raves about Donovan Ezeiruaku and Caleb Downs, says CeeDee Lamb and George Pickens can each go off, and hints at managing snap counts for the D-line and skill players. No injuries were mentioned.",
+  "summary": "Schottenheimer said the Cowboys treated this as a short week, giving players Monday off and finishing the full game plan before flying to Rio to face the Ravens. The team has planned the trip since March, with sleep and travel experts consulted, and will practice Friday and visit the stadium Saturday. He said the field is expected to be fine and that the team has cleats available and has been educating players, with Rashan Gary having played in a similar game. On defense, the focus is building a wall at the line against Derrick Henry and containing Lamar Jackson, which Dallas has not done well in the first two weeks. He called for a big game from the front and from the safeties, not only linebackers Dee Winters and Jaishawn Barham. He praised Quinnen Williams and Kenny Clark as elite competitors, but said the staff is looking at rotations and play counts early in the season, which also applies to Pickens, Lamb and the tight ends. He said Caleb Downs is ahead of where he was in Week 1, wants him involved early, and cited his pass breakup on Terry McLaurin. He said Lamb has practiced crisply and that Lamb or Pickens could be the featured player in any given week. He called Donovan Ezeiruaku's play awesome, with a growing pass-rush toolbox, and expects Trey Hendrickson to line up on the left against Tyler Guyton.",
   "injuries": [],
   "signals": [
    {
     "player": "CeeDee Lamb",
-    "topic": "usage",
-    "signal": "watch",
+    "topic": "role",
+    "signal": "up",
     "tone": "positive",
-    "claim": "Lamb and George Pickens may alternate as the top producer from week to week",
-    "note": "Lamb and Pickens may split the big-play and target share, so weekly volume is less predictable than usual.",
+    "claim": "Lamb will remain a featured receiver, and the leading target can alternate between him and George Pickens from week to week.",
+    "note": "Lamb is practicing sharply and the target share can swing between him and Pickens, so weekly volume is somewhat volatile but the ceiling is high.",
     "quote": "if it's CD one week, it could be George the next week",
     "player_id": "00-0036358"
    },
    {
     "player": "George Pickens",
-    "topic": "usage",
-    "signal": "watch",
+    "topic": "role",
+    "signal": "up",
     "tone": "positive",
-    "claim": "Pickens may be the featured receiver some weeks in place of Lamb",
-    "note": "Pickens may have a week-to-week role that varies with CeeDee Lamb's performance.",
-    "quote": "if it's CD one week, it could be George the next week",
+    "claim": "Pickens shares the top receiving role with Lamb and could be the lead target in any given week.",
+    "note": "Both receivers are WR1-caliber and either can have a huge game, as the two combined for big yardage recently.",
+    "quote": "",
     "player_id": "00-0037247"
    },
    {
@@ -41,9 +41,9 @@
     "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Downs will be involved early in games through designed plays",
-    "note": "The staff wants Downs to be targeted and used early, which supports his impact even when his stat line is modest.",
-    "quote": "he's a guy also that you want to get involved early",
+    "claim": "Downs will be involved early in games with plays called to get him going, and he is improving week over week.",
+    "note": "Strong IDP trajectory for Downs, though his impact may not always show up in box-score stats.",
+    "quote": "he's a guy also that you want to get involved early.",
     "player_id": ""
    },
    {
@@ -51,19 +51,49 @@
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Ezeiruaku is developing quickly and playing at a high level as a pass rusher",
-    "note": "His rising pass-rush development makes him a candidate for more sacks and pressures as his role grows.",
-    "quote": "He's playing awesome. He really is.",
+    "claim": "Ezeiruaku continues to develop as a pass rusher and sacks are expected to come.",
+    "note": "He is generating pressure and the coach is optimistic that sacks will come, which helps IDP value.",
+    "quote": "he's playing awesome. He really is.",
     "player_id": ""
    },
    {
     "player": "Kenny Clark",
     "topic": "usage",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Clark's snaps may be managed through rotations, with the staff considering taking some load off.",
+    "note": "Possible snap reduction for the interior D-line could cap IDP production.",
+    "quote": "do we need to take a little bit something off them?",
+    "player_id": ""
+   },
+   {
+    "player": "Quinnen Williams",
+    "topic": "usage",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Clark's snaps may be managed through rotations and play-count decisions",
-    "note": "Snap management could limit Clark's workload and reduce his defensive stat production.",
-    "quote": "We're looking at rotations and things like that.",
+    "claim": "Williams is facing questions about his play, and the staff is reviewing his technique and play count.",
+    "note": "Coach defended him as an elite competitor but acknowledged the team has not played its best.",
+    "quote": "",
+    "player_id": ""
+   },
+   {
+    "player": "Dee Winters",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Winters will be asked to fill gaps against Derrick Henry, but the coach stressed safeties and the front share the responsibility.",
+    "note": "Run-stopping linebacker role against Baltimore could mean tackle volume, though the coach spread the responsibility.",
+    "quote": "it's not just going to be D and J. Sean filling gaps.",
+    "player_id": ""
+   },
+   {
+    "player": "Jaishawn Barham",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Barham will be asked to fill gaps against Derrick Henry alongside Winters.",
+    "note": "Likely high-tackle-opportunity matchup vs. the Ravens' run game.",
+    "quote": "",
     "player_id": ""
    },
    {
@@ -71,24 +101,24 @@
     "topic": "matchup",
     "signal": "watch",
     "tone": "neutral",
-    "claim": "Guyton is expected to face Trey Hendrickson on the left side",
-    "note": "Guyton's pass-protection matchup against a strong edge rusher could affect the offensive line's week and the passing game.",
-    "quote": "it should be a great matchup between him and Tyler Guyton",
+    "claim": "Guyton will face Trey Hendrickson, who plays mainly on the left side.",
+    "note": "A tough pass-rush matchup for Guyton could affect pass protection and Dak Prescott's pressure rate.",
+    "quote": "it should be a great matchup between him and Tyler Guyton.",
     "player_id": "00-0039341"
    }
   ],
   "topics": [
    {
-    "topic": "Travel and game week logistics",
-    "detail": "The team flew to Baltimore on Thursday after moving the schedule up to prepare on a short week. The plan includes Friday practice, a Saturday stadium visit, and sleep and acclimation focus."
+    "topic": "Travel and logistics",
+    "detail": "The team moved its week forward, gave players Monday off, and completed the game plan before flying to Rio. They will practice Friday and tour the stadium Saturday, and the coach said the field should be fine."
    },
    {
-    "topic": "Ravens matchup",
-    "detail": "Defensive priorities include stopping Derrick Henry-type runners and containing Lamar Jackson. Coach said the defense has to limit his movement and throws that can run past four or five seconds."
+    "topic": "Defensive game plan vs. Ravens",
+    "detail": "Dallas aims to create a wall at the line to stop Derrick Henry and has made containing Lamar Jackson and plastering coverage on extended plays a major emphasis, admitting the team has struggled with it."
    },
    {
-    "topic": "Stats and grading",
-    "detail": "Coach commented on outside grading services such as PFF and Next Gen Stats, saying the coaching film evaluation matters more to him."
+    "topic": "Early-season workload management",
+    "detail": "The staff is monitoring play counts and rest periods for linemen, receivers like Pickens and Lamb, and tight ends, comparing it to star basketball players getting rest."
    }
   ],
   "opponent": "Baltimore Ravens"
@@ -105,48 +135,68 @@
   "after_week": 2,
   "coach": "Nick Sirianni",
   "words": 3058,
-  "model": "claude-haiku-5-5",
-  "headline": "Saquon Barkley's status is unclear pending the injury report, Zach Ertz has not practiced yet, and Tank Bigsby and Will Shipley remain a trusted running back committee.",
-  "summary": "Sirianni said the Bears are a strong, well-coached team and that the quarterback uncertainty is just another layer of weekly planning. He called the Eagles' 2026 season a process, with pads practice once a week, and emphasized block destruction and run defense as keys to this game. On takeaways, he said the team has had few real chances, since the opposing QBs have been mobile, and he stressed that tackling comes before strip attempts. He said Zach Ertz has not practiced yet and that trust is built through reps, so his readiness for Sunday will be determined at practice. On Saquon Barkley, he deferred to the injury report and said Barkley works hard to be ready each week. He praised Kenny Moore's competitiveness and said his versatility could let him contribute at safety, though it still needs to be seen in practice. He described Tank Bigsby and Will Shipley as a trusted committee at running back, both having earned reps, and he credited the depth after Barkley left a game. He also praised rookie Dontayvion Wicks's physicality, contested catching, and work ethic, saying the team saw his potential on tape before drafting him.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Zach Ertz signed as tight end help with Dallas Goedert apparently on IR, but his Sunday readiness is unknown. Saquon Barkley's status hangs on the injury report after he left the last game, and Tank Bigsby and Will Shipley are trusted backups.",
+  "summary": "Sirianni previewed the Bears, saying Chicago's quarterback uncertainty adds layers to the prep but is routine in the NFL. He praised the Bears' coaching and their run game, including a Bears running back he coached last year, and stressed block destruction and fundamentals. He said the team works in pads every Wednesday for that reason. Zach Ertz is newly signed and had not practiced yet, so his knowledge of the system and readiness for Sunday are still to be determined, and Sirianni said he would quiz him and watch him in practice. A reporter's question implied Dallas Goedert is on IR, and Sirianni did not dispute it. He did not give specifics on Saquon Barkley beyond pointing to the injury report, but he referred to Saquon being unable to continue in the last game. He said the backups, Tank Bigsby and Will Shipley, were majorly helpful in that game, have different skill sets, and have both earned reps. Newly signed DB Kenny Moore drew heavy praise for his competitiveness and versatility, though Sirianni did not commit to him playing safety and said he needs reps. Sirianni also praised Dontayvion Wicks for his physicality, competitiveness and contested-catch ability, and explained that the team has no takeaway yet because of a lack of opportunities rather than poor process.",
   "injuries": [
    {
     "player": "Saquon Barkley",
     "status": "unclear",
-    "detail": "Coach deferred to the injury report; said Barkley does everything to be ready each week and that the team will see where he is.",
+    "detail": "Sirianni referred to him being unable to continue in the last game and said the injury report will show his status. A reporter noted he was practicing a bit, and Sirianni gave no timeline or concern level.",
     "player_id": "00-0034844"
-   },
-   {
-    "player": "Zach Ertz",
-    "status": "unclear",
-    "detail": "Has not practiced yet since joining the team; readiness for Sunday will be evaluated in practice.",
-    "player_id": "00-0030061"
    },
    {
     "player": "Dallas Goedert",
     "status": "ir",
-    "detail": "Reporter referenced Goedert going on IR; coach answered generally that every contingency is discussed and planned, without naming him.",
+    "detail": "A reporter's question framed him as on IR with an injury history, and Sirianni did not dispute it. This is why Ertz was added.",
     "player_id": "00-0034351"
+   },
+   {
+    "player": "Zach Ertz",
+    "status": "unclear",
+    "detail": "Newly signed and had not yet practiced. Sirianni said he would see where Ertz is after the practice.",
+    "player_id": "00-0030061"
    }
   ],
   "signals": [
    {
+    "player": "Zach Ertz",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Ertz's role and whether he plays Sunday will be decided after he practices this week.",
+    "note": "With Goedert apparently on IR, Ertz is a potential TE option, but his Week 3 usage depends on how quickly he learns the offense.",
+    "quote": "see where he is and see how we need to play this thing out",
+    "player_id": "00-0030061"
+   },
+   {
+    "player": "Saquon Barkley",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Barkley's availability for the Bears game will be shown on the injury report.",
+    "note": "He left the last game, so his practice participation this week is the key signal for his fantasy availability.",
+    "quote": "We'll get you guys injury report.",
+    "player_id": "00-0034844"
+   },
+   {
     "player": "Tank Bigsby",
-    "topic": "usage",
+    "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Continues to share running back reps as part of a committee with Will Shipley",
-    "note": "Backup RB work has expanded and the coach trusts him, which supports a bigger role if Barkley is limited.",
+    "claim": "Bigsby will share backup running back work behind Barkley and see more reps if Barkley is limited.",
+    "note": "He is a handcuff-type pickup if Barkley's injury lingers.",
     "quote": "We trust the heck out of both of them.",
     "player_id": "00-0038555"
    },
    {
     "player": "Will Shipley",
-    "topic": "usage",
+    "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Continues to share running back reps as part of a committee with Tank Bigsby",
-    "note": "Backup RB work has expanded and the coach trusts him, which supports a bigger role if Barkley is limited.",
-    "quote": "they both have earned reps",
+    "claim": "Shipley will share backup running back work with Bigsby and see more if Barkley is limited.",
+    "note": "He is part of a committee behind Barkley, which makes the backup split murky.",
+    "quote": "they both have earned reps and they both, you know, have different things",
     "player_id": "00-0039746"
    },
    {
@@ -154,64 +204,42 @@
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Praised as a great addition with strong physicality and contested-catch ability",
-    "note": "Coach's glowing review suggests a real role in the passing game, though no specific usage was promised.",
-    "quote": "he's been a great addition",
+    "claim": "",
+    "note": "Sirianni sees him as a valuable addition and a contested-catch weapon, which supports his place in the receiver rotation.",
+    "quote": "I love his physicality within the game of football and his mentality",
     "player_id": "00-0038393"
    },
    {
     "player": "Kenny Moore",
-    "topic": "role",
+    "topic": "depth_chart",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Could play safety thanks to versatility, but his role depends on reps in practice",
-    "note": "Versatility could make him a depth or specialty piece, but his fantasy relevance is unclear for now.",
-    "quote": "We'll see where he is.",
+    "claim": "Moore may be used in a versatile role, possibly at safety, once he gets reps in practice.",
+    "note": "This is mainly relevant for IDP leagues, and his role is not yet defined.",
+    "quote": "he has ability to to be versatile, which is really important",
     "player_id": ""
-   },
-   {
-    "player": "Zach Ertz",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "Has not practiced yet, so Sunday availability is undetermined until he takes reps",
-    "note": "His role in the offense and whether he plays this week hinge on practice reports.",
-    "quote": "we'll see where he is.",
-    "player_id": "00-0030061"
-   },
-   {
-    "player": "Saquon Barkley",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "Injury status will be reported on the official injury report; no clear update given",
-    "note": "Barkley's availability is the biggest fantasy swing factor, and the backups' reps suggest a committee if he is limited.",
-    "quote": "we'll see what happens see where we are.",
-    "player_id": "00-0034844"
-   },
-   {
-    "player": "Dallas Goedert",
-    "topic": "injury",
-    "signal": "down",
-    "tone": "neutral",
-    "claim": "Remains on injured reserve",
-    "note": "Goedert is out of the TE mix, which shifts targets toward other tight ends and receivers.",
-    "quote": "",
-    "player_id": "00-0034351"
    }
   ],
   "topics": [
    {
-    "topic": "Bears quarterback situation",
-    "detail": "Sirianni said the uncertainty at QB adds planning layers, but every team faces a possible QB change each week, and the Eagles will follow their normal process."
+    "topic": "Bears quarterback uncertainty",
+    "detail": "The Bears' unsettled quarterback situation adds more layers to the game plan, but Sirianni called it routine and said the team will follow its usual process."
    },
    {
-    "topic": "Takeaways and pads practice",
-    "detail": "Few takeaways so far because opposing QBs have been mobile. Sirianni said tackling comes first, and the team practices in pads once a week, with block destruction a focus."
+    "topic": "Bears run game and run defense",
+    "detail": "Sirianni called the Bears' run game challenging and praised their RB's one-cut ability. He said block destruction by the O-line and D-line will be critical, and the team practices in pads every Wednesday to improve it."
    },
    {
-    "topic": "Revenge and Bears run game",
-    "detail": "Sirianni said the team does not focus on revenge. He praised the Bears' run game and their running back's one-cut ability, and said block destruction is the key to stopping it."
+    "topic": "No takeaways yet",
+    "detail": "He said takeaways come in bunches, the team has not dropped an interception, and scrambling QBs have limited strip-sack chances. He will not sacrifice tackling fundamentals to chase strips."
+   },
+   {
+    "topic": "Revenge narrative",
+    "detail": "Sirianni said the team does not get into revenge for last year's loss to the Bears, and the keys are turnovers, explosive plays and fundamentals."
+   },
+   {
+    "topic": "Coaching style",
+    "detail": "He said a head coach should not worry about pleasing outsiders and should be authentic within the rules."
    }
   ],
   "opponent": "Chicago Bears"
@@ -228,69 +256,85 @@
   "after_week": 2,
   "coach": "Mike McCarthy",
   "words": 1493,
-  "model": "claude-haiku-5-5",
-  "headline": "McCarthy praised Pat Freiermuth's play and said the offense needs more ball distribution, while promising DK Metcalf will get targets Sunday despite recent struggles.",
-  "summary": "McCarthy said Asante Samuel Jr. has been consistent since day one of training camp, with two solid outings and a tough assignment this week. He was vague on an unnamed player (transcribed as 'Joey') who worked in a limited capacity, saying the player did the planned work and would be re-evaluated after more work Thursday. He said the Bengals' ability to stop the run without loading the box, including six-man front looks in the red zone, is being prepared for through situational work. On Aaron Rodgers, McCarthy said their conversations run longer because they have been apart for a while, and the staff is tailoring concepts to the perimeter players. He praised Patrick Graham's defensive staff for integrating players' individual skills into calls and in-game adjustments. McCarthy said Pat Freiermuth is playing well, has earned more opportunities, and he would like more ball distribution overall, including more targets for Freiermuth. On DK Metcalf, he said the team has support around him, the team will throw him the ball, and he will have opportunities Sunday. He described Wednesday's practice as the best of the year so far and said this is the next-to-last week of training camp.",
+  "model": "claude-sonnet-5-5",
+  "headline": "McCarthy backs DK Metcalf (\"we're going to throw the ball to DK\") and is all for more Pat Freiermuth targets; the injury status of \"Joey\" stays vague and the offense is still working combinations.",
+  "summary": "McCarthy praised Asante Samuel Jr., who has been consistent since day one and has put together two solid outings, but he faces a big challenge this week. He was evasive about a player the reporter called \"Joey\", saying only that the player hit his planned work on Wednesday and has more scheduled Thursday, and he pointed reporters to the injury report. On personnel, he said the team will keep working different combinations all week, mainly on offense, while the game plan goes in. Against the Bengals he expects four-, five- and six-man line looks, including a six-one look in the red zone, and the Steelers are preparing for anything. He said his long history with Aaron Rodgers makes the planning conversations longer, and that the offense is built around his experience and fits the perimeter players. McCarthy endorsed getting Pat Freiermuth more targets, saying he has earned them and that the team needs more ball distribution overall. He backed DK Metcalf through his bumps, promising he will get targets and opportunities Sunday. He also praised Patrick Graham's defense for fitting schemes to players' skills, and noted the corners must grow on special teams, naming Daylen Everette as a good practice performer.",
   "injuries": [
    {
-    "player": "Unidentified player (transcribed as 'Joey')",
+    "player": "Unclear (referred to as \"Joey\")",
     "status": "unclear",
-    "detail": "Limited in some capacity on Wednesday; he did the planned work and was scheduled for more work Thursday. McCarthy did not give a clear status.",
+    "detail": "McCarthy said he hit his planned work Wednesday, with more scheduled Thursday. He would not say whether the player was limited and pointed to the injury report.",
     "player_id": ""
    }
   ],
   "signals": [
    {
+    "player": "DK Metcalf",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "DK Metcalf will keep getting targets and will have opportunities in Sunday's game against the Bengals.",
+    "note": "Metcalf has had a slow start, but the coach is publicly committed to feeding him, which supports a bounce-back.",
+    "quote": "We're going to throw the ball to DK. You know I can promise you that.",
+    "player_id": "00-0035640"
+   },
+   {
     "player": "Pat Freiermuth",
     "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Coach supports giving Freiermuth more targets and says he has earned more opportunities in the passing game",
-    "note": "Rodgers publicly wants more targets for him, and the coach agrees, which points to a larger role in the passing game.",
+    "claim": "The Steelers want to get Pat Freiermuth more targets and a more balanced target distribution.",
+    "note": "Rodgers and McCarthy both want Freiermuth more involved, which is a TE upside signal, though McCarthy hedged on game flow.",
     "quote": "Pat's playing really well. He's earned those opportunities.",
     "player_id": "00-0036894"
-   },
-   {
-    "player": "DK Metcalf",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Coach says Metcalf will get targets and opportunities in Sunday's game despite recent struggles",
-    "note": "The coach publicly committed to using him after a rough stretch, which supports his target share in Week 3.",
-    "quote": "You know we're going to throw the ball to DK.",
-    "player_id": "00-0035640"
    },
    {
     "player": "Asante Samuel Jr.",
     "topic": "role",
     "signal": "watch",
     "tone": "positive",
-    "claim": "Coach views Samuel as playing well and facing a big challenge this week",
-    "note": "Praise from the coach suggests a solid role at cornerback, but he is a defensive back with limited fantasy value.",
-    "quote": "He's been on the mark since, you know, day one.",
+    "claim": "Asante Samuel Jr. will face a big challenge this week against the Bengals' receivers.",
+    "note": "He has played well, but the matchup is tough, which matters for opposing Bengals WRs in fantasy.",
+    "quote": "",
     "player_id": ""
+   },
+   {
+    "player": "Daylen Everette",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Daylen Everette should keep growing on special teams and be ready to play at corner.",
+    "note": "He is depth with a chance at a bigger role, a minor IDP and defensive-depth note.",
+    "quote": "I think Everett's one of them. So I actually had a nice day here yesterday",
+    "player_id": ""
+   },
+   {
+    "player": "Aaron Rodgers",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "The offense will keep being tailored to Rodgers' experience, with longer conversations and the first 15 scripted plays set Thursday night.",
+    "note": "The scheme is still being tailored to Rodgers, so passing game continuity is still developing.",
+    "quote": "it's about playing to his reps and to his experiences.",
+    "player_id": "00-0023459"
    }
   ],
   "topics": [
    {
     "topic": "Bengals defense",
-    "detail": "McCarthy said Cincinnati has been productive stopping the run without loading the box, and the offense is preparing for four-man, five-man, and six-man front looks, especially in the red zone."
+    "detail": "Cincinnati has stopped the run well without loading the box. They show four-, five- and six-man line fronts, including a six-one look in the red zone. Pittsburgh is working on all of them and playing the numbers."
    },
    {
-    "topic": "Quarterback Aaron Rodgers",
-    "detail": "Rodgers' long history with McCarthy makes the weekly play-calling conversations longer. The staff is focused on concepts and variations that fit the perimeter players."
+    "topic": "Personnel combinations",
+    "detail": "The Steelers will keep working different combinations through the week while installing the game plan. No specific changes were named."
    },
    {
     "topic": "Defense under Patrick Graham",
-    "detail": "McCarthy credited the defensive staff for integrating players' skill sets into calls and in-game adjustments, and said communication has been strong."
+    "detail": "McCarthy praised Graham's staff for building schemes around players' individual skills, including pass rush plans and in-game adjustments. Communication has been good."
    },
    {
-    "topic": "Cornerback depth",
-    "detail": "McCarthy said corner depth is improving, with Daylen Everette cited for a strong competitive day and a special-teams role. The receiver group presents a huge challenge this week."
-   },
-   {
-    "topic": "Practice and personnel",
-    "detail": "Wednesday was the best practice day of the year so far. McCarthy said the team will keep working different personnel combinations throughout the week."
+    "topic": "Practice and team growth",
+    "detail": "Wednesday was the best Wednesday of the season. McCarthy views the first four weeks of the season as a continuation of training camp and wants the team to keep growing."
    }
   ],
   "opponent": "Cincinnati Bengals"

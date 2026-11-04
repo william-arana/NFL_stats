@@ -11,32 +11,32 @@
   "after_week": 1,
   "coach": "Mike Vrabel",
   "words": 2632,
-  "model": "claude-haiku-5-5",
-  "headline": "A.J. Brown left the game with a reported high ankle sprain; Vrabel gave no firm timeline and will update next week, so his availability is uncertain.",
-  "summary": "Vrabel said A.J. Brown did not finish the preseason game and that the team is still running tests, so there is no confirmed diagnosis or timeline yet. He said he doesn't know whether Brown will be available for the coming week and promised an update next week, with the treatment plan to follow once the reports are in. Other returners Morgan Moses, Hunter Henry and Carlton Davis came back after bumps and bruises, and nobody else is expected to miss time. Vrabel defended the joint-practice reps, saying the backups' limited preseason snaps wouldn't have prepared the team for the environment. He attributed Drake Maye's last-throw issue to timing and protection, said Maye will learn from it, and said he expects Maye to keep playing at a high level. On the run game, Vrabel said the team ran better in the second half and protected better, though not well enough. He credited Gabe Jacas with continued improvement, especially his instinctive red-zone tackle. Corey Kiner got more offensive involvement while TreVeyon Henderson is still learning the offense, and Vrabel said Kiner has worked hard and will get more chances to run.",
+  "model": "claude-sonnet-5-5",
+  "headline": "A.J. Brown left the opener with a possible high ankle sprain, is undergoing more tests and may miss next week; Corey Kiner stepped in at RB with TreVeyon Henderson out.",
+  "summary": "Vrabel said A.J. Brown could not finish the opener. He did not confirm a high ankle sprain, saying more tests are coming and an update will follow next week. He added that he doesn't know whether Brown will be available for the next game. Morgan Moses, Hunter Henry and Carlton Davis all returned to the game after getting hurt, and Vrabel expects only bumps and bruises from them. Vrabel defended the decision to rely on joint practices rather than preseason snaps. He took responsibility for the poor execution and the second-half collapse, and said the line-of-scrimmage penalties and operation gave the team a chance early. On the final drive, he explained that Drake Maye had to throw it away because the timing and protection weren't there. He said Maye will learn from it and that he expects him to keep playing at a very high level. Vrabel said Romeo Doubs simply dropped a ball and it was not a decision error. He called Gabe Jacas' game an improvement and praised his instinctive red-zone play. He said Corey Kiner worked hard on protections and terminology but that the team must block better for him. Vrabel said the run game was better in the second half.",
   "injuries": [
    {
     "player": "A.J. Brown",
-    "status": "questionable",
-    "detail": "Reported high ankle sprain; did not finish the game. Tests are ongoing, Vrabel is unsure about next week and will update next week.",
+    "status": "unclear",
+    "detail": "Left the game and could not finish. Reported high ankle sprain not confirmed. More tests are pending and his availability for next week is uncertain.",
     "player_id": "00-0035676"
    },
    {
     "player": "Morgan Moses",
-    "status": "full",
-    "detail": "Returned to the game after bumps and bruises; no injury expected to keep him out.",
+    "status": "returning",
+    "detail": "Returned to the game after getting hurt; only a bump or bruise expected.",
     "player_id": "00-0031330"
    },
    {
     "player": "Hunter Henry",
-    "status": "full",
-    "detail": "Returned to the game after bumps and bruises; no injury expected to keep him out.",
+    "status": "returning",
+    "detail": "Returned to the game after getting hurt; not expected to miss time.",
     "player_id": "00-0033090"
    },
    {
     "player": "Carlton Davis",
-    "status": "full",
-    "detail": "Returned to the game after bumps and bruises; no injury expected to keep him out.",
+    "status": "returning",
+    "detail": "Returned to the game after getting hurt; not expected to miss time.",
     "player_id": ""
    }
   ],
@@ -46,19 +46,19 @@
     "topic": "injury",
     "signal": "down",
     "tone": "hedged",
-    "claim": "Availability for next week is unknown; a status update will come next week",
-    "note": "A high ankle sprain can sideline a top receiver for multiple weeks, so Brown is a risky start until the update.",
+    "claim": "Brown may not be available for next week's game pending test results.",
+    "note": "A WR1 with a possible multi-week ankle injury is a big risk, and the pass-catching targets would likely be spread among the other receivers.",
     "quote": "I don't know if he'll be available going forward here for, for the next week",
     "player_id": "00-0035676"
    },
    {
     "player": "Corey Kiner",
     "topic": "role",
-    "signal": "up",
+    "signal": "watch",
     "tone": "positive",
-    "claim": "Will get more opportunities to run the ball",
-    "note": "Kiner's expanded role in the backfield could make him a usable flex or handcuff option while Henderson is still learning the offense.",
-    "quote": "we have to be able to give him some opportunities to, to run",
+    "claim": "Kiner will get more opportunities to run while he acclimates to the offense, with Henderson out.",
+    "note": "Kiner is a possible fill-in RB if Henderson's absence continues, but the run blocking was poor and Vrabel's praise was mild.",
+    "quote": "we have to, you know, be able to give him some opportunities to, to run.",
     "player_id": "00-0040556"
    },
    {
@@ -66,9 +66,9 @@
     "topic": "other",
     "signal": "up",
     "tone": "positive",
-    "claim": "Expected to keep performing at a very high level going forward",
-    "note": "Vrabel's praise and expectation of continued high-level play support Maye as a reliable fantasy QB1, despite the turnover-risk throws.",
-    "quote": "we've seen Drake perform at a, at an extremely high level",
+    "claim": "Maye will bounce back and continue playing at a very high level.",
+    "note": "Vrabel shows full confidence in Maye despite the late throw and turnover issues, so there is no concern about his role.",
+    "quote": "we've seen Drake perform at a, at an extremely high level.",
     "player_id": "00-0039851"
    },
    {
@@ -76,48 +76,38 @@
     "topic": "other",
     "signal": "watch",
     "tone": "neutral",
-    "claim": "Dropped a pass on the final throw; Vrabel dismissed the focus criticism as a routine drop",
-    "note": "Doubs' drop got public attention, but the coach framed it as ordinary, so it is not a clear negative for his role.",
-    "quote": "That's what happens in this league. Sometimes guys drop the ball.",
+    "claim": "Doubs' miss was a drop, not a route or decision problem.",
+    "note": "Vrabel doesn't think the drop signals a role issue, so Doubs' volume should hold.",
+    "quote": "He just, you know, he dropped the ball. That's what happens in this league.",
     "player_id": "00-0037816"
    },
    {
     "player": "Gabe Jacas",
-    "topic": "role",
+    "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Continuing to improve, with good run-game edge setting and instinctive play",
-    "note": "Jacas is getting coaching praise for his growth, which could mean a larger role on defense and special teams.",
-    "quote": "continues to improve. I thought that, uh, you know, he was active.",
-    "player_id": ""
-   },
-   {
-    "player": "Marcus Jones",
-    "topic": "role",
-    "signal": "watch",
-    "tone": "positive",
-    "claim": "Will keep getting trusted to make return decisions and the team wants to get him going",
-    "note": "Vrabel backed Jones' return decisions, so he should keep his return role, though the team's struggles on returns make his volume uncertain.",
-    "quote": "We trust Marcus like we trust all the other players to make a decision.",
+    "claim": "Jacas continues to improve and is playing an active role on defense.",
+    "note": "IDP managers should note his growing role, with a tackle for loss and good run defense.",
+    "quote": "I thought it was, continues to improve.",
     "player_id": ""
    }
   ],
   "topics": [
    {
+    "topic": "Fourth-down and final-drive decisions",
+    "detail": "Vrabel said the team aimed to be aggressive near field-goal range with a tie available, and that the final throw wasn't there. The team converted two fourth downs on that drive but did not execute at the end."
+   },
+   {
     "topic": "Run game and protection",
-    "detail": "The team ran better in the second half and protected better, but Vrabel said the offense still needs to be better at picking up pressure and avoiding negative plays."
+    "detail": "Early-down runs struggled, but the team ran better in the second half. Vrabel said that helped protect the offensive line and avoid a pure drop-back game, and that pass protection improved but wasn't perfect."
    },
    {
-    "topic": "Ball security",
-    "detail": "Vrabel said the team practices ball security daily and expects receivers, backs and the QB to protect the ball, though the turnover issues need to stop becoming a pattern."
+    "topic": "Ball security and Marcus Jones' punt returns",
+    "detail": "Vrabel stressed practice-based ball security and staying aggressive without being reckless. He said he trusts Marcus Jones' decisions on punts and wants to get him going in the return game."
    },
    {
-    "topic": "Red-zone and fourth-down decisions",
-    "detail": "Vrabel said the team was aggressive on fourth down in field-goal range and wants to keep attacking, but it has to execute those situations better."
-   },
-   {
-    "topic": "Halftime and joint practices",
-    "detail": "Vrabel said the locker room decision before halftime was about regrouping and focus, and he defended the joint-practice reps even though backups got limited snaps."
+    "topic": "Defense",
+    "detail": "Vrabel said missed tackles and poor communication allowed explosive plays, including a touchdown after a fourth-and-one stop attempt, and that the defense didn't make the opponent earn it."
    }
   ],
   "opponent": ""
@@ -134,40 +124,52 @@
   "after_week": 1,
   "coach": "Mike Vrabel",
   "words": 1261,
-  "model": "claude-haiku-5-5",
-  "headline": "Patriots lost the Week 1 opener at Seattle after three Drake Maye interceptions and a failed late drive; Vrabel stressed turnovers and fourth-quarter execution, and expressed confidence in Maye.",
-  "summary": "Vrabel said New England didn't win the game in the second half, where it failed to make plays in critical situations. He called turnovers a broken record and said the team has to avoid giving the ball away and create more of its own. He credited the offense for battling back on fourth down and the defense for early stops, and said the team handled the road environment well enough, aside from a punt-team penalty and a false start. On the quarterback, he said the team has complete confidence in Drake Maye and that he will make many plays, while acknowledging three interceptions can't happen. He defended the late-game approach, saying the team wanted to be aggressive without being reckless, and that the third-and-long calls against heavy coverage made punting a possibility. On the defense, he said a fourth-down big play came from missed tackles and that Seattle's run defense (second in the league last year) made running hard. He said the team was not caught off guard by Seattle's blitzes and that it hit back, and that it has to move on and improve over a long season. He said he had no update on an injured player who was unable to return.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Patriots fall in Week 1 at Seattle after Drake Maye throws three interceptions; Vrabel backs Maye, and an unnamed player's injury remains without an update.",
+  "summary": "Vrabel said the Patriots failed to win the second half, pointing to turnovers and a lack of plays in critical situations. He praised the offense for battling back with fourth-down conversions but said the team has to be aggressive without being reckless. On the late interceptions, he said Maye may have tried to do too much and that the team forced some long-yardage situations. He expressed full confidence in Maye, saying the loss isn't about one player. He had no update on a player who did not return from injury, and the transcript doesn't name him. Vrabel said Seattle's run defense, ranked second in the league last year, made it hard to run, though he saw some positive runs and thought protection and balance were adequate. He said the offense handled Seattle's blitzes, including blitz zeros, mostly okay. He criticized the defense for missed tackles and for selling out against the run on a fourth-down play that went for a big gain. He also noted a punt-team penalty and one other false start, but felt the team handled the road environment well.",
   "injuries": [
    {
-    "player": "Unidentified player (name unclear in transcript)",
+    "player": "Unknown",
     "status": "unclear",
-    "detail": "Coach had no update on a player who was unable to return to the game; the name is garbled in the captions, so the player cannot be confirmed.",
+    "detail": "Asked 'How is he doing?'; Vrabel said he had no update and the player wasn't able to return. The player's name isn't clear from the captions.",
     "player_id": ""
    }
   ],
   "signals": [
    {
     "player": "Drake Maye",
-    "topic": "other",
+    "topic": "role",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Needs to cut down turnovers; coach says the team cannot keep throwing interceptions.",
-    "note": "Three interceptions in the opener is a concern for his fantasy floor, though Vrabel publicly backed him.",
-    "quote": "you can't throw three interceptions. You know Drake knows that.",
+    "claim": "Maye remains the starting QB and the team backs him, but he must cut down on turnovers and forced throws.",
+    "note": "Three interceptions in a loss raise short-term turnover risk, but the coach publicly backs him and no benching is implied.",
+    "quote": "we have nothing but the utmost confidence in him and everybody on this football team",
     "player_id": "00-0039851"
    }
   ],
   "topics": [
    {
-    "topic": "Seattle defense",
-    "detail": "Vrabel said Seattle was second in the league in run defense last year and likely picked up where it left off. He also said Seattle blitzed often, including blitz-zero looks similar to those in the Super Bowl, but that New England was not caught off guard."
+    "topic": "Turnovers and second half",
+    "detail": "The Patriots did not make enough plays in the second half. Three interceptions and a lack of takeaways were the key issues, and Vrabel called it a broken record."
    },
    {
-    "topic": "Special teams and late-game execution",
-    "detail": "A punt-team issue and a false start were noted as mistakes. Vrabel also said the team could not end every possession with a kick and that the late third-and-long situations were hard against heavy coverage."
+    "topic": "Run game",
+    "detail": "Seattle's run defense was ranked second last year. New England had some decent runs and some negative ones, but nothing good enough, though pass protection and balance held up reasonably well."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Missed tackles and selling out against the run led to a 50-yard gain on fourth down, even though the defense got stops earlier."
+   },
+   {
+    "topic": "Blitz pickup",
+    "detail": "Seattle brought extra pressure, including blitz zeros and double-A-gap looks, but New England mostly held up and hit one big play down the field."
+   },
+   {
+    "topic": "Penalties and environment",
+    "detail": "A punt-team penalty and one other false start occurred, but Vrabel felt the team handled the road environment well overall."
    }
   ],
-  "opponent": ""
+  "opponent": "Seattle Seahawks"
  },
  {
   "id": "SEA:head-coach-mike-macdonald-recaps-the-week-1-win-vs-patriots",
@@ -181,112 +183,98 @@
   "after_week": 1,
   "coach": "Mike Macdonald",
   "words": 3003,
-  "model": "claude-haiku-5-5",
-  "headline": "Sam Darnold's hip-area muscle injury remains unclear with no new update, while Drew Lock was praised for his poise in the Week 1 comeback win and Julian Love, Byron Murphy, and Nehemiah Pritchett drew strong reviews.",
-  "summary": "Macdonald said there was no new update on Sam Darnold beyond positive feelings, that the team is still working out the extent of the hip-area muscle injury, and that a clearer plan should be set by Monday. He said Darnold was back in the building and that they had texted but not yet met in person. On the pre-snap penalties, he said the issues were multiple small causes rather than one fixable problem, so the fix is a return to fundamentals in practice, call entry, and motion and shifts. He was excited about the run game, saying runners were decisive and the team cut negative runs, though keeping drives alive would create more carries. He praised Drew Lock's play in relief, calling the ball never in jeopardy and saying he prepares like a starter. Macdonald highlighted rookie Jadarian Price's runs, Jalen Sundell's blocking, Nehemiah Pritchett, Julian Love (possibly his best game as a Seahawk), and Byron Murphy as standouts. He said Trevon Diggs was inactive and that his return timing is uncertain, while Rodney Thomas II stepped up in the secondary. He also said the defense's front flexibility and the offense's identity under Brian Fleury remain consistent with the Seahawks' system despite new play calls and language.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Sam Darnold has a hip-area muscle injury with no new update, so Drew Lock is the fallback after a strong relief outing, and Rodney Thomas II stepped into the secondary with Ty Okada out.",
+  "summary": "Macdonald said there was no new update on Darnold beyond earlier positive news. The team is still working out the extent of the injury and a plan, and he expects a clearer picture when work resumes Monday. He described it as a muscle issue around the hip area, and Darnold was back in the building. Macdonald praised Drew Lock for never putting the ball in jeopardy and for preparing like a starter, and said he expects the same if Lock plays again. He is excited about the run game, citing physical, decisive runners and fewer negative runs, and singled out Jadarian Price's first NFL action. He also highlighted Jalen Sundell, Nehemiah Pritchett, Julian Love (best game as a Seahawk) and Byron Murphy, plus DeMarcus Lawrence's play on the last interception. The seven pre-snap penalties had no single cause, so the fix is a return to fundamentals in practice, calls, motions and shifts. In the secondary, Rodney Thomas II played well with Ty Okada out and AJ Finley is ready if needed. Trevon Diggs was inactive, and Macdonald only said 'we'll see' on his availability.",
   "injuries": [
    {
     "player": "Sam Darnold",
     "status": "unclear",
-    "detail": "Hip-area muscle injury with no new update; the team is still determining its extent and will have a clearer plan by Monday.",
+    "detail": "Muscle injury around the hip area; no new update, back in the building, and the team is still determining the extent and a plan, with more clarity expected Monday.",
     "player_id": "00-0034869"
+   },
+   {
+    "player": "Ty Okada",
+    "status": "out",
+    "detail": "Missed Week 1; Macdonald said 'we'll see how long' he is out, with no timeline given.",
+    "player_id": ""
    },
    {
     "player": "Trevon Diggs",
     "status": "unclear",
-    "detail": "Inactive in Week 1; Macdonald said he is doing well but would not commit to a return timeline.",
+    "detail": "Inactive in Week 1; asked whether he is close to playing, Macdonald only said 'we'll see.'",
     "player_id": ""
    }
   ],
   "signals": [
    {
+    "player": "Sam Darnold",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Darnold's status for the next game will be clearer once the team resumes work Monday.",
+    "note": "His availability is uncertain and the extent of the injury is still unknown, so monitor closely before setting lineups.",
+    "quote": "It's around the hip area.",
+    "player_id": "00-0034869"
+   },
+   {
     "player": "Drew Lock",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "Lock will play again if needed and the team expects the same level of play",
-    "note": "A strong relief performance keeps him as a credible backup option if Darnold misses time.",
+    "claim": "Lock will play again if Darnold can't go, and the team expects the same performance.",
+    "note": "He is the clear fallback and would have the offense's trust if Darnold misses time.",
     "quote": "if he has to play again, then we expect the same moving forward",
     "player_id": "00-0035704"
    },
    {
-    "player": "Sam Darnold",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "No new injury update; the plan will be clearer by Monday",
-    "note": "Darnold's availability is unresolved, so Lock's workload and the offense's projections depend on the Monday update.",
-    "quote": "no update, honestly, from from earlier",
-    "player_id": "00-0034869"
-   },
-   {
-    "player": "Julian Love",
-    "topic": "usage",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Love played his best game as a Seahawk",
-    "note": "Strong play in a defensive role suggests a steady, expanded role, though this is a limited fantasy asset.",
-    "quote": "Julian Love probably played his best game as a Seahawk.",
-    "player_id": ""
-   },
-   {
-    "player": "Byron Murphy",
-    "topic": "usage",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Murphy had a standout game on film",
-    "note": "Strong play reinforces his role in the defensive rotation.",
-    "quote": "we had a lot of guys had really solid games",
-    "player_id": ""
-   },
-   {
-    "player": "Nehemiah Pritchett",
-    "topic": "usage",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Pritchett played a really good game",
-    "note": "Praise for his tackling and first interception points to a stable role.",
-    "quote": "Nehemiah Pritchett played a really good football game.",
-    "player_id": ""
-   },
-   {
-    "player": "Jalen Sundell",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Sundell made a great block on a run play",
-    "note": "Strong blocking grades matter for the run game and the offensive line's rotation.",
-    "quote": "I was really impressed with, uh, Jaylen Sundell had a great pile.",
-    "player_id": "00-0039926"
-   },
-   {
     "player": "Jadarian Price",
-    "topic": "role",
+    "topic": "usage",
     "signal": "up",
     "tone": "positive",
-    "claim": "Price had really good runs in his first NFL action",
-    "note": "Impressive debut runs may earn him more work behind the top backs.",
-    "quote": "I thought Darren Price had some really good runs",
+    "claim": "",
+    "note": "Macdonald singled out his debut runs, though he gave no carry-split commitment.",
+    "quote": "had some really good runs for, you know, first NFL action",
     "player_id": "00-0041512"
+   },
+   {
+    "player": "Rodney Thomas II",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Thomas will keep a role in the secondary while Okada is out.",
+    "note": "He filled in well for Okada, which matters for IDP and defense-streaming value.",
+    "quote": "Credit to Rodney for staying ready.",
+    "player_id": ""
+   },
+   {
+    "player": "Ty Okada",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "",
+    "note": "Okada's absence opened the door for Thomas, and his return timeline is unknown.",
+    "quote": "",
+    "player_id": ""
+   },
+   {
+    "player": "AJ Finley",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Finley is ready to play in the secondary if needed.",
+    "note": "He is a depth option if Okada's absence continues.",
+    "quote": "AJ's ready to go too.",
+    "player_id": ""
    },
    {
     "player": "Trevon Diggs",
     "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Return timing is uncertain",
-    "note": "Diggs's availability for coming games is unknown, which affects secondary depth.",
-    "quote": "Uh we'll see we'll see.",
-    "player_id": ""
-   },
-   {
-    "player": "Rodney Thomas II",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Thomas stepped up in the secondary with a strong game",
-    "note": "A strong showing in Diggs's absence could keep him in a larger role.",
-    "quote": "Credit to Rodney for staying ready.",
+    "claim": "",
+    "note": "Macdonald gave no timeline for Diggs's debut.",
+    "quote": "we'll see we'll see",
     "player_id": ""
    },
    {
@@ -294,32 +282,80 @@
     "topic": "scheme",
     "signal": "watch",
     "tone": "neutral",
-    "claim": "Emmanwori's role will be flexible, deployed as a linebacker or in other looks depending on the front",
-    "note": "Positional flexibility makes his fantasy value depend on the defensive package.",
-    "quote": "we can have front flexibility in all of our personnel groups",
+    "claim": "Emmanwori will continue to be used in flexible front and linebacker-type alignments in base personnel.",
+    "note": "Hybrid usage could boost his IDP tackle opportunities.",
+    "quote": "That's the idea.",
+    "player_id": ""
+   },
+   {
+    "player": "DeMarcus Lawrence",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "His pressure and cut-block hurdle set up the game-ending interception, which is good for IDP value.",
+    "quote": "Yeah that was amazing man.",
+    "player_id": ""
+   },
+   {
+    "player": "Josh Jobe",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "He made the play on the final interception after disrupting timing earlier.",
+    "quote": "Jobe was great earlier in the play.",
+    "player_id": ""
+   },
+   {
+    "player": "Nehemiah Pritchett",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "He had his first interception and good tackling, which makes him a notable secondary performer.",
+    "quote": "Nehemiah Pritchett played a really good football game.",
+    "player_id": ""
+   },
+   {
+    "player": "Julian Love",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "Macdonald called it Love's best game as a Seahawk, a boost for his IDP value.",
+    "quote": "Julian Love probably played his best game as a Seahawk.",
     "player_id": ""
    }
   ],
   "topics": [
    {
     "topic": "Pre-snap penalties",
-    "detail": "Macdonald said the seven pre-snap penalties came from multiple small causes rather than one problem, so the fix is a return to fundamentals in practice, call entry, and motion and shifts."
+    "detail": "The seven pre-snap penalties had multiple small causes rather than one theme. The team will go back to the fundamentals of practice, getting calls in, and motion and shifts, without panicking."
    },
    {
     "topic": "Run game",
-    "detail": "The coach praised runners for being decisive and cutting negative runs, and said more consistent drives would create more carries."
+    "detail": "Macdonald is excited about the run game, citing runners who were decisive, a line that ran off the ball and fewer negative runs. He said keeping drives alive would give more chances to run."
    },
    {
-    "topic": "Offense under Brian Fleury",
-    "detail": "Play calls and terminology are different from last year, but the offense keeps the Seahawks' identity; the offensive line, tight ends, and receivers were praised for physical play."
+    "topic": "Offensive identity",
+    "detail": "The offense has different play calls and language but is still the Seahawk offense, with physical line and tight end play and decisive receivers. Macdonald stressed clear directives for the players."
    },
    {
-    "topic": "Special teams",
-    "detail": "Macdonald praised the field position shift and said the team held a top punt returner to zero punt return yards."
+    "topic": "Backfield usage",
+    "detail": "Asked whether a back earned more carries, Macdonald said usage follows how the game plays out and will be taken game by game."
    },
    {
-    "topic": "Secondary depth",
-    "detail": "Macdonald said the defense has options in the secondary, with AJ ready after practicing well, though he gave no specifics beyond that."
+    "topic": "Fourth-and-one touchdown",
+    "detail": "Asked why the team didn't go with AJ on the fourth-and-one that led to the touchdown pass, Macdonald said they simply felt it was the best play and gave no further detail."
+   },
+   {
+    "topic": "Defense and special teams",
+    "detail": "The defense tackled well after a preseason without live reps, though Macdonald thought they missed four to six tackles. He praised the punter's kicks for shifting field position and holding a dangerous returner to no return yards."
+   },
+   {
+    "topic": "Early-season approach",
+    "detail": "Opponents' systems have changed a lot from last year and teams haven't shown their identity yet. Macdonald expects the first quarter of the season to focus on improving the team's own phases."
    }
   ],
   "opponent": ""

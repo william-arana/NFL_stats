@@ -11,50 +11,62 @@
   "after_week": 5,
   "coach": "Kyle Shanahan",
   "words": 2132,
-  "model": "claude-haiku-5-5",
-  "headline": "Deebo Samuel Sr. and Garret Wallow are ruled out for Sunday's Commanders game, Mykel Williams and Gracen Halton are questionable, and Brock Purdy gets strong praise from Shanahan.",
-  "summary": "Shanahan opened with the injury report for Sunday's Week 6 game against Washington: Deebo Samuel Sr. and Garret Wallow are out, while Mike Evans, Gracen Halton, Mykel Williams, and Upton Stout are listed as questionable. He said questionable designations are precautionary, applied to any player with lingering concerns. A returning player's status, which reporters asked about, will be determined Monday, and Shanahan called the return from an injury that looked serious early on 'really impressive.' Kaelon Black is not on the injury report but is away from the team for the birth of his child, and Shanahan said the team was expecting that absence even though Black had been optimistic about playing. Shanahan spent much of the session reflecting on his 2015 Falcons experience and his own perspective on winning streaks. He praised Brock Purdy's competitiveness, comparing his consistency to Matt Ryan's and saying Purdy plays to win, not for his passer rating, and that Purdy has become more aggressive against Raheem Morris's secondary. He also credited Sebastian Valdez, who initially missed the roster, as a player the team gambled on and was lucky to keep.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Deebo Samuel Sr. and Nick Bosa are out, Mike Evans is questionable, and Kaelon Black is expected to play; Shanahan also praised Brock Purdy at length.",
+  "summary": "Shanahan opened with the injury report. Deebo Samuel Sr., Garret Wallow, Nick Bosa and Marques Sigle are out. Mike Evans, Gracen Halton, Upton Stout, Mykel Williams and a couple of other players are questionable. Williams played in Seattle and seems fine, but Shanahan said anyone with any lingering question gets the questionable tag. Kaelon Black is not on the questionable list, so he is expected to play Monday. Shanahan also said one returning player, whose name was garbled in the captions, could be activated Monday. That player's injury looked bad at first and was expected to cost three weeks, but he is now a full go, and Shanahan called the recovery very impressive. At 5-0, Shanahan said you can't get caught up in the highs and lows, and he recalled the 2015 Falcons' 5-0 start and 8-8 finish. He praised Purdy's consistency, comparing him to Matt Ryan as a quarterback who is 'automatic' running a game plan. He said Purdy plays to win, sometimes at his own risk, and has become more aggressive after a camp against a more aggressive defense. He said he no longer thinks about his Washington ties, and he called the Sebastian Valdez roster decision a gamble that worked out.",
   "injuries": [
    {
     "player": "Deebo Samuel Sr.",
     "status": "out",
-    "detail": "Ruled out for Sunday's Week 6 game against Washington.",
+    "detail": "Ruled out for the game.",
     "player_id": "00-0035719"
    },
    {
     "player": "Garret Wallow",
     "status": "out",
-    "detail": "Ruled out for Sunday's game (transcript says 'Walo').",
+    "detail": "Ruled out.",
+    "player_id": ""
+   },
+   {
+    "player": "Nick Bosa",
+    "status": "out",
+    "detail": "Ruled out; the captions are garbled but he appears in the out group.",
+    "player_id": ""
+   },
+   {
+    "player": "Marques Sigle",
+    "status": "out",
+    "detail": "Ruled out; the name is garbled in the captions (\"LB Siegel\"), so this is a moderate-confidence match.",
     "player_id": ""
    },
    {
     "player": "Mike Evans",
     "status": "questionable",
-    "detail": "Listed as questionable for Sunday; decision expected Monday.",
+    "detail": "Listed questionable; no further detail given.",
     "player_id": "00-0031408"
    },
    {
     "player": "Gracen Halton",
     "status": "questionable",
-    "detail": "Listed as questionable for Sunday.",
-    "player_id": ""
-   },
-   {
-    "player": "Mykel Williams",
-    "status": "questionable",
-    "detail": "Listed as questionable despite playing in Seattle; Shanahan called it precautionary.",
+    "detail": "Listed questionable.",
     "player_id": ""
    },
    {
     "player": "Upton Stout",
     "status": "questionable",
-    "detail": "Listed as questionable for Sunday.",
+    "detail": "Listed questionable.",
+    "player_id": ""
+   },
+   {
+    "player": "Mykel Williams",
+    "status": "questionable",
+    "detail": "Played in Seattle and seems okay, but he still has some lingering issues, so he is tagged questionable.",
     "player_id": ""
    },
    {
     "player": "Kaelon Black",
-    "status": "out",
-    "detail": "Not on the injury report; absent for the birth of his child and not expected to play Sunday.",
+    "status": "full",
+    "detail": "Not on the questionable list, so he is expected to play Monday.",
     "player_id": "00-0041052"
    }
   ],
@@ -63,53 +75,75 @@
     "player": "Deebo Samuel Sr.",
     "topic": "injury",
     "signal": "down",
-    "tone": "neutral",
-    "claim": "Will not play in Week 6 against Washington.",
-    "note": "Ruled out, so his target share goes to the rest of the receiving group for Sunday.",
+    "tone": "negative",
+    "claim": "Will not play this week.",
+    "note": "Deebo is out, so his targets and touches shift to the other receivers.",
     "quote": "Deebo will be out.",
     "player_id": "00-0035719"
    },
    {
-    "player": "Garret Wallow",
+    "player": "Mike Evans",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Status is uncertain and will be decided closer to game time.",
+    "note": "With Deebo out, Evans's availability decides how thin the receiver group is.",
+    "quote": "",
+    "player_id": "00-0031408"
+   },
+   {
+    "player": "Nick Bosa",
     "topic": "injury",
     "signal": "down",
-    "tone": "neutral",
-    "claim": "Will not play in Week 6 against Washington.",
-    "note": "Ruled out for the game, which affects defensive snaps and depth for SF.",
-    "quote": "Walo will be out.",
+    "tone": "negative",
+    "claim": "Will not play this week.",
+    "note": "Bosa's absence hurts the pass rush, which matters for IDP and team defense.",
+    "quote": "",
     "player_id": ""
+   },
+   {
+    "player": "Kaelon Black",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will play Monday.",
+    "note": "He is off the injury report and available for the backfield.",
+    "quote": "he's not questionable. So yes",
+    "player_id": "00-0041052"
    },
    {
     "player": "Brock Purdy",
-    "topic": "role",
+    "topic": "scheme",
     "signal": "up",
     "tone": "positive",
-    "claim": "Shanahan views Purdy as a player who plays to win and has grown more aggressive against Washington's secondary.",
-    "note": "Shanahan's praise and the adjustments he has made suggest Purdy's aggressive play and volume should stay strong.",
+    "claim": "Purdy keeps executing the game plan at a high level and plays aggressively to win.",
+    "note": "Shanahan's confidence in Purdy supports his weekly QB value.",
     "quote": "Brock is such an unselfish player in that way.",
     "player_id": "00-0037834"
-   },
-   {
-    "player": "Sebastian Valdez",
-    "topic": "depth_chart",
-    "signal": "watch",
-    "tone": "positive",
-    "claim": "Valdez has played at a high level since OTAs and was a roster gamble the team was happy to keep.",
-    "note": "Valdez is now on the 53-man roster, but his role is still unclear and he is unlikely to matter much in fantasy.",
-    "quote": "Sea bass was someone we really gambled with.",
-    "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Commanders matchup",
-    "detail": "Shanahan previewed Sunday's Week 6 game against Washington, which will feature Raheem Morris's secondary and new Commanders leadership under Adam Peters and Dan Quinn."
+    "topic": "Team record and perspective",
+    "detail": "At 5-0, Shanahan said you can't get caught up in the emotion of the week. He cited the 2015 Falcons (5-0 start, 8-8 finish) and the 2012 Washington team (3-6, then won the division)."
    },
    {
-    "topic": "Injury transcript uncertainty",
-    "detail": "Several names in the injury report are garbled in the captions (e.g., 'Neil,' 'Kirk,' 'Bosa LB Siegel'). Kirk may refer to George Kittle returning from injury with a decision Monday, but this could not be confirmed, and Bosa's status is unclear."
+    "topic": "Purdy's aggressiveness",
+    "detail": "Shanahan said Purdy is more aggressive this year partly because he practiced against a different defense in camp. That forced the offense to work on different throws, and he thinks it helped."
+   },
+   {
+    "topic": "Returning player",
+    "detail": "A player whose name is garbled in the captions (\"Kirk\" and \"Juice\") is a full go, and the team will know Monday whether he is activated. His recovery was far faster than the three weeks first expected."
+   },
+   {
+    "topic": "Sebastian Valdez",
+    "detail": "Shanahan said Valdez played well enough to make the roster initially. The team gambled on getting him through to the practice squad, and he was glad it worked out."
+   },
+   {
+    "topic": "Washington ties",
+    "detail": "Shanahan said he no longer thinks about his history in Washington. He spoke well of Dan Quinn and Adam Peters."
    }
   ],
-  "opponent": "Washington Commanders"
+  "opponent": "Commanders"
  }
 ]

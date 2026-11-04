@@ -11,36 +11,36 @@
   "after_week": 3,
   "coach": "Brian Schottenheimer",
   "words": 1370,
-  "model": "claude-haiku-5-5",
-  "headline": "Joey Porter Jr. (back) is a questionable Week debut: Schottenheimer wants him to play but won't commit, and he moved well in his first practice.",
-  "summary": "Schottenheimer called the Joey Porter Jr. trade a sign of Dallas' aggressive, win-now approach, crediting Jerry Jones and Stephen Jones and Will McClay. He praised Porter's length, size, coverage skills, and physicality, including his willingness to fill runs and tackle. On health, the coach said Porter had moved well that day and that the team would like him to play this week, but he would not commit and would evaluate him through the rest of the week. Porter reportedly passed his physical and took part in practice soon after arriving, and the coach said he saw no major mistakes. Schottenheimer said the team had not yet decided where Porter will line up, and that defensive coordinator Christian Parker has a specific plan for him if he plays, though he would not be a full-time, every-snap player. He also framed the pass-rush benefit as coming from tighter coverage that disrupts timing and helps the quarterback get sacked. The coach said the trade was not tied to the team's recent injuries or to any contract talk, and that Porter is focused on football.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Cowboys traded for CB Joey Porter Jr., who moved well in his first practice and could play this week vs. Houston in a limited, specially designed package.",
+  "summary": "Schottenheimer framed the Joey Porter Jr. trade as proof of Dallas's win-now approach, crediting Jerry Jones, Stephen Jones and Will McClay for being aggressive. He praised Porter's length, size, physicality and elite cover skills, plus his ability to fill against the run and tackle. Porter had back issues in Pittsburgh, but the coach said he moved well in his first practice. Schottenheimer wouldn't commit to Porter playing this week, saying the team would like him to and will see how the week goes. Defensive coordinator Christian Parker has a specific plan for Porter, which Schottenheimer wouldn't reveal because the Texans will be watching. He said Porter probably won't play every snap, but if he plays there will be a good package for him, and the team doesn't yet know where he'll line up. He said the addition helps a secondary depleted by injuries and also helps the pass rush by tightening coverage and disrupting timing. He also said Dak Prescott is still playing at an elite level and the offense has elite weapons.",
   "injuries": [
    {
     "player": "Joey Porter Jr.",
-    "status": "questionable",
-    "detail": "Had back issues before the trade; moved well at first practice with Dallas, but the coach would not confirm he will play this week.",
+    "status": "unclear",
+    "detail": "Had back issues in Pittsburgh. Moved around well in his first Dallas practice, and the team would like him to play this week but is waiting to see how the week goes.",
     "player_id": ""
    }
   ],
   "signals": [
    {
     "player": "Joey Porter Jr.",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "Playing this week is uncertain; the coach will decide as the week progresses.",
-    "note": "A back issue plus a one-day workout makes his Week debut and snap count a real question for fantasy managers.",
-    "quote": "We'd like him to play, but we'll see how the week goes.",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will have a specific defensive package if he plays this week against Houston, though probably not every snap.",
+    "note": "For IDP and DST managers, an elite corner added to a depleted secondary could improve Dallas's coverage and pass-rush outlook.",
+    "quote": "if he plays, we'll certainly have a good package for him.",
     "player_id": ""
    },
    {
     "player": "Joey Porter Jr.",
-    "topic": "role",
+    "topic": "injury",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Dallas has not settled on his position or role yet, though a specific package is planned if he plays.",
-    "note": "Without a set role, his snap share and fantasy value (mainly IDP-style or defensive stats) remain unclear.",
-    "quote": "we're not sure where we'll put him yet",
+    "claim": "Porter's availability for the game this week will be decided as the week goes on.",
+    "note": "His back history and the coach's refusal to commit make his Week status uncertain, so check later practice reports.",
+    "quote": "We'd like him to play, but we'll see how the week goes.",
     "player_id": ""
    },
    {
@@ -48,24 +48,28 @@
     "topic": "other",
     "signal": "up",
     "tone": "positive",
-    "claim": "Prescott is still playing at an elite level.",
-    "note": "The coach's praise supports Prescott's stability as the Dallas starting QB for fantasy purposes.",
+    "claim": "",
+    "note": "The coach cited Prescott's elite level of play as a reason for the win-now stance, which supports confidence in the offense.",
     "quote": "Dak Prescott still playing at elite level.",
     "player_id": "00-0033077"
    }
   ],
   "topics": [
    {
-    "topic": "Trade context",
-    "detail": "Dallas acquired Porter in a trade that the coach described as a change of scenery for a young, elite cover corner. The coach said the trade was not linked to the team's injuries or to Porter's contract talks."
+    "topic": "Win-now mindset",
+    "detail": "Schottenheimer said he and Jerry Jones have been aligned on a win-now approach from the start. He cited Jones's age, Dak Prescott's play, elite offensive weapons and an improving defense."
    },
    {
-    "topic": "Defensive scheme and pass rush",
-    "detail": "Defensive coordinator Christian Parker has a specific plan for Porter, which the coach did not disclose because the opponent will study film. The coach said better coverage tightness should help the pass rush by disrupting timing and disguising coverage, while the defense still must tackle better."
+    "topic": "Secondary depth",
+    "detail": "Dallas's defensive backs group is depleted by injuries, and Porter adds an elite-coverage young corner. The team communicated with players in the DB room about the trade before it was finalized."
    },
    {
-    "topic": "Ownership and team philosophy",
-    "detail": "Schottenheimer said the team remains in a win-now mindset, citing Jerry Jones's age and the strength of the offense and the improving defense."
+    "topic": "Pass rush",
+    "detail": "Tight coverage disrupts timing and helps the rush get home. Disguised coverages and fewer open receivers should help, though the team still has to finish sacks by wrapping up and tackling."
+   },
+   {
+    "topic": "Trade circumstances",
+    "detail": "Schottenheimer said the trade had little to do with the loss in Brazil and was more about adding a young elite corner. He said Porter arrived early in the day, passed his physical and practiced the same day."
    }
   ],
   "opponent": "Houston Texans"
@@ -82,35 +86,56 @@
   "after_week": 3,
   "coach": "Matt LaFleur",
   "words": 1086,
-  "model": "claude-haiku-5-5",
-  "headline": "No direct player-level signals; LaFleur stressed leaning on the run game against a stout Tampa Bay run defense, while the new veteran linemen's timeline stays unclear.",
-  "summary": "LaFleur said the newly added offensive linemen were impressive in their first day and that it is exciting to get them on the field, noting they have lots of NFL experience. He cautioned that how quickly they pick up the offense mentally is unknown, though their physical conditioning should be helped by training camp. He has a ramp-up plan for each individual but declined to share it for competitive reasons. On the offense, he said getting the run game going keeps defenses from focusing on one dimension, while acknowledging Tampa Bay's run defense is one of the stingiest in the league. He described the short passing game as a way to supplement the run, though tight or match-heavy coverages can make it harder. On the backfield, he said a committee offers depth and defined roles, but a clear lead back gives a better feel for what schemes work, so there are pluses and minuses. He also said teaching new linemen is built around the week's game plan to avoid cluttering their minds, with protection code words as a key learning point. He expects a positive response from the defense after last week, and flagged Tampa's skill players, including a rookie quarterback and running back Bucky Irving.",
+  "model": "claude-sonnet-5-5",
+  "headline": "Packers LaFleur wants to lean on the run vs. Tampa's stingy front, is noncommittal on committee vs. lead back, and is ramping up newly added veteran offensive linemen.",
+  "summary": "LaFleur said the newly added offensive linemen did well in their first day and are veterans who have played a lot of football at a high level. Their physical readiness is a question, so the team has an individualized ramp-up plan for each one, which he refused to share for competitive reasons. He stressed the need to get the run game going because it opens up the whole offense and keeps defenses from keying on one dimension, while acknowledging Tampa Bay has one of the stingiest run defenses, led by Vita Vea. He said the short, quick passing game can supplement the run by any means necessary, but man-heavy 'matchy' coverages make it harder. Asked about the backfield, he said there are benefits to both a three-man committee with defined roles and a lead dog, and he did not commit to a change. He expects the defense to respond positively after last week and called Tampa's offensive line one of the league's better ones. He also praised Bucky Irving as a top-tier tailback and noted the Bucs have a rookie quarterback the Packers know little about.",
   "injuries": [],
-  "signals": [],
-  "topics": [
+  "signals": [
    {
-    "topic": "New offensive linemen",
-    "detail": "Veteran linemen added to the line had a strong first day; mental learning speed is unknown, and the coach has a private ramp-up plan for each player."
+    "player": "Josh Jacobs",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "",
+    "note": "LaFleur would not commit to moving away from the backfield committee, so Jacobs' workload is unsettled, though a lead-back approach was acknowledged as having benefits.",
+    "quote": "",
+    "player_id": "00-0035700"
    },
    {
-    "topic": "Run game emphasis",
-    "detail": "LaFleur wants to get the run game going to avoid being one-dimensional, though he expects a tough test against Tampa's run defense led by Vita Vea."
+    "player": "Jordan Love",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "The offense wants to lean more on the run game and short, quick passing to supplement it.",
+    "note": "A run-leaning plan against a tough front and quick-game usage could cap Love's downfield volume this week.",
+    "quote": "by any means necessary",
+    "player_id": "00-0036264"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive line additions",
+    "detail": "The new veteran linemen had a good first day. The team has individualized ramp-up plans, and the coaches teach them from the weekly game plan rather than the full playbook. Protection calls and code words are the main learning curve."
+   },
+   {
+    "topic": "Run game and scheme",
+    "detail": "LaFleur wants to get the run game going to keep the defense from keying on the pass, though Tampa's run defense is among the league's stingiest. Short, quick passing can supplement it, but man-heavy coverages make that harder."
    },
    {
     "topic": "Backfield approach",
-    "detail": "Asked about a running back committee, he said both committee and lead-back approaches have pros and cons and gave no decision."
+    "detail": "He sees pluses and minuses in both a three-man committee with defined roles and a single lead back, and did not announce any change."
    },
    {
-    "topic": "Game plan teaching",
-    "detail": "New players learn only what is in the weekly game plan, including protections and code words, to avoid overloading them."
+    "topic": "Tampa Bay opponent notes",
+    "detail": "He praised Vita Vea and the Bucs' edge setters, physical linebackers and secondary. He called their offensive line one of the league's better units and Bucky Irving a top-tier tailback. They have a rookie quarterback the Packers don't know much about."
    },
    {
-    "topic": "Rule change",
-    "detail": "He said he prefers the current pass interference review rules and values consistency over a return of challenges."
+    "topic": "Defense bounce-back",
+    "detail": "He expects the defense to respond positively after last week and said Wednesday's practice was great."
    },
    {
-    "topic": "Defensive response",
-    "detail": "He expects a positive response from the defense after last week following a strong practice."
+    "topic": "Pass interference review",
+    "detail": "He would not want replay review of pass interference to return, preferring consistent officiating."
    }
   ],
   "opponent": "Tampa Bay Buccaneers"
