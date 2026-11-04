@@ -1,0 +1,27 @@
+name: Pressers model test (one-off)
+on:
+  push:
+    branches: [model-test]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - env:
+          TOKEN: ${{ secrets.TRANSCRIPTS_TOKEN }}
+        run: git clone "https://x-access-token:${TOKEN}@github.com/william-arana/NFL_stats-transcripts.git" "$RUNNER_TEMP/private"
+      - env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/model_test.py "$RUNNER_TEMP/private" "$RUNNER_TEMP/private/tests/model-compare-2026-11-03"
+      - name: Save results to the private repo
+        run: |
+          cd "$RUNNER_TEMP/private"
+          git config user.name "github-actions[bot]"; git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add tests && git commit -m "Model test: Haiku vs Sonnet, 10 pressers" && git push
