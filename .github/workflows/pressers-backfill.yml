@@ -17,6 +17,9 @@ on:
       model:
         description: "Claude model"
         default: claude-haiku-5-5
+      only:
+        description: "only these teams (space separated), ALL = all 32"
+        default: ""
 
 permissions:
   contents: write
@@ -29,6 +32,8 @@ env:
   WEEKS: ${{ inputs.weeks || '1-8' }}
   MODEL: ${{ inputs.model || 'claude-haiku-5-5' }}
   PRIVATE_REPO: william-arana/NFL_stats-transcripts
+  # push-triggered re-runs: teams to redo (blank = all 32)
+  ONLY: ${{ inputs.only || 'ATL HOU IND JAX NE LV LAC TEN' }}
 
 jobs:
   teams:
@@ -48,6 +53,8 @@ jobs:
           - "SF TB TEN WAS"
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}  # branch head at run time (picks up earlier backfill results)
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -63,6 +70,7 @@ jobs:
           PRESSERS_TEAMS: ${{ matrix.teams }}
           PRESSERS_MODEL: ${{ env.MODEL }}
           PRESSERS_BACKFILL: ${{ env.WEEKS }}
+          PRESSERS_ONLY: ${{ env.ONLY }}
           PRESSERS_OUT: ${{ runner.temp }}/signals
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
@@ -100,6 +108,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}  # branch head at run time (picks up earlier backfill results)
       - uses: actions/download-artifact@v4
         with:
           pattern: signals-*

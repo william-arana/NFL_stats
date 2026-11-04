@@ -98,6 +98,20 @@ def get(url: str, timeout: int = 30) -> str:
 
 # ---------- 1. discover ----------
 
+def parse_dur(raw: str | None) -> int:
+    """Seconds from a sitemap duration: plain seconds, or ISO 8601 like 'PT45M', 'P0D', 'P2DT1H52M'
+    (some club archives mix both). Unparseable -> 0 (= skip the length filter)."""
+    raw = (raw or "").strip()
+    if raw.isdigit():
+        return int(raw)
+    m = re.fullmatch(r"P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?", raw)
+    if not m:
+        return 0
+    d, h, mi, se = (float(x) if x else 0 for x in m.groups())
+    sec = int(d * 86400 + h * 3600 + mi * 60 + se)
+    return 0 if sec > 86400 else sec  # multi-day values are bad metadata: don't filter on them
+
+
 def video_sitemaps(domain: str) -> list[str]:
     """Every video sitemap the club site lists (robots.txt -> sitemap indexes), for backfills:
     the fast-changing one only covers the last few weeks."""
@@ -152,7 +166,7 @@ def _discover_one(team: str, sitemap: str, since: date, urls: set) -> list[dict]
         tags = [t.strip() for t in unescape(v.findtext("v:tag", "", NS)).split(",") if t.strip()]
         pub_ts = v.findtext("v:publication_date", "", NS)
         pub = pub_ts[:10]
-        dur = int(v.findtext("v:duration", "0", NS) or 0)
+        dur = parse_dur(v.findtext("v:duration", "0", NS))
         hay = " ".join([title, *tags])
         if not pub or date.fromisoformat(pub) < since or SKIP.search(hay):
             continue
@@ -482,6 +496,14 @@ def main() -> None:
         cap = max(cap, 40 * len(teams) * len(weeks))
 
     index = load_index()
+    if OUT_DIR != ROOT / "data" / "pressers":  # parallel job: also skip what the branch already has
+        try:
+            index["done"].update(json.loads((ROOT / "data" / "pressers" / "index.json").read_text()).get("done", {}))
+        except (OSError, ValueError):
+            pass
+    only = os.environ.get("PRESSERS_ONLY", "").upper().split()
+    if only and only != ["ALL"]:
+        teams = [t for t in teams if t in only]
     new: list[dict] = []
     for t in teams:
         try:
