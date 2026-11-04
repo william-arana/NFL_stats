@@ -4,9 +4,11 @@ Reads data/pressers/<date>.json (our own summaries, never transcripts) and write
 data/site/presser_signals.json:
 
   {"updated_utc": "...", "v": [[date, team, coach, url], ...],
-   "p": {"<gsis_id>": [[v_index, signal, topic, claim, note, quote], ...]}}   (newest first)
+   "p": {"<gsis_id>": [[v_index, signal, topic, claim, note, quote, n], ...]}}   (newest first)
 
-Only signals that were matched to a player id are included. Run after any pressers update.
+Only signals that were matched to a player id are included. Coaches repeat themselves across a
+week's pressers, so the same player + week + topic + direction is kept once (the newest) with
+n = how many pressers said it. Run after any pressers update.
 """
 import json
 from datetime import datetime, timezone
@@ -29,17 +31,26 @@ def main():
                 if e["id"] not in vix:
                     vix[e["id"]] = len(vids)
                     vids.append([e.get("date", f.stem), e.get("team", ""), e.get("coach", ""), e.get("url", "") or ""])
-                by.setdefault(pid, []).append([
-                    vix[e["id"]], s["signal"], s.get("topic", "") or "", s.get("claim", "") or "",
-                    s.get("note", "") or "", s.get("quote", "") or "",
-                ])
+                row = [vix[e["id"]], s["signal"], s.get("topic", "") or "", s.get("claim", "") or "",
+                       s.get("note", "") or "", s.get("quote", "") or "", 1]
+                wk = e.get("after_week", e.get("date", f.stem))
+                k = (wk, row[2], row[1])
+                p = by.setdefault(pid, {})
+                if k in p:  # same player, week, topic, direction: keep the newest, count the pressers
+                    old = p[k]
+                    if vids[row[0]][0] >= vids[old[0]][0]:
+                        row[6] = old[6] + 1
+                        p[k] = row
+                    else:
+                        old[6] += 1
+                else:
+                    p[k] = row
                 n += 1
-    for v in by.values():
-        v.sort(key=lambda r: vids[r[0]][0], reverse=True)
+    by = {pid: sorted(p.values(), key=lambda r: vids[r[0]][0], reverse=True) for pid, p in by.items()}
     OUT.write_text(json.dumps({
         "updated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
         "v": vids, "p": by}, ensure_ascii=False, separators=(",", ":")))
-    print(f"presser_signals.json: {n} signals for {len(by)} players, {OUT.stat().st_size // 1024} KB")
+    print(f"presser_signals.json: {n} signals ({sum(map(len, by.values()))} after grouping) for {len(by)} players, {OUT.stat().st_size // 1024} KB")
 
 
 if __name__ == "__main__":

@@ -1,14 +1,14 @@
-name: Pressers weekly
+name: Pressers daily
 
-# Head-coach pressers, every week, all 32 teams in 4 parallel batches of 8 (~10-15 min).
-# Picks each coach's day-after-game + first-practice-day presser (scripts/update_pressers.py, weekly mode),
-# skips anything already done, so the second run only picks up late uploads.
+# Head-coach pressers, every day, all 32 teams in 4 parallel batches of 8 (~5-10 min).
+# Picks every head coach presser of the last 8 days, labeled postgame / day_after / first_practice /
+# midweek / final_practice (scripts/update_pressers.py, PRESSERS_PICK=all), and skips anything already
+# done, so each run only does the new ones (~20 a day).
 # Raw transcripts -> PRIVATE repo NFL_stats-transcripts (TRANSCRIPTS_TOKEN); signals -> data/pressers/ here.
 # Times are UTC; Pacific (standard time) in comments.
 on:
   schedule:
-    - cron: "23 3 * * 4"    # Wed 7:23 PM PT: after Wednesday pressers are posted
-    - cron: "37 17 * * 4"   # Thu 9:37 AM PT: late uploads / TNF teams
+    - cron: "41 3 * * *"    # daily 7:41 PM PT: after the day's pressers are posted
   workflow_dispatch:
     inputs:
       model:

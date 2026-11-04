@@ -117,9 +117,9 @@
   let SIGP=null;const SIGW={up:'Up',down:'Down',watch:'Watch'};
   function presserItems(g){
     if(!SIGP)SIGP=fetch('data/site/presser_signals.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
-    return SIGP.then(j=>{if(!j||!j.p||!j.p[g])return [];return j.p[g].map(([vi,sig,topic,claim,note,quote])=>{const v=j.v[vi]||[];
+    return SIGP.then(j=>{if(!j||!j.p||!j.p[g])return [];return j.p[g].map(([vi,sig,topic,claim,note,quote,n])=>{const v=j.v[vi]||[];
       return {h:claim||note||'Mentioned in a press conference',s:[claim&&note?note:'',quote?'“'+quote+'”':''].filter(Boolean).join(' '),d:v[0]?v[0]+'T17:00:00Z':null,
-        src:`Presser · ${v[2]||'coach'} (${v[1]||''})${topic?' · '+topic:''}`,url:v[3]||null,sig}})});
+        src:`Presser · ${v[2]||'coach'} (${v[1]||''})${topic?' · '+topic:''}${n>1?` · said in ${n} pressers that week`:''}`,url:v[3]||null,sig}})});
   }
   /* key = gsis id or "DEF:XX". Resolves {items (newest first), archived: n, live: 'direct'|'worker'|null} */
   function newsFor(key){
