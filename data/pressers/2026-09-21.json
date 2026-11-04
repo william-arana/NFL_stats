@@ -862,6 +862,117 @@
   "opponent": "Indianapolis Colts"
  },
  {
+  "id": "IND:indianapolis-colts-head-coach-shane-steichen-week-2-recap-colts-vs-kansas-city-chiefs-press-conference-media-availability-sunday-night-football-nfl-overtime",
+  "team": "IND",
+  "url": "https://www.colts.com/video/indianapolis-colts-head-coach-shane-steichen-week-2-recap-colts-vs-kansas-city-chiefs-press-conference-media-availability-sunday-night-football-nfl-overtime",
+  "title": "Shane Steichen: Week 2 recap, Colts vs. Chiefs",
+  "date": "2026-09-21",
+  "duration": 446,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/colts/oh6aeobpocma6spdth8h",
+  "kind": "day_after",
+  "after_week": 2,
+  "coach": "Shane Steichen",
+  "words": 1724,
+  "model": "claude-haiku-5-5",
+  "headline": "Alec Pierce's heel flare-up has no timetable yet, and Steichen says the next receivers up will have to step up.",
+  "summary": "Steichen said X-rays on Alec Pierce's heel were negative, but Pierce aggravated something in the heel that was previously procedure-treated, and the team is still gathering information from doctors and trainers. He gave no timeline and would not say whether Pierce will play next week, promising an update once more is known. He also said Charvarius Ward had growing tightness and that his status will be reassessed as the week goes on. Asked about the late-game decisions, Steichen defended the approach to the Laquon Treadwell catch in overtime, saying the offense was trying to score and the attempt simply failed. He said punting on fourth-and-four in regulation was preferred over going for it because Kansas City's kicker could make a long field goal with that much time left. On overtime, he said the choice to receive or defer depends on game flow, and that the defense holding Kansas City to a field goal was the key. He added that the offense needs to finish in the red zone. On the losing streak, he said the team is focused on 2026 rather than last year and needs to win close games, and he expects the team to be ready for a home game against Houston. On Tyler Warren's six catches for 21 yards, he said some targets were covered, the team checked down to the backs, and Warren remains a big part of the offense.",
+  "injuries": [
+   {
+    "player": "Alec Pierce",
+    "status": "unclear",
+    "detail": "X-rays negative, but he aggravated something in a heel that had a prior procedure. Team still gathering information; no timeline given.",
+    "player_id": "00-0037664"
+   },
+   {
+    "player": "Charvarius Ward",
+    "status": "limited",
+    "detail": "Growing tightness reported; Steichen will monitor how the week progresses. (Transcript name is garbled; this is taken from the video description.)",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Alec Pierce",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Availability for next week is unknown; no timeline given yet",
+    "note": "Pierce's absence leaves the receiver room thin, and his status is still unresolved.",
+    "quote": "I don't know that right now.",
+    "player_id": "00-0037664"
+   },
+   {
+    "player": "Tyler Warren",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Remains a big part of the offense and will keep getting targets",
+    "note": "Six catches suggest a sizable role in the passing game, and the coach says he remains a key option.",
+    "quote": "he's a big part of our offense",
+    "player_id": "00-0040128"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Fourth-down and overtime decisions",
+    "detail": "Steichen said punting on fourth-and-four in regulation was preferred because of Kansas City's kicker, and that the overtime receive-or-defer decision depends on game flow."
+   },
+   {
+    "topic": "Losing streak and locker room",
+    "detail": "Steichen said the team is focused on 2026, not last year's close losses, and that it must win close games."
+   },
+   {
+    "topic": "Receiver depth",
+    "detail": "If Pierce cannot play, Steichen said someone else will step up and he has confidence in the group, but he did not name the replacement."
+   }
+  ],
+  "opponent": "Houston Texans (home game next week)"
+ },
+ {
+  "id": "JAX:liam-coen-recaps-loss-to-the-broncos-press-conference",
+  "team": "JAX",
+  "url": "https://www.jaguars.com/video/liam-coen-recaps-loss-to-the-broncos-press-conference",
+  "title": "Liam Coen Recaps Loss to the Broncos | Press Conference",
+  "date": "2026-09-21",
+  "duration": 349,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/jaguars/u8kjshg88uixjb7tempv",
+  "kind": "day_after",
+  "after_week": 2,
+  "coach": "Liam Coen",
+  "words": 1309,
+  "model": "claude-haiku-5-5",
+  "headline": "Coach Coen says Travis Hunter didn't get enough targets against Denver and the staff will look for more ways to get him the ball.",
+  "summary": "Coen said the offense's first drive after halftime stalled, with a field goal missed, and that the team didn't finish the game despite a two-possession lead. He described the second-half and fourth-quarter failures as breakdowns in all three phases, including not winning one-on-one matchups in the pass rush, blocking, and catching. He said the Broncos mixed coverages early, which made short, dink-and-dunk passing less settling, and that the staff chose to keep attacking rather than shift to a run-heavy approach. On Travis Hunter, Coen said the staff needs to find more ways to get him opportunities, but he declined to comment on a penalty that was called on Hunter. Defensively, Coen said the rotation was the same plan used the previous week, and that pressuring Denver's quarterback will need to improve because the Broncos identified blitzes pre-snap and flipped protections. He also said the ball was coming out early and the offense was out of sync in the second half, and he took responsibility for not putting players in better positions.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Travis Hunter",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Staff will look for more ways to get Hunter targets after Denver limited his opportunities",
+    "note": "Coen acknowledged Hunter didn't get enough chances against a coverage-mixing defense, so his target share is a question mark until the staff adjusts.",
+    "quote": "find some more ways to get him some ops",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Scheme and defense",
+    "detail": "Coen said Denver mixed coverages, used play action and moving launch points, and identified pre-snap blitzes. He said the Jaguars will need to pressure the quarterback better and get out of or adjust blitzes when protections are flipped."
+   },
+   {
+    "topic": "Penalty",
+    "detail": "Coen said Travis Hunter was flagged after saying something on the field. He said he would not comment on the penalty and considered Hunter's play decent overall."
+   },
+   {
+    "topic": "Game recap",
+    "detail": "Coen called the field goal miss after the halftime drive and the second-half and fourth-quarter stalls the main problems in a 20-13 loss to Denver. He said the defense's goal-line stop before halftime gave the team momentum that wasn't carried through."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "KC:andy-reid-on-butker-s-game-winning-field-goal-not-an-easy-thing-to-do-he-did-it-with-a-lot-of-confidence",
   "team": "KC",
   "url": "https://www.chiefs.com/video/andy-reid-on-butker-s-game-winning-field-goal-not-an-easy-thing-to-do-he-did-it-with-a-lot-of-confidence",
@@ -1001,6 +1112,236 @@
    }
   ],
   "opponent": ""
+ },
+ {
+  "id": "LAC:jim-harbaugh-press-conference-monday-week-3-2026",
+  "team": "LAC",
+  "url": "https://www.chargers.com/video/jim-harbaugh-press-conference-monday-week-3-2026",
+  "title": "Jim Harbaugh on Building on Improvements Entering Week 3",
+  "date": "2026-09-21",
+  "duration": 1053,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/chargers/wm3a0nof0gux35kb400c",
+  "kind": "day_after",
+  "after_week": 2,
+  "coach": "Jim Harbaugh",
+  "words": 2453,
+  "model": "claude-haiku-5-5",
+  "headline": "Harbaugh says David Njoku and Charlie Kolar are headed to IR, with Kayode Awosika and Dalvin Tomlinson possibly missing time, and expects Oronde Gadsden II to take on a bigger role.",
+  "summary": "Harbaugh said David Njoku will go on IR with a fibula injury and Charlie Kolar will also go to IR with a forearm injury. He said Kayode Awosika and Dalvin Tomlinson may miss some time, though the Awosika classification was not settled. On film review he saw improvement and said the margins decided the game, citing penalties, fumbles and a few drives that fell short. He described a formula of improvement plus urgency plus belief in teammates. He expressed a lot of confidence in Oronde Gadsden II's expanded role. He praised the defensive line, Derwin James and the run defense, along with takeaways, goal-line stops and special teams kickoff coverage. He defended Justin Herbert, saying he handled adversity after two interceptions that were not his fault. He attributed the offense's procedural problems and false starts to growing pains and a need to find rhythm rather than to the new system. He said the schedule's upcoming stretch is very tough and the team is taking it one game at a time.",
+  "injuries": [
+   {
+    "player": "David Njoku",
+    "status": "ir",
+    "detail": "Going to IR with a fibula injury; the team is working through personnel moves at tight end.",
+    "player_id": "00-0033885"
+   },
+   {
+    "player": "Charlie Kolar",
+    "status": "ir",
+    "detail": "Going to IR with a forearm injury.",
+    "player_id": "00-0038046"
+   },
+   {
+    "player": "Kayode Awosika",
+    "status": "questionable",
+    "detail": "Coach said he may miss some time; the injury had not been formally classified.",
+    "player_id": "00-0036736"
+   },
+   {
+    "player": "Dalvin Tomlinson",
+    "status": "questionable",
+    "detail": "Coach said he may miss some time; no further detail given.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Oronde Gadsden II",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will take on a larger role at tight end following the Njoku and Kolar IR moves.",
+    "note": "With two tight ends going to IR, Gadsden's expanded role should translate into more targets and snaps.",
+    "quote": "a lot of confidence, um, in around his game",
+    "player_id": "00-0040189"
+   },
+   {
+    "player": "David Njoku",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Placed on IR with a fibula injury and will miss time.",
+    "note": "Njoku's absence removes a major tight end target and opens snaps for the remaining tight ends.",
+    "quote": "he'll be, uh, going to ir",
+    "player_id": "00-0033885"
+   },
+   {
+    "player": "Charlie Kolar",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Placed on IR with a forearm injury.",
+    "note": "Kolar's IR move further thins the tight end room and cuts his fantasy value to near zero for now.",
+    "quote": "same with Charlie Kolar",
+    "player_id": "00-0038046"
+   },
+   {
+    "player": "Kayode Awosika",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "May miss some time; injury classification not finalized.",
+    "note": "Uncertain availability for an offensive lineman has minimal direct fantasy impact but affects line depth.",
+    "quote": "I don't know if we've classified it.",
+    "player_id": "00-0036736"
+   },
+   {
+    "player": "Dalvin Tomlinson",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "May miss some time.",
+    "note": "Tomlinson's availability affects run defense snaps and interior line depth.",
+    "quote": "Uh, and Alvin may miss some time.",
+    "player_id": ""
+   },
+   {
+    "player": "Justin Herbert",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "Harbaugh defended Herbert's composure after two interceptions, which suggests confidence in his starting role and mentality.",
+    "quote": "that speaks volumes to who he is.",
+    "player_id": "00-0036355"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offense",
+    "detail": "Harbaugh described procedural penalties, false starts and fumbles as growing pains and said the offense is still finding rhythm. He pointed to protection and execution as positives and said the passing game was close to 350 yards."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Harbaugh praised the defensive line and Derwin James, and said the run defense was much improved. He cited takeaways, goal-line stops and three-and-outs as areas of progress."
+   },
+   {
+    "topic": "Special teams",
+    "detail": "Kickoff coverage and kickoff return were both described as improved."
+   },
+   {
+    "topic": "Schedule",
+    "detail": "Harbaugh called the upcoming 17-week stretch very tough and said the team is focused on one game at a time."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "LV:klint-kubiak-recap-week-2-chargers-nfl-2026-season",
+  "team": "LV",
+  "url": "https://www.raiders.com/video/klint-kubiak-recap-week-2-chargers-nfl-2026-season",
+  "title": "Klint Kubiak recaps Week 2 win: 'We got to prove it every week'",
+  "date": "2026-09-21",
+  "duration": 736,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/raiders/mwivxxtj7r6xwiym5e9i",
+  "kind": "day_after",
+  "after_week": 2,
+  "coach": "Klint Kubiak",
+  "words": 2760,
+  "model": "claude-haiku-5-5",
+  "headline": "Brock Bowers (limited) will practice this week, and Cody White had a standout game and is in line for a possible elevation.",
+  "summary": "Kubiak said Treydan Stukes is in the concussion protocol and that Brock Bowers will practice this week after a workout that was not enough to play him in Week 2. He said the team is still deciding whether Cody White goes back to the practice squad or gets elevated, and he praised White's game and his special teams and offensive contributions. On the offense, Kubiak credited Kirk Cousins for working through progressions and getting the ball to the backs, but said the run game needs to improve and the quarterback took too many hits (ten, two sacks). He pointed to Maxx Crosby as the centerpiece of a defensive front that is applying pressure, and praised the position coaches and coordinators. He said Nakobe Dean leads through production and leadership, and described the team's underdog mentality and the need to prove it every week. Kubiak said the team is turning the page quickly and now prepares for the Saints.",
+  "injuries": [
+   {
+    "player": "Treydan Stukes",
+    "status": "unclear",
+    "detail": "In the concussion protocol; no return timeline was given.",
+    "player_id": ""
+   },
+   {
+    "player": "Brock Bowers",
+    "status": "limited",
+    "detail": "Worked out but did not practice enough to play in Week 2; expected to practice this week.",
+    "player_id": "00-0039338"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Cody White",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Coach called him a model for making the most of opportunities; practice squad vs. elevation decision still pending",
+    "note": "A strong game plus a possible elevation suggests a bigger role on offense and special teams for the coming weeks.",
+    "quote": "he's the poster child for that right now.",
+    "player_id": "00-0035891"
+   },
+   {
+    "player": "Brock Bowers",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Will practice this week; was not ready to play in Week 2",
+    "note": "A practice week leaves his Week 3 availability open, so monitor the injury report on Wednesday.",
+    "quote": "Brock has worked his tail off",
+    "player_id": "00-0039338"
+   },
+   {
+    "player": "Maxx Crosby",
+    "topic": "matchup",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Draws heavy attention and anchors a pressure-generating defensive front",
+    "note": "His attention draws blockers away from others, which helps the rest of the pass rush and production.",
+    "quote": "Max you know demands a lot of attention.",
+    "player_id": ""
+   },
+   {
+    "player": "Nakobe Dean",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Serves as a defensive leader who makes plays and creates takeaways",
+    "note": "His consistent production and leadership keep him a strong IDP play as the defense gets more takeaways.",
+    "quote": "He's been a leader for our defense.",
+    "player_id": ""
+   },
+   {
+    "player": "Kirk Cousins",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Needs to protect himself better after being hit ten times and sacked twice",
+    "note": "Heavy pressure is a risk to his production if the offensive line does not improve.",
+    "quote": "our quarterback got hit too many times.",
+    "player_id": "00-0029604"
+   },
+   {
+    "player": "Tre Tucker",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Made a key play on a late-half throw from Cousins that sparked the offense",
+    "note": "The throw shows he can be targeted in pressure situations, though the coach did not single him out for a bigger role.",
+    "quote": "that was a big time big time throw.",
+    "player_id": "00-0038563"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Run game",
+    "detail": "Kubiak said the run game needs to improve after 11 first-half carries with little success and 18 second-half carries, and that sticking with the run is necessary even when it is not working."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Kubiak praised the defensive coaching staff and credited the pass rush and secondary, and said takeaways come from a consistent aggressive mentality."
+   },
+   {
+    "topic": "Team mindset",
+    "detail": "Kubiak said the team has short memories, is focused on winning one game at a time, and wants to keep proving itself each week."
+   }
+  ],
+  "opponent": "Saints"
  },
  {
   "id": "MIA:hc-jeff-hafley-sept-21-press-conference",

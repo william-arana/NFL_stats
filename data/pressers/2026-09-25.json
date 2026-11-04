@@ -348,6 +348,91 @@
   "opponent": "Miami Dolphins"
  },
  {
+  "id": "TEN:robert-saleh-press-conference-tennessee-titans-x3879",
+  "team": "TEN",
+  "url": "https://www.tennesseetitans.com/video/robert-saleh-press-conference-tennessee-titans-x3879",
+  "title": "Robert Saleh Press Conference | Tennessee Titans",
+  "date": "2026-09-25",
+  "duration": 485,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/titans/bkrfuhkoew6qfp9kixys",
+  "kind": "first_practice",
+  "after_week": 2,
+  "coach": "Robert Saleh",
+  "words": 1610,
+  "model": "claude-haiku-5-5",
+  "headline": "Nicholas Singleton is trending up and should see more touches, while Saleh says a heavy run game is the plan if weather hits.",
+  "summary": "Saleh opened with injury updates: Daniel Bellinger is back at practice after a sickness, Fernando Carmona is good, Cordale Flott will be limited again, and Marcus Harris is full despite a tweaked shoulder. He said he isn't worried about the game and that several players will practice. On weather, he said the run game is the easiest way to handle wind and rain, and that a strong run game and special teams give a team a chance to win. He dismissed the MetLife turf concerns as overblown, though he said players feel a real difference between turf and grass and their input should be heard. The team is using wet balls in practice because conditions are sunny. He explained that wind is read pregame through the kicker, the quarterback, and the coin-toss plan. Cam Ward's voice matters in play-calling, and Saleh stays in regular communication with Daboll to keep the offense aligned without dictating its calls. On Singleton, he said the rookie got touches last week, is still about 50/50 on reads, and is heading in the right direction, with more touches hoped for. He also described the practice-jersey color and scout-team recognition system, which rewards deliberate technique.",
+  "injuries": [
+   {
+    "player": "Daniel Bellinger",
+    "status": "full",
+    "detail": "Back at practice Friday after being out with a sickness.",
+    "player_id": "00-0038115"
+   },
+   {
+    "player": "Fernando Carmona",
+    "status": "full",
+    "detail": "Described as good.",
+    "player_id": "00-0040881"
+   },
+   {
+    "player": "Cordale Flott",
+    "status": "limited",
+    "detail": "Will be limited again in practice.",
+    "player_id": ""
+   },
+   {
+    "player": "Marcus Harris",
+    "status": "full",
+    "detail": "Tweaked his shoulder in practice but expected to be fine.",
+    "player_id": ""
+   },
+   {
+    "player": "Michael Carter",
+    "status": "limited",
+    "detail": "Listed as limited; transcript name is unclear ('Mike'), but Saleh said not worried about the game.",
+    "player_id": "00-0036924"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Nicholas Singleton",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will get more touches as the team builds his role.",
+    "note": "Getting touches and praised as a good back suggests a growing role, though he is still learning reads.",
+    "quote": "he's going to be a good back. He's going in the right direction.",
+    "player_id": "00-0040886"
+   },
+   {
+    "player": "Cam Ward",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Has real input into play-calling, including the play-action and under-center looks he likes.",
+    "note": "Ward's preferences are shaping the offense, which could affect how often the offense runs play-action.",
+    "quote": "his voice is very, very important.",
+    "player_id": "00-0040676"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Weather and run game",
+    "detail": "Saleh expects weather could be significant and says the run game will be emphasized to give the team the best chance to win."
+   },
+   {
+    "topic": "MetLife turf",
+    "detail": "Saleh called the turf concerns overblown but said players are sensitive to the feel difference between turf and grass, and that their input should be considered."
+   },
+   {
+    "topic": "Practice jerseys and scout team",
+    "detail": "Black jerseys go to scout-team players who are deliberate and technical in a developmental period. Position coaches evaluate them, and the recognition is meant to build a case for the 53-man roster."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "WAS:hc-dan-quinn-09-25-26",
   "team": "WAS",
   "url": "https://www.commanders.com/video/hc-dan-quinn-09-25-26",

@@ -474,5 +474,94 @@
    }
   ],
   "opponent": "Miami Dolphins"
+ },
+ {
+  "id": "TEN:robert-saleh-press-conference-tennessee-titans-x6531",
+  "team": "TEN",
+  "url": "https://www.tennesseetitans.com/video/robert-saleh-press-conference-tennessee-titans-x6531",
+  "title": "Robert Saleh Press Conference | Tennessee Titans",
+  "date": "2026-09-18",
+  "duration": 484,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/titans/xaux0teooppxydtok5kt",
+  "kind": "first_practice",
+  "after_week": 1,
+  "coach": "Robert Saleh",
+  "words": 1592,
+  "model": "claude-haiku-5-5",
+  "headline": "Anthony Hill is starting at Mike linebacker with Cody Barton expected in packages, Oluwafemi Oladejo had a promising edge debut, and Cedric Gray is full while James Williams remains limited.",
+  "summary": "The transcript is badly garbled. It mixes Titans-style injury and linebacker discussion with unrelated material, including a high school coach-of-the-week segment, a Matt LaFleur congratulations, and a Fred Warner anecdote. Saleh said Cedric (likely Cedric Gray) would be full, James Williams would stay limited, and a player named 'Cordell' popped up with tightness after practice, would not practice that day, and was not a concern for the game. He said a player coming off protocol was expected to clear by day's end. He described Anthony Hill as starting at Mike linebacker and praised his communication, noting he has Cody Barton beside him and Amani Hooker and Kevin Winston helping him. He said there will be moving parts and packages with Barton, who is also a starting linebacker. He praised Oluwafemi Oladejo's first game as an edge rusher, citing his run defense, clean play, athleticism and length, while noting he is still raw as a pass rusher. He said the team saves its extra captain announcement until after practice and picks players based on leadership, including off-field conduct. Confidence in the backup quarterback was also mentioned, though the name is unclear in the captions.",
+  "injuries": [
+   {
+    "player": "Cordell (unidentified; name unclear in captions)",
+    "status": "limited",
+    "detail": "Popped up with tightness after practice; will not practice today; coach has no concern for the game but will monitor.",
+    "player_id": ""
+   },
+   {
+    "player": "Cedric Gray",
+    "status": "full",
+    "detail": "Listed as full for today's practice.",
+    "player_id": ""
+   },
+   {
+    "player": "James Williams",
+    "status": "limited",
+    "detail": "Continues to be limited in practice.",
+    "player_id": ""
+   },
+   {
+    "player": "Unidentified player coming off protocol",
+    "status": "questionable",
+    "detail": "Expected to be evaluated by end of day and likely to clear; coach would be surprised if he did not.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Anthony Hill",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is starting at Mike linebacker",
+    "note": "Locked in as the starting Mike with strong praise for his communication and development, which supports his every-down role.",
+    "quote": "Anthony starting at Mike.",
+    "player_id": ""
+   },
+   {
+    "player": "Cody Barton",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will see package and playing-time changes alongside Anthony Hill",
+    "note": "Coach described a moving-parts linebacker rotation without committing to specifics, so Barton's snap share is uncertain.",
+    "quote": "there'll be some, some moving parts there.",
+    "player_id": ""
+   },
+   {
+    "player": "Oluwafemi Oladejo",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Played well in his first edge-rusher game and is developing in the system",
+    "note": "Strong run-game play and clean execution suggest a growing role, though he is still raw as a pass rusher.",
+    "quote": "Femi had a really nice game. Was really good in the run game.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Coach of the week and extra captain",
+    "detail": "Saleh mentioned a high school coach-of-the-week segment and said the extra captain is chosen weekly and announced after practice based on leadership on and off the field."
+   },
+   {
+    "topic": "Mindset and philosophy",
+    "detail": "Saleh discussed self-doubt, trusting the people around the team, and his philosophy of coaching young linebackers so they can play fast without being overcoached."
+   },
+   {
+    "topic": "Matt LaFleur",
+    "detail": "Saleh congratulated LaFleur on his first win and praised him as a smart, talented play caller."
+   }
+  ],
+  "opponent": ""
  }
 ]

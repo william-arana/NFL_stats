@@ -1029,6 +1029,125 @@
   "opponent": "Dallas Cowboys"
  },
  {
+  "id": "IND:shane-steichen-week-3-recap-colts-vs-texans",
+  "team": "IND",
+  "url": "https://www.colts.com/video/shane-steichen-week-3-recap-colts-vs-texans",
+  "title": "Shane Steichen: Week 3 recap, Colts vs. Texans",
+  "date": "2026-09-28",
+  "duration": 465,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/colts/lapnwqlhffxmqyyeyvvc",
+  "kind": "day_after",
+  "after_week": 4,
+  "coach": "Shane Steichen",
+  "words": 1780,
+  "model": "claude-haiku-5-5",
+  "headline": "Steichen says Daniel Jones has handled QB sneaks well and will keep getting them; Rigoberto Sanchez's kickoffs and Sauce Gardner's expanded role were also praised, while Spencer Shrader has a growing injury that's being monitored.",
+  "summary": "Steichen opened with injury notes: Laiatu Latu has a chest contusion and should be fine, Spencer Shrader has a growing issue that the staff will monitor through the week, and the player transcribed as \"Dooling\" is progressing with an ankle injury. He praised the defense for strong third-down and run-defense play and credited Daniel Jones for a late two-minute drive that set up the game-winning field goal. Asked about Jones's three turnovers, Steichen said ball security, including two hands on the ball in the pocket, is a point of emphasis and is being addressed with film. He called the Houston game one of those ugly, low-scoring wins he had predicted, given Houston's strong pass rush. Steichen said Jones has been successfully running quarterback sneaks the last couple of weeks, that Jones doesn't mind the role, and that it can be either called or audible at the line. He praised DeForest Buckner's work ethic and recovery from his neck injury, and said Sauce Gardner is in his second year and fully in the system, with coverage ability that will help the team. On special teams, he said Shrader has earned confidence on long kicks and that the team wants to get inside the 40, and he credited Rigoberto Sanchez for pinning the Texans deep on kickoffs and a late touchback. Steichen said the team will keep its Thursday-night travel plan, with a walkthrough Friday, and the next opponent is Washington.",
+  "injuries": [
+   {
+    "player": "Laiatu Latu",
+    "status": "questionable",
+    "detail": "Chest contusion; Steichen said he should be fine.",
+    "player_id": ""
+   },
+   {
+    "player": "Spencer Shrader",
+    "status": "unclear",
+    "detail": "Growing injury that the staff will monitor through the week; Steichen said he should be fine.",
+    "player_id": ""
+   },
+   {
+    "player": "Dooling (unverified, possibly a garbled roster name)",
+    "status": "unclear",
+    "detail": "Making progress with an ankle injury; the coach said they'll see how it goes this week.",
+    "player_id": ""
+   },
+   {
+    "player": "Alec Pierce",
+    "status": "unclear",
+    "detail": "Rehabbing, no surgery; he was seen in the press box in a cast.",
+    "player_id": "00-0037664"
+   }
+  ],
+  "signals": [
+   {
+    "player": "DeForest Buckner",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Continuing to play at an All-Pro level after returning from his neck injury",
+    "note": "Steichen's praise and Buckner's 1.5 sacks in Week 3 point to a strong, healthy interior pass rusher.",
+    "quote": "one of the hardest workers I've ever been around",
+    "player_id": ""
+   },
+   {
+    "player": "Sauce Gardner",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Playing a bigger role now in his second year, fully in the system and covering well",
+    "note": "Full-time playing time and coverage ability make him a stronger cornerback option for the team.",
+    "quote": "anytime you can have a guy that can cover like him",
+    "player_id": ""
+   },
+   {
+    "player": "Daniel Jones",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Has been handling quarterback sneaks and short-yardage runs in recent weeks, and it has worked",
+    "note": "Goal-line and short-yardage carries add rushing and touchdown upside for Jones.",
+    "quote": "he doesn't mind doing it",
+    "player_id": "00-0035710"
+   },
+   {
+    "player": "Rigoberto Sanchez",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Was a major factor on kickoffs, repeatedly pinning the Texans deep",
+    "note": "His kickoff role gives him a bigger job than a typical punter, which matters in leagues that count kicking production.",
+    "quote": "He was phenomenal.",
+    "player_id": ""
+   },
+   {
+    "player": "Spencer Shrader",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Trusted for long field goals and is the team's kicker in clutch situations",
+    "note": "Steichen's confidence supports Shrader's field goal volume, but his growing injury needs monitoring.",
+    "quote": "we'll have a lot of confidence in his ability",
+    "player_id": ""
+   },
+   {
+    "player": "Alec Pierce",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Still rehabbing with no surgery; no return timeline given",
+    "note": "No timeline means Pierce's availability for upcoming games is uncertain.",
+    "quote": "No, he's rehabbing. There's no surgery.",
+    "player_id": "00-0037664"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Ball security",
+    "detail": "Steichen said Daniel Jones committed three turnovers, and the team is emphasizing two hands on the ball in the pocket, with film clips in meetings."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Steichen praised the defense for third-down and run-defense performance, and said it held Houston to 17 points despite a strong pass rush."
+   },
+   {
+    "topic": "Travel",
+    "detail": "The team will keep its Thursday-night travel approach, with a red-eye flight, a Friday walkthrough, and Saturday and Sunday routines for players."
+   }
+  ],
+  "opponent": "Washington"
+ },
+ {
   "id": "KC:andy-reid-on-week-3-matchup-wins-are-very-hard-to-get-in-this-league-press-conference-9-28",
   "team": "KC",
   "url": "https://www.chiefs.com/video/andy-reid-on-week-3-matchup-wins-are-very-hard-to-get-in-this-league-press-conference-9-28",
@@ -1265,6 +1384,262 @@
    }
   ],
   "opponent": "Philadelphia Eagles"
+ },
+ {
+  "id": "LAC:jim-harbaugh-press-conference-monday-week-4-2026",
+  "team": "LAC",
+  "url": "https://www.chargers.com/video/jim-harbaugh-press-conference-monday-week-4-2026",
+  "title": "Jim Harbaugh on Making Corrections and Continuing to Grow",
+  "date": "2026-09-28",
+  "duration": 1481,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/chargers/prx52zy8klduc9dwzi5y",
+  "kind": "day_after",
+  "after_week": 3,
+  "coach": "Jim Harbaugh",
+  "words": 3490,
+  "model": "claude-haiku-5-5",
+  "headline": "Harbaugh gave no concrete scheme or role changes, but said Omarion Hampton's usage is open and Donte Jackson is in concussion protocol.",
+  "summary": "Harbaugh framed the Week 3 loss around small scheme, technique, and personnel corrections, not wholesale changes. He said the team is disciplined on tape and that the effort and talent are right, while the offense still needs better execution and more small wins. He credited Genesis Smith's two interceptions and praised Joe Alt for cleaning up false starts after a rough prior week. On the offense, he said the staff is looking at how to put Justin Herbert in the best position and declined to give specifics on the scheme. He said all options are open for the running backs, with no set carry plan, and that Omarion Hampton ran efficiently. He defended his fourth-down choices, including taking the field goal early and going for it late, and said he would not share a precise motion or short-yardage game plan. On injuries, he said Donte Jackson is in the concussion protocol and gave no timeline for other players.",
+  "injuries": [
+   {
+    "player": "Donte Jackson",
+    "status": "unclear",
+    "detail": "Harbaugh said 'Dante' (likely Donte Jackson) is in the concussion protocol; no timeline given.",
+    "player_id": ""
+   },
+   {
+    "player": "Unnamed reserve(s)",
+    "status": "unclear",
+    "detail": "Harbaugh said some players are 'healing rehabbing' but gave no updated timeline.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Omarion Hampton",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Could see an increase in touches, but no precise carry plan has been set.",
+    "note": "Harbaugh praised his efficient running but said all backs will be used and no workload is locked in.",
+    "quote": "all options are open",
+    "player_id": "00-0040666"
+   },
+   {
+    "player": "Genesis Smith",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Made two interceptions in the game and showed elite ball skills.",
+    "note": "Two picks in a single game signal a bigger defensive role and possible return or playmaking chances.",
+    "quote": "Yeah, it was, uh, uh, made some great plays.",
+    "player_id": ""
+   },
+   {
+    "player": "Joe Alt",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Had no false starts and elite play in Week 3 after three false starts the week before.",
+    "note": "Improved discipline and play quality support his standing as a reliable starter.",
+    "quote": "this week, no false starts and elite play",
+    "player_id": "00-0039897"
+   },
+   {
+    "player": "Quentin Johnston",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Harbaugh called him talented and said the staff must put him in the best positions, but gave no specifics.",
+    "note": "No concrete role change was announced, so his weekly target share is still unclear.",
+    "quote": "I think he's a tremendous talented player",
+    "player_id": "00-0038544"
+   },
+   {
+    "player": "Justin Herbert",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "The offense must be better, and staff is weighing small changes that put him in the best position.",
+    "note": "Harbaugh offered no concrete scheme change, so the offense's efficiency outlook stays uncertain.",
+    "quote": "We need to be better.",
+    "player_id": "00-0036355"
+   },
+   {
+    "player": "Donte Jackson",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "In the concussion protocol with no return timeline given.",
+    "note": "His availability for Week 4 is uncertain and depends on clearance.",
+    "quote": "Dante is in the concussion protocol.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive scheme and execution",
+    "detail": "Harbaugh said the offense needs better fundamentals and small-win improvements, with clear communication and more practice focus on the problem areas, but gave no details of schematic changes."
+   },
+   {
+    "topic": "Discipline and penalties",
+    "detail": "He said the team is disciplined on film, that false starts are being corrected, and that the group is focused on not repeating errors."
+   },
+   {
+    "topic": "Fourth-down decisions",
+    "detail": "Harbaugh defended the early field goal and the late fourth-down choice, saying he wanted points and the best odds to convert while accepting second-guessing."
+   },
+   {
+    "topic": "Defense",
+    "detail": "He said the defense showed real growth, especially in takeaways and big plays, and wants to build on it."
+   },
+   {
+    "topic": "Motion and short-yardage play calls",
+    "detail": "Harbaugh said motion gives an advantage against the next opponent, and he would not reveal more detail on short-yardage choices, saying all options remain open."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "LV:klint-kubiak-recap-raiders-week-3-win-saints-2026-season",
+  "team": "LV",
+  "url": "https://www.raiders.com/video/klint-kubiak-recap-raiders-week-3-win-saints-2026-season",
+  "title": "Klint Kubiak on the resilience shown in Raiders’ Week 3 come-from-behind victory",
+  "date": "2026-09-28",
+  "duration": 436,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/raiders/dnshh3qtselwqfwd1irv",
+  "kind": "day_after",
+  "after_week": 4,
+  "coach": "Klint Kubiak",
+  "words": 1517,
+  "model": "claude-haiku-5-5",
+  "headline": "Mike Washington Jr. has earned more opportunities after a big run; Jackson Powers-Johnson and Ashton Jeanty are expected back this week, while Jack Bech is out with an uncertain roster decision.",
+  "summary": "Kubiak said the Raiders' Week 3 come-from-behind win showed their resilience after falling two scores down in the second half, and that the four fourth-quarter takeaways were the difference. He said rookie Mike Washington Jr. made a major impact and has earned more opportunities. Jack Bech was hit in the forearm on a play where Kirk Cousins threw the ball away, and while he avoided a concussion, he will be out for a while, with his roster status still to be decided. Jackson Powers-Johnson has a sore groin and is expected back this week, and Ashton Jeanty is playing through sore ankles and should return at some point this week. He credited Nakobe Dean as a communicator and leader who elevates others, and said Maxx Crosby understands the value of managing snaps for the long season. Kubiak praised Michael Mayer's goal-line play and checkdown work, said Cody White and Dareke Young have exceeded expectations since arriving from Seattle, and gave credit to the defensive line, Malcolm Koonce, and the offensive line. The Raiders now turn to a division game against the Kansas City Chiefs.",
+  "injuries": [
+   {
+    "player": "Jack Bech",
+    "status": "out",
+    "detail": "Forearm hit on a Cousins throw-away; no concussion, expected to miss time, roster decision still TBD.",
+    "player_id": "00-0040729"
+   },
+   {
+    "player": "Jackson Powers-Johnson",
+    "status": "questionable",
+    "detail": "Sore groin; Kubiak expects him back this week, still being evaluated.",
+    "player_id": "00-0039735"
+   },
+   {
+    "player": "Ashton Jeanty",
+    "status": "questionable",
+    "detail": "Sore ankles, taped during game; Kubiak anticipates him returning at some point this week.",
+    "player_id": "00-0040122"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Mike Washington Jr.",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will receive more opportunities going forward after his big-impact game",
+    "note": "Kubiak's praise for a rookie backup after a big run points to an expanded role that could lift his touch volume.",
+    "quote": "it's definitely earned more opportunities.",
+    "player_id": "00-0040878"
+   },
+   {
+    "player": "Michael Mayer",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Remains heavily involved in the offense even with Brock Bowers back, and is valued in multiple roles",
+    "note": "Kubiak highlighted his goal-line production and checkdown plays, and a new contract, which supports continued targets near the goal line.",
+    "quote": "",
+    "player_id": "00-0039066"
+   },
+   {
+    "player": "Nakobe Dean",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Viewed as a defensive captain and leader who drives the unit's success",
+    "note": "Positive leadership framing suggests he remains a central piece of the defense, though this is not a direct usage change.",
+    "quote": "He's a leader. That's why we signed him to be a leader",
+    "player_id": ""
+   },
+   {
+    "player": "Cody White",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Has exceeded expectations in both the passing game and special teams",
+    "note": "Touchdown production plus special teams contributions make him a relevant depth piece for fantasy.",
+    "quote": "they've surpassed expectations with how hard they're playing",
+    "player_id": "00-0035891"
+   },
+   {
+    "player": "Dareke Young",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Has contributed in the passing game and on special teams since arriving from Seattle",
+    "note": "Kubiak lumped him with Cody White, but the transcript names him as Derrick Young; he is a depth contributor with limited standalone fantasy value.",
+    "quote": "they've surpassed expectations with how hard they're playing",
+    "player_id": "00-0037093"
+   },
+   {
+    "player": "Malcolm Koonce",
+    "topic": "matchup",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Made a key turnover and a big third-down stop in the win",
+    "note": "Pass-rush production that creates takeaways can add sack and tackle upside.",
+    "quote": "Malcolm Koonce a huge turnover huge third down stop for us.",
+    "player_id": ""
+   },
+   {
+    "player": "Maxx Crosby",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Will manage his snap count to stay available for the full season, per Kubiak",
+    "note": "Questions about resting him during games were answered generally, not with a specific snap plan, so his workload is unchanged in fantasy terms.",
+    "quote": "Max is about winning. So he understands that.",
+    "player_id": ""
+   },
+   {
+    "player": "Hezekiah Masses",
+    "topic": "matchup",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Is the starting cornerback and will face top opposing receivers each week",
+    "note": "Starting role is confirmed, though the coach's answer on his matchup against Chris Olave was generic.",
+    "quote": "he's going to be getting their best every week.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Week 3 comeback",
+    "detail": "Kubiak said the Raiders faced a two-score deficit and responded with four fourth-quarter takeaways, which he called the difference in the win. He framed it as a test of team resilience and toughness."
+   },
+   {
+    "topic": "Takeaways and ball security",
+    "detail": "Kubiak emphasized that protecting the ball and forcing turnovers are central to winning, and said the team is starting from scratch each week."
+   },
+   {
+    "topic": "Run game and trenches",
+    "detail": "Kubiak acknowledged the Saints' defensive line created problems for the run game, which needs improvement, and credited the offensive and defensive lines for the team's success."
+   },
+   {
+    "topic": "Defensive coaching",
+    "detail": "Kubiak praised defensive coordinator Rob Leonard and the staff for getting on the same page and communicating well on the sideline."
+   },
+   {
+    "topic": "Quarterbacks room",
+    "detail": "Kubiak credited Mike Sullivan, a former Army Ranger and longtime colleague from Denver, for his experience and influence on the quarterbacks."
+   }
+  ],
+  "opponent": "Kansas City Chiefs"
  },
  {
   "id": "MIN:kevin-o-connell-talks-about-the-trade-of-j-j-mccarthy-justin-jefferson-s-ankle-win-over-tampa-bay",

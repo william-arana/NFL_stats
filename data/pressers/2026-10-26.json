@@ -768,6 +768,89 @@
   "opponent": ""
  },
  {
+  "id": "HOU:demeco-ryans-on-accountability-using-the-bye-week-to-reset-full-q-a",
+  "team": "HOU",
+  "url": "https://www.houstontexans.com/video/demeco-ryans-on-accountability-using-the-bye-week-to-reset-full-q-a",
+  "title": "DeMeco Ryans on Accountability & Using the Bye Week to Reset | Full Q&A",
+  "date": "2026-10-26",
+  "duration": 1059,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/texans/rvzrhb0yqde2juojf9tl.jpg",
+  "kind": "day_after",
+  "after_week": 7,
+  "coach": "DeMeco Ryans",
+  "words": 3609,
+  "model": "claude-haiku-5-5",
+  "headline": "Ryans owns the tackling, penalty and close-game problems at 2-5; Nico Collins was doubled and Tank Dell gets praise, while David Montgomery's and the other injuries stay unclear entering the bye.",
+  "summary": "Ryans took ownership of the Texans' fundamentals problems, saying tackling and penalties start with him and that he needs to coach the details better and emphasize them more in practice. He said the team is sitting back instead of wrapping up and playing fast, and that the penalties come from blocking technique and holding. He called the 2-5 start unacceptable, noting five games have been decided in the final possession with only one win, and that the defense has not closed out those games. He said the offense's third-down struggles and the explosive plays allowed are his responsibility to fix, and he pointed to the Giants' physicality as the reason the offensive line and defense lost the line of scrimmage. On Nico Collins, he said the team was doubled because game flow prevented sustained drives, and he expressed confidence in Collins' ability to win contested catches. He gave no update on David Montgomery or the turf toe injury to another player, and said he is taking things one day at a time. He praised C.J. Stroud's season, said Tank Dell has earned his optimism through practice, and said the bye week will be used for evaluation and resetting.",
+  "injuries": [
+   {
+    "player": "David Montgomery",
+    "status": "unclear",
+    "detail": "Ryans said he did not have an update on Montgomery or the other player asked about, who was being evaluated for turf toe.",
+    "player_id": "00-0035685"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Nico Collins",
+    "topic": "matchup",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Collins will keep winning contested catches despite being frequently doubled",
+    "note": "Heavy double coverage limited his targets last game, so his volume depends on whether the offense sustains drives.",
+    "quote": "he can still come down with the contested catches",
+    "player_id": "00-0036554"
+   },
+   {
+    "player": "C.J. Stroud",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Stroud's play is carrying the team and will keep winning games for them",
+    "note": "Ryans gave Stroud high praise and said his play is why the team wins, supporting continued stable QB production.",
+    "quote": "CJ's done a fantastic job all year.",
+    "player_id": "00-0039163"
+   },
+   {
+    "player": "Tank Dell",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Dell's practice preparation has earned Ryans' optimism about his role going forward",
+    "note": "Ryans cited Dell's practice work over the last three weeks rather than a single play, suggesting a continued role in the offense.",
+    "quote": "I have a ton of optimism in tank",
+    "player_id": "00-0038977"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Tackling and penalties",
+    "detail": "Ryans said the team is not wrapping up tackles and is sitting back rather than playing fast, and that penalties (especially holding and blocking technique) need cleanup, with him taking responsibility for coaching them better."
+   },
+   {
+    "topic": "Close games and defense",
+    "detail": "Five games were decided in the final possession (1-4 in those), and the defense has been on the field to allow go-ahead or tying points in each. Ryans said he reviews this week to week and expects execution to close games."
+   },
+   {
+    "topic": "Offensive third downs and explosives",
+    "detail": "Ryans said third-down conversions and pressure handling must improve by getting better starts on first and second down, and that the staff will look into the explosive plays allowed on defense."
+   },
+   {
+    "topic": "Home record and morale",
+    "detail": "Ryans said the home record is not where they want it, and morale is poor at 2-5, but he said the team will reset during the bye week."
+   },
+   {
+    "topic": "Staff and scheme",
+    "detail": "Ryans said he expects to keep the current coaching staff and is confident in the offensive and defensive schemes, while acknowledging the need for better execution and adjustments."
+   },
+   {
+    "topic": "Injury: unidentified player",
+    "detail": "A player whose name was garbled in the captions (possibly Jalen Pitre) is being evaluated for turf toe; Ryans did not know the timeline. Verify before relying on this."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "IND:shane-steichen-week-7-recap-colts-at-vikings",
   "team": "IND",
   "url": "https://www.colts.com/video/shane-steichen-week-7-recap-colts-at-vikings",

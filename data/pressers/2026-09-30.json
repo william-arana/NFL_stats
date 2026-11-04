@@ -904,6 +904,145 @@
   "opponent": "Dallas Cowboys"
  },
  {
+  "id": "IND:indianapolis-colts-head-coach-shane-steichen-midweek-update-colts-vs-washington-commanders-nfl-london-press-conference-media-availability",
+  "team": "IND",
+  "url": "https://www.colts.com/video/indianapolis-colts-head-coach-shane-steichen-midweek-update-colts-vs-washington-commanders-nfl-london-press-conference-media-availability",
+  "title": "Shane Steichen: Midweek update, Colts vs. Commanders",
+  "date": "2026-09-30",
+  "duration": 550,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/colts/vqeospskqwkbmxc0mlvj",
+  "kind": "first_practice",
+  "after_week": 4,
+  "coach": "Shane Steichen",
+  "words": 2209,
+  "model": "claude-haiku-5-5",
+  "headline": "Alec Pierce is out for now and Daniel Jones is playing well, while Ashton Dulin's travel status to London is still unclear.",
+  "summary": "Steichen says the Colts are excited for the Thursday trip to London to face the Commanders, a well-coached team coming off a win over Seattle. He expects Washington's quarterback to be either Jayden Daniels or Marcus Mariota, both mobile, so the Colts must set strong rush lanes and coverage regardless. He describes Washington's defense as very multiple with frequent pressure and blitzes, and notes its coordinator came from Minnesota. On the travel plan, the team will try to stay on East Coast time and keep its schedule, and Steichen calls the Thursday-night trip a proven approach from past overseas games. He calls Stefon Diggs and Terry McLaurin explosive and says the Colts must limit their big plays by tracking their alignments and routes. On Daniel Jones, Steichen says he is completing close to 70% and should keep getting stronger as the season goes on, while the team focuses on protecting the ball in the pocket. He says losing Alec Pierce for now hurts the offense and that the staff must create chunk plays through scheme and favorable looks. Ashton Dulin is progressing well but his travel status is still undecided, and the team is working through which injured players will make the trip.",
+  "injuries": [
+   {
+    "player": "Alec Pierce",
+    "status": "out",
+    "detail": "Out for the time being; Steichen says losing him hurts the offense's big-play ability.",
+    "player_id": "00-0037664"
+   },
+   {
+    "player": "Ashton Dulin",
+    "status": "unclear",
+    "detail": "Progressing really well, but Steichen has not decided whether he will travel to London.",
+    "player_id": "00-0035021"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Daniel Jones",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will keep improving and getting stronger as the season goes on",
+    "note": "Steichen is praising his play and recovery from the Achilles injury, which supports his role as the starter.",
+    "quote": "he's been playing really good football. And I think he's only going to develop",
+    "player_id": "00-0035710"
+   },
+   {
+    "player": "Alec Pierce",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Is out for the time being",
+    "note": "With Pierce sidelined, the Colts' deep-ball and chunk-play upside shrinks, and other receivers may absorb targets.",
+    "quote": "Obviously losing Alec, you know, for the time being obviously hurts",
+    "player_id": "00-0037664"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Commanders QB situation",
+    "detail": "Steichen expects either Jayden Daniels or Marcus Mariota, who has played recently, and says the Colts will adapt to whoever plays Sunday."
+   },
+   {
+    "topic": "Commanders defense",
+    "detail": "Washington runs a multiple scheme with heavy pressure and blitzes under a coordinator who came from Minnesota."
+   },
+   {
+    "topic": "End-of-game and kicking strategy",
+    "detail": "Steichen discussed balancing aggression with clock management, the value of field goals versus kickoffs, and his end-game line for long kicks."
+   },
+   {
+    "topic": "London travel and preparation",
+    "detail": "The team will keep its normal meetings, hold a mock game Saturday, and aim to stay on East Coast time after the Thursday-night trip."
+   }
+  ],
+  "opponent": "Washington Commanders"
+ },
+ {
+  "id": "JAX:liam-coen-on-team-mentality-entering-week-4-continuing-to-respond-press-conference",
+  "team": "JAX",
+  "url": "https://www.jaguars.com/video/liam-coen-on-team-mentality-entering-week-4-continuing-to-respond-press-conference",
+  "title": "Liam Coen on Team Mentality Entering Week 4, Continuing to Respond | Press Conference",
+  "date": "2026-09-30",
+  "duration": 1018,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/jaguars/qyltpxhbuhxapdnpkqqu",
+  "kind": "day_after",
+  "after_week": 4,
+  "coach": "Liam Coen",
+  "words": 3097,
+  "model": "claude-haiku-5-5",
+  "headline": "Coen says Chris Rodriguez Jr. gained confidence and better run lanes in Week 3, and credits year-two continuity for fewer self-inflicted penalties.",
+  "summary": "Coen said the team's penalty discipline has improved in year two because players are running the same system on both sides of the ball, and he stressed that the group must stay disciplined and consistent over a long season. He praised Parker Washington's contested-catch ability and fearlessness at the catch point, saying the trait can't be coached and that Trevor Lawrence trusts him in critical situations. On the Bengals, he described Cincinnati's defense as patient and disruptive, with Dexter Lawrence drawing multiple gaps, and said Joe Burrow's accuracy and ability to extend plays are what make him dangerous. He said the message this week is about responding to adversity and focusing on the next play. Coen said he supports bringing back defensive pass interference challenges in critical moments. Looking at Denver, he said he watched their film from last year and noted personnel changes, and he said Denver has an injury at nickel this week. On offense, he said Chris Rodriguez Jr. was frustrated early in the season but got more room and momentum in Week 3, which helped him get downhill and score. Coen tied the team's rushing success to taking pressure off the quarterback and the offensive line in third-down, red-zone and two-minute situations.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Chris Rodriguez Jr.",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Rodriguez gets more room and momentum to run downhill, which should keep him productive in short-yardage and third-down spots.",
+    "note": "Coen says the run game is being built around Rodriguez's style and the offensive line is creating better lanes, which supports his touchdown and third-down upside.",
+    "quote": "we did a better job... just creating a little bit more room and momentum",
+    "player_id": "00-0038611"
+   },
+   {
+    "player": "Parker Washington",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Washington has the trust of Trevor Lawrence and will be used in critical situations, including third-and-long.",
+    "note": "Coen calls Washington fearless at the catch point and trusted in key moments, which supports his target share.",
+    "quote": "Parker's got the confidence to go and make that play.",
+    "player_id": "00-0038606"
+   },
+   {
+    "player": "Trevor Lawrence",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Lawrence has been playing well and is trusting his targets in critical situations.",
+    "note": "Coen says Lawrence is playing well and has confidence in Washington, which supports his passing production.",
+    "quote": "I thought Trevor was playing really well.",
+    "player_id": "00-0036971"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Discipline",
+    "detail": "Coen credits year two in the system and a focus on avoiding self-inflicted penalties for the team's improved discipline through three games."
+   },
+   {
+    "topic": "Bengals preview",
+    "detail": "Coen described Cincinnati's defense as patient and disruptive, led by Dexter Lawrence, and said Joe Burrow's extension ability makes him a major threat, with a focus on physical tackling and awareness against Ja'Marr Chase."
+   },
+   {
+    "topic": "Pass interference challenges",
+    "detail": "Coen said he supports bringing back challenges for defensive pass interference in critical moments so the outcome is earned by the players."
+   },
+   {
+    "topic": "Denver",
+    "detail": "Coen said he reviewed Denver's film from last year, noting personnel changes and an injury to their nickel defender this week, and felt the offense moved the ball well but failed to finish."
+   }
+  ],
+  "opponent": "Denver"
+ },
+ {
   "id": "KC:andy-reid-on-week-4-matchup-love-going-against-a-good-team-press-conference-9-30",
   "team": "KC",
   "url": "https://www.chiefs.com/video/andy-reid-on-week-4-matchup-love-going-against-a-good-team-press-conference-9-30",
@@ -1064,6 +1203,50 @@
    }
   ],
   "opponent": "Philadelphia Eagles (Week 4, at Philadelphia)"
+ },
+ {
+  "id": "LV:kirk-cousins-klint-kubiak-nfl-week-4-chiefs-2026-season",
+  "team": "LV",
+  "url": "https://www.raiders.com/video/kirk-cousins-klint-kubiak-nfl-week-4-chiefs-2026-season",
+  "title": "Kirk Cousins on Klint Kubiak: 'Nothing is going to get past his watchful eye'",
+  "date": "2026-09-30",
+  "duration": 577,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/raiders/vadmbzxowow4clmgblyh",
+  "kind": "first_practice",
+  "after_week": 4,
+  "coach": "Klint Kubiak",
+  "words": 2165,
+  "model": "claude-haiku-5-5",
+  "headline": "Cousins praises Brock Bowers' after-the-catch ability and says the chemistry with him is still developing ahead of the Chiefs game.",
+  "summary": "Quarterback Kirk Cousins spoke ahead of Sunday's game against the Kansas City Chiefs. He called head coach Klint Kubiak organized and detail-oriented, saying the play calls come in quickly and that Kubiak stays focused on coaching even after wins. Cousins said he has worked with Kubiak since their time together in 2019 and 2020 and in 2021, and he finds comfort in that. On Brock Bowers, he called the tight end very capable, with tremendous after-the-catch ability, good hands, and strong play strength, along with the intelligence and work ethic he brings. He said the on-field chemistry between them is still being built, noting they have not had as many reps together as he would like. He compared it to his earlier work with Justin Jefferson and Adam Thielen, where years of reps made the timing feel automatic. On the running game, Cousins said the offense needs to get it going, and that the coaching staff will stay committed to it and expects it to improve as the season goes on. He credited the defense for short fields in recent wins and framed team success as a shared effort. He also described Patrick Mahomes as a standard for quarterback play, and said no lead feels safe against the Chiefs.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Brock Bowers",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "Cousins praises Bowers' after-catch ability and hands, suggesting he remains a featured piece of the passing game against Kansas City.",
+    "quote": "his tremendous after the catch with the football",
+    "player_id": "00-0039338"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Play calling",
+    "detail": "Cousins praised Klint Kubiak's organization and relentless coaching standard, saying the offense feels like it is on the same page."
+   },
+   {
+    "topic": "Running game",
+    "detail": "Cousins said the offense needs to get the run game going at a higher clip and that the staff will stay committed to it."
+   },
+   {
+    "topic": "Chiefs matchup",
+    "detail": "Cousins framed Sunday's game against Kansas City as a major challenge, emphasizing Patrick Mahomes and the need to respect the Chiefs' scoring ability."
+   }
+  ],
+  "opponent": "Kansas City Chiefs"
  },
  {
   "id": "MIN:kevin-o-connell-talks-dolphins-game-adapting-offense-after-injuries-run-game-demond-claiborne",
@@ -1949,6 +2132,93 @@
    }
   ],
   "opponent": "Green Bay Packers"
+ },
+ {
+  "id": "TEN:robert-saleh-press-conference-tennessee-titans-x7758",
+  "team": "TEN",
+  "url": "https://www.tennesseetitans.com/video/robert-saleh-press-conference-tennessee-titans-x7758",
+  "title": "Robert Saleh Press Conference | Tennessee Titans",
+  "date": "2026-09-30",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/titans/iea7gephmv9sbssix9yx",
+  "kind": "day_after",
+  "after_week": 5,
+  "coach": "Robert Saleh",
+  "words": 2620,
+  "model": "claude-haiku-5-5",
+  "headline": "Saleh says Cam Ward's footwork is improving but downfield shots remain limited; John Franklin-Myers (back) sat Wednesday, and Pollard and Spears were also out, with the coach not overly concerned about Sunday.",
+  "summary": "Saleh opened with an injury update: John Franklin-Myers is dealing with a back issue and sat Wednesday, and Tony Pollard and Tyjae Spears were also out, though he is not overly concerned about any of them for Sunday. He said a player needs surgery and will be out for the rest of the year, but declined to say who will fill that spot or whether Pat Coogan would play guard or center. On Cam Ward, Saleh said his footwork and pocket presence are lasting longer into games and he is trusting the offensive line more, though he sometimes reverts to old habits late. He credited the staff and Ward's work ethic and expects the mechanics to stop being a topic eventually. Saleh said slow starts come from a mix of factors, including a fumbled opening kickoff, dropped passes, and defensive stops that didn't happen, and that the team's young group is getting better. He defended the offense's shot selection against two-high defenses, saying Ward has to be selective and take what defenses give, and said the team opened things up by running the ball in the second half. He praised JC Latham's season and said the new starter next to him has communicated well. He also said Ward and coordinator Daboll are communicating well while still learning a new system, and that a Baltimore game plan will focus on disciplined pass rush against Lamar Jackson's scrambling.",
+  "injuries": [
+   {
+    "player": "John Franklin-Myers",
+    "status": "out",
+    "detail": "Dealing with a back issue and will not practice Wednesday; Saleh not overly concerned about Sunday.",
+    "player_id": ""
+   },
+   {
+    "player": "Tony Pollard",
+    "status": "out",
+    "detail": "Will not practice Wednesday; Saleh not overly concerned about Sunday.",
+    "player_id": "00-0035261"
+   },
+   {
+    "player": "Tyjae Spears",
+    "status": "out",
+    "detail": "Will not practice Wednesday; Saleh not overly concerned about Sunday.",
+    "player_id": "00-0039032"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Cam Ward",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will be asked to be more selective on downfield shots and use his legs to find explosives when the defense gives him the chance",
+    "note": "Ward's deep-ball attempts have been rare, so the offense leans on the underneath and running game for production.",
+    "quote": "you got to be selective. And you still got to be a disciplined quarterback.",
+    "player_id": "00-0040676"
+   },
+   {
+    "player": "Cam Ward",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Footwork and pocket presence are improving and lasting longer in games, though they still slip late",
+    "note": "Late-game mechanical lapses are a concern for accuracy in close games.",
+    "quote": "you kind of see him kind of revert back to some old habits.",
+    "player_id": "00-0040676"
+   },
+   {
+    "player": "JC Latham",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Playing at a Pro Bowl level through three games",
+    "note": "Strong play from the right tackle supports protection for Ward and a stable offensive line.",
+    "quote": "",
+    "player_id": "00-0039731"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive line depth",
+    "detail": "Saleh declined to say who will replace the injured lineman or whether Pat Coogan would play guard or center; the spot is open and every option is on the table."
+   },
+   {
+    "topic": "Offensive approach",
+    "detail": "Saleh said the team's approach is fine, and that dropped passes, communication and execution are the issues being fixed, with the second half offering a glimpse of a better offense."
+   },
+   {
+    "topic": "Rules",
+    "detail": "Saleh opposes reinstating defensive pass interference reviews, saying human officiating is part of the game's character."
+   },
+   {
+    "topic": "Next opponent",
+    "detail": "Saleh referenced Lamar Jackson's mobility this week, so the next opponent appears to be the Baltimore Ravens (inferred from the transcript, not stated outright)."
+   }
+  ],
+  "opponent": "Baltimore Ravens"
  },
  {
   "id": "WAS:hc-dan-quinn-09-30-26",
