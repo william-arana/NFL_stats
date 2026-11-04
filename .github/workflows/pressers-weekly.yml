@@ -8,7 +8,7 @@ name: Pressers weekly
 on:
   push:  # TEMP test trigger, removed before merge
     branches: [pressers-weekly]
-    paths: [.github/workflows/pressers-weekly.yml]
+    paths: [.github/workflows/pressers-weekly.yml, scripts/update_pressers.py]
   schedule:
     - cron: "23 3 * * 4"    # Wed 7:23 PM PT: after Wednesday pressers are posted
     - cron: "37 17 * * 4"   # Thu 9:37 AM PT: late uploads / TNF teams
@@ -60,6 +60,7 @@ jobs:
           PRESSERS_TEAMS: ${{ matrix.teams }}
           PRESSERS_MODEL: ${{ env.MODEL }}
           PRESSERS_OUT: ${{ runner.temp }}/signals
+          PRESSERS_SKIP: CHI  # Bears video page freezes headless Chrome and has no caption track; separate source TBD
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           mkdir -p "$RUNNER_TEMP/private/logs"
