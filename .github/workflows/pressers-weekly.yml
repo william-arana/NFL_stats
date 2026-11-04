@@ -1,0 +1,135 @@
+name: Pressers weekly
+
+# Head-coach pressers, every week, all 32 teams in 4 parallel batches of 8 (~10-15 min).
+# Picks each coach's day-after-game + first-practice-day presser (scripts/update_pressers.py, weekly mode),
+# skips anything already done, so the second run only picks up late uploads.
+# Raw transcripts -> PRIVATE repo NFL_stats-transcripts (TRANSCRIPTS_TOKEN); signals -> data/pressers/ here.
+# Times are UTC; Pacific (standard time) in comments.
+on:
+  schedule:
+    - cron: "23 3 * * 4"    # Wed 7:23 PM PT: after Wednesday pressers are posted
+    - cron: "37 17 * * 4"   # Thu 9:37 AM PT: late uploads / TNF teams
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "Claude model"
+        default: claude-haiku-5-5
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pressers-weekly
+  cancel-in-progress: false
+
+env:
+  MODEL: ${{ inputs.model || 'claude-haiku-5-5' }}
+  PRIVATE_REPO: william-arana/NFL_stats-transcripts
+
+jobs:
+  teams:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        teams:
+          - "ARI ATL BAL BUF CAR CHI CIN CLE"
+          - "DAL DEN DET GB HOU IND JAX KC"
+          - "LA LAC LV MIA MIN NE NO NYG"
+          - "NYJ PHI PIT SEA SF TB TEN WAS"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-pressers.txt && python -m playwright install --with-deps chromium
+      - name: Clone private transcripts repo
+        env:
+          TOKEN: ${{ secrets.TRANSCRIPTS_TOKEN }}
+        run: |
+          test -n "$TOKEN" || { echo "TRANSCRIPTS_TOKEN secret is missing"; exit 1; }
+          git clone "https://x-access-token:${TOKEN}@github.com/${PRIVATE_REPO}.git" "$RUNNER_TEMP/private"
+      - name: Pressers
+        env:
+          PRESSERS_TEAMS: ${{ matrix.teams }}
+          PRESSERS_MODEL: ${{ env.MODEL }}
+          PRESSERS_OUT: ${{ runner.temp }}/signals
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/private/logs"
+          tag=$(echo "$PRESSERS_TEAMS" | tr ' ' '-')
+          python scripts/update_pressers.py --save-dir="$RUNNER_TEMP/private/transcripts/2026" 2>&1 \
+            | tee "$RUNNER_TEMP/private/logs/weekly-$(date -u +%Y-%m-%d)-${tag}.log"
+      - name: Push transcripts (private repo)
+        if: always()
+        working-directory: ${{ runner.temp }}/private
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && echo "No transcripts" && exit 0
+          git commit -m "Weekly transcripts: ${{ matrix.teams }} ($(date -u +%Y-%m-%d))"
+          git branch -M main
+          for i in 1 2 3 4 5 6; do
+            (git ls-remote --exit-code --heads origin main >/dev/null && git pull --rebase origin main || true) && git push origin main && break
+            sleep $((RANDOM % 10 + 5))
+          done
+      - name: Group name
+        id: g
+        run: echo "tag=$(echo '${{ matrix.teams }}' | tr ' ' '-')" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: signals-${{ steps.g.outputs.tag }}
+          path: ${{ runner.temp }}/signals
+          if-no-files-found: ignore
+          retention-days: 3
+
+  merge:
+    needs: teams
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: signals-*
+          path: ${{ runner.temp }}/parts
+      - name: Merge signals into data/pressers
+        run: |
+          python - "$RUNNER_TEMP/parts" <<'EOF'
+          import json, sys
+          from pathlib import Path
+          out = Path("data/pressers"); out.mkdir(parents=True, exist_ok=True)
+          idx_f = out / "index.json"
+          index = json.loads(idx_f.read_text()) if idx_f.exists() else {"dates": [], "done": {}}
+          n = 0
+          for part in Path(sys.argv[1]).glob("*"):
+              for f in part.glob("*.json"):
+                  if f.name == "index.json":
+                      sub = json.loads(f.read_text())
+                      index["done"].update(sub.get("done", {}))
+                      index["dates"] = sorted({*index["dates"], *sub.get("dates", [])}, reverse=True)
+                      continue
+                  tgt = out / f.name
+                  old = json.loads(tgt.read_text()) if tgt.exists() else []
+                  new = json.loads(f.read_text()); n += len(new)
+                  merged = {e["id"]: e for e in old + new}
+                  tgt.write_text(json.dumps(sorted(merged.values(), key=lambda e: (e["team"], e["id"])), ensure_ascii=False, indent=1))
+          from datetime import datetime, timezone
+          index["updated_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
+          idx_f.write_text(json.dumps(index, indent=1, sort_keys=True))
+          print(f"merged {n} summaries")
+          EOF
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/pressers
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Pressers weekly: $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
