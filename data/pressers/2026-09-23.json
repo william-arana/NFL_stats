@@ -531,6 +531,113 @@
   "opponent": "Philadelphia Eagles (Monday Night Football)"
  },
  {
+  "id": "CIN:zac-taylor-steelers-press-conference-week-3-2026-september-23",
+  "team": "CIN",
+  "url": "https://www.bengals.com/video/zac-taylor-steelers-press-conference-week-3-2026-september-23",
+  "title": "Zac Taylor Provides Injury Updates, Talks Steelers | PRESS CONFERENCE",
+  "date": "2026-09-23",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/bengals/vmkti6z3nn3ujn0h9av9",
+  "kind": "first_practice",
+  "after_week": 2,
+  "coach": "Zac Taylor",
+  "words": 2221,
+  "model": "claude-sonnet-5-5",
+  "headline": "WR Andrei Iosivas is headed to IR after thumb surgery, so Cincinnati's WR and TE rooms will have to absorb his targets. Joe Burrow was sore at Wednesday's practice, and Taylor gave no update beyond that.",
+  "summary": "Taylor opened with injuries. Andrei Iosivas tore a ligament in his thumb during the game and had surgery that morning. He goes on IR, and Taylor expects a stay a bit longer than the minimum window, though he has no firm timeline. B.J. Hill will be worked through the week while the team sees where he stands for the game. Jonathan Allen sat out Wednesday for load management. Taylor said Joe was sore and would be monitored through practice, but he gave no detail on the cause. With Iosivas down, Taylor said several players in the receiver and tight end rooms will get more opportunity, and he named none of them. Most of the rest of the session covered Pittsburgh: the Steelers' strong defensive front under new coordinator Patrick Graham, T.J. Watt's play, Heyward's tipped passes, and their big receivers and tight ends. He also talked about the Rodgers-McCarthy offense and the need to avoid pre-snap penalties on the road in a divisional game.",
+  "injuries": [
+   {
+    "player": "Andrei Iosivas",
+    "status": "ir",
+    "detail": "Torn ligament in his thumb, surgery Wednesday morning. Going on IR for the minimum window, possibly a bit longer; no timeline yet. Injured during the game.",
+    "player_id": "00-0038619"
+   },
+   {
+    "player": "B.J. Hill",
+    "status": "unclear",
+    "detail": "Being managed through the week; the team will see where he ends up for the game.",
+    "player_id": ""
+   },
+   {
+    "player": "Jonathan Allen",
+    "status": "out",
+    "detail": "Held out of Wednesday's practice for load management.",
+    "player_id": ""
+   },
+   {
+    "player": "Joe Burrow",
+    "status": "unclear",
+    "detail": "Described as sore and monitored through Wednesday's practice. The cause was not clear in the captions (possibly his back), so treat the attribution as tentative.",
+    "player_id": "00-0036442"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Andrei Iosivas",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Will be placed on IR with a thumb ligament tear and miss at least the minimum IR window.",
+    "note": "He is out of the WR rotation for several weeks, which opens up targets for other receivers and tight ends.",
+    "quote": "He'll be on IR.",
+    "player_id": "00-0038619"
+   },
+   {
+    "player": "B.J. Hill",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "His availability for the Steelers game will be decided as the week goes on.",
+    "note": "Defensive line depth is a concern if Hill is limited, and Allen is also being rested.",
+    "quote": "see where he ends up for this game",
+    "player_id": ""
+   },
+   {
+    "player": "Jonathan Allen",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Sat out Wednesday's practice for load management.",
+    "note": "This looks like a rest day rather than an injury, but it is worth tracking his practice reports.",
+    "quote": "Jonathan Allen will be out today load management",
+    "player_id": ""
+   },
+   {
+    "player": "Joe Burrow",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Burrow's participation depends on how he gets through Wednesday's practice while sore.",
+    "note": "Burrow's health is the top fantasy risk for the offense, and the captions may not clearly tie this soreness to him.",
+    "quote": "He's sore so we'll see how he gets through practice today",
+    "player_id": "00-0036442"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Steelers defense",
+    "detail": "Taylor called the Steelers front tremendous and said those players are still playing at a high level. He praised new coordinator Patrick Graham, whose scheme keeps some of the usual Steelers trademarks. Taylor said T.J. Watt still looks like he's in his prime and affects both the pass and run games."
+   },
+   {
+    "topic": "Steelers offense",
+    "detail": "Taylor highlighted DK Metcalf, Pat Freiermuth, Darnell Washington and Pittman, whose status is unknown. He described the Rodgers-McCarthy offense as one that gives the quarterback freedom at the line. He said it is too early to predict how it will look over the season."
+   },
+   {
+    "topic": "Tipped passes",
+    "detail": "Taylor said Heyward tipped passes at a high rate early this season and that Cincinnati has to combat that."
+   },
+   {
+    "topic": "Team mindset and penalties",
+    "detail": "Taylor downplayed the 2-0 start and said the team has not faced adversity yet. He called the road divisional game the first real test and said the team must cut pre-snap penalties, especially on offense."
+   },
+   {
+    "topic": "Replacing Iosivas",
+    "detail": "Taylor said the receiver and tight end rooms will share the load and expects those players to step up, but named no one."
+   }
+  ],
+  "opponent": "Pittsburgh Steelers"
+ },
+ {
   "id": "CLE:todd-monken-press-conference-september-23rd-2026",
   "team": "CLE",
   "url": "https://www.clevelandbrowns.com/video/todd-monken-press-conference-september-23rd-2026",

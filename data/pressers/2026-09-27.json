@@ -72,6 +72,147 @@
   "opponent": ""
  },
  {
+  "id": "BUF:joe-brady-talks-what-he-learned-from-the-24-16-victory-over-the-chargers",
+  "team": "BUF",
+  "url": "https://www.buffalobills.com/video/joe-brady-talks-what-he-learned-from-the-24-16-victory-over-the-chargers",
+  "title": "Joe Brady Talks What He Learned From the 24-16 Victory Over the Chargers",
+  "date": "2026-09-27",
+  "duration": 714,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/bills/j79fkcjcrglsgpc6rjih",
+  "kind": "postgame",
+  "after_week": 3,
+  "coach": "Joe Brady",
+  "words": 3008,
+  "model": "claude-sonnet-5-5",
+  "headline": "Bills won ugly (24-16) despite five turnovers; Ty Johnson made big plays and James Cook keeps the job despite a second straight fumble, while Christian Benford's injury status is unknown.",
+  "summary": "Joe Brady took the blame for five offensive turnovers in the 24-16 win over the Chargers. He called the day a fire alarm after weeks of talking about \"smoke detectors\" on ball security. He praised the defense for keeping the team in the game and highlighted C.J. Gardner-Johnson's interception in his return. He said he told the team at halftime the situation was \"perfect\" as a test of character. Brady said Greg Rousseau is playing a slightly different position with eyes in the backfield and a two-point stance, and that his confidence could open things up for Ed Oliver, Dion Dawkins and Bradley Chubb. Ty Johnson brought energy and playmaking, with a designed fourth-down play and a big third-down conversion, and it was good to get Frank Gore Jr. back involved. Brady stood by James Cook after a second straight game with a punched-out ball, saying he told Cook he would still get the ball on the next play. On injuries, he had no update on Christian Benford, who went down, and Maxwell Hairston and Davison Igbinosun filled in. He said he will review the pass protection issues, starting with his own play calling, and defended Josh Allen as someone the team rides with even on an off day.",
+  "injuries": [
+   {
+    "player": "Christian Benford",
+    "status": "unclear",
+    "detail": "Left the game; Brady said he had no report yet and will evaluate.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "James Cook",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Cook will keep getting the ball despite fumbling in consecutive games.",
+    "note": "Brady publicly backed Cook as the lead runner, so his workload looks safe despite ball-security worries.",
+    "quote": "that's not going to stop me from giving you the ball the next play",
+    "player_id": "00-0037248"
+   },
+   {
+    "player": "Ty Johnson",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Ty Johnson made a bigger impact on offense, with a fourth-down play and a third-down conversion.",
+    "note": "Johnson showed explosive playmaking and could carve out a larger change-of-pace or pass-game role.",
+    "quote": "Ty's on the field. Good things usually happen.",
+    "player_id": "00-0035537"
+   },
+   {
+    "player": "Frank Gore Jr.",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Gore did an outstanding job the first two weeks and was brought back into the mix this game.",
+    "note": "The comments about Johnson's return and Gore suggest a shared backfield, so Gore's role bears watching.",
+    "quote": "Frank obviously did an outstanding job the first two weeks",
+    "player_id": "00-0039471"
+   },
+   {
+    "player": "Gregory Rousseau",
+    "topic": "scheme",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Rousseau will keep rushing from a two-point stance with eyes in the backfield and keep his confidence going.",
+    "note": "Back-to-back two-sack games and a role tweak make him a rising IDP option.",
+    "quote": "He's playing a little different position. He has eyes in the backfield.",
+    "player_id": ""
+   },
+   {
+    "player": "Dalton Kincaid",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Kincaid fumbled while fighting for extra yards; Brady wants better ball security but not less effort.",
+    "note": "A turnover is a mild concern, but Brady framed it as a team-wide coaching issue rather than singling out Kincaid.",
+    "quote": "I want our guys fighting for extra yards",
+    "player_id": "00-0038933"
+   },
+   {
+    "player": "Christian Benford",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Benford's injury will be evaluated; no update is available yet.",
+    "note": "If he misses time, Hairston and Igbinosun step into bigger roles.",
+    "quote": "Nothing yet.",
+    "player_id": ""
+   },
+   {
+    "player": "Davison Igbinosun",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Igbinosun stepped in after Benford went down and will keep getting opportunities.",
+    "note": "He is first in line for snaps if Benford is out.",
+    "quote": "that guy definitely doesn't blink",
+    "player_id": ""
+   },
+   {
+    "player": "Maxwell Hairston",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Hairston was in the mix after Benford went down and wants to bounce back from a rough drive.",
+    "note": "Hairston may see more snaps if Benford is out, though he had a costly early play.",
+    "quote": "Max is going to want that first drive back",
+    "player_id": ""
+   },
+   {
+    "player": "C.J. Gardner-Johnson",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Gardner-Johnson is back on the field after a week of practice and made a big interception.",
+    "note": "He is back in the defensive back rotation and is a playmaker for IDP leagues.",
+    "quote": "So proud of CD man. Just finally getting out there.",
+    "player_id": ""
+   },
+   {
+    "player": "Josh Allen",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Allen had an off day with decisions he wants back, but the team will keep riding with him.",
+    "note": "No role concern, though pass protection issues could affect his efficiency.",
+    "quote": "we're always going to ride along with Josh",
+    "player_id": "00-0034857"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Ball security",
+    "detail": "Brady took the blame for five turnovers and said the team cannot gloss over it just because it won. He promised better play calling and more coaching of detail."
+   },
+   {
+    "topic": "Pass protection",
+    "detail": "Brady will review the breakdowns that led to hits on Josh Allen and said the review starts with his own play calling."
+   },
+   {
+    "topic": "Stadium",
+    "detail": "Brady said the new stadium is loud even in a day game and that he has nothing of note on conditions yet."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "CAR:dave-canales-evaluates-week-3-game-vs-browns",
   "team": "CAR",
   "url": "https://www.panthers.com/video/dave-canales-evaluates-week-3-game-vs-browns",
@@ -687,6 +828,70 @@
    }
   ],
   "opponent": ""
+ },
+ {
+  "id": "NE:head-coach-mike-vrabel-9-27-we-have-to-fix-a-lot-of-things",
+  "team": "NE",
+  "url": "https://www.patriots.com/video/head-coach-mike-vrabel-9-27-we-have-to-fix-a-lot-of-things",
+  "title": "Head Coach Mike Vrabel 9/27: \"We have to fix a lot of things\"",
+  "date": "2026-09-27",
+  "duration": 441,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/patriots/v7wmimqxv5eqd2ksoltk",
+  "kind": "postgame",
+  "after_week": 3,
+  "coach": "Mike Vrabel",
+  "words": 1539,
+  "model": "claude-sonnet-5-5",
+  "headline": "Vrabel is openly worried about the Patriots after a Week 3 loss to Jacksonville. Drake Maye's turnovers and hesitation are the focus, Morgan Moses was pulled early for Caleb Lomu, and the run defense got pushed around.",
+  "summary": "Vrabel opened by saying his concern level for the team is very high, and he repeatedly put the blame on himself. He said the Patriots are not taking care of the football, are not making good decisions, and are being beaten by turnovers, penalties, sudden-change situations and missed red zone chances. On Drake Maye, he insisted the quarterback knows the formations and plays but needs to react to defenses with more confidence. He said Maye shouldn't force things and sometimes wants it too badly, and he stressed that the people around him have to protect him and do their jobs. He described Maye as a young 24-year-old who shouldn't play like a robot, and said he had not seen this kind of turnover problem in practice. He also pointed to pre-snap penalties, saying Jacksonville's pass rushers counted the snap and the team jumped. On the offensive line, he said he took Morgan Moses out early because the game was lost and he wanted to get Caleb Lomu reps, and he wasn't aware of any job in jeopardy. He said the run defense struggled because the team got tired, missed a ton of tackles and couldn't get off the field on third down. He called for fixing things quickly before a road game at Buffalo.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Drake Maye",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Maye will work to correct his decision-making and ball security, and the coaches expect he can fix the hesitation and turnovers.",
+    "note": "Maye's turnovers and hesitation are a real concern for his fantasy floor, especially on the road against Buffalo, although Vrabel is publicly backing him.",
+    "quote": "We haven't made good decisions with the football.",
+    "player_id": "00-0039851"
+   },
+   {
+    "player": "Morgan Moses",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Moses was pulled in garbage time so Caleb Lomu could get reps, and Vrabel isn't aware of his starting job being in jeopardy.",
+    "note": "A shaky right tackle situation could affect Maye's protection and the offense's efficiency.",
+    "quote": "let's get Caleb some, some reps.",
+    "player_id": "00-0031330"
+   },
+   {
+    "player": "Caleb Lomu",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Lomu got playing time late in the loss when Vrabel pulled Moses.",
+    "note": "He is a backup to monitor for offensive line changes, but this was framed as a decision made in a lost game rather than a change.",
+    "quote": "",
+    "player_id": "00-0041541"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Turnovers and penalties",
+    "detail": "Vrabel said turnovers, missed red zone opportunities, pre-snap penalties and sudden-change breakdowns are what beat the team, and that these are areas where they are usually good."
+   },
+   {
+    "topic": "Run defense",
+    "detail": "The defense got tired, missed tackles and let Jacksonville push piles. Vrabel said that if you don't get off the field on third down it creates more chances for opponents."
+   },
+   {
+    "topic": "Coaching accountability",
+    "detail": "Vrabel said everything starts with him, and that he will review the tape and plan a practice schedule that prepares the team better."
+   }
+  ],
+  "opponent": "Buffalo Bills"
  },
  {
   "id": "NYG:postgame-press-conference-coach-john-harbaugh-on-win-over-titans",
