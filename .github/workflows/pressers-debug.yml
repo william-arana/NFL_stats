@@ -2,7 +2,7 @@ name: Pressers debug (one video)
 on:
   push:
     branches: [pressers-weekly]
-    paths: [scripts/debug_captions.py, .github/workflows/pressers-debug.yml]
+    paths: [scripts/debug_captions2.py, .github/workflows/pressers-debug.yml]
   workflow_dispatch:
     inputs:
       url:
@@ -20,4 +20,4 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install playwright && python -m playwright install --with-deps chromium
-      - run: python scripts/debug_captions.py "${{ inputs.url || 'https://www.chicagobears.com/video/ben-johnson-we-have-to-play-the-best-we-ve-played-all-year-on-monday-night-press-conference' }}"
+      - run: python scripts/debug_captions2.py "https://www.vikings.com/video/kevin-oconnell-on-the-run-game-week-8-lions-detroit"
