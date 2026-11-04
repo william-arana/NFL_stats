@@ -69,6 +69,15 @@ input:focus-visible,button:focus-visible,select:focus-visible,a:focus-visible{ou
 .setmenu .sm-seg button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
 @media (max-width:640px){.navtools .theme .lbl{display:none}}
 /* side panel mode (desktop): the open card docks on the right, full height; the page makes room on wide screens */
+.pc-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin:-2px 112px 8px 0;padding-top:2px}
+.pc-tabs::-webkit-scrollbar{display:none}
+.pc-tab{display:inline-flex;align-items:center;flex:none;max-width:170px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:6px 6px 0 0;background:var(--paper);color:var(--ink-2)}
+.pc-tab.on{background:var(--sheet);color:var(--ink);border-bottom-color:var(--blue)}
+.pc-tab button{border:0;background:none;color:inherit;cursor:pointer;font:500 11.5px var(--f-body);padding:4px 4px 4px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.pc-tab.on button{font-weight:600}
+.pc-tab button[data-tabx]{padding:4px 7px 4px 2px;color:var(--ink-3);font-size:13px;line-height:1}
+.pc-tab button[data-tabx]:hover{color:var(--margin)}
+.tab-ghost{border-style:dashed;transition:none}
 .pc.pc-side{position:fixed;top:8px;right:8px;left:auto!important;height:calc(100vh - 16px);max-height:none;border-radius:10px}
 @media (min-width:1200px){html.side-open body{margin-right:var(--side-w,460px)}}
 .navtools label{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:color-mix(in srgb,var(--nav-fg) 60%,transparent)}

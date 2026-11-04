@@ -21,7 +21,7 @@
     return `<div class="sm-h">Settings</div>
       ${sw('dark','Dark mode','',root.dataset.theme==='dark')}
       <div class="sm-sec">Player cards <small>(computer / tablet)</small></div>
-      ${sw('side','Side panel','Cards open docked on the right. Drag one out by its header to float it.',CS.get('side',false))}
+      ${sw('side','Side panel','Cards open docked on the right; each new name opens as a tab. Drag a card out by its header to float it.',CS.get('side',false))}
       ${sw('snap','Snap to screen edges','Drop a card on the top edge = full screen, left / right = half',CS.get('snap',true))}
       <div class="sm-row"><span><b>Cards on screen</b><small>Open card + pop-out windows</small></span><span class="seg sm-seg">${[2,3,4,5].map(n=>`<button type="button" data-max="${n}" aria-pressed="${n===max}">${n}</button>`).join('')}</span></div>`}
   function openSettings(btn,menu){const on=menu.hidden;menu.hidden=!on;btn.setAttribute('aria-expanded',String(on));if(on)menu.innerHTML=settingsHTML()}
