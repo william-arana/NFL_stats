@@ -286,6 +286,66 @@ def pick_backfill(vids: list[dict], team: str, weeks: range) -> list[dict]:
     return list({v["id"]: v for v in out}.values())
 
 
+def _games(team: str) -> list[tuple[datetime, int]]:
+    """All of the team's games as (UTC kickoff, week), oldest first (nflverse schedule, ET times)."""
+    from zoneinfo import ZoneInfo
+    et = ZoneInfo("America/New_York")
+    try:
+        d = json.loads(SCHEDULE.read_text())["data"]
+    except (OSError, KeyError, ValueError):
+        return []
+    return sorted(
+        (datetime.fromisoformat(f"{day}T{tm}").replace(tzinfo=et).astimezone(timezone.utc), wk)
+        for wk, day, tm, a, h in zip(d["week"], d["gameday"], d["gametime"], d["away_team"], d["home_team"])
+        if team in (a, h) and day and tm)
+
+
+def pick_all(vids: list[dict], team: str, weeks: range | None = None) -> list[dict]:
+    """Every head coach presser, labeled by its place in the week (anchored on the nflverse schedule):
+    postgame (within ~14h of kickoff, or tagged postgame), day_after (first later day), first_practice
+    (next day after that), final_practice (last one within 2 days of the next game), midweek (the rest).
+    v["week"] = week of the game it follows. One per (day, label): the longest video wins (clips of the
+    same presser often get posted separately)."""
+    from zoneinfo import ZoneInfo
+    et = ZoneInfo("America/New_York")
+    gs = _games(team)
+    def when(v: dict) -> datetime:
+        t = _ts(v)
+        if (t.hour, t.minute, t.second) == (0, 0, 0):  # date-only sitemap: treat as end of that ET day
+            t = datetime.combine(date.fromisoformat(v["date"]), datetime.max.time().replace(microsecond=0), et).astimezone(timezone.utc)
+        return t
+    slots: dict[tuple[int, str], list[dict]] = {}
+    for v in sorted((v for v in vids if v["hc"]), key=when):
+        t = when(v)
+        prev = [g for g in gs if g[0] <= t]
+        k, wk = prev[-1] if prev else (None, 0)
+        if weeks is not None and wk not in weeks:
+            continue
+        v["week"] = wk
+        v["_t"] = t
+        pg = v["postgame"] or (k is not None and t - k < timedelta(hours=14)
+                               and not (t.astimezone(et).date() > k.astimezone(et).date() and t.astimezone(et).hour >= 6))
+        slots.setdefault((wk, "pg" if pg else "rest"), []).append(v)
+    out: list[dict] = []
+    for (wk, grp), lst in slots.items():
+        days: dict[date, dict] = {}
+        for v in lst:  # longest video per ET day
+            dd = v["_t"].astimezone(et).date()
+            if dd not in days or (v.get("duration") or 0) > (days[dd].get("duration") or 0):
+                days[dd] = v
+        for i, (dd, v) in enumerate(sorted(days.items())):
+            if grp == "pg":
+                v["kind"] = "postgame"
+            else:
+                nxt = next((g[0] for g in gs if g[0] > v["_t"]), None)
+                close = nxt is not None and (nxt.astimezone(et).date() - dd).days <= 2
+                v["kind"] = "day_after" if i == 0 else "first_practice" if i == 1 else "final_practice" if close else "midweek"
+            out.append(v)
+    for v in out:
+        v.pop("_t", None)
+    return sorted(out, key=_ts)
+
+
 # ---------- 2. captions ----------
 
 def vtt_to_text(vtt: str) -> str:
@@ -575,7 +635,12 @@ def main() -> None:
         if "--list" in sys.argv:
             for v in sorted(allv, key=lambda v: v["date"]):
                 log(f"    {v['ts'][:19]} {'HC ' if v['hc'] else '   '}{'PG ' if v['postgame'] else '   '}{v['duration']:>5}s {v['title'][:70]} | {', '.join(v['tags'])[:50]}")
-        vids = allv if every else pick_backfill(allv, t, weeks) if weeks else pick_weekly(allv, t)
+        if every:
+            vids = allv
+        elif os.environ.get("PRESSERS_PICK", "all") == "all":  # every HC presser, labeled (daily run + backfill)
+            vids = pick_all(allv, t, weeks)
+        else:  # "two": the original day-after + first-practice pick
+            vids = pick_backfill(allv, t, weeks) if weeks else pick_weekly(allv, t)
         vids = [v for v in vids if v["id"] not in index["done"]]
         n_hc = sum(v["hc"] for v in allv)
         log(f"{t}: {len(allv)} press videos since {since}, {n_hc} head coach, picked: "
@@ -614,7 +679,7 @@ def main() -> None:
             continue
         entry = {k: v[k] for k in ("id", "team", "url", "title", "date", "duration", "thumb")}
         entry["kind"] = v.get("kind", "")
-        if v.get("week"):
+        if v.get("week") is not None:
             entry["after_week"] = v["week"]
         entry["coach"] = COACHES[v["team"]]
         entry.update(words=len(v["transcript"].split()), model=model, **s)
