@@ -111,6 +111,57 @@
   "opponent": "New England Patriots"
  },
  {
+  "id": "PIT:watch-mike-mccarthy-media-availability-oct-29",
+  "team": "PIT",
+  "url": "https://www.steelers.com/video/watch-mike-mccarthy-media-availability-oct-29",
+  "title": "WATCH: Mike McCarthy Media Availability (Oct. 29)",
+  "date": "2026-10-29",
+  "duration": 224,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/steelers/epof0pbivgtuseqngdpl.jpg",
+  "kind": "first_practice",
+  "coach": "Mike McCarthy",
+  "words": 831,
+  "model": "claude-haiku-5-5",
+  "headline": "McCarthy praised safety Jaquan Brisker's growing comfort and steady play, and said the injured-reserve players all have a chance to return, ahead of the Week 8 Browns game.",
+  "summary": "McCarthy said the Steelers value home-field energy at Acrisure Stadium and recognize that winning home games matters, with the Browns coming in as a tough test. On the offense's 27th-ranked red zone production, he pointed to the need to get into scoring position and to convert more trips into touchdowns, and said the week's game plan addresses that. He credited the Browns' habit of winning late in games as a reflection of how the NFL is played today, and said the team has prepared for those moments through training. He praised Jaquan Brisker, saying he is growing more comfortable with his assignments, his play-making ability is real, and the calls reflect that. McCarthy also said the defense's communication is improving every week, starting inside. When asked about the offense's inconsistency across games, he said it is part of the season and that the team is working on it daily, with no specific fix named. He would not name a specific player to expand his role beyond saying the younger player needs to keep practicing hard. On the players placed on injured reserve, he said he believes all of them have a chance to return, and did not suggest any season-ending injuries.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Jaquan Brisker",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Brisker's role is expanding as he grows more comfortable with the calls and the defense's assignments",
+    "note": "Coach praised his steadiness, big-play ability, and comfort with the calls, and the reporter noted he played nearly every snap, which supports a stable, high-usage role for IDP and defensive scoring purposes.",
+    "quote": "you see him more and more comfortable",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Red zone offense",
+    "detail": "Asked about the offense ranking 27th in red zone, McCarthy said the team wants to score more touchdowns and that the plan this week addresses it, without naming a specific fix."
+   },
+   {
+    "topic": "Late-game wins",
+    "detail": "McCarthy said winning in the fourth quarter is how the league is played today and that the team has prepared for those moments through training, not a special message."
+   },
+   {
+    "topic": "Offensive consistency",
+    "detail": "Asked about the offense being quiet until the fourth quarter in the last Browns game, McCarthy said it is part of the season and that the team has a good plan for this week."
+   },
+   {
+    "topic": "Injured reserve",
+    "detail": "McCarthy said he believes all the players recently placed on injured reserve have a chance to return. He did not name them, so no player-specific timeline was given."
+   },
+   {
+    "topic": "Home field",
+    "detail": "McCarthy stressed the value of the fans and the North Shore environment and said the team wants to win its home games."
+   }
+  ],
+  "opponent": "Cleveland Browns"
+ },
+ {
   "id": "SEA:head-coach-mike-macdonald-on-the-quenton-nelson-trade-preparing-for-week-8-press-conference-october-29-2026",
   "team": "SEA",
   "url": "https://www.seahawks.com/video/head-coach-mike-macdonald-on-the-quenton-nelson-trade-preparing-for-week-8-press-conference-october-29-2026",
