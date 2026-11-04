@@ -365,6 +365,80 @@
   "opponent": "Atlanta Falcons"
  },
  {
+  "id": "CHI:ben-johnson-excited-to-be-back-at-soldier-field-in-front-of-bears-fans-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-excited-to-be-back-at-soldier-field-in-front-of-bears-fans-press-conference",
+  "title": "Ben Johnson excited to be back at Soldier Field in front of Bears fans | Press Conference",
+  "date": "2026-09-16",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/bears/stnresa7ofibtidntdd1",
+  "kind": "first_practice",
+  "after_week": 1,
+  "coach": "Ben Johnson",
+  "words": 2202,
+  "model": "claude-haiku-5-5",
+  "headline": "Ben Johnson praised Caleb Williams' growing anticipation and decisiveness and said the offense will keep leaning into a heavy run game led by Jonah Jackson and Darnell Wright, with Luther Burden III also singled out for strong film work.",
+  "summary": "Johnson said the Bears are excited to return to Soldier Field and called the upcoming opponent, a division team on a six-game win streak, a very good and dangerous team. He said that opponent runs the ball at a high rate and has strong perimeter talent, and that its defense forces a lot of fumbles, which Chicago needs to clean up after one last week. He described the defense's blitz-heavy approach, led by Brian Flores, as hard to prepare for, and said the staff has to build answers for it each week. On the run game, he said Jonah Jackson and Darnell Wright are powerful enough that they are hard to stop, and the offense will lean into the right side when matchups call for it while still complementing it to the left. On Caleb Williams, he said the quarterback is playing with more anticipation, is seeing the field well, and got to the right target faster, with a strong week of preparation. Johnson also praised the receivers' work on film, which he showed to the team, and said the offense will keep giving the ball to players who execute most consistently. He was less satisfied with the defense, noting some three-and-outs and good technique but not enough winning performances for championship-level play. He stressed that home wins matter for the season.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Caleb Williams",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Williams continues to read the field faster and is getting to the right target quicker than before",
+    "note": "Improved processing and anticipation point to a more efficient passing offense and steadier fantasy output.",
+    "quote": "he continues to play with more anticipation",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Luther Burden III",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Burden was highlighted in film review as a receiver executing the game plan well",
+    "note": "Being singled out for film work and targeted by the offense supports his role in the passing game, though no usage change was stated.",
+    "quote": "",
+    "player_id": "00-0040735"
+   },
+   {
+    "player": "Jonah Jackson",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Offense will continue leaning into the right side run game against Minnesota",
+    "note": "Heavy run concepts toward his side reinforce the run-game plan but do not directly change fantasy value for skill players.",
+    "quote": "",
+    "player_id": "00-0036258"
+   },
+   {
+    "player": "Darnell Wright",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Offense will continue leaning into the right side run game against Minnesota",
+    "note": "Heavy run concepts toward his side reinforce the run-game plan but do not directly change fantasy value for skill players.",
+    "quote": "",
+    "player_id": "00-0038932"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Opponent and defense",
+    "detail": "Johnson described the opponent as a hot, six-game winning team that forces fumbles well. He said Flores' blitz packages come from all over, and he expects a new wrinkle since Flores hasn't shown everything on tape yet."
+   },
+   {
+    "topic": "Defensive performance",
+    "detail": "Johnson said the Bears had three-and-outs and good technique but not enough winning performances, and the defense needs to improve to reach championship level."
+   },
+   {
+    "topic": "Home field",
+    "detail": "Johnson said the team needs home wins and is counting on the Soldier Field crowd."
+   }
+  ],
+  "opponent": "Minnesota Vikings"
+ },
+ {
   "id": "CLE:todd-monken-press-conference-september-16th-2026",
   "team": "CLE",
   "url": "https://www.clevelandbrowns.com/video/todd-monken-press-conference-september-16th-2026",

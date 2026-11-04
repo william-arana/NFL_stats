@@ -1,5 +1,126 @@
 [
  {
+  "id": "CHI:ben-johnson-pleased-with-defense-s-performance-vs-jets-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-pleased-with-defense-s-performance-vs-jets-press-conference",
+  "title": "Ben Johnson pleased with defense’s performance vs. Jets | Press Conference",
+  "date": "2026-10-05",
+  "duration": 927,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bears/q2psnqrdvdwaknsgy9db.jpg",
+  "kind": "day_after",
+  "after_week": 4,
+  "coach": "Ben Johnson",
+  "words": 3249,
+  "model": "claude-haiku-5-5",
+  "headline": "Caleb Williams is out for Week 5 at Green Bay, Kyle Monangai has a day-to-day thumb injury, and Roschon Johnson may see more goal-line work.",
+  "summary": "Ben Johnson opened by praising the coaches and players for finding a 3-1 start and for the effort in the win over the Jets, while stressing that execution in all three phases still needs work. He defended Tyson Bagent, who had two interceptions negated and is now the starter, saying Bagent made good decisions and that the ball-security coaching is about balancing caution with aggression. Johnson said Kyle Monangai's thumb is expected to be fine and is a day-to-day issue. He said Caleb Williams is rehabbing well but will not play this week, and that his status is still week to week. On the defense, Johnson praised Dayo Odeyingbo's high-effort play as an interior rusher and credited better rush integrity and coverage windows for the third-down improvement. On red zone struggles, he said the issues vary week to week, with last week's problems tied to negative plays and this week's to detail, and he said Friday's red zone practice will be used to fix them. He suggested Roschon Johnson, with a bigger frame, could help near the goal line. Johnson said Theo Benedet's play at tackle was encouraging, and that the offense's core approach doesn't change much regardless of which quarterback is playing. Johnson described Jahdae Walker-style... no further detail, and said Swift's role for the coming week will be determined in practice after his fumble.",
+  "injuries": [
+   {
+    "player": "Caleb Williams",
+    "status": "out",
+    "detail": "Will not play this week; rehab is going well and his status is still week to week.",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Kyle Monangai",
+    "status": "questionable",
+    "detail": "Thumb injury; coach expects him to be okay and called it a day-to-day issue.",
+    "player_id": "00-0040236"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Caleb Williams",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Will not play this week; status remains week to week",
+    "note": "Confirms Williams is out, so Bagent remains the starter for the Packers game and the QB fantasy outlook stays unchanged.",
+    "quote": "He's not going to be there this week for us",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Kyle Monangai",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Thumb injury expected to be okay; day-to-day",
+    "note": "Practice reports this week will decide his status for the Packers game and whether the RB backfield changes.",
+    "quote": "more of a day to day type deal",
+    "player_id": "00-0040236"
+   },
+   {
+    "player": "Roschon Johnson",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "hedged",
+    "claim": "Could be part of the red zone and goal-line solution because of his bigger frame",
+    "note": "Goal-line usage could add touchdown upside even if his base snaps stay limited.",
+    "quote": "he might be part of the solution as well",
+    "player_id": "00-0039021"
+   },
+   {
+    "player": "D'Andre Swift",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Role for the coming week will be set in practice after his fumble",
+    "note": "A fumble raises the risk of reduced touches, so his weekly role is worth tracking closely.",
+    "quote": "each role is determined through the week of practice.",
+    "player_id": "00-0036275"
+   },
+   {
+    "player": "Dayo Odeyingbo",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Playing at a high level as an interior rusher",
+    "note": "His interior rush role and high effort suggest a strong, stable defensive contributor.",
+    "quote": "He's playing at a really high level, I think.",
+    "player_id": ""
+   },
+   {
+    "player": "Tyson Bagent",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Remains the starter; the coaching staff's game plan does not change much with him at QB",
+    "note": "Coaches are backing him as the starter despite the negated interceptions, which keeps his fantasy value steady.",
+    "quote": "the game didn't seem too big for him.",
+    "player_id": "00-0038416"
+   },
+   {
+    "player": "Theo Benedet",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Showed improved comfort and run-blocking ability at tackle",
+    "note": "Strong early play suggests a stable offensive line role that supports the run game.",
+    "quote": "I thought he did a really nice job.",
+    "player_id": "00-0039459"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Red zone",
+    "detail": "Johnson said red zone issues differ week to week, with Week 4 negative plays and this week's detail breakdowns. Friday's red zone practice is meant to fix them before game day."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Johnson credited better rush integrity, smaller coverage windows, and unselfish team pressure for the third-down improvement. He praised the defense for holding the Jets to two field goals after two sudden changes."
+   },
+   {
+    "topic": "Special teams",
+    "detail": "Johnson said the kickoff return unit needs improvement."
+   },
+   {
+    "topic": "Quarterbacks",
+    "detail": "Johnson said the playbook stays largely the same whether Bagent, Case Keenum, or Caleb Williams is playing."
+   }
+  ],
+  "opponent": "Green Bay Packers"
+ },
+ {
   "id": "HOU:demeco-ryans-on-tank-dell-defensive-fixes-titans-week-full-q-a",
   "team": "HOU",
   "url": "https://www.houstontexans.com/video/demeco-ryans-on-tank-dell-defensive-fixes-titans-week-full-q-a",

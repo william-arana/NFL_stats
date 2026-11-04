@@ -1,5 +1,100 @@
 [
  {
+  "id": "CHI:ben-johnson-on-preparing-for-packers-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-on-preparing-for-packers-press-conference",
+  "title": "Ben Johnson on preparing for Packers | Press Conference",
+  "date": "2026-10-07",
+  "duration": 660,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bears/pw6whdjzvgxa25vzzh0k.jpg",
+  "kind": "first_practice",
+  "after_week": 4,
+  "coach": "Ben Johnson",
+  "words": 2362,
+  "model": "claude-haiku-5-5",
+  "headline": "Tyson Bagent is expected to start again at Lambeau, with Ben Johnson pushing him to take more deep shots and Rome Odunze set to see more early targets.",
+  "summary": "Johnson opened by calling Green Bay a good team with a strong special teams unit, fast defenders, and a dangerous Packers offense led by Jordan Love, and said the road game will be a big challenge. He said the Packers' safeties fly around and will disguise coverages, so Bagent must keep his eyes disciplined and receivers must be precise in their routes. He praised Bagent's processing and said Bagent has handled pre-snap changes for the past year and a half, but he wants him to pull the trigger on second-level throws the team has been missing. Johnson said the crowd and cadence will be a test, and the team has used chaos in practice to prepare for it. He framed Bagent's next step as improving from his first start to his next, and said the team is still in a improvement phase after four weeks. On the skill players, he said Odunze and others needed more touches early and that Odunze's confidence is not the issue. Johnson said Swift's two fumbles are uncharacteristic, that last week's was egregious, and that ball security must tighten. He said Theo Benedet played solidly in the run game and will keep improving, and that Ozzy Trapilo is getting closer each week with a decision on the three returning players to be made at the end of the week. He called Jonah Jackson the team's top-graded offensive lineman and said his demeanor carries weight. Practice today will be padded but managed to balance reps after a heavy game workload.",
+  "injuries": [
+   {
+    "player": "Ozzy Trapilo",
+    "status": "returning",
+    "detail": "Getting closer each week after being on the 53; a decision on whether he and two other returning players are active will come at the end of the week.",
+    "player_id": "00-0040740"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Tyson Bagent",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Bagent will start again at Green Bay and is expected to take more shots downfield.",
+    "note": "Johnson is treating Bagent as the starter again and encouraging him to be more aggressive, which could lift his passing volume and upside.",
+    "quote": "",
+    "player_id": "00-0038416"
+   },
+   {
+    "player": "Rome Odunze",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Odunze will get more targets early in the game.",
+    "note": "Johnson said he wants to get Odunze the ball earlier, which could boost his volume and big-play chances.",
+    "quote": "try to get in his hands a little bit earlier in the game",
+    "player_id": "00-0039919"
+   },
+   {
+    "player": "D'Andre Swift",
+    "topic": "other",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Swift must tighten ball security after two fumbles this season.",
+    "note": "Fumbling problems could cost him snaps or touches if the coaching staff tightens the leash.",
+    "quote": "we just got to tighten that up",
+    "player_id": "00-0036275"
+   },
+   {
+    "player": "Theo Benedet",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Benedet is expected to play Sunday and contribute in the run game.",
+    "note": "Johnson praised his run blocking and said he should improve with more game experience, supporting a bigger role.",
+    "quote": "is only going to play better the more experience he gets",
+    "player_id": "00-0039459"
+   },
+   {
+    "player": "Ozzy Trapilo",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Trapilo is getting closer to returning but his availability for Sunday is undecided.",
+    "note": "A return would add a body up front, but the timeline is still uncertain until the end of the week.",
+    "quote": "he's getting closer and closer each and every week",
+    "player_id": "00-0040740"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Packers scheme and special teams",
+    "detail": "Johnson said Green Bay has new special teams and defensive schemes, a fast secondary, a new Mike linebacker who is instinctive, and a strong front, and said Packers coordinator Gannon does a great job."
+   },
+   {
+    "topic": "Practice and workload",
+    "detail": "The team will have a padded practice to work on technique, with reps managed after a heavy workload in the last game, when the offense ran 89 plays."
+   },
+   {
+    "topic": "Roster",
+    "detail": "There is one open roster spot, and decisions on returning players will be made at the end of the week. A player named Davenport retired after one game, which the coach called unexpected; the name is not on the roster provided."
+   },
+   {
+    "topic": "Cadence and crowd",
+    "detail": "Johnson said the team has used varying cadences and chaos in practice so that the crowd and pre-snap noise will not disrupt the offense, which is key for a road game at Lambeau."
+   }
+  ],
+  "opponent": "Green Bay Packers (at Lambeau Field)"
+ },
+ {
   "id": "HOU:demeco-ryans-on-taking-over-the-defense-tank-dell-s-return",
   "team": "HOU",
   "url": "https://www.houstontexans.com/video/demeco-ryans-on-taking-over-the-defense-tank-dell-s-return",

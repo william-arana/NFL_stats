@@ -393,6 +393,107 @@
   "opponent": "Detroit Lions"
  },
  {
+  "id": "CHI:ben-johnson-on-aaron-glenn-preparing-for-jets-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-on-aaron-glenn-preparing-for-jets-press-conference",
+  "title": "Ben Johnson on Aaron Glenn, preparing for Jets | Press Conference",
+  "date": "2026-09-30",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/bears/ttb6q9ynfluovugknwuy",
+  "kind": "day_after",
+  "after_week": 3,
+  "coach": "Ben Johnson",
+  "words": 2174,
+  "model": "claude-haiku-5-5",
+  "headline": "Bears QB decision remains open among three quarterbacks with Caleb Williams still limited, though Case Keenum's Monday night performance strengthens his case; Sunday starter will be revealed then.",
+  "summary": "Johnson said the Bears are weighing three quarterbacks for Sunday's game against the Jets and will work through the week before deciding, choosing whoever gives the best chance to win. He praised Case Keenum's decisive play in the most recent game, saying he handled pressure well and had a strong grasp of the game plan, and said that performance will factor into the evaluation. Caleb Williams is improving every day but will not participate in Wednesday's walkthrough. Braxton Jones is week to week and not practicing today, while Ozzy Trapilo is getting closer to swing tackle duty but is not yet certain for this week, with Jordan McFadden and Joe Thuney as other tackle options. Johnson said Malik Muhammad is a sticky outside corner on an upward trajectory despite some communication errors, and that the team has not said a word to a pass catcher over a dropped end-zone ball. He said pass catchers are eager for more targets and that distributing the ball is on him as play caller. On the Jets, Johnson described a strong special teams unit, a high-level offense with a quarterback completing passes at an elite rate, and a veteran defense. He has great respect for Aaron Glenn, his former Lions colleague, and expects Glenn's scheme and unscouted looks to make Sunday difficult. Johnson also said the defense is still defining roles and that the small sample size means the team will learn more over the next few games. He declined to challenge calls as a head coach.",
+  "injuries": [
+   {
+    "player": "Caleb Williams",
+    "status": "limited",
+    "detail": "Getting better every day but will not be at Wednesday's walkthrough; he is in the starting QB mix.",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Braxton Jones",
+    "status": "out",
+    "detail": "Week to week and not participating in Wednesday's practice.",
+    "player_id": "00-0037081"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Case Keenum",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "His strong Monday night performance is part of the evaluation for the Sunday starter.",
+    "note": "Keenum's recent play makes him a live option to start over Caleb Williams, which matters for both QB outlooks.",
+    "quote": "",
+    "player_id": "00-0028986"
+   },
+   {
+    "player": "Caleb Williams",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will not practice at Wednesday's walkthrough but is progressing daily; Sunday status is undetermined.",
+    "note": "Williams's availability and status for Sunday is uncertain, and his backup Keenum has gained ground.",
+    "quote": "",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Malik Muhammad",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will continue to play outside corner, having shown improvement and an upward trajectory through three games.",
+    "note": "Muhammad is locked into a starting outside corner role with ongoing growth, supporting his defensive snap share.",
+    "quote": "He's on an upward trajectory.",
+    "player_id": ""
+   },
+   {
+    "player": "Ozzy Trapilo",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Getting closer to being ready for swing tackle duty, but not certain for this week.",
+    "note": "A swing tackle role would primarily affect his practice and game-day usage rather than fantasy output.",
+    "quote": "He's getting closer. Um, I don't know if this will be the week or not.",
+    "player_id": "00-0040740"
+   },
+   {
+    "player": "Jordan McFadden",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Viewed as an option to fill in at tackle, including outside, if needed.",
+    "note": "McFadden's depth role could expand if injuries occur on the offensive line, with little direct fantasy impact.",
+    "quote": "I think a guy like Jordan McFadden has played out wide.",
+    "player_id": "00-0038595"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Quarterback competition",
+    "detail": "Johnson is weighing three quarterbacks and will not reveal the starter until Sunday. He said the decision is not hard and he trusts all three to win games."
+   },
+   {
+    "topic": "Jets matchup",
+    "detail": "Johnson called the Jets a strong team with the top special teams unit last year, a high-completion offense, and a veteran defense. He expects Aaron Glenn's unscouted looks to challenge the Bears."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Johnson said the defense is still defining roles and that competition is improving the group, with the defensive coordinator mixing up game plans."
+   },
+   {
+    "topic": "Passing game",
+    "detail": "Johnson said he is responsible for distributing touches to pass catchers, who all want more involvement."
+   }
+  ],
+  "opponent": "New York Jets"
+ },
+ {
   "id": "DAL:brian-schottenheimer-it-s-going-to-turn-press-conference",
   "team": "DAL",
   "url": "https://www.dallascowboys.com/video/brian-schottenheimer-it-s-going-to-turn-press-conference",

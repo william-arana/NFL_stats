@@ -1,5 +1,120 @@
 [
  {
+  "id": "CHI:ben-johnson-reviews-thursday-s-victory-gives-update-on-cole-kmet-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-reviews-thursday-s-victory-gives-update-on-cole-kmet-press-conference",
+  "title": "Ben Johnson reviews Thursday's victory, gives update on Cole Kmet | Press Conference",
+  "date": "2026-10-23",
+  "duration": 1139,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bears/w9fg7vtzfg3fjaisy28r.jpg",
+  "kind": "day_after",
+  "after_week": 8,
+  "coach": "Ben Johnson",
+  "words": 3907,
+  "model": "claude-haiku-5-5",
+  "headline": "Cole Kmet has a serious knee injury and goes on IR today; Sam Roush and Colston Loveland should see bigger roles, and Luther Burden III is the emerging playmaker.",
+  "summary": "Johnson said the team showed resolve winning Thursday on a short week and that the staff deserves credit for the preparation. The coming weekend is a mini bye that gives the staff time to evaluate personnel and scheme. He confirmed Cole Kmet's knee injury is serious and that Kmet will be placed on IR later Friday. Johnson praised Kmet as a leader and said the tight-end group will need to step up, pointing to practice-squad development as depth. He said Luther Burden III is elite with the ball in his hands and is being used more in intermediate routes, though the team has not yet targeted him over the top this year. Johnson also said Sam Roush's rep count will likely rise, and Colston Loveland's target share has grown, with a couple of drops against the Patriots he is expected to rebound from. On the offensive line, Theo Benedet was called solid at left tackle, and Jonah Jackson was described as playing through the week with a tough attitude. Caleb Williams was praised for speeding up his progressions and escaping pressure, though the offense still has pre-snap and holding penalties to clean up.",
+  "injuries": [
+   {
+    "player": "Cole Kmet",
+    "status": "ir",
+    "detail": "Serious knee injury, confirmed as season-ending; placed on IR later Friday.",
+    "player_id": "00-0036290"
+   },
+   {
+    "player": "Jonah Jackson",
+    "status": "full",
+    "detail": "Returned after leaving the Falcons game and played every snap against the Patriots; described as tough and fully committed.",
+    "player_id": "00-0036258"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Cole Kmet",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Going on IR later today with a serious knee injury, season over.",
+    "note": "Kmet's removal removes a key tight-end target and shifts snaps and targets to the remaining TEs.",
+    "quote": "",
+    "player_id": "00-0036290"
+   },
+   {
+    "player": "Sam Roush",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "High likelihood his rep count goes up with Kmet out.",
+    "note": "Roush is the most likely beneficiary of Kmet's snaps and could see a real TE2 role.",
+    "quote": "there's a high likelihood that his rep count is going to go up",
+    "player_id": "00-0041558"
+   },
+   {
+    "player": "Colston Loveland",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Target share has increased and the staff is working to get him more opportunities.",
+    "note": "Rising target share makes Loveland a stronger weekly option despite recent drops.",
+    "quote": "the target share has gone up a little bit",
+    "player_id": "00-0040126"
+   },
+   {
+    "player": "Luther Burden III",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will get more touches beyond screens and underneath routes, including deep shots.",
+    "note": "Johnson sees more to Burden's game than screens, which could raise his upside in the passing game.",
+    "quote": "He's got more speed than that, too.",
+    "player_id": "00-0040735"
+   },
+   {
+    "player": "Caleb Williams",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Progressions are quicker and he is escaping pressure more often, reducing negative plays.",
+    "note": "Faster reads and better escapes support steady efficiency for passing-game volume.",
+    "quote": "he has certainly sped up. Um, he's gone through the progressions a little bit quicker",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Theo Benedet",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will remain the starting left tackle and is doing a solid job.",
+    "note": "Stable LT play helps the run game and protects the passing offense.",
+    "quote": "Theo's doing a solid job for us right now.",
+    "player_id": "00-0039459"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Team schedule",
+    "detail": "The weekend is effectively a mini bye after the short-week win over the Patriots, giving the staff time to evaluate personnel and scheme."
+   },
+   {
+    "topic": "Defense",
+    "detail": "The run defense is built on technique, fundamentals, and swarming to the ball, with an emphasis on getting takeaways. Johnson said the defense is better than last year but has lacked takeaways."
+   },
+   {
+    "topic": "Penalties and time of possession",
+    "detail": "Johnson said pre-snap and holding penalties need to be cleaned up, and he downplayed time of possession as a stat while noting the offense's ball control has taken pressure off the defense."
+   },
+   {
+    "topic": "Late first-half defense",
+    "detail": "Johnson said the rush and tackling on the final play before halftime were not clean enough and said he should have communicated more clearly on the prior clock situation."
+   },
+   {
+    "topic": "Trick play",
+    "detail": "Johnson said the Joe Thuney tush-push play was legal and that the team was practicing it, with an earlier version that put the ball on the ground."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "CLE:todd-monken-press-conference-october-23rd-2026",
   "team": "CLE",
   "url": "https://www.clevelandbrowns.com/video/todd-monken-press-conference-october-23rd-2026",
