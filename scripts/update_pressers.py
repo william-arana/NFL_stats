@@ -73,7 +73,21 @@ def is_head_coach(team: str, title: str, desc: str, tags: list[str]) -> bool:
     pat = re.escape(last).replace("'", "['’]?")  # O'Connell / O’Connell / OConnell
     if re.search(r"\b(?:asst\.?|assistant)\s+(?:head coach|HC)\b", title, re.I):
         return bool(re.search(rf"\b{pat}\b", title, re.I))
-    return bool(re.search(rf"\b{pat}\b", title, re.I) or re.search(r"\bhead coach\b|\bHC\b", title, re.I))
+    m = re.search(rf"\b{pat}\b", title, re.I)
+    if m and _other_speaker_first(team, title[:m.start()]):
+        return False  # "Case Keenum praises Ben Johnson", "Drake Maye on Mike Vrabel": a player talking about him
+    return bool(m or re.search(r"\bhead coach\b|\bHC\b", title, re.I))
+
+
+_NOT_A_PERSON = re.compile(r"^(?:head coach|press conference|news conference|media availability|new england|green bay|"
+                           r"kansas city|las vegas|los angeles|new orleans|new york|san francisco|tampa bay|week \d+)$", re.I)
+
+
+def _other_speaker_first(team: str, before: str) -> bool:
+    """True if another person's name ("First Last") comes before the coach's name in the same title part."""
+    before = re.split(r"[|:“”\"–—]", before)[-1]  # only the part of the title the coach's name is in
+    before = re.sub(rf"\b{re.escape(COACHES[team].split()[0])}\s*$", "", before, flags=re.I)
+    return any(not _NOT_A_PERSON.match(p) for p in re.findall(r"\b([A-Z][\w'’.-]+ [A-Z][\w'’.-]+)\b", before))
 
 
 # Each club tags its videos a little differently ("Press Conferences", "Media Pass", Detroit's

@@ -1306,50 +1306,6 @@
   "opponent": "Philadelphia Eagles (Week 4, at Philadelphia)"
  },
  {
-  "id": "LV:kirk-cousins-klint-kubiak-nfl-week-4-chiefs-2026-season",
-  "team": "LV",
-  "url": "https://www.raiders.com/video/kirk-cousins-klint-kubiak-nfl-week-4-chiefs-2026-season",
-  "title": "Kirk Cousins on Klint Kubiak: 'Nothing is going to get past his watchful eye'",
-  "date": "2026-09-30",
-  "duration": 577,
-  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/raiders/vadmbzxowow4clmgblyh",
-  "kind": "first_practice",
-  "after_week": 4,
-  "coach": "Klint Kubiak",
-  "words": 2165,
-  "model": "claude-haiku-5-5",
-  "headline": "Cousins praises Brock Bowers' after-the-catch ability and says the chemistry with him is still developing ahead of the Chiefs game.",
-  "summary": "Quarterback Kirk Cousins spoke ahead of Sunday's game against the Kansas City Chiefs. He called head coach Klint Kubiak organized and detail-oriented, saying the play calls come in quickly and that Kubiak stays focused on coaching even after wins. Cousins said he has worked with Kubiak since their time together in 2019 and 2020 and in 2021, and he finds comfort in that. On Brock Bowers, he called the tight end very capable, with tremendous after-the-catch ability, good hands, and strong play strength, along with the intelligence and work ethic he brings. He said the on-field chemistry between them is still being built, noting they have not had as many reps together as he would like. He compared it to his earlier work with Justin Jefferson and Adam Thielen, where years of reps made the timing feel automatic. On the running game, Cousins said the offense needs to get it going, and that the coaching staff will stay committed to it and expects it to improve as the season goes on. He credited the defense for short fields in recent wins and framed team success as a shared effort. He also described Patrick Mahomes as a standard for quarterback play, and said no lead feels safe against the Chiefs.",
-  "injuries": [],
-  "signals": [
-   {
-    "player": "Brock Bowers",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "",
-    "note": "Cousins praises Bowers' after-catch ability and hands, suggesting he remains a featured piece of the passing game against Kansas City.",
-    "quote": "his tremendous after the catch with the football",
-    "player_id": "00-0039338"
-   }
-  ],
-  "topics": [
-   {
-    "topic": "Play calling",
-    "detail": "Cousins praised Klint Kubiak's organization and relentless coaching standard, saying the offense feels like it is on the same page."
-   },
-   {
-    "topic": "Running game",
-    "detail": "Cousins said the offense needs to get the run game going at a higher clip and that the staff will stay committed to it."
-   },
-   {
-    "topic": "Chiefs matchup",
-    "detail": "Cousins framed Sunday's game against Kansas City as a major challenge, emphasizing Patrick Mahomes and the need to respect the Chiefs' scoring ability."
-   }
-  ],
-  "opponent": "Kansas City Chiefs"
- },
- {
   "id": "MIN:kevin-o-connell-talks-dolphins-game-adapting-offense-after-injuries-run-game-demond-claiborne",
   "team": "MIN",
   "url": "https://www.vikings.com/video/kevin-o-connell-talks-dolphins-game-adapting-offense-after-injuries-run-game-demond-claiborne",
@@ -1483,87 +1439,6 @@
    }
   ],
   "opponent": "Miami Dolphins"
- },
- {
-  "id": "NE:drake-maye-on-mike-vrabel-9-30-i-love-playing-for-him-that-s-not-going-to-change",
-  "team": "NE",
-  "url": "https://www.patriots.com/video/drake-maye-on-mike-vrabel-9-30-i-love-playing-for-him-that-s-not-going-to-change",
-  "title": "Drake Maye on Mike Vrabel 9/30: \"I love playing for him, that's not going to change\"",
-  "date": "2026-09-30",
-  "duration": 547,
-  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/patriots/hme0qrx3whnxafturamd",
-  "kind": "first_practice",
-  "after_week": 5,
-  "coach": "Mike Vrabel",
-  "words": 2357,
-  "model": "claude-haiku-5-5",
-  "headline": "Maye says his shoulder isn't affecting his throwing and blames turnovers and decision-making for the offense's problems; Romeo Doubs is earning more trust.",
-  "summary": "Drake Maye pushed back on reports of a rift with Mike Vrabel, calling him one of the best coaches he's had and saying his enjoyment of playing for him won't change. Asked about his shoulder, he said it hasn't affected his throwing or decision-making, and that he felt good at practice. He said the offense isn't struggling to move the ball; the problem is turnovers and mistakes that stall drives before touchdowns. He added that he has made throws and decisions he wishes he could take back, and that the team needs to trust its line and playmakers. On the upcoming game at Buffalo, he described the Bills as well coached, disciplined, and hard to move the ball against, and noted the new stadium and their explosive offense. He said the Bills' defense under Jim Leonard uses similar concepts to the Sean McDermott staff but mixes in different personnel and tests opponents' strengths. He praised Romeo Doubs' growing trust, blocking, and work ethic, and called fullback Reggie Gilliam one of the best at his position and very smart. He also said the team won't simplify the offense, since the core of what they do is already established. On ball security, he said the running back ball-protection drills were reinforced with the running backs coach, and he emphasized holding the ball tighter.",
-  "injuries": [
-   {
-    "player": "Drake Maye",
-    "status": "unclear",
-    "detail": "Asked about his shoulder, he said it has not impacted his throwing or decision-making; no formal injury status was given.",
-    "player_id": "00-0039851"
-   }
-  ],
-  "signals": [
-   {
-    "player": "Romeo Doubs",
-    "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Maye's trust in Doubs is growing and he is contributing as a blocker and in the run game",
-    "note": "Maye's praise for his blocking and growing trust suggests Doubs's role is expanding beyond route running.",
-    "quote": "I'm only, you know, gaining more and more trust in Romeo",
-    "player_id": "00-0037816"
-   },
-   {
-    "player": "Reggie Gilliam",
-    "topic": "usage",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "The Patriots will keep using Gilliam to open up the run game",
-    "note": "Maye expects Gilliam to remain a key run-game piece, which supports fullback involvement in the offense.",
-    "quote": "just keep on using him, um, in ways to open up the run game",
-    "player_id": "00-0036187"
-   },
-   {
-    "player": "Drake Maye",
-    "topic": "injury",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "His shoulder is not affecting his throwing or decision-making",
-    "note": "Maye denied any shoulder impact, but he has not given a formal status, so monitor practice reports.",
-    "quote": "No it hasn't. It hasn't.",
-    "player_id": "00-0039851"
-   },
-   {
-    "player": "Drake Maye",
-    "topic": "usage",
-    "signal": "watch",
-    "tone": "hedged",
-    "claim": "Turnovers, not arm talent, are the main issue and he expects better decisions going forward",
-    "note": "Maye's admission about turnovers and decision-making is a concern for his passing efficiency and TD projection against Buffalo.",
-    "quote": "I'm turning the football over doing things that are preventing us from scoring touchdowns.",
-    "player_id": "00-0039851"
-   }
-  ],
-  "topics": [
-   {
-    "topic": "Bills defense",
-    "detail": "Maye described Buffalo as well coached, disciplined, and hard to play against, with a new stadium and a tough, explosive offense on the other side."
-   },
-   {
-    "topic": "Defensive scheme",
-    "detail": "Maye said Jim Leonard's defense uses structural concepts similar to the previous regime's, but mixes them with new personnel and tests opponents' strengths."
-   },
-   {
-    "topic": "Ball security",
-    "detail": "The team reinforced ball-security drills with the running backs coach after a fumble near the red zone; Maye emphasized holding the ball tighter."
-   }
-  ],
-  "opponent": "Buffalo Bills"
  },
  {
   "id": "NYG:coach-john-harbaugh-previews-week-4-vs-cardinals",
