@@ -200,6 +200,139 @@
   "opponent": "Philadelphia Eagles"
  },
  {
+  "id": "CHI:ben-johnson-on-adjustments-for-week-6-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-on-adjustments-for-week-6-press-conference",
+  "title": "Ben Johnson on adjustments for Week 6 | Press Conference",
+  "date": "2026-10-12",
+  "duration": 493,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bears/rgvplv9nwhyb5mhz9srk.jpg",
+  "kind": "day_after",
+  "after_week": 5,
+  "coach": "Ben Johnson",
+  "words": 1693,
+  "model": "claude-haiku-5-5",
+  "headline": "Ben Johnson has not named a Week 6 starting QB; Caleb Williams is still awaiting a green light, and the Tyson Bagent vs. Case Keenum decision is open with Bagent's interceptions a concern.",
+  "summary": "Johnson said there were no injury updates Monday and that the team expects to have more clarity Wednesday, with players expected to be available during the week. He was blunt that execution was not good enough in all three phases, and he said the staff is cleaning up offensive and defensive mistakes ahead of the trip to Atlanta. He said the run and pass games did not look as intended in the Packers loss, and that the defense had explosive plays to fix. He explained that the backfield was thinner than usual, which led to spreading touches among several quarterbacks and RBs, and that the plan did not produce what he hoped. On Caleb Williams, he said he is progressing and eager to return, but that his availability depends on getting the green light. He would not say who starts at quarterback if Williams is out, saying no determination has been made, and he defended Tyson Bagent's preparation while acknowledging a turnover-prone performance and saying the interceptions came from throws that didn't happen in camp. On the defense, he said the big plays were a team issue involving coverage, rushes, and calls. Kyler Gordon is mentally sharp and in a physical stress test, while Shemar Turner's roster status will be decided within days. Johnson said the team is 3-2 but 0-2 in the division, and that the next game is a road trip to Atlanta.",
+  "injuries": [
+   {
+    "player": "Caleb Williams",
+    "status": "limited",
+    "detail": "Progressing well but has not been cleared; availability depends on getting the green light, with no timeline given.",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Kyler Gordon",
+    "status": "returning",
+    "detail": "Mentally sharp, but still in a physical stress test to confirm he is ready to play in games.",
+    "player_id": ""
+   },
+   {
+    "player": "Shemar Turner",
+    "status": "unclear",
+    "detail": "Recovery progressing; team must decide within a couple of days whether to activate him to the 53-man roster.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Caleb Williams",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Availability for the next game is pending a medical green light; timeline not set",
+    "note": "His return timing is the biggest swing factor for the QB position and every pass-game player in the offense.",
+    "quote": "he's itching to get back as soon as he can",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Tyson Bagent",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Still in the mix to start at QB Wednesday if Caleb Williams is out; no decision made",
+    "note": "A possible starting role, but his turnovers and the lack of a decision make him a risky start.",
+    "quote": "I think we have three guys that can win games in this league.",
+    "player_id": "00-0038416"
+   },
+   {
+    "player": "Tyson Bagent",
+    "topic": "matchup",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Turnover and interception issues are being addressed; root cause not fully confirmed",
+    "note": "Two turnovers and interception concerns lower his floor in fantasy formats.",
+    "quote": "we can't put the ball in harm's way like we did with the two turnovers",
+    "player_id": "00-0038416"
+   },
+   {
+    "player": "Case Keenum",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Possible starter if Caleb Williams is out; no determination yet",
+    "note": "He is the alternative to Bagent, so his name is a watch-list item if Williams is sidelined.",
+    "quote": "no determination has been made in terms of, uh, what direction we're going",
+    "player_id": "00-0028986"
+   },
+   {
+    "player": "D'Andre Swift",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Ran hard with his opportunities; coach did not signal reduced role",
+    "note": "Positive praise for his effort suggests his role is secure, though rhythm in the run game was a problem.",
+    "quote": "He ran hard, uh, with the opportunities that he was given.",
+    "player_id": "00-0036275"
+   },
+   {
+    "player": "Kyle Monangai",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Backfield was thinner than usual, and touches were spread out; Monangai's role for the next game is not addressed",
+    "note": "His availability and workload affect the RB split, but the comment was about one game, not a stated plan.",
+    "quote": "with Monangai being active and going",
+    "player_id": "00-0040236"
+   },
+   {
+    "player": "Kyler Gordon",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Mentally ready; return depends on passing his physical stress test this week",
+    "note": "A cornerback return would help the defensive pass game, but the physical clearance is still pending.",
+    "quote": "I think mentally he's pretty sharp right now.",
+    "player_id": ""
+   },
+   {
+    "player": "Shemar Turner",
+    "topic": "trade_or_roster",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Roster decision expected within the next couple of days on whether to move him to the 53-man roster",
+    "note": "A roster move would signal his return timeline, but he is not an immediate fantasy factor.",
+    "quote": "whether we want to put him on the 53 or not",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive execution",
+    "detail": "Johnson said the offense did not get into a rhythm in the run or pass game, with three-and-outs and turnovers, and the staff is reviewing all five games."
+   },
+   {
+    "topic": "Defensive explosive plays",
+    "detail": "Johnson said the big plays came from a mix of coverage, rushes, and calls, and the defense must fix them."
+   },
+   {
+    "topic": "Standings",
+    "detail": "Johnson said the team is 3-2 overall but 0-2 in the division, and that the club has dug itself a hole."
+   }
+  ],
+  "opponent": "Atlanta"
+ },
+ {
   "id": "CIN:zac-taylor-week-5-2026-bye-week-press-conference",
   "team": "CIN",
   "url": "https://www.bengals.com/video/zac-taylor-week-5-2026-bye-week-press-conference",

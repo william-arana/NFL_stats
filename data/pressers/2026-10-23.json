@@ -1,5 +1,120 @@
 [
  {
+  "id": "CHI:ben-johnson-reviews-thursday-s-victory-gives-update-on-cole-kmet-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-reviews-thursday-s-victory-gives-update-on-cole-kmet-press-conference",
+  "title": "Ben Johnson reviews Thursday's victory, gives update on Cole Kmet | Press Conference",
+  "date": "2026-10-23",
+  "duration": 1139,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bears/w9fg7vtzfg3fjaisy28r.jpg",
+  "kind": "day_after",
+  "after_week": 8,
+  "coach": "Ben Johnson",
+  "words": 3907,
+  "model": "claude-haiku-5-5",
+  "headline": "Cole Kmet has a serious knee injury and goes on IR today; Sam Roush and Colston Loveland should see bigger roles, and Luther Burden III is the emerging playmaker.",
+  "summary": "Johnson said the team showed resolve winning Thursday on a short week and that the staff deserves credit for the preparation. The coming weekend is a mini bye that gives the staff time to evaluate personnel and scheme. He confirmed Cole Kmet's knee injury is serious and that Kmet will be placed on IR later Friday. Johnson praised Kmet as a leader and said the tight-end group will need to step up, pointing to practice-squad development as depth. He said Luther Burden III is elite with the ball in his hands and is being used more in intermediate routes, though the team has not yet targeted him over the top this year. Johnson also said Sam Roush's rep count will likely rise, and Colston Loveland's target share has grown, with a couple of drops against the Patriots he is expected to rebound from. On the offensive line, Theo Benedet was called solid at left tackle, and Jonah Jackson was described as playing through the week with a tough attitude. Caleb Williams was praised for speeding up his progressions and escaping pressure, though the offense still has pre-snap and holding penalties to clean up.",
+  "injuries": [
+   {
+    "player": "Cole Kmet",
+    "status": "ir",
+    "detail": "Serious knee injury, confirmed as season-ending; placed on IR later Friday.",
+    "player_id": "00-0036290"
+   },
+   {
+    "player": "Jonah Jackson",
+    "status": "full",
+    "detail": "Returned after leaving the Falcons game and played every snap against the Patriots; described as tough and fully committed.",
+    "player_id": "00-0036258"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Cole Kmet",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Going on IR later today with a serious knee injury, season over.",
+    "note": "Kmet's removal removes a key tight-end target and shifts snaps and targets to the remaining TEs.",
+    "quote": "",
+    "player_id": "00-0036290"
+   },
+   {
+    "player": "Sam Roush",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "High likelihood his rep count goes up with Kmet out.",
+    "note": "Roush is the most likely beneficiary of Kmet's snaps and could see a real TE2 role.",
+    "quote": "there's a high likelihood that his rep count is going to go up",
+    "player_id": "00-0041558"
+   },
+   {
+    "player": "Colston Loveland",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Target share has increased and the staff is working to get him more opportunities.",
+    "note": "Rising target share makes Loveland a stronger weekly option despite recent drops.",
+    "quote": "the target share has gone up a little bit",
+    "player_id": "00-0040126"
+   },
+   {
+    "player": "Luther Burden III",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will get more touches beyond screens and underneath routes, including deep shots.",
+    "note": "Johnson sees more to Burden's game than screens, which could raise his upside in the passing game.",
+    "quote": "He's got more speed than that, too.",
+    "player_id": "00-0040735"
+   },
+   {
+    "player": "Caleb Williams",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Progressions are quicker and he is escaping pressure more often, reducing negative plays.",
+    "note": "Faster reads and better escapes support steady efficiency for passing-game volume.",
+    "quote": "he has certainly sped up. Um, he's gone through the progressions a little bit quicker",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Theo Benedet",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will remain the starting left tackle and is doing a solid job.",
+    "note": "Stable LT play helps the run game and protects the passing offense.",
+    "quote": "Theo's doing a solid job for us right now.",
+    "player_id": "00-0039459"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Team schedule",
+    "detail": "The weekend is effectively a mini bye after the short-week win over the Patriots, giving the staff time to evaluate personnel and scheme."
+   },
+   {
+    "topic": "Defense",
+    "detail": "The run defense is built on technique, fundamentals, and swarming to the ball, with an emphasis on getting takeaways. Johnson said the defense is better than last year but has lacked takeaways."
+   },
+   {
+    "topic": "Penalties and time of possession",
+    "detail": "Johnson said pre-snap and holding penalties need to be cleaned up, and he downplayed time of possession as a stat while noting the offense's ball control has taken pressure off the defense."
+   },
+   {
+    "topic": "Late first-half defense",
+    "detail": "Johnson said the rush and tackling on the final play before halftime were not clean enough and said he should have communicated more clearly on the prior clock situation."
+   },
+   {
+    "topic": "Trick play",
+    "detail": "Johnson said the Joe Thuney tush-push play was legal and that the team was practicing it, with an earlier version that put the ball on the ground."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "CLE:todd-monken-press-conference-october-23rd-2026",
   "team": "CLE",
   "url": "https://www.clevelandbrowns.com/video/todd-monken-press-conference-october-23rd-2026",
@@ -115,6 +230,113 @@
    }
   ],
   "opponent": "Tennessee"
+ },
+ {
+  "id": "MIN:kevin-oconnell-jordan-mason-colts-week-7-2026",
+  "team": "MIN",
+  "url": "https://www.vikings.com/video/kevin-oconnell-jordan-mason-colts-week-7-2026",
+  "title": "Kevin O’Connell on Jordan Mason’s Status, Being Without Josh Oliver & Preparing for Colts in Week 7",
+  "date": "2026-10-23",
+  "duration": 569,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/vikings/wnvg6elbq8wdhrrtfjza.jpg",
+  "kind": "first_practice",
+  "after_week": 5,
+  "coach": "Kevin O'Connell",
+  "words": 1995,
+  "model": "claude-haiku-5-5",
+  "headline": "Jordan Mason is listed as questionable but will practice fully all week, and the coach expects him to be available vs. the Colts; Josh Oliver's absence remains a significant loss.",
+  "summary": "Kevin O'Connell opened by saying the team finished a good week of practice on the grass and is looking forward to playing at home against Indianapolis. He said Jordan Mason will practice fully all week and is technically questionable, but no other player will carry a game designation, so the roster is healthier. He is optimistic Mason will be available. O'Connell praised the run game's effort and blocking, including Kyler Murray's athleticism and receivers' blocking, and said Mason's return paired with Aaron Jones will be a positive, since Jones has carried a heavy workload. On the defensive side, he credited Ryan Nielsen's one-on-one teaching, especially pre-snap communication, and discussed how the Vikings' defense can disguise coverages and fronts. He said Kyler Murray reads those looks well. He also discussed how split-safety shells are suppressing explosive runs. Finally, he said losing Josh Oliver has been a big blow, since Oliver brought physicality and run blocking and complemented T.J. Hockenson. The team is adapting with more versatility, including Gavin Bartholomew, Ben Yurosek, Max Bredeson, and Caleb Tiernan in a jumbo package.",
+  "injuries": [
+   {
+    "player": "Jordan Mason",
+    "status": "questionable",
+    "detail": "Technically questionable but will practice fully all week; coach is optimistic he will be available vs. Indianapolis.",
+    "player_id": "00-0037525"
+   },
+   {
+    "player": "Josh Oliver",
+    "status": "unclear",
+    "detail": "Has missed time; coach described the absence as a significant loss, but gave no current status or return timeline.",
+    "player_id": "00-0035249"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Jordan Mason",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will practice fully all week and is expected to be available Sunday vs. Indianapolis.",
+    "note": "A full practice week and positive outlook point to Mason getting back into the backfield rotation.",
+    "quote": "he is technically questionable right now",
+    "player_id": "00-0037525"
+   },
+   {
+    "player": "Jordan Mason",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will be paired with Aaron Jones in the run game when healthy.",
+    "note": "Mason's return could cut into Jones's workload, so the split between the two is worth monitoring.",
+    "quote": "my excitement to see him paired with Aaron",
+    "player_id": "00-0037525"
+   },
+   {
+    "player": "Aaron Jones",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Has carried a heavy workload and may share backfield snaps with Jordan Mason.",
+    "note": "If Mason returns fully, Jones's volume could decline from the heavy load he has carried so far.",
+    "quote": "with the workload Aaron's had",
+    "player_id": "00-0033293"
+   },
+   {
+    "player": "Josh Oliver",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Has missed time and his absence has hurt the tight end group; no return date given.",
+    "note": "Without Oliver, the tight end snaps are concentrated on Hockenson and depth players, limiting upside for the position.",
+    "quote": "I knew when we lost him it was going to be a really significant thing",
+    "player_id": "00-0035249"
+   },
+   {
+    "player": "T.J. Hockenson",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Is now handling more of the tight end load with Oliver out.",
+    "note": "Hockenson is the primary tight end, and extra targets and snaps are likely while Oliver is out.",
+    "quote": "Great compliment to TJ.",
+    "player_id": "00-0035229"
+   },
+   {
+    "player": "Caleb Tiernan",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Has been used in jumbo packages, with the coach praising his work there.",
+    "note": "Tiernan's role in heavier personnel groupings could add snaps and some tight end production.",
+    "quote": "where I thought Caleb Tiernan did a nice job with that",
+    "player_id": "00-0041053"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Defense / Ryan Nielsen",
+    "detail": "Coach praised defensive coordinator Ryan Nielsen's individual teaching, pre-snap communication, and disguise schemes, including how the defense shrinks and changes its run looks."
+   },
+   {
+    "topic": "League-wide run game",
+    "detail": "Coach discussed split-safety shells limiting explosive runs. Teams are running more but averaging fewer yards per carry, and defenses prioritize preventing big plays."
+   },
+   {
+    "topic": "Depth",
+    "detail": "Coach said the roster depth is unique, pointing to a receiver who can play X, F, and Z spots and contributes on special teams, though the player was not confirmed in the transcript."
+   }
+  ],
+  "opponent": "Indianapolis Colts (Jonathan Taylor mentioned as their run threat)"
  },
  {
   "id": "NYJ:aaron-glenn-jets-press-conference-10-23-2026",

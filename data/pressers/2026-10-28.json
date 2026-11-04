@@ -379,6 +379,95 @@
   "opponent": "Baltimore Ravens"
  },
  {
+  "id": "CHI:ben-johnson-previews-monday-night-matchup-in-seattle-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-previews-monday-night-matchup-in-seattle-press-conference",
+  "title": "Ben Johnson previews Monday night matchup in Seattle | Press Conference",
+  "date": "2026-10-28",
+  "duration": 735,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bears/dtpiuervjjf4ioaamc9g.jpg",
+  "kind": "first_practice",
+  "after_week": 8,
+  "coach": "Ben Johnson",
+  "words": 2645,
+  "model": "claude-haiku-5-5",
+  "headline": "Caleb Williams is getting the ball out faster and more accurately, Daniel Hardy has earned more defensive snaps, and Montez Sweat is back in the lineup; Seattle's pass defense is the main concern this Monday.",
+  "summary": "Johnson opened by calling Seattle a tough, well-coached team that won the Super Bowl last year and plays in a hostile road environment. He said Seattle's defense wins by pressuring the quarterback with four rushers, taking away explosive plays, and forcing offenses into three-and-outs and red-zone struggles. He said Chicago must avoid self-inflicted mistakes, especially penalties, and take care of the football. On Caleb Williams, Johnson said he is getting rid of the ball a tick quicker and on rhythm, with more accurate and better-located throws after the catch, and that Williams is his own harshest critic. Johnson said Montez Sweat has been steady in the run game, though his counting stats are down because opponents are sliding protection and chipping him. He credited Daniel Hardy as one of the best at pressuring the passer over the last two weeks and said Hardy deserves more defensive playing time. Johnson said a knee-rehab player is on track but still a few weeks from change-of-direction work, and that the return timeline will be clearer over the next month. He also said the team will use the bye week for a deeper self-scout and that the running and passing games still have much room to improve.",
+  "injuries": [
+   {
+    "player": "Montez Sweat",
+    "status": "returning",
+    "detail": "Missed a couple of games and is back in the lineup; Johnson called him steady and wants him to get more one-on-one matchups.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Caleb Williams",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is getting the ball out on time more often and finding open receivers more consistently.",
+    "note": "Quicker, more accurate decisions suggest more efficient passing production and better receiver target quality.",
+    "quote": "you're seeing just a tick more of him playing on time and on rhythm",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Daniel Hardy",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Deserves more defensive playing time after strong pass rush the last two weeks.",
+    "note": "A larger defensive role could mean more tackle and sack opportunities for a player who is getting attention from the coaching staff.",
+    "quote": "a guy that certainly warrants a little bit more playing time on defense",
+    "player_id": ""
+   },
+   {
+    "player": "Austin Booker",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is making a strong impact getting to the quarterback.",
+    "note": "Pass rush production is a key driver of his fantasy value in this defense.",
+    "quote": "when you combine Booker's impact getting to the quarterback",
+    "player_id": ""
+   },
+   {
+    "player": "Montez Sweat",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will keep being challenged to win one-on-one pass rush matchups as double teams and chips reduce his opportunities.",
+    "note": "Sack and pressure totals depend on whether he gets single coverage, so his numbers may stay modest in the short term.",
+    "quote": "he's been kind of a steady Eddie guy for us",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Seattle opponent",
+    "detail": "Johnson said Seattle's defense is strong, especially in pass defense, and that the Seahawks' top receiver is getting double-digit targets nearly every week. He also expects a run-game emphasis after a recent trade."
+   },
+   {
+    "topic": "Chicago self-scout and penalties",
+    "detail": "Johnson said the team used the extra time to check formation and run-pass numbers, and that penalties hurt the team in recent weeks and must stop."
+   },
+   {
+    "topic": "Knee rehab player",
+    "detail": "Johnson said a player recovering from a knee injury is on track, is doing land running, and is still weeks away from change-of-direction work. The player's name was garbled in the captions, so no name is attributed here. Johnson kept the return target vague and will decide over the next month whether a return this season is possible."
+   },
+   {
+    "topic": "Trade deadline",
+    "detail": "Johnson said GM Ryan Poles handles trade talks, with the coaching staff involved in ongoing conversations about team needs now and in future years."
+   },
+   {
+    "topic": "Seattle defensive coordinator hire",
+    "detail": "Johnson praised Brian Fleury, who once overlapped with him in Miami, calling him sharp and well versed on both sides of the ball."
+   }
+  ],
+  "opponent": "Seattle Seahawks"
+ },
+ {
   "id": "CIN:zac-taylor-week-8-2026-press-conference-titans-october-28",
   "team": "CIN",
   "url": "https://www.bengals.com/video/zac-taylor-week-8-2026-press-conference-titans-october-28",

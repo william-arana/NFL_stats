@@ -103,6 +103,143 @@
   "opponent": "Chicago Bears"
  },
  {
+  "id": "CHI:ben-johnson-on-bears-week-6-mindset-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-on-bears-week-6-mindset-press-conference",
+  "title": "Ben Johnson on Bears' Week 6 mindset | Press Conference",
+  "date": "2026-10-14",
+  "duration": 633,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bears/b0wvdonlcczpikfcotvk.jpg",
+  "kind": "first_practice",
+  "after_week": 5,
+  "coach": "Ben Johnson",
+  "words": 2272,
+  "model": "claude-haiku-5-5",
+  "headline": "Caleb Williams's Week 6 status is still fluid, Austin Booker is gaining snaps, and Dayo Odeyingbo is expected to miss some time after going down in the Green Bay game.",
+  "summary": "Johnson said Wednesday's walk-through was a planned mid-season reset before the bye, and he framed Atlanta as a strong team in all three phases and a tough road test. He confirmed the Montez Sweat suspension, said he was not aware of an appeal, and said Sweat's absence is next-man-up. Dayo Odeyingbo went down in the Green Bay game; the coach said he will likely miss some time, though not enough to go on IR, and that defensive linemen who were active in camp may get opportunities. Johnson described Austin Booker as trending up in snaps and production, and said Shemar Turner's return to the 53-man roster helps. He said Tyrique Stevenson is more day-to-day and T.J. Edwards is more week-to-week. On the quarterback spot, he said Caleb Williams is expected to be full in practice, but the Sunday decision is still fluid and based on what is best for winning. He took responsibility for the offense's struggles and said health is the top priority for all the quarterbacks. On the backfield, he said the team will use running back by committee and will not lean on one back for 50-plus snaps. He said the offense must return to fundamentals, cut down on volume and three-and-outs, and clean up turnovers and explosive plays. On Kyler Gordon, he said the team is considering all options but the plan was to use the full 21-day window.",
+  "injuries": [
+   {
+    "player": "Montez Sweat",
+    "status": "out",
+    "detail": "Suspended, will miss multiple games; coach said he was not aware of an appeal.",
+    "player_id": ""
+   },
+   {
+    "player": "Dayo Odeyingbo",
+    "status": "unclear",
+    "detail": "Injured in the Green Bay game; likely to miss some time but not expected to go to IR. Duration unknown.",
+    "player_id": ""
+   },
+   {
+    "player": "Tyrique Stevenson",
+    "status": "questionable",
+    "detail": "Described as day-to-day after the recent game. Coach's name reference was unclear in the captions, so the player match is probable, not certain.",
+    "player_id": ""
+   },
+   {
+    "player": "T.J. Edwards",
+    "status": "doubtful",
+    "detail": "Described as week-to-week.",
+    "player_id": ""
+   },
+   {
+    "player": "Caleb Williams",
+    "status": "full",
+    "detail": "Coach said he will be a full participant in practice today; Sunday's starting decision is still fluid.",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Kyler Gordon",
+    "status": "unclear",
+    "detail": "On PUP; the team is considering all options but intended to use the full 21-day window.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Austin Booker",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is trending up in snap count and production and is a key option on defense.",
+    "note": "Booker's snaps and production are climbing, and Odeyingbo's injury could give him more defensive line work.",
+    "quote": "you've got a guy like Booker who certainly on on the up right now",
+    "player_id": ""
+   },
+   {
+    "player": "Dayo Odeyingbo",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Will likely miss some time after going down in the Green Bay game.",
+    "note": "Odeyingbo's absence reduces defensive line depth and creates a larger role for backups.",
+    "quote": "the shame of it is a guy like Dio going down in the game",
+    "player_id": ""
+   },
+   {
+    "player": "Caleb Williams",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will be a full participant in practice today, but Sunday's starting decision is still fluid.",
+    "note": "His availability and starting status for Sunday are still uncertain, which affects the entire passing offense.",
+    "quote": "it's still fluid, but, uh, you know, I feel good about the plan",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Rome Odunze",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Is part of the broader push for consistency and reduced volume, with the coaching focus on fundamentals.",
+    "note": "The coach framed Odunze's inconsistency as an offensive issue rather than a single-player problem, so his role is not clearly changing.",
+    "quote": "I think that's the story the whole offense right now.",
+    "player_id": "00-0039919"
+   },
+   {
+    "player": "D'Andre Swift",
+    "topic": "usage",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Will share carries in a running back committee and will not get 50-plus snaps in a game.",
+    "note": "Swift's workload is capped by the committee approach, which limits his fantasy ceiling in game-script-dependent weeks.",
+    "quote": "",
+    "player_id": "00-0036275"
+   },
+   {
+    "player": "Montez Sweat",
+    "topic": "trade_or_roster",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Is suspended and will miss multiple games.",
+    "note": "Sweat's absence removes a key pass rusher from the defensive line rotation for several weeks.",
+    "quote": "we lose a player of his caliber for multiple games",
+    "player_id": ""
+   },
+   {
+    "player": "Kyler Gordon",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Could come off PUP, but the team is still considering all options and wants him to complete the 21-day window.",
+    "note": "A PUP activation would add a cornerback option, but the timing is uncertain.",
+    "quote": "",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Week 6 opponent and game plan",
+    "detail": "Johnson described Atlanta as a strong team in all three phases, singled out their running game as elite, and said the Bears need to clean up explosive plays and play better as one unit."
+   },
+   {
+    "topic": "Offensive struggles",
+    "detail": "Johnson said the offense has had too many three-and-outs and turnovers, and that the red zone was still a problem with a 1-for-2 result last week. He said the focus is on fundamentals and rhythm."
+   }
+  ],
+  "opponent": "Atlanta"
+ },
+ {
   "id": "IND:shane-steichen-midweek-update-colts-vs-titans-x1603",
   "team": "IND",
   "url": "https://www.colts.com/video/shane-steichen-midweek-update-colts-vs-titans-x1603",

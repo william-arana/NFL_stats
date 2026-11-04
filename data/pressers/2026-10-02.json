@@ -1,5 +1,114 @@
 [
  {
+  "id": "CHI:ben-johnson-on-qbs-we-have-guys-we-believe-in-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-on-qbs-we-have-guys-we-believe-in-press-conference",
+  "title": "Ben Johnson on QBs: 'We have guys we believe in' | Press Conference",
+  "date": "2026-10-02",
+  "duration": 705,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/bears/vppuowckrxyfx50pqg0y",
+  "kind": "first_practice",
+  "after_week": 3,
+  "coach": "Ben Johnson",
+  "words": 2481,
+  "model": "claude-haiku-5-5",
+  "headline": "Caleb Williams is out this week, so Case Keenum and Tyson Bagent are competing to start; Ozzy Trapilo is back in pads, and Dillon Thieneman is earning a bigger role at safety.",
+  "summary": "Ben Johnson declined to name his Sunday starter and said he is comfortable with either quarterback, Case Keenum or Tyson Bagent, calling the room supportive and well prepared. Johnson said the staff is split when each coach is asked individually, and that the 'hot hand' factors into the decision alongside the longer body of work. The transcript is garbled on Caleb Williams, but the exchange reads as Williams being out this week. Running back D'Andre Swift is on the injury report with lingering effects from Monday Night Football, but Johnson expects him to practice and is optimistic for Sunday. Left tackle Ozzy Trapilo ('OSI' in the captions) is progressing well in pads and could return sooner rather than later, but Theo Benedet starts at left tackle this week. Colston Loveland is playing well and is trusted in the run game, but he has been used as a blocker more than Johnson wants, and the staff is working to get him more involved in the passing game. On defense, Johnson praised Dillon Thieneman's instincts and versatility at safety, noting he plays post, quarters, and blitzes and is always around the ball. Johnson also previewed the Jets, praising their edge rusher David Bailey and their tight end and noting that Garrett Wilson must be tracked on every play.",
+  "injuries": [
+   {
+    "player": "Caleb Williams",
+    "status": "out",
+    "detail": "Johnson indicated Williams will be out this week; the caption is garbled, so confirm before acting on it.",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "D'Andre Swift",
+    "status": "questionable",
+    "detail": "Listed on the injury report with lingering effects from a Monday Night Football game; Johnson expects him to practice and is optimistic for Sunday.",
+    "player_id": "00-0036275"
+   },
+   {
+    "player": "Ozzy Trapilo",
+    "status": "out",
+    "detail": "Not available this week; Johnson said he looks better each week and could return sooner rather than later.",
+    "player_id": "00-0040740"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Case Keenum",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Still in contention to start Sunday; Johnson has not named a starter between Keenum and Bagent.",
+    "note": "The starting QB job is unsettled, which affects passing volume and fantasy projections for the whole offense.",
+    "quote": "I don't know that there's a bad choice or wrong choice.",
+    "player_id": "00-0028986"
+   },
+   {
+    "player": "Tyson Bagent",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Still in contention to start Sunday; Johnson has not named a starter between Keenum and Bagent.",
+    "note": "Bagent's chance to start is live, so his fantasy value depends on the late decision.",
+    "quote": "I know both of them are well prepared to play and win a game.",
+    "player_id": "00-0038416"
+   },
+   {
+    "player": "D'Andre Swift",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Expected to practice and play Sunday, but his status is still being evaluated.",
+    "note": "Swift's availability and workload will determine whether he is a usable RB starter this week.",
+    "quote": "I'm optimistic for Sunday.",
+    "player_id": "00-0036275"
+   },
+   {
+    "player": "Colston Loveland",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will be incorporated more in the passing game, after being used as a blocker more than wanted.",
+    "note": "Loveland's receiving role is the key upside, but Johnson has not committed to a higher target share.",
+    "quote": "got to do a better job getting all these guys incorporated.",
+    "player_id": "00-0040126"
+   },
+   {
+    "player": "Dillon Thieneman",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will keep being used around the ball in multiple coverages and as a blitzer.",
+    "note": "Thieneman's expanded, versatile role is a positive sign for his snaps and playmaking in IDP leagues.",
+    "quote": "we try to get him around the ball as much as we can.",
+    "player_id": ""
+   },
+   {
+    "player": "Theo Benedet",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "neutral",
+    "claim": "Will start at left tackle this week while Trapilo recovers.",
+    "note": "Benedet's starting role keeps the offensive line picture stable for Sunday.",
+    "quote": "We're going to go with Theo this week.",
+    "player_id": "00-0039459"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Upcoming opponent",
+    "detail": "Johnson previewed the New York Jets, praising David Bailey's first step and the quickness of their front. He said the Bears' tackles will need to work hard in pass protection, and he flagged Garrett Wilson and the Jets' tight end as players to track on every play."
+   },
+   {
+    "topic": "Locker room",
+    "detail": "Johnson said players are putting team needs first, including Joe Thuney and Cole Kmet volunteering for special teams, and that pass catchers have not shown frustration about touches."
+   }
+  ],
+  "opponent": "New York Jets"
+ },
+ {
   "id": "CLE:todd-monken-press-conference-october-2nd-2026",
   "team": "CLE",
   "url": "https://www.clevelandbrowns.com/video/todd-monken-press-conference-october-2nd-2026",

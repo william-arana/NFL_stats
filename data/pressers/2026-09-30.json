@@ -393,6 +393,107 @@
   "opponent": "Detroit Lions"
  },
  {
+  "id": "CHI:ben-johnson-on-aaron-glenn-preparing-for-jets-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-on-aaron-glenn-preparing-for-jets-press-conference",
+  "title": "Ben Johnson on Aaron Glenn, preparing for Jets | Press Conference",
+  "date": "2026-09-30",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/bears/ttb6q9ynfluovugknwuy",
+  "kind": "day_after",
+  "after_week": 3,
+  "coach": "Ben Johnson",
+  "words": 2174,
+  "model": "claude-haiku-5-5",
+  "headline": "Bears QB decision remains open among three quarterbacks with Caleb Williams still limited, though Case Keenum's Monday night performance strengthens his case; Sunday starter will be revealed then.",
+  "summary": "Johnson said the Bears are weighing three quarterbacks for Sunday's game against the Jets and will work through the week before deciding, choosing whoever gives the best chance to win. He praised Case Keenum's decisive play in the most recent game, saying he handled pressure well and had a strong grasp of the game plan, and said that performance will factor into the evaluation. Caleb Williams is improving every day but will not participate in Wednesday's walkthrough. Braxton Jones is week to week and not practicing today, while Ozzy Trapilo is getting closer to swing tackle duty but is not yet certain for this week, with Jordan McFadden and Joe Thuney as other tackle options. Johnson said Malik Muhammad is a sticky outside corner on an upward trajectory despite some communication errors, and that the team has not said a word to a pass catcher over a dropped end-zone ball. He said pass catchers are eager for more targets and that distributing the ball is on him as play caller. On the Jets, Johnson described a strong special teams unit, a high-level offense with a quarterback completing passes at an elite rate, and a veteran defense. He has great respect for Aaron Glenn, his former Lions colleague, and expects Glenn's scheme and unscouted looks to make Sunday difficult. Johnson also said the defense is still defining roles and that the small sample size means the team will learn more over the next few games. He declined to challenge calls as a head coach.",
+  "injuries": [
+   {
+    "player": "Caleb Williams",
+    "status": "limited",
+    "detail": "Getting better every day but will not be at Wednesday's walkthrough; he is in the starting QB mix.",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Braxton Jones",
+    "status": "out",
+    "detail": "Week to week and not participating in Wednesday's practice.",
+    "player_id": "00-0037081"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Case Keenum",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "His strong Monday night performance is part of the evaluation for the Sunday starter.",
+    "note": "Keenum's recent play makes him a live option to start over Caleb Williams, which matters for both QB outlooks.",
+    "quote": "",
+    "player_id": "00-0028986"
+   },
+   {
+    "player": "Caleb Williams",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will not practice at Wednesday's walkthrough but is progressing daily; Sunday status is undetermined.",
+    "note": "Williams's availability and status for Sunday is uncertain, and his backup Keenum has gained ground.",
+    "quote": "",
+    "player_id": "00-0039918"
+   },
+   {
+    "player": "Malik Muhammad",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will continue to play outside corner, having shown improvement and an upward trajectory through three games.",
+    "note": "Muhammad is locked into a starting outside corner role with ongoing growth, supporting his defensive snap share.",
+    "quote": "He's on an upward trajectory.",
+    "player_id": ""
+   },
+   {
+    "player": "Ozzy Trapilo",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Getting closer to being ready for swing tackle duty, but not certain for this week.",
+    "note": "A swing tackle role would primarily affect his practice and game-day usage rather than fantasy output.",
+    "quote": "He's getting closer. Um, I don't know if this will be the week or not.",
+    "player_id": "00-0040740"
+   },
+   {
+    "player": "Jordan McFadden",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Viewed as an option to fill in at tackle, including outside, if needed.",
+    "note": "McFadden's depth role could expand if injuries occur on the offensive line, with little direct fantasy impact.",
+    "quote": "I think a guy like Jordan McFadden has played out wide.",
+    "player_id": "00-0038595"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Quarterback competition",
+    "detail": "Johnson is weighing three quarterbacks and will not reveal the starter until Sunday. He said the decision is not hard and he trusts all three to win games."
+   },
+   {
+    "topic": "Jets matchup",
+    "detail": "Johnson called the Jets a strong team with the top special teams unit last year, a high-completion offense, and a veteran defense. He expects Aaron Glenn's unscouted looks to challenge the Bears."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Johnson said the defense is still defining roles and that competition is improving the group, with the defensive coordinator mixing up game plans."
+   },
+   {
+    "topic": "Passing game",
+    "detail": "Johnson said he is responsible for distributing touches to pass catchers, who all want more involvement."
+   }
+  ],
+  "opponent": "New York Jets"
+ },
+ {
   "id": "DAL:brian-schottenheimer-it-s-going-to-turn-press-conference",
   "team": "DAL",
   "url": "https://www.dallascowboys.com/video/brian-schottenheimer-it-s-going-to-turn-press-conference",
@@ -1205,45 +1306,94 @@
   "opponent": "Philadelphia Eagles (Week 4, at Philadelphia)"
  },
  {
-  "id": "LV:kirk-cousins-klint-kubiak-nfl-week-4-chiefs-2026-season",
+  "id": "LV:klint-kubiak-nfl-week-4-chiefs-2026-season",
   "team": "LV",
-  "url": "https://www.raiders.com/video/kirk-cousins-klint-kubiak-nfl-week-4-chiefs-2026-season",
-  "title": "Kirk Cousins on Klint Kubiak: 'Nothing is going to get past his watchful eye'",
+  "url": "https://www.raiders.com/video/klint-kubiak-nfl-week-4-chiefs-2026-season",
+  "title": "Klint Kubiak: 'Every game is a one game Super Bowl'",
   "date": "2026-09-30",
-  "duration": 577,
-  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/raiders/vadmbzxowow4clmgblyh",
+  "duration": 359,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/raiders/d9h2hahiunsxfdm3v9oq",
   "kind": "first_practice",
   "after_week": 4,
   "coach": "Klint Kubiak",
-  "words": 2165,
+  "words": 1365,
   "model": "claude-haiku-5-5",
-  "headline": "Cousins praises Brock Bowers' after-the-catch ability and says the chemistry with him is still developing ahead of the Chiefs game.",
-  "summary": "Quarterback Kirk Cousins spoke ahead of Sunday's game against the Kansas City Chiefs. He called head coach Klint Kubiak organized and detail-oriented, saying the play calls come in quickly and that Kubiak stays focused on coaching even after wins. Cousins said he has worked with Kubiak since their time together in 2019 and 2020 and in 2021, and he finds comfort in that. On Brock Bowers, he called the tight end very capable, with tremendous after-the-catch ability, good hands, and strong play strength, along with the intelligence and work ethic he brings. He said the on-field chemistry between them is still being built, noting they have not had as many reps together as he would like. He compared it to his earlier work with Justin Jefferson and Adam Thielen, where years of reps made the timing feel automatic. On the running game, Cousins said the offense needs to get it going, and that the coaching staff will stay committed to it and expects it to improve as the season goes on. He credited the defense for short fields in recent wins and framed team success as a shared effort. He also described Patrick Mahomes as a standard for quarterback play, and said no lead feels safe against the Chiefs.",
-  "injuries": [],
+  "headline": "Raiders' Brock Bowers earned AFC Offensive Player of the Week, but Kubiak says the Chiefs now have his full attention; Treydan Stukes is full go and Jackson Powers-Johnson won't practice today.",
+  "summary": "Kubiak opened by saying Treydan Stukes is full go, Jackson will not practice today, and a player whose name was garbled in the captions is not present but is hoped back by week's end. He praised Kirk Cousins for leading the team through three games and said the focus is simply on the next game. Asked about Fernando Mendoza, he said Mendoza is ready when called upon. He gave no firm timeline for the injured offensive lineman but said the goal is to get him practice reps this week. On the Chiefs game, Kubiak said every game is a one-game Super Bowl and the team treats this one like any other. He credited the defense and special teams for the turnovers and field position behind the offense's recent scoring. He called Brock Bowers studious and said the award is a team award, but added that Kansas City now has Bowers's full attention. He praised Cody White, saying he earned his call-up, and called Maxx Crosby a major asset against Patrick Mahomes. He said Kansas City's defense is the best-coached unit in the league and that Kenneth Walker is playing as well as anyone.",
+  "injuries": [
+   {
+    "player": "Treydan Stukes",
+    "status": "full",
+    "detail": "Kubiak said Stukes is full go today.",
+    "player_id": ""
+   },
+   {
+    "player": "Jackson Powers-Johnson",
+    "status": "out",
+    "detail": "Won't practice today; the caption is garbled, so the player match is inferred from the 'JP J' reference later in the presser. Hopes to get him practice reps this week so he can play.",
+    "player_id": "00-0039735"
+   }
+  ],
   "signals": [
    {
     "player": "Brock Bowers",
+    "topic": "matchup",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Chiefs will focus heavily on Bowers, so other Raiders must contribute",
+    "note": "Kansas City's attention on Bowers could limit his targets and volume against a strong defense.",
+    "quote": "But he has the full attention of of the Chiefs.",
+    "player_id": "00-0039338"
+   },
+   {
+    "player": "Kirk Cousins",
     "topic": "role",
     "signal": "up",
     "tone": "positive",
-    "claim": "",
-    "note": "Cousins praises Bowers' after-catch ability and hands, suggesting he remains a featured piece of the passing game against Kansas City.",
-    "quote": "his tremendous after the catch with the football",
-    "player_id": "00-0039338"
+    "claim": "Cousins continues to lead the offense as the starter",
+    "note": "Kubiak says Cousins is playing well and leading the team, which supports stable starting-QB volume.",
+    "quote": "",
+    "player_id": "00-0029604"
+   },
+   {
+    "player": "Fernando Mendoza",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Mendoza is ready to play if Cousins is unavailable",
+    "note": "Mendoza is only a backup behind Cousins, so his fantasy value depends on injury news.",
+    "quote": "And Fernando is ready to go when called upon.",
+    "player_id": "00-0041562"
+   },
+   {
+    "player": "Cody White",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "White earned his call-up to the active roster",
+    "note": "The coach's praise suggests White has a real role, which could bring usable targets or touches.",
+    "quote": "Um, he earned it. He earned it.",
+    "player_id": "00-0035891"
+   },
+   {
+    "player": "Maxx Crosby",
+    "topic": "matchup",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Crosby will be a key pass rusher against Mahomes",
+    "note": "Crosby's effort against Mahomes matters for defensive and pass-rush streaming decisions.",
+    "quote": "",
+    "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Play calling",
-    "detail": "Cousins praised Klint Kubiak's organization and relentless coaching standard, saying the offense feels like it is on the same page."
+    "topic": "Chiefs defense",
+    "detail": "Kubiak called Kansas City's defense the best-coached unit in the league and said Spagnuolo's group shows that on tape despite personnel changes."
    },
    {
-    "topic": "Running game",
-    "detail": "Cousins said the offense needs to get the run game going at a higher clip and that the staff will stay committed to it."
-   },
-   {
-    "topic": "Chiefs matchup",
-    "detail": "Cousins framed Sunday's game against Kansas City as a major challenge, emphasizing Patrick Mahomes and the need to respect the Chiefs' scoring ability."
+    "topic": "Turnovers and special teams",
+    "detail": "Kubiak credited turnovers, field position, and special teams for the offense's recent scoring streak of 25+ points in three straight games."
    }
   ],
   "opponent": "Kansas City Chiefs"
@@ -1384,82 +1534,75 @@
   "opponent": "Miami Dolphins"
  },
  {
-  "id": "NE:drake-maye-on-mike-vrabel-9-30-i-love-playing-for-him-that-s-not-going-to-change",
+  "id": "NE:head-coach-mike-vrabel-9-30-we-have-to-be-at-our-best-when-it-s-required",
   "team": "NE",
-  "url": "https://www.patriots.com/video/drake-maye-on-mike-vrabel-9-30-i-love-playing-for-him-that-s-not-going-to-change",
-  "title": "Drake Maye on Mike Vrabel 9/30: \"I love playing for him, that's not going to change\"",
+  "url": "https://www.patriots.com/video/head-coach-mike-vrabel-9-30-we-have-to-be-at-our-best-when-it-s-required",
+  "title": "Head Coach Mike Vrabel 9/30: \"We have to be at our best when it's required\"",
   "date": "2026-09-30",
-  "duration": 547,
-  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/patriots/hme0qrx3whnxafturamd",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/patriots/hecdrofqllmqolzqhofe",
   "kind": "first_practice",
   "after_week": 5,
   "coach": "Mike Vrabel",
-  "words": 2357,
+  "words": 2758,
   "model": "claude-haiku-5-5",
-  "headline": "Maye says his shoulder isn't affecting his throwing and blames turnovers and decision-making for the offense's problems; Romeo Doubs is earning more trust.",
-  "summary": "Drake Maye pushed back on reports of a rift with Mike Vrabel, calling him one of the best coaches he's had and saying his enjoyment of playing for him won't change. Asked about his shoulder, he said it hasn't affected his throwing or decision-making, and that he felt good at practice. He said the offense isn't struggling to move the ball; the problem is turnovers and mistakes that stall drives before touchdowns. He added that he has made throws and decisions he wishes he could take back, and that the team needs to trust its line and playmakers. On the upcoming game at Buffalo, he described the Bills as well coached, disciplined, and hard to move the ball against, and noted the new stadium and their explosive offense. He said the Bills' defense under Jim Leonard uses similar concepts to the Sean McDermott staff but mixes in different personnel and tests opponents' strengths. He praised Romeo Doubs' growing trust, blocking, and work ethic, and called fullback Reggie Gilliam one of the best at his position and very smart. He also said the team won't simplify the offense, since the core of what they do is already established. On ball security, he said the running back ball-protection drills were reinforced with the running backs coach, and he emphasized holding the ball tighter.",
-  "injuries": [
-   {
-    "player": "Drake Maye",
-    "status": "unclear",
-    "detail": "Asked about his shoulder, he said it has not impacted his throwing or decision-making; no formal injury status was given.",
-    "player_id": "00-0039851"
-   }
-  ],
+  "headline": "Vrabel: no roster moves yet, Walter Rouse and Ben Brown are getting reps as the O-line sorts out, and the Bills are on the road this Sunday.",
+  "summary": "Vrabel said there are no open active-roster spots yet after some players went to injured reserve, and the team has only signed one player to the practice squad. He said Marcus Bryant would be eligible to return after the fourth week, but Harold Landry is not yet eligible and the staff will be careful about when his window opens. On Drake Maye, Vrabel pushed back on an unnamed-source report of a rift, saying he came to New England because Maye was the quarterback and that he is focused on coaching the offense's urgency, huddle command and execution. On the offense, he said the Bills' O-line and play-action game are underrated and that the Patriots need to move the line of scrimmage, play faster and finish plays. Defensively, he said the interior has to produce more pressure and run stops, and that the goal is wins rather than chasing plays. He said he wants the team's identity to be physical, full-tilt, technique-driven football with ball security and takeaways, and that the next game against Buffalo on the road is a critical division game.",
+  "injuries": [],
   "signals": [
    {
-    "player": "Romeo Doubs",
+    "player": "Drake Maye",
     "topic": "role",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "Maye's trust in Doubs is growing and he is contributing as a blocker and in the run game",
-    "note": "Maye's praise for his blocking and growing trust suggests Doubs's role is expanding beyond route running.",
-    "quote": "I'm only, you know, gaining more and more trust in Romeo",
-    "player_id": "00-0037816"
-   },
-   {
-    "player": "Reggie Gilliam",
-    "topic": "usage",
-    "signal": "up",
-    "tone": "positive",
-    "claim": "The Patriots will keep using Gilliam to open up the run game",
-    "note": "Maye expects Gilliam to remain a key run-game piece, which supports fullback involvement in the offense.",
-    "quote": "just keep on using him, um, in ways to open up the run game",
-    "player_id": "00-0036187"
-   },
-   {
-    "player": "Drake Maye",
-    "topic": "injury",
     "signal": "watch",
-    "tone": "hedged",
-    "claim": "His shoulder is not affecting his throwing or decision-making",
-    "note": "Maye denied any shoulder impact, but he has not given a formal status, so monitor practice reports.",
-    "quote": "No it hasn't. It hasn't.",
+    "tone": "positive",
+    "claim": "Vrabel is keeping Maye as the central offensive piece and says the offense must be efficient with him and create turnover-free drives.",
+    "note": "Vrabel's public backing stays firm, but the bar is efficiency and avoiding turnovers rather than any scheme change.",
+    "quote": "I wanted to coach here because Drake was the quarterback.",
     "player_id": "00-0039851"
    },
    {
-    "player": "Drake Maye",
-    "topic": "usage",
+    "player": "Walter Rouse",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Rouse is working at a position alongside Ben Brown in practice today and tomorrow, with the week's plan still to be determined.",
+    "note": "Offensive line reps are being shuffled, so his weekly role and any snap changes are unclear.",
+    "quote": "Walter and Ben are working there, uh, today and tomorrow",
+    "player_id": "00-0039828"
+   },
+   {
+    "player": "Ben Brown",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Brown is working alongside Walter Rouse in practice today and tomorrow, with the week's plan still to be determined.",
+    "note": "Possible line change, but the coach did not specify the position, so his fantasy relevance is hard to read yet.",
+    "quote": "Walter and Ben are working there, uh, today and tomorrow",
+    "player_id": "00-0037413"
+   },
+   {
+    "player": "Alijah Vera-Tucker",
+    "topic": "depth_chart",
     "signal": "watch",
     "tone": "hedged",
-    "claim": "Turnovers, not arm talent, are the main issue and he expects better decisions going forward",
-    "note": "Maye's admission about turnovers and decision-making is a concern for his passing efficiency and TD projection against Buffalo.",
-    "quote": "I'm turning the football over doing things that are preventing us from scoring touchdowns.",
-    "player_id": "00-0039851"
+    "claim": "Vrabel is not planning a change for Vera-Tucker right now, though he sees the vision for him, Ben Brown and Will Campbell developing.",
+    "note": "A possible move is on hold, so Vera-Tucker's current spot looks stable for this week.",
+    "quote": "So probably not right now.",
+    "player_id": "00-0036979"
    }
   ],
   "topics": [
    {
-    "topic": "Bills defense",
-    "detail": "Maye described Buffalo as well coached, disciplined, and hard to play against, with a new stadium and a tough, explosive offense on the other side."
+    "topic": "Roster and practice squad",
+    "detail": "No open active-roster spots yet. One player was signed to the practice squad. Marcus Bryant is eligible to return after week four under the rules, and Harold Landry is not yet eligible, with his return timing still undecided."
    },
    {
-    "topic": "Defensive scheme",
-    "detail": "Maye said Jim Leonard's defense uses structural concepts similar to the previous regime's, but mixes them with new personnel and tests opponents' strengths."
+    "topic": "Defensive interior",
+    "detail": "Vrabel said the team needs more pressure and run stops from its interior defensive line and that the players know it. He emphasized making plays that create a new line of scrimmage even without a tackle."
    },
    {
-    "topic": "Ball security",
-    "detail": "The team reinforced ball-security drills with the running backs coach after a fumble near the red zone; Maye emphasized holding the ball tighter."
+    "topic": "Offensive game plan and opponent",
+    "detail": "The team wants more points and fewer negative plays, with the emphasis on speed, aggression and execution. Vrabel praised Buffalo's offensive line, play-action and the quarterback's ability to extend plays."
    }
   ],
   "opponent": "Buffalo Bills"

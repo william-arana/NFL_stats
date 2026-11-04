@@ -73,7 +73,21 @@ def is_head_coach(team: str, title: str, desc: str, tags: list[str]) -> bool:
     pat = re.escape(last).replace("'", "['’]?")  # O'Connell / O’Connell / OConnell
     if re.search(r"\b(?:asst\.?|assistant)\s+(?:head coach|HC)\b", title, re.I):
         return bool(re.search(rf"\b{pat}\b", title, re.I))
-    return bool(re.search(rf"\b{pat}\b", title, re.I) or re.search(r"\bhead coach\b|\bHC\b", title, re.I))
+    m = re.search(rf"\b{pat}\b", title, re.I)
+    if m and _other_speaker_first(team, title[:m.start()]):
+        return False  # "Case Keenum praises Ben Johnson", "Drake Maye on Mike Vrabel": a player talking about him
+    return bool(m or re.search(r"\bhead coach\b|\bHC\b", title, re.I))
+
+
+_NOT_A_PERSON = re.compile(r"^(?:head coach|press conference|news conference|media availability|new england|green bay|"
+                           r"kansas city|las vegas|los angeles|new orleans|new york|san francisco|tampa bay|week \d+)$", re.I)
+
+
+def _other_speaker_first(team: str, before: str) -> bool:
+    """True if another person's name ("First Last") comes before the coach's name in the same title part."""
+    before = re.split(r"[|:“”\"–—]", before)[-1]  # only the part of the title the coach's name is in
+    before = re.sub(rf"\b{re.escape(COACHES[team].split()[0])}\s*$", "", before, flags=re.I)
+    return any(not _NOT_A_PERSON.match(p) for p in re.findall(r"\b([A-Z][\w'’.-]+ [A-Z][\w'’.-]+)\b", before))
 
 
 # Each club tags its videos a little differently ("Press Conferences", "Media Pass", Detroit's
@@ -296,14 +310,54 @@ def _alarm(*_):
     raise Stuck("took over 120s")
 
 
+# Teams whose video page breaks headless Chrome: go straight to the video platform via yt-dlp.
+# CHI: the page freezes during the pre-roll ad, before the player ever requests the video.
+NO_BROWSER = set(os.environ.get("PRESSERS_NO_BROWSER", "CHI").upper().split())
+
+
 def fetch_captions(videos: list[dict]) -> None:
-    _fetch_captions(videos)
-    retry = [v for v in videos if not v.get("transcript")]
+    direct = [v for v in videos if v["team"] in NO_BROWSER]
+    _fetch_captions_ytdlp(direct)
+    browser = [v for v in videos if v["team"] not in NO_BROWSER]
+    if browser:
+        _fetch_captions(browser)
+    retry = [v for v in browser if not v.get("transcript")]
     if retry:
         log(f"retrying {len(retry)} video(s) once")
         for v in retry:
             v.pop("error", None)
         _fetch_captions(retry)
+    # last resort for anything still missing (any team): the video platform directly
+    left = [v for v in videos if not v.get("transcript")]
+    if left:
+        log(f"yt-dlp fallback for {len(left)} video(s)")
+        _fetch_captions_ytdlp(left)
+
+
+def _fetch_captions_ytdlp(videos: list[dict]) -> None:
+    """Club video pages run on the league's video platform (Lura/Anvato, id = mcpID). yt-dlp's
+    nfl.com extractor asks the platform for the video and returns its official caption playlist
+    (the same subs.m3u8 the page player loads), without opening the page in a browser."""
+    import json as _json
+    import subprocess
+    for v in videos:
+        v.pop("error", None)
+        try:
+            r = subprocess.run(["yt-dlp", "-J", "--skip-download", "--no-warnings", "--no-playlist", v["url"]],
+                               capture_output=True, text=True, timeout=120)
+            if r.returncode:
+                raise RuntimeError(r.stderr.strip().splitlines()[-1] if r.stderr.strip() else f"exit {r.returncode}")
+            j = _json.loads(r.stdout)
+            if j.get("_type") == "playlist":
+                j = (j.get("entries") or [{}])[0]
+            subs = [s["url"] for lang, lst in (j.get("subtitles") or {}).items() if lang.startswith("en")
+                    for s in lst if "m3u8" in s.get("url", "") or s.get("ext") == "vtt"]
+            v["transcript"] = pick_transcript(subs, None)  # URL comes from this exact video, no mcpID check needed
+            if not v["transcript"]:
+                v["error"] = "no captions found (yt-dlp)"
+        except Exception as e:  # noqa: BLE001
+            v["error"] = f"yt-dlp: {type(e).__name__}: {e}"[:200]
+        log(f"  {v['id']}: {len(v.get('transcript', '').split())} words (yt-dlp)" + (f" ({v['error']})" if v.get("error") else ""))
 
 
 def _fetch_captions(videos: list[dict]) -> None:

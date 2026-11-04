@@ -337,6 +337,67 @@
   "opponent": "Dallas Cowboys"
  },
  {
+  "id": "CHI:ben-johnson-recaps-loss-to-vikings-looks-ahead-to-monday-night-football-vs-eagles-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-recaps-loss-to-vikings-looks-ahead-to-monday-night-football-vs-eagles-press-conference",
+  "title": "Ben Johnson recaps loss to Vikings, looks ahead to Monday Night Football vs. Eagles | Press Conference",
+  "date": "2026-09-21",
+  "duration": 565,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/bears/s5pcmjbhgcs07w05goup",
+  "kind": "day_after",
+  "after_week": 2,
+  "coach": "Ben Johnson",
+  "words": 1861,
+  "model": "claude-haiku-5-5",
+  "headline": "Caleb Williams is week to week with an injury and not ruled out for the Eagles game; Tyson Bagent is the likely replacement if he misses time.",
+  "summary": "Ben Johnson said the team reviewed the Vikings loss and found it was not much different from how it looked the night before. He felt Chicago had chances to win in all three phases but did not take advantage of them, and he was proud of the effort. He called Caleb Williams week to week, said the latest report was somewhat encouraging, and gave no timeline. If Williams cannot play, Johnson said he has strong confidence in Tyson Bagent and Case Keenum, who have both won games in the league. Johnson said the offense struggled with penalties and third-and-long situations in the first half, and the offense played cleaner in the second half but still scored zero points on three red-zone trips at the end. He called the blocked field goal's operation unclean, with a high snap, and said the first attempt was a warning sign. The team now turns its attention to the Eagles on Monday Night Football.",
+  "injuries": [
+   {
+    "player": "Caleb Williams",
+    "status": "questionable",
+    "detail": "Coach said he is week to week with no timeline and is not ruling him out for the next game; the latest report was somewhat encouraging.",
+    "player_id": "00-0039918"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Tyson Bagent",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Could start at quarterback in place of Caleb Williams if Williams is unable to play",
+    "note": "If Williams sits, Bagent becomes the starter and his passing volume and fantasy output would be the key variable.",
+    "quote": "I feel strongly about what he's capable of.",
+    "player_id": "00-0038416"
+   },
+   {
+    "player": "Caleb Williams",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Week-to-week with no set timeline for return",
+    "note": "Williams' availability is uncertain, so managers should plan for a backup at quarterback.",
+    "quote": "we're saying week to week with him right now.",
+    "player_id": "00-0039918"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offense penalties and red zone",
+    "detail": "Johnson said self-inflicted penalties and third-and-long situations hurt the first half, and the offense did better in the second half with no offensive penalties. Chicago still failed to score on three red-zone trips at the end of the game."
+   },
+   {
+    "topic": "Special teams",
+    "detail": "Johnson said the field goal operation was not clean, a high snap contributed, and the first blocked attempt was a warning sign that was not corrected in time for the second."
+   },
+   {
+    "topic": "Quarterback room",
+    "detail": "Johnson said all three quarterbacks improved from year one to year two during camp and described the room as dynamic and competitive."
+   }
+  ],
+  "opponent": "Philadelphia Eagles"
+ },
+ {
   "id": "CLE:todd-monken-press-conference-september-21st-2026",
   "team": "CLE",
   "url": "https://www.clevelandbrowns.com/video/todd-monken-press-conference-september-21st-2026",
