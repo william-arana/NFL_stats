@@ -456,13 +456,17 @@
      or bookmarked. Opening a name inside a card pushes a new card (capped at MAXDEPTH). */
   const MAXDEPTH=12;
   let el=null,shade=null,anchor=null,stack=[];
+  /* side panel tabs: each tab keeps its own card trail; `stack` is always the active tab's trail */
+  const MAXTABS=8;let tabs=[],ti=0;
+  const docked=()=>!!(el&&el.classList.contains('pc-side'));
+  function tabList(){if(!tabs.length){tabs=[{stack}];ti=0}tabs[ti].stack=stack;return tabs}
   let pendingBack=false,afterPop=null;
   const cardState=()=>history.state&&history.state.nflsCard?history.state:null;
   const depth=()=>{const s=cardState();return s?s.nflsDepth||0:0};
   const validKey=k=>typeof k==='string'&&/^[pdgo]:[A-Za-z0-9_-]+$/.test(k);
   function urlFor(key){const u=new URL(location.href);if(key)u.searchParams.set('card',key);else u.searchParams.delete('card');return u.pathname+u.search+u.hash}
   function writeState(mode,d){const top=stack[stack.length-1];history[mode]({nflsCard:stack.map(x=>({key:x.key,pos:x.pos||''})),nflsDepth:d},'',urlFor(top&&top.key))}
-  function closeLocal(){if(el){el.remove();el=null;document.documentElement.classList.remove('side-open')}if(shade){shade.remove();shade=null}if(anchor){anchor.setAttribute('aria-expanded','false');anchor=null}stack=[]}
+  function closeLocal(){tabs=[];ti=0;if(el){el.remove();el=null;document.documentElement.classList.remove('side-open')}if(shade){shade.remove();shade=null}if(anchor){anchor.setAttribute('aria-expanded','false');anchor=null}stack=[]}
   /* close = go back past every card entry we added, so Back afterwards leaves the page normally */
   function close(){
     if(!el)return;const d=depth();closeLocal();
@@ -510,10 +514,13 @@
     const html=cardHTML(cur.key,cur.pos);
     const crumbs=stack.length>1?`<nav class="pc-crumbs" aria-label="Card trail">${stack.map((x,i)=>i===stack.length-1?`<span aria-current="true">${esc(keyName(x.key))}</span>`:`<button type="button" data-crumb="${i}">${esc(keyName(x.key))}</button>`).join('<i>›</i>')}</nav>`:'';
     /* header (close, tools, crumbs, name) is one sticky block so it never scrolls out of reach */
-    el.innerHTML=`<div class="pc-head"><button type="button" class="pc-x" aria-label="Close">×</button><div class="pc-tools"><button type="button" data-copylink title="Copy a link to this card">${ICON.link}</button><button type="button" data-pin-card title="Pop out the whole card">${ICON.pop}</button></div>${crumbs}</div>`+html;
+    const tl=docked()?tabList():[];
+    const tabBar=tl.length>1?`<div class="pc-tabs" role="tablist">${tl.map((t,i)=>{const k=t.stack[t.stack.length-1].key;return `<span class="pc-tab${i===ti?' on':''}"><button type="button" role="tab" aria-selected="${i===ti}" data-tab="${i}" title="${esc(keyName(k))}">${esc(keyName(k))}</button><button type="button" data-tabx="${i}" aria-label="Close tab ${esc(keyName(k))}">×</button></span>`}).join('')}</div>`:'';
+    el.innerHTML=`<div class="pc-head">${tabBar}<button type="button" class="pc-x" aria-label="${tl.length>1?'Close all tabs':'Close'}" title="${tl.length>1?'Close all tabs':'Close'}">×</button><div class="pc-tools"><button type="button" data-copylink title="Copy a link to this card">${ICON.link}</button><button type="button" data-pin-card title="Pop out the whole card">${ICON.pop}</button></div>${crumbs}</div>`+html;
     {const head=el.querySelector('.pc-head'),top=el.querySelector(':scope > .pc-top');if(head&&top)head.appendChild(top)}
     if(stack.length>1){const top=el.querySelector('.pc-top');if(top)top.insertAdjacentHTML('afterbegin',`<button type="button" class="pc-back" aria-label="Back">←</button>`)}
     if(crumbs){const c=el.querySelector('.pc-crumbs');c.scrollLeft=c.scrollWidth}
+    if(tabBar){const b=el.querySelector('.pc-tabs'),on=b.querySelector('.pc-tab.on');if(on)b.scrollLeft=Math.max(0,on.offsetLeft-b.clientWidth/2+on.offsetWidth/2)}
     tagSections(el,true);
     el.scrollTop=0;fillOwner(el);fillNews(el,newsKey(cur.key),false);fillPlays(el);
   }
@@ -538,6 +545,12 @@
   function open(key,a,pos){
     if(!validKey(key))return;
     if(pendingBack){afterPop=()=>open(key,a,pos);return}
+    /* side panel: a new name opens in a new tab (or jumps to its tab if it's already open) */
+    if(docked()&&desk()&&LS.get('cards-side',false)){
+      tabList();let i=tabs.findIndex(t=>t.stack[0].key===key||t.stack[t.stack.length-1].key===key);
+      if(i<0){tabs.push({stack:[{key,pos:pos||''}]});i=tabs.length-1;if(tabs.length>MAXTABS){tabs.shift();i--}}
+      if(anchor)anchor.setAttribute('aria-expanded','false');anchor=a||null;if(anchor)anchor.setAttribute('aria-expanded','true');
+      switchTab(i);return}
     if(el&&a&&anchor===a){close();return}
     /* desktop: a card you dragged somewhere stays there — it becomes a pop-out window in the same spot and size,
        and the new name opens as a second card (side-by-side compares) */
@@ -545,6 +558,8 @@
     const d=el?depth():0;closeLocal();mk(a);
     stack=[{key,pos:pos||''}];writeState('pushState',d+1);show();
   }
+  function switchTab(i){tabList();ti=Math.max(0,Math.min(i,tabs.length-1));stack=tabs[ti].stack;writeState('replaceState',depth());show()}
+  function closeTab(i){tabList();if(tabs.length<=1){close();return}tabs.splice(i,1);if(i<ti||ti>=tabs.length)ti--;stack=tabs[ti].stack;writeState('replaceState',depth());render()}
   function push(key,pos){
     if(!validKey(key))return;
     if(!el){open(key,null,pos);return}
@@ -638,6 +653,8 @@
       return;
     }
     if(el&&el.contains(e.target)){
+      const tx=e.target.closest('[data-tabx]');if(tx){closeTab(+tx.dataset.tabx);return}
+      const tb=e.target.closest('[data-tab]');if(tb){if(+tb.dataset.tab!==ti)switchTab(+tb.dataset.tab);return}
       if(e.target.closest('.pc-x')){close();return}
       if(e.target.closest('.pc-back')){goBack(1);return}
       const cr=e.target.closest('[data-crumb]');if(cr){goBack(stack.length-1-(+cr.dataset.crumb));return}
@@ -675,6 +692,10 @@
   },true);
   document.addEventListener('pointermove',e=>{
     if(!mv||!el)return;
+    if(!mv.on&&docked()&&tabList().length>1){if(Math.abs(e.clientX-mv.x0)+Math.abs(e.clientY-mv.y0)<5)return;mv.on=true;mv.out=true;
+      mv.gx=Math.min(mv.gx,300);if(!ghostEl){ghostEl=document.createElement('div');ghostEl.className='snap-ghost tab-ghost';document.body.appendChild(ghostEl)}}
+    if(mv.out){const w=Math.min(600,document.documentElement.clientWidth-16),h=Math.round(innerHeight*.7);mv.ox=Math.max(0,Math.min(e.clientX-mv.gx,document.documentElement.clientWidth-w));mv.oy=Math.max(0,Math.min(e.clientY-mv.gy,innerHeight-60));
+      Object.assign(ghostEl.style,{left:mv.ox+'px',top:mv.oy+'px',width:w+'px',height:h+'px'});mv.ow=w;mv.oh=h;return}
     if(!mv.on){if(Math.abs(e.clientX-mv.x0)+Math.abs(e.clientY-mv.y0)<5)return;mv.on=true;el.classList.add('pc-moving');
       if(el.classList.contains('pc-side')){undock(false);el._moved=true}
       const r=el.getBoundingClientRect();unfix(el);
@@ -686,6 +707,7 @@
   });
   document.addEventListener('pointerup',e=>{
     if(!mv)return;const m=mv;mv=null;ghost('');el&&el.classList.remove('pc-moving');
+    if(m.out){eat();lastTap=null;if(m.ow&&el){const c=stack[stack.length-1];closeTab(ti);addPin(c.key,c.pos,'','',{x:m.ox,y:m.oy,w:m.ow,h:m.oh})}return}
     if(m.on){eat();lastTap=null;if(m.z&&el)snapCard(el,m.z);return}
     /* a tap on the header: two within 350 ms = back to the normal size and spot */
     const now=Date.now();
@@ -709,7 +731,7 @@
   }
   function snapPin(p,w,z){const r=snapRect(z);if(!p.snap)p.pre={w:p.w,h:p.h};p.snap=z;p.min=false;w.classList.remove('min');
     Object.assign(p,{x:r.x,y:r.y,w:r.w,h:r.h});Object.assign(w.style,{left:r.x+'px',top:r.y+'px',width:r.w+'px',height:r.h+'px'});savePins()}
-  addEventListener('nfls-settings',e=>{if(e.detail==='max')capPins();if(e.detail==='side'&&el&&!el._moved){if(LS.get('cards-side',false))dock();else{undock(true);sizeCard();place()}}});
+  addEventListener('nfls-settings',e=>{if(e.detail==='max')capPins();if(e.detail==='side'&&el&&!el._moved){if(LS.get('cards-side',false))dock();else{tabList();tabs=[];ti=0;undock(true);sizeCard();place();render()}}});
   addEventListener('resize',()=>{if(el&&el._snap)snapCard(el,el._snap);for(const p of pins){const w=pinEls.get(p.id);if(w&&p.snap)snapPin(p,w,p.snap)}});
 
   /* ---- resize: drag any corner (mouse or finger) or side (mouse) of the card or a pop-out window.
