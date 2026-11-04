@@ -1,0 +1,196 @@
+[
+ {
+  "id": "GB:matt-lafleur-he-s-playing-like-an-animal-right-now-sept-22-2026",
+  "team": "GB",
+  "url": "https://www.packers.com/video/matt-lafleur-he-s-playing-like-an-animal-right-now-sept-22-2026",
+  "title": "Matt LaFleur: 'He's playing like an animal right now'",
+  "date": "2026-09-22",
+  "duration": 855,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/packers/ju3nm3xmlikemb09g3xk",
+  "kind": "day_after",
+  "after_week": 2,
+  "coach": "Matt LaFleur",
+  "words": 2887,
+  "model": "claude-haiku-5-5",
+  "headline": "Van Ness is 'playing like an animal' and Belton is expected at right tackle if healthy, while Banks's Thursday status remains open ahead of the Falcons game.",
+  "summary": "LaFleur said the team is still determining availability for Thursday's game against Atlanta, and he would not commit on Aaron Banks until game time. He said Anthony Belton will be the right tackle if healthy and he expects him to play, though there are still about 48 hours to go. He praised Lukas Van Ness, saying Van Ness is impactful even when it doesn't show in the stat sheet and is 'playing like an animal right now.' He praised the linemen who protected Jordan Love on the end-zone hit, saying players need to have each other's backs even though the team has been penalized heavily. He called the 26 penalties through two games unacceptable, blaming pre-snap focus and two young players for the post-snap penalties. He said the defense improved on offsides, and the team will work on field position discipline. On the offense, he said the third-down struggles stem mostly from poor distances (third-and-ten too often), and the team needs more third-and-short situations. He defended Chris Brooks' red-zone carries as a function of the defense playing two high safeties, and he said the run game must be established. He called Skyy Moore's return work a big positive that gives the offense better field position, though the offense must capitalize on it. He said Jager Burton is a player he is excited about, but Aaron Banks has played well, so the left guard competition will play out. He also expects Burton to play meaningful snaps given the injuries, though he is also weighing continuity on the offensive line.",
+  "injuries": [
+   {
+    "player": "Aaron Banks",
+    "status": "questionable",
+    "detail": "Availability for Thursday's game against Atlanta is undecided. LaFleur said the team would decide at game time, and Banks is the starting left guard if healthy.",
+    "player_id": "00-0036551"
+   },
+   {
+    "player": "Anthony Belton",
+    "status": "questionable",
+    "detail": "Expected to start at right tackle if healthy and available, with the team still watching his status before Thursday.",
+    "player_id": "00-0040726"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Lukas Van Ness",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Van Ness's impact is growing, and the team needs him to keep producing at this level.",
+    "note": "The coach is praising his production and availability, which supports a larger defensive role and possible fantasy upside for pass rush.",
+    "quote": "he's playing like an animal right now",
+    "player_id": ""
+   },
+   {
+    "player": "Anthony Belton",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Belton is expected to start at right tackle if he is healthy and available for Thursday.",
+    "note": "Offensive line status matters for pass protection and Love's effectiveness, though O-line players carry little direct fantasy value.",
+    "quote": "He'll be the right tackle.",
+    "player_id": "00-0040726"
+   },
+   {
+    "player": "Aaron Banks",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Banks's Thursday availability will not be decided until game time.",
+    "note": "His status affects the offensive line and whether Jager Burton keeps playing as a starter.",
+    "quote": "Well we'll give it up to game time.",
+    "player_id": "00-0036551"
+   },
+   {
+    "player": "Jager Burton",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Burton will keep getting real snaps and is in a competition with Banks at left guard.",
+    "note": "Burton has a clear path to more reps if Banks is limited, but it is still a competition.",
+    "quote": "Jagr, I'm excited about his future.",
+    "player_id": "00-0040884"
+   },
+   {
+    "player": "Kaleb Johnson",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Johnson's 12-yard overtime run gave the offense a boost, and the coach sees him as a bigger part of the run game.",
+    "note": "The positive review and the emphasis on establishing the run game point to a possible larger workload.",
+    "quote": "I think that that was big for us.",
+    "player_id": "00-0040142"
+   },
+   {
+    "player": "Chris Brooks",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Red-zone run calls to Brooks came because the defense used two high safeties, and the run game needs to be established.",
+    "note": "The team's run emphasis may continue, but the coach did not say Brooks has a firm red-zone role.",
+    "quote": "",
+    "player_id": "00-0038685"
+   },
+   {
+    "player": "Skyy Moore",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Moore's return-game work has given the offense better field position.",
+    "note": "A consistent return role can add fantasy points and suggests he will keep handling return duties.",
+    "quote": "Puts us in position to score a lot more points.",
+    "player_id": "00-0038090"
+   },
+   {
+    "player": "Jordan Love",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Love should use his legs when a lane opens, but only when the situation is right.",
+    "note": "Rushing upside is a fantasy factor, but the coach framed it as situational rather than a new expectation.",
+    "quote": "If the situation is right for it.",
+    "player_id": "00-0036264"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "penalties",
+    "detail": "LaFleur called the pre-snap penalties inexcusable, said the defense improved on offsides, and said the team will keep working on post-snap discipline."
+   },
+   {
+    "topic": "third down",
+    "detail": "He said the team is near the bottom of the league on third down, mostly because too many third-and-long situations, and needs more manageable downs."
+   },
+   {
+    "topic": "offensive line",
+    "detail": "The line is being rebuilt because of injuries and the short week, and the coach said the team is trying to keep continuity among its five starters."
+   },
+   {
+    "topic": "team injuries",
+    "detail": "A key player is out with a neck injury and another is dealing with a knee injury, though the coach did not name them in the transcript."
+   }
+  ],
+  "opponent": "Atlanta (Thursday night; Penix mentioned as their quarterback)"
+ },
+ {
+  "id": "NYG:coach-john-harbaugh-on-latest-with-qb-jaxson-dart",
+  "team": "NYG",
+  "url": "https://www.giants.com/video/coach-john-harbaugh-on-latest-with-qb-jaxson-dart",
+  "title": "Coach John Harbaugh on latest with QB Jaxson Dart",
+  "date": "2026-09-22",
+  "duration": 846,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/giants/fb2hlycwla6u5hyiukrp",
+  "kind": "day_after",
+  "after_week": 2,
+  "coach": "John Harbaugh",
+  "words": 2681,
+  "model": "claude-haiku-5-5",
+  "headline": "Dart's injury evaluation is still ongoing with no final decision; Harbaugh gave no timeline and expects Jameis Winston or the next man up to fill in if needed.",
+  "summary": "Harbaugh declined to confirm or comment on reports about Jaxson Dart's injury, including reports that he could miss the season, saying evaluations are ongoing and no final decisions have been made. He said he will announce the direction when decisions are reached, and that he won't respond to every report. Harbaugh said Dart had an MRI and that doctors are consulting on the test results, but he would not describe the injury's severity or confirm whether it is worse than a sprained MCL. On Winston, he said he has absolute faith in every player on the roster and that whoever is next up would step in, mentioning Winston only as a good player who is there for a reason. Harbaugh said Dart was disappointed after the loss, and they discussed offense and the team's direction, but he would not say anything about the injury. He said the team's focus is on preparing for a range of possibilities and on the Tennessee Titans game in five days. He also said the team has lost quarterbacks many times and that backups have won games before, pointing to past playoff runs. He said the team is not playing close to its potential and needs to focus on playing its best as a whole.",
+  "injuries": [
+   {
+    "player": "Jaxson Dart",
+    "status": "unclear",
+    "detail": "Injury evaluation ongoing after the last game; MRI done and test results still being reviewed with doctors. Harbaugh declined to confirm reports of severity or a season-ending outcome, and no decision has been announced.",
+    "player_id": "00-0040691"
+   },
+   {
+    "player": "Deonte Banks",
+    "status": "unclear",
+    "detail": "Harbaugh said Banks was out for the last game, which was tough for the team; no update on his current status was given.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Jaxson Dart",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "No final decision on Dart's injury or timeline yet; the team will announce a direction once decisions are made.",
+    "note": "Reports suggest a serious injury and Harbaugh gave no timeline, so Dart's availability for upcoming games is highly uncertain.",
+    "quote": "We haven't got any final decisions yet.",
+    "player_id": "00-0040691"
+   },
+   {
+    "player": "Jameis Winston",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Harbaugh has full confidence in Winston and every backup as the next option if Dart is out, though he did not name a starter.",
+    "note": "Winston is the likely backup and would take over the starting role if Dart misses time, making him a fantasy consideration.",
+    "quote": "Absolute faith in all of our players.",
+    "player_id": "00-0031503"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Team mentality and adversity",
+    "detail": "Harbaugh said backup quarterbacks have won games before and the team must play as a whole. He stressed the team is not yet playing near its potential and is focused on the next game."
+   },
+   {
+    "topic": "Upcoming opponent",
+    "detail": "The team plays the Tennessee Titans in five days, and Harbaugh said the focus is on preparing for multiple outcomes."
+   }
+  ],
+  "opponent": "Tennessee Titans"
+ }
+]

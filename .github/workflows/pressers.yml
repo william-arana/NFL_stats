@@ -1,0 +1,66 @@
+name: Pressers (test)
+
+# Head-coach press conferences: video sitemap -> official captions -> Claude signals.
+# Manual only for now. mode=dry: find videos + captions, no Claude calls, nothing written.
+# mode=run: Claude (PRESSERS_MODEL, default Haiku) writes data/pressers/*.json and commits them
+# to the branch it ran on. Raw transcripts go only to the private repo NFL_stats-transcripts (TRANSCRIPTS_TOKEN).
+on:
+  workflow_dispatch:
+    inputs:
+      teams:
+        description: "teams (space separated) or ALL"
+        default: ALL
+      mode:
+        description: "dry or run"
+        default: dry
+      model:
+        description: "Claude model for mode=run"
+        default: claude-haiku-5-5
+
+permissions:
+  contents: write
+
+jobs:
+  pressers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-pressers.txt && python -m playwright install --with-deps chromium
+      - name: Clone private transcripts repo
+        if: inputs.mode == 'run'
+        env:
+          TOKEN: ${{ secrets.TRANSCRIPTS_TOKEN }}
+        run: git clone "https://x-access-token:${TOKEN}@github.com/william-arana/NFL_stats-transcripts.git" "$RUNNER_TEMP/private"
+      - name: Pressers
+        env:
+          PRESSERS_TEAMS: ${{ inputs.teams }}
+          PRESSERS_MODEL: ${{ inputs.model }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          if [ "$MODE" = "run" ]; then python scripts/update_pressers.py --save-dir="$RUNNER_TEMP/private/transcripts/2026"
+          else python scripts/update_pressers.py --dry-run --list; fi
+      - name: Commit
+        if: inputs.mode == 'run'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/pressers
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Pressers: $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
+      - name: Push transcripts (private repo)
+        if: inputs.mode == 'run'
+        working-directory: ${{ runner.temp }}/private
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && echo "No transcripts" && exit 0
+          git commit -m "Transcripts: $(date -u +%Y-%m-%dT%H:%MZ)"
+          git branch -M main
+          for i in 1 2 3; do (git ls-remote --exit-code --heads origin main >/dev/null && git pull --rebase origin main || true) && git push origin main && break; sleep 5; done

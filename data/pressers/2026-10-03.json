@@ -1,0 +1,97 @@
+[
+ {
+  "id": "NO:kellen-moore-interview-saints-vs-falcons-2026-nfl-week-4-october-3-2026",
+  "team": "NO",
+  "url": "https://www.neworleanssaints.com/video/kellen-moore-interview-saints-vs-falcons-2026-nfl-week-4-october-3-2026",
+  "title": "Kellen Moore on injury report, Falcons pass rush | Saints vs. Falcons 2026 NFL Week 4",
+  "date": "2026-10-03",
+  "duration": 441,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/saints/ka5c6jup4lepifaryxiy",
+  "kind": "day_after",
+  "after_week": 4,
+  "coach": "Kellen Moore",
+  "words": 1665,
+  "model": "claude-haiku-5-5",
+  "headline": "Saints ruled out LB Kaden Elliss (calf, week to week), DE Carl Granderson (ankle), and DT Anfernee Jennings (knee) for Monday vs. Atlanta; Danny Stutsman gets a bigger role.",
+  "summary": "Moore opened with the injury report: Kaden Elliss (calf), Carl Granderson (ankle), and Anfernee Jennings (knee) are out, while Pete Werner (shoulder) and Noah Fant (abdominal) are questionable. Everyone else is listed as healthy for Monday night. Elliss's injury is week to week, and Werner's status will be decided after contact tolerance is evaluated over the next roughly 24 hours, with a possible pregame workout. Nathan Shepherd sat out practice as a planned rest day, not an injury. Moore said the team's depth is prepared for the run defense, and he declined to say whether Devin Neal and Audric Estime's settlements were about anything beyond roster management, noting that limited injured-reserve returns drove the decision. He also said the team's tackling and fundamentals have been strong, and that the rivalry with Atlanta feels real. On the Falcons, he praised their pass rush generation despite missing their top two edge rushers, and said Michael Penix Jr. has been talented but turnovers have hurt them. Moore expressed confidence in Danny Stutsman stepping into a larger role.",
+  "injuries": [
+   {
+    "player": "Kaden Elliss",
+    "status": "out",
+    "detail": "Calf injury; Moore said week to week.",
+    "player_id": ""
+   },
+   {
+    "player": "Carl Granderson",
+    "status": "out",
+    "detail": "Ankle injury, ruled out for Monday.",
+    "player_id": ""
+   },
+   {
+    "player": "Anfernee Jennings",
+    "status": "out",
+    "detail": "Knee injury, ruled out for Monday.",
+    "player_id": ""
+   },
+   {
+    "player": "Pete Werner",
+    "status": "questionable",
+    "detail": "Shoulder; status depends on how he tolerates contact over the next 24 hours, possibly a pregame workout.",
+    "player_id": ""
+   },
+   {
+    "player": "Noah Fant",
+    "status": "questionable",
+    "detail": "Abdominal injury, listed questionable.",
+    "player_id": "00-0035644"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Danny Stutsman",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will have a big role on defense with Elliss out and Werner questionable.",
+    "note": "Stutsman is the likely lead linebacker replacement and a viable tackle and IDP option Monday night.",
+    "quote": "he can start for plenty of teams.",
+    "player_id": ""
+   },
+   {
+    "player": "Kaden Elliss",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Out for Monday with a calf injury, week-to-week timeline.",
+    "note": "Lost run-defense snaps; the replacement group absorbs them.",
+    "quote": "Just week to week. We'll see.",
+    "player_id": ""
+   },
+   {
+    "player": "Pete Werner",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Decision on Werner's shoulder pending contact tolerance evaluation in the next day.",
+    "note": "Werner's availability determines whether Stutsman's role expands further.",
+    "quote": "Two questionable guys.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Injury/roster",
+    "detail": "An unnamed player (transcribed as 'Jordan') is ramping up from a prior-game injury and still in trainer rehab with no return timeline; the team says venue and overseas travel are not factors in his return. Devin Neal and Audric Estime were handled through injury settlement as roster management, given limited injured-reserve returns."
+   },
+   {
+    "topic": "Scheme/opponent",
+    "detail": "Moore praised Atlanta's ability to create pass rush without its top two edge rushers through one-on-one matchups and relentless play. He also said Atlanta's offense is still developing under Michael Penix Jr., with turnovers hurting them in recent games despite strong play at Green Bay."
+   },
+   {
+    "topic": "Team",
+    "detail": "Moore said the defense's tackling and fundamentals have been strong, with a focus on basics, and that the offense needs to improve ball security. The team's Monday night routine will include a morning walk-through."
+   }
+  ],
+  "opponent": "Atlanta Falcons (Monday Night Football, Week 4)"
+ }
+]

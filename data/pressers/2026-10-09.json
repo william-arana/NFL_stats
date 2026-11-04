@@ -1,0 +1,109 @@
+[
+ {
+  "id": "TB:todd-bowles-zyon-mccollum-playing-like-an-all-pro-press-conference",
+  "team": "TB",
+  "url": "https://www.buccaneers.com/video/todd-bowles-zyon-mccollum-playing-like-an-all-pro-press-conference",
+  "title": "Todd Bowles: Zyon McCollum ‘Playing Like An All-Pro’ | Press Conference",
+  "date": "2026-10-09",
+  "duration": 691,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/buccaneers/fny6ktudkhaajbm6yl2v.jpg",
+  "kind": "day_after",
+  "after_week": 5,
+  "coach": "Todd Bowles",
+  "words": 2366,
+  "model": "claude-haiku-5-5",
+  "headline": "Baker Mayfield's hand injury points to Jalon Daniels starting vs. the Steelers, while Bucky Irving and Zyon McCollum earned high praise.",
+  "summary": "Bowles said Bucky Irving brought a different energy and a determined mindset, and credited the offensive line for his 72-yard run and closing 22-yard carry. He praised the corners, calling Zyon McCollum 'playing like an all pro corner right now' and noting Jacob Parrish's deflections, though Parrish tired and sat a play or two. McCollum's improvement was attributed to more film study on formations, splits, and down-and-distance. On Baker Mayfield, Bowles said the grip was smaller and he would know more later in the week, but the plan is to start Jalon Daniels against Pittsburgh. Daniels had only a few days to prepare on a short week and played within himself, and Bowles said he played smart and decisive. Bowles said Rueben Bain returned from missing games and looked good, needing to knock off some technique rust. He called the pressure from the front the best of the season even without sacks. Bowles acknowledged the offensive line's penalties have been creeping up each week and must be cleaned up. On Sean Tucker, Bowles said third-back usage depends on the hot hand, and Tucker would get more work if Irving cooled off. Bowles took responsibility for going for it on fourth-and-goal instead of kicking a field goal, calling it his decision.",
+  "injuries": [
+   {
+    "player": "Baker Mayfield",
+    "status": "doubtful",
+    "detail": "Hand/grip injury with a smaller splint; coach will know more later in the week, but the plan is to start Jalon Daniels against Pittsburgh.",
+    "player_id": "00-0034855"
+   },
+   {
+    "player": "Rueben Bain",
+    "status": "returning",
+    "detail": "Returned to action after missing a couple of games; looked good but needs to knock off some technique rust.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Bucky Irving",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Bowles credited Irving with a big spark and went with him as the hot hand over the third back.",
+    "note": "Irving's explosive play and hot-hand status keep him as the clear lead back while Tucker and Gainwell stay in a complementary role.",
+    "quote": "Bucky brought a different energy in this game.",
+    "player_id": "00-0039361"
+   },
+   {
+    "player": "Zyon McCollum",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "McCollum is playing at an elite level and his film work has improved his mental game.",
+    "note": "Coverage production and a sharper mental approach make him a strong defensive playmaker, though fantasy value is limited to IDP or defensive formats.",
+    "quote": "Zion is playing like an all pro corner right now.",
+    "player_id": ""
+   },
+   {
+    "player": "Jacob Parrish",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Parrish got tired and was pulled for a play or two; his workload could be managed.",
+    "note": "Fatigue on the outside corner matters for snap share and matchups against top receivers.",
+    "quote": "",
+    "player_id": ""
+   },
+   {
+    "player": "Baker Mayfield",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Mayfield is not expected to start this week; Jalon Daniels is the planned starter vs. Pittsburgh.",
+    "note": "Mayfield's hand injury puts Daniels in line to start, lowering Mayfield's floor for the coming week.",
+    "quote": "But right now we're planning on starting Jaylen against the Steelers.",
+    "player_id": "00-0034855"
+   },
+   {
+    "player": "Sean Tucker",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Tucker will get some touches as the third back, but volume depends on who the hot hand is each game.",
+    "note": "Tucker's role is uncertain week to week; he is a flex-level option at best while Irving is rolling.",
+    "quote": "",
+    "player_id": "00-0038951"
+   },
+   {
+    "player": "Rueben Bain",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Bain looked good in his return and played hard.",
+    "note": "Bain returning to full snaps adds pressure on the defensive front; rust is minor.",
+    "quote": "He looked good, he looked good, got to knock the rust off some technique wise.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive line and penalties",
+    "detail": "Bowles praised the line's effort and blocking but said penalties have crept up every week and must be fixed."
+   },
+   {
+    "topic": "Defense and turnovers",
+    "detail": "The defense is taking pride in its play and playing for each other; the team won the turnover battle for the first time this season without giving it away on offense."
+   },
+   {
+    "topic": "Fourth-and-goal decision",
+    "detail": "Bowles took full responsibility for going for a touchdown on fourth-and-goal from the one instead of kicking a field goal to go up 17."
+   }
+  ],
+  "opponent": "Pittsburgh Steelers"
+ }
+]

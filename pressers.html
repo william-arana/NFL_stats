@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pressers · NFL_stats</title>
+<!-- link previews -->
+<meta name="description" content="What every head coach said this week: injuries, roles and usage signals for fantasy, from team press conferences.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NFL_stats">
+<meta property="og:title" content="Pressers · NFL_stats">
+<meta property="og:description" content="What every head coach said this week: injuries, roles and usage signals for fantasy, from team press conferences.">
+<meta property="og:url" content="https://william-arana.github.io/NFL_stats/pressers.html">
+<meta property="og:image" content="https://william-arana.github.io/NFL_stats/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NFL_stats logo on a navy football field">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://william-arana.github.io/NFL_stats/assets/og.jpg">
+<meta name="theme-color" content="#0f1b33">
+<!-- /link previews -->
+<!-- app icon -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="NFL_stats">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- /app icon -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<link rel="stylesheet" href="assets/site.css?v=1.63">
+<script src="assets/site.js?v=1.63" defer></script>
+<script src="assets/cards.js?v=1.63" defer></script>
+<script src="assets/tables.js?v=1.63" defer></script>
+<style>
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;margin:0}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{padding-block:26px 14px;border-bottom:2px solid var(--margin)}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.98;margin:6px 0 6px;text-transform:uppercase}
+h1 span{color:var(--blue)}
+.sub{color:var(--ink-2);margin:0 0 10px;max-width:760px}
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px 0;position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--rule)}
+.bar select,.bar input{font:14px var(--f-body);padding:6px 10px;border:1px solid var(--rule);border-radius:6px;background:var(--sheet);color:var(--ink)}
+.bar input{width:170px}
+.seg{display:inline-flex}.seg button{font:600 13px var(--f-body);padding:6px 11px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink-2);cursor:pointer;margin-left:-1px}
+.seg button:first-child{border-radius:6px 0 0 6px;margin-left:0}.seg button:last-child{border-radius:0 6px 6px 0}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.count{font:12px var(--f-mono);color:var(--ink-3);margin-left:auto}
+.card{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;margin:14px 0;overflow:hidden}
+.card .ch{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;background:var(--head);padding:9px 14px;border-bottom:1px solid var(--rule)}
+.tm{font:800 18px var(--f-display);letter-spacing:.02em}
+.meta{font:12px var(--f-mono);color:var(--ink-3)}
+.ch a{margin-left:auto;font-size:13px;color:var(--blue)}
+.cb{padding:10px 14px 12px}
+.hl{font-weight:600;font-size:16px;margin:2px 0 6px}
+details{margin:2px 0 8px}summary{cursor:pointer;color:var(--ink-2);font-size:13.5px}details p{margin:6px 0 0;color:var(--ink-2)}
+h4{font:700 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:10px 0 4px}
+.inj{list-style:none;margin:0;padding:0}.inj li{font-size:13.5px;padding:4px 0;border-bottom:1px dashed var(--rule)}.inj li:last-child{border-bottom:0}
+.st{font:700 11px var(--f-mono);text-transform:uppercase;margin:0 6px;color:var(--ink-3)}
+.st.out,.st.ir,.st.doubtful{color:var(--margin)}.st.full,.st.returning{color:var(--good)}
+.scr{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th{font:600 11px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td{padding:6px 8px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.nw{white-space:nowrap}
+.pname{font:inherit;font-weight:600;color:var(--blue);background:none;border:0;padding:0;cursor:pointer;text-align:left;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--blue) 35%,transparent);text-underline-offset:2px}
+.nolink{font-weight:600}
+.sg{font:700 11px var(--f-mono);text-transform:uppercase;border-radius:4px;padding:2px 6px;white-space:nowrap}
+.sg.up{background:var(--good-soft);color:var(--good)}.sg.down{background:var(--margin-soft);color:var(--margin)}.sg.watch{background:var(--gold-soft);color:var(--gold)}
+.tone{font-size:12px;color:var(--ink-3)}
+.q{display:block;font-style:italic;color:var(--ink-2);font-size:12.5px;margin-top:2px}
+.dim{color:var(--ink-3);font-size:12px}
+.more{display:block;margin:16px auto 30px;font:600 14px var(--f-body);padding:8px 16px;border:1px solid var(--rule);border-radius:6px;background:var(--sheet);color:var(--ink);cursor:pointer}
+.empty{padding:40px 0;color:var(--ink-3);text-align:center}
+.foot-note{font-size:12.5px;color:var(--ink-3);margin:18px 0 40px;max-width:760px}
+@media (max-width:640px){.bar input{width:100%}.count{margin-left:0;width:100%}
+ .sigt thead{display:none}.sigt tr{display:grid;grid-template-columns:auto auto 1fr;gap:2px 8px;padding:8px 0;border-bottom:1px solid var(--rule)}
+ .sigt td{border:0;padding:0}.sigt td.cl{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<header class="sitenav"><div class="wrap">
+  <a class="brand" href="./" title="Home">NFL<span>_</span>stats</a>
+  <nav aria-label="Site"><a href="./">Home</a><a href="stats.html">Stats</a><a href="waivers.html">Waivers</a><a href="trade.html">Compare</a><a href="pressers.html" aria-current="page">Pressers</a><a href="lab.html">Lab</a><a href="guide.html">Guide</a></nav>
+  <span class="upd" id="upd"></span>
+  <div class="navtools" id="navtools"></div>
+</div></header>
+<header class="top"><div class="wrap">
+  <div class="eyebrow">Head coach press conferences · all 32 teams</div>
+  <h1>The <span>Pressers</span></h1>
+  <p class="sub">What each head coach said in his day-after-game and first-practice pressers: injury updates, and every player whose role or usage moved, with the coach's own words.</p>
+</div></header>
+<div class="wrap">
+  <div class="bar" id="bar">
+    <span class="seg" id="view"><button data-v="p" aria-pressed="true">Pressers</button><button data-v="pl">Players</button></span>
+    <select id="when" aria-label="Time range"><option value="7">Last 7 days</option><option value="14" selected>Last 2 weeks</option><option value="0">All season</option></select>
+    <select id="team" aria-label="Team"><option value="">All teams</option></select>
+    <select id="topic" aria-label="Topic"><option value="">All topics</option><option value="role">Role</option><option value="usage">Usage</option><option value="injury">Injury</option><option value="depth_chart">Depth chart</option><option value="scheme">Scheme</option><option value="matchup">Matchup</option><option value="trade_or_roster">Trade / roster</option><option value="other">Other</option></select>
+    <span class="seg" id="dir"><button data-d="" aria-pressed="true">All</button><button data-d="up">Up</button><button data-d="watch">Watch</button><button data-d="down">Down</button></span>
+    <input id="q" type="search" placeholder="Player…" aria-label="Search player">
+    <span class="count" id="count"></span>
+  </div>
+  <div id="out"><div class="empty">Loading…</div></div>
+  <p class="foot-note">Summaries and signals are written by Claude from the captions of the videos each team posts, so names can occasionally be off. Quotes are kept short; the full press conference is at each "Watch" link. "Claim" is what the coach said will happen; we'll check those against snaps and touches as the season goes.</p>
+</div>
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const TOPIC={role:'Role',usage:'Usage',injury:'Injury',depth_chart:'Depth chart',scheme:'Scheme',matchup:'Matchup',trade_or_roster:'Trade / roster',other:'Other'};
+const KIND={day_after:'Day after game',first_practice:'First practice day',latest:'Latest'};
+const q0=new URLSearchParams(location.search);
+let ALL=[],S={view:q0.get('view')||'p',when:q0.get('when')??'14',team:q0.get('team')||'',topic:q0.get('topic')||'',dir:q0.get('dir')||'',q:q0.get('q')||''},SHOWN=20;
+const pl=(id,name)=>id?`<button type="button" class="pname" data-card="p:${esc(id)}" data-name="${esc(name)}" aria-expanded="false">${esc(name)}</button>`:`<span class="nolink">${esc(name)}</span>`;
+const day=d=>new Date(d+'T12:00:00').toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});
+fetch('data/pressers/index.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{dates:[]}).then(ix=>Promise.all((ix.dates||[]).map(d=>fetch('data/pressers/'+d+'.json').then(r=>r.ok?r.json():[]).catch(()=>[])))).then(parts=>{
+  ALL=parts.flat().sort((a,b)=>b.date.localeCompare(a.date)||a.team.localeCompare(b.team));
+  if(!ALL.length){$('#out').innerHTML='<div class="empty">No pressers yet.</div>';return}
+  const teams=[...new Set(ALL.map(e=>e.team))].sort();$('#team').insertAdjacentHTML('beforeend',teams.map(t=>`<option>${t}</option>`).join(''));
+  for(const k of ['when','team','topic'])$('#'+k).value=S[k];$('#q').value=S.q;draw()
+}).catch(()=>{$('#out').innerHTML='<div class="empty">Couldn\'t load the pressers.</div>'});
+function since(){if(S.when==='0')return '';const d=new Date(ALL[0].date+'T12:00:00');d.setDate(d.getDate()-(+S.when)+1);return d.toISOString().slice(0,10)}
+function sigOk(g){return (!S.topic||g.topic===S.topic)&&(!S.dir||g.signal===S.dir)&&(!S.q||String(g.player).toLowerCase().includes(S.q.toLowerCase()))}
+function draw(){
+  document.querySelectorAll('#view button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===S.view));
+  document.querySelectorAll('#dir button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.d===S.dir));
+  const u=new URLSearchParams();for(const[k,v]of Object.entries(S))if(v&&!(k==='view'&&v==='p')&&!(k==='when'&&v==='14'))u.set(k,v);history.replaceState(null,'',u.toString()?'?'+u:location.pathname);
+  const from=since();const E=ALL.filter(e=>e.date>=from&&(!S.team||e.team===S.team));
+  const filtering=S.topic||S.dir||S.q;
+  if(S.view==='pl')return players(E);
+  const rows=E.map(e=>({e,sig:(e.signals||[]).filter(sigOk)})).filter(r=>!filtering||r.sig.length);
+  $('#count').textContent=`${rows.length} pressers · ${rows.reduce((n,r)=>n+r.sig.length,0)} signals`;
+  if(!rows.length){$('#out').innerHTML='<div class="empty">Nothing matches these filters.</div>';return}
+  $('#out').innerHTML=rows.slice(0,SHOWN).map(({e,sig})=>card(e,sig,filtering)).join('')+(rows.length>SHOWN?`<button class="more" id="more">Show more (${rows.length-SHOWN} left)</button>`:'');
+  const m=$('#more');if(m)m.onclick=()=>{SHOWN+=20;draw()}
+}
+function card(e,sig,filtering){
+  const inj=(e.injuries||[]).filter(i=>!S.q||String(i.player).toLowerCase().includes(S.q.toLowerCase()));
+  return `<div class="card"><div class="ch"><span class="tm">${esc(e.team)}</span><span>${esc(e.coach||'')}</span><span class="meta">${day(e.date)} · ${KIND[e.kind]||'Press conference'}</span><a href="${esc(e.url)}" target="_blank" rel="noopener">Watch ↗</a></div><div class="cb">
+  <div class="hl">${esc(e.headline||'')}</div>
+  ${e.summary?`<details${filtering?'':''}><summary>What he said</summary><p>${esc(e.summary)}</p></details>`:''}
+  ${inj.length&&(!S.topic||S.topic==='injury')&&!S.dir?`<h4>Injury updates</h4><ul class="inj">${inj.map(i=>`<li>${pl(i.player_id,i.player)}<span class="st ${esc(i.status)}">${esc(i.status)}</span><span class="dim">${esc(i.detail||'')}</span></li>`).join('')}</ul>`:''}
+  ${sig.length?`<h4>Player signals</h4><div class="scr"><table class="sigt"><thead><tr><th>Player</th><th>Topic</th><th>Signal</th><th>Claim / why it matters</th></tr></thead><tbody>${sig.map(g=>`<tr><td class="nw">${pl(g.player_id,g.player)}</td><td class="nw">${TOPIC[g.topic]||esc(g.topic)}</td><td class="nw"><span class="sg ${esc(g.signal)}">${esc(g.signal)}</span> <span class="tone">${esc(g.tone||'')}</span></td><td class="cl">${esc(g.claim||g.note||'')}${g.claim&&g.note?` <span class="dim">${esc(g.note)}</span>`:''}${g.quote?`<span class="q">“${esc(g.quote)}”</span>`:''}</td></tr>`).join('')}</tbody></table></div>`:''}
+  </div></div>`}
+function players(E){
+  const M=new Map();
+  for(const e of E)for(const g of e.signals||[]){if(!sigOk(g))continue;const k=(g.player_id||g.player)+'|'+e.team;
+    const p=M.get(k)||{id:g.player_id,name:g.player,team:e.team,n:0,up:0,watch:0,down:0,last:null};p.n++;p[g.signal]=(p[g.signal]||0)+1;if(!p.last||e.date>=p.last.date)p.last={date:e.date,g};M.set(k,p)}
+  const L=[...M.values()].sort((a,b)=>b.n-a.n||b.last.date.localeCompare(a.last.date));
+  $('#count').textContent=`${L.length} players · ${L.reduce((n,p)=>n+p.n,0)} signals`;
+  if(!L.length){$('#out').innerHTML='<div class="empty">Nothing matches these filters.</div>';return}
+  $('#out').innerHTML=`<div class="card"><div class="scr"><table><thead><tr><th>Player</th><th>Team</th><th>Signals</th><th>Up</th><th>Watch</th><th>Down</th><th>Latest</th></tr></thead><tbody>${L.slice(0,SHOWN*5).map(p=>`<tr><td class="nw">${pl(p.id,p.name)}</td><td>${esc(p.team)}</td><td>${p.n}</td><td>${p.up||''}</td><td>${p.watch||''}</td><td>${p.down||''}</td><td><span class="dim">${day(p.last.date)} · ${TOPIC[p.last.g.topic]||''}</span> <span class="sg ${esc(p.last.g.signal)}">${esc(p.last.g.signal)}</span> ${esc(p.last.g.claim||p.last.g.note||'')}</td></tr>`).join('')}</tbody></table></div></div>`+(L.length>SHOWN*5?`<button class="more" id="more">Show more (${L.length-SHOWN*5} left)</button>`:'');
+  const m=$('#more');if(m)m.onclick=()=>{SHOWN+=20;draw()}
+}
+$('#view').onclick=e=>{const b=e.target.closest('button');if(!b)return;S.view=b.dataset.v;SHOWN=20;draw()};
+$('#dir').onclick=e=>{const b=e.target.closest('button');if(!b)return;S.dir=b.dataset.d;SHOWN=20;draw()};
+for(const k of ['when','team','topic'])$('#'+k).onchange=e=>{S[k]=e.target.value;SHOWN=20;draw()};
+let t;$('#q').oninput=e=>{clearTimeout(t);t=setTimeout(()=>{S.q=e.target.value.trim();SHOWN=20;draw()},200)};
+})();
+</script>
+</body>
+</html>

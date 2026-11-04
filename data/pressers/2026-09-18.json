@@ -1,0 +1,567 @@
+[
+ {
+  "id": "BUF:joe-brady-breaks-down-week-2-victory-over-detroit-lions-buffalo-bills",
+  "team": "BUF",
+  "url": "https://www.buffalobills.com/video/joe-brady-breaks-down-week-2-victory-over-detroit-lions-buffalo-bills",
+  "title": "Joe Brady Breaks Down Week 2 Victory Over Detroit Lions | Buffalo Bills",
+  "date": "2026-09-18",
+  "duration": 1134,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/bills/s3xmf0po5bdzp3feynwm",
+  "kind": "day_after",
+  "after_week": 2,
+  "coach": "Joe Brady",
+  "words": 4441,
+  "model": "claude-haiku-5-5",
+  "headline": "DJ Moore's injury is the key watch item: he is day-to-day with a possible one-game absence, while Keon Coleman, Dalton Kincaid, and Deone Walker earned praise after Week 2.",
+  "summary": "Coach Joe Brady said DJ Moore's injury is not severe but he may miss one game, and the team will see how he recovers over the long weekend since there is no practice until next Wednesday. Ed Oliver was ruled out before the Lions game after a late-breaking pain report during the pregame process, and players were undergoing tests and MRIs on Friday. Brady said Josh Allen had no concerns after reports of him being unwell, calling it typical pre-Thursday-game IV treatment. On the offense, Brady said the team is still defining its identity, that the run game and Allen's aggressiveness on first downs stress defenses, and that the offense left points on the field. He praised Keon Coleman for his six catches, the key third-and-seven conversion, and his trust with Allen while filling in for Moore. Brady praised Dalton Kincaid's blocking and versatility, and said Deone Walker's two batted balls and expanded role showed he is trending up. He also said Keleki Latu's role will keep growing and that Skyler Bell is ready, though he did not name Bell as the next starter. Brady took responsibility for poor clock management on the final two-minute drive before halftime. The team now has ten days to prepare for the Chargers.",
+  "injuries": [
+   {
+    "player": "DJ Moore",
+    "status": "questionable",
+    "detail": "Injury is not considered severe but he might miss one game; he will be evaluated after the long weekend, with no practice until next Wednesday.",
+    "player_id": "00-0034827"
+   },
+   {
+    "player": "Ed Oliver",
+    "status": "unclear",
+    "detail": "Was ruled out for the Lions game after a late pain report; he was undergoing tests and MRIs on Friday and his status is still being evaluated.",
+    "player_id": ""
+   },
+   {
+    "player": "Josh Allen",
+    "status": "full",
+    "detail": "Reports that he was unwell and receiving an IV before the game; Brady said he has no concerns and noted Allen's performance.",
+    "player_id": "00-0034857"
+   }
+  ],
+  "signals": [
+   {
+    "player": "DJ Moore",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "may miss one game; Skyler Bell would be the next man up if he is out",
+    "note": "A possible absence would push Skyler Bell into a larger receiving role.",
+    "quote": "if he can be out there, he'll be out there.",
+    "player_id": "00-0034827"
+   },
+   {
+    "player": "Keon Coleman",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Coleman earned trust from Josh Allen and took on Moore's role in the passing game while Moore was out",
+    "note": "Coleman's six catches and key conversion make him a strong fantasy option if Moore is out or limited.",
+    "quote": "it's the trust that I have in Keon.",
+    "player_id": "00-0039901"
+   },
+   {
+    "player": "Dalton Kincaid",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "will continue to be used in both the run and pass game, with blocking as an important part of his role",
+    "note": "Kincaid's blocking and versatility keep him on the field more often, which supports his receiving volume.",
+    "quote": "",
+    "player_id": "00-0038933"
+   },
+   {
+    "player": "Deone Walker",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "his role grew in the last two games and he is in a good place both against the run and in pass rush",
+    "note": "A bigger rotation role in the defensive line could boost his tackle and sack chances in IDP leagues.",
+    "quote": "the arrow was up with him.",
+    "player_id": ""
+   },
+   {
+    "player": "Keleki Latu",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "his role will continue to increase, with a strong special teams contribution and ready to play multiple positions",
+    "note": "Latu's growing role is primarily a special teams and depth development signal, but increased snaps could come.",
+    "quote": "his role is only going to continue to increase.",
+    "player_id": "00-0040363"
+   },
+   {
+    "player": "Skyler Bell",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "his time will come, possibly as soon as next week if DJ Moore is out, but Brady did not name him the starter",
+    "note": "Bell is the likely replacement if Moore misses time, but Brady offered no firm commitment.",
+    "quote": "it's his time is going to come.",
+    "player_id": "00-0041443"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Team identity and first-down aggression",
+    "detail": "Brady said the team is still defining its identity, pointing to the mix of run game and Josh Allen-led aggressiveness on first downs. He said the offense left points on the field and needs cleanup."
+   },
+   {
+    "topic": "End-of-half clock management",
+    "detail": "Brady took responsibility for letting the Lions get the ball back with 58 seconds left and first-and-five, calling it poor management on his part."
+   },
+   {
+    "topic": "Short-week scheme and tight end usage",
+    "detail": "Brady said the team used preseason and training camp installs to prepare for the short week and praised the versatility of the tight ends, with 12, 13, and 14 personnel producing touchdowns."
+   },
+   {
+    "topic": "Preparation for Chargers",
+    "detail": "With ten days until the next game, the team will self-scout its tendencies and check league trends, including what other teams are doing."
+   }
+  ],
+  "opponent": "Los Angeles Chargers"
+ },
+ {
+  "id": "DEN:hc-sean-payton-on-the-broncos-home-field-advantage-we-feed-off-that",
+  "team": "DEN",
+  "url": "https://www.denverbroncos.com/video/hc-sean-payton-on-the-broncos-home-field-advantage-we-feed-off-that",
+  "title": "HC Sean Payton on the Broncos’ home-field advantage: ’We feed off that’",
+  "date": "2026-09-18",
+  "duration": 592,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/broncos/f2j5zvllpq765gofufoy",
+  "kind": "first_practice",
+  "after_week": 1,
+  "coach": "Sean Payton",
+  "words": 1861,
+  "model": "claude-haiku-5-5",
+  "headline": "Payton says Jaylen Waddle will get his touches and that the team is working on getting him involved early, while stressing home-field crowd noise as a real advantage for the defense.",
+  "summary": "Payton said the team's energy and focus were good in both practices this week, with a heavier third-down emphasis and a more extensive red-zone session planned for Saturday. He stressed that defending the home field matters and that crowd noise disrupts the offense's cadence and communication, especially on silent snap counts, and said the team feeds off its fans. On the schedule, he called the short week a deliberate result of the Monday-night setup and said recovery and playing at home are important. He discussed the opponent's quarterback, Lawrence, noting his big arm and ability to escape the pocket and throw on the move. On the offense, Payton said the team wanted to get Jaylen Waddle involved early in the last game, would be more deliberate about it without forcing it, and that he will have his touches. He also talked about the league's cycles of heavier personnel groupings, saying 13-personnel looks force defenses to close edges, and that he still wants a balanced run-pass game on first and second down. Payton also said he is trying to get more sleep and go home earlier, since fatigue can cloud decision-making.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Jaylen Waddle",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Waddle will get early and continued touches in the offense going forward",
+    "note": "Payton addressed a deliberate plan to get Waddle involved early after the last game, which points to a more consistent target role.",
+    "quote": "But you know he's going to have his touches.",
+    "player_id": "00-0036613"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Home-field advantage",
+    "detail": "Payton said crowd noise makes it harder for the offense to handle the cadence, motions, and communication, and that the team feeds off its home crowd."
+   },
+   {
+    "topic": "Practice and preparation",
+    "detail": "Practices have had good energy and focus. Third-down work is the main emphasis, with an extended red-zone session planned for Saturday."
+   },
+   {
+    "topic": "Personnel groupings",
+    "detail": "Payton said heavier looks like 13 personnel can reduce the defense's options and help the tackles by making it easier to close edges, while the offense still wants balanced run-pass calls on early downs."
+   },
+   {
+    "topic": "Short week and scheduling",
+    "detail": "Payton said the rest after a Monday game is a factor in the schedule and that playing at home helps. He also said more efficient late-night work and better sleep are priorities for the staff."
+   },
+   {
+    "topic": "Punt return",
+    "detail": "Payton was asked about a punt returner after an injury but gave a limited answer, saying the team has several players who have taken reps there depending on where the punt comes from."
+   }
+  ],
+  "opponent": "Jacksonville"
+ },
+ {
+  "id": "DET:campbell-on-week-2-performance",
+  "team": "DET",
+  "url": "https://www.detroitlions.com/video/campbell-on-week-2-performance",
+  "title": "Campbell on Week 2 performance",
+  "date": "2026-09-18",
+  "duration": 762,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/lions/um4rz4nsrylyolvh5jva",
+  "kind": "day_after",
+  "after_week": 2,
+  "coach": "Dan Campbell",
+  "words": 2557,
+  "model": "claude-haiku-5-5",
+  "headline": "Campbell says Week 2 loss to Buffalo came down to execution and coaching; CB Avonte Maddox left on crutches with no clear status yet.",
+  "summary": "Campbell credited Buffalo and said the Lions didn't play or coach well enough, taking responsibility himself. He said the offense stalled early and hasn't produced much, and that the run game must become more efficient and consistent. Defensively he cited too many explosive plays, missed fits and coverage busts on the back end, and communication issues in the secondary, especially after the team chose to play more aggressively. He described the run defense as having a mix of players who can pressure and stop the run, and said the front should improve with more time together. He said the pass game picked up in spurts, and that the team has a long way to go on both sides. He was uncertain about Avonte Maddox's status and said he would know more the next day. He said the staff will review the tape, and the team will shift focus to the Jets next.",
+  "injuries": [
+   {
+    "player": "Avonte Maddox",
+    "status": "unclear",
+    "detail": "Left the game and was seen on crutches; Campbell said he would not know his status until the next day.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Avonte Maddox",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Maddox's status for the Jets game will not be known until the day after Week 2.",
+    "note": "A missed or limited Maddox would thin an already struggling secondary and could shift snaps to other corners.",
+    "quote": "when he doesn't come back that makes me nervous. But I won't know until tomorrow",
+    "player_id": ""
+   },
+   {
+    "player": "Jameson Williams",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "The Lions may lean more on the pass game, including Jameson Williams, if the run game keeps stalling.",
+    "note": "Campbell said the offense might need to throw more if the run game doesn't get going, which could lift Williams's target share.",
+    "quote": "you got Shane over there and Jamo and, and la Porta",
+    "player_id": "00-0037240"
+   },
+   {
+    "player": "Sam LaPorta",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "The Lions may throw more to Sam LaPorta if the run game keeps stalling.",
+    "note": "Campbell's comments point to the pass game as the fallback when the run game struggles, which could increase LaPorta's opportunities.",
+    "quote": "you got Shane over there and Jamo and, and la Porta",
+    "player_id": "00-0039065"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Run game",
+    "detail": "Campbell said the run game needs to be far more efficient and consistent after it stalled, and that it cannot disappear from one week to the next."
+   },
+   {
+    "topic": "Defense",
+    "detail": "The defense allowed too many explosive plays, had missed run fits and multiple back-end busts that led to touchdowns, and struggled to contain the quarterback."
+   },
+   {
+    "topic": "Secondary",
+    "detail": "Campbell cited communication and being on the same page as key issues, especially when the team played more aggressively."
+   },
+   {
+    "topic": "Environment",
+    "detail": "Campbell said the crowd was loud and good, but not something the team couldn't handle."
+   },
+   {
+    "topic": "Next game",
+    "detail": "The staff has a few days to review tape before preparing for the Jets, with the goal of playing better in all three phases."
+   }
+  ],
+  "opponent": "New York Jets"
+ },
+ {
+  "id": "LA:sean-mcvay-matthew-stafford-davante-adams-giants-preparation-lessons-week-1-press-conference",
+  "team": "LA",
+  "url": "https://www.therams.com/video/sean-mcvay-matthew-stafford-davante-adams-giants-preparation-lessons-week-1-press-conference",
+  "title": "Sean McVay, Matthew Stafford & Davante Adams discuss preparation for the Giants, lessons from Week 1 in Australia & more",
+  "date": "2026-09-18",
+  "duration": 1249,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/rams/ojxkl3lgsvksblblpcis",
+  "kind": "first_practice",
+  "after_week": 1,
+  "coach": "Sean McVay",
+  "words": 4982,
+  "model": "claude-haiku-5-5",
+  "headline": "Myles Garrett is out at least four weeks after surgery, and Kamren Kinchens sat out Thursday's practice with a hamstring injury before the Monday night game vs. the Giants.",
+  "summary": "McVay opened with the injury report: Kamren Curl (ankle), Omar Speights (hip), and Nathan Landman (shoulder) were limited, Kamren Kinchens (hamstring) did not practice, and Davante Adams took his normal rest day. He said Myles Garrett's surgery went well and he is already walking without crutches, but McVay would not give a firm timeline beyond a minimum of four weeks and said Garrett won't be rushed back. On Aaron Donald, McVay said the key benchmark is how he feels, since he has not had many 11-on-11 reps, and he hopes Donald has good work this week. McVay called the Giants physical, energetic, and well-schemed, with playmakers on all three levels, and said the team needs to match that edge. He downplayed the Week 1 loss in Australia, saying the team should focus on preparation and not dwell on it. Looking at the offense, McVay said the team never got into rhythm, and he praised Coleman Shelton, Steve Avila, Kevin Dotson, Alaric Jackson, and Warren McClendon for their run-game work, while stressing that consistency is the goal. He said Stafford's performance was not a major concern and that the QB has handled adversity well. Stafford added that the offense needs better third-down and early-down efficiency to stay on the field. He also said the travel was tiring and he was a little under the weather, but he feels fine now and is ready to play.",
+  "injuries": [
+   {
+    "player": "Myles Garrett",
+    "status": "out",
+    "detail": "Had surgery; out at least four weeks, with no rush to return. Walking without crutches already.",
+    "player_id": ""
+   },
+   {
+    "player": "Kamren Kinchens",
+    "status": "out",
+    "detail": "Hamstring; did not practice (DNP) Thursday.",
+    "player_id": ""
+   },
+   {
+    "player": "Kamren Curl",
+    "status": "limited",
+    "detail": "Ankle; limited in Thursday's practice.",
+    "player_id": ""
+   },
+   {
+    "player": "Omar Speights",
+    "status": "limited",
+    "detail": "Hip; limited in Thursday's practice.",
+    "player_id": ""
+   },
+   {
+    "player": "Nathan Landman",
+    "status": "limited",
+    "detail": "Shoulder; limited in Thursday's practice.",
+    "player_id": ""
+   },
+   {
+    "player": "Davante Adams",
+    "status": "unclear",
+    "detail": "Took his normal rest day Thursday; no injury reported.",
+    "player_id": "00-0031381"
+   },
+   {
+    "player": "Aaron Donald",
+    "status": "unclear",
+    "detail": "McVay said he is 'chomping at the bit' and the team will decide based on how he feels after this week's work; the transcript's 'Aaron' reference is unclear.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Myles Garrett",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Will miss at least four weeks after surgery and will not be rushed back.",
+    "note": "Garrett is out for the foreseeable future, so the edge rush is weakened and any pass-rush fantasy value is gone for now.",
+    "quote": "we're not going to rush him back",
+    "player_id": ""
+   },
+   {
+    "player": "Kamren Kinchens",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Did not practice Thursday with a hamstring injury; availability for Monday is uncertain.",
+    "note": "A missed practice raises the risk he will not play Monday, which affects safety depth.",
+    "quote": "",
+    "player_id": ""
+   },
+   {
+    "player": "Aaron Donald",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Return is pending; the decision depends on how he feels after this week's practice work.",
+    "note": "Donald's status is still open, so monitor the Friday report before counting on any contribution.",
+    "quote": "if he says he's ready to go, then we'll be excited",
+    "player_id": ""
+   },
+   {
+    "player": "Coleman Shelton",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Praised for run-game work in the opener; interior line expected to keep building on it.",
+    "note": "Positive reviews of the interior line point to a steady run-blocking role, which helps the run game.",
+    "quote": "some really good, you know, good stuff from Coleman",
+    "player_id": "00-0034114"
+   },
+   {
+    "player": "Steve Avila",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Praised for run-game work in the opener; interior line expected to keep building on it.",
+    "note": "Good interior grades help the run game, which supports backs such as Kyren Williams.",
+    "quote": "good stuff from Coleman and from Steve and from K-dot",
+    "player_id": "00-0039058"
+   },
+   {
+    "player": "Kevin Dotson",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Praised for run-game work in the opener; interior line expected to keep building on it.",
+    "note": "Good interior grades help the run game, which supports backs such as Kyren Williams.",
+    "quote": "good stuff from Coleman and from Steve and from K-dot",
+    "player_id": "00-0036339"
+   },
+   {
+    "player": "Matthew Stafford",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Coach says Stafford is calm and locked in for the Giants game after the Week 1 loss.",
+    "note": "McVay says Stafford's demeanor hasn't changed, which suggests no lingering confidence issue.",
+    "quote": "he's the most cool, calm, collected person I've been around",
+    "player_id": "00-0026498"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Week 1 loss and offensive rhythm",
+    "detail": "McVay and Stafford said the offense never got into rhythm in the Australia opener, with too few plays and poor third-down and early-down efficiency. They want consistency and better execution, not new schemes."
+   },
+   {
+    "topic": "Giants defense",
+    "detail": "Both McVay and Stafford called the Giants physical, energetic, and well-schemed, with playmakers at all levels, including Abdul Carter, Brian Burns, and Dexter Lawrence-type interior pressure. They expect a major challenge."
+   },
+   {
+    "topic": "Travel and mindset",
+    "detail": "The team flew about 16 hours home and several players said they were tired or under the weather, but they say they're ready. McVay downplayed travel as a major excuse."
+   }
+  ],
+  "opponent": "New York Giants (Monday night)"
+ },
+ {
+  "id": "SF:shanahan-provides-injury-updates-ahead-of-week-2-vs-dolphins",
+  "team": "SF",
+  "url": "https://www.49ers.com/video/shanahan-provides-injury-updates-ahead-of-week-2-vs-dolphins",
+  "title": "Shanahan Provides Injury Updates Ahead of Week 2 vs. Dolphins",
+  "date": "2026-09-18",
+  "duration": 539,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/49ers/gkdngo7vceveoe4jmcap",
+  "kind": "first_practice",
+  "after_week": 1,
+  "coach": "Kyle Shanahan",
+  "words": 2144,
+  "model": "claude-haiku-5-5",
+  "headline": "Kaelon Black is questionable for Week 2 and De'Zhaun Stribling is out; Upton Stout gets strong praise from Shanahan.",
+  "summary": "Shanahan opened with injury news: De'Zhaun Stribling will be out for Week 2, while Dominick Puni and Kaelon Black are both listed as questionable. He described Black's status as only a \"questionable amount of optimism\" and did not say whether it is the same groin issue Black dealt with earlier. He also said the team may need to add a kicker from the practice squad, with two candidates still under consideration. On pre-snap motion, he said the team has always believed in it for angles and confusion, and that it takes many practice reps because the quarterback and motion man must match cadence, which gets harder on the road. He said the team's recovery from the Australia trip was uneven, with the first three or four days rough, but that players were fully recovered by Monday and Tuesday after an extra three days off. He defended the value of intense practice, arguing that the more teams practice football as it's played, the better prepared they are for Week 1. On the Dolphins, he called their offense explosive, especially their running back and quarterback, and warned that the defense can't let up. He praised Upton Stout's growth in year two, citing more knowledge of how opponents attack the nickel position. Overall, he framed the week around Black's uncertain status, the Stribling absence, and the Dolphins' playmakers.",
+  "injuries": [
+   {
+    "player": "De'Zhaun Stribling",
+    "status": "out",
+    "detail": "Shanahan said he will be out for Week 2. He is listed as a WR in the description but does not appear on the supplied roster, so this name may need checking.",
+    "player_id": ""
+   },
+   {
+    "player": "Kaelon Black",
+    "status": "questionable",
+    "detail": "Shanahan said he is questionable, with only a \"questionable amount of optimism.\" He did not confirm whether it is the same groin injury as earlier.",
+    "player_id": "00-0041052"
+   },
+   {
+    "player": "Dominick Puni",
+    "status": "questionable",
+    "detail": "Listed as questionable for the Dolphins game. The transcript name is garbled as \"Pinero,\" so the match is likely but not certain.",
+    "player_id": "00-0039351"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Kaelon Black",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Questionable for Week 2 against Miami, with a status that could change before kickoff.",
+    "note": "His status is murky, so managers should check the final injury report before Sunday and have a backup plan at RB.",
+    "quote": "A questionable amount of optimism.",
+    "player_id": "00-0041052"
+   },
+   {
+    "player": "Upton Stout",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Stout has improved in year two and is more aware of how opponents attack the nickel position.",
+    "note": "Shanahan's praise suggests Stout's role in the defense, especially in nickel packages, may grow.",
+    "quote": "He's our bulldog.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Pre-snap motion",
+    "detail": "Shanahan said the motion is a longstanding part of the offense, used for angles and confusion. It requires many practice reps because of cadence timing, which is harder on the road."
+   },
+   {
+    "topic": "Australia trip recovery",
+    "detail": "The team had an extra three days off and was mostly recovered by Monday and Tuesday. Shanahan said the travel made the Week 1 game feel longer to enjoy."
+   },
+   {
+    "topic": "Practice philosophy",
+    "detail": "Shanahan argued that practicing football as it's played best prepares teams for early-season games, despite shorter training camps and reduced OTAs."
+   },
+   {
+    "topic": "Miami Dolphins",
+    "detail": "Shanahan described the Dolphins as having many playmakers, an explosive running back, and a quarterback with running ability and arm strength. He warned the defense can't let up or fall asleep."
+   },
+   {
+    "topic": "Kicker",
+    "detail": "The team may need to elevate a kicker from the practice squad, with two options being considered, to cover for a possible issue."
+   }
+  ],
+  "opponent": "Miami Dolphins"
+ },
+ {
+  "id": "TEN:robert-saleh-press-conference-tennessee-titans-x6531",
+  "team": "TEN",
+  "url": "https://www.tennesseetitans.com/video/robert-saleh-press-conference-tennessee-titans-x6531",
+  "title": "Robert Saleh Press Conference | Tennessee Titans",
+  "date": "2026-09-18",
+  "duration": 484,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/titans/xaux0teooppxydtok5kt",
+  "kind": "first_practice",
+  "after_week": 1,
+  "coach": "Robert Saleh",
+  "words": 1592,
+  "model": "claude-haiku-5-5",
+  "headline": "Anthony Hill is starting at Mike linebacker with Cody Barton expected in packages, Oluwafemi Oladejo had a promising edge debut, and Cedric Gray is full while James Williams remains limited.",
+  "summary": "The transcript is badly garbled. It mixes Titans-style injury and linebacker discussion with unrelated material, including a high school coach-of-the-week segment, a Matt LaFleur congratulations, and a Fred Warner anecdote. Saleh said Cedric (likely Cedric Gray) would be full, James Williams would stay limited, and a player named 'Cordell' popped up with tightness after practice, would not practice that day, and was not a concern for the game. He said a player coming off protocol was expected to clear by day's end. He described Anthony Hill as starting at Mike linebacker and praised his communication, noting he has Cody Barton beside him and Amani Hooker and Kevin Winston helping him. He said there will be moving parts and packages with Barton, who is also a starting linebacker. He praised Oluwafemi Oladejo's first game as an edge rusher, citing his run defense, clean play, athleticism and length, while noting he is still raw as a pass rusher. He said the team saves its extra captain announcement until after practice and picks players based on leadership, including off-field conduct. Confidence in the backup quarterback was also mentioned, though the name is unclear in the captions.",
+  "injuries": [
+   {
+    "player": "Cordell (unidentified; name unclear in captions)",
+    "status": "limited",
+    "detail": "Popped up with tightness after practice; will not practice today; coach has no concern for the game but will monitor.",
+    "player_id": ""
+   },
+   {
+    "player": "Cedric Gray",
+    "status": "full",
+    "detail": "Listed as full for today's practice.",
+    "player_id": ""
+   },
+   {
+    "player": "James Williams",
+    "status": "limited",
+    "detail": "Continues to be limited in practice.",
+    "player_id": ""
+   },
+   {
+    "player": "Unidentified player coming off protocol",
+    "status": "questionable",
+    "detail": "Expected to be evaluated by end of day and likely to clear; coach would be surprised if he did not.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Anthony Hill",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is starting at Mike linebacker",
+    "note": "Locked in as the starting Mike with strong praise for his communication and development, which supports his every-down role.",
+    "quote": "Anthony starting at Mike.",
+    "player_id": ""
+   },
+   {
+    "player": "Cody Barton",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will see package and playing-time changes alongside Anthony Hill",
+    "note": "Coach described a moving-parts linebacker rotation without committing to specifics, so Barton's snap share is uncertain.",
+    "quote": "there'll be some, some moving parts there.",
+    "player_id": ""
+   },
+   {
+    "player": "Oluwafemi Oladejo",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Played well in his first edge-rusher game and is developing in the system",
+    "note": "Strong run-game play and clean execution suggest a growing role, though he is still raw as a pass rusher.",
+    "quote": "Femi had a really nice game. Was really good in the run game.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Coach of the week and extra captain",
+    "detail": "Saleh mentioned a high school coach-of-the-week segment and said the extra captain is chosen weekly and announced after practice based on leadership on and off the field."
+   },
+   {
+    "topic": "Mindset and philosophy",
+    "detail": "Saleh discussed self-doubt, trusting the people around the team, and his philosophy of coaching young linebackers so they can play fast without being overcoached."
+   },
+   {
+    "topic": "Matt LaFleur",
+    "detail": "Saleh congratulated LaFleur on his first win and praised him as a smart, talented play caller."
+   }
+  ],
+  "opponent": ""
+ }
+]

@@ -29,6 +29,7 @@ A personal, non-commercial hobby site, shared with a small group of friends and 
 | [Lab](https://william-arana.github.io/NFL_stats/lab.html) | Build your own tables in the browser: point-and-click pivots, a SQL editor (DuckDB), 10 waiver recipes (incl. RB and WR pickup checks with PFR, Next Gen, depth chart and injury data), charts, CSV export, saved queries. |
 | [Waivers](https://william-arana.github.io/NFL_stats/waivers.html) | Free agents in the selected Sleeper league ranked by a waiver score (recent xFP, PPR, snap/touch trends, matchup), player search (name, team or position; includes rostered players), my roster with likeliest drops, and D/ST streamers. |
 | [Compare](https://william-arana.github.io/NFL_stats/trade.html) | Two-sided comparison (trades and more): pick players/defenses from any league roster or search, then compare FP/g, last 3, our projection for next week (`data/site/proj.json`, built by `scripts/build_site_projection.py` in the update-data job), xFP, usage, weekly scores, rest-of-season schedule and news. Scoring toggle includes your Sleeper league's own scoring (Sleeper's weekly league points for rostered players, the league's rules applied to the box score for everyone else). Shareable link; "Copy for Claude" summary. |
+| [Pressers](https://william-arana.github.io/NFL_stats/pressers.html) | Head-coach press conferences, all 32 teams, two per week (day after the game, first practice day): headline, summary, injury updates and per-player signals (topic, up/watch/down, tone, checkable claim, short quote), filterable by team/topic/player, plus a Players view. Captions from each team's video sitemap + Claude signals: `scripts/update_pressers.py`, workflows `pressers.yml` / `pressers-backfill.yml`. Raw transcripts live only in the private repo `NFL_stats-transcripts`. |
 
 **Stat descriptions:** hover a dotted-underlined column name on Stats, Lab, Waivers and Trade for a short description (from the Guide's data dictionary, `data/catalog.json`, plus notes for stats the site calculates); click it to sort. Card tables sort on header click too. Lives in `assets/glossary.js` and `assets/tables.js`.
 
@@ -93,6 +94,7 @@ Load it to a sheet. Each Tuesday, hit **Data → Refresh All**. Google Sheets: `
 | `assets/tables.js` | Columns button (hide / reorder) for any `table[data-cols]`, pages and cards |
 | `scripts/update_player_news.py` | Per-player / per-defense news archive → `data/site/news/*.json` |
 | `trade.html` | Trade analyzer |
+| `pressers.html` | Head-coach press conference signals |
 | `scripts/update_sleeper.py` | Sleeper rosters → `data/site/leagues.json`, `sleeper_map.json` |
 | `data/catalog.json` | Catalog behind the Guide |
 | `scripts/update_data.py` | Weekly data pull → CSVs, master.xlsx, site JSON (incl. `kickers.json`, `def_week.json`, `oline.json` for the Defenders / O-line / Kickers tabs) |
