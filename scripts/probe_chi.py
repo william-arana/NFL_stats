@@ -57,20 +57,21 @@ def browser(team, url, secs=60):
         b = p.chromium.launch(args=["--autoplay-policy=no-user-gesture-required"])
         pg = b.new_context(user_agent=up.UA, viewport={"width": 1280, "height": 800}).new_page()
         pg.on("request", rec)
-        done = threading.Event()
-        def run():
-            try:
-                pg.goto(url, wait_until="commit", timeout=45000)
-                print(f"  committed at {time.time()-t0:.1f}s", flush=True)
-            except Exception as e:
-                print("  goto error:", e, flush=True)
-            done.set()
-        th = threading.Thread(target=run, daemon=True); th.start()
-        th.join(secs)
         try:
-            pg.wait_for_timeout(15000)
+            pg.goto(url, wait_until="commit", timeout=45000)
+            print(f"  committed at {time.time()-t0:.1f}s", flush=True)
         except Exception as e:
-            print("  wait error:", e)
+            print("  goto error:", e, flush=True)
+        for i in range(secs):
+            try:
+                pg.wait_for_timeout(1000)
+            except Exception as e:
+                print("  wait error at", i, e); break
+            if any("subs.m3u8" in x for x in seen) and i > 8:
+                break
+            if i == 12:
+                try: pg.evaluate("document.querySelector('video')?.play?.()")
+                except Exception as e: print("  play() error:", str(e)[:120])
         for s in seen[:60]:
             print("  ", s)
         print(f"  ({len(seen)} matching requests)")
