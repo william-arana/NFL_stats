@@ -16,10 +16,13 @@ on:
         default: "1-8"
       model:
         description: "Claude model"
-        default: claude-haiku-5-5
+        default: claude-sonnet-5-5
       only:
         description: "only these teams (space separated), ALL = all 32"
         default: ""
+      redo:
+        description: "1 = re-summarize pressers already done (e.g. after a model change); reuses saved transcripts"
+        default: "0"
 
 permissions:
   contents: write
@@ -30,7 +33,7 @@ concurrency:
 
 env:
   WEEKS: ${{ inputs.weeks || '1-8' }}
-  MODEL: ${{ inputs.model || 'claude-haiku-5-5' }}
+  MODEL: ${{ inputs.model || 'claude-sonnet-5-5' }}
   PRIVATE_REPO: william-arana/NFL_stats-transcripts
   # push-triggered re-runs: teams to redo (blank = all 32)
   ONLY: ${{ inputs.only || 'ATL HOU IND JAX NE LV LAC TEN' }}
@@ -71,6 +74,7 @@ jobs:
           PRESSERS_MODEL: ${{ env.MODEL }}
           PRESSERS_BACKFILL: ${{ env.WEEKS }}
           PRESSERS_ONLY: ${{ env.ONLY }}
+          PRESSERS_REDO: ${{ inputs.redo || '0' }}
           PRESSERS_OUT: ${{ runner.temp }}/signals
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |

@@ -548,22 +548,23 @@ def link_ids(items: list[dict], roster: dict[str, str]) -> None:
         it["player_id"] = roster.get(it.get("player", "")) or by.get(_norm(it.get("player", "")), "")
 
 
-def summarize(model: str, v: dict, roster: dict[str, str]) -> tuple[dict, dict]:
-    import requests
+API = "https://api.anthropic.com/v1"
 
-    key = os.environ["ANTHROPIC_API_KEY"]
+
+def _headers() -> dict:
+    return {"x-api-key": os.environ["ANTHROPIC_API_KEY"], "anthropic-version": "2023-06-01", "content-type": "application/json"}
+
+
+def _params(model: str, v: dict, roster: dict[str, str]) -> dict:
     msg = (
-        f"Team: {v['team']} (head coach {COACHES[v['team']]})\nVideo title: {v['title']}\nDescription: {v['description']}\n"
+        f"Team: {v['team']} (head coach {COACHES[v['team']]})\nVideo title: {v['title']}\nDescription: {v.get('description', '')}\n"
         f"Posted: {v['date']} ({v.get('kind', '')})\nRoster: {', '.join(sorted(roster)) or 'n/a'}\n\n"
         f"<transcript>\n{v['transcript']}\n</transcript>"
     )
-    r = requests.post("https://api.anthropic.com/v1/messages", timeout=180,
-                      headers={"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json"},
-                      json={"model": model, "max_tokens": 6000, "system": SYSTEM,
-                            "messages": [{"role": "user", "content": msg}]})
-    if r.status_code != 200:
-        raise RuntimeError(f"Claude API {r.status_code}: {r.text[:200]}")
-    data = r.json()
+    return {"model": model, "max_tokens": 6000, "system": SYSTEM, "messages": [{"role": "user", "content": msg}]}
+
+
+def _parse(data: dict, roster: dict[str, str]) -> tuple[dict, dict]:
     txt = "".join(b.get("text", "") for b in data.get("content", []) if b.get("type") == "text").strip()
     txt = re.sub(r"^```(?:json)?|```$", "", txt.strip()).strip()
     out = json.loads(txt[txt.index("{"): txt.rindex("}") + 1])
@@ -578,6 +579,75 @@ def summarize(model: str, v: dict, roster: dict[str, str]) -> tuple[dict, dict]:
     link_ids(out["injuries"], roster)
     u = data.get("usage", {})
     return out, {"input_tokens": u.get("input_tokens", 0), "output_tokens": u.get("output_tokens", 0)}
+
+
+def summarize(model: str, v: dict, roster: dict[str, str]) -> tuple[dict, dict]:
+    """One direct call (full price). Retries once if the reply isn't valid JSON."""
+    import requests
+    for attempt in (1, 2):
+        r = requests.post(f"{API}/messages", timeout=180, headers=_headers(), json=_params(model, v, roster))
+        if r.status_code != 200:
+            raise RuntimeError(f"Claude API {r.status_code}: {r.text[:200]}")
+        try:
+            return _parse(r.json(), roster)
+        except ValueError:
+            if attempt == 2:
+                raise
+
+
+def summarize_batch(model: str, vids: list[dict], ros: dict) -> dict[str, tuple[dict, dict]]:
+    """Message Batches API (half price; results usually in minutes, guaranteed within 24h).
+    Waits up to PRESSERS_BATCH_WAIT minutes (default 45); anything not back by then, or that fails
+    or isn't valid JSON, goes through summarize() directly so a run never ends empty-handed."""
+    import time
+    import requests
+    out: dict[str, tuple[dict, dict]] = {}
+    if not vids:
+        return out
+    cid = {f"p{i:04d}": v for i, v in enumerate(vids)}
+    r = requests.post(f"{API}/messages/batches", timeout=120, headers=_headers(), json={"requests": [
+        {"custom_id": c, "params": _params(model, v, ros.get(v["team"], {}))} for c, v in cid.items()]})
+    if r.status_code != 200:
+        log(f"batch submit failed ({r.status_code}: {r.text[:200]}); falling back to direct calls")
+        bid = None
+    else:
+        bid = r.json()["id"]
+        log(f"batch {bid}: {len(cid)} pressers submitted ({model}, half price)")
+        deadline = time.time() + 60 * int(os.environ.get("PRESSERS_BATCH_WAIT", "45"))
+        st = {}
+        while time.time() < deadline:
+            st = requests.get(f"{API}/messages/batches/{bid}", timeout=60, headers=_headers()).json()
+            if st.get("processing_status") == "ended":
+                break
+            time.sleep(30)
+        if st.get("processing_status") != "ended":
+            log(f"batch {bid} not done after the wait ({st.get('request_counts')}); cancelling, rest go direct")
+            requests.post(f"{API}/messages/batches/{bid}/cancel", timeout=60, headers=_headers())
+            time.sleep(20)
+            st = requests.get(f"{API}/messages/batches/{bid}", timeout=60, headers=_headers()).json()
+        if st.get("results_url"):
+            res = requests.get(st["results_url"], timeout=300, headers=_headers())
+            for line in res.text.splitlines():
+                if not line.strip():
+                    continue
+                row = json.loads(line)
+                v = cid.get(row.get("custom_id"))
+                if not v or row.get("result", {}).get("type") != "succeeded":
+                    continue
+                try:
+                    out[v["id"]] = _parse(row["result"]["message"], ros.get(v["team"], {}))
+                except ValueError as e:
+                    log(f"  {v['id']}: batch reply wasn't valid JSON ({e}); retrying direct")
+        log(f"batch {bid}: {len(out)}/{len(cid)} back")
+    for v in cid.values():
+        if v["id"] in out:
+            continue
+        try:
+            out[v["id"]] = summarize(model, v, ros.get(v["team"], {}))
+            log(f"  {v['id']}: done direct")
+        except Exception as e:  # noqa: BLE001
+            log(f"  {v['id']}: summary FAILED ({e})")
+    return out
 
 
 # ---------- 4. write ----------
@@ -600,7 +670,7 @@ def main() -> None:
         teams = list(TEAMS)
     days = int(os.environ.get("PRESSERS_DAYS", "8"))
     cap = int(os.environ.get("PRESSERS_MAX", "150"))
-    model = os.environ.get("PRESSERS_MODEL", "claude-haiku-5-5")
+    model = os.environ.get("PRESSERS_MODEL", "claude-sonnet-5-5")
     since = datetime.now(timezone.utc).date() - timedelta(days=days)
     bf = os.environ.get("PRESSERS_BACKFILL", "")  # e.g. "1-8": weeks to backfill
     weeks = range(int(bf.split("-")[0]), int(bf.split("-")[-1]) + 1) if bf else None
@@ -641,7 +711,8 @@ def main() -> None:
             vids = pick_all(allv, t, weeks)
         else:  # "two": the original day-after + first-practice pick
             vids = pick_backfill(allv, t, weeks) if weeks else pick_weekly(allv, t)
-        vids = [v for v in vids if v["id"] not in index["done"]]
+        if os.environ.get("PRESSERS_REDO") != "1":  # REDO=1: re-summarize pressers already done (model change)
+            vids = [v for v in vids if v["id"] not in index["done"]]
         n_hc = sum(v["hc"] for v in allv)
         log(f"{t}: {len(allv)} press videos since {since}, {n_hc} head coach, picked: "
             + (", ".join(f"{v['date']} {v.get('kind', '')} '{v['title'][:60]}'" for v in vids) or "none"))
@@ -653,7 +724,13 @@ def main() -> None:
         log("nothing new")
         return
 
-    fetch_captions(new)
+    if save_dir:  # transcripts we already saved privately: reuse them, no need to fetch captions again
+        for v in new:
+            f = save_dir / v["date"] / f"{v['team']} {v['id'].split(':', 1)[1]}.txt"
+            if f.exists():
+                v["transcript"] = f.read_text().split("\n", 3)[-1]
+        log(f"reused {sum(bool(v.get('transcript')) for v in new)} saved transcript(s)")
+    fetch_captions([v for v in new if not v.get("transcript")])
     ready = [v for v in new if v.get("transcript")]
     log(f"captions: {len(ready)}/{len(new)}")
     if save_dir:
@@ -670,13 +747,20 @@ def main() -> None:
     ros = rosters()
     tok = {"input_tokens": 0, "output_tokens": 0}
     by_date: dict[str, list[dict]] = {}
+    if os.environ.get("PRESSERS_BATCH", "1") == "1":
+        results = summarize_batch(model, ready, ros)
+    else:
+        results = {}
+        for v in ready:
+            try:
+                results[v["id"]] = summarize(model, v, ros.get(v["team"], {}))
+            except Exception as e:  # noqa: BLE001
+                log(f"  {v['id']}: summary FAILED ({e})")
     for v in ready:
-        try:
-            s, u = summarize(model, v, ros.get(v["team"], {}))
-            tok = {k: tok[k] + u[k] for k in tok}
-        except Exception as e:  # noqa: BLE001
-            log(f"  {v['id']}: summary FAILED ({e})")
+        if v["id"] not in results:
             continue
+        s, u = results[v["id"]]
+        tok = {k: tok[k] + u[k] for k in tok}
         entry = {k: v[k] for k in ("id", "team", "url", "title", "date", "duration", "thumb")}
         entry["kind"] = v.get("kind", "")
         if v.get("week") is not None:

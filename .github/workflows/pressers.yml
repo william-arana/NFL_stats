@@ -15,7 +15,7 @@ on:
         default: dry
       model:
         description: "Claude model for mode=run"
-        default: claude-haiku-5-5
+        default: claude-sonnet-5-5
 
 permissions:
   contents: write
