@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.63">
-<script src="assets/site.js?v=1.63" defer></script>
-<script src="assets/cards.js?v=1.63" defer></script>
-<script src="assets/glossary.js?v=1.63" defer></script>
-<script src="assets/tables.js?v=1.63" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.65">
+<script src="assets/site.js?v=1.65" defer></script>
+<script src="assets/cards.js?v=1.65" defer></script>
+<script src="assets/glossary.js?v=1.65" defer></script>
+<script src="assets/tables.js?v=1.65" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -179,9 +179,10 @@ const st={a:[],b:[],ta:null,tb:null,hot:null};
 const NAMES={};
 const POS_ORDER=['QB','RB','WR','TE','K','DEF'];
 
-function waitCards(){if(!window.NFLSCards||!window.NFLS)return setTimeout(waitCards,40);C=NFLSCards;C.load().then(d=>{D=d;
+function waitCards(){if(!window.NFLSCards||!window.NFLS)return setTimeout(waitCards,40);C=NFLSCards;Promise.all([C.load(),C.loadX().catch(()=>null)]).then(([d])=>{D=d;
   $('#upd').textContent=`${D.META.season} · thru Wk ${D.META.last_completed_week}`;
   for(const r of D.P)NAMES[r.player_id]={name:r.player_display_name,pos:r.position,team:r.team};
+  for(const [k,L] of C.kickers()){const l=L[L.length-1];NAMES[k]={name:l.player_display_name,pos:'K',team:l.team}}
   for(const t of Object.keys(D.TM||{}))NAMES['DEF:'+t]={name:t+' D/ST',pos:'DEF',team:t};
   readHash();NFLS.onLeague(lg=>{const was=LG&&LG.my_roster_id;LG=lg;ROST=null;loadLg(lg);if(!lg){draw();return}NFLS.rosterStatus().then(r=>{if(LG!==lg)return;ROST=r;defaultSides(was);draw()})});
   window.addEventListener('nfls-scoring',draw);
@@ -213,6 +214,9 @@ function entry(k){
   if(isDef(k)){const t=k.slice(4);const s=C.defSummary(t);const lw=D.META.last_completed_week;
     const x={k,def:true,name:t+' D/ST',pos:'DEF',team:t,g:s.g,fpg:s.dst,l3:s.l3,xfp3:null,snap3:null,opps:null,tgt:null,best:s.best,sd:s.sd,rank:s.rk.dst,
       weeks:Object.fromEntries(s.rows.map(r=>[r.week,r.dst_pts])),extra:`${f1(s.sk)} sacks · ${f1(s.tk)} takeaways / g`};
+    Object.assign(x,fut0(x));x.ros=num(x.fpg)?x.fpg*x.left:null;x.proj=projOf(k);return applyLg(x)}
+  if(C.kickers().has(k)){const s=C.kickerSummary(k);const x={k,name:s.name,pos:'K',team:s.team,g:s.g,fpg:s.fpg,l3:s.l3,best:s.best,sd:s.sd,rank:s.rank,
+    weeks:Object.fromEntries(s.logs.map(l=>[l.week,l.k_pts])),inj:D.INJ[k],extra:`${s.logs.reduce((a,r)=>a+(r.fg_made||0),0)}/${s.logs.reduce((a,r)=>a+(r.fg_att||0),0)} FG`};
     Object.assign(x,fut0(x));x.ros=num(x.fpg)?x.fpg*x.left:null;x.proj=projOf(k);return applyLg(x)}
   const s=C.playerSummary(k);
   if(!s){const n=NAMES[k]||{};return {k,none:true,name:n.name||'Player '+k,pos:n.pos||'',team:n.team||'',fut:[],left:null,weeks:{}}}
@@ -258,6 +262,7 @@ function loadLg(lg){if(!lg||lg.provider==='yahoo'||LGS[lg.id])return;const id=lg
     const put=(k,w,calc)=>{const e=ex[k]&&ex[k][w];const v=num(e)?e:calc;if(!num(v))return;(pts[k]=pts[k]||{})[w]=v;num(e)?nEx++:nCalc++};
     for(const l of D.P)put(l.player_id,l.week,lgCalc(ss,l));
     for(const r of D.T)put('DEF:'+r.team,r.week,r.dst_pts);
+    for(const [k,L] of C.kickers())for(const r of L)put(k,r.week,r.k_pts);
     const byPos={};for(const k of Object.keys(pts)){const v=Object.values(pts[k]);if(v.length<2)continue;const pos=isDef(k)?'DEF':(NAMES[k]||{}).pos;if(pos)(byPos[pos]=byPos[pos]||[]).push([k,mean(v)])}
     const rank={};for(const l of Object.values(byPos)){l.sort((a,b)=>b[1]-a[1]);l.forEach(([k],i)=>rank[k]=i+1)}
     Object.assign(o,{ready:true,name:L.name||lg.name,pts,rank,nEx,nCalc,rec:ss.rec});if(LG&&LG.id===id)draw();
@@ -273,6 +278,7 @@ const scLabel=()=>lgOn()?LGS[LG.id].name+' (Sleeper)':C.SCORING[C.scoring()].lab
 let UNIVERSE=null;
 function universe(){if(UNIVERSE)return UNIVERSE;const by=new Map();
   for(const r of D.P){let a=by.get(r.player_id);if(!a)by.set(r.player_id,a={k:r.player_id,name:r.player_display_name,pos:r.position,team:r.team,fp:0});a.team=r.team;a.fp+=r.fantasy_points_ppr||0}
+  for(const [k,L] of C.kickers()){const l=L[L.length-1];by.set(k,{k,name:l.player_display_name,alt:'kicker',pos:'K',team:l.team,fp:L.reduce((a,r)=>a+(r.k_pts||0),0)})}
   const list=[...by.values()];for(const t of Object.keys(D.TM||{}))list.push({k:'DEF:'+t,name:t+' D/ST',alt:(D.TM[t].name||'')+' defense',pos:'DEF',team:t,fp:0});
   return UNIVERSE=list}
 function search(q){q=q.trim().toLowerCase();if(!q)return [];const words=q.split(/\s+/);

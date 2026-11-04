@@ -3,8 +3,6 @@
 (function(){
   const LS={get(k){try{return localStorage.getItem('nfls-'+k)}catch(e){return null}},set(k,v){try{localStorage.setItem('nfls-'+k,v)}catch(e){}}};
   const root=document.documentElement;
-  const SUN='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
-  const MOON='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
   const EXT='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
   const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const listeners=[];let leagueCfg=null;
@@ -13,7 +11,20 @@
   const cache={};
 
   function setTheme(t){if(t==='dark')root.dataset.theme='dark';else delete root.dataset.theme;LS.set('theme',t);paintThemeBtn();window.dispatchEvent(new Event('nfls-theme'))}
-  function paintThemeBtn(){const b=document.getElementById('theme-btn');if(!b)return;const dark=root.dataset.theme==='dark';b.innerHTML=(dark?SUN:MOON)+(dark?'Light':'Dark');b.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode')}
+  function paintThemeBtn(){const b=document.querySelector('#set-menu [data-set="dark"]');if(b)b.checked=root.dataset.theme==='dark'}
+  /* Settings menu (gear in the nav): dark mode + how player cards behave. Card settings are read by cards.js
+     (JSON in localStorage: nfls-cards-side, nfls-cards-snap, nfls-cards-max) and applied live via the nfls-settings event. */
+  const GEAR='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>';
+  const CS={get(k,d){try{const v=localStorage.getItem('nfls-cards-'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('nfls-cards-'+k,JSON.stringify(v))}catch(e){}}};
+  function settingsHTML(){const max=CS.get('max',2);
+    const sw=(k,label,sub,on)=>`<label class="sm-row"><span><b>${label}</b>${sub?`<small>${sub}</small>`:''}</span><input type="checkbox" class="sw" data-set="${k}" ${on?'checked':''}></label>`;
+    return `<div class="sm-h">Settings</div>
+      ${sw('dark','Dark mode','',root.dataset.theme==='dark')}
+      <div class="sm-sec">Player cards <small>(computer / tablet)</small></div>
+      ${sw('side','Side panel','Cards open docked on the right. Drag one out by its header to float it.',CS.get('side',false))}
+      ${sw('snap','Snap to screen edges','Drop a card on the top edge = full screen, left / right = half',CS.get('snap',true))}
+      <div class="sm-row"><span><b>Cards on screen</b><small>Open card + pop-out windows</small></span><span class="seg sm-seg">${[2,3,4,5].map(n=>`<button type="button" data-max="${n}" aria-pressed="${n===max}">${n}</button>`).join('')}</span></div>`}
+  function openSettings(btn,menu){const on=menu.hidden;menu.hidden=!on;btn.setAttribute('aria-expanded',String(on));if(on)menu.innerHTML=settingsHTML()}
 
   function loadLeagues(){
     if(leagueCfg)return Promise.resolve(leagueCfg);
@@ -57,9 +68,15 @@
 
   function mount(){
     const host=document.getElementById('navtools');if(!host)return;
-    host.innerHTML=`<label for="league-sel">Team</label><select id="league-sel" aria-label="League and team"></select><button class="theme" id="theme-btn" type="button"></button>`;
-    paintThemeBtn();
-    document.getElementById('theme-btn').onclick=()=>setTheme(root.dataset.theme==='dark'?'light':'dark');
+    host.innerHTML=`<label for="league-sel">Team</label><select id="league-sel" aria-label="League and team"></select><span class="setwrap"><button class="theme" id="set-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="set-menu" title="Settings">${GEAR}<span class="lbl">Settings</span></button><div class="setmenu" id="set-menu" role="dialog" aria-label="Settings" hidden></div></span>`;
+    {const btn=document.getElementById('set-btn'),menu=document.getElementById('set-menu');
+      btn.onclick=e=>{e.stopPropagation();openSettings(btn,menu)};
+      menu.addEventListener('click',e=>{e.stopPropagation();const m=e.target.closest('[data-max]');if(!m)return;CS.set('max',+m.dataset.max);
+        menu.querySelectorAll('[data-max]').forEach(b=>b.setAttribute('aria-pressed',String(b===m)));window.dispatchEvent(new CustomEvent('nfls-settings',{detail:'max'}))});
+      menu.addEventListener('change',e=>{const k=e.target.dataset.set;if(!k)return;if(k==='dark'){setTheme(e.target.checked?'dark':'light');return}
+        CS.set(k,e.target.checked);window.dispatchEvent(new CustomEvent('nfls-settings',{detail:k}))});
+      document.addEventListener('click',e=>{if(!menu.hidden&&!e.target.closest('.setwrap')){menu.hidden=true;btn.setAttribute('aria-expanded','false')}});
+      document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.hidden){menu.hidden=true;btn.setAttribute('aria-expanded','false');btn.focus()}})}
     loadLeagues().then(()=>{const s=document.getElementById('league-sel');const opts=allOptions();const groups=[...new Set(opts.map(o=>o.group))];
       s.innerHTML=groups.map(g=>`<optgroup label="${esc(g)}">${opts.filter(o=>o.group===g).map(o=>`<option value="${o.value}">${esc(o.label)}</option>`).join('')}</optgroup>`).join('')+'<option value="none">No league</option>';
       s.value=sel;

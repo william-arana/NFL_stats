@@ -113,14 +113,23 @@
     await Promise.all(jobs);return out;
   }
   const nkey=it=>it.h.toLowerCase().replace(/\W/g,'').slice(0,80);
+  /* press conference signals (data/site/presser_signals.json, our own summaries of what the coach said) */
+  let SIGP=null;const SIGW={up:'Up',down:'Down',watch:'Watch'};
+  function presserItems(g){
+    if(!SIGP)SIGP=fetch('data/site/presser_signals.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
+    return SIGP.then(j=>{if(!j||!j.p||!j.p[g])return [];return j.p[g].map(([vi,sig,topic,claim,note,quote])=>{const v=j.v[vi]||[];
+      return {h:claim||note||'Mentioned in a press conference',s:[claim&&note?note:'',quote?'“'+quote+'”':''].filter(Boolean).join(' '),d:v[0]?v[0]+'T17:00:00Z':null,
+        src:`Presser · ${v[2]||'coach'} (${v[1]||''})${topic?' · '+topic:''}`,url:v[3]||null,sig}})});
+  }
   /* key = gsis id or "DEF:XX". Resolves {items (newest first), archived: n, live: 'direct'|'worker'|null} */
   function newsFor(key){
     if(NEWS[key])return NEWS[key];
     const isDef=key.startsWith('DEF:');
     const arch=fetch('data/site/news/'+key.replace(':','_')+'.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
     const lv=isDef?Promise.resolve({items:[],via:[]}):load().then(()=>liveNews(key));
-    return NEWS[key]=Promise.all([arch,lv]).then(([a,l])=>{const by=new Map();for(const it of [...(a&&a.items||[]),...l.items])by.set(nkey(it),{...by.get(nkey(it)),...it});
-      const rwT=new Set([...by.values()].filter(x=>x.src==='RotoWire').map(x=>x.d&&new Date(x.d).getTime()));const items=[...by.values()].filter(x=>!(x.src==='ESPN fantasy'&&x.d&&rwT.has(new Date(x.d).getTime()))).sort((x,y)=>String(y.d||'').localeCompare(String(x.d||'')));return {items,archived:a?a.items.length:0,live:l.via,updated:a&&a.updated_utc}});
+    const ps=isDef?Promise.resolve([]):presserItems(key);
+    return NEWS[key]=Promise.all([arch,lv,ps]).then(([a,l,ps])=>{const by=new Map();for(const it of [...(a&&a.items||[]),...l.items,...ps])by.set(nkey(it),{...by.get(nkey(it)),...it});
+      const rwT=new Set([...by.values()].filter(x=>x.src==='RotoWire').map(x=>x.d&&new Date(x.d).getTime()));const items=[...by.values()].filter(x=>!(x.src==='ESPN fantasy'&&x.d&&rwT.has(new Date(x.d).getTime()))).sort((x,y)=>String(y.d||'').localeCompare(String(x.d||'')));return {items,archived:a?a.items.length:0,live:l.via,pressers:ps.length,updated:a&&a.updated_utc}});
   }
   const fmtDate=s=>{if(!s)return '';const d=new Date(s);if(isNaN(d))return '';const days=(Date.now()-d)/864e5;
     const md=d.toLocaleDateString(undefined,{month:'short',day:'numeric',...(d.getFullYear()!==new Date().getFullYear()?{year:'numeric'}:{})});
@@ -128,10 +137,10 @@
   function newsHTML(n,all,name){
     if(!n.items.length)return `<p class="dim" style="margin:0">No stories yet. The news archive fills in each time the "Update Sleeper rosters" job runs (3× a day).</p>`;
     const show=all?n.items:n.items.slice(0,6);const oldest=n.items[n.items.length-1].d;
-    return `<ul class="pc-news">${show.map(it=>{const fresh=it.d&&(Date.now()-new Date(it.d))<3*864e5;return `<li class="${fresh?'new':''}">${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.h)}</a>`:`<b>${esc(it.h)}</b>`}${it.s?`<p>${esc(it.s)}</p>`:''}<small>${esc(it.src||'')}${it.d?' · '+esc(fmtDate(it.d)):''}</small></li>`}).join('')}</ul>
+    return `<ul class="pc-news">${show.map(it=>{const fresh=it.d&&(Date.now()-new Date(it.d))<3*864e5;return `<li class="${[fresh?'new':'',it.sig?'sig sig-'+it.sig:''].join(' ').trim()}">${it.sig?`<span class="sigb">${SIGW[it.sig]}</span>`:''}${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.h)}</a>`:`<b>${esc(it.h)}</b>`}${it.s?`<p>${esc(it.s)}</p>`:''}<small>${esc(it.src||'')}${it.d?' · '+esc(fmtDate(it.d)):''}</small></li>`}).join('')}</ul>
       ${!all&&n.items.length>show.length?`<button type="button" class="more" data-more>Show all ${n.items.length} stories (back to ${esc(fmtDate(oldest).split(' · ')[0])})</button>`:''}`;
   }
-  function newsSrc(n){const p=[];if(n.live&&n.live.length)p.push(n.live.join(' + ')+' live');if(n.archived)p.push(`site archive (${n.archived})`);return p.length?p.join(' + '):'site archive'}
+  function newsSrc(n){const p=[];if(n.live&&n.live.length)p.push(n.live.join(' + ')+' live');if(n.archived)p.push(`site archive (${n.archived})`);if(n.pressers)p.push(`pressers (${n.pressers})`);return p.length?p.join(' + '):'site archive'}
 
   /* ---------- card HTML ---------- */
   const f1=v=>num(v)?v.toFixed(1):'–',f0=v=>num(v)?v.toFixed(0):'–',pct=v=>num(v)?Math.round(v*100)+'%':'–';
@@ -241,6 +250,13 @@
       return X});
     return xP;
   }
+  /* season summary for a kicker (Compare page): Sleeper-default K points per game, rank among kickers */
+  function kickerSummary(id){
+    const logs=X.K.get(id);if(!logs||!logs.length)return null;const l=logs[logs.length-1];const v=logs.map(r=>r.k_pts||0);const m=mean(v);
+    if(!X._krk){const all=[...X.K].map(([k,L])=>[k,mean(L.map(r=>r.k_pts||0)),L.length]).filter(x=>x[2]>=2).sort((a,b)=>b[1]-a[1]);X._krk=new Map(all.map(([k],i)=>[k,i+1]))}
+    const lw=D.META.last_completed_week,rec=logs.filter(r=>r.week>lw-3).map(r=>r.k_pts||0);
+    return {name:l.player_display_name,pos:'K',team:l.team,g:logs.length,fpg:m,l3:rec.length?mean(rec):null,best:Math.max(...v),sd:v.length>1?Math.sqrt(mean(v.map(p=>(p-m)**2))):null,rank:X._krk.get(id)||null,logs};
+  }
   const loadAll=()=>Promise.all([load(),loadX()]).then(()=>D);
   const nextLine=(team)=>{const n=nextOpp(team);return n?`<span>${gbtn(n.g.game_id,'Wk '+D.META.next_week)} ${oppBtn(n.opp,(n.at?'@ ':'vs ')+n.opp,null)}</span>`:`<span>Wk ${D.META.next_week} bye</span>`};
   const newsBlock=()=>`<section><h4>News <span class="sp"></span><span data-news-src></span></h4><div data-news><span class="spin"></span>Loading news…</div></section>`;
@@ -249,7 +265,7 @@
     const logs=X.K.get(id);const l=logs[logs.length-1];const S=k=>sum(logs.map(r=>r[k]));const g=logs.length;
     const fgm=S('fg_made'),fga=S('fg_att');const n=nextOpp(l.team);
     return `<div class="pc-top">${l.headshot_url?`<img class="hs" src="${esc(l.headshot_url)}" alt="" loading="lazy" onerror="this.remove()">`:''}<div><h3>${esc(l.player_display_name)}</h3>
-      <div class="sub"><span>K · ${obtn(l.team,esc(l.team),'tmlink')}</span><span>bye ${byeWeek(l.team)||'–'}</span>${nextLine(l.team)}</div></div></div>
+      <div class="sub"><span>K · ${obtn(l.team,esc(l.team),'tmlink')}</span><span>bye ${byeWeek(l.team)||'–'}</span>${nextLine(l.team)}${tradeAdd(id)}</div></div></div>
     <section><div class="tags">${injTag(id)}${ownerTag(id)}</div><div class="tiles" style="margin-top:8px">
       <div><span>K pts / g</span><b>${f1(S('k_pts')/g)}</b><small>${g} g · Sleeper default</small></div>
       <div><span>FG</span><b>${fgm}/${fga}</b><small>${fga?Math.round(fgm/fga*100)+'%':''} · long ${Math.max(0,...logs.map(r=>r.fg_long||0))}</small></div>
@@ -446,7 +462,7 @@
   const validKey=k=>typeof k==='string'&&/^[pdgo]:[A-Za-z0-9_-]+$/.test(k);
   function urlFor(key){const u=new URL(location.href);if(key)u.searchParams.set('card',key);else u.searchParams.delete('card');return u.pathname+u.search+u.hash}
   function writeState(mode,d){const top=stack[stack.length-1];history[mode]({nflsCard:stack.map(x=>({key:x.key,pos:x.pos||''})),nflsDepth:d},'',urlFor(top&&top.key))}
-  function closeLocal(){if(el){el.remove();el=null}if(shade){shade.remove();shade=null}if(anchor){anchor.setAttribute('aria-expanded','false');anchor=null}stack=[]}
+  function closeLocal(){if(el){el.remove();el=null;document.documentElement.classList.remove('side-open')}if(shade){shade.remove();shade=null}if(anchor){anchor.setAttribute('aria-expanded','false');anchor=null}stack=[]}
   /* close = go back past every card entry we added, so Back afterwards leaves the page normally */
   function close(){
     if(!el)return;const d=depth();closeLocal();
@@ -454,15 +470,27 @@
   }
   function place(){
     if(!el||el._moved)return;/* moved by hand (desktop): stay put */const phone=matchMedia('(max-width:640px)').matches;
+    if(!phone&&LS.get('cards-side',false)){dock();return}
+    if(el.classList.contains('pc-side'))undock(true);
     if(phone){if(!shade){shade=document.createElement('div');shade.className='pc-shade';shade.onclick=close;document.body.appendChild(shade)}return}
     const w=el.offsetWidth,h=el.offsetHeight,cw=document.documentElement.clientWidth;
     if(!anchor||!anchor.isConnected){el.style.left=Math.max(scrollX+12,scrollX+(cw-w)/2)+'px';el.style.top=(scrollY+64)+'px';return}
     const r=anchor.getBoundingClientRect();
     let left=r.left+scrollX;left=Math.min(left,scrollX+cw-w-12);left=Math.max(scrollX+12,left);
-    const below=innerHeight-r.bottom-12,above=r.top-60;let top=r.bottom+scrollY+6;
-    if(below<Math.min(h,360)){if(above>=h)top=r.top+scrollY-h-6;else setTimeout(()=>{if(el)el.scrollIntoView({block:'nearest',behavior:'smooth'})},30)}
+    /* opens under the name; when the whole card doesn't fit below it, it moves up so its bottom sits on the bottom of the screen */
+    const below=innerHeight-r.bottom-12;let top=r.bottom+scrollY+6;
+    if(below<h)top=Math.max(scrollY+8,scrollY+innerHeight-h-10);
     el.style.left=left+'px';el.style.top=top+'px';
   }
+  /* side panel mode (Settings): the card docks on the right edge at full height; dragging its header pulls it out
+     into a normal floating card, dragging its left edge sets the panel width (remembered) */
+  const sideW=()=>Math.round(Math.max(340,Math.min(LS.get('cards-side-w',460)||460,document.documentElement.clientWidth*.6)));
+  function dock(){if(!el)return;el.classList.add('pc-side');Object.assign(el.style,{position:'',left:'',top:'',height:'',maxHeight:'',width:sideW()+'px'});
+    document.documentElement.classList.add('side-open');document.documentElement.style.setProperty('--side-w',(sideW()+16)+'px')}
+  function undock(reset){if(!el||!el.classList.contains('pc-side'))return;const r=el.getBoundingClientRect();el.classList.remove('pc-side');
+    document.documentElement.classList.remove('side-open');
+    if(reset){el.style.width=el.style.height='';return}
+    Object.assign(el.style,{left:(r.left+scrollX)+'px',top:(r.top+scrollY)+'px',width:r.width+'px',height:Math.min(r.height,innerHeight*.8)+'px',maxHeight:'none'})}
   const keyName=k=>k[0]==='d'?k.slice(2)+' D/ST':k[0]==='o'?k.slice(2)+' offense':k[0]==='g'?(m=>m?m[2]+' @ '+m[3]+' · Wk '+(+m[1]):k.slice(2))(k.slice(2).match(/^\d{4}_(\d+)_([A-Z]+)_([A-Z]+)$/)):(NAMEHINT[k.slice(2)]||'Player');
   const ICON={pop:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="14" height="14" rx="2"/><path d="M10 3h11v11"/></svg>',
     link:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>'};
@@ -546,7 +574,7 @@
      ⧉ on a card (or on one of its sections) floats it in its own window: drag it by the title bar, resize from
      any corner (double-tap the title bar = normal size), minimize, or open it back up as a card. Windows stay put while you browse other cards and
      follow you to other pages in the same tab (sessionStorage). Names inside a window open cards too. */
-  const MAXBOX=2,ZBASE=72;  // at most 2 boxes on screen: pop-out windows + the open card
+  const ZBASE=72;const maxBox=()=>Math.max(2,Math.min(5,+LS.get('cards-max',2)||2));  // boxes on screen (open card + pop-out windows): Settings, 2–5, default 2
   const SS={get(){try{const v=JSON.parse(sessionStorage.getItem('nfls-pins')||'[]');return Array.isArray(v)?v.filter(p=>p&&validKey(p.key)):[]}catch(e){return []}},set(v){try{sessionStorage.setItem('nfls-pins',JSON.stringify(v))}catch(e){}}};
   let pins=SS.get();const pinEls=new Map();let zTop=ZBASE;
   const savePins=()=>SS.set(pins);
@@ -588,7 +616,7 @@
       x:geo?Math.round(geo.x):phone?8:vw-width-20-n*26,y:geo?Math.round(geo.y):phone?8+n*40:76+n*30};
     pins.push(p);capPins();savePins();loadAll().then(()=>{if(pins.includes(p))mountPin(p)});
   }
-  function capPins(){const cap=Math.max(1,MAXBOX-(el?1:0));while(pins.length>cap)removePin(pins[0].id)}
+  function capPins(){const cap=Math.max(1,maxBox()-(el?1:0));while(pins.length>cap)removePin(pins[0].id)}
   function removePin(id){const w=pinEls.get(id);if(w)w.remove();pinEls.delete(id);pins=pins.filter(p=>p.id!==id);savePins()}
   function refreshPins(){for(const p of pins)fillPin(p)}
   if(pins.length&&matchMedia('(max-width:640px)').matches){pins=[];savePins()}   // phones: drop windows left over from a wider screen
@@ -625,7 +653,7 @@
     }
     const t=e.target.closest('[data-card],.opp[data-opp]');
     if(t&&!e.target.closest('.plink,.av,a[href]:not([data-card])')){e.preventDefault();e.stopPropagation();const k=t.dataset.card||('d:'+t.dataset.opp);if(t.dataset.name)NAMEHINT[k.slice(2)]=t.dataset.name;open(k,t,t.dataset.pos);return}
-    if(el&&!e.target.closest('.pmenu,.glpop,.colpanel'))close();
+    if(el&&!el.classList.contains('pc-side')&&!e.target.closest('.pmenu,.glpop,.colpanel,.setwrap'))close();
   });
   /* desktop/tablet: drag the card by its header to move it, resize it from any corner or side (the size is
      remembered for the next card), double-tap / double-click the header to put it back to its normal size and spot.
@@ -648,6 +676,7 @@
   document.addEventListener('pointermove',e=>{
     if(!mv||!el)return;
     if(!mv.on){if(Math.abs(e.clientX-mv.x0)+Math.abs(e.clientY-mv.y0)<5)return;mv.on=true;el.classList.add('pc-moving');
+      if(el.classList.contains('pc-side')){undock(false);el._moved=true}
       const r=el.getBoundingClientRect();unfix(el);
       if(el._snap){const pw=el._pre&&el._pre.w||660;mv.gx=mv.gx/r.width*pw;el.style.width=el._pre&&el._pre.w?pw+'px':'';el.style.height=el._pre&&el._pre.h?el._pre.h+'px':'';if(!(el._pre&&el._pre.h))el.style.maxHeight='';el._snap=''}}
     const cw=document.documentElement.clientWidth,w=el.offsetWidth;
@@ -667,7 +696,7 @@
 
   /* ---- snapping: drop a header on the top edge = full screen, left / right edge = that half ---- */
   const SNAPM=8;let ghostEl=null;
-  function snapZone(x,y){const vw=document.documentElement.clientWidth;return y<=6?'max':x<=6?'left':x>=vw-7?'right':''}
+  function snapZone(x,y){if(!LS.get('cards-snap',true))return '';const vw=document.documentElement.clientWidth;return y<=6?'max':x<=6?'left':x>=vw-7?'right':''}
   function snapRect(z){const vw=document.documentElement.clientWidth,vh=innerHeight,m=SNAPM,half=Math.round(vw/2);
     return z==='max'?{x:m,y:m,w:vw-2*m,h:vh-2*m}:z==='left'?{x:m,y:m,w:half-m-m/2,h:vh-2*m}:{x:half+m/2,y:m,w:vw-half-m-m/2,h:vh-2*m}}
   function ghost(z){if(!z){if(ghostEl){ghostEl.remove();ghostEl=null}return}
@@ -680,6 +709,7 @@
   }
   function snapPin(p,w,z){const r=snapRect(z);if(!p.snap)p.pre={w:p.w,h:p.h};p.snap=z;p.min=false;w.classList.remove('min');
     Object.assign(p,{x:r.x,y:r.y,w:r.w,h:r.h});Object.assign(w.style,{left:r.x+'px',top:r.y+'px',width:r.w+'px',height:r.h+'px'});savePins()}
+  addEventListener('nfls-settings',e=>{if(e.detail==='max')capPins();if(e.detail==='side'&&el&&!el._moved){if(LS.get('cards-side',false))dock();else{undock(true);sizeCard();place()}}});
   addEventListener('resize',()=>{if(el&&el._snap)snapCard(el,el._snap);for(const p of pins){const w=pinEls.get(p.id);if(w&&p.snap)snapPin(p,w,p.snap)}});
 
   /* ---- resize: drag any corner (mouse or finger) or side (mouse) of the card or a pop-out window.
@@ -698,11 +728,14 @@
   function rzMove(x,y){
     if(!rz)return false;const dx=x-rz.x0,dy=y-rz.y0;
     if(!rz.on){if(Math.abs(dx)+Math.abs(dy)<5)return false;rz.on=true;rz.b.classList.add('pc-sizing');document.documentElement.classList.add('rz-doc');
-      if(rz.kind==='pc'){unfix(rz.b);rz.b.style.maxHeight='none';rz.b._snap=''}
+      rz.side=rz.kind==='pc'&&rz.b.classList.contains('pc-side');
+      if(rz.side&&rz.c!=='w')undock(false);rz.side=rz.side&&rz.c==='w';
+      if(rz.kind==='pc'&&!rz.side){unfix(rz.b);rz.b.style.maxHeight='none';rz.b._snap=''}
       rz.l=parseFloat(rz.b.style.left)||0;rz.t=parseFloat(rz.b.style.top)||0}
     const [mw,mh]=RZMIN[rz.kind],vw=document.documentElement.clientWidth;const {b,c}=rz;
     const E=c.includes('e'),W=c.includes('w'),S=c.includes('s'),N=c.includes('n');
     let w=rz.w+(E?dx:W?-dx:0),h=rz.h+(S?dy:N?-dy:0);w=Math.max(mw,Math.min(w,vw-8));h=Math.max(mh,h);
+    if(rz.side){w=Math.max(340,Math.min(w,vw*.6));b.style.width=w+'px';document.documentElement.style.setProperty('--side-w',(w+16)+'px');return true}
     if(E||W)b.style.width=w+'px';if(N||S)b.style.height=h+'px';
     if(W)b.style.left=(rz.l+rz.w-w)+'px';if(N)b.style.top=(rz.t+rz.h-h)+'px';
     if(rz.kind==='pc'&&(W||N))b._moved=true;
@@ -710,7 +743,7 @@
   }
   function rzEnd(){
     if(!rz)return;const z=rz;rz=null;if(!z.on)return;z.b.classList.remove('pc-sizing');document.documentElement.classList.remove('rz-doc');eat();
-    if(z.kind==='pc')LS.set('card-size',{w:z.b.offsetWidth,h:z.b.offsetHeight});else savePinGeo(z.b);
+    if(z.side)LS.set('cards-side-w',z.b.offsetWidth);else if(z.kind==='pc')LS.set('card-size',{w:z.b.offsetWidth,h:z.b.offsetHeight});else savePinGeo(z.b);
   }
   /* double-click a side or corner: stretch that side / those sides to the edge of the screen */
   function stretch(b,c){
@@ -841,5 +874,5 @@
   function pbtn(id,name,cls){return `<button type="button" class="pname ${cls||''}" data-card="p:${esc(id)}" data-name="${esc(name)}" aria-expanded="false">${esc(name)}</button>`}
   function obtn(team,label,cls){return `<button type="button" class="${cls?'pname '+cls:'unit'}" data-card="o:${esc(team)}" aria-expanded="false">${label}</button>`}
   function dbtn(team,label,cls){return `<button type="button" class="pname ${cls||''}" data-card="d:${esc(team)}" aria-expanded="false">${esc(label||team)}</button>`}
-  window.NFLSCards={provide,load,loadX,open,push,close,addPin,gbtn,gameKey,pbtn,dbtn,oppBtn,mrk,newsFor,playerSummary,defSummary,teamDefense,dvp,gameOf,nextOpp,byeWeek,scoring,SCORING,data:()=>D,index:()=>IX};
+  window.NFLSCards={provide,load,loadX,kickerSummary,kickers:()=>X.K,open,push,close,addPin,gbtn,gameKey,pbtn,dbtn,oppBtn,mrk,newsFor,playerSummary,defSummary,teamDefense,dvp,gameOf,nextOpp,byeWeek,scoring,SCORING,data:()=>D,index:()=>IX};
 })();

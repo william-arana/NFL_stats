@@ -49,7 +49,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/pressers
+          python scripts/build_presser_signals.py
+          git add data/pressers data/site/presser_signals.json
           git diff --cached --quiet && echo "No changes" && exit 0
           git commit -m "Pressers: $(date -u +%Y-%m-%dT%H:%MZ)"
           for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
