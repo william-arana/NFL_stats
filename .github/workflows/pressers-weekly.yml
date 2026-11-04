@@ -57,7 +57,6 @@ jobs:
           PRESSERS_TEAMS: ${{ matrix.teams }}
           PRESSERS_MODEL: ${{ env.MODEL }}
           PRESSERS_OUT: ${{ runner.temp }}/signals
-          PRESSERS_SKIP: CHI  # Bears video page freezes headless Chrome and has no caption track; separate source TBD
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           mkdir -p "$RUNNER_TEMP/private/logs"
