@@ -23,7 +23,9 @@ with sync_playwright() as p:
     for i in range(40):
         pg.wait_for_timeout(500)
         if any("subs.m3u8" in u for u in seen): break
-        if i == 10: pg.evaluate("try{document.querySelector('video')?.play?.()}catch(e){}")
+        if i == 10:
+            try: pg.evaluate("try{document.querySelector('video')?.play?.()?.catch?.(()=>{})}catch(e){}")
+            except Exception as e: print("eval", e)
     html = pg.content()
     m = re.search(r'"slug":"%s".*?"mcpID":"(\d+)"' % re.escape(url.rsplit("/", 1)[-1]), html, re.S)
     print("WORKING mcpID", m.group(1) if m else None)
