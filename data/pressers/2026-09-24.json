@@ -1,0 +1,125 @@
+[
+ {
+  "id": "PHI:nick-sirianni-press-conference-september-24-2026",
+  "team": "PHI",
+  "url": "https://www.philadelphiaeagles.com/video/nick-sirianni-press-conference-september-24-2026",
+  "title": "Nick Sirianni Press Conference: September 24, 2026",
+  "date": "2026-09-24",
+  "duration": 925,
+  "thumb": "https://static.clubs.nfl.com/image/upload/t_q-best/eagles/troyw5kthur2tqtn0mcd",
+  "kind": "first_practice",
+  "after_week": 2,
+  "coach": "Nick Sirianni",
+  "words": 3058,
+  "model": "claude-haiku-5-5",
+  "headline": "Saquon Barkley's status is unclear pending the injury report, Zach Ertz has not practiced yet, and Tank Bigsby and Will Shipley remain a trusted running back committee.",
+  "summary": "Sirianni said the Bears are a strong, well-coached team and that the quarterback uncertainty is just another layer of weekly planning. He called the Eagles' 2026 season a process, with pads practice once a week, and emphasized block destruction and run defense as keys to this game. On takeaways, he said the team has had few real chances, since the opposing QBs have been mobile, and he stressed that tackling comes before strip attempts. He said Zach Ertz has not practiced yet and that trust is built through reps, so his readiness for Sunday will be determined at practice. On Saquon Barkley, he deferred to the injury report and said Barkley works hard to be ready each week. He praised Kenny Moore's competitiveness and said his versatility could let him contribute at safety, though it still needs to be seen in practice. He described Tank Bigsby and Will Shipley as a trusted committee at running back, both having earned reps, and he credited the depth after Barkley left a game. He also praised rookie Dontayvion Wicks's physicality, contested catching, and work ethic, saying the team saw his potential on tape before drafting him.",
+  "injuries": [
+   {
+    "player": "Saquon Barkley",
+    "status": "unclear",
+    "detail": "Coach deferred to the injury report; said Barkley does everything to be ready each week and that the team will see where he is.",
+    "player_id": "00-0034844"
+   },
+   {
+    "player": "Zach Ertz",
+    "status": "unclear",
+    "detail": "Has not practiced yet since joining the team; readiness for Sunday will be evaluated in practice.",
+    "player_id": "00-0030061"
+   },
+   {
+    "player": "Dallas Goedert",
+    "status": "ir",
+    "detail": "Reporter referenced Goedert going on IR; coach answered generally that every contingency is discussed and planned, without naming him.",
+    "player_id": "00-0034351"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Tank Bigsby",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Continues to share running back reps as part of a committee with Will Shipley",
+    "note": "Backup RB work has expanded and the coach trusts him, which supports a bigger role if Barkley is limited.",
+    "quote": "We trust the heck out of both of them.",
+    "player_id": "00-0038555"
+   },
+   {
+    "player": "Will Shipley",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Continues to share running back reps as part of a committee with Tank Bigsby",
+    "note": "Backup RB work has expanded and the coach trusts him, which supports a bigger role if Barkley is limited.",
+    "quote": "they both have earned reps",
+    "player_id": "00-0039746"
+   },
+   {
+    "player": "Dontayvion Wicks",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Praised as a great addition with strong physicality and contested-catch ability",
+    "note": "Coach's glowing review suggests a real role in the passing game, though no specific usage was promised.",
+    "quote": "he's been a great addition",
+    "player_id": "00-0038393"
+   },
+   {
+    "player": "Kenny Moore",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Could play safety thanks to versatility, but his role depends on reps in practice",
+    "note": "Versatility could make him a depth or specialty piece, but his fantasy relevance is unclear for now.",
+    "quote": "We'll see where he is.",
+    "player_id": ""
+   },
+   {
+    "player": "Zach Ertz",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Has not practiced yet, so Sunday availability is undetermined until he takes reps",
+    "note": "His role in the offense and whether he plays this week hinge on practice reports.",
+    "quote": "we'll see where he is.",
+    "player_id": "00-0030061"
+   },
+   {
+    "player": "Saquon Barkley",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Injury status will be reported on the official injury report; no clear update given",
+    "note": "Barkley's availability is the biggest fantasy swing factor, and the backups' reps suggest a committee if he is limited.",
+    "quote": "we'll see what happens see where we are.",
+    "player_id": "00-0034844"
+   },
+   {
+    "player": "Dallas Goedert",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Remains on injured reserve",
+    "note": "Goedert is out of the TE mix, which shifts targets toward other tight ends and receivers.",
+    "quote": "",
+    "player_id": "00-0034351"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Bears quarterback situation",
+    "detail": "Sirianni said the uncertainty at QB adds planning layers, but every team faces a possible QB change each week, and the Eagles will follow their normal process."
+   },
+   {
+    "topic": "Takeaways and pads practice",
+    "detail": "Few takeaways so far because opposing QBs have been mobile. Sirianni said tackling comes first, and the team practices in pads once a week, with block destruction a focus."
+   },
+   {
+    "topic": "Revenge and Bears run game",
+    "detail": "Sirianni said the team does not focus on revenge. He praised the Bears' run game and their running back's one-cut ability, and said block destruction is the key to stopping it."
+   }
+  ],
+  "opponent": "Chicago Bears"
+ }
+]

@@ -1,5 +1,72 @@
 [
  {
+  "id": "BAL:jesse-minter-announces-joe-fagnano-as-starting-quarterback-vs-jaguars-ravens-press-conferences",
+  "team": "BAL",
+  "url": "https://www.baltimoreravens.com/video/jesse-minter-announces-joe-fagnano-as-starting-quarterback-vs-jaguars-ravens-press-conferences",
+  "title": "Jesse Minter Announces Joe Fagnano As Starting Quarterback vs. Jaguars",
+  "date": "2026-11-03",
+  "duration": 319,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/ravens/uobgeuut3nsyud1ccctt.jpg",
+  "kind": "day_after",
+  "after_week": 8,
+  "coach": "Jesse Minter",
+  "words": 1158,
+  "model": "claude-haiku-5-5",
+  "headline": "Joe Fagnano starts at QB Thursday vs. Jacksonville; Lamar Jackson's availability is still undetermined and Tyler Huntley is out, possibly heading to IR.",
+  "summary": "Minter confirmed that Joe Fagnano will start at quarterback Thursday night against Jacksonville, calling it an opportunity and saying the team is excited to play in front of its fans. He praised Fagnano for taking advantage of his chances since training camp, noting that he got few reps in OTAs because of the quarterback numbers but gained more work after an injury at the position about ten days before the first preseason game. Minter described Fagnano as calm and composed, said the offense ran smoothly with him in the preseason, and said the familiarity with terminology and calls from past stints should help him operate on a short week. He said the other leaders have responded well and laid out the formula for winning: run the ball, protect and play well around Fagnano, and make game-changing plays on defense and special teams. On Jacksonville, Minter pointed to their physical run and pass game, strong backs who break tackles, skill players like Parker Washington, and Trevor Lawrence and Liam Coen's offense. He said the team would need to stop the run and make plays on defense. Asked about Lamar Jackson's status for this week, Minter said the team would know the final answer at some point before Thursday. He said Tyler Huntley is out and could be placed on IR, with more details expected soon.",
+  "injuries": [
+   {
+    "player": "Tyler Huntley",
+    "status": "out",
+    "detail": "Out for the Jaguars game; Minter said he is potentially an IR candidate, with the full picture expected within a day or so.",
+    "player_id": "00-0035993"
+   },
+   {
+    "player": "Lamar Jackson",
+    "status": "unclear",
+    "detail": "Asked whether he would have to play this week, Minter said the final determination would come at some point before Thursday. Nothing confirmed.",
+    "player_id": "00-0034796"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Joe Fagnano",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will start at quarterback Thursday night vs. Jacksonville",
+    "note": "Confirmed starter for a primetime game; he is a streaming QB option, though a backup-level passing ceiling is likely given the run-focused game plan.",
+    "quote": "we'll be starting Joe at quarterback this week on Thursday.",
+    "player_id": "00-0040981"
+   },
+   {
+    "player": "Tyler Huntley",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Will miss this week's game and could be placed on IR",
+    "note": "Huntley is out, so he is not a fantasy factor for Thursday and his long-term role is in question.",
+    "quote": "Potentially.",
+    "player_id": "00-0035993"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Scheme and game plan",
+    "detail": "Minter's plan centers on running the ball, protecting and supporting the new starter, and making defensive stops and game-changing plays."
+   },
+   {
+    "topic": "Opponent: Jacksonville",
+    "detail": "Minter praised Jacksonville's physical rushing and passing attack, strong backs who break tackles, skill players including Parker Washington, and Trevor Lawrence, and said Liam Coen does a good job calling the offense."
+   },
+   {
+    "topic": "Roster moves",
+    "detail": "Minter referenced a recent roster addition of Kedon Slovis to the quarterback mix, plus other moves such as a practice squad addition and a quarterback workout, without details."
+   }
+  ],
+  "opponent": "Jacksonville Jaguars"
+ },
+ {
   "id": "LAC:jim-harbaugh-press-conference-monday-week-9-2026",
   "team": "LAC",
   "url": "https://www.chargers.com/video/jim-harbaugh-press-conference-monday-week-9-2026",
@@ -8,53 +75,227 @@
   "duration": 842,
   "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/chargers/rwu3oa8fuhttnx1p87wo.jpg",
   "kind": "day_after",
+  "after_week": 8,
   "coach": "Jim Harbaugh",
   "words": 1878,
   "model": "claude-haiku-5-5",
-  "headline": "David Njoku's practice window is likely opening this week, while the offense's scoring drought and a three-back rotation under review leave Justin Herbert's and the backfield's usage uncertain.",
-  "summary": "Harbaugh said he expects the team's practice window for David Njoku to open this week, which he framed as a positive boost. Several other injured players were expected to keep ramping up or to start practicing, but the captions garble those names, so they can't be matched reliably to the roster. He praised the offensive linemen who moved positions, calling the versatility impressive. On the trade deadline, he said his focus was on the upcoming Texans game and that the organization is always looking to improve, and he said Khalil Mack wants to stay and is a pillar of the team. Asked about Justin Herbert's struggles, Harbaugh said Herbert mostly does his job very well, with a couple of throws he'd like back, and that the problems came in desperation moments trying to make a play. He said the offense is fully aware of the nine-quarter touchdown drought and that the focus is on finishing drives, with pre-snap penalties reduced to one per unit as a sign of progress. The running game was not good recently, and he said the team is looking at the ball-carrier rotation, possibly giving one back a longer run to build rhythm, though he also values a 'hot hand' approach. He praised cornerback Tarheeb Still as a stalwart and one of his favorite players, and credited the defense's play despite losing Derwin James.",
+  "headline": "Harbaugh says David Njoku's practice window is opening soon, Rodney Shelley and Donte Jackson are ramping up, and Khalil Mack is staying put, while the backfield rotation is under review after a poor running game.",
+  "summary": "Harbaugh gave a practice update that is partly garbled in the captions. Rodney Shelley and Donte Jackson are ramping up in practice, and another player is expected to start working in soon. Brenen Thompson is not likely to practice this week, and Deane Leonard remains in the concussion protocol. Harbaugh expects the Leonard situation to open David Njoku's practice window. He praised the offensive linemen who moved positions and called Joe Alt an elite player. On the trade deadline, Harbaugh said his focus is on the Texans, but the organization is always looking to improve. He said he wants Khalil Mack to stay, calling him a pillar of the team who wants to be here. On Justin Herbert, he said Herbert mostly does his job well and that only two throws he would like back. He acknowledged the offense has not finished drives, with the touchdown drought and the lack of third-down success as the key issues. He said the running game was not its best and that the team is looking at rotating its three healthy backs more effectively, possibly giving one a longer run. On the defense, he praised Tarheeb Still as a favorite player and Isas Waxter for rising, and said the unit has responded well despite playing without Derwin James.",
   "injuries": [
+   {
+    "player": "Rodney Shelley",
+    "status": "limited",
+    "detail": "Continuing to ramp up in practice, not yet full.",
+    "player_id": ""
+   },
+   {
+    "player": "Donte Jackson",
+    "status": "limited",
+    "detail": "Continuing to ramp up in practice, not yet full.",
+    "player_id": ""
+   },
+   {
+    "player": "Brenen Thompson",
+    "status": "doubtful",
+    "detail": "Not likely to practice this week (name partly garbled in captions; matched to 'Brennan').",
+    "player_id": "00-0041550"
+   },
+   {
+    "player": "Deane Leonard",
+    "status": "questionable",
+    "detail": "Still in the concussion protocol; expected to open David Njoku's practice window.",
+    "player_id": ""
+   },
    {
     "player": "David Njoku",
     "status": "returning",
-    "detail": "Harbaugh said he will likely open the practice window for Njoku this week, a step toward his return.",
+    "detail": "Practice window expected to open; not yet back in practice.",
     "player_id": "00-0033885"
+   },
+   {
+    "player": "Derwin James",
+    "status": "out",
+    "detail": "Did not play in the Rams game; defense performed without him.",
+    "player_id": ""
    }
   ],
   "signals": [
    {
+    "player": "Khalil Mack",
+    "topic": "trade_or_roster",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Mack will stay with the Chargers past the trade deadline; Harbaugh wants him here.",
+    "note": "Keeps a veteran edge rusher in the rotation and rules out a near-term trade.",
+    "quote": "I want Khalil Mack here.",
+    "player_id": ""
+   },
+   {
+    "player": "Joe Alt",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Alt is playing at an elite level.",
+    "note": "Harbaugh describes him as an elite player, supporting his standing as a top offensive line piece.",
+    "quote": "the elite player that he is",
+    "player_id": "00-0039897"
+   },
+   {
     "player": "Justin Herbert",
     "topic": "role",
     "signal": "watch",
-    "tone": "hedged",
-    "claim": "Harbaugh says Herbert mostly does his job well; struggles came in desperation moments, and the offense must finish drives.",
-    "note": "Herbert's fantasy value is tied to the offense converting drives into touchdowns, which has not happened recently.",
-    "quote": "most part, Justin does his job and he does it does it really well.",
+    "tone": "positive",
+    "claim": "Herbert is doing his job well overall, with only two throws Harbaugh would like back.",
+    "note": "Harbaugh defended Herbert's play, but the offense's drive and touchdown struggles still limit fantasy upside.",
+    "quote": "Justin does his job and he does it really well.",
     "player_id": "00-0036355"
+   },
+   {
+    "player": "Tarheeb Still",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Still has been a stalwart in his third season and recorded the first interception of his season.",
+    "note": "Harbaugh's praise and the interception point to a steady, productive cornerback role.",
+    "quote": "he's one of my favorite players.",
+    "player_id": ""
+   },
+   {
+    "player": "Isas Waxter",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Waxter has risen as a defensive contributor.",
+    "note": "Strong play without Derwin James suggests a larger defensive role.",
+    "quote": "has really has really risen",
+    "player_id": ""
    }
   ],
   "topics": [
    {
-    "topic": "Running back rotation",
-    "detail": "Harbaugh said the running game was not good recently and the team is considering giving one back a longer stretch to build rhythm, while acknowledging three healthy backs playing well. Individual backs were not named clearly in the captions."
+    "topic": "Running game and backfield rotation",
+    "detail": "Harbaugh said the running game was not its best and that the team is looking at giving one of its three healthy backs more of a rhythm chance, possibly favoring a hot hand."
+   },
+   {
+    "topic": "Offensive struggles",
+    "detail": "Harbaugh acknowledged the offense is not converting drives into touchdowns, with the nine-quarter touchdown drought a focus; he cited fewer pre-snap penalties and improved third-down conversions as progress."
+   },
+   {
+    "topic": "Offensive line",
+    "detail": "Harbaugh praised several linemen who shifted between left and right tackle as a boost; the captions are too garbled to name them with confidence."
    },
    {
     "topic": "Trade deadline",
-    "detail": "Harbaugh said his focus is on the Texans and that the organization is always looking to improve. He said Khalil Mack wants to stay and is a pillar of the team."
-   },
-   {
-    "topic": "Offensive line versatility",
-    "detail": "Harbaugh praised linemen who moved between left and right tackle as a good boost, and called Joe Alt an elite player. Names were garbled in the captions."
-   },
-   {
-    "topic": "Defense",
-    "detail": "Harbaugh praised Tarheeb Still as a stalwart and a favorite player, and credited several defenders for strong play without Derwin James."
-   },
-   {
-    "topic": "Other injuries",
-    "detail": "Harbaugh said some players would continue ramping up or begin practicing, and that one player remained in concussion protocol. The captions garble those names, so they are not attributed to roster players."
+    "detail": "Harbaugh said his focus is on the Texans and the organization is always looking to improve, but he gave no direct signal on buying or selling."
    }
   ],
-  "opponent": "Texans"
+  "opponent": "Houston Texans"
+ },
+ {
+  "id": "MIA:hc-jeff-hafley-nov-2-press-conference",
+  "team": "MIA",
+  "url": "https://www.miamidolphins.com/video/hc-jeff-hafley-nov-2-press-conference",
+  "title": "HC Jeff Hafley - Nov 2 | Press Conference",
+  "date": "2026-11-03",
+  "duration": 902,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/dolphins/vxymhxlaknvvjqw3fxxx.jpg",
+  "kind": "day_after",
+  "after_week": 8,
+  "coach": "Jeff Hafley",
+  "words": 3268,
+  "model": "claude-haiku-5-5",
+  "headline": "Kingston impressed in his first start at guard and could start again; Jaylen Wright is trusted in kick returns, while Kadyn Proctor remains in protocol.",
+  "summary": "Hafley said Kadyn Proctor is still in protocol and progressing through the steps, with no firm timetable. He was positive on Malik Willis, citing clean decisions, a touchdown pass and third-down conversions, while calling out areas to improve in throwing, running and decision-making. He praised Jarrett Kingston's first start at guard, saying he started slow but got physical and finished well, and said he will be ready if needed again. He said the defense played better situationally against New England, with better third downs and second-and-long, though missed opportunities on big plays hurt. He defended Chris, who had a deep-pass breakdown, and said he would move on from it. On Ollie Gordon, he said emotional penalties, both pre- and post-snap, are unacceptable and that he is addressing them directly. He praised the rookie receivers and Malik Washington's touchdown drive, and said Kaytron Allen is earning trust on special teams with his backfield role possibly coming soon. Jaylen Wright was a bright spot in the return game, and Hafley said his confidence in Wright as a runner has not changed. He said the kicker, Zayne Anderson, will stay in the job for now after the missed kick.",
+  "injuries": [
+   {
+    "player": "Kadyn Proctor",
+    "status": "unclear",
+    "detail": "Still in protocol; Hafley says he is progressing through the steps with no update given.",
+    "player_id": "00-0041521"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Malik Willis",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Willis had some good moments but has room to improve as a passer, runner and decision-maker.",
+    "note": "Mixed review keeps his rushing and passing upside uncertain for fantasy.",
+    "quote": "there's always some good and there's always, um, you know, some room to improve.",
+    "player_id": "00-0038128"
+   },
+   {
+    "player": "Jarrett Kingston",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Kingston played well in his first start and the coach says he can be counted on if he starts again next week.",
+    "note": "Strong first start makes him a likely continued starter on the offensive line, which helps the run game and team stability.",
+    "quote": "I thought he played well for his first start",
+    "player_id": "00-0039832"
+   },
+   {
+    "player": "Jaylen Wright",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Wright has become a reliable kick returner and his confidence as a runner has not been lost.",
+    "note": "Reliable return duties add value, and the coach said his offensive role will come.",
+    "quote": "he's become a pretty reliable guy back there",
+    "player_id": "00-0039874"
+   },
+   {
+    "player": "Zayne Anderson",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "The team will stick with Anderson as kicker for now despite a recent miss.",
+    "note": "Only matters for kicker-based fantasy; job security is stated but not guaranteed.",
+    "quote": "as of right now we'll stick with Zane.",
+    "player_id": ""
+   },
+   {
+    "player": "Ollie Gordon",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "negative",
+    "claim": "Gordon has emotional penalties that Hafley is addressing directly, including pre- and post-snap penalties.",
+    "note": "Penalties and discipline concerns could affect his playing time, though no role change was stated.",
+    "quote": "pre-snap and post-snap penalties are not okay with me.",
+    "player_id": ""
+   },
+   {
+    "player": "Kaytron Allen",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Allen could see time in the backfield soon, with his special teams play earning trust.",
+    "note": "Special teams success could lead to more offensive snaps, though timing is uncertain.",
+    "quote": "",
+    "player_id": "00-0041096"
+   },
+   {
+    "player": "Malik Washington",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Washington did well and the coach would throw him in the mix at receiver.",
+    "note": "A praised receiver who scored on a drive could see more targets.",
+    "quote": "Malik Washington did a nice job as well.",
+    "player_id": "00-0039880"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Defense",
+    "detail": "Hafley said the defense played better situationally, with stronger third downs, second-and-long stops and key red-zone stops, though missed opportunities on big plays and some run-fit issues remain."
+   },
+   {
+    "topic": "Rookie receivers",
+    "detail": "The rookie receivers competed well against a strong corner group, and the coach credited their growth as they adjust."
+   }
+  ],
+  "opponent": ""
  }
 ]

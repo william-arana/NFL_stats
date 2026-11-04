@@ -1,0 +1,526 @@
+[
+ {
+  "id": "HOU:demeco-ryans-on-tank-dell-defensive-fixes-titans-week-full-q-a",
+  "team": "HOU",
+  "url": "https://www.houstontexans.com/video/demeco-ryans-on-tank-dell-defensive-fixes-titans-week-full-q-a",
+  "title": "DeMeco Ryans on Tank Dell, Defensive Fixes & Titans Week | Full Q&A",
+  "date": "2026-10-05",
+  "duration": 1130,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/texans/vpjthhkksfyrjugknavb.jpg",
+  "kind": "day_after",
+  "after_week": 4,
+  "coach": "DeMeco Ryans",
+  "words": 3763,
+  "model": "claude-haiku-5-5",
+  "headline": "Tank Dell, Braden Smith, and Kayden McDonald's practice windows open this week, so their Titans-week availability is the key fantasy watch; Kenneth Murray left Sunday with a concussion and no update was given.",
+  "summary": "Ryans called the defense's struggles a technique and communication problem, not a scheme problem, and said the team has not done enough to earn a win. He stressed complementary football, citing special teams giving up explosives and a touchdown in the second half as a key failure. On offense he praised the game plan, the emphasis on winning first down, and C.J. Stroud's play, while saying the run blocking needs to finish better. He said the team expects to open the 21-day practice window this week for Tank Dell, Braden Smith, and Kayden McDonald, and that how they respond in practice will determine Sunday. He praised Kenneth Murray's preparation as the green-dot communicator but said Murray left the game with a concussion. Asked about the defense's bump-and-run usage for Derek Stingley Jr. and Kamari Lassiter, he said the team runs all those coverages without directly explaining the reduced press usage. He called penalties a mix of unavoidable bang-bang plays and controllable mistakes, citing pre-snap and alignment issues on special teams and offense. The next opponent is the Tennessee Titans.",
+  "injuries": [
+   {
+    "player": "Tank Dell",
+    "status": "returning",
+    "detail": "Expected to be activated from IR/PUP into the 21-day practice window this week; Sunday availability depends on how he responds in practice.",
+    "player_id": "00-0038977"
+   },
+   {
+    "player": "Braden Smith",
+    "status": "returning",
+    "detail": "Expected to be activated from IR/PUP into the 21-day practice window this week; Sunday availability depends on practice response.",
+    "player_id": "00-0034836"
+   },
+   {
+    "player": "Kayden McDonald",
+    "status": "returning",
+    "detail": "Expected to be activated from IR/PUP into the 21-day practice window this week; Sunday availability depends on practice response.",
+    "player_id": ""
+   },
+   {
+    "player": "Kenneth Murray",
+    "status": "unclear",
+    "detail": "Left Sunday's game with a concussion; no update on his practice or game status was given.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Tank Dell",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Practice window opens this week, but Sunday availability is uncertain.",
+    "note": "A return from IR/PUP would add a receiving option, but the coach avoided promising he plays Sunday.",
+    "quote": "This week we expect to open the window for for tank Dale",
+    "player_id": "00-0038977"
+   },
+   {
+    "player": "Braden Smith",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Practice window opens this week, but Sunday availability is uncertain.",
+    "note": "Smith's return is a roster/depth development more than a direct fantasy asset.",
+    "quote": "This week we expect to open the window for for tank Dale, for Braden Smith",
+    "player_id": "00-0034836"
+   },
+   {
+    "player": "Kayden McDonald",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Practice window opens this week, but Sunday availability is uncertain.",
+    "note": "Defensive return could help a unit the coach says is struggling with execution.",
+    "quote": "Once you open that 21 day window you have to see how guys respond",
+    "player_id": ""
+   },
+   {
+    "player": "Kenneth Murray",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Left the game with a concussion; no timeline given.",
+    "note": "Concussion status is the key question for his green-dot role this week.",
+    "quote": "unfortunate that he was had to leave the game with a with a concussion",
+    "player_id": ""
+   },
+   {
+    "player": "Kenneth Murray",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Was prepared to take the green-dot communicator role and improved through the week.",
+    "note": "Positive review of his role, but his availability now depends on the concussion.",
+    "quote": "Kenneth did a really great job this entire week, man.",
+    "player_id": ""
+   },
+   {
+    "player": "C.J. Stroud",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Playing exceptionally well and making great decisions, spreading the ball around.",
+    "note": "Strong praise supports continued high-volume passing production.",
+    "quote": "CJ s playing exceptionally well, making great decisions.",
+    "player_id": "00-0039163"
+   },
+   {
+    "player": "Brevin Jordan",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Returned from a two-year absence and made an explosive play.",
+    "note": "Coach singled him out as a positive contributor, which supports his role in the passing game.",
+    "quote": "Brevin Jordan being back for the first time in two years",
+    "player_id": "00-0036556"
+   },
+   {
+    "player": "Derek Stingley Jr.",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "",
+    "note": "Coach did not explain why press coverage usage has been limited; no change promised.",
+    "quote": "We've used all those coverages.",
+    "player_id": ""
+   },
+   {
+    "player": "Kamari Lassiter",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "",
+    "note": "Coach did not explain why press coverage usage has been limited; no change promised.",
+    "quote": "We've used all those coverages.",
+    "player_id": ""
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Defensive technique and communication",
+    "detail": "Ryans blamed poor execution, dropped coverages, and communication breakdowns, and said the staff will look at ways to help. He declined to say whether he'd retake defensive play-calling, saying only 'We'll see how all that goes.'"
+   },
+   {
+    "topic": "Special teams and complementary football",
+    "detail": "Ryans pointed to second-half special teams giving up explosives and a touchdown, and said the team needs all three phases to set each other up."
+   },
+   {
+    "topic": "Run game and penalties",
+    "detail": "He said the offensive line is not finishing blocks in the run game. He called some penalties controllable (blocks in the back, holding, false starts, alignment issues on kick returns) and others bang-bang. He praised a defensive player named in the question as competitive despite penalties."
+   },
+   {
+    "topic": "Coverage vs. CeeDee Lamb",
+    "detail": "Ryans said Dallas moved Lamb around the formation, so the defense used multiple matchups, and that the defense's own execution was the main issue."
+   }
+  ],
+  "opponent": "Tennessee Titans"
+ },
+ {
+  "id": "LA:sean-mcvay-byron-young-kobie-turner-rams-week-4-win-eagles-riding-momentum-monday-night-football-press-conference",
+  "team": "LA",
+  "url": "https://www.therams.com/video/sean-mcvay-byron-young-kobie-turner-rams-week-4-win-eagles-riding-momentum-monday-night-football-press-conference",
+  "title": "Sean McVay, Byron Young & Kobie Turner discuss the Rams' Week 4 win over the Eagles, riding momentum into Monday Night Football & more",
+  "date": "2026-10-05",
+  "duration": 2825,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/rams/oqjj1crxkr4afypgelg3.jpg",
+  "kind": "day_after",
+  "after_week": 4,
+  "coach": "Sean McVay",
+  "words": 10507,
+  "model": "claude-haiku-5-5",
+  "headline": "Puka Nacua came out of the Eagles game feeling healthy, while Terrance Ferguson is on IR for at least four games and Aaron Donald is trending toward playing Monday against Buffalo.",
+  "summary": "McVay said the Rams' Week 4 win at Philadelphia was built on late execution, even though the offense was inconsistent for much of the game. He credited the defense's fourth-down stop and its pressure for keeping the Rams in the game, and said the penalties and procedural mistakes need to be cleaned up. Puka Nacua was a key factor late, and McVay said he felt healthy after the game despite a hip concern raised by reporters. Aaron Donald is trending toward practicing and playing this week, though McVay would not commit. Terrance Ferguson was placed on IR for a medial ankle sprain, and McVay expects him back before season's end. McVay said Jaylen Watson's shoulder is improving and he is expected to be ready for Buffalo if practice goes well. On special teams, McVay called the return game and coverage inconsistent, with a costly long punt return and a missed field goal among the problems. The next game is Monday Night Football against the Bills, and McVay said the offense must play cleaner against Josh Allen's group.",
+  "injuries": [
+   {
+    "player": "Emmanuel Forbes",
+    "status": "full",
+    "detail": "Knee contusion; McVay said he should be good moving forward.",
+    "player_id": ""
+   },
+   {
+    "player": "Puka Nacua",
+    "status": "full",
+    "detail": "Reporters asked about hip pain; McVay said he came out feeling healthy and played a lot of snaps.",
+    "player_id": "00-0039075"
+   },
+   {
+    "player": "Terrance Ferguson",
+    "status": "ir",
+    "detail": "Placed on IR with a medial ankle sprain; McVay said at least four games and expects him back before season's end.",
+    "player_id": "00-0040737"
+   },
+   {
+    "player": "Aaron Donald",
+    "status": "questionable",
+    "detail": "Injury not specified; McVay said the hope is that he practices and plays this week, with the trend positive.",
+    "player_id": ""
+   },
+   {
+    "player": "Jaylen Watson",
+    "status": "questionable",
+    "detail": "Shoulder; McVay said the goal is for him to be cleared through practice and be ready for Buffalo.",
+    "player_id": ""
+   },
+   {
+    "player": "Myles Garrett",
+    "status": "unclear",
+    "detail": "Reporter referred to him as 'Miles' and asked about a return after the Bills game; McVay said he would decide with Reggie later this week.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Puka Nacua",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Came out of the Eagles game feeling healthy and will continue at a full workload.",
+    "note": "A clean bill of health after a big game keeps his volume and target share intact heading into Buffalo.",
+    "quote": "",
+    "player_id": "00-0039075"
+   },
+   {
+    "player": "Matthew Stafford",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Was 12 for 15 on the final two drives and made strong decisions in the late comeback.",
+    "note": "Late-game efficiency and decision-making support his fantasy floor even after a slow start.",
+    "quote": "did a great job with decisions.",
+    "player_id": "00-0026498"
+   },
+   {
+    "player": "Byron Young",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Shined late in the game and was a key part of the defensive pass rush.",
+    "note": "Career-high sacks and continued pressure role make him a viable pass-rush option against Josh Allen.",
+    "quote": "Obviously Byron Young shined really bright at the latter parts of the game",
+    "player_id": ""
+   },
+   {
+    "player": "Jaylen Watson",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Shoulder should allow him to practice this week and be ready to play against Buffalo if he feels good.",
+    "note": "Health status is still uncertain, so his availability as a defensive back depends on practice this week.",
+    "quote": "the expectation is he'll be ready to roll against the bills.",
+    "player_id": ""
+   },
+   {
+    "player": "Aaron Donald",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Trending toward practicing and playing this week, though not confirmed.",
+    "note": "Donald's return would reshape the interior line rotation and limit snaps for the backups.",
+    "quote": "That's the that's the hope.",
+    "player_id": ""
+   },
+   {
+    "player": "Terrance Ferguson",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "On IR with a medial ankle sprain; will miss at least four games and is expected back before the end of the season.",
+    "note": "He will not contribute for fantasy purposes for at least four games.",
+    "quote": "It's going to be at least four games.",
+    "player_id": "00-0040737"
+   },
+   {
+    "player": "Alex Bachman",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "negative",
+    "claim": "Handled fielding cleanly but the punt return was not good enough and he needs more perimeter blocking.",
+    "note": "Return duties give him a small fantasy-adjacent role, but the return game has been inconsistent.",
+    "quote": "let's make good decisions on fielding it clean.",
+    "player_id": "00-0035602"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Special teams",
+    "detail": "McVay said the return and coverage units need more production, citing a long punt return allowed, a missed field goal, and the need for better perimeter blocks."
+   },
+   {
+    "topic": "Penalties and discipline",
+    "detail": "McVay said pre-snap and procedural penalties are the main discipline problem and must be eliminated, including the staff-related penalties."
+   },
+   {
+    "topic": "Eagles fan video",
+    "detail": "McVay said the team discussed the coaching staff's interaction with Eagles fans and that it will not be an issue going forward."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Defensive players credited the front and their pressure for keeping the Eagles out of the end zone after halftime and stopping the tush push. Several players said the team's approach against Josh Allen will be to attack and not sit back."
+   },
+   {
+    "topic": "Weather",
+    "detail": "McVay said the light rain affected some throws and ball handling, though he said Stafford would not use it as an excuse."
+   },
+   {
+    "topic": "Defensive line rotation",
+    "detail": "Players said the interior group has been together for years and that Wesley Bailey is getting more snaps as a rookie to build depth."
+   },
+   {
+    "topic": "Kamren Kinchens",
+    "detail": "Players said Kinchens' versatility as a deep safety and in blitz packages gives the defense flexibility."
+   }
+  ],
+  "opponent": "Buffalo Bills"
+ },
+ {
+  "id": "LAC:jim-harbaugh-press-conference-monday-week-5-2026",
+  "team": "LAC",
+  "url": "https://www.chargers.com/video/jim-harbaugh-press-conference-monday-week-5-2026",
+  "title": "Jim Harbaugh on Justin Herbert’s “Inspiring” Resilience",
+  "date": "2026-10-05",
+  "duration": 979,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/chargers/gxresaoqtrcqtggiualj.jpg",
+  "kind": "day_after",
+  "after_week": 4,
+  "coach": "Jim Harbaugh",
+  "words": 2216,
+  "model": "claude-haiku-5-5",
+  "headline": "Rashawn Slater (transcribed as \"Sean\") has a high ankle sprain and is a significant loss, possibly IR-bound; Joe Alt (neck) and Trevor Penning (concussion protocol) are still being evaluated.",
+  "summary": "Harbaugh confirmed Rashawn Slater has a high ankle sprain and called his absence significant, with no timeline yet and IR possible. Joe Alt's neck injury is still being evaluated, and Harbaugh said Slater's situation looks more likely to become IR than Alt's. Trevor Penning is in the concussion protocol, and Donte Jackson has a hamstring issue. Harbaugh said Dalvin Tomlinson, Charlie Kolar and Brenen Thompson are making good progress, with another update coming Wednesday. Branson Taylor and Scott Matlock are expected to be activated from IR this week, while the status of another IR candidate is less certain. On the offensive line, rookies and Cole Strange and Jake Slaughter stepped in well, and Harbaugh's plan is next-man-up with a one-game-at-a-time approach. Harbaugh praised Justin Herbert's resilience and said it inspires the whole team, though he did not give a concrete answer about changes to the second-half checkdown approach. On the running backs, Harbaugh said he can't predict carry shares, all three backs are contributing, and Omarion Hampton is playing well despite a fumble.",
+  "injuries": [
+   {
+    "player": "Rashawn Slater",
+    "status": "out",
+    "detail": "High ankle sprain; duration unknown and IR possible per Harbaugh.",
+    "player_id": "00-0037009"
+   },
+   {
+    "player": "Joe Alt",
+    "status": "questionable",
+    "detail": "Neck injury still being evaluated; Harbaugh said IR is less likely for him than for Slater.",
+    "player_id": "00-0039897"
+   },
+   {
+    "player": "Trevor Penning",
+    "status": "unclear",
+    "detail": "In the concussion protocol; no further update given.",
+    "player_id": "00-0037241"
+   },
+   {
+    "player": "Donte Jackson",
+    "status": "questionable",
+    "detail": "Hamstring issue; timeline not specified.",
+    "player_id": ""
+   },
+   {
+    "player": "Derwin James",
+    "status": "questionable",
+    "detail": "Harbaugh described his issue as day-to-day, though the transcript is unclear on the exact injury.",
+    "player_id": ""
+   },
+   {
+    "player": "Dalvin Tomlinson",
+    "status": "limited",
+    "detail": "Making good progress; will be re-evaluated Wednesday.",
+    "player_id": ""
+   },
+   {
+    "player": "Charlie Kolar",
+    "status": "limited",
+    "detail": "Making good progress; will be re-evaluated Wednesday.",
+    "player_id": "00-0038046"
+   },
+   {
+    "player": "Brenen Thompson",
+    "status": "limited",
+    "detail": "Making good progress; will be re-evaluated Wednesday.",
+    "player_id": "00-0041550"
+   },
+   {
+    "player": "Branson Taylor",
+    "status": "returning",
+    "detail": "Expected to be activated from IR this week.",
+    "player_id": "00-0040212"
+   },
+   {
+    "player": "Scott Matlock",
+    "status": "returning",
+    "detail": "Expected to be activated from IR this week.",
+    "player_id": "00-0038614"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Rashawn Slater",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Out for an unknown length of time with a high ankle sprain; IR is possible.",
+    "note": "Losing a starting tackle hurts the offensive line and the protection for Herbert.",
+    "quote": "it's significant. Uh, great player.",
+    "player_id": "00-0037009"
+   },
+   {
+    "player": "Joe Alt",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Still being evaluated for a neck injury; less likely to go to IR than Slater.",
+    "note": "His status for Week 5 will determine whether the offensive line depth is tested again.",
+    "quote": "still evaluating",
+    "player_id": "00-0039897"
+   },
+   {
+    "player": "Justin Herbert",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Harbaugh framed Herbert's resilience as the team's driving force, with no stated change to his usage.",
+    "note": "Harbaugh's praise signals confidence in Herbert, though no concrete usage change was announced.",
+    "quote": "It's infectious. It's inspiring.",
+    "player_id": "00-0036355"
+   },
+   {
+    "player": "Omarion Hampton",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Harbaugh said carry shares among the three backs can't be predicted and will depend on game flow.",
+    "note": "Hampton's share has tapered recently, so weekly volume is uncertain even though the coach praised his play.",
+    "quote": "Pleased with Amari the way he's playing.",
+    "player_id": "00-0040666"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive line depth",
+    "detail": "Rookies and Cole Strange and Jake Slaughter stepped in well, and Harbaugh's plan is next-man-up with a one-game-at-a-time approach."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Harbaugh praised the defensive line and Khalil Mack, and said the team played at elite levels in the second half, though he also noted areas still needing improvement."
+   },
+   {
+    "topic": "Special teams",
+    "detail": "Harbaugh said special teams need improvement and that the team is striving for a complementary style of play."
+   },
+   {
+    "topic": "Running backs",
+    "detail": "All three backs are contributing and the run game is making progress, but Harbaugh said carry shares will vary by game flow."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "PHI:nick-sirianni-press-conference-october-5-2026",
+  "team": "PHI",
+  "url": "https://www.philadelphiaeagles.com/video/nick-sirianni-press-conference-october-5-2026",
+  "title": "Nick Sirianni Press Conference: October 5, 2026",
+  "date": "2026-10-05",
+  "duration": 708,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/eagles/oamwurdlycpx9cijsdn5.jpg",
+  "kind": "day_after",
+  "after_week": 4,
+  "coach": "Nick Sirianni",
+  "words": 2239,
+  "model": "claude-haiku-5-5",
+  "headline": "Saquon Barkley's hamstring injury leaves his Sunday availability uncertain. Sirianni will update on Wednesday.",
+  "summary": "Sirianni said Saquon Barkley's availability for Sunday is still unknown after his hamstring injury, and that the team will have more answers by Wednesday as players respond to treatment. He said Barkley will do everything he can to return. On the offense, he said the team still hasn't settled on an identity, and the mix of under-center and gun sets reflects game-plan needs rather than a settled personnel decision. He acknowledged the goal-line and short-yardage failures (a fourth-and-one and a third-and-goal from the two) and said the tape review is about accountability and finding solutions. He gave no update on Lane Johnson's return. He praised rookie tackle Markel Bell's performance as solid, with good movement on double teams and second-level blocks, while noting he wasn't perfect. He said left guard Cam is doing good things and there is no plan to change him. On pass protection, he declined to say who makes the protection calls, called the breakdowns multiple factors including coaching and matchups, and said it has to be more consistent. He said the team will leave for the international trip on Friday to get a full week of practice in, and that jet lag was part of the planning.",
+  "injuries": [
+   {
+    "player": "Saquon Barkley",
+    "status": "unclear",
+    "detail": "Hamstring injury; availability for Sunday unknown. Sirianni said more information would come Wednesday, and he expects Barkley to do everything possible to return.",
+    "player_id": "00-0034844"
+   },
+   {
+    "player": "Lane Johnson",
+    "status": "unclear",
+    "detail": "No update given on his status or expected return to the building.",
+    "player_id": "00-0030561"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Saquon Barkley",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Availability for Sunday is undetermined; team will update on Wednesday",
+    "note": "The RB1 timeline is uncertain, so backups and the expected workload could change sharply depending on Wednesday's update.",
+    "quote": "",
+    "player_id": "00-0034844"
+   },
+   {
+    "player": "Markel Bell",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Played well as a rookie tackle on short notice and was praised by the coach",
+    "note": "Positive reviews of a rookie filling in on short notice suggest he has earned continued reps on the line.",
+    "quote": "I thought he was solid.",
+    "player_id": "00-0041554"
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive identity",
+    "detail": "Sirianni said the team is still searching for its identity, that under-center versus gun formations depend on the game plan, and that the team needs to be able to do multiple things. He said consistency has been lacking in both coaching and playing."
+   },
+   {
+    "topic": "Goal line and short yardage",
+    "detail": "The offense failed on a fourth-and-one and a third-down attempt from the two-yard line. Sirianni said the film review will look for solutions and that the issue has more than one cause."
+   },
+   {
+    "topic": "Pass protection",
+    "detail": "Sirianni declined to name who makes protection calls, calling it a set process. He acknowledged protection breakdowns, including losing matchups and blitz pickups, and said the team must improve."
+   },
+   {
+    "topic": "Travel",
+    "detail": "The team will leave Friday for the international trip to London, to allow a full week of practice. Sirianni said the decision came from research and that jet lag was considered."
+   },
+   {
+    "topic": "Injury depth",
+    "detail": "Sirianni said the team feels good about the players who step in and take reps, and he does not treat injuries as an excuse."
+   }
+  ],
+  "opponent": ""
+ }
+]
