@@ -76,6 +76,11 @@ td.nw{white-space:nowrap}
 .tone{font-size:12px;color:var(--ink-3)}
 .q{display:block;font-style:italic;color:var(--ink-2);font-size:12.5px;margin-top:2px}
 .dim{color:var(--ink-3);font-size:12px}
+.hx{margin-left:6px;font:600 12px var(--f-body);padding:1px 7px;border:1px solid var(--rule);border-radius:5px;background:var(--sheet);color:var(--blue);cursor:pointer;white-space:nowrap}
+.hxr td{background:var(--stripe);padding:6px 10px 10px}
+.hxl{list-style:none;margin:0;padding:0;position:sticky;left:10px;max-width:min(680px,calc(100vw - 52px))}.hxl li{padding:8px 0;border-bottom:1px solid var(--rule)}.hxl li:last-child{border-bottom:0}
+.hxl li>div{margin-top:2px}.hxa{font-size:12.5px;margin-top:3px}
+.back{font:600 13px var(--f-body);padding:4px 10px;border:1px solid var(--rule);border-radius:6px;background:var(--sheet);color:var(--ink);cursor:pointer}
 .ts{font-size:11.5px;font-variant-numeric:tabular-nums;font-family:var(--f-mono);background:var(--blue-soft);color:var(--blue);border-radius:4px;padding:0 4px;text-decoration:none;white-space:nowrap}
 .more{display:block;margin:16px auto 30px;font:600 14px var(--f-body);padding:8px 16px;border:1px solid var(--rule);border-radius:6px;background:var(--sheet);color:var(--ink);cursor:pointer}
 .empty{padding:40px 0;color:var(--ink-3);text-align:center}
@@ -118,7 +123,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const TOPIC={role:'Role',usage:'Usage',injury:'Injury',depth_chart:'Depth chart',scheme:'Scheme',matchup:'Matchup',trade_or_roster:'Trade / roster',other:'Other'};
 const KIND={postgame:'Postgame',day_after:'Day after game',first_practice:'First practice day',midweek:'Midweek',final_practice:'Last practice before game',latest:'Latest'};
 const q0=new URLSearchParams(location.search);
-let ALL=[],S={view:q0.get('view')||'p',kind:q0.get('kind')||'',when:q0.get('when')??'14',team:q0.get('team')||'',topic:q0.get('topic')||'',dir:q0.get('dir')||'',q:q0.get('q')||''},SHOWN=20;
+let ALL=[],S={view:q0.get('view')||'p',kind:q0.get('kind')||'',when:q0.get('when')??'14',team:q0.get('team')||'',topic:q0.get('topic')||'',dir:q0.get('dir')||'',q:q0.get('q')||'',id:q0.get('id')||''},SHOWN=20;
 const pl=(id,name)=>id?`<button type="button" class="pname" data-card="p:${esc(id)}" data-name="${esc(name)}" aria-expanded="false">${esc(name)}</button>`:`<span class="nolink">${esc(name)}</span>`;
 const day=d=>new Date(d+'T12:00:00').toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});
 fetch('data/pressers/index.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{dates:[]}).then(ix=>Promise.all((ix.dates||[]).map(d=>fetch('data/pressers/'+d+'.json').then(r=>r.ok?r.json():[]).catch(()=>[])))).then(parts=>{
@@ -133,6 +138,7 @@ function draw(){
   document.querySelectorAll('#view button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===S.view));
   document.querySelectorAll('#dir button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.d===S.dir));
   const u=new URLSearchParams();for(const[k,v]of Object.entries(S))if(v&&!(k==='view'&&v==='p')&&!(k==='when'&&v==='14'))u.set(k,v);history.replaceState(null,'',u.toString()?'?'+u:location.pathname);
+  if(S.id){const one=ALL.filter(e=>e.id===S.id);if(one.length){$('#count').innerHTML=`<button type="button" class="back" id="back">← All pressers</button>`;$('#out').innerHTML=card(one[0],one[0].signals||[],false);$('#back').onclick=()=>{S.id='';draw()};return}S.id=''}
   const from=since();const E=ALL.filter(e=>e.date>=from&&(!S.team||e.team===S.team)&&(!S.kind||e.kind===S.kind));
   const filtering=S.topic||S.dir||S.q;
   if(S.view==='pl')return players(E);
@@ -143,13 +149,14 @@ function draw(){
   const m=$('#more');if(m)m.onclick=()=>{SHOWN+=20;draw()}
 }
 function mmss(t){t=Math.floor(t);const h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=String(t%60).padStart(2,'0');return h?`${h}:${String(m).padStart(2,'0')}:${s}`:`${m}:${s}`}
+const tsChip=(g,url)=>g.t!=null?`<a class="ts" href="${esc(url)}" target="_blank" rel="noopener" title="${g.t_exact?'Where the quote is said in the video':'About where this comes up in the video'}">${g.t_exact?'':'~'}${mmss(g.t)}</a> `:'';
 function card(e,sig,filtering){
   const inj=(e.injuries||[]).filter(i=>!S.q||String(i.player).toLowerCase().includes(S.q.toLowerCase()));
   return `<div class="card"><div class="ch"><span class="tm">${esc(e.team)}</span><span>${esc(e.coach||'')}</span><span class="meta">${day(e.date)} · ${KIND[e.kind]||'Press conference'}</span><a href="${esc(e.url)}" target="_blank" rel="noopener">Watch ↗</a></div><div class="cb">
   <div class="hl">${esc(e.headline||'')}</div>
   ${e.summary?`<details${filtering?'':''}><summary>What he said</summary><p>${esc(e.summary)}</p></details>`:''}
   ${inj.length&&(!S.topic||S.topic==='injury')&&!S.dir?`<h4>Injury updates</h4><ul class="inj">${inj.map(i=>`<li>${pl(i.player_id,i.player)}<span class="st ${esc(i.status)}">${esc(i.status)}</span><span class="dim">${esc(i.detail||'')}</span></li>`).join('')}</ul>`:''}
-  ${sig.length?`<h4>Player signals</h4><div class="scr"><table class="sigt"><thead><tr><th>Player</th><th>Topic</th><th>Signal</th><th>Claim / why it matters</th></tr></thead><tbody>${sig.map(g=>`<tr><td class="nw">${pl(g.player_id,g.player)}</td><td class="nw">${TOPIC[g.topic]||esc(g.topic)}</td><td class="nw"><span class="sg ${esc(g.signal)}">${esc(g.signal)}</span> <span class="tone">${esc(g.tone||'')}</span></td><td class="cl">${g.t!=null?`<a class="ts" href="${esc(e.url)}" target="_blank" rel="noopener" title="${g.t_exact?'Where the quote is said in the video':'About where this comes up in the video'}">${g.t_exact?'':'~'}${mmss(g.t)}</a> `:''}${esc(g.claim||g.note||'')}${g.claim&&g.note?` <span class="dim">${esc(g.note)}</span>`:''}${g.quote?`<span class="q">“${esc(g.quote)}”</span>`:''}</td></tr>`).join('')}</tbody></table></div>`:''}
+  ${sig.length?`<h4>Player signals</h4><div class="scr"><table class="sigt"><thead><tr><th>Player</th><th>Topic</th><th>Signal</th><th>Claim / why it matters</th></tr></thead><tbody>${sig.map(g=>`<tr><td class="nw">${pl(g.player_id,g.player)}</td><td class="nw">${TOPIC[g.topic]||esc(g.topic)}</td><td class="nw"><span class="sg ${esc(g.signal)}">${esc(g.signal)}</span> <span class="tone">${esc(g.tone||'')}</span></td><td class="cl">${tsChip(g,e.url)}${esc(g.claim||g.note||'')}${g.claim&&g.note?` <span class="dim">${esc(g.note)}</span>`:''}${g.quote?`<span class="q">“${esc(g.quote)}”</span>`:''}</td></tr>`).join('')}</tbody></table></div>`:''}
   </div></div>`}
 function players(E){
   const M=new Map();
@@ -158,9 +165,23 @@ function players(E){
   const L=[...M.values()].sort((a,b)=>b.n-a.n||b.last.date.localeCompare(a.last.date));
   $('#count').textContent=`${L.length} players · ${L.reduce((n,p)=>n+p.n,0)} signals`;
   if(!L.length){$('#out').innerHTML='<div class="empty">Nothing matches these filters.</div>';return}
-  $('#out').innerHTML=`<div class="card"><div class="scr"><table><thead><tr><th>Player</th><th>Team</th><th>Signals</th><th>Up</th><th>Watch</th><th>Down</th><th>Latest</th></tr></thead><tbody>${L.slice(0,SHOWN*5).map(p=>`<tr><td class="nw">${pl(p.id,p.name)}</td><td>${esc(p.team)}</td><td>${p.n}</td><td>${p.up||''}</td><td>${p.watch||''}</td><td>${p.down||''}</td><td><span class="dim">${day(p.last.date)} · ${TOPIC[p.last.g.topic]||''}</span> <span class="sg ${esc(p.last.g.signal)}">${esc(p.last.g.signal)}</span> ${esc(p.last.g.claim||p.last.g.note||'')}</td></tr>`).join('')}</tbody></table></div></div>`+(L.length>SHOWN*5?`<button class="more" id="more">Show more (${L.length-SHOWN*5} left)</button>`:'');
+  $('#out').innerHTML=`<div class="card"><div class="scr"><table><thead><tr><th>Player</th><th>Team</th><th>Signals</th><th>Up</th><th>Watch</th><th>Down</th><th>Latest</th></tr></thead><tbody>${L.slice(0,SHOWN*5).map(p=>`<tr><td class="nw">${pl(p.id,p.name)}</td><td>${esc(p.team)}</td><td>${p.n}</td><td>${p.up||''}</td><td>${p.watch||''}</td><td>${p.down||''}</td><td><span class="dim">${day(p.last.date)} · ${TOPIC[p.last.g.topic]||''}</span> <span class="sg ${esc(p.last.g.signal)}">${esc(p.last.g.signal)}</span> ${esc(p.last.g.claim||p.last.g.note||'')} <button type="button" class="hx" data-k="${esc(p.id||p.name)}" aria-expanded="false">Last 10 ▾</button></td></tr>`).join('')}</tbody></table></div></div>`+(L.length>SHOWN*5?`<button class="more" id="more">Show more (${L.length-SHOWN*5} left)</button>`:'');
   const m=$('#more');if(m)m.onclick=()=>{SHOWN+=20;draw()}
 }
+/* Players tab: a player's 10 latest signals across every presser (ignores the date/team filters) */
+function sigHistory(k){
+  const out=[];
+  for(const e of ALL){for(const g of e.signals||[])if((g.player_id||g.player)===k){out.push({e,g});break}if(out.length>=10)break}
+  return `<ul class="hxl">${out.map(({e,g})=>`<li><span class="dim">${day(e.date)} · ${esc(e.coach||e.team)} · ${KIND[e.kind]||'Press conference'}</span><div><span class="sg ${esc(g.signal)}">${esc(g.signal)}</span> ${tsChip(g,e.url)}${esc(g.claim||g.note||'')}${g.claim&&g.note?` <span class="dim">${esc(g.note)}</span>`:''}${g.quote?`<span class="q">“${esc(g.quote)}”</span>`:''}</div><div class="hxa"><a href="?id=${encodeURIComponent(e.id)}" data-id="${esc(e.id)}">Full presser</a> · <a href="${esc(e.url)}" target="_blank" rel="noopener">Watch ↗</a></div></li>`).join('')}</ul>`;
+}
+$('#out').addEventListener('click',ev=>{
+  const b=ev.target.closest('.hx');
+  if(b){const tr=b.closest('tr'),nx=tr.nextElementSibling;
+    if(nx&&nx.classList.contains('hxr')){nx.remove();b.setAttribute('aria-expanded','false');b.textContent='Last 10 ▾';return}
+    tr.insertAdjacentHTML('afterend',`<tr class="hxr"><td colspan="7">${sigHistory(b.dataset.k)}</td></tr>`);b.setAttribute('aria-expanded','true');b.textContent='Hide ▴';return}
+  const a=ev.target.closest('a[data-id]');
+  if(a&&!ev.metaKey&&!ev.ctrlKey){ev.preventDefault();S.id=a.dataset.id;draw();scrollTo(0,0)}
+});
 $('#view').onclick=e=>{const b=e.target.closest('button');if(!b)return;S.view=b.dataset.v;SHOWN=20;draw()};
 $('#dir').onclick=e=>{const b=e.target.closest('button');if(!b)return;S.dir=b.dataset.d;SHOWN=20;draw()};
 for(const k of ['when','team','kind','topic'])$('#'+k).onchange=e=>{S[k]=e.target.value;SHOWN=20;draw()};

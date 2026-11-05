@@ -117,9 +117,9 @@
   let SIGP=null;const SIGW={up:'Up',down:'Down',watch:'Watch'};
   function presserItems(g){
     if(!SIGP)SIGP=fetch('data/site/presser_signals.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
-    return SIGP.then(j=>{if(!j||!j.p||!j.p[g])return [];return j.p[g].map(([vi,sig,topic,claim,note,quote,n])=>{const v=j.v[vi]||[];
+    return SIGP.then(j=>{if(!j||!j.p||!j.p[g])return [];return j.p[g].map(([vi,sig,topic,claim,note,quote,n,t,te])=>{const v=j.v[vi]||[];
       return {h:claim||note||'Mentioned in a press conference',s:[claim&&note?note:'',quote?'“'+quote+'”':''].filter(Boolean).join(' '),d:v[0]?v[0]+'T17:00:00Z':null,
-        src:`Presser · ${v[2]||'coach'} (${v[1]||''})${topic?' · '+topic:''}${n>1?` · said in ${n} pressers that week`:''}`,url:v[3]||null,sig}})});
+        src:`Presser · ${v[2]||'coach'} (${v[1]||''})${topic?' · '+topic:''}${n>1?` · said in ${n} pressers that week`:''}`,url:v[4]?'pressers.html?id='+encodeURIComponent(v[4]):v[3]||null,video:v[3]||null,t:t??null,te:!!te,pr:1,sig}})});
   }
   /* key = gsis id or "DEF:XX". Resolves {items (newest first), archived: n, live: 'direct'|'worker'|null} */
   function newsFor(key){
@@ -134,10 +134,17 @@
   const fmtDate=s=>{if(!s)return '';const d=new Date(s);if(isNaN(d))return '';const days=(Date.now()-d)/864e5;
     const md=d.toLocaleDateString(undefined,{month:'short',day:'numeric',...(d.getFullYear()!==new Date().getFullYear()?{year:'numeric'}:{})});
     return days<1?`${md} · ${Math.max(1,Math.round(days*24))}h ago`:days<14?`${md} · ${Math.round(days)}d ago`:md};
-  function newsHTML(n,all,name){
+  const mmss=t=>{t=Math.floor(t);const h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=String(t%60).padStart(2,'0');return h?`${h}:${String(m).padStart(2,'0')}:${s}`:`${m}:${s}`};
+  /* f: '' all, 'n' news only, 'p' pressers only */
+  function newsHTML(n0,all,name,f){
+    const n={...n0,items:f==='p'?n0.items.filter(x=>x.pr):f==='n'?n0.items.filter(x=>!x.pr):n0.items};
+    const tog=n0.pressers?`<div class="pc-nf" role="group">${[['','All'],['n','News'],['p',`Pressers (${n0.pressers})`]].map(([k,l])=>`<button type="button" data-nf="${k}" aria-pressed="${(f||'')===k}">${l}</button>`).join('')}</div>`:'';
+    return tog+newsList(n,all,name);
+  }
+  function newsList(n,all,name){
     if(!n.items.length)return `<p class="dim" style="margin:0">No stories yet. The news archive fills in each time the "Update Sleeper rosters" job runs (3× a day).</p>`;
     const show=all?n.items:n.items.slice(0,6);const oldest=n.items[n.items.length-1].d;
-    return `<ul class="pc-news">${show.map(it=>{const fresh=it.d&&(Date.now()-new Date(it.d))<3*864e5;return `<li class="${[fresh?'new':'',it.sig?'sig sig-'+it.sig:''].join(' ').trim()}">${it.sig?`<span class="sigb">${SIGW[it.sig]}</span>`:''}${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.h)}</a>`:`<b>${esc(it.h)}</b>`}${it.s?`<p>${esc(it.s)}</p>`:''}<small>${esc(it.src||'')}${it.d?' · '+esc(fmtDate(it.d)):''}</small></li>`}).join('')}</ul>
+    return `<ul class="pc-news">${show.map(it=>{const fresh=it.d&&(Date.now()-new Date(it.d))<3*864e5;return `<li class="${[fresh?'new':'',it.sig?'sig sig-'+it.sig:''].join(' ').trim()}">${it.sig?`<span class="sigb">${SIGW[it.sig]}</span>`:''}${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.h)}</a>`:`<b>${esc(it.h)}</b>`}${it.s?`<p>${esc(it.s)}</p>`:''}<small>${esc(it.src||'')}${it.d?' · '+esc(fmtDate(it.d)):''}${it.video?` · ${it.t!=null?`<a class="ts" href="${esc(it.video)}" target="_blank" rel="noopener" title="${it.te?'Where the quote is said in the video':'About where this comes up in the video'}">${it.te?'':'~'}${mmss(it.t)}</a> `:''}<a href="${esc(it.video)}" target="_blank" rel="noopener">Watch ↗</a>`:''}</small></li>`}).join('')}</ul>
       ${!all&&n.items.length>show.length?`<button type="button" class="more" data-more>Show all ${n.items.length} stories (back to ${esc(fmtDate(oldest).split(' · ')[0])})</button>`:''}`;
   }
   function newsSrc(n){const p=[];if(n.live&&n.live.length)p.push(n.live.join(' + ')+' live');if(n.archived)p.push(`site archive (${n.archived})`);if(n.pressers)p.push(`pressers (${n.pressers})`);return p.length?p.join(' + '):'site archive'}
@@ -529,10 +536,12 @@
     NFLS.rosterStatus().then(rs=>{if(!rs||!root.isConnected)return;root.querySelectorAll('[data-own]').forEach(s=>{const k=s.dataset.own;const m=rs.map.get(k);
       s.outerHTML=m?(m.status==='mine'?`<span class="tag mine">On ${esc(lg.viewer||'your')} roster · ${esc(lg.name)}</span>`:`<span class="tag">Rostered by ${esc(m.team)} · ${esc(lg.name)}</span>`):`<span class="tag fa">Free agent in ${esc(lg.name)}</span>`})}).catch(()=>{});
   }
+  let NF='';try{NF=localStorage.getItem('newsFilter')||''}catch(e){}
   function fillNews(root,key,all){
     const box=root&&root.querySelector('[data-news]');if(!box)return;const name=NAMEHINT[key]||'';
-    newsFor(key).then(n=>{if(!box.isConnected)return;box.innerHTML=newsHTML(n,all,name);const s=root.querySelector('[data-news-src]');if(s)s.textContent=n.items.length?newsSrc(n):'';
-      const m=box.querySelector('[data-more]');if(m)m.onclick=ev=>{ev.stopPropagation();fillNews(root,key,true)}}).catch(()=>{box.textContent="Couldn't load news."});
+    newsFor(key).then(n=>{if(!box.isConnected)return;const f=n.pressers?NF:'';box.innerHTML=newsHTML(n,all,name,f);const s=root.querySelector('[data-news-src]');if(s)s.textContent=n.items.length?newsSrc(n):'';
+      const m=box.querySelector('[data-more]');if(m)m.onclick=ev=>{ev.stopPropagation();fillNews(root,key,true)};
+      box.querySelectorAll('[data-nf]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();NF=b.dataset.nf;try{localStorage.setItem('newsFilter',NF)}catch(e){}fillNews(root,key,all)})}).catch(()=>{box.textContent="Couldn't load news."});
   }
   function mk(a){
     anchor=a||null;if(anchor)anchor.setAttribute('aria-expanded','true');
