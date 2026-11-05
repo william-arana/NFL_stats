@@ -149,7 +149,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           python scripts/build_presser_signals.py
-          git add data/pressers data/site/presser_signals.json
+          git add -A data/pressers data/site/presser_signals
           git diff --cached --quiet && echo "No changes" && exit 0
           git commit -m "Pressers backfill: wk ${WEEKS}"
           for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done

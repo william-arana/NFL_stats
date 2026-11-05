@@ -113,11 +113,11 @@
     await Promise.all(jobs);return out;
   }
   const nkey=it=>it.h.toLowerCase().replace(/\W/g,'').slice(0,80);
-  /* press conference signals (data/site/presser_signals.json, our own summaries of what the coach said) */
-  let SIGP=null;const SIGW={up:'Up',down:'Down',watch:'Watch'};
+  /* press conference signals (data/site/presser_signals/<gsis_id>.json, our own summaries of what the coach said) */
+  const SIGP={};const SIGW={up:'Up',down:'Down',watch:'Watch'};
   function presserItems(g){
-    if(!SIGP)SIGP=fetch('data/site/presser_signals.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
-    return SIGP.then(j=>{if(!j||!j.p||!j.p[g])return [];return j.p[g].map(([vi,sig,topic,claim,note,quote,n,t,te])=>{const v=j.v[vi]||[];
+    if(!SIGP[g])SIGP[g]=fetch('data/site/presser_signals/'+encodeURIComponent(g)+'.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
+    return SIGP[g].then(j=>{if(!j||!j.p)return [];return j.p.map(([vi,sig,topic,claim,note,quote,n,t,te])=>{const v=j.v[vi]||[];
       return {h:claim||note||'Mentioned in a press conference',s:[claim&&note?note:'',quote?'“'+quote+'”':''].filter(Boolean).join(' '),d:v[0]?v[0]+'T17:00:00Z':null,
         src:`Presser · ${v[2]||'coach'} (${v[1]||''})${topic?' · '+topic:''}${n>1?` · said in ${n} pressers that week`:''}`,url:v[4]?'pressers.html?id='+encodeURIComponent(v[4]):v[3]||null,video:v[3]||null,t:t??null,te:!!te,pr:1,sig}})});
   }

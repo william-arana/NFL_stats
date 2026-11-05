@@ -1,10 +1,10 @@
 """Per-player press conference signals for the player-card News section.
 
-Reads data/pressers/<date>.json (our own summaries, never transcripts) and writes
-data/site/presser_signals.json:
+Reads data/pressers/<date>.json (our own summaries, never transcripts) and writes one small file per
+player, data/site/presser_signals/<gsis_id>.json, so a card only downloads its own player's pressers:
 
-  {"updated_utc": "...", "v": [[date, team, coach, url, presser_id], ...],
-   "p": {"<gsis_id>": [[v_index, signal, topic, claim, note, quote, n, t, t_exact], ...]}}   (newest first)
+  {"v": [[date, team, coach, url, presser_id], ...],
+   "p": [[v_index, signal, topic, claim, note, quote, n, t, t_exact], ...]}   (newest first; v_index into this file's v)
 
 t = seconds into the video (null if unknown), t_exact = 1 when the quote was matched in the captions.
 
@@ -13,12 +13,12 @@ week's pressers, so the same player + week + topic + direction is kept once (the
 n = how many pressers said it. Run after any pressers update.
 """
 import json
-from datetime import datetime, timezone
+import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "data" / "pressers"
-OUT = ROOT / "data" / "site" / "presser_signals.json"
+OUT = ROOT / "data" / "site" / "presser_signals"
 
 
 def main():
@@ -50,11 +50,25 @@ def main():
                     p[k] = row
                 n += 1
     by = {pid: sorted(p.values(), key=lambda r: vids[r[0]][0], reverse=True) for pid, p in by.items()}
-    OUT.write_text(json.dumps({
-        "updated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
-        "v": vids, "p": by}, ensure_ascii=False, separators=(",", ":")))
-    print(f"presser_signals.json: {n} signals ({sum(map(len, by.values()))} after grouping) for {len(by)} players, {OUT.stat().st_size // 1024} KB")
-
+    if OUT.exists():
+        shutil.rmtree(OUT)  # players who no longer have signals lose their file
+    OUT.mkdir(parents=True)
+    old = OUT.parent / "presser_signals.json"  # the old all-players file
+    if old.exists():
+        old.unlink()
+    total = 0
+    for pid, rows in by.items():
+        loc: dict[int, int] = {}
+        v = []
+        for r in rows:
+            if r[0] not in loc:
+                loc[r[0]] = len(v)
+                v.append(vids[r[0]])
+        f = OUT / f"{pid}.json"
+        f.write_text(json.dumps({"v": v, "p": [[loc[r[0]], *r[1:]] for r in rows]}, ensure_ascii=False, separators=(",", ":")))
+        total += f.stat().st_size
+    print(f"presser_signals/: {n} signals ({sum(map(len, by.values()))} after grouping) for {len(by)} players, "
+          f"{total // 1024} KB total, {total // max(1, len(by))} bytes per player")
 
 if __name__ == "__main__":
     main()
