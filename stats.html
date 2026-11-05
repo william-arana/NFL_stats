@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.70">
-<script src="assets/site.js?v=1.70" defer></script>
-<script src="assets/cards.js?v=1.70" defer></script>
-<script src="assets/glossary.js?v=1.70" defer></script>
-<script src="assets/tables.js?v=1.70" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.71">
+<script src="assets/site.js?v=1.71" defer></script>
+<script src="assets/cards.js?v=1.71" defer></script>
+<script src="assets/glossary.js?v=1.71" defer></script>
+<script src="assets/tables.js?v=1.71" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -278,7 +278,7 @@ function aggPlayers(){
     for(const k of MEANK)if(num(r[k])){a[k]+=r[k];a._n[k]++}}
   const out=[];const q=ps.q;
   for(const a of by.values()){
-    if(a.g<ps.minG)continue;if(q&&!a.name.toLowerCase().includes(q))continue;
+    if(!q&&a.g<ps.minG)continue;if(q&&!a.name.toLowerCase().includes(q))continue; // a name search ignores Min games
     if(ROST&&ps.av!=='all'){if(ps.av.startsWith('r:')){const m=ROST.map.get(a.id);if(!m||String(m.roster_id)!==ps.av.slice(2))continue}else if(avail(a.id)!==ps.av)continue}
     for(const k of MEANK)a[k]=a._n[k]?a[k]/a._n[k]:null;
     for(const k of ['offense_snaps','xfp','xfp_diff','qb_pressured','ybc'])if(!a.logs.some(l=>num(l[k])))a[k]=null;
@@ -569,7 +569,7 @@ function XTab(kind,team){
   (C.rows?Promise.resolve(C.rows()):xload(C.file)).then(rs=>{RS=rs;ALL=C.agg(rs);draw()}).catch(e=>{$('#x-sum').innerHTML=`<span>Couldn't load ${esc(C.noun)} (${esc(e.message)}). It appears after the next data refresh.</span>`});
   function draw(){
     if(!ALL)return;
-    let data=ALL.filter(a=>(s.team==='ALL'||a.team===s.team)&&(s.pos==='ALL'||a.grp===s.pos)&&(!C.minG||a.g>=s.minG)&&(!s.q||String(a.name).toLowerCase().includes(s.q)));
+    let data=ALL.filter(a=>(s.team==='ALL'||a.team===s.team)&&(s.pos==='ALL'||a.grp===s.pos)&&(!C.minG||s.q||a.g>=s.minG)&&(!s.q||String(a.name).toLowerCase().includes(s.q)));
     const pg=C.mode&&s.mode==='pg';
     data=data.map(a=>{if(!pg)return a;const o={...a};for(const k of C.pg||[])o[k]=num(a[k])?a[k]/a.g:a[k];return o});
     sortRows(data,s.sort,s.dir);
