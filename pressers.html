@@ -76,6 +76,7 @@ td.nw{white-space:nowrap}
 .tone{font-size:12px;color:var(--ink-3)}
 .q{display:block;font-style:italic;color:var(--ink-2);font-size:12.5px;margin-top:2px}
 .dim{color:var(--ink-3);font-size:12px}
+.ts{font-size:11.5px;font-variant-numeric:tabular-nums;font-family:var(--f-mono);background:var(--blue-soft);color:var(--blue);border-radius:4px;padding:0 4px;text-decoration:none;white-space:nowrap}
 .more{display:block;margin:16px auto 30px;font:600 14px var(--f-body);padding:8px 16px;border:1px solid var(--rule);border-radius:6px;background:var(--sheet);color:var(--ink);cursor:pointer}
 .empty{padding:40px 0;color:var(--ink-3);text-align:center}
 .foot-note{font-size:12.5px;color:var(--ink-3);margin:18px 0 40px;max-width:760px}
@@ -141,13 +142,14 @@ function draw(){
   $('#out').innerHTML=rows.slice(0,SHOWN).map(({e,sig})=>card(e,sig,filtering)).join('')+(rows.length>SHOWN?`<button class="more" id="more">Show more (${rows.length-SHOWN} left)</button>`:'');
   const m=$('#more');if(m)m.onclick=()=>{SHOWN+=20;draw()}
 }
+function mmss(t){t=Math.floor(t);const h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=String(t%60).padStart(2,'0');return h?`${h}:${String(m).padStart(2,'0')}:${s}`:`${m}:${s}`}
 function card(e,sig,filtering){
   const inj=(e.injuries||[]).filter(i=>!S.q||String(i.player).toLowerCase().includes(S.q.toLowerCase()));
   return `<div class="card"><div class="ch"><span class="tm">${esc(e.team)}</span><span>${esc(e.coach||'')}</span><span class="meta">${day(e.date)} · ${KIND[e.kind]||'Press conference'}</span><a href="${esc(e.url)}" target="_blank" rel="noopener">Watch ↗</a></div><div class="cb">
   <div class="hl">${esc(e.headline||'')}</div>
   ${e.summary?`<details${filtering?'':''}><summary>What he said</summary><p>${esc(e.summary)}</p></details>`:''}
   ${inj.length&&(!S.topic||S.topic==='injury')&&!S.dir?`<h4>Injury updates</h4><ul class="inj">${inj.map(i=>`<li>${pl(i.player_id,i.player)}<span class="st ${esc(i.status)}">${esc(i.status)}</span><span class="dim">${esc(i.detail||'')}</span></li>`).join('')}</ul>`:''}
-  ${sig.length?`<h4>Player signals</h4><div class="scr"><table class="sigt"><thead><tr><th>Player</th><th>Topic</th><th>Signal</th><th>Claim / why it matters</th></tr></thead><tbody>${sig.map(g=>`<tr><td class="nw">${pl(g.player_id,g.player)}</td><td class="nw">${TOPIC[g.topic]||esc(g.topic)}</td><td class="nw"><span class="sg ${esc(g.signal)}">${esc(g.signal)}</span> <span class="tone">${esc(g.tone||'')}</span></td><td class="cl">${esc(g.claim||g.note||'')}${g.claim&&g.note?` <span class="dim">${esc(g.note)}</span>`:''}${g.quote?`<span class="q">“${esc(g.quote)}”</span>`:''}</td></tr>`).join('')}</tbody></table></div>`:''}
+  ${sig.length?`<h4>Player signals</h4><div class="scr"><table class="sigt"><thead><tr><th>Player</th><th>Topic</th><th>Signal</th><th>Claim / why it matters</th></tr></thead><tbody>${sig.map(g=>`<tr><td class="nw">${pl(g.player_id,g.player)}</td><td class="nw">${TOPIC[g.topic]||esc(g.topic)}</td><td class="nw"><span class="sg ${esc(g.signal)}">${esc(g.signal)}</span> <span class="tone">${esc(g.tone||'')}</span></td><td class="cl">${g.t!=null?`<a class="ts" href="${esc(e.url)}" target="_blank" rel="noopener" title="${g.t_exact?'Where the quote is said in the video':'About where this comes up in the video'}">${g.t_exact?'':'~'}${mmss(g.t)}</a> `:''}${esc(g.claim||g.note||'')}${g.claim&&g.note?` <span class="dim">${esc(g.note)}</span>`:''}${g.quote?`<span class="q">“${esc(g.quote)}”</span>`:''}</td></tr>`).join('')}</tbody></table></div>`:''}
   </div></div>`}
 function players(E){
   const M=new Map();
