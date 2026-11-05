@@ -67,9 +67,11 @@
    "target_share_l3": 9.04324
   },
   "K": {
-   "Intercept": 3.37717,
-   "implied": 0.17502,
-   "k_avg": 0.07382
+   "Intercept": 6.4679,
+   "implied": 0.022,
+   "fav_by": 0.0815,
+   "dome": 0.8397,
+   "k_avg": 0.0711
   },
   "DEF": {
    "Intercept": 14.19391,
@@ -79,5 +81,6 @@
    "o_give_pg": 0.51767
   }
  },
- "def_note": "D/ST = 14.19 + 0.055 \u00d7 season avg \u2212 0.415 \u00d7 opponent implied + 13.26 \u00d7 opponent sack rate + 0.518 \u00d7 opponent giveaways/g (fit 2022\u20132025)"
+ "def_note": "D/ST = 14.19 + 0.055 \u00d7 season avg \u2212 0.415 \u00d7 opponent implied + 13.26 \u00d7 opponent sack rate + 0.518 \u00d7 opponent giveaways/g (fit 2022\u20132025)",
+ "k_note": "K v1 (11/5) = 6.47 + 0.022 \u00d7 team implied + 0.082 \u00d7 points favored by + 0.84 if dome/closed roof + 0.071 \u00d7 kicker season avg (fit 2018\u20132025). Holdout 2024\u201325: miss 3.78 vs 3.81 for v0, rank corr 0.20 vs 0.14."
 }

@@ -1,6 +1,6 @@
 """Projection v0 (NFL_stats' own weekly projection). Same code as the private projection log.
 Model: data/model/model_v0.json — per-position linear model on the backtested signals (season avg, last 3, Vegas implied,
-xFP, snap % trend, share of team carries + targets, target share), K = implied + kicker avg, D/ST = opponent implied +
+xFP, snap % trend, share of team carries + targets, target share), K = implied + spread + dome + kicker avg, D/ST = opponent implied +
 opponent sack rate + giveaways. Uses only weeks before `week`."""
 import json
 from pathlib import Path
@@ -9,9 +9,25 @@ import pandas as pd
 MODEL = Path(__file__).resolve().parents[1] / "data" / "model" / "model_v0.json"
 
 
+DOMES = {"ARI", "ATL", "DAL", "DET", "HOU", "IND", "LA", "LV", "MIN", "NO"}  # dome or retractable roof (home team)
+
+
+def k_context(g):
+    """Per team for this week's games: points favored by (spread, + = favorite) and 1 if indoors (dome/closed roof).
+    Roof comes from the schedule; when it's blank (future games) fall back to the home team's stadium type."""
+    fav, dome = {}, {}
+    for r in g.itertuples():
+        sp = 0.0 if pd.isna(r.spread_line) else float(r.spread_line)
+        roof = getattr(r, "roof", None)
+        ind = float(roof in ("dome", "closed")) if isinstance(roof, str) else float(r.home_team in DOMES)
+        fav[r.home_team], fav[r.away_team] = sp, -sp
+        dome[r.home_team] = dome[r.away_team] = ind
+    return fav, dome
+
+
 def ours(P, K, S, week, T=None):
     """Our projection v0 (projections/model_v0.json): per-position linear model on the backtested signals
-    (season avg, last 3, Vegas implied, xFP, snap % trend, share of team carries + targets, target share). K: implied + kicker avg."""
+    (season avg, last 3, Vegas implied, xFP, snap % trend, share of team carries + targets, target share). K: implied + spread + dome + kicker avg."""
     if not MODEL.exists():
         return pd.DataFrame(columns=["key", "ours_ppr", "ours_n_games"])
     M = json.loads(MODEL.read_text())
@@ -38,10 +54,13 @@ def ours(P, K, S, week, T=None):
         out.append({"key": pid, "ours_ppr": round(c["Intercept"] + sum(c[k] * f[k] for k in f), 2), "ours_n_games": len(h)})
     if not K.empty and "K" in M["coef"]:
         c = M["coef"]["K"]
+        fav, dome = k_context(g)
         for pid, h in K[K.week < week].sort_values("week").groupby("player_id"):
             t = h.team.iloc[-1]
             if t in imp and not pd.isna(imp[t]):
-                out.append({"key": pid, "ours_ppr": round(c["Intercept"] + c["implied"] * imp[t] + c["k_avg"] * h.k_pts.mean(), 2), "ours_n_games": len(h)})
+                v = c["Intercept"] + c["implied"] * imp[t] + c["k_avg"] * h.k_pts.mean()
+                v += c.get("fav_by", 0) * fav.get(t, 0) + c.get("dome", 0) * dome.get(t, 0)
+                out.append({"key": pid, "ours_ppr": round(v, 2), "ours_n_games": len(h)})
     if "DEF" in M["coef"] and T is not None:
         c = M["coef"]["DEF"]
         t = T[T.week < week].copy()
