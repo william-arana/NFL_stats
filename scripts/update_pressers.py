@@ -348,18 +348,91 @@ def pick_all(vids: list[dict], team: str, weeks: range | None = None) -> list[di
 
 # ---------- 2. captions ----------
 
-def vtt_to_text(vtt: str) -> str:
-    """WebVTT segments -> plain transcript, one line per speaker turn (">>" in broadcast captions)."""
-    lines: list[str] = []
+def _secs(ts: str) -> float:
+    h, m, sec = (["0"] + ts.strip().split(":"))[-3:]
+    return int(h) * 3600 + int(m) * 60 + float(sec.replace(",", "."))
+
+
+def vtt_lines(vtt: str) -> list[tuple[float, str]]:
+    """WebVTT -> [(video seconds, caption line)], repeated lines dropped. HLS caption segments can each carry an
+    X-TIMESTAMP-MAP; any shift from the first segment's map is added so times stay on the video's clock."""
+    out: list[tuple[float, str]] = []
+    base = shift = None
+    t = 0.0
     for raw in vtt.splitlines():
-        t = unescape(raw.strip())
-        if not t or t.startswith(("WEBVTT", "X-TIMESTAMP", "NOTE")) or "-->" in t or t.isdigit():
+        line = unescape(raw.strip())
+        if line.startswith("X-TIMESTAMP-MAP"):
+            m = re.search(r"MPEGTS:(\d+)", line)
+            loc = re.search(r"LOCAL:([\d:.]+)", line)
+            if m:
+                off = int(m.group(1)) / 90000 - (_secs(loc.group(1)) if loc else 0)
+                base = off if base is None else base
+                shift = off - base
             continue
-        if lines and lines[-1] == t:  # segment boundaries repeat the last cue
+        if "-->" in line:
+            try:
+                t = _secs(line.split("-->")[0]) + (shift or 0)
+            except ValueError:
+                pass
             continue
-        lines.append(t)
-    text = re.sub(r"\s+", " ", " ".join(lines))
+        if not line or line.startswith(("WEBVTT", "NOTE")) or line.isdigit():
+            continue
+        if out and out[-1][1] == line:  # segment boundaries repeat the last cue
+            continue
+        out.append((max(t, 0.0), line))
+    return out
+
+
+def mmss(t: float) -> str:
+    t = int(t)
+    return f"{t // 3600}:{t % 3600 // 60:02d}:{t % 60:02d}" if t >= 3600 else f"{t // 60}:{t % 60:02d}"
+
+
+def vtt_to_text(vtt: str, marks: int = 0) -> str:
+    """WebVTT segments -> plain transcript, one line per speaker turn (">>" in broadcast captions).
+    marks=N puts a [m:ss] video-time marker in front of a caption line about every N seconds."""
+    parts: list[str] = []
+    nxt = 0.0
+    for t, line in vtt_lines(vtt):
+        if marks and t >= nxt:
+            parts.append(f"[{mmss(t)}]")
+            nxt = (t // marks + 1) * marks
+        parts.append(line)
+    text = re.sub(r"\s+", " ", " ".join(parts))
     return re.sub(r"\s*>>\s*", "\n>> ", text).strip()
+
+
+def _words(s: str) -> list[str]:
+    return re.findall(r"[a-z0-9']+", s.lower().replace("’", "'"))
+
+
+def add_times(s: dict, vtt: str) -> None:
+    """Put a video time on each signal. Exact: its verbatim quote is found in the timed captions (t_exact).
+    Otherwise approximate: the [m:ss] marker Claude gave ("at"). No captions (written transcripts): no time."""
+    from difflib import SequenceMatcher
+    words: list[tuple[str, float]] = [(w, t) for t, line in vtt_lines(vtt) for w in _words(line)] if vtt else []
+    toks = [w for w, _ in words]
+    for sg in s.get("signals", []):
+        at = str(sg.pop("at", "") or "")
+        if not words:
+            continue
+        q = _words(sg.get("quote") or "")
+        if len(q) >= 3:
+            best, bi = 0.0, -1
+            for i in range(0, max(1, len(toks) - len(q) + 1)):
+                if toks[i] not in q[:3] and (i + 1 >= len(toks) or toks[i + 1] not in q[:3]):
+                    continue  # cheap prefilter: a match starts near one of the quote's first words
+                sm = SequenceMatcher(None, q, toks[i:i + len(q) + 2])
+                r = sm.ratio()
+                if r > best:  # time of the first quote word actually found in this window
+                    best, bi = r, i + next((b.b for b in sm.get_matching_blocks() if b.size), 0)
+            if best >= 0.75:  # captions misspell names, so allow a little slack
+                sg["t"], sg["t_exact"] = int(words[bi][1]), True
+                continue
+        m = re.fullmatch(r"\[?(?:(\d+):)?(\d{1,2}):(\d{2})\]?", at.strip())
+        if m:
+            sg["t"] = int(m.group(1) or 0) * 3600 + int(m.group(2)) * 60 + int(m.group(3))
+            sg["t_exact"] = False
 
 
 class Stuck(Exception):
@@ -412,7 +485,8 @@ def _fetch_captions_ytdlp(videos: list[dict]) -> None:
                 j = (j.get("entries") or [{}])[0]
             subs = [s["url"] for lang, lst in (j.get("subtitles") or {}).items() if lang.startswith("en")
                     for s in lst if "m3u8" in s.get("url", "") or s.get("ext") == "vtt"]
-            v["transcript"] = pick_transcript(subs, None)  # URL comes from this exact video, no mcpID check needed
+            v["vtt"] = pick_transcript(subs, None)
+            v["transcript"] = vtt_to_text(v["vtt"])  # URL comes from this exact video, no mcpID check needed
             if not v["transcript"]:
                 v["error"] = "no captions found (yt-dlp)"
         except Exception as e:  # noqa: BLE001
@@ -450,7 +524,8 @@ def _fetch_captions(videos: list[dict]) -> None:
                     page.wait_for_timeout(500)
                     if _ == 10:  # nudge the player if autoplay didn't start
                         page.evaluate("try{document.querySelector('video')?.play?.()?.catch?.(()=>{})}catch(e){}")
-                v["transcript"] = pick_transcript(subs, mcp)
+                v["vtt"] = pick_transcript(subs, mcp)
+                v["transcript"] = vtt_to_text(v["vtt"])
                 if not v["transcript"]:
                     v["error"] = "no captions found"
             except Exception as e:  # noqa: BLE001
@@ -466,6 +541,7 @@ def _fetch_captions(videos: list[dict]) -> None:
 
 
 def pick_transcript(sub_urls: list[str], mcp: str | None) -> str:
+    """Raw WebVTT for the video's captions ("" if none matched)."""
     for su in dict.fromkeys(sub_urls):
         segs = [l for l in get(su).splitlines() if l.startswith("http")]
         if not segs or (mcp and f"/{mcp}/" not in segs[0]):
@@ -478,7 +554,7 @@ def pick_transcript(sub_urls: list[str], mcp: str | None) -> str:
                 import time
                 time.sleep(2)
                 parts.append(get(seg, timeout=15))
-        return vtt_to_text("\n".join(parts))
+        return "\n".join(parts)  # raw WebVTT (timed); vtt_to_text() makes the plain transcript
     return ""
 
 
@@ -490,7 +566,8 @@ SIGNAL_TOPICS = ["role", "usage", "injury", "depth_chart", "scheme", "matchup", 
 SYSTEM = """You turn one NFL head coach press conference transcript into structured fantasy-football signals.
 
 The transcript comes from auto-generated broadcast captions: names are often misspelled, there are no speaker names,
-and ">>" marks a new speaker (usually a reporter question, then the coach's answer). Use the roster to correct names and
+and ">>" marks a new speaker (usually a reporter question, then the coach's answer). Video-time markers like [4:30]
+appear about every 30 seconds when the captions have timing. Use the roster to correct names and
 only name a player when you are confident who is meant. Attribute statements to the coach, not to the reporter asking.
 
 Return ONLY a JSON object (no code fences, no prose) with these keys:
@@ -506,13 +583,14 @@ Return ONLY a JSON object (no code fences, no prose) with these keys:
     "claim": what the coach said or implied will happen, as a checkable statement
              (e.g. "will get more snaps at RB this week"; "" if nothing checkable),
     "note": one sentence, why it matters for fantasy,
-    "quote": the coach's own words backing it, verbatim, max 15 words ("" if none)
+    "quote": the coach's own words backing it, verbatim, max 15 words ("" if none),
+    "at": the last [m:ss] marker before where the coach says it, e.g. "4:30" ("" if there are no markers)
  }],
  "topics": [{"topic", "detail"}]  other subjects (scheme, opponent, team news), 1-2 sentences each,
  "opponent": next opponent if discussed, else ""
 }
 Rules: one signal per player per topic. Skip players who were only mentioned in passing. Paraphrase everything except
-"quote". Leave a list empty rather than padding it. Never invent a quote."""
+"quote". Never put the [m:ss] markers inside a quote. Leave a list empty rather than padding it. Never invent a quote."""
 
 
 def rosters() -> dict[str, dict[str, str]]:
@@ -559,7 +637,7 @@ def _params(model: str, v: dict, roster: dict[str, str]) -> dict:
     msg = (
         f"Team: {v['team']} (head coach {COACHES[v['team']]})\nVideo title: {v['title']}\nDescription: {v.get('description', '')}\n"
         f"Posted: {v['date']} ({v.get('kind', '')})\nRoster: {', '.join(sorted(roster)) or 'n/a'}\n\n"
-        f"<transcript>\n{v['transcript']}\n</transcript>"
+        f"<transcript>\n{vtt_to_text(v['vtt'], 30) if v.get('vtt') else v['transcript']}\n</transcript>"
     )
     return {"model": model, "max_tokens": 6000, "system": SYSTEM, "messages": [{"role": "user", "content": msg}]}
 
@@ -760,6 +838,7 @@ def main() -> None:
         if v["id"] not in results:
             continue
         s, u = results[v["id"]]
+        add_times(s, v.get("vtt", ""))
         tok = {k: tok[k] + u[k] for k in tok}
         entry = {k: v[k] for k in ("id", "team", "url", "title", "date", "duration", "thumb")}
         entry["kind"] = v.get("kind", "")
