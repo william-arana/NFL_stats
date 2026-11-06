@@ -1,0 +1,452 @@
+[
+ {
+  "id": "BUF:joe-brady-looks-ahead-to-facing-the-vikings-the-trade-deadline-and-injury-updates",
+  "team": "BUF",
+  "url": "https://www.buffalobills.com/video/joe-brady-looks-ahead-to-facing-the-vikings-the-trade-deadline-and-injury-updates",
+  "title": "Joe Brady Looks Ahead To Facing The Vikings, The Trade Deadline, And Injury Updates",
+  "date": "2026-11-05",
+  "duration": 987,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bills/q5shqu7zlwyyuyctgrxs.jpg",
+  "kind": "first_practice",
+  "after_week": 8,
+  "coach": "Joe Brady",
+  "words": 3998,
+  "model": "claude-sonnet-5-5",
+  "headline": "Josh Allen's offense faces Brian Flores' blitz-heavy Vikings on Monday night. James Cook is called a \"huge component\" of a balanced plan, and Spencer Brown and DJ Moore are back at practice.",
+  "summary": "Brady said Buffalo had prepared for both Vikings quarterbacks, so Carson Wentz being confirmed as the starter changes little. He called Brian Flores' defense elite and the league's best, and said practice can never fully match its game-day speed. His answer was to trust technique, keep communication sharp, and get play calls in quickly in a loud road environment. He said C.J. Gardner-Johnson's release was a roster decision made for the good of the team. It also opened opportunities for other players, and the plan had been to evaluate after the Baltimore game. He voiced confidence in Tylan Grable, who filled in at tackle, and said Jordan Hancock will practice today with his return window opened. DJ Moore and Spencer Brown will both be out at practice today. On the trade deadline, he said he talks with Brandon Beane constantly, trusts the personnel staff, and is not addressing it with players. On Detroit's second-half rushing success against Minnesota, he said Buffalo will play its own style rather than react. He called James Cook a huge piece of a balanced, two-dimensional offense.",
+  "injuries": [
+   {
+    "player": "Jordan Hancock",
+    "status": "returning",
+    "detail": "His practice window is opening and he will be on the field today in pads. Brady said the team will keep evaluating him and noted it has been a while since he played.",
+    "player_id": ""
+   },
+   {
+    "player": "Spencer Brown",
+    "status": "unclear",
+    "detail": "He will be out at practice today. Brady gave no designation, and Tylan Grable filled in for him last week.",
+    "player_id": "00-0036976"
+   },
+   {
+    "player": "DJ Moore",
+    "status": "unclear",
+    "detail": "He will be out at practice today. Brady gave no injury designation or participation level.",
+    "player_id": "00-0034827"
+   }
+  ],
+  "signals": [
+   {
+    "player": "James Cook",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Cook will remain a central part of the game plan as Buffalo aims to be balanced and two-dimensional against Minnesota.",
+    "note": "Brady named Cook as a key piece against a defense that just allowed a big rushing day to Detroit's Gibbs, which supports his volume.",
+    "quote": "we know James Cook is a huge component to who we are as an offense",
+    "player_id": "00-0037248",
+    "t": 973,
+    "t_exact": true
+   },
+   {
+    "player": "Tylan Grable",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Grable can fill in at either tackle spot and will play if Spencer Brown or another tackle is unavailable.",
+    "note": "Offensive line depth matters against a heavy Vikings blitz, and Brady expressed confidence in the swing tackle.",
+    "quote": "I got a lot a lot of confidence in him",
+    "player_id": "00-0039882",
+    "t": 408,
+    "t_exact": true
+   },
+   {
+    "player": "Spencer Brown",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Brown will practice today, and his Monday availability will be evaluated through the week.",
+    "note": "Right tackle health affects pass protection against Flores' pressure, which affects Josh Allen and the passing game.",
+    "quote": "D.J. and Spencer, they'll be out there today",
+    "player_id": "00-0036976",
+    "t": 450,
+    "t_exact": true
+   },
+   {
+    "player": "DJ Moore",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Moore will be on the practice field today, with his status to be determined as the week goes on.",
+    "note": "His practice participation is the first sign of whether he is available for Monday night.",
+    "quote": "D.J. and Spencer, they'll be out there today",
+    "player_id": "00-0034827",
+    "t": 450,
+    "t_exact": true
+   },
+   {
+    "player": "Jordan Hancock",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Hancock will practice today and the team will continue to evaluate him.",
+    "note": "A returning defensive back adds secondary depth, but his game readiness is still unknown.",
+    "quote": "he'll be out there today",
+    "player_id": "",
+    "t": 433,
+    "t_exact": true
+   },
+   {
+    "player": "C.J. Gardner-Johnson",
+    "topic": "trade_or_roster",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Gardner-Johnson has been released and is no longer on Buffalo's roster.",
+    "note": "His safety snaps go to other players, and he becomes a free agent for IDP managers.",
+    "quote": "what we feel like was the best thing to do for the Buffalo Bills",
+    "player_id": "",
+    "t": 249,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Opponent QB",
+    "detail": "Carson Wentz was confirmed as the Vikings' starter for Monday night. Brady said the defense had prepared for both quarterbacks and expects only some adjustments for the different skill sets."
+   },
+   {
+    "topic": "Vikings defense",
+    "detail": "Brady praised Brian Flores as an evolving, elite scheme mind whose group is number one in the league. He stressed technique, fundamentals and communication, and said the answer to heavy blitzing is simply doing your job on each play, not any special scheme."
+   },
+   {
+    "topic": "Road communication",
+    "detail": "Brady said he must get play calls in quickly so the line can get set without sloppy feet. Buffalo practiced with crowd noise in camp, and he said he and Josh Allen need to be on the same page, especially in the gun."
+   },
+   {
+    "topic": "Trade deadline",
+    "detail": "Brady talks with Brandon Beane constantly, trusts the personnel staff to add players if needed, and does not plan to address deadline uncertainty with the team."
+   },
+   {
+    "topic": "Detroit's rushing success",
+    "detail": "Brady downplayed copying Detroit's second-half rushing approach. He said Buffalo will take care of the ball and play its own style instead of reacting to what the Lions did."
+   },
+   {
+    "topic": "Penalties and blockers",
+    "detail": "Brady said penalties come down to technique and fundamentals and the team must keep cleaning them up. He said versatile tight ends and backs who can block help the play-caller against pressure."
+   }
+  ],
+  "opponent": "Minnesota Vikings (Monday Night Football, Minneapolis)"
+ },
+ {
+  "id": "DET:sheppard-on-playing-for-jack-campbell",
+  "team": "DET",
+  "url": "https://www.detroitlions.com/video/sheppard-on-playing-for-jack-campbell",
+  "title": "Sheppard on playing for Jack Campbell",
+  "date": "2026-11-05",
+  "duration": 817,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/lions/vszofxcqhp5fij26up0v.jpg",
+  "kind": "midweek",
+  "after_week": 8,
+  "coach": "Dan Campbell",
+  "words": 2596,
+  "model": "claude-sonnet-5-5",
+  "headline": "With LB Jack Campbell hurt, DC Kelvin Sheppard says Derrick Barnes and Malcolm Rodriguez will share the green-dot role, and the defense will lean on more depth players.",
+  "summary": "This was Sheppard's press conference, not Dan Campbell's. He opened by talking about the scary injury to LB Jack Campbell on Sunday, calling it a freak accident on a routine tackle. He said the team is praying for Campbell and has set the week's theme as preparing and playing the way Campbell would. He explained that the unusual fourth-down pressure call came from the players' wish to 'go for 46' and Aidan Hutchinson's reaction. On the green-dot role, Sheppard said Campbell is still tuned in and it is still 'Jack Campbell's defense.' He named Derrick Barnes and Malcolm Rodriguez as the two who have worn it before and said the load may be shared, though it's still being worked out. He also said a young linebacker he called 'Bocci' will have a role in the game. He credited the assistant coaches for preparing many developmental players and said some of those players' roles will grow further because of injuries. On Ennis Rakestraw's one snap on Sunday, he pointed to the ankle issue the week before and to matchup-based decisions made with DBs coach Deshea Townsend. He gave no specific injury timetable for Campbell, and he did not name the upcoming opponent beyond saying they have trended upward over the past month.",
+  "injuries": [
+   {
+    "player": "Jack Campbell",
+    "status": "unclear",
+    "detail": "Injured on a tackle Sunday at Ford Field. Sheppard gave no timetable and said the team is praying for him through a recovery process. Sheppard has spoken with him and said he is 'pushing through it.'",
+    "player_id": ""
+   },
+   {
+    "player": "Ennis Rakestraw",
+    "status": "unclear",
+    "detail": "Sheppard said he is 'a little nicked up and banged up.' The question referenced an ankle issue the week before. He played just one snap Sunday, and availability and reps are the issue.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Jack Campbell",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "positive",
+    "claim": "Campbell will not be the one wearing the green dot and calling the defense this week, with no recovery timetable given.",
+    "note": "Fantasy managers should treat him as out with an unknown return date, which removes the defense's usual signal-caller and top tackler.",
+    "quote": "this is still Jack Campbell's defense.",
+    "player_id": "",
+    "t": 455,
+    "t_exact": true
+   },
+   {
+    "player": "Derrick Barnes",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Barnes will wear the green dot and handle defensive checks, possibly sharing it with Malcolm Rodriguez.",
+    "note": "A bigger role in communication and likely snaps makes Barnes a stronger IDP linebacker option this week.",
+    "quote": "they both have worn the green dot before.",
+    "player_id": "",
+    "t": 494,
+    "t_exact": true
+   },
+   {
+    "player": "Malcolm Rodriguez",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Rodriguez will take on a larger linebacker role and may share the green-dot duty with Barnes.",
+    "note": "Extra snaps and responsibility with Campbell out make him a potential IDP pickup.",
+    "quote": "I'm confident in either one of them.",
+    "player_id": "",
+    "t": 503,
+    "t_exact": true
+   },
+   {
+    "player": "Ennis Rakestraw",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Rakestraw's snaps will depend on his health and on weekly matchups, with Khalil Dorsey and Rock Ya-Sin also in the mix.",
+    "note": "He is not a reliable IDP play until his ankle issue and role stabilize.",
+    "quote": "It's always been about availability and how many reps did he get that week.",
+    "player_id": "",
+    "t": 784,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Team response to Campbell's injury",
+    "detail": "The theme is to prepare and play like Campbell. Sheppard said the team started meetings by putting football aside, and the players were emotional. He said the fourth-down pressure call came from the players' wish to 'go for 46' and Hutchinson's reaction."
+   },
+   {
+    "topic": "Defensive depth and rotation",
+    "detail": "Sheppard credited position coaches and developmental work for many players getting reps. He said some of those players' roles will increase because of current injuries and that he expects 'no drop off.'"
+   },
+   {
+    "topic": "Secondary matchups",
+    "detail": "Sheppard said he defers to Deshea Townsend on cornerback usage, which may vary by matchup among Dorsey, Rakestraw, Ya-Sin and another DB."
+   },
+   {
+    "topic": "Next opponent",
+    "detail": "He did not name the opponent, only saying they have 'trended upwards' over the past month."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "GB:matt-lafleur-on-watching-the-growth-of-jordan-love-it-s-been-pretty-cool-nov-5-2026",
+  "team": "GB",
+  "url": "https://www.packers.com/video/matt-lafleur-on-watching-the-growth-of-jordan-love-it-s-been-pretty-cool-nov-5-2026",
+  "title": "Matt LaFleur on watching the growth of Jordan Love: 'It's been pretty cool'",
+  "date": "2026-11-05",
+  "duration": 260,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/packers/tiiu9eka89gtr2sxhsqa.jpg",
+  "kind": "midweek",
+  "after_week": 8,
+  "coach": "Matt LaFleur",
+  "words": 813,
+  "model": "claude-sonnet-5-5",
+  "headline": "Sean Rhyan's injury looks short-term, with LaFleur saying he doesn't believe the lineman will go on IR. Brenton Cox is trending up on defense. Jordan Love is nearing 100 career TD passes.",
+  "summary": "LaFleur opened by reflecting on Jordan Love, who is one touchdown pass from 100 for his career. He said watching Love grow as a player and a person over six years has been 'pretty cool', and praised him for staying the same guy through the pressure of following Aaron Rodgers. He said Brenton Cox keeps getting better, has always been physical, and has taken his game to another level with more opportunity. Asked whether Sean Rhyan will go on IR, he said he doesn't believe so, and he agreed with the reporter's suggestion that the injury is short-term. He credited Green Bay's improved takeaways to talent and ball skills at the second and third levels, plus heavy pressure on the quarterback that forces bad decisions. He then previewed the opponent's defense, praising their edge rushers and interior linemen. The coach named Mike Smith as the defensive coordinator and Milton Williams as one of the disruptive interior players. Beyond that, the session was light on fantasy-relevant skill-position news.",
+  "injuries": [
+   {
+    "player": "Sean Rhyan",
+    "status": "unclear",
+    "detail": "LaFleur said he doesn't believe Rhyan will go on IR and agreed the injury is shorter term. No specific status or return timeline was given.",
+    "player_id": "00-0037076"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Brenton Cox",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Cox has taken on more opportunity on defense and has improved as the season has gone on.",
+    "note": "Cox's role is growing on the defense, which helps in IDP leagues and shows the coaches trust him.",
+    "quote": "he just gets better and better and better",
+    "player_id": "",
+    "t": 132,
+    "t_exact": true
+   },
+   {
+    "player": "Sean Rhyan",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Rhyan will not be placed on injured reserve, and his absence is expected to be short-term.",
+    "note": "A short-term injury means Rhyan could return soon. Monitor practice participation for the impact on the offensive line's makeup.",
+    "quote": "I don't believe so.",
+    "player_id": "00-0037076",
+    "t": 151,
+    "t_exact": true
+   },
+   {
+    "player": "Jordan Love",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "Love is about to reach 100 career touchdown passes, and LaFleur praised his steadiness and growth, which signals strong confidence in him.",
+    "quote": "he's the same guy each and every day",
+    "player_id": "00-0036264",
+    "t": 71,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Defensive takeaways",
+    "detail": "LaFleur credited the improved takeaway numbers to talent and ball skills in the second and third levels, plus heavy quarterback pressure that forces poor decisions."
+   },
+   {
+    "topic": "Opponent's defensive front",
+    "detail": "LaFleur called the opposing front formidable, praising the edge rushers and interior players, Christian Barmore and Milton Williams. He also complimented the coaching under Mike Smith and said the unit varies its front structures."
+   },
+   {
+    "topic": "Love milestone",
+    "detail": "Love is one touchdown pass from 100 for his career. LaFleur said he hadn't been aware of the exact number and called Love's journey a pretty cool experience."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "MIN:kevin-oconnell-carson-wentz-starting-vs-bills-injury-updates-safety",
+  "team": "MIN",
+  "url": "https://www.vikings.com/video/kevin-oconnell-carson-wentz-starting-vs-bills-injury-updates-safety",
+  "title": "Kevin O'Connell on Carson Wentz Starting vs. Bills, Injury Updates & Depth of Safety Position",
+  "date": "2026-11-05",
+  "duration": 661,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/vikings/mraiww1rl3x4e9z5nqgg.jpg",
+  "kind": "first_practice",
+  "after_week": 8,
+  "coach": "Kevin O'Connell",
+  "words": 2330,
+  "model": "claude-sonnet-5-5",
+  "headline": "Kyler Murray is out with a hamstring strain (week-to-week), so Carson Wentz starts Monday night vs. the Bills. Christian Darrisaw returns to practice and Theo Jackson is out of practice with a quad injury.",
+  "summary": "O'Connell said imaging on Monday showed Kyler Murray has a hamstring strain, which he described as no more than week-to-week. The team won't let Murray work through it because his mobility and explosive style could turn it into something worse, and IR is not under consideration. Carson Wentz will start Monday night against the Bills with Max Bredeson as his backup. O'Connell praised Wentz's experience, his command of the offense, and the team's results when he has stepped in. Murray will start his progression early, hopefully next week, and stays heavily involved in meetings and installs this week. Christian Darrisaw will practice in some capacity after encouraging early treatment, while safety Theo Jackson won't practice because of a quad injury. The team feels good about safety depth, citing Jay Ward, Jacob Thomas and Harrison Smith, and may add another safety to the game-day roster. O'Connell also pointed to the lost opportunities in the first loss, including a three-and-out after a turnover and a two-minute interception on an overthrow to Justin Jefferson.",
+  "injuries": [
+   {
+    "player": "Kyler Murray",
+    "status": "out",
+    "detail": "Hamstring strain found on imaging, described as week-to-week. Will not play Monday night. Progression starts early this week, with a return hoped for next week. IR not under consideration.",
+    "player_id": "00-0035228"
+   },
+   {
+    "player": "Christian Darrisaw",
+    "status": "limited",
+    "detail": "Will participate in practice today. Early treatment has been encouraging and the team will see how he feels through the week.",
+    "player_id": "00-0036616"
+   },
+   {
+    "player": "Theo Jackson",
+    "status": "questionable",
+    "detail": "Quad injury. Will not practice today, and his game status is unclear.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Carson Wentz",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will start at QB against the Bills on Monday night.",
+    "note": "Wentz is a streaming QB option in a home game, with the coach expecting steady, effective play and plenty of completions.",
+    "quote": "Carson will start the football game and Max will will back him up.",
+    "player_id": "00-0032950",
+    "t": 60,
+    "t_exact": true
+   },
+   {
+    "player": "Kyler Murray",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Will miss Monday night's game with a hamstring strain and is week-to-week, with a return possibly next week at the earliest.",
+    "note": "Murray should be benched in fantasy for Week 9, and his timeline beyond that is uncertain.",
+    "quote": "",
+    "player_id": "00-0035228",
+    "t": 31,
+    "t_exact": false
+   },
+   {
+    "player": "Max Bredeson",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Will be the backup QB behind Wentz this week.",
+    "note": "He matters only as insurance if Wentz gets hurt or the game gets out of hand.",
+    "quote": "Carson will start the football game and Max will will back him up.",
+    "player_id": "00-0041081",
+    "t": 60,
+    "t_exact": true
+   },
+   {
+    "player": "Justin Jefferson",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "The offense is looking to connect on missed passing-game chances, including the overthrow to Jefferson in the two-minute drill.",
+    "note": "Jefferson's volume should hold with Wentz, and a missed deep shot is the kind of play the offense wants back.",
+    "quote": "the two minute interception just when we overthrew Justin",
+    "player_id": "00-0036322",
+    "t": 527,
+    "t_exact": true
+   },
+   {
+    "player": "Christian Darrisaw",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Will practice today in some capacity, and his availability depends on how he feels through the week.",
+    "note": "Darrisaw's status matters for Wentz's pass protection, so keep an eye on his practice participation.",
+    "quote": "Christian Darrisaw will participate today.",
+    "player_id": "00-0036616",
+    "t": 21,
+    "t_exact": true
+   },
+   {
+    "player": "Theo Jackson",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Won't practice today because of a quad injury, and his availability for Monday is in question.",
+    "note": "Jackson's absence would shift safety snaps to the depth players, which matters mostly for IDP leagues.",
+    "quote": "He won't practice today with that quad.",
+    "player_id": "",
+    "t": 302,
+    "t_exact": true
+   },
+   {
+    "player": "Jacob Thomas",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is among the safeties who would absorb snaps if Theo Jackson can't play.",
+    "note": "Thomas is a potential IDP pickup if Jackson misses time.",
+    "quote": "between Jacob Thomas Harrison Smith and, and for for",
+    "player_id": "",
+    "t": 314,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Opponent and setting",
+    "detail": "The Vikings are coming off their first loss of the season and host the Bills on Monday night at U.S. Bank Stadium. O'Connell called Buffalo one of the best teams in football."
+   },
+   {
+    "topic": "Offensive execution",
+    "detail": "O'Connell said practices have gone well but the execution needs to carry over to games. He cited a three-and-out after a turnover and a two-minute interception as the sequences that changed the loss."
+   },
+   {
+    "topic": "Safety depth",
+    "detail": "With Theo Jackson's quad issue, the team feels good about its safety depth and may add another safety to the game-day roster."
+   }
+  ],
+  "opponent": "Buffalo Bills"
+ }
+]
