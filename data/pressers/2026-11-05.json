@@ -137,6 +137,63 @@
   "opponent": "Minnesota Vikings (Monday Night Football, Minneapolis)"
  },
  {
+  "id": "CIN:zac-taylor-madrid-week-9-2026-press-conference",
+  "team": "CIN",
+  "url": "https://www.bengals.com/video/zac-taylor-madrid-week-9-2026-press-conference",
+  "title": "Zac Taylor Meets With Madrid Media Ahead of Week 9 | PRESS CONFERENCE",
+  "date": "2026-11-05",
+  "duration": 961,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bengals/btp9j9307lqnozetg7pw.jpg",
+  "kind": "first_practice",
+  "after_week": 8,
+  "coach": "Zac Taylor",
+  "words": 3068,
+  "model": "claude-sonnet-5-5",
+  "headline": "Taylor gave almost no injury or role news in Madrid; some players, possibly including DJ Turner, will be limited at the first real practice, with no declarations until after it.",
+  "summary": "Taylor spent most of the session on the logistics of the Madrid trip and the Week 9 game against Atlanta. The Bengals arrived Wednesday morning, and he says the schedule is back to a normal Thursday: third-down emphasis today and red zone work tomorrow. When asked whether DJ Turner would practice, he said some players will be limited and that he wasn't ready to make declarations until he sees how they feel. He did not name anyone else or give any injury details. He praised Atlanta as a well-rounded team built around a dangerous running back, with play-action, nakeds and screens, and called Drake London a tremendous receiver. He noted that Atlanta's quarterback came back from missing the first two games and played well last week in a driving rainstorm. He said the Bengals haven't yet played a full game start to finish and are focused on improving. The rest was Spain, soccer, growing the NFL internationally and the AFC North race.",
+  "injuries": [
+   {
+    "player": "DJ Turner",
+    "status": "limited",
+    "detail": "Asked whether Turner would practice, Taylor said some players will be on a limited basis and he'd see how they feel. He made no firm declaration, so Turner's exact status is unclear.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "DJ Turner",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Turner may be limited at Thursday's practice, but his game status wasn't declared.",
+    "note": "Turner's availability is uncertain; check Friday's practice report before setting lineups.",
+    "quote": "I think some of our guys will be on a limited basis.",
+    "player_id": "",
+    "t": 178,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Opponent",
+    "detail": "Taylor called Atlanta a really good, well-rounded team. He pointed to a dangerous running back, a play-action and screen-heavy run game, a quarterback who delivers well from the pocket, and Drake London as a tremendous receiver. He said Atlanta's three losses include a rainstorm game last week."
+   },
+   {
+    "topic": "Practice schedule",
+    "detail": "The Bengals did their Wednesday practice on Tuesday before leaving, so Thursday is a normal day with a third-down emphasis. Friday will be red zone based. The team also does a walkthrough at the stadium on Saturday."
+   },
+   {
+    "topic": "International travel",
+    "detail": "Taylor said the team arrived early to acclimate, kept its routine as close to normal as possible, and focused on food and schedule. He said he would keep this approach for future international games."
+   },
+   {
+    "topic": "Division race",
+    "detail": "He said the AFC North is always tight and usually decided in late December. He called the Atlanta game a big one."
+   }
+  ],
+  "opponent": "Atlanta Falcons"
+ },
+ {
   "id": "DET:sheppard-on-playing-for-jack-campbell",
   "team": "DET",
   "url": "https://www.detroitlions.com/video/sheppard-on-playing-for-jack-campbell",
