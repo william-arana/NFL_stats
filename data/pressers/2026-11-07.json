@@ -1,0 +1,268 @@
+[
+ {
+  "id": "BUF:joe-brady-gives-an-injury-update-for-monday-s-game-against-the-vikings",
+  "team": "BUF",
+  "url": "https://www.buffalobills.com/video/joe-brady-gives-an-injury-update-for-monday-s-game-against-the-vikings",
+  "title": "Joe Brady Gives An Injury Update For Monday's Game Against The Vikings",
+  "date": "2026-11-07",
+  "duration": 428,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bills/jdx4csczx0v4opcjrbfk.jpg",
+  "kind": "final_practice",
+  "after_week": 8,
+  "coach": "Joe Brady",
+  "words": 1767,
+  "model": "claude-sonnet-5-5",
+  "headline": "Josh Palmer is the only Bills player ruled out for Monday night at Minnesota. Dion Dawkins is questionable after missing practice but is expected to be given every chance to play.",
+  "summary": "Joe Brady opened with the injury report: Josh Palmer is out, and Dion Dawkins, Jordan Hancock and two or three others (heard as Alex Anderson, Greg Gaines and Tyrell Shavers) are questionable. He said IR is not under consideration for Palmer right now. He explained that Dawkins sat out practice as a veteran rest plan, and that experienced players at certain positions can be ready without a full week of reps. He compared Dawkins to Christian Benford before the Rams game, to DJ Moore, and to Spencer Brown last week. Brady said the line prepares for backups and position shuffles during the week, so a changed combination wouldn't force him to alter the play calling. He praised the line coaching and depth development, singling out the young tackle (heard as 'Graves', most likely Tylan Grable), who has moved from right tackle last week to prepping at left tackle. He said the Vikings' defense, which he called the best in the NFL at scoring, often plays base personnel against 11 personnel, which is a growing league trend. He said the running backs will face an above-average pass-protection test this week and need to clean up technique after a low-blocking penalty last week. He closed by saying the team's standard shouldn't change with the opponent and that players should avoid trying to be heroes.",
+  "injuries": [
+   {
+    "player": "Josh Palmer",
+    "status": "out",
+    "detail": "Ruled out for Monday night. Brady said IR is not being considered right now.",
+    "player_id": "00-0036988"
+   },
+   {
+    "player": "Dion Dawkins",
+    "status": "questionable",
+    "detail": "Did not practice this week as a planned veteran rest. Brady trusts him to be ready and will keep evaluating through Monday.",
+    "player_id": "00-0033904"
+   },
+   {
+    "player": "Jordan Hancock",
+    "status": "questionable",
+    "detail": "Listed as questionable for Monday with no further detail.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Josh Palmer",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Palmer will miss Monday night's game against the Vikings.",
+    "note": "With Palmer out, the Bills' other receivers pick up his targets and snaps in a tough matchup.",
+    "quote": "Joshua Palmer the only one that is out.",
+    "player_id": "00-0036988",
+    "t": 9,
+    "t_exact": true
+   },
+   {
+    "player": "Dion Dawkins",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Dawkins is expected to be given every chance to play Monday despite no practice reps this week, pending further evaluation.",
+    "note": "His status affects the left side of the line, which matters for Josh Allen and the run game against a tough defense.",
+    "quote": "",
+    "player_id": "00-0033904",
+    "t": 60,
+    "t_exact": false
+   },
+   {
+    "player": "Tylan Grable",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Grable can move from right tackle to left tackle this week if needed, with no drop-off in the offense.",
+    "note": "If Dawkins can't go, Grable is the likely fill-in at left tackle, and Brady said he wouldn't change his play calling.",
+    "quote": "I don't think he would blink.",
+    "player_id": "00-0039882",
+    "t": 280,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Other injury report",
+    "detail": "Besides Dawkins and Hancock, players heard as Alex Anderson, Greg Gaines and Tyrell Shavers were also listed as questionable. These names are not on the supplied roster, so they were not confirmed."
+   },
+   {
+    "topic": "Offensive line depth",
+    "detail": "Brady credited the line coaches for developing backups who step in without a drop-off. He said the starting five don't take every practice rep, so the team prepares for different combinations and different players snapping to Josh Allen."
+   },
+   {
+    "topic": "Running back pass protection",
+    "detail": "Brady called it good but said it faces an unusually big test this week. The backs need to clean up technique after a low-blocking penalty last week, and he said pass pro matters to them as much as running the ball."
+   },
+   {
+    "topic": "Vikings defense",
+    "detail": "Minnesota often plays base personnel against 11 personnel, trusting its players to match up in space. Brady sees this as a growing league trend that takes a coach and players who trust the scheme."
+   },
+   {
+    "topic": "Team mindset",
+    "detail": "Brady said the team's standard shouldn't rise or fall with the opponent. He wants players to avoid being heroes and just play the next play, which is what he means by 'competitive stamina'."
+   }
+  ],
+  "opponent": "Minnesota Vikings (Monday night, road)"
+ },
+ {
+  "id": "MIN:kevin-oconnell-aaron-jones-nominated-salute-to-service-award-bills-monday-night",
+  "team": "MIN",
+  "url": "https://www.vikings.com/video/kevin-oconnell-aaron-jones-nominated-salute-to-service-award-bills-monday-night",
+  "title": "Kevin O’Connell on Aaron Jones Being Nominated for Salute to Service Award & Preparing for Vikings vs. Bills Monday Night",
+  "date": "2026-11-07",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/vikings/mcvmwrccuoiaze4cxpoa.jpg",
+  "kind": "final_practice",
+  "after_week": 8,
+  "coach": "Kevin O'Connell",
+  "words": 2182,
+  "model": "claude-sonnet-5-5",
+  "headline": "Kyler Murray, Jauan Jennings and Demond Claiborne are all out Monday night vs. the Bills, so Carson Wentz starts and Justin Jefferson and Jordan Addison are the healthy top receivers.",
+  "summary": "O'Connell opened by praising Aaron Jones as the Vikings' Salute to Service nominee. He then gave injury news. Demond Claiborne (knee) and Jauan Jennings (calf strain) were hurt at Thursday practice, and both are out Monday along with Kyler Murray. Theo Jackson (quad) and Jay Ward (knee) are questionable, and nobody else carries a designation. Murray spent the week in treatment, and the plan is to see how he moves Monday and then how he feels heading into a short week. Without Jennings, Justin Jefferson and Jordan Addison are healthy, and the staff is deciding between an elevation from the practice squad and a mix of other receivers, working backward from red zone, third down and early downs. With Carson Wentz in, O'Connell said Minnesota has been in shotgun a lot on early downs. He praised Wentz's RPO experience and size, and said they could be under center more depending on what the defense shows. He called the Bills' defensive front very talented and an aggressive blitzing group. He stressed quick, rhythm-based passing and total-team pass protection. The rest of the session covered a conversation with a player named Jordan about a possible roster move that didn't happen, and memories of coaching Adrian Peterson.",
+  "injuries": [
+   {
+    "player": "Kyler Murray",
+    "status": "out",
+    "detail": "Out for Monday night. He was in a treatment phase this week and will move around Monday to see how he feels going into next week.",
+    "player_id": "00-0035228"
+   },
+   {
+    "player": "Jauan Jennings",
+    "status": "out",
+    "detail": "Calf strain suffered at Thursday practice. Out for Monday night.",
+    "player_id": "00-0036259"
+   },
+   {
+    "player": "Demond Claiborne",
+    "status": "out",
+    "detail": "Knee injury at Thursday practice. Out Monday. Probably not a surgical issue and his season isn't necessarily over, but the time missed is still being evaluated.",
+    "player_id": "00-0041104"
+   },
+   {
+    "player": "Theo Jackson",
+    "status": "questionable",
+    "detail": "Quad injury. Questionable for Monday night.",
+    "player_id": ""
+   },
+   {
+    "player": "Jay Ward",
+    "status": "questionable",
+    "detail": "Knee injury. Questionable for Monday night.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Kyler Murray",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Will miss the Monday night game vs. the Bills; return timeline beyond that is undetermined.",
+    "note": "Murray is a bench or drop risk this week, and his status for the short-week game after Monday is still unclear.",
+    "quote": "he's progressing",
+    "player_id": "00-0035228",
+    "t": 270,
+    "t_exact": false
+   },
+   {
+    "player": "Carson Wentz",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will start at QB Monday with Murray out, and the offense may use more under-center and RPO looks.",
+    "note": "Wentz steps in as the starter against an aggressive Bills front, which makes him a streaming option in deeper or superflex formats.",
+    "quote": "Carson's had a lot of success and experience with RPOs throughout his career.",
+    "player_id": "00-0032950",
+    "t": 307,
+    "t_exact": true
+   },
+   {
+    "player": "Jauan Jennings",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Will miss Monday night with a calf strain.",
+    "note": "Jennings can't be started Monday, and calf strains can linger, so the following week is worth watching.",
+    "quote": "got a calf strain",
+    "player_id": "00-0036259",
+    "t": 52,
+    "t_exact": true
+   },
+   {
+    "player": "Demond Claiborne",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Out Monday with a knee injury; his season is not necessarily over but the timeline is unknown.",
+    "note": "Claiborne is only a deep-league handcuff or stash, and he is not usable until his timeline is clearer.",
+    "quote": "don't think his season's necessarily over",
+    "player_id": "00-0041104",
+    "t": 70,
+    "t_exact": true
+   },
+   {
+    "player": "Justin Jefferson",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Healthy and ready to go Monday, with Jennings out and Wentz at QB.",
+    "note": "With Jennings out, Jefferson should see a concentrated target share in a game the offense is trying to get its playmakers going early.",
+    "quote": "both ready to go and healthy",
+    "player_id": "00-0036322",
+    "t": 219,
+    "t_exact": true
+   },
+   {
+    "player": "Jordan Addison",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Healthy and ready to go Monday as one of the two main receivers.",
+    "note": "Addison becomes the clear WR2 with Jennings out and should see added target opportunity.",
+    "quote": "both ready to go and healthy",
+    "player_id": "00-0038994",
+    "t": 219,
+    "t_exact": true
+   },
+   {
+    "player": "Jeshaun Jones",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "May be elevated from the practice squad Monday to fill the Jennings role, but nothing is decided.",
+    "note": "The WR3 spot is open, but nothing is set, so the roster elevations are worth checking before kickoff.",
+    "quote": "",
+    "player_id": "00-0039710",
+    "t": 210,
+    "t_exact": false
+   },
+   {
+    "player": "Jacob Thomas",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Could be active at safety Monday if Theo Jackson and Jay Ward can't go.",
+    "note": "Only an IDP-league consideration, and the decision is tied to special teams needs.",
+    "quote": "",
+    "player_id": "",
+    "t": 120,
+    "t_exact": false
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Bills defensive front",
+    "detail": "O'Connell called the Bills' defensive front really talented and said it blitzes aggressively. Minnesota needs to get its playmakers activated on early downs. He emphasized a rhythm-based offense with the ball out on time so pass protection can be aggressive."
+   },
+   {
+    "topic": "Scheme with Wentz",
+    "detail": "The offense has been in shotgun more than previously, especially on early downs, to pair the run and pass. With Wentz it can use more under-center looks and RPOs, depending on what the defense shows."
+   },
+   {
+    "topic": "Aaron Jones award",
+    "detail": "Jones is the team's Salute to Service nominee, and fans can vote online. O'Connell praised his work with current and former service members."
+   },
+   {
+    "topic": "Roster move that didn't happen",
+    "detail": "Asked about a past conversation with a player named Jordan regarding a possible roster move that didn't happen, O'Connell said both sides handled it well. He said the player loves being a Minnesota Viking."
+   },
+   {
+    "topic": "Adrian Peterson",
+    "detail": "O'Connell reminisced about working out Peterson in Washington and called him an absolute machine. He also praised East Texas as a talent hotbed. Nothing fantasy-relevant."
+   }
+  ],
+  "opponent": "Buffalo Bills"
+ }
+]
