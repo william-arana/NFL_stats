@@ -784,6 +784,91 @@
   "opponent": ""
  },
  {
+  "id": "MIA:hc-jeff-hafley-nov-8-postgame-press-conference",
+  "team": "MIA",
+  "url": "https://www.miamidolphins.com/video/hc-jeff-hafley-nov-8-postgame-press-conference",
+  "title": "HC Jeff Hafley - Nov 8 | Postgame Press Conference",
+  "date": "2026-11-08",
+  "duration": 641,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/dolphins/s8kzmnsl3eozc2yvijut.jpg",
+  "kind": "postgame",
+  "after_week": 9,
+  "coach": "Jeff Hafley",
+  "words": 2296,
+  "model": "claude-sonnet-5-5",
+  "headline": "Malik Willis played through a tight groin and wasn't at full speed, with his status to be re-checked Monday. Caleb Douglas is trending up, but the Dolphins' offense was sunk by 11 penalties and a passing game held to about 128 yards.",
+  "summary": "Hafley opened by praising the Lions and sending thoughts to Jack Campbell, then said he was proud of a defense that held the NFL's top offense under 200 yards and 3-of-12 on third down. He was angry about the 19-9 loss but said he was encouraged by the team's physicality and effort. The offense was undermined by 11 penalties for 87 yards, including at least five holding calls. He called those penalties self-inflicted and said the staff will study fundamentals and technique on tape. Malik Willis' groin was tight and limited his mobility, so Hafley said they will check on him Tuesday. He said Detroit stacked eight-man fronts against the run, and the offense often fell behind the sticks, which made it predictable. He didn't have a full answer on the passing game, which managed about 128 yards, and said some catches were made but others were missed and the pass rush got home. Special teams were a mixed bag: a missed field goal before halftime, poor field position, and a fake punt allowed. Hafley singled out rookie Chris Johnson for his first interception and a good return, called Jordyn Brooks and Jacob Rodriguez's communication clean, and said Caleb Douglas is taking big steps.",
+  "injuries": [
+   {
+    "player": "Malik Willis",
+    "status": "questionable",
+    "detail": "Groin was tight during the game and he couldn't fully open up or go full speed; Hafley will see how he is tomorrow.",
+    "player_id": "00-0038128"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Malik Willis",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Willis' groin tightness will be reassessed the day after the game to determine his status going forward.",
+    "note": "A tight groin limited his mobility and scrambling, which is a key part of his fantasy value, so monitor his practice status this week.",
+    "quote": "you could see he just you know wasn't wasn't quite able to go full speed.",
+    "player_id": "00-0038128",
+    "t": 212,
+    "t_exact": true
+   },
+   {
+    "player": "Caleb Douglas",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Douglas is developing into a more productive receiver and is taking big steps.",
+    "note": "A second straight good game and praise for his competitiveness and run-after-catch ability make him a rising waiver or stash candidate in a low-volume passing offense.",
+    "quote": "He catches the ball. He's really competitive.",
+    "player_id": "00-0041523",
+    "t": 617,
+    "t_exact": true
+   },
+   {
+    "player": "Chris Johnson",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "",
+    "note": "The rookie DB recorded his first interception and bounced back from a rough previous week, which matters for IDP leagues.",
+    "quote": "Chris got a lot of heat for a play that happened last week.",
+    "player_id": "",
+    "t": 371,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Penalties",
+    "detail": "The Dolphins had 11 penalties for 87 yards, with at least five holds that stalled drives. Hafley said it's all self-inflicted and the staff will look at fundamentals and technique."
+   },
+   {
+    "topic": "Run game and scheme",
+    "detail": "Detroit used lots of eight-man fronts. Hafley said the Dolphins often fell behind the sticks, which made them predictable, while still seeing opportunities in the run game."
+   },
+   {
+    "topic": "Passing offense",
+    "detail": "The passing game managed about 128 yards. Hafley said there were good catches and some drops or missed chances, plus pressure that prevented the ball from coming out. He'll study the tape for a better answer."
+   },
+   {
+    "topic": "Defense",
+    "detail": "The defense held Detroit under 200 yards, 3-of-12 on third down and 1-of-4 in the red zone, with early pass-rush success. Hafley cited a loud, confident, young unit and good communication from Jordyn Brooks and Jacob Rodriguez."
+   },
+   {
+    "topic": "Special teams",
+    "detail": "Hafley cited a missed field goal before halftime, a poor kickoff and a fake punt allowed. He said the team needs to self-scout and review the player execution."
+   }
+  ],
+  "opponent": "Detroit Lions"
+ },
+ {
   "id": "NYG:coach-john-harbaugh-it-s-a-huge-win-for-us",
   "team": "NYG",
   "url": "https://www.giants.com/video/coach-john-harbaugh-it-s-a-huge-win-for-us",
