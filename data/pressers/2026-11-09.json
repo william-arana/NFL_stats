@@ -5302,5 +5302,200 @@
    }
   ],
   "opponent": "Jacksonville Jaguars"
+ },
+ {
+  "id": "WAS:hc-dan-quinn-11-10-26",
+  "team": "WAS",
+  "url": "https://www.commanders.com/video/hc-dan-quinn-11-10-26",
+  "title": "HC Dan Quinn | 11/9/26",
+  "date": "2026-11-09",
+  "duration": 1138,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/commanders/s31uk8izmdxf9qwoiwf6.jpg",
+  "kind": "day_after",
+  "after_week": 9,
+  "coach": "Dan Quinn",
+  "words": 3825,
+  "model": "claude-sonnet-5-5",
+  "headline": "Lucas Patrick is in the concussion protocol, so the line is shuffling for a short-week road game. Treylon Burks and Amik Robertson are trending toward playing Thursday, and Stefon Diggs is still a priority despite a quiet game.",
+  "summary": "Quinn opened by saying the team has to turn the page quickly. Thursday night is at the division leaders, so the schedule is meetings and a workout Monday, a jog-through Tuesday, and practice Wednesday before traveling. He repeated that he is chasing consistent football for a full game and admitted he is tired of saying it. He said the offensive line and run game were not up to standard, and that three-and-outs in the third quarter cost them chances to run. He called third-down conversions and sustained drives the fix. Center Lucas Patrick is in the protocol, and Nick Allegretti and Matt Gulbin are the candidates to replace him. Amik Robertson's ankle improved and Treylon Burks is trending toward returning, with Tuesday as the key day. Quinn said he would not hesitate to make personnel changes if the evaluation points that way. He said there is no change to the trade-deadline approach after the loss. He defended his offensive play-caller, said Diggs is always in the front of their thinking, and called the Antonio Williams play design good. He also said two false starts (the center and the left tackle) came despite extra work on cadence.",
+  "injuries": [
+   {
+    "player": "Lucas Patrick",
+    "status": "unclear",
+    "detail": "In the concussion protocol after leaving the game. His availability for Thursday is uncertain, and Quinn said that makes things harder on a short week.",
+    "player_id": "00-0033082"
+   },
+   {
+    "player": "Amik Robertson",
+    "status": "limited",
+    "detail": "Ankle improved after the game. Quinn said he is optimistic heading into Tuesday and Wednesday.",
+    "player_id": ""
+   },
+   {
+    "player": "Treylon Burks",
+    "status": "questionable",
+    "detail": "Missed last week but got some work Saturday. Quinn is more optimistic about Thursday, and Tuesday's practice will show where he stands.",
+    "player_id": "00-0037742"
+   },
+   {
+    "player": "Dyami Brown",
+    "status": "unclear",
+    "detail": "Quinn listed him among the injured receivers, calling him a significant contributor. No timeline or detail was given.",
+    "player_id": "00-0036626"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Lucas Patrick",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Patrick may be unavailable Thursday, forcing a different center on a short week.",
+    "note": "A backup center would hurt the run game and pass protection for the offense.",
+    "quote": "makes it more challenging with Lucas in the protocol for sure",
+    "player_id": "00-0033082",
+    "t": 206,
+    "t_exact": true
+   },
+   {
+    "player": "Nick Allegretti",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Allegretti is one of two candidates to play center if Patrick can't go.",
+    "note": "He could start at center on Thursday, which affects the interior line.",
+    "quote": "",
+    "player_id": "00-0035149",
+    "t": 182,
+    "t_exact": false
+   },
+   {
+    "player": "Matt Gulbin",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Gulbin is the other candidate to play center if Patrick can't go.",
+    "note": "He is a possible fill-in starter at center.",
+    "quote": "",
+    "player_id": "00-0041108",
+    "t": 182,
+    "t_exact": false
+   },
+   {
+    "player": "Amik Robertson",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Robertson's ankle is improving and he is trending toward being available Thursday.",
+    "note": "Good sign for the defensive back's availability on a short week.",
+    "quote": "ended up doing better with his ankle",
+    "player_id": "",
+    "t": 438,
+    "t_exact": true
+   },
+   {
+    "player": "Treylon Burks",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Burks could return for Thursday's game, with Tuesday's practice deciding it.",
+    "note": "His return would add a downfield option to the receiver group.",
+    "quote": "definitely more optimistic",
+    "player_id": "00-0037742",
+    "t": 464,
+    "t_exact": true
+   },
+   {
+    "player": "Stefon Diggs",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Diggs remains a priority in the passing game despite one catch for most of the game.",
+    "note": "His target volume was low, but Quinn said the staff wants him involved in critical situations.",
+    "quote": "he's always in the front of our thoughts. I love his fire.",
+    "player_id": "00-0031588",
+    "t": 667,
+    "t_exact": true
+   },
+   {
+    "player": "Antonio Williams",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Williams will keep getting involved in play-action downfield throws.",
+    "note": "Quinn praised a design that got him involved downfield, so his role may grow.",
+    "quote": "I thought that was good design good execution",
+    "player_id": "00-0041040",
+    "t": 812,
+    "t_exact": true
+   },
+   {
+    "player": "Terry McLaurin",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "McLaurin is one of the main targets for explosive downfield throws.",
+    "note": "Quinn pointed to him as a source of the explosive plays the offense wants.",
+    "quote": "Terry was certainly one.",
+    "player_id": "00-0035659",
+    "t": 795,
+    "t_exact": true
+   },
+   {
+    "player": "Dyami Brown",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "",
+    "note": "Another significant receiver contributor is dealing with an injury, which thins the group.",
+    "quote": "Terry and Trey and now Dyami",
+    "player_id": "00-0036626",
+    "t": 926,
+    "t_exact": true
+   },
+   {
+    "player": "Jayden Daniels",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "The passing game will keep mixing short throws with designed downfield shots.",
+    "note": "His short-area passing share is high, and a returning Burks could add more downfield throws.",
+    "quote": "it is a little bit of both",
+    "player_id": "00-0039910",
+    "t": 788,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Run game and third down",
+    "detail": "Quinn said the run game was not up to standard and the team needs more chances to run. He tied that to converting third downs and sustaining drives, not simply handing off more."
+   },
+   {
+    "topic": "Offensive line and cadence",
+    "detail": "He was frustrated by two false starts (the center and the left tackle) after practicing cadences all week. He said the process was good and expects it to be fixed."
+   },
+   {
+    "topic": "Defense versus zone",
+    "detail": "Asked about the opposing receiver's production against zone coverage, he said the answer is to speed up the rush with a fifth or sixth rusher. He said the pass rush was not getting home consistently."
+   },
+   {
+    "topic": "Play-calling and personnel",
+    "detail": "He defended offensive coordinator David Blough as competitive and talented. He said fans don't see everything that goes into the calls. He said he is evaluating how to put people in the best spots and would not hesitate to make personnel changes if that is the problem."
+   },
+   {
+    "topic": "Trade deadline",
+    "detail": "Quinn said the loss changes nothing about the team's trade-deadline approach, and that calls and discussions are routine for GM Adam Peters and his staff."
+   },
+   {
+    "topic": "Receiver injuries",
+    "detail": "He said the staff does a deep dive on every injury, including practice, training and fueling, plus recovery work by the performance staff. The receiver group started the year healthy, but Terry McLaurin, Treylon Burks and Dyami Brown have all been hurt."
+   },
+   {
+    "topic": "Must-win framing",
+    "detail": "Quinn avoided one-game declarations but said the team needs the win Thursday against the division leaders and everyone in the building knows it."
+   }
+  ],
+  "opponent": "Division leaders (Thursday night road game; team not named in transcript)"
  }
 ]
