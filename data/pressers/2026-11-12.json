@@ -1,0 +1,207 @@
+[
+ {
+  "id": "LA:sean-mcvay-matthew-stafford-discuss-trade-deadline-injury-timelines-week-10-vs-cardinals-press-conference",
+  "team": "LA",
+  "url": "https://www.therams.com/video/sean-mcvay-matthew-stafford-discuss-trade-deadline-injury-timelines-week-10-vs-cardinals-press-conference",
+  "title": "Sean McVay & Matthew Stafford discuss the trade deadline, injury timelines, Week 10 vs. the Cardinals & more",
+  "date": "2026-11-12",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/rams/qgauya2llhvrh8iigkxj.jpg",
+  "kind": "first_practice",
+  "after_week": 9,
+  "coach": "Sean McVay",
+  "words": 4779,
+  "model": "claude-sonnet-5-5",
+  "headline": "Puka Nacua is out for an extended stretch (not going on IR), Terrance Ferguson is out a couple more weeks, and Davante Adams is realistically back after the Green Bay game. McDuffie is optimistic to play this week.",
+  "summary": "McVay opened with the Wednesday DNP list: Steve Avila (hamstring), Puka Nacua (knee/toe), Trent McDuffie (back), Kamren Curl (toe) and Terrance Ferguson (hamstring). Nacua will miss an extended period but won't go on IR, which McVay said is for roster-mechanics reasons. The Rams re-signed Xavier Smith and placed Jordan Whittington on IR with a back issue. They were quiet at the trade deadline because they expect injured players back soon and didn't want to fill voids as if they were season-long. Davante Adams is looking at a return after the Green Bay game. Ferguson is at least a couple of weeks away, and the Rams want to save him a roster spot before his 21-day clock runs out around Green Bay. McVay called having both running backs very valuable and said leaning on the run game matters regardless of health. He stressed flexibility in game plans, with new players getting chances in normal down-and-distance packages. The Rams face Arizona in Week 10 on a three-game win streak, and McDuffie is hoped to return this week.",
+  "injuries": [
+   {
+    "player": "Steve Avila",
+    "status": "out",
+    "detail": "Hamstring; DNP at Wednesday's practice.",
+    "player_id": "00-0039058"
+   },
+   {
+    "player": "Puka Nacua",
+    "status": "out",
+    "detail": "Knee/toe; out for an extended period. Not being placed on IR, for roster-mechanics reasons, and no new information on the injury.",
+    "player_id": "00-0039075"
+   },
+   {
+    "player": "Trent McDuffie",
+    "status": "questionable",
+    "detail": "Back; DNP Wednesday, but McVay is optimistic he can play this week and says he is making good progress.",
+    "player_id": ""
+   },
+   {
+    "player": "Kamren Curl",
+    "status": "unclear",
+    "detail": "Toe; DNP Wednesday, no further detail given.",
+    "player_id": ""
+   },
+   {
+    "player": "Terrance Ferguson",
+    "status": "out",
+    "detail": "Hamstring; at least a couple of weeks. The Rams hope to keep him on the active roster when his 21-day clock expires around the Green Bay game, or he would go on IR.",
+    "player_id": "00-0040737"
+   },
+   {
+    "player": "Jordan Whittington",
+    "status": "ir",
+    "detail": "Placed on injured reserve with a back issue he had been playing through.",
+    "player_id": "00-0039751"
+   },
+   {
+    "player": "Davante Adams",
+    "status": "returning",
+    "detail": "McVay calls a return after the Green Bay game a realistic timeline. He is feeling good.",
+    "player_id": "00-0031381"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Puka Nacua",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Nacua will miss an extended period but will not be placed on IR",
+    "note": "The top receiver is out for the foreseeable future, which cuts the passing-game volume and shifts targets to others.",
+    "quote": "he still is going to be out for an extended period of time",
+    "player_id": "00-0039075",
+    "t": 13,
+    "t_exact": true
+   },
+   {
+    "player": "Davante Adams",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Adams is likely to return after the Green Bay game",
+    "note": "He is a returning WR option, but not available until after the Green Bay game.",
+    "quote": "I would think after green Bay is a realistic timeline for him",
+    "player_id": "00-0031381",
+    "t": 97,
+    "t_exact": true
+   },
+   {
+    "player": "Terrance Ferguson",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Ferguson will be out at least a couple more weeks, and the Rams hope to keep him on the active roster rather than IR",
+    "note": "The pass-catching TE/WR-type weapon is out for now, and his return could slip past Green Bay.",
+    "quote": "It probably is a couple weeks at least.",
+    "player_id": "00-0040737",
+    "t": 331,
+    "t_exact": true
+   },
+   {
+    "player": "Trent McDuffie",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "McDuffie may be able to play this week against Arizona",
+    "note": "His back is improving but he is not confirmed; watch practice participation for IDP and defense-matchup value.",
+    "quote": "we're optimistic that this week he will be able to go",
+    "player_id": "",
+    "t": 204,
+    "t_exact": true
+   },
+   {
+    "player": "Steve Avila",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Avila did not practice Wednesday with a hamstring injury",
+    "note": "A missing starting guard could affect Rams run-blocking and pass protection.",
+    "quote": "",
+    "player_id": "00-0039058",
+    "t": 0,
+    "t_exact": false
+   },
+   {
+    "player": "Kamren Curl",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Curl did not practice Wednesday with a toe injury",
+    "note": "IDP managers should monitor his Thursday and Friday practice reports.",
+    "quote": "",
+    "player_id": "",
+    "t": 0,
+    "t_exact": false
+   },
+   {
+    "player": "Jordan Whittington",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Whittington is on injured reserve with a back injury",
+    "note": "One fewer depth receiver is available, leaving the receiver room thin.",
+    "quote": "We had to put Jordan Whittington on, on injured reserve",
+    "player_id": "00-0039751",
+    "t": 44,
+    "t_exact": true
+   },
+   {
+    "player": "Xavier Smith",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Smith was brought back and may fill a depth role while the receiver room is thin",
+    "note": "A familiar system fit who could see snaps, but a deep-league stash at most for now.",
+    "quote": "it's good to be able to get X-Man back",
+    "player_id": "00-0038359",
+    "t": 38,
+    "t_exact": true
+   },
+   {
+    "player": "Kyren Williams",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "The Rams will lean on the run game and use both backs given the receiver injuries",
+    "note": "A run-heavy approach supports his volume while the receiving corps is depleted.",
+    "quote": "And it is very helpful to have, you know, both of those backs.",
+    "player_id": "00-0037840",
+    "t": 461,
+    "t_exact": true
+   },
+   {
+    "player": "Blake Corum",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Corum is part of a two-back approach the Rams plan to lean on",
+    "note": "He should keep a role as the offense leans on the run.",
+    "quote": "And it is very helpful to have, you know, both of those backs.",
+    "player_id": "00-0039738",
+    "t": 461,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Trade deadline and roster",
+    "detail": "The Rams explored moves but little materialized. McVay said it takes two sides to trade, and the team preferred waiting for injured players like Adams and Ferguson to return rather than filling voids for the whole season. Roster mechanics (48, 53, practice squad) were unusually complicated."
+   },
+   {
+    "topic": "Offensive approach",
+    "detail": "McVay said they will explore everything to maximize the available players, including personnel groupings, with a focus on normal downs and distances this week. He sees it as an opportunity for newer players to prove themselves. Stafford said they have used 13, 12 and 11 personnel this year and he is comfortable with whatever works."
+   },
+   {
+    "topic": "Receiver depth",
+    "detail": "Stafford said he trusts the receivers who will play and will throw to them in the game. He praised CJ Daniels, who has shown up in crossover practice tape and could get a chance on Sunday. Daniels is not on the provided roster."
+   },
+   {
+    "topic": "Defense and Arizona",
+    "detail": "McVay called the defense great lately and said the Rams will do whatever is necessary on offense. Stafford said Arizona's defense under a coordinator the Rams have faced often will present challenges."
+   },
+   {
+    "topic": "Aaron and morale",
+    "detail": "McVay said Aaron has been having fun and playing great, sharing a moment with Myles after a sack. He said the team is proud of the three-game win streak but not complacent. They are looking to improve after a frustrating earlier loss to Arizona that he attributed to execution and energy."
+   }
+  ],
+  "opponent": "Arizona Cardinals"
+ }
+]
