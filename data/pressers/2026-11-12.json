@@ -1,5 +1,140 @@
 [
  {
+  "id": "GB:matt-lafleur-on-the-resilience-of-the-team-they-re-going-to-keep-battling-and-that-s-all-you-can-ask-for-nov-12-2026",
+  "team": "GB",
+  "url": "https://www.packers.com/video/matt-lafleur-on-the-resilience-of-the-team-they-re-going-to-keep-battling-and-that-s-all-you-can-ask-for-nov-12-2026",
+  "title": "Matt LaFleur on the resilience of the team: ‘They’re going to keep battling and that’s all you can ask for’",
+  "date": "2026-11-12",
+  "duration": 361,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/packers/vcylezxetqggojo1cwbx.jpg",
+  "kind": "midweek",
+  "after_week": 9,
+  "coach": "Matt LaFleur",
+  "words": 1151,
+  "model": "claude-sonnet-5-5",
+  "headline": "Josh Jacobs has surgery Friday with the long-term outlook unknown, so watch Chris Brooks' role. Lukas Van Ness missed Wednesday practice, and Skyy Moore may return for Week 10 at Minnesota.",
+  "summary": "LaFleur spoke ahead of the Week 10 game against the Vikings. He called the Minnesota defense a constant problem for offenses because it puts them behind the sticks, creates lots of third-and-longs and forces mistakes, so Green Bay needs a clean game. He said Week 1 is mostly irrelevant, since the Vikings have changed a lot and Green Bay struggled to get everyone on the same page offensively in that loud building. He expects the pressure to be on his defense to communicate against a Vikings team with a new quarterback and likely new wrinkles. On injuries, Lukas Van Ness was one of several players who did not practice Wednesday and the coach called that a concern, though he may be out there Thursday. Skyy Moore may be back, which would boost the return game and possibly add a role on offense. Josh Jacobs has not had his surgery yet but is expected to tomorrow, and the long-term outlook will not be known until afterward. The coach stressed that the running game matters more as the weather turns and praised Chris Brooks' runs from the first meeting. He also praised Karl Brooks' consistency inside and called Jordan Love poised, resilient and playing as well as anybody in the league.",
+  "injuries": [
+   {
+    "player": "Lukas Van Ness",
+    "status": "unclear",
+    "detail": "Did not practice Wednesday; coach said any missed practice is a concern. He may be out there Thursday after being loosened up.",
+    "player_id": ""
+   },
+   {
+    "player": "Skyy Moore",
+    "status": "returning",
+    "detail": "Coach said 'if he's able to go' he would boost the return game and could be used on offense, so his availability is not confirmed.",
+    "player_id": "00-0038090"
+   },
+   {
+    "player": "Josh Jacobs",
+    "status": "unclear",
+    "detail": "Surgery had not happened yet and was expected the next day; the long-term outlook will be clearer afterward.",
+    "player_id": "00-0035700"
+   },
+   {
+    "player": "Warren Brinson",
+    "status": "unclear",
+    "detail": "Coach expects him to play this season, but he is about five weeks post-surgery and recovery usually takes longer than that.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Josh Jacobs",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "neutral",
+    "claim": "Jacobs will have surgery the day after this press conference, and his long-term status will be known afterward.",
+    "note": "A pending surgery puts the lead back's availability in doubt, so manage the risk and line up a replacement.",
+    "quote": "Not yet.",
+    "player_id": "00-0035700",
+    "t": 212,
+    "t_exact": false
+   },
+   {
+    "player": "Chris Brooks",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Brooks could see a bigger ball-carrier role as the running game becomes more important.",
+    "note": "If Jacobs is out, Brooks is a possible beneficiary, though the coach did not commit to anything.",
+    "quote": "ripped off a couple nice runs in that game the first time we played him",
+    "player_id": "00-0038685",
+    "t": 272,
+    "t_exact": true
+   },
+   {
+    "player": "Skyy Moore",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "If healthy, Moore will return kicks and may get some offensive snaps against Minnesota.",
+    "note": "His return and offensive role depend on his health, so it is a small upside play pending his status.",
+    "quote": "if he's able to go, that'll definitely boost our returns",
+    "player_id": "00-0038090",
+    "t": 144,
+    "t_exact": true
+   },
+   {
+    "player": "Lukas Van Ness",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Van Ness may practice Thursday after missing Wednesday.",
+    "note": "A missed practice is a concern; check Thursday and Friday practice reports before the game.",
+    "quote": "any time guys don't practice, that is a concern",
+    "player_id": "",
+    "t": 12,
+    "t_exact": true
+   },
+   {
+    "player": "Jordan Love",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "The coach praised Love's poise and consistency after he earned NFC Offensive Player of the Week.",
+    "quote": "playing as well as anybody in the league right now",
+    "player_id": "00-0036264",
+    "t": 352,
+    "t_exact": true
+   },
+   {
+    "player": "Karl Brooks",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "Brooks is praised as a consistent interior presence, which is mildly useful for IDP leagues.",
+    "quote": "Just a consistent force on the inside.",
+    "player_id": "",
+    "t": 259,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Vikings defense",
+    "detail": "LaFleur said Minnesota consistently creates third-and-longs and applies pressure to force mistakes, so Green Bay must play a clean game."
+   },
+   {
+    "topic": "Week 1 comparison",
+    "detail": "He downplayed the Week 1 loss. The loud environment caused offensive communication problems, and he expects pressure on his defense to stay on the same page against a Vikings team with a new quarterback and new wrinkles."
+   },
+   {
+    "topic": "Running game",
+    "detail": "He stressed that running the ball matters more later in the season as the weather turns, especially at home."
+   },
+   {
+    "topic": "Team resilience",
+    "detail": "He said the team has a one-play mindset and never feels out of the fight."
+   }
+  ],
+  "opponent": "Minnesota Vikings"
+ },
+ {
   "id": "LA:sean-mcvay-matthew-stafford-discuss-trade-deadline-injury-timelines-week-10-vs-cardinals-press-conference",
   "team": "LA",
   "url": "https://www.therams.com/video/sean-mcvay-matthew-stafford-discuss-trade-deadline-injury-timelines-week-10-vs-cardinals-press-conference",
@@ -203,5 +338,153 @@
    }
   ],
   "opponent": "Arizona Cardinals"
+ },
+ {
+  "id": "LAC:jim-harbaugh-press-conference-week-10-thursday-2026",
+  "team": "LAC",
+  "url": "https://www.chargers.com/video/jim-harbaugh-press-conference-week-10-thursday-2026",
+  "title": "Jim Harbaugh on Daiyan Henley Trade Situation and Facing the Ravens",
+  "date": "2026-11-12",
+  "duration": 729,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/chargers/wmiyatel8i8ykkaxq4ea.jpg",
+  "kind": "first_practice",
+  "after_week": 9,
+  "coach": "Jim Harbaugh",
+  "words": 1735,
+  "model": "claude-sonnet-5-5",
+  "headline": "LB Daiyan Henley is back with the Chargers after the Broncos trade fell through over a medical-grade dispute; his practice status is TBD this week ahead of Monday night vs. the Ravens.",
+  "summary": "Harbaugh said the Broncos made the Henley trade conditional on a medical pass/fail grade and tried to renegotiate for less compensation after the deadline. The Chargers refused, so the deal fell apart. He called this a loophole the league should examine. Henley flew back late Tuesday night, attended meetings and a walkthrough this morning, and was welcomed back warmly by the coaches and players. His practice participation and injury-report status are \"TBD\", though Harbaugh said they fully expect him to be available. Harbaugh declined to confirm reports of knee arthritis. On the Week 10 matchup, he praised Ravens coach Jesse Minter as a friend and a good head coach. He also praised Baltimore's multiple-front, coverage-disguising defense and called Derrick Henry's skills elite. He said red zone and third-down efficiency are an emphasis, and that the team's only goal is to win Monday night and build momentum. He expects Jacoby Brissett to start for Baltimore and was non-specific about the plan.",
+  "injuries": [
+   {
+    "player": "Daiyan Henley",
+    "status": "unclear",
+    "detail": "Returned late Tuesday night after the failed trade; practice participation and injury-report designation are \"TBD\", though Harbaugh fully expects him to be available. He was on last week's injury report with a reported shoulder/knee issue, and Harbaugh wouldn't confirm a reported knee arthritis finding.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Daiyan Henley",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Henley is back with the team and is expected to be available and in the defensive rotation after meetings and a walkthrough.",
+    "note": "Henley stays in the Chargers' defense, which matters for IDP and the LA defensive outlook, though his practice status is uncertain.",
+    "quote": "we fully expect, uh, that he is.",
+    "player_id": "",
+    "t": 248,
+    "t_exact": true
+   },
+   {
+    "player": "Daiyan Henley",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Henley's practice participation and injury-report status will be determined this week.",
+    "note": "Harbaugh would not detail the knee/shoulder issue, so watch the practice reports for limited vs. full.",
+    "quote": "TBD on what will be on the personal guy got in late last night.",
+    "player_id": "",
+    "t": 316,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Failed Henley trade",
+    "detail": "Harbaugh said Denver conditioned the trade on a medical pass/fail grade and wanted a lower pick than the agreed fourth- and fifth-round compensation. He called it a loophole that sets a bad precedent and said the league should look into it."
+   },
+   {
+    "topic": "Ravens defense",
+    "detail": "Baltimore uses multiple personnel groups, can stop both the run and the pass, and changes coverages, linebacker patterns and stunts, making the scheme look complex while executing it with ease."
+   },
+   {
+    "topic": "Derrick Henry",
+    "detail": "Harbaugh called Henry's strength, speed, vision, patience and physicality elite and said that makes him hard to stop."
+   },
+   {
+    "topic": "Offense and red zone",
+    "detail": "Harbaugh said red-zone scoring and extending drives on third down are emphasized, and that there were encouraging things from the offense at the end of the last game."
+   },
+   {
+    "topic": "Team goal",
+    "detail": "The team's stated focus is to win Monday night and get on a roll."
+   }
+  ],
+  "opponent": "Baltimore Ravens"
+ },
+ {
+  "id": "PIT:watch-mike-mccarthy-media-availability-nov-12",
+  "team": "PIT",
+  "url": "https://www.steelers.com/video/watch-mike-mccarthy-media-availability-nov-12",
+  "title": "WATCH: Mike McCarthy Media Availability (Nov. 12)",
+  "date": "2026-11-12",
+  "duration": 515,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/steelers/z0ljudoukt5iut9l7gyu.jpg",
+  "kind": "midweek",
+  "after_week": 8,
+  "coach": "Mike McCarthy",
+  "words": 1880,
+  "model": "claude-sonnet-5-5",
+  "headline": "DT Derrick Harmon appears to be back at practice and on his planned workload, and Pittsburgh's veteran-managed defensive line rotation continues ahead of the Week 10 trip to Cincinnati.",
+  "summary": "McCarthy spent most of the session on the Bengals, praising Joe Burrow and the passing game as a high-level operation with explosive plays, double moves and efficient execution. He called the AFC North the best football there is and framed the prime-time trip to Cincinnati as the kind of game you look forward to. He said the focus is on small details like turf, weather and night conditions, and on playing Pittsburgh's own style. On a player he called \"Derek\", who is almost certainly Derrick Harmon, he said the player hit the practice number the staff wanted the day before and that Wednesday's practice is a big one for everyone, since the team hasn't been in football function since the Cleveland game. He defended the defensive front rotation as a deliberate plan: veterans aren't worn down on Wednesdays and Thursdays, and young players get more reps. He added that the team is healthy enough that he isn't sure who his 48th active player is on Thursday. He said confidence is high after a couple of straight wins, and that handling success is the next challenge. He also downplayed red-zone rankings this early in the season. Finally, he praised rookie offensive lineman Max Iheanachor (captioned as \"Max Hillman\") for his work ethic and consistency, said he earned a 53-man roster spot before getting hurt, and said he's looking forward to getting him back.",
+  "injuries": [
+   {
+    "player": "Derrick Harmon",
+    "status": "returning",
+    "detail": "Coach said he hit the practice number the staff wanted for him the day before and is 'going okay' today. No setback was mentioned, but the transcript only says 'Derek', so the identification is inferred.",
+    "player_id": ""
+   },
+   {
+    "player": "Max Iheanachor",
+    "status": "returning",
+    "detail": "Rookie OL who got hurt earlier. Coach said it will be great to get him back into the fold, but gave no timeline or status.",
+    "player_id": "00-0041482"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Derrick Harmon",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Harmon is back at practice and working toward a normal role in the defensive front rotation against Cincinnati.",
+    "note": "He is trending toward full availability for the Bengals game, but the rotation plan means snaps may be managed.",
+    "quote": "he hit the number that they were looking to hit with him",
+    "player_id": "",
+    "t": 238,
+    "t_exact": true
+   },
+   {
+    "player": "Max Iheanachor",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Iheanachor is expected to return from injury and rejoin the roster, though no date was given.",
+    "note": "Coach praised him highly, but he is a depth lineman with no stated return date and little immediate fantasy impact.",
+    "quote": "he truly performed to a level that he deserved a 53 man roster spot",
+    "player_id": "00-0041482",
+    "t": 460,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Bengals offense",
+    "detail": "McCarthy called Cincinnati's offense elite. He credited Burrow's decision-making, pump fakes and double moves, and the way they move their receivers around. He said it is a challenge Pittsburgh is looking forward to."
+   },
+   {
+    "topic": "Defensive line rotation",
+    "detail": "The staff deliberately limits veterans' Wednesday and Thursday reps, working with the strength and medical staff. That gives young players more snaps and makes the roster deeper. He also said the roster is healthy enough that the 48th active player is still undecided."
+   },
+   {
+    "topic": "Team mindset",
+    "detail": "Confidence is high after a couple of straight wins, and McCarthy's stated challenge is handling success. He said the team needs a strong Wednesday practice after not being in football function since the Cleveland game."
+   },
+   {
+    "topic": "Red zone and game conditions",
+    "detail": "He said red-zone rankings don't matter until about four weeks into a season. He stressed the little things for the prime-time road game (turf, night conditions, weather) and playing on Pittsburgh's own terms."
+   }
+  ],
+  "opponent": "Cincinnati Bengals"
  }
 ]

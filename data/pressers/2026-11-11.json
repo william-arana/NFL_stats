@@ -1,5 +1,104 @@
 [
  {
+  "id": "ARI:hc-mike-lafleur-press-conference-november-11-week-10-vs-los-angeles-rams",
+  "team": "ARI",
+  "url": "https://www.azcardinals.com/video/hc-mike-lafleur-press-conference-november-11-week-10-vs-los-angeles-rams",
+  "title": "HC Mike LaFleur Press Conference: November 11 | Week 10 vs. Los Angeles Rams",
+  "date": "2026-11-11",
+  "duration": 954,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/cardinals/bs4rouajjer3xkmfpyfq.jpg",
+  "kind": "first_practice",
+  "after_week": 9,
+  "coach": "Mike LaFleur",
+  "words": 3587,
+  "model": "claude-sonnet-5-5",
+  "headline": "Carson Beck makes his first NFL start Sunday vs. the Rams after Gardner Minshew's season-ending injury, with Michael Wilson also out for the year.",
+  "summary": "LaFleur confirmed that Carson Beck will start at quarterback this week. Gardner Minshew is having surgery and is done for the season, though the coach did not know the exact procedure. Michael Wilson is on season-ending IR, but LaFleur said the long-term prognosis is good and he did not know the return timeline. Beck will take 100% of the first-team reps and already knows the receivers from running scout team with them. LaFleur praised Beck's maturity, his improved footwork and his comfort in the huddle and under center, and said he has no expectations beyond playing one play at a time. He also pointed to the receiver and tight end rooms as places where depth players get a chance to step up. On the offensive line, Jon Gaines is out of practice today with an ankle but trending well and is still undecided for Sunday, and Hjalte Froholdt is in the concussion protocol. The team signed veteran Josh Johnson, who will back up Beck.",
+  "injuries": [
+   {
+    "player": "Gardner Minshew",
+    "status": "ir",
+    "detail": "Season-ending knee/UCL-type injury per reporters; LaFleur said he will have surgery but did not know the exact procedure. He suffered it on the last play of the first half and played into the second half.",
+    "player_id": "00-0035289"
+   },
+   {
+    "player": "Michael Wilson",
+    "status": "ir",
+    "detail": "On season-ending IR. The prognosis is good and it should not affect him going forward, but LaFleur did not know the return date (OTAs or later).",
+    "player_id": "00-0038559"
+   },
+   {
+    "player": "Jon Gaines",
+    "status": "questionable",
+    "detail": "Out of practice today with an ankle injury. Trending well, and Sunday is still to be determined.",
+    "player_id": "00-0038571"
+   },
+   {
+    "player": "Hjalte Froholdt",
+    "status": "unclear",
+    "detail": "In the concussion protocol.",
+    "player_id": "00-0035258"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Carson Beck",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will start at QB on Sunday vs. the Rams and take all of the first-team practice reps this week.",
+    "note": "He is a first-time starter with a depleted receiver room, so he is a high-variance option in fantasy and a watch item for the pass catchers around him.",
+    "quote": "Carson will be the starter.",
+    "player_id": "",
+    "t": 22,
+    "t_exact": true
+   },
+   {
+    "player": "Gardner Minshew",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Will have surgery and miss the rest of the season.",
+    "note": "He is off the fantasy radar for the year, and Beck takes over as the starter.",
+    "quote": "I know he will be getting surgery.",
+    "player_id": "00-0035289",
+    "t": 79,
+    "t_exact": true
+   },
+   {
+    "player": "Michael Wilson",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "positive",
+    "claim": "Out for the season on IR, with a good long-term outlook and no known return date.",
+    "note": "He is gone for 2026, which thins the WR room, but there are no lasting concerns about his future.",
+    "quote": "a positive outlook in what could have been a negative one.",
+    "player_id": "00-0038559",
+    "t": 69,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Receiver and tight end opportunity",
+    "detail": "LaFleur called the injuries a big opportunity for the receiver room, which has only about five total catches among the group coaches mentioned, and for the tight ends to step up even more. He did not name specific players."
+   },
+   {
+    "topic": "Quarterback depth",
+    "detail": "The team signed Josh Johnson, whom LaFleur has known since 2020, to back up Beck. A young quarterback named Joey was also brought in, and LaFleur said the team had liked him since the draft process."
+   },
+   {
+    "topic": "Beck's preparation",
+    "detail": "Beck gets 100% of the reps this week and is familiar with the receivers from scout team. LaFleur said he has gotten quieter with his feet and understands the timing of the offense. LaFleur said Beck will not be scared to let it rip."
+   },
+   {
+    "topic": "Roster approach",
+    "detail": "LaFleur said the front office kept the roster intact, and he is focused on coaching up the 53 plus the practice squad, reminding players that they are one snap away from playing."
+   }
+  ],
+  "opponent": "Los Angeles Rams"
+ },
+ {
   "id": "ATL:hc-kevin-stefanski-on-preparations-to-take-on-patrick-mahomes-and-the-chiefs-press-conference",
   "team": "ATL",
   "url": "https://www.atlantafalcons.com/video/hc-kevin-stefanski-on-preparations-to-take-on-patrick-mahomes-and-the-chiefs-press-conference",
