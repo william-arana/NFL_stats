@@ -451,13 +451,13 @@
   "words": 2792,
   "model": "claude-sonnet-5-5",
   "headline": "Deshaun Watson is trending toward playing after a full practice week, Emmanuel McNeil-Warren steps into a bigger safety role, and Cleveland still wants to fix its run game and slow starts against Houston's edge rushers.",
-  "summary": "Monken said a player named Denzel, listed as questionable, moved well and took a full walk-through but had limited reps, and that he is trending the right way. The staff will make final calls on the Michael situation later in the day, and the coach named Carson and Zaire, who was recently picked up, as options. With Ronnie Hickman apparently out, he called Emmanuel McNeil-Warren's chance a great opportunity and praised his range, physicality and football IQ. He said Deshaun Watson, back from the concussion, has had a great week of practice and he is excited to have him return. He was optimistic that Jared Verse, who has struggled and talked about getting mental help, will turn his season around once he gets his first sack. On the run game, he said Dylan Sampson's return and Quinshon Judkins have helped, but it remains a work in progress and the team must run the ball to control games. He praised rookie left tackle Spencer Fano's mentality. He also acknowledged slow starts on both sides of the ball and a need to balance Watson extending plays against getting the ball out. The team practiced in freezing rain and expects wet weather against Houston's strong edge rushers, which makes clean football and staying ahead of the chains the focus.",
+  "summary": "Monken said Denzel Boston, listed as questionable with a toe injury, moved well and took a full walk-through but had limited reps, and that he is trending the right way. The staff will make final calls on the Michael situation later in the day, and the coach named Carson and Zaire, who was recently picked up, as options. With Ronnie Hickman apparently out, he called Emmanuel McNeil-Warren's chance a great opportunity and praised his range, physicality and football IQ. He said Deshaun Watson, back from the concussion, has had a great week of practice and he is excited to have him return. He was optimistic that Jared Verse, who has struggled and talked about getting mental help, will turn his season around once he gets his first sack. On the run game, he said Dylan Sampson's return and Quinshon Judkins have helped, but it remains a work in progress and the team must run the ball to control games. He praised rookie left tackle Spencer Fano's mentality. He also acknowledged slow starts on both sides of the ball and a need to balance Watson extending plays against getting the ball out. The team practiced in freezing rain and expects wet weather against Houston's strong edge rushers, which makes clean football and staying ahead of the chains the focus.",
   "injuries": [
    {
-    "player": "Denzel (unclear whether Boston or Ward)",
+    "player": "Denzel Boston",
     "status": "questionable",
     "detail": "Moved around well and took a full walk-through, but reps were limited. Monken said he is trending in the right direction and will be monitored through Sunday.",
-    "player_id": ""
+    "player_id": "00-0041037"
    },
    {
     "player": "Michael (unclear which player)",
@@ -479,6 +479,18 @@
    }
   ],
   "signals": [
+   {
+    "player": "Denzel Boston",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Boston is trending toward playing Sunday against Houston after a full walk-through with limited reps",
+    "note": "He is questionable with the toe but moved well Friday; check the inactives before kickoff.",
+    "quote": "",
+    "player_id": "00-0041037",
+    "t": null,
+    "t_exact": false
+   },
    {
     "player": "Emmanuel McNeil-Warren",
     "topic": "role",

@@ -575,6 +575,10 @@ The transcript comes from auto-generated broadcast captions: names are often mis
 and ">>" marks a new speaker (usually a reporter question, then the coach's answer). Video-time markers like [4:30]
 appear about every 30 seconds when the captions have timing. Use the roster to correct names and
 only name a player when you are confident who is meant. Attribute statements to the coach, not to the reporter asking.
+Coaches and reporters often use only a first name or nickname ("Denzel is trending the right way"). When more than
+one roster player fits, use the "Injury context" lines (this week's injury report and the team's previous press
+conference) and the subject of the question to work out who is meant, then use his full roster name. Only if it is
+still a toss-up, leave him out of "signals" and say in "injuries" that it is unclear.
 
 Return ONLY a JSON object (no code fences, no prose) with these keys:
 {
@@ -622,6 +626,40 @@ def rosters() -> dict[str, dict[str, str]]:
     return out
 
 
+_INJ_CACHE: dict = {}
+
+
+def injury_context(v: dict, roster: dict[str, str]) -> str:
+    """Who is already known to be hurt on this team, so a bare first name can be resolved:
+    the current injury report (data/site/meta.json) + the injuries from the team's previous presser."""
+    if "meta" not in _INJ_CACHE:
+        try:
+            _INJ_CACHE["meta"] = json.loads((PLAYERS.parent / "meta.json").read_text()).get("injuries") or {}
+        except (OSError, ValueError):
+            _INJ_CACHE["meta"] = {}
+        _INJ_CACHE["files"] = sorted(OUT_DIR.glob("20*.json"), reverse=True)
+    lines = []
+    rep = [f"{name} ({', '.join(str(x) for x in _INJ_CACHE['meta'][pid][:2] if x)})"
+           for name, pid in sorted(roster.items()) if pid and pid in _INJ_CACHE["meta"]]
+    if rep:
+        lines.append("Injury report: " + "; ".join(rep))
+    for f in _INJ_CACHE["files"]:
+        if f.stem > v["date"]:
+            continue
+        if len(f.stem) != 10 or (date.fromisoformat(v["date"]) - date.fromisoformat(f.stem)).days > 10:
+            break
+        try:
+            es = [e for e in json.loads(f.read_text()) if e.get("team") == v["team"] and e.get("id") != v["id"]]
+        except (OSError, ValueError):
+            continue
+        inj = [f"{i.get('player', '')} ({i.get('status', '')}: {i.get('detail', '')})"
+               for e in es for i in e.get("injuries") or [] if i.get("player_id")]
+        if inj:
+            lines.append(f"Previous press conference ({f.stem}): " + "; ".join(inj))
+            break
+    return "\n".join(lines)
+
+
 def _norm(n: str) -> str:
     return re.sub(r"[^a-z]", "", re.sub(r"\b(jr|sr|ii|iii|iv)\b\.?", "", n.lower()))
 
@@ -642,7 +680,8 @@ def _headers() -> dict:
 def _params(model: str, v: dict, roster: dict[str, str]) -> dict:
     msg = (
         f"Team: {v['team']} (head coach {COACHES[v['team']]})\nVideo title: {v['title']}\nDescription: {v.get('description', '')}\n"
-        f"Posted: {v['date']} ({v.get('kind', '')})\nRoster: {', '.join(sorted(roster)) or 'n/a'}\n\n"
+        f"Posted: {v['date']} ({v.get('kind', '')})\nRoster: {', '.join(sorted(roster)) or 'n/a'}\n"
+        f"Injury context:\n{injury_context(v, roster) or 'n/a'}\n\n"
         f"<transcript>\n{vtt_to_text(v['vtt'], 30) if v.get('vtt') else v['transcript']}\n</transcript>"
     )
     return {"model": model, "max_tokens": 6000, "system": SYSTEM, "messages": [{"role": "user", "content": msg}]}
