@@ -65,6 +65,8 @@ COACHES = {
     "SF": "Kyle Shanahan", "TB": "Todd Bowles", "TEN": "Robert Saleh", "WAS": "Dan Quinn",
 }
 POSTGAME = re.compile(r"post-?game", re.I)
+# description of a postgame presser: "spoke to the media after the Bucs' game against ..." (not "the day after ...")
+POSTGAME_DESC = re.compile(r"(?<!day )\b(?:after|following)\b[^.]{0,60}?\b(?:game|win|loss|victory|defeat|matchup)\b", re.I)
 
 
 def is_head_coach(team: str, title: str, desc: str, tags: list[str]) -> bool:
@@ -325,6 +327,10 @@ def pick_all(vids: list[dict], team: str, weeks: range | None = None) -> list[di
         v["_t"] = t
         pg = v["postgame"] or (k is not None and t - k < timedelta(hours=14)
                                and not (t.astimezone(et).date() > k.astimezone(et).date() and t.astimezone(et).hour >= 6))
+        # date-only sitemaps (no time) after a night game: the postgame lands on the same ET day as the
+        # day-after presser and would lose the one-per-day slot; the description tells them apart
+        if not pg and k is not None and (t.astimezone(et).date() - k.astimezone(et).date()).days <= 1:
+            pg = bool(POSTGAME_DESC.search(v.get("description") or ""))
         slots.setdefault((wk, "pg" if pg else "rest"), []).append(v)
     out: list[dict] = []
     for (wk, grp), lst in slots.items():
