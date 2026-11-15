@@ -64,6 +64,13 @@ COACHES = {
     "NYJ": "Aaron Glenn", "PHI": "Nick Sirianni", "PIT": "Mike McCarthy", "SEA": "Mike Macdonald",
     "SF": "Kyle Shanahan", "TB": "Todd Bowles", "TEN": "Robert Saleh", "WAS": "Dan Quinn",
 }
+# Offensive coordinator per team (2026), for the OC test (PRESSERS_ROLE=oc). Filled from the club video
+# titles (discovery run); teams left out are matched only by "offensive coordinator"/"OC" in the title.
+OCS: dict[str, str] = {}
+ROLE = os.environ.get("PRESSERS_ROLE", "hc").lower()  # hc = head coach (live), oc = offensive coordinator (test)
+SPEAKER = {"hc": "head coach", "oc": "offensive coordinator"}[ROLE]
+OC_TITLE = re.compile(r"\boffensive coordinator\b|\bOC\b|\bO\.C\.", re.I)
+NOT_OC = re.compile(r"\bdefensive\b|\bDC\b|special teams|\bSTC\b|\bpass(?:ing)? game\b|\brun game\b", re.I)
 POSTGAME = re.compile(r"post-?game", re.I)
 # description of a postgame presser: "spoke to the media after the Bucs' game against ..." (not "the day after ...")
 POSTGAME_DESC = re.compile(r"(?<!day )\b(?:after|following)\b[^.]{0,60}?\b(?:game|win|loss|victory|defeat|matchup)\b", re.I)
@@ -81,14 +88,26 @@ def is_head_coach(team: str, title: str, desc: str, tags: list[str]) -> bool:
     return bool(m or re.search(r"\bhead coach\b|\bHC\b", title, re.I))
 
 
+def is_oc(team: str, title: str) -> bool:
+    """Offensive coordinator presser: his name (OCS) or "offensive coordinator"/"OC" in the title."""
+    if NOT_OC.search(title) and not re.search(r"\boffensive coordinator\b", title, re.I):
+        return False
+    if team in OCS:
+        pat = re.escape(OCS[team].split()[-1]).replace("'", "['’]?")
+        m = re.search(rf"\b{pat}\b", title, re.I)
+        if m and not _other_speaker_first(team, title[:m.start()], OCS[team]):
+            return True
+    return bool(OC_TITLE.search(title))
+
+
 _NOT_A_PERSON = re.compile(r"^(?:head coach|press conference|news conference|media availability|new england|green bay|"
                            r"kansas city|las vegas|los angeles|new orleans|new york|san francisco|tampa bay|week \d+)$", re.I)
 
 
-def _other_speaker_first(team: str, before: str) -> bool:
+def _other_speaker_first(team: str, before: str, name: str = "") -> bool:
     """True if another person's name ("First Last") comes before the coach's name in the same title part."""
     before = re.split(r"[|:“”\"–—]", before)[-1]  # only the part of the title the coach's name is in
-    before = re.sub(rf"\b{re.escape(COACHES[team].split()[0])}\s*$", "", before, flags=re.I)
+    before = re.sub(rf"\b{re.escape((name or COACHES[team]).split()[0])}\s*$", "", before, flags=re.I)
     return any(not _NOT_A_PERSON.match(p) for p in re.findall(r"\b([A-Z][\w'’.-]+ [A-Z][\w'’.-]+)\b", before))
 
 
@@ -198,7 +217,7 @@ def _discover_one(team: str, sitemap: str, since: date, urls: set) -> list[dict]
         found.append({
             "id": f"{team}:{url.rstrip('/').rsplit('/', 1)[-1]}", "team": team, "url": url, "title": title,
             "description": desc, "tags": tags, "date": pub, "ts": pub_ts, "duration": dur,
-            "hc": is_head_coach(team, title, desc, tags), "postgame": bool(POSTGAME.search(hay) or POSTGAME.search(url)),
+            "hc": is_head_coach(team, title, desc, tags), "oc": is_oc(team, title), "postgame": bool(POSTGAME.search(hay) or POSTGAME.search(url)),
             "thumb": v.findtext("v:thumbnail_loc", "", NS),
         })
     return found
@@ -317,7 +336,7 @@ def pick_all(vids: list[dict], team: str, weeks: range | None = None) -> list[di
             t = datetime.combine(date.fromisoformat(v["date"]), datetime.max.time().replace(microsecond=0), et).astimezone(timezone.utc)
         return t
     slots: dict[tuple[int, str], list[dict]] = {}
-    for v in sorted((v for v in vids if v["hc"]), key=when):
+    for v in sorted((v for v in vids if v[ROLE] and (ROLE == "hc" or not v["hc"])), key=when):
         t = when(v)
         prev = [g for g in gs if g[0] <= t]
         k, wk = prev[-1] if prev else (None, 0)
@@ -643,7 +662,8 @@ def injury_context(v: dict, roster: dict[str, str]) -> str:
            for name, pid in sorted(roster.items()) if pid and pid in _INJ_CACHE["meta"]]
     if rep:
         lines.append("Injury report: " + "; ".join(rep))
-    for f in _INJ_CACHE["files"]:
+    # OC test: injury report only, so HC presser injuries can't leak into what the OC "said"
+    for f in (_INJ_CACHE["files"] if ROLE == "hc" else []):
         if f.stem > v["date"]:
             continue
         if len(f.stem) != 10 or (date.fromisoformat(v["date"]) - date.fromisoformat(f.stem)).days > 10:
@@ -679,12 +699,15 @@ def _headers() -> dict:
 
 def _params(model: str, v: dict, roster: dict[str, str]) -> dict:
     msg = (
-        f"Team: {v['team']} (head coach {COACHES[v['team']]})\nVideo title: {v['title']}\nDescription: {v.get('description', '')}\n"
+        f"Team: {v['team']} ({SPEAKER} {OCS.get(v['team'], '(name in the title)') if ROLE == 'oc' else COACHES[v['team']]}"
+        f"{'; head coach ' + COACHES[v['team']] if ROLE == 'oc' else ''})\nVideo title: {v['title']}\nDescription: {v.get('description', '')}\n"
         f"Posted: {v['date']} ({v.get('kind', '')})\nRoster: {', '.join(sorted(roster)) or 'n/a'}\n"
         f"Injury context:\n{injury_context(v, roster) or 'n/a'}\n\n"
         f"<transcript>\n{vtt_to_text(v['vtt'], 30) if v.get('vtt') else v['transcript']}\n</transcript>"
     )
-    return {"model": model, "max_tokens": 6000, "system": SYSTEM, "messages": [{"role": "user", "content": msg}]}
+    system = SYSTEM if ROLE == "hc" else SYSTEM.replace("NFL head coach press", f"NFL {SPEAKER} press").replace(
+        "Attribute statements to the coach", f"The speaker is the {SPEAKER}, not the head coach. Attribute statements to him")
+    return {"model": model, "max_tokens": 6000, "system": system, "messages": [{"role": "user", "content": msg}]}
 
 
 def _parse(data: dict, roster: dict[str, str]) -> tuple[dict, dict]:
@@ -819,7 +842,7 @@ def main() -> None:
     for t in teams:
         try:
             allv = discover(t, since, deep=bool(weeks))
-            if not weeks and not any(v["hc"] for v in allv):
+            if not weeks and not any(v[ROLE] for v in allv):
                 # some clubs (SF) leave pressers out of the fast sitemap: fall back to the full archive
                 allv = discover(t, since, deep=True)
         except Exception as e:  # noqa: BLE001
@@ -827,7 +850,7 @@ def main() -> None:
             continue
         if "--list" in sys.argv:
             for v in sorted(allv, key=lambda v: v["date"]):
-                log(f"    {v['ts'][:19]} {'HC ' if v['hc'] else '   '}{'PG ' if v['postgame'] else '   '}{v['duration']:>5}s {v['title'][:70]} | {', '.join(v['tags'])[:50]}")
+                log(f"    {v['ts'][:19]} {'HC ' if v['hc'] else 'OC ' if v['oc'] else '   '}{'PG ' if v['postgame'] else '   '}{v['duration']:>5}s {v['title'][:70]} | {', '.join(v['tags'])[:50]}")
         if every:
             vids = allv
         elif os.environ.get("PRESSERS_PICK", "all") == "all":  # every HC presser, labeled (daily run + backfill)
@@ -836,10 +859,13 @@ def main() -> None:
             vids = pick_backfill(allv, t, weeks) if weeks else pick_weekly(allv, t)
         if os.environ.get("PRESSERS_REDO") != "1":  # REDO=1: re-summarize pressers already done (model change)
             vids = [v for v in vids if v["id"] not in index["done"]]
-        n_hc = sum(v["hc"] for v in allv)
-        log(f"{t}: {len(allv)} press videos since {since}, {n_hc} head coach, picked: "
+        n_hc = sum(v[ROLE] for v in allv)
+        log(f"{t}: {len(allv)} press videos since {since}, {n_hc} {SPEAKER}, picked: "
             + (", ".join(f"{v['date']} {v.get('kind', '')} '{v['title'][:60]}'" for v in vids) or "none"))
         new += vids
+    if os.environ.get("PRESSERS_LIST_ONLY") == "1":  # discovery: titles only, no captions / Claude
+        log(f"list only: {len(new)} {SPEAKER} pressers would be picked")
+        return
     if len(new) > cap:
         log(f"capping {len(new)} -> {cap} videos this run (the rest wait for tomorrow)")
         new = sorted(new, key=lambda v: v["date"], reverse=True)[:cap]
@@ -889,7 +915,9 @@ def main() -> None:
         entry["kind"] = v.get("kind", "")
         if v.get("week") is not None:
             entry["after_week"] = v["week"]
-        entry["coach"] = COACHES[v["team"]]
+        entry["coach"] = OCS.get(v["team"], "") if ROLE == "oc" else COACHES[v["team"]]
+        if ROLE != "hc":
+            entry["role"] = ROLE
         entry.update(words=len(v["transcript"].split()), model=model, **s)
         by_date.setdefault(v["date"], []).append(entry)
         index["done"][v["id"]] = v["date"]

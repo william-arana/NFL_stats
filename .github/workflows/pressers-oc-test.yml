@@ -1,0 +1,127 @@
+name: Pressers OC test
+
+# Test only (branch oc-test, never merged): offensive coordinator pressers for Wk 7-9.
+# MODE=list: print every press video title per team (finds OC names), no captions, no Claude.
+# MODE=run: captions -> raw transcripts to the PRIVATE repo (transcripts/2026-oc), signals (Claude,
+# Sonnet batch) -> data/pressers-oc/ on this branch only. Nothing here reaches the live site.
+on:
+  push:
+    branches: [oc-test]
+    paths: [".github/workflows/pressers-oc-test.yml", "scripts/update_pressers.py"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pressers-oc-test
+  cancel-in-progress: true
+
+env:
+  MODE: list
+  WEEKS: "7-9"
+  MODEL: claude-sonnet-5-5
+  PRIVATE_REPO: william-arana/NFL_stats-transcripts
+
+jobs:
+  teams:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      matrix:
+        teams:
+          - "ARI ATL BAL BUF"
+          - "CAR CHI CIN CLE"
+          - "DAL DEN DET GB"
+          - "HOU IND JAX KC"
+          - "LA LAC LV MIA"
+          - "MIN NE NO NYG"
+          - "NYJ PHI PIT SEA"
+          - "SF TB TEN WAS"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-pressers.txt
+      - if: env.MODE == 'run'
+        run: python -m playwright install --with-deps chromium
+      - name: Clone private transcripts repo
+        if: env.MODE == 'run'
+        env:
+          TOKEN: ${{ secrets.TRANSCRIPTS_TOKEN }}
+        run: git clone "https://x-access-token:${TOKEN}@github.com/${PRIVATE_REPO}.git" "$RUNNER_TEMP/private"
+      - name: OC pressers
+        env:
+          PRESSERS_ROLE: oc
+          PRESSERS_TEAMS: ${{ matrix.teams }}
+          PRESSERS_MODEL: ${{ env.MODEL }}
+          PRESSERS_BACKFILL: ${{ env.WEEKS }}
+          PRESSERS_OUT: ${{ runner.temp }}/signals
+          PRESSERS_LIST_ONLY: ${{ env.MODE == 'list' && '1' || '0' }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ "$MODE" = list ]; then
+            python scripts/update_pressers.py --list
+          else
+            mkdir -p "$RUNNER_TEMP/private/logs"
+            tag=$(echo "$PRESSERS_TEAMS" | tr ' ' '-')
+            python scripts/update_pressers.py --save-dir="$RUNNER_TEMP/private/transcripts/2026-oc" 2>&1 \
+              | tee "$RUNNER_TEMP/private/logs/oc-test-wk${WEEKS}-${tag}.log"
+          fi
+      - name: Push transcripts (private repo)
+        if: always() && env.MODE == 'run'
+        working-directory: ${{ runner.temp }}/private
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && echo "No transcripts" && exit 0
+          git commit -m "OC test transcripts: ${{ matrix.teams }} (wk ${WEEKS})"
+          for i in 1 2 3 4 5 6; do git pull --rebase origin main && git push origin main && break; sleep $((RANDOM % 10 + 5)); done
+      - name: Group name
+        id: g
+        run: echo "tag=$(echo '${{ matrix.teams }}' | tr ' ' '-')" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        if: env.MODE == 'run'
+        with:
+          name: oc-signals-${{ steps.g.outputs.tag }}
+          path: ${{ runner.temp }}/signals
+          if-no-files-found: ignore
+          retention-days: 3
+
+  merge:
+    needs: teams
+    if: always() && needs.teams.result != 'cancelled'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        if: env.MODE == 'run'
+      - uses: actions/download-artifact@v4
+        if: env.MODE == 'run'
+        with:
+          pattern: oc-signals-*
+          path: ${{ runner.temp }}/parts
+      - name: Merge into data/pressers-oc (this branch only)
+        if: env.MODE == 'run'
+        run: |
+          python - "$RUNNER_TEMP/parts" <<'PY'
+          import json, sys
+          from pathlib import Path
+          out = Path("data/pressers-oc"); out.mkdir(parents=True, exist_ok=True)
+          n = 0
+          for part in Path(sys.argv[1]).glob("*"):
+              for f in part.glob("20*.json"):
+                  tgt = out / f.name
+                  old = json.loads(tgt.read_text()) if tgt.exists() else []
+                  new = json.loads(f.read_text()); n += len(new)
+                  merged = {e["id"]: e for e in old + new}
+                  tgt.write_text(json.dumps(sorted(merged.values(), key=lambda e: (e["team"], e["id"])), ensure_ascii=False, indent=1))
+          print(f"merged {n} OC summaries")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data/pressers-oc
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "OC test: signals wk ${WEEKS} [skip ci]"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
