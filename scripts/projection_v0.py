@@ -241,8 +241,13 @@ def ours_v01(P, K, S, week, T=None, site=None):
 # +3.1 -> -0.1, weekly rank corr +0.010 (better 67% of weeks), waiver-tier top-5 picks per week 9.25 -> 9.84 PPR. "Back" = missed
 # his team's last game and is on this week's injury report but not Out/Doubtful. New signings / trades / practice-squad elevations
 # at the position did NOT take work away (coef ~0), so they aren't used. Game statuses come out Friday: the Saturday data run uses them.
-DEPTH = {"RB": {"vac_above": 10.241, "next_up": 1.336, "ret": -6.473},
-         "WR": {"vac_above": 14.785, "next_up": 0.0, "ret": -8.124}}
+# Half of the fitted bump (William, 11/15): the full fit matches the AVERAGE backup, which a few boom games pull up, so it
+# overshot the typical one (15%+ vacancies: median miss 3.20 -> 4.11, typical player 1.9 pts too high). Half: typical miss about
+# even (signed median -0.4), best average miss (5.09 -> 4.88), waiver-tier top-5 picks 9.25 -> 9.67 PPR.
+DEPTH_SCALE = 0.5
+DEPTH = {pos: {k: round(v * DEPTH_SCALE, 3) for k, v in c.items()} for pos, c in {
+    "RB": {"vac_above": 10.241, "next_up": 1.336, "ret": -6.473},
+    "WR": {"vac_above": 14.785, "next_up": 0.0, "ret": -8.124}}.items()}
 
 
 def depth_adj(P, S, I, status, week, season=None, R=None):
