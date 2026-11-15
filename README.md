@@ -15,7 +15,7 @@ A personal, non-commercial hobby site, shared with a small group of friends and 
 
 **Principles**
 - **Non-commercial.** No ads, no paid features, no data resale.
-- **Open data, credited.** Stats come from [nflverse](https://github.com/nflverse) (CC-BY 4.0) and FTN charting via nflverse (CC-BY-SA 4.0), always credited on the site. FTN-derived stats always stay free.
+- **Open data, credited.** Stats come from [nflverse](https://github.com/nflverse) (CC-BY 4.0), FTN charting via nflverse (CC-BY-SA 4.0) and expected fantasy points (xFP) from [ffopportunity](https://github.com/ffverse/ffopportunity) (CC-BY-SA 4.0), always credited on the site. FTN- and xFP-derived stats always stay free.
 - **Read-only league access.** Fantasy league data (Sleeper; Yahoo once Yahoo approves API access) is only read, never changed. Each person connects only their own leagues.
 - **Not official.** Not affiliated with or endorsed by the NFL, its teams, Sleeper, Yahoo or ESPN. No league or team logos, no official headshots.
 - **Small and simple.** A static site (HTML + vanilla JS) on GitHub Pages; data refreshed by scheduled GitHub Actions.
@@ -114,4 +114,6 @@ Plans, ideas and decisions are kept in a separate private repo.
 5. Models: D/ST pressure matchups, usage risers, expected vs. actual points; backtest weekly
 6. Team news and press conference signals; Claude built into the site
 
-Data: [nflverse](https://github.com/nflverse) (CC-BY 4.0 for most datasets; FTN charting CC-BY-SA 4.0). D/ST points follow the leagues' Sleeper D/ST scoring (sack 1, INT 2, fumble recovery 2, forced fumble 1, TD 6, safety 2, blocked kick 2, points-allowed tiers).
+Data: [nflverse](https://github.com/nflverse) (CC-BY 4.0 for most datasets; FTN charting CC-BY-SA 4.0, credit "FTN Data via nflverse"). Expected fantasy points (xFP): [ffopportunity](https://github.com/ffverse/ffopportunity) via nflverse (CC-BY-SA 4.0). Game lines (spread, total, implied totals): nfldata schedule via nflverse. Player status (IR/PUP, team): Sleeper's public API. Snap counts, pressures and coverage come from Pro Football Reference and tracking stats from NFL Next Gen Stats, via nflverse; those belong to their owners.
+
+**Our projection** (`scripts/projection_v0.py`, `data/model/model_v0.json`) is built only from the data above plus head-coach injury statements from our own presser summaries; the rest-of-season number also zeroes players whose stored news headlines (Sleeper and ESPN feeds) say they're out for the season. It uses no Sleeper, ESPN or other outside projections; those are only logged privately to grade ours against. D/ST points follow the leagues' Sleeper D/ST scoring (sack 1, INT 2, fumble recovery 2, forced fumble 1, TD 6, safety 2, blocked kick 2, points-allowed tiers).
