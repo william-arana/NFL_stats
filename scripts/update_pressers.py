@@ -66,11 +66,22 @@ COACHES = {
 }
 # Offensive coordinator per team (2026), for the OC test (PRESSERS_ROLE=oc). Filled from the club video
 # titles (discovery run); teams left out are matched only by "offensive coordinator"/"OC" in the title.
-OCS: dict[str, str] = {}
+# Gaps (Wk 7-9 sitemaps): CIN and WAS post no coordinator videos. ATL, CHI, JAX, PIT and SF post joint
+# coordinator videos (OC + DC/STC); HOU, CAR and LA post them as "Coordinators" with no names.
+OCS: dict[str, str] = {
+    "ARI": "Nathaniel Hackett", "ATL": "Tommy Rees", "BAL": "Declan Doyle", "BUF": "Pete Carmichael",
+    "CHI": "Press Taylor", "CLE": "Travis Switzer", "DAL": "Klayton Adams", "DEN": "Davis Webb",
+    "DET": "Drew Petzing", "GB": "Adam Stenavich", "IND": "Jim Bob Cooter", "JAX": "Grant Udinski",
+    "KC": "Eric Bieniemy", "LAC": "Mike McDaniel", "LV": "Andrew Janocko", "MIA": "Bobby Slowik",
+    "MIN": "Wes Phillips", "NE": "Josh McDaniels", "NO": "Doug Nussmeier", "NYG": "Matt Nagy",
+    "NYJ": "Frank Reich", "PHI": "Sean Mannion", "PIT": "Brian Angelichio", "SEA": "Brian Fleury",
+    "SF": "Klay Kubiak", "TB": "Zac Robinson", "TEN": "Brian Daboll",
+}
+OC_JOINT = {"HOU", "CAR", "LA"}  # unnamed "Coordinators" pressers
 ROLE = os.environ.get("PRESSERS_ROLE", "hc").lower()  # hc = head coach (live), oc = offensive coordinator (test)
 SPEAKER = {"hc": "head coach", "oc": "offensive coordinator"}[ROLE]
 OC_TITLE = re.compile(r"\boffensive coordinator\b|\bOC\b|\bO\.C\.", re.I)
-NOT_OC = re.compile(r"\bdefensive\b|\bDC\b|special teams|\bSTC\b|\bpass(?:ing)? game\b|\brun game\b", re.I)
+NOT_OC = re.compile(r"\bdefensive\b|\bDC\b|special teams|\bSTC\b|\b(?:pass(?:ing)?|run) game coordinator\b|\bPGC\b", re.I)
 POSTGAME = re.compile(r"post-?game", re.I)
 # description of a postgame presser: "spoke to the media after the Bucs' game against ..." (not "the day after ...")
 POSTGAME_DESC = re.compile(r"(?<!day )\b(?:after|following)\b[^.]{0,60}?\b(?:game|win|loss|victory|defeat|matchup)\b", re.I)
@@ -95,8 +106,11 @@ def is_oc(team: str, title: str) -> bool:
     if team in OCS:
         pat = re.escape(OCS[team].split()[-1]).replace("'", "['’]?")
         m = re.search(rf"\b{pat}\b", title, re.I)
-        if m and not _other_speaker_first(team, title[:m.start()], OCS[team]):
+        # "Tommy Rees, Jeff Ulbrich & ..." (joint) counts; "Drake Maye on Josh McDaniels" doesn't
+        if m and not re.search(r"\b(?:on|praises|about|discusses|talks|credits|with)\s+(?:\w+\s+)?$", title[:m.start()], re.I):
             return True
+    if team in OC_JOINT and re.search(r"\bcoordinators\b", title, re.I):
+        return True
     return bool(OC_TITLE.search(title))
 
 

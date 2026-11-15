@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  MODE: list
+  MODE: run
   WEEKS: "7-9"
   MODEL: claude-sonnet-5-5
   PRIVATE_REPO: william-arana/NFL_stats-transcripts
