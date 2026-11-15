@@ -193,3 +193,47 @@ def ours_v01(P, K, S, week, T=None, site=None):
     o["why"] = [m.get(k, (1.0, ""))[1] for k in o.key]
     o["ours_ppr"] = (o.ours_ppr * o.avail).round(2)
     return o
+
+
+# ---------- ROS v0 (notes repo docs/backtests/ros) ----------
+# Rest-of-season PPR through week 18 = this week's v0.1 + v0's per-game number for every later team game x the share of
+# team games a fantasy-relevant player actually plays (2022-24). An estimated implied total per future game added nothing
+# (hurt QBs), so later games use this week's number. Backtest: beats season avg x games left for RB/WR/TE in 2025 and 2026
+# (rank corr +0.05 to +0.13), ties for QBs. Sleeper IR/PUP or a hurt regular QB1: skips 3 more weeks; out for the season / backup QB: 0.
+ROS_LAST_WEEK = 18
+GAMES_PLAYED = {"QB": 0.764, "RB": 0.783, "WR": 0.799, "TE": 0.794}
+
+
+def ros(P, K, S, week, T=None, site=None):
+    """{gsis_id: rest-of-season PPR, weeks week..18} for QB/RB/WR/TE."""
+    v0 = ours(P, K, S, week, T)
+    if v0.empty:
+        return {}
+    v1 = ours_v01(P, K, S, week, T, site).set_index("key").ours_ppr
+    st = {}
+    if site is not None and (Path(site) / "status.json").exists():
+        st = json.loads((Path(site) / "status.json").read_text()).get("p") or {}
+    m = play_mult(site, week, S) if site is not None else {}
+    pos = P[P.week < week].sort_values("week").groupby("player_id")[["position", "team"]].last()
+    fut = S[(S.week > week) & (S.week <= ROS_LAST_WEEK)]
+    left = pd.concat([fut.home_team, fut.away_team]).value_counts()
+    # each team's regular starting QB (most starts this season): hurt, not benched, so he comes back later
+    q = P[(P.week < week) & (P.position == "QB")].fillna({"attempts": 0}).sort_values("attempts", ascending=False).drop_duplicates(["team", "week"])
+    q = q[q.attempts >= 5]
+    reg = set(q.groupby("team").player_id.agg(lambda x: x.value_counts().idxmax())) if len(q) else set()
+    out = {}
+    for r in v0.itertuples():
+        if r.key not in pos.index or pos.position[r.key] not in GAMES_PLAYED:
+            continue
+        p, team = pos.position[r.key], pos.team[r.key]
+        why = m.get(r.key, (1.0, ""))[1]
+        s = st.get(r.key) or {}
+        hurt_qb1 = why.startswith("backup QB") and r.key in reg
+        if s.get("season") or (why.startswith("backup QB") and not hurt_qb1):
+            out[r.key] = 0.0
+            continue
+        n = int(left.get(team, 0))
+        if s.get("s") in ("IR", "PUP") or hurt_qb1:  # injured regular QB1: back after ~3 more weeks
+            n = max(0, n - 3)
+        out[r.key] = round(float(v1.get(r.key, r.ours_ppr)) + GAMES_PLAYED[p] * r.ours_ppr * n, 1)
+    return out
