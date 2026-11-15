@@ -16,6 +16,8 @@
     target_share:['Target share','Player\'s share of the team\'s targets. 20%+ is a featured receiver; for RBs, 10%+ means a real passing-down role.','player_stats.target_share'],
     air_yards_share:['Air yards share','Player\'s share of the team\'s air yards (how far passes travel past the line of scrimmage, catch or not). Shows who gets the deep, valuable looks.','player_stats.air_yards_share'],
     opps:['Opportunities','Carries + targets per game: every chance to touch the ball.',''],
+    plays:['Plays','Pass attempts + sacks + carries + targets: every play he threw, ran or was thrown to. For an RB/WR/TE this equals Opps; for a QB it is dropbacks + runs.',''],
+    team_plays:['Team plays','His team\'s offensive plays in the games he played (offensive snaps ÷ snap %). The number Snap % is out of.','snap_counts'],
     tds:['Touchdowns','Passing + rushing + receiving touchdowns.','player_stats.rushing_tds'],
     trend:['Weekly FP','Fantasy points each week in the range you picked. The gray line is 10 points.',''],
     g:['Games','Games played in the selected weeks.',''],

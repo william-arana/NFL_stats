@@ -201,6 +201,7 @@
         <div><span>Snap %</span><b>${pct(s.snap)}</b><small>L3 ${pct(s.snap3)}</small></div>
         <div><span>Touches / g</span><b>${f1(s.opps)}</b><small>${s.pos==='QB'?'carries + targets':'L3 '+f1(s.opps3)}</small></div>
       </div></section>
+    <section data-outlook="${esc(id)}" hidden></section>
     <section><h4>Season stats</h4><div class="scr"><table data-cols="card-season-${s.pos}"><thead><tr><th class="l"></th><th>FP</th>${cols.map(([,l])=>`<th>${l}</th>`).join('')}${xc.map(c=>`<th data-k="x-${c.k}" data-def-off="1">${c.l}</th>`).join('')}</tr></thead><tbody>${seasonRow('Per game',true)}${seasonRow('Total',false)}</tbody></table></div></section>
     <section><h4>Game log <span class="sp"></span><span>high ${f1(s.best)} · low ${f1(s.worst)}${num(s.sd)?' · ±'+s.sd.toFixed(1):''}</span></h4><div class="scr"><table data-cols="card-log-${s.pos}"><thead><tr><th class="l">Wk</th><th class="l">Opp</th><th>FP</th>${cols.map(([,l])=>`<th>${l}</th>`).join('')}${xc.map(c=>`<th data-k="x-${c.k}" data-def-off="1">${c.l}</th>`).join('')}</tr></thead><tbody>${logRows}</tbody></table></div><div class="note">Opponent rank = PPR points that defense allows to ${s.pos}s (green = generous). Click an opponent for its defense card.</div></section>
     ${playsSec('p',id,[...s.logs].reverse().map(l=>[gameKey(l.team,l.week),l.week]).filter(x=>x[0]))}
@@ -529,7 +530,7 @@
     if(crumbs){const c=el.querySelector('.pc-crumbs');c.scrollLeft=c.scrollWidth}
     if(tabBar){const b=el.querySelector('.pc-tabs'),on=b.querySelector('.pc-tab.on');if(on)b.scrollLeft=Math.max(0,on.offsetLeft-b.clientWidth/2+on.offsetWidth/2)}
     tagSections(el,true);
-    el.scrollTop=0;fillOwner(el);fillNews(el,newsKey(cur.key),false);fillPlays(el);
+    el.scrollTop=0;fillOwner(el);fillNews(el,newsKey(cur.key),false);fillPlays(el);fillOutlook(el);
   }
   function fillOwner(root){
     if(!window.NFLS||!root)return;const lg=NFLS.getLeague();if(!lg)return;
@@ -537,6 +538,19 @@
       s.outerHTML=m?(m.status==='mine'?`<span class="tag mine">On ${esc(lg.viewer||'your')} roster · ${esc(lg.name)}</span>`:`<span class="tag">Rostered by ${esc(m.team)} · ${esc(lg.name)}</span>`):`<span class="tag fa">Free agent in ${esc(lg.name)}</span>`})}).catch(()=>{});
   }
   let NF='';try{NF=localStorage.getItem('newsFilter')||''}catch(e){}
+  /* weekly outlook (data/site/outlooks/<gsis_id>.json): Claude's lines from our facts only; tap a line for the facts behind it */
+  const OUTL={};
+  function fillOutlook(root){
+    const sec=root&&root.querySelector('[data-outlook]');if(!sec)return;const id=sec.dataset.outlook;
+    if(!OUTL[id])OUTL[id]=fetch('data/site/outlooks/'+encodeURIComponent(id)+'.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
+    OUTL[id].then(o=>{if(!o||!sec.isConnected||!(o.lines||[]).length)return;
+      const d=o.asof?new Date(o.asof+'T12:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'}):'';
+      sec.innerHTML=`<h4>Outlook <span class="sp"></span><span>Wk ${esc(o.w)}${d?' · as of '+esc(d):''}</span></h4>
+        <div class="ol">${o.lines.map(([t,ids])=>`<details><summary>${esc(t)}</summary><ul>${ids.map(i=>o.facts&&o.facts[i]?`<li>${esc(o.facts[i])}</li>`:'').join('')}</ul></details>`).join('')}
+        ${o.claim?`<div class="ol-claim"><b>Check after the game:</b> ${esc(o.claim)}</div>`:''}</div>
+        <div class="note">Written by Claude from our stats only (data: nflverse; projections are ours). Tap a line to see the numbers behind it.</div>`;
+      sec.hidden=false});
+  }
   function fillNews(root,key,all){
     const box=root&&root.querySelector('[data-news]');if(!box)return;const name=NAMEHINT[key]||'';
     newsFor(key).then(n=>{if(!box.isConnected)return;const f=n.pressers?NF:'';box.innerHTML=newsHTML(n,all,name,f);const s=root.querySelector('[data-news-src]');if(s)s.textContent=n.items.length?newsSrc(n):'';
@@ -608,7 +622,7 @@
     const t=document.createElement('div');t.innerHTML=html;tagSections(t,false);
     const s=t.querySelector(`section[data-sec="${p.sec}"]`);return s?s.outerHTML:`<section class="dim">That section isn't on this card anymore.</section>`;
   }
-  function fillPin(p){const w=pinEls.get(p.id);if(!w)return;const b=w.querySelector('.pw-b');b.innerHTML=pinBody(p);w.querySelector('.pw-h b').textContent=pinTitle(p);fillPlays(b);fillOwner(b);fillNews(b,newsKey(p.key),false)}
+  function fillPin(p){const w=pinEls.get(p.id);if(!w)return;const b=w.querySelector('.pw-b');b.innerHTML=pinBody(p);w.querySelector('.pw-h b').textContent=pinTitle(p);fillPlays(b);fillOwner(b);fillNews(b,newsKey(p.key),false);fillOutlook(b)}
   function front(w){if(!w)return;if(zTop>ZBASE+40){zTop=ZBASE;[...pinEls.values(),el].filter(Boolean).sort((a,b)=>(+a.style.zIndex||0)-(+b.style.zIndex||0)).forEach(x=>x.style.zIndex=++zTop)}w.style.zIndex=++zTop}
   document.addEventListener('pointerdown',e=>{if(el&&el.contains(e.target))front(el)},true);
   function clampPin(p){const vw=document.documentElement.clientWidth,vh=innerHeight;p.x=Math.max(4-(p.w||300)+60,Math.min(p.x,vw-60));p.y=Math.max(0,Math.min(p.y,vh-36))}

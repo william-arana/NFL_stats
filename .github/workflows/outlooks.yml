@@ -1,0 +1,55 @@
+name: Player outlooks
+
+# Weekly player outlooks (player card → Outlook): 2-3 lines per player written by Claude from a facts file only,
+# plus one checkable claim graded after the games. 67FFL rostered + top 300 QB/RB/WR/TE by projection.
+# Wed 8:47 PM PT: after Tuesday's data refresh and the evening pressers, before Thursday night.
+# Sonnet via the Batch API (half price); anything the batch doesn't return in 50 min goes direct.
+# Times are UTC; Pacific (standard time) in comments.
+on:
+  schedule:
+    - cron: "47 4 * * 4"    # Wed 8:47 PM PT
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "only the first N players (test); blank = all"
+        default: ""
+      facts_only:
+        description: "true = build the facts file only (no Claude calls)"
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  outlooks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pandas requests scipy
+      - name: Build
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          LIMIT: ${{ inputs.limit }}
+          FACTS_ONLY: ${{ inputs.facts_only }}
+        run: |
+          args=""
+          [ -n "$LIMIT" ] && args="$args --limit $LIMIT"
+          if [ "$FACTS_ONLY" = "true" ]; then args="$args --facts-only"
+          elif [ -z "$ANTHROPIC_API_KEY" ]; then echo "::error::ANTHROPIC_API_KEY secret not set"; exit 1; fi
+          python scripts/build_outlooks.py $args
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data/site/outlooks data/outlooks
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Player outlooks: $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
