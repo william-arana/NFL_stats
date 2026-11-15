@@ -143,6 +143,8 @@
     next_opp:['Next opponent','Next week\'s opponent.',''],
     matchup_score:['Matchup score','Sum of z-scores (standard deviations from league average). Positive = better than average.',''],
     final_number:['Final number','Weighted sum of z-scores: 1.0 × target share + 0.6 × air share + 1.0 × xFP + 0.4 × snap %. Edit the weights in the query.',''],
+    qb_proj:['Our QB projection','Our projected PPR points for next week (projection v0.1: season role, recent form and the team\'s Vegas implied total, lowered if he may not play; backup QBs are 0).','our model'],
+    implied_rank:['Implied rank','Where his team\'s Vegas implied points rank among all teams playing next week (1st = highest). For waiver-tier QBs, a top-5 implied offense averaged ~5 more PPR than a bottom-10 one (2019–2026).','schedules.total_line, spread_line'],
     k_proj:['Our kicker projection','Our projected kicker points for next week (standard kicker scoring: FG 3/4/5 by distance, PAT 1, misses −1). = 6.47 + 0.022 × team implied points + 0.082 × points favored by + 0.84 if indoors + 0.071 × his season average. Backtested on 2018–2025: kicker weeks are mostly noise, so treat a 1-point gap as a coin flip.',''],
     fav_by:['Favored by','Points the team is favored by next week (Vegas spread). Negative = underdog. Favorites kick more extra points.','schedules.spread_line'],
     indoors:['Indoors','Dome or closed roof next week. Indoor kickers averaged about 0.9 more points per game (2018–2025).','schedules.roof'],
