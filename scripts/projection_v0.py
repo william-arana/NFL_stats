@@ -80,3 +80,73 @@ def ours(P, K, S, week, T=None):
     return pd.DataFrame(out)
 
 
+
+
+# ---------- v0.1: availability (docs: notes repo docs/backtests/presser-signals, 2026 wks 3-9) ----------
+# v0 has no idea who's hurt. v0.1 = v0 x chance he plays. Backtest: MAE 6.35 -> 5.57, better every week, bias +1.70 -> +0.68.
+# Official game status first (Out/Doubtful 0% played, Questionable 67%), then Sleeper IR/PUP, then the head coach's
+# latest presser injury status before the game when the report says nothing (coach out/IR: 7% played; unclear/Q: 76%).
+# A coach downgrade is ignored when the report shows he practiced Full/Limited (all 30 such cases played).
+# Up/down/role/usage presser talk does NOT move points among players who play, so it isn't used.
+MULT = {"out": 0.0, "coach_out": 0.15, "q": 0.73, "coach_unclear": 0.75}
+
+
+def play_mult(site, week, S):
+    """{gsis_id: (multiplier, reason)} for players whose chance of playing is in doubt in `week`. `site` = data/site dir."""
+    site = Path(site)
+    rd = lambda n: json.loads((site / n).read_text()) if (site / n).exists() else {}  # noqa: E731
+    meta, status = rd("meta.json"), rd("status.json")
+    out = {}
+    g = S[S.week == week]
+    gday = {**dict(zip(g.home_team, g.gameday)), **dict(zip(g.away_team, g.gameday))}
+    # coach's latest injury status per player, from pressers before his team's game (<= 8 days)
+    coach = {}
+    pdir = site.parent / "pressers"
+    days = sorted({d for d in gday.values() if isinstance(d, str)})
+    if pdir.exists() and days:
+        lo = (pd.Timestamp(days[0]) - pd.Timedelta(days=8)).strftime("%Y-%m-%d")
+        for f in sorted(pdir.glob("20*.json")):
+            if not (lo <= f.stem < days[-1]):
+                continue
+            for x in json.loads(f.read_text()):
+                gd = gday.get(x.get("team"))
+                if not gd or not (x["date"] < gd and (pd.Timestamp(gd) - pd.Timestamp(x["date"])).days <= 8):
+                    continue
+                for i in x.get("injuries") or []:
+                    if i.get("player_id"):
+                        prev = coach.get(i["player_id"])
+                        if prev is None or x["date"] >= prev[0]:
+                            coach[i["player_id"]] = (x["date"], (i.get("status") or "").lower(), x.get("coach", ""))
+    practiced = {pid for pid, v in (meta.get("injuries") or {}).items()  # practiced Full/Limited, no game status: he plays (backtest 30/30)
+                 if (len(v) < 3 or v[2] == week) and (v[0] or "") in ("Practice: Full", "Practice: Limited")}
+    for pid, (d, st, who) in coach.items():
+        if pid in practiced:
+            continue
+        if st in ("out", "doubtful", "ir"):
+            out[pid] = (MULT["coach_out"], f"coach: {st} ({who} {d})")
+        elif st in ("unclear", "questionable"):
+            out[pid] = (MULT["coach_unclear"], f"coach: {st} ({who} {d})")
+    for pid, v in (status.get("p") or {}).items():  # Sleeper IR / PUP
+        if v.get("s") in ("IR", "PUP"):
+            out[pid] = (MULT["out"], f"Sleeper {v['s']}")
+    for pid, v in (meta.get("injuries") or {}).items():  # official report wins
+        if len(v) > 2 and v[2] != week:
+            continue
+        s = (v[0] or "").lower()
+        if s in ("out", "doubtful"):
+            out[pid] = (MULT["out"], f"report: {v[0]}")
+        elif s == "questionable":
+            out[pid] = (MULT["q"], "report: Questionable")
+    return out
+
+
+def ours_v01(P, K, S, week, T=None, site=None):
+    """v0 x play_mult. Same columns as ours() plus `avail` (multiplier) and `why`."""
+    o = ours(P, K, S, week, T)
+    if site is None or o.empty:
+        return o.assign(avail=1.0, why="")
+    m = play_mult(site, week, S)
+    o["avail"] = [m.get(k, (1.0, ""))[0] for k in o.key]
+    o["why"] = [m.get(k, (1.0, ""))[1] for k in o.key]
+    o["ours_ppr"] = (o.ours_ppr * o.avail).round(2)
+    return o

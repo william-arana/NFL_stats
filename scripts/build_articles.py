@@ -16,7 +16,7 @@ from pathlib import Path
 import pandas as pd, requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from projection_v0 import ours  # noqa: E402
+from projection_v0 import ours, ours_v01  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE, OUT = ROOT / "data" / "site", ROOT / "data" / "site" / "articles"
@@ -287,7 +287,7 @@ def preview_facts(week, args):
     owner_of = {k: rosters[rid]["team_name"] for rid in rosters for k in rosters[rid]["players"]}
     me = lg["my_roster_id"]
     slots = ["QB", "RB", "RB", "WR", "WR", "TE", "FLEX", "FLEX", "K", "DEF"]
-    o = ours(P, K, S, week, T)
+    o = ours_v01(P, K, S, week, T, SITE)  # v0.1: x chance he plays
     proj = dict(zip(o.key, o.ours_ppr)) if len(o) else {}
     inj = (meta.get("injuries") or {})
     sts = status.get("p", {}) if isinstance(status, dict) else {}
