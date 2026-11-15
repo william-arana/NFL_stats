@@ -1,0 +1,365 @@
+[
+ {
+  "id": "LA:aaron-donald-rams-coordinators-discuss-maximizing-roster-depth-week-10-against-cardinals-press-conference",
+  "team": "LA",
+  "url": "https://www.therams.com/video/aaron-donald-rams-coordinators-discuss-maximizing-roster-depth-week-10-against-cardinals-press-conference",
+  "title": "Aaron Donald & Rams Coordinators discuss maximizing roster depth, Week 10 against the Cardinals & more",
+  "date": "2026-11-13",
+  "duration": 1285,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/rams/g6rk1ukvoid9rsjapl01.jpg",
+  "kind": "day_after",
+  "after_week": 9,
+  "coach": "",
+  "role": "oc",
+  "words": 4985,
+  "model": "claude-sonnet-5-5",
+  "headline": "With Puka Nacua and Davante Adams unavailable, Scheelhaase pointed to Konata Mumpfield, Xavier Smith, Tutu Atwell and an unnamed CJ Daniels to step up, while Kyren Williams and Blake Corum keep splitting carries.",
+  "summary": "Nate Scheelhaase spent most of his session on how the offense adjusts without Puka Nacua and Davante Adams, who together account for nearly half of Matthew Stafford's passing yards. He said no single player replaces them, so the staff will change how it plans normal downs, third downs and the red zone while keeping its core identity. He argued that trust with Stafford comes from reps built over the year, and that injuries are what create opportunities. He singled out a receiver he called CJ Daniels (not on the provided roster) as having earned more snaps through practice work. He also praised Konata Mumpfield's big plays and welcomed Xavier Smith and Tutu Atwell back, saying Smith has played every position in the offense. At running back, he said Corum has provided a second-half spark and that Kyren Williams has done the same earlier in the year. RB coach Ron Gould will keep rotating them by feel rather than riding one hot hand. Looking back at the first Arizona game, he said the offense moved the ball but didn't finish drives past midfield, and that the lack of a trusted field goal operation pushed them to be more aggressive. He expects another tough plan from the Cardinals' defense.",
+  "injuries": [
+   {
+    "player": "Puka Nacua",
+    "status": "out",
+    "detail": "Did not practice with a knee injury. Scheelhaase talked as if the offense will be without him this week.",
+    "player_id": "00-0039075"
+   },
+   {
+    "player": "Davante Adams",
+    "status": "out",
+    "detail": "Not on the injury report provided, but Scheelhaase and the reporters treated him as unavailable alongside Nacua. The reason is not given.",
+    "player_id": "00-0031381"
+   },
+   {
+    "player": "Tutu Atwell",
+    "status": "returning",
+    "detail": "Described as 'coming back into the fold' along with Xavier Smith. No injury details or snap expectations were given.",
+    "player_id": "00-0036849"
+   },
+   {
+    "player": "Xavier Smith",
+    "status": "returning",
+    "detail": "Scheelhaase said he was in walkthrough the day before and 'snaps back into it'.",
+    "player_id": "00-0038359"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Puka Nacua",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Nacua will be unavailable for the Week 10 game against Arizona.",
+    "note": "Losing the top target removes a major share of Stafford's volume, which lifts the other pass catchers but hurts offensive ceilings.",
+    "quote": "feel that way with Puka and all that he brings to the table",
+    "player_id": "00-0039075",
+    "t": 395,
+    "t_exact": true
+   },
+   {
+    "player": "Davante Adams",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Adams will not be available this week, and the offense will have to adjust to life without him.",
+    "note": "Adams' absence, combined with Nacua's, opens targets for the rest of the receiver room.",
+    "quote": "that man, it's hard to replace him.",
+    "player_id": "00-0031381",
+    "t": 390,
+    "t_exact": true
+   },
+   {
+    "player": "Konata Mumpfield",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Mumpfield will be among the receivers asked to take on a bigger role with Nacua and Adams out.",
+    "note": "Scheelhaase cited his deep double-move catch against Denver as proof he can make plays, making him a sleeper for more targets.",
+    "quote": "we've seen him make those same plays on our field",
+    "player_id": "00-0040590",
+    "t": 861,
+    "t_exact": true
+   },
+   {
+    "player": "Xavier Smith",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Smith is back with the team and can step into any receiver spot in the offense.",
+    "note": "His versatility and familiarity with the scheme could earn him snaps while the receiver room is thin.",
+    "quote": "He's played all positions in this offense.",
+    "player_id": "00-0038359",
+    "t": 918,
+    "t_exact": true
+   },
+   {
+    "player": "Tutu Atwell",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Atwell is returning to the offense, but no snap count was given.",
+    "note": "He is a depth option at receiver this week, with his usage still unclear.",
+    "quote": "they're the type of guys that you just want to go to war with.",
+    "player_id": "00-0036849",
+    "t": 882,
+    "t_exact": true
+   },
+   {
+    "player": "Blake Corum",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Corum will keep providing second-half spark and a share of carries and checkdown catches.",
+    "note": "He has scored in each of the last three games, and the coach credited him as an explosive pass-game option.",
+    "quote": "I've been excited to see Blake be able to provide that.",
+    "player_id": "00-0039738",
+    "t": 725,
+    "t_exact": true
+   },
+   {
+    "player": "Kyren Williams",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Williams and Corum will continue to share carries, with Ron Gould deciding by feel rather than committing to one back.",
+    "note": "The committee caps the upside for either back, and a hot hand is not guaranteed extra work.",
+    "quote": "when those moments are where a guy needs a few more carries",
+    "player_id": "00-0037840",
+    "t": 961,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Replacing Nacua and Adams",
+    "detail": "Scheelhaase said the staff will adjust its planning on normal downs, third downs and the red zone, and use the available players' skill sets without asking them to do things they haven't done. Core identity plays stay the same."
+   },
+   {
+    "topic": "CJ Daniels",
+    "detail": "Scheelhaase praised the receiver's practice work over recent weeks and said he has earned his opportunities. The name does not match anyone on the provided roster, so no signal was assigned."
+   },
+   {
+    "topic": "Stafford and trust",
+    "detail": "He said trust comes from reps built over the season, and that Stafford has a good feel for what each play is meant to accomplish. He added that opponents have less tape on the current skill players."
+   },
+   {
+    "topic": "Last meeting with Arizona",
+    "detail": "The offense moved the ball but didn't capitalize past midfield, and uncertainty over the field goal operation pushed them to play more aggressively. Stafford was sacked three times, and he expects another strong plan from the Cardinals' defense."
+   }
+  ],
+  "opponent": "Arizona Cardinals"
+ },
+ {
+  "id": "LAC:mike-mcdaniel-press-conference-week-10-friday-2026",
+  "team": "LAC",
+  "url": "https://www.chargers.com/video/mike-mcdaniel-press-conference-week-10-friday-2026",
+  "title": "Mike McDaniel on Calling Plays From the Booth and Creating Explosive Plays",
+  "date": "2026-11-13",
+  "duration": 1063,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/chargers/ztisytchcikuok2o4tsh.jpg",
+  "kind": "day_after",
+  "after_week": 9,
+  "coach": "Mike McDaniel",
+  "role": "oc",
+  "words": 2501,
+  "model": "claude-sonnet-5-5",
+  "headline": "Cole Strange was benched at right guard after a poor game vs. Houston but is still the nominal starter, with competition open. McDaniel will call plays from the booth again Monday night and wants more catch-and-run plays.",
+  "summary": "McDaniel said Cole Strange is still seen as the starter, but the staff pulled him mid-game because his play fell below the standard. The team is practicing this week expecting Strange to start unless other linemen with game experience earn the job, and McDaniel would not reveal the lineup. He described the Texans game as a blip for Strange, whose pass protection had been solid before it, and he expects a bounce-back. McDaniel liked calling plays from the booth because he could track defensive tendencies live, especially for second-half calls, and he will stay there Monday night. He praised Justin Herbert's mental growth and said the touchdown to Quentin Johnston didn't surprise him. He called the throw perfectly placed and said Johnston's immediate catch transition and yards after the catch are what the offense needs more of. He stressed that explosive plays and execution on high-read plays are needed to turn field goals into touchdowns, since a couple of players failed to execute on the field-goal drives last game. He expects Herbert's best play of the season to still be ahead. He called the Ravens defense physical, disciplined, smart and multiple, with sound technique behind the apparent complexity.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Cole Strange",
+    "topic": "depth_chart",
+    "signal": "down",
+    "tone": "hedged",
+    "claim": "Strange starts at guard this week unless other linemen outperform him in practice.",
+    "note": "His starting job is not secure, which makes the LAC interior line and pass-protection situation worth watching for Herbert and the run game.",
+    "quote": "the expectation that, uh, that coal starts unless other guys give us the reason",
+    "player_id": "00-0038103",
+    "t": 68,
+    "t_exact": true
+   },
+   {
+    "player": "Justin Herbert",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Herbert's best play of the season is still to come, based on his improved mental approach and process.",
+    "note": "McDaniel sees Herbert's confidence and process improving after the touchdown, a mildly bullish sign for the QB's output.",
+    "quote": "",
+    "player_id": "00-0036355",
+    "t": 962,
+    "t_exact": false
+   },
+   {
+    "player": "Quentin Johnston",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "The offense wants more catch-and-run plays like Johnston's touchdown and will look to build on that.",
+    "note": "Johnston's yards-after-catch ability is a model for the passing game, which could mean more manufactured touches for him.",
+    "quote": "a perfectly placed ball that Q ran through that he didn't hesitate",
+    "player_id": "00-0038544",
+    "t": 519,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Play calling from the booth",
+    "detail": "McDaniel moved upstairs and found he could track defensive tendencies live and make better second-half calls. He said it was no cure-all, and he will stay in the booth for Monday night."
+   },
+   {
+    "topic": "Red zone and explosives",
+    "detail": "He called turning field goals into touchdowns paramount. The team needs more explosive plays and cleaner execution on high-read plays after a couple of breakdowns on field-goal drives."
+   },
+   {
+    "topic": "Ravens defense",
+    "detail": "He described Baltimore as physical, disciplined and high-IQ, with sound zone and technique. It runs many looks that appear complex but are well coached."
+   },
+   {
+    "topic": "Team context",
+    "detail": "McDaniel referred to a stretch of eight straight losses as a source of freedom for Herbert to play without pressure."
+   }
+  ],
+  "opponent": "Baltimore Ravens"
+ },
+ {
+  "id": "SEA:brian-fleury-on-drew-lock-s-performance-getting-ready-for-week-10",
+  "team": "SEA",
+  "url": "https://www.seahawks.com/video/brian-fleury-on-drew-lock-s-performance-getting-ready-for-week-10",
+  "title": "Brian Fleury On Drew Lock's Performance, Getting Ready For Week 10",
+  "date": "2026-11-13",
+  "duration": 450,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/seahawks/u1g3yiv9xxo88w8j4tap.jpg",
+  "kind": "day_after",
+  "after_week": 9,
+  "coach": "Brian Fleury",
+  "role": "oc",
+  "words": 1856,
+  "model": "claude-sonnet-5-5",
+  "headline": "Drew Lock is on track to play with no restrictions, and the Charbonnet/Price backfield is gaining momentum, with Charbonnet getting a bigger workload.",
+  "summary": "Fleury called Drew Lock's last game gritty, given how few practice reps he had going in. He said the elbow has improved over the past few weeks and the oblique issue isn't a big concern. Lock took more reps this week than last, so the team has no worries about his readiness. Fleury said the offense has no restrictions with Lock compared to Sam Darnold. The young quarterback (captioned as 'Jalen Mills', almost certainly Jalen Milroe) has been mixed in with the first-team reps and has shown leadership in the huddle. On the ground, Fleury said both backs can excel at outside and inside zone. The mix changes weekly with the opponent and coverage structure. He said Jadarian Price and Zach Charbonnet are building momentum and confidence, and that Charbonnet felt ready to take on more work during the game. Grey Zabel will likely slide back to right guard once Quenton Nelson is healthy, though the line has had to shuffle for two weeks and has room to improve. He also said the offense has faced unscouted looks early in games, including coverages built to take away Jaxon Smith-Njigba and unexpected fronts. He said they are working on 'catch-all' calls and have adjusted well in the second half. Smith-Njigba still gets plenty of designed targets, but Fleury said the defense ultimately dictates who gets the ball.",
+  "injuries": [
+   {
+    "player": "Drew Lock",
+    "status": "limited",
+    "detail": "Elbow has improved over recent weeks and a minor oblique issue is not a big concern. He took more reps this week than last, and the staff has no concerns about his readiness.",
+    "player_id": "00-0035704"
+   },
+   {
+    "player": "Quenton Nelson",
+    "status": "returning",
+    "detail": "Expected back at some point (no date given). Zabel will likely move back to right guard when Nelson is healthy. He did not practice (knee) on the injury report.",
+    "player_id": "00-0034342"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Drew Lock",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Lock will be ready to play this week despite the elbow and minor oblique issues.",
+    "note": "The coordinator downplayed both injuries and said Lock's practice workload is increasing, which points to him playing.",
+    "quote": "we have no concerns about his readiness to go",
+    "player_id": "00-0035704",
+    "t": 84,
+    "t_exact": true
+   },
+   {
+    "player": "Drew Lock",
+    "topic": "scheme",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "The offense has no restrictions with Lock under center compared to Sam Darnold.",
+    "note": "The full playbook and passing game should be available with Lock at quarterback.",
+    "quote": "there's no restrictions with drew versus Sam",
+    "player_id": "00-0035704",
+    "t": 387,
+    "t_exact": true
+   },
+   {
+    "player": "Zach Charbonnet",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Charbonnet will keep a larger share of the carries after his biggest workload in two years.",
+    "note": "He said he felt good and ready for more work, so he should hold a bigger role in the run game.",
+    "quote": "he was feeling ready to take on more of that role",
+    "player_id": "00-0039165",
+    "t": 167,
+    "t_exact": true
+   },
+   {
+    "player": "Jadarian Price",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Price's role in the run game will keep growing alongside Charbonnet's.",
+    "note": "The coordinator sees both backs gaining confidence, so Price should keep a meaningful share of touches.",
+    "quote": "they're building momentum",
+    "player_id": "00-0041512",
+    "t": 133,
+    "t_exact": true
+   },
+   {
+    "player": "Grey Zabel",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Zabel will likely move back to right guard once Quenton Nelson is healthy.",
+    "note": "Fleury said most reps stay as they are for now, so this matters for line continuity and the run game once Nelson returns.",
+    "quote": "he'll probably move back to right guard when Quentin is healthy",
+    "player_id": "00-0040639",
+    "t": 225,
+    "t_exact": true
+   },
+   {
+    "player": "Quenton Nelson",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Nelson will return to the lineup at right guard once healthy, with Zabel moving back.",
+    "note": "No timeline was given, but his return would restore the line to a more settled alignment.",
+    "quote": "",
+    "player_id": "00-0034342",
+    "t": 211,
+    "t_exact": false
+   },
+   {
+    "player": "Jaxon Smith-Njigba",
+    "topic": "matchup",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Defenses will keep trying to take Smith-Njigba away, and targets will follow the coverage.",
+    "note": "He remains a primary design target, but the coordinator said he can't control how often the ball ends up with him.",
+    "quote": "the defense always dictates who gets the football",
+    "player_id": "00-0038543",
+    "t": 424,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Run scheme",
+    "detail": "The team ran more inside zone than usual last week. Fleury said outside and inside zone complement each other and the mix depends on the opponent and coverage. He said both backs can excel at either."
+   },
+   {
+    "topic": "Offensive line",
+    "detail": "The line played with room for improvement while shuffling positions for a second week. Fleury said the group ran the ball well late in the game. He said he is looking forward to continuity."
+   },
+   {
+    "topic": "Slow starts",
+    "detail": "First-down production has lagged early in games. Early tempo was ineffective, and the offense has faced unscouted looks, including coverages built to take away Smith-Njigba and unexpected fronts. The staff is adding contingency plays for early explosives and has adjusted well in the second half."
+   },
+   {
+    "topic": "Backup quarterback",
+    "detail": "A young quarterback (captioned 'Jalen Mills', likely Jalen Milroe, not on the provided roster) has gotten more reps, including some with the first team. Fleury praised his leadership in the huddle and his support of Lock."
+   },
+   {
+    "topic": "Pass-catching back",
+    "detail": "Asked about a drafted back's pass-catching, Fleury said the staff saw the potential in the offseason and camp but it was delayed by injury. He said they are ready to 'unleash' it. The captions don't make clear which back he meant."
+   }
+  ],
+  "opponent": ""
+ }
+]

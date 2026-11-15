@@ -1,0 +1,128 @@
+[
+ {
+  "id": "PIT:watch-angelichio-graham-and-crossman-preview-week-10-against-bengals",
+  "team": "PIT",
+  "url": "https://www.steelers.com/video/watch-angelichio-graham-and-crossman-preview-week-10-against-bengals",
+  "title": "WATCH: Angelichio, Graham, and Crossman Preview Week 10 against Bengals",
+  "date": "2026-11-09",
+  "duration": 1733,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/steelers/ous8skh7uknwfsjodyp3.jpg",
+  "kind": "day_after",
+  "after_week": 8,
+  "coach": "Brian Angelichio",
+  "role": "oc",
+  "words": 6296,
+  "model": "claude-sonnet-5-5",
+  "headline": "Angelichio says the run game worked by getting downhill with double teams and Rico Dowdle is back. He'll try to get DK Metcalf more opportunities, and Darnell Washington is trusted near the goal line.",
+  "summary": "Angelichio said the run game worked against Cincinnati because the team deliberately got downhill and emphasized combination blocks and double teams inside. He said the Bengals' defensive line, including Lawrence, deserved respect. He credited the offensive line's continuity (five or six games together) and having Rico Dowdle back for the improvement. He called the passing game a work in progress. The bye-week self-scout focused on paring the offense down to what the players do well and putting them in better positions. He said the staff has looked at whether DK Metcalf is being placed correctly and will try to get him more opportunities. He praised Darnell Washington's consistency, his trust with Aaron Rodgers, and his size as both a pass catcher and a blocker, and said there are red-zone plays designed for him. He would not commit on Michael Pittman or Roman Wilson, saying only that their status will be judged as the week of practice goes on. The Bengals game is a Sunday-night game, and he wants to be explosive and get the ball to playmakers rather than just run and punt.",
+  "injuries": [
+   {
+    "player": "Rico Dowdle",
+    "status": "full",
+    "detail": "Described as healthy and back in the lineup; Angelichio called having him back 'huge'.",
+    "player_id": "00-0036139"
+   },
+   {
+    "player": "Michael Pittman",
+    "status": "unclear",
+    "detail": "Angelichio gave no timeline; he said they'll see how players run and feel in Wednesday's practice.",
+    "player_id": "00-0036252"
+   },
+   {
+    "player": "Roman Wilson",
+    "status": "unclear",
+    "detail": "A reporter said he can't return until the following week; Angelichio didn't confirm and said the process plays out through the week.",
+    "player_id": "00-0039739"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Rico Dowdle",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Dowdle is healthy and will be a central part of the run game that has been improving.",
+    "note": "A healthy lead back running behind a settled line against Cincinnati is a positive for his volume and efficiency.",
+    "quote": "having Rico backs huge",
+    "player_id": "00-0036139",
+    "t": 56,
+    "t_exact": true
+   },
+   {
+    "player": "Darnell Washington",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Washington will get red-zone and goal-line targets, including fade routes, this week.",
+    "note": "Increased goal-line looks add touchdown upside for a tight end already producing in the passing game.",
+    "quote": "we have some plays that are in for him down there",
+    "player_id": "00-0038558",
+    "t": 249,
+    "t_exact": true
+   },
+   {
+    "player": "Darnell Washington",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Washington's blocking lets the offense run three-man surfaces and combinations, while still being a threat in the pass game.",
+    "note": "His blocking keeps him on the field every down, but it can limit how often he is used as a receiver.",
+    "quote": "one of the few tight ends that you could leave on a defensive end",
+    "player_id": "00-0038558",
+    "t": 338,
+    "t_exact": true
+   },
+   {
+    "player": "DK Metcalf",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "The offense will make changes to get Metcalf more opportunities.",
+    "note": "Coaches acknowledge he is underused and plan to change how they use him, which could mean more targets.",
+    "quote": "get him more ops to be effective",
+    "player_id": "00-0035640",
+    "t": 276,
+    "t_exact": true
+   },
+   {
+    "player": "Michael Pittman",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Pittman's availability will be clearer after Wednesday's practice.",
+    "note": "A return would ease the load on the other receivers, but no timeline was given.",
+    "quote": "tomorrow will be another day.",
+    "player_id": "00-0036252",
+    "t": 399,
+    "t_exact": true
+   },
+   {
+    "player": "Roman Wilson",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "",
+    "note": "The coach didn't confirm a return and said it would be judged through the week of practice.",
+    "quote": "I think it'll help all of them for sure.",
+    "player_id": "00-0039739",
+    "t": 428,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Run game",
+    "detail": "The offense ran well by focusing on getting downhill and using combination blocks and double teams inside against Cincinnati's defensive line. The line has been together for five or six games. The plan is not to abandon those concepts, only to change how they look."
+   },
+   {
+    "topic": "Passing game",
+    "detail": "Described as a work in progress. The bye-week self-scout looked at concepts and player placement, with the goal of paring the offense down to what the players do well."
+   },
+   {
+    "topic": "Game plan",
+    "detail": "He respects Cincinnati's offense and will protect the ball and manage the clock, while still being explosive and getting the ball to playmakers."
+   }
+  ],
+  "opponent": "Cincinnati Bengals"
+ }
+]

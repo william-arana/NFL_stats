@@ -1,0 +1,136 @@
+[
+ {
+  "id": "PIT:watch-crossman-angelichio-and-graham-preview-week-8-against-browns",
+  "team": "PIT",
+  "url": "https://www.steelers.com/video/watch-crossman-angelichio-and-graham-preview-week-8-against-browns",
+  "title": "WATCH: Crossman, Angelichio, and Graham, Preview Week 8 against Browns",
+  "date": "2026-10-26",
+  "duration": 1840,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/steelers/l0cwjscnpytg1vabnbqr.jpg",
+  "kind": "day_after",
+  "after_week": 7,
+  "coach": "Brian Angelichio",
+  "role": "oc",
+  "words": 6858,
+  "model": "claude-sonnet-5-5",
+  "headline": "Steelers split work evenly between Jaylen Warren and a healthy-looking Rico Dowdle (30 runs, 30 passes), Darnell Washington is Rodgers' trusted big target, and DK Metcalf was held to 2 catches on 6 targets.",
+  "summary": "Offensive coordinator Brian Angelichio said the Steelers' short-yardage success comes from the offensive line (Zach Frazier, Mason McCormick and Brock Hoffman) getting movement, with Jaylen Warren and Rico Dowdle keeping their pads forward. He called the Warren/Dowdle snap split a good balance on a 30-run, 30-pass day. He said both backs were kept fresh and hoped to continue that. Dowdle looked healthy and fresh after missing a few games. Angelichio explained that Spencer Anderson's move into an extra-tackle role came after Brock Hoffman took over at right guard. Anderson can also catch, and the package pairs well with Darnell Washington on the wing. He praised Washington's sideline catch and said Aaron Rodgers trusts him in one-on-one matchups. On DK Metcalf's 2 catches on 6 targets, he credited New Orleans for taking him away and said that opens the ball up to the backs. He also praised the 42-year-old Rodgers' scrambling and pocket feel. For the Browns, he expects the same attacking four-man front, press and bump-and-run, a single-high post safety, and Grant Delpit down in the box. He also expects a few new third-down pressures. Several questions and answers in the session came from the special teams and defensive coordinators and are not attributed to Angelichio.",
+  "injuries": [
+   {
+    "player": "Rico Dowdle",
+    "status": "returning",
+    "detail": "Angelichio said he looked healthy with fresh legs and showed explosiveness after missing a few games.",
+    "player_id": "00-0036139"
+   },
+   {
+    "player": "Sebastian Joseph-Day",
+    "status": "ir",
+    "detail": "A reporter's question mentioned him being on IR; it was not discussed by the offensive coordinator.",
+    "player_id": ""
+   },
+   {
+    "player": "Darnell Washington",
+    "status": "unclear",
+    "detail": "The injury report lists a DNP that is not injury related (resting player); Angelichio spoke of him as fully involved.",
+    "player_id": "00-0038558"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Rico Dowdle",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Dowdle is healthy and will continue to share the backfield workload with Warren.",
+    "note": "A clean bill of health plus a real role in a 30-run offense makes Dowdle a viable flex option.",
+    "quote": "he looked healthy. You know his legs are fresh",
+    "player_id": "00-0036139",
+    "t": 937,
+    "t_exact": true
+   },
+   {
+    "player": "Jaylen Warren",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Warren and Dowdle will keep splitting snaps in a balanced way.",
+    "note": "A continued even split caps the ceiling for both backs, though both get touches in a run-friendly offense.",
+    "quote": "I think it was a good balance.",
+    "player_id": "00-0037228",
+    "t": 752,
+    "t_exact": true
+   },
+   {
+    "player": "Spencer Anderson",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Anderson will keep playing in the extra-big-tackle package and can be used as a receiver.",
+    "note": "A real role as an extra tackle and occasional pass-catcher adds some run-heavy and trick-play flexibility, though it is mostly an OL-driven change.",
+    "quote": "You can throw him the football too.",
+    "player_id": "00-0038645",
+    "t": 457,
+    "t_exact": true
+   },
+   {
+    "player": "Darnell Washington",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Washington will remain a go-to one-on-one target for Rodgers and part of the two-big-tight-end looks.",
+    "note": "Rodgers trusts him in contested situations, and the Steelers have a package built around him and Spencer Anderson.",
+    "quote": "Darnell is a tough cover.",
+    "player_id": "00-0038558",
+    "t": 558,
+    "t_exact": true
+   },
+   {
+    "player": "DK Metcalf",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "When defenses take Metcalf away, the offense will lean on the backs and spread the ball around.",
+    "note": "Metcalf had only 2 catches on 6 targets, so volume is volatile against teams that bracket him, though he still hit a 51-yard play.",
+    "quote": "spread the ball around",
+    "player_id": "00-0035640",
+    "t": 908,
+    "t_exact": true
+   },
+   {
+    "player": "Aaron Rodgers",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Rodgers will keep using his legs and pocket movement to extend plays and make big throws.",
+    "note": "His scrambles and the 51-yard pass to Metcalf show he can still extend plays and keep defenses honest.",
+    "quote": "he's always a passer.",
+    "player_id": "00-0023459",
+    "t": 820,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Short-yardage offense",
+    "detail": "The Steelers say the line (Frazier, McCormick, Hoffman) gets movement, and the backs stay tight with their pads forward, which explains their perfect conversion rate when running on third and fourth down needing two yards or less."
+   },
+   {
+    "topic": "Offensive line and extra-tackle package",
+    "detail": "Moving Brock Hoffman into the lineup freed Spencer Anderson, who had been playing right guard, to join the extra-tackle package alongside Darnell Washington. This lets them adapt to nine-technique or heavy six-technique looks."
+   },
+   {
+    "topic": "Penalty and unclear 'Brandon'",
+    "detail": "Angelichio called a 15-yard personal foul by 'Brandon Smith' disappointing and said Rodgers trusts him after a later big catch. The roster has both Brandon Smith and Brandon Johnson, and a catch makes the receiver more plausible, so I left him out of the signals."
+   },
+   {
+    "topic": "Browns defense",
+    "detail": "Angelichio expects the Browns to stay the same: four-man front, downhill linebackers, active safeties, press and bump-and-run, single-high post safety, and Grant Delpit in the box. He expects a few wrinkles, such as different third-down pressures."
+   },
+   {
+    "topic": "Special teams and defense (other coordinators)",
+    "detail": "Special teams coordinator Danny Crossman discussed the clock-management field goal, the return game and kicking in the slick Europe fields. Defensive coordinator Patrick Graham praised the run defense and the play of Payton Wilson and DeShon Elliott."
+   }
+  ],
+  "opponent": "Cleveland Browns"
+ }
+]

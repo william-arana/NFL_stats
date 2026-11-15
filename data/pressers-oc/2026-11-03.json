@@ -1,0 +1,534 @@
+[
+ {
+  "id": "GB:adam-stenavich-on-run-game-a-matter-of-us-making-the-plays-nov-3-2026",
+  "team": "GB",
+  "url": "https://www.packers.com/video/adam-stenavich-on-run-game-a-matter-of-us-making-the-plays-nov-3-2026",
+  "title": "Adam Stenavich on run game: 'A matter of us making the plays'",
+  "date": "2026-11-03",
+  "duration": 828,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/packers/oqpskthvmqapnsxeii2l.jpg",
+  "kind": "day_after",
+  "after_week": 8,
+  "coach": "Adam Stenavich",
+  "role": "oc",
+  "words": 2659,
+  "model": "claude-sonnet-5-5",
+  "headline": "Stenavich says Josh Jacobs' return should lift a run game that lacks explosive plays, and he wants to keep feeding Jacobs, Tucker Kraft, Christian Watson and Matthew Golden. Jordan Love is carrying a pass-heavy offense.",
+  "summary": "Stenavich said he was frustrated but encouraged after rewatching the film, because the yards are there and the run game just needs to hit more explosive runs. He expects Josh Jacobs' return to help, since Jacobs gets better the more he is fed, and he said the team won't abandon the run. He blamed the lack of movement at the point of attack on fundamentals and pad level across the line, tight ends and receivers. He also called for the offensive line to settle in. On the line, he said Kevin Zeitler hasn't played only because Laken Tomlinson and Travis Glover performed well, and that he would not hesitate to play Zeitler. He said the team will pick its best five to beat the Patriots and won't change things just for the sake of it. He praised the passing game and Jordan Love, who is leading the league in attempts, and he is fine with that pass-heavy approach as long as it works. He called Tucker Kraft's game against the Panthers tremendous and said Matthew Golden has much more upside, with the receiver room running through Golden and Christian Watson. He also said three-tight-end sets are up this year because the team has three healthy tight ends.",
+  "injuries": [
+   {
+    "player": "Josh Jacobs",
+    "status": "unclear",
+    "detail": "Stenavich said Jacobs is back and should help the run game. Jacobs did not practice this week with a finger issue, and the coach did not address it.",
+    "player_id": "00-0035700"
+   },
+   {
+    "player": "Kevin Zeitler",
+    "status": "limited",
+    "detail": "Stenavich said Zeitler is healthy enough to play and has been ready to go. He was signed coming off a knee injury and has not played yet; the injury report lists him as limited with an ankle issue.",
+    "player_id": "00-0029592"
+   },
+   {
+    "player": "Christian Watson",
+    "status": "full",
+    "detail": "Watson went to the hospital during the game but returned. Stenavich said he is glad Watson has bounced back and called him reliable this year.",
+    "player_id": "00-0038124"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Josh Jacobs",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Jacobs will be fed heavily and the run game should improve with him back.",
+    "note": "Stenavich ties the run game's hoped-for improvement to Jacobs and wants to get the ball in his hands however possible, but the offense is still struggling to produce explosive runs and Jacobs missed practice with a finger injury.",
+    "quote": "I think having Josh back is going to help.",
+    "player_id": "00-0035700",
+    "t": 44,
+    "t_exact": true
+   },
+   {
+    "player": "Tucker Kraft",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Kraft will keep getting fed targets as the season goes on.",
+    "note": "He caught all six of his targets against the Panthers and is in a group of players Stenavich wants to keep feeding.",
+    "quote": "I thought he had a tremendous game against the Panthers.",
+    "player_id": "00-0038996",
+    "t": 428,
+    "t_exact": true
+   },
+   {
+    "player": "Matthew Golden",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Golden will remain a focal point of the passing game with more production to come.",
+    "note": "Stenavich says the receiver room runs through Golden and Watson and that Golden has much more upside once the drops are fixed.",
+    "quote": "Everything in that room kind of goes through those two guys.",
+    "player_id": "00-0040667",
+    "t": 667,
+    "t_exact": true
+   },
+   {
+    "player": "Christian Watson",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Watson will remain a top option, with the receiver room running through him and Golden.",
+    "note": "He is healthy after the scare in the game, and Stenavich praised his football IQ, route running and reliability.",
+    "quote": "",
+    "player_id": "00-0038124",
+    "t": 660,
+    "t_exact": false
+   },
+   {
+    "player": "Jordan Love",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "The offense will keep leaning on Love's passing volume while the run game struggles.",
+    "note": "Stenavich is fine with Love leading the league in attempts and praised his quick processing and confidence, which supports high-volume passing production.",
+    "quote": "Why not? I mean, if it's working yeah.",
+    "player_id": "00-0036264",
+    "t": 501,
+    "t_exact": true
+   },
+   {
+    "player": "Kevin Zeitler",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Zeitler could play but has no set role; he is not starting at right guard now.",
+    "note": "He's ready, but Tomlinson and Glover have played well, so a lineup change is only possible, not planned.",
+    "quote": "Would I hesitate to put him in a game. No, I would not.",
+    "player_id": "00-0029592",
+    "t": 176,
+    "t_exact": true
+   },
+   {
+    "player": "Laken Tomlinson",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Tomlinson has been the one playing right guard, with Aaron Banks at left guard.",
+    "note": "The guard spots are fluid, but Tomlinson has earned praise for stepping in on a short week.",
+    "quote": "I thought Larkin did a nice job going in there on a short week",
+    "player_id": "00-0032234",
+    "t": 237,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Run game",
+    "detail": "The run game's problem is a lack of explosive runs and poor movement at the point of attack. Stenavich blamed pad level and fundamentals across the offensive line, tight ends and receivers. The team will keep calling runs to make defenses respect it."
+   },
+   {
+    "topic": "Offensive line",
+    "detail": "Stenavich says continuity matters, so the team won't change the line just to change it. The coaches will pick their best five to face the Patriots. Zeitler, Tomlinson, Banks and Glover are all in the mix on the interior."
+   },
+   {
+    "topic": "Personnel groupings",
+    "detail": "Green Bay uses three-tight-end sets more because it has three healthy tight ends this year, and Tucker Kraft is back from injury. Stenavich likes being multiple, mixing 13 and 11 personnel."
+   },
+   {
+    "topic": "Passing game",
+    "detail": "Stenavich credited the pass game and pass protection for the team's success. He said Love has been strong on off-schedule plays but had a few bad throws and decisions."
+   }
+  ],
+  "opponent": "New England Patriots"
+ },
+ {
+  "id": "IND:jim-bob-cooter-on-improving-the-pass-game-colts-vs-cowboys-week-9",
+  "team": "IND",
+  "url": "https://www.colts.com/video/jim-bob-cooter-on-improving-the-pass-game-colts-vs-cowboys-week-9",
+  "title": "Jim Bob Cooter on improving the pass game | Colts vs. Cowboys, Week 9",
+  "date": "2026-11-03",
+  "duration": 473,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/colts/qpf0mkweyi39umwpvron.jpg",
+  "kind": "day_after",
+  "after_week": 8,
+  "coach": "Jim Bob Cooter",
+  "role": "oc",
+  "words": 1577,
+  "model": "claude-sonnet-5-5",
+  "headline": "Cooter says the staff is '100%' behind Daniel Jones and wants a better pass game. He called Jonathan Taylor as explosive as they come and gave a lukewarm 'we'll see' on Josh Downs amid his trade request.",
+  "summary": "Cooter said the coaching staff tried to take the Josh Downs trade-request noise at face value and focus on the work week. He thought coaches and players could have done a better job of that last week. Downs took part in all meetings, walkthroughs and practices. Cooter praised him as a man-to-man separator but called the season imperfect for everyone, and ended with a noncommittal 'we'll see.' On the passing game, he said every part needs to improve, including protection, routes, separation, catching, play design and focus, and he wants a high yards per attempt through explosives and moving the chains. Asked about using Anthony Richardson's legs, he sidestepped, saying different players have different tools and the staff must find the best path. He also said the staff is '100%' behind Daniel Jones and needs to play better around him. He acknowledged defenses are squeezing the offense, with safeties close to the line, and said it's on the offense to beat that, which it hasn't done often enough. He closed by describing Jonathan Taylor as a constant big-play threat who can turn a 3-4 yard run into 50, and he did not address trade speculation about him.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Daniel Jones",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Daniel Jones remains the Colts' starting quarterback.",
+    "note": "The staff publicly backed Jones and put the blame on the offense around him, so a QB change looks unlikely for now.",
+    "quote": "we're behind Daniel 100%. We gotta go play better around him.",
+    "player_id": "00-0035710",
+    "t": 277,
+    "t_exact": true
+   },
+   {
+    "player": "Anthony Richardson",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "",
+    "note": "Cooter didn't rule out or commit to using Richardson's running ability, so any package role is speculative.",
+    "quote": "different players on our offense have different tools",
+    "player_id": "00-0039164",
+    "t": 283,
+    "t_exact": true
+   },
+   {
+    "player": "Josh Downs",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Downs will keep getting opportunities against man and match-up zone coverage.",
+    "note": "Cooter values him as a man-beater, but the pass game is struggling overall, which limits his upside.",
+    "quote": "He's a man to man separating receiver.",
+    "player_id": "00-0038997",
+    "t": 93,
+    "t_exact": true
+   },
+   {
+    "player": "Josh Downs",
+    "topic": "trade_or_roster",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Downs participated fully in the work week despite the trade request.",
+    "note": "He is still practicing and playing, but Cooter was noncommittal about the future, so a trade remains possible.",
+    "quote": "been a pleasure to coach for a bunch of years here",
+    "player_id": "00-0038997",
+    "t": 133,
+    "t_exact": true
+   },
+   {
+    "player": "Jonathan Taylor",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Taylor remains a central, explosive piece of the offense.",
+    "note": "Cooter praised his big-play ability as a runner and receiver and did not address the trade speculation, which supports his fantasy value while he is on the team.",
+    "quote": "So JT is explosive as they get.",
+    "player_id": "00-0036223",
+    "t": 465,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Passing game",
+    "detail": "Cooter said every part of the passing game needs to improve: protection, routes, separation, catching, play design and focus. He wants a high yards per attempt, built on explosives and consistently moving the chains."
+   },
+   {
+    "topic": "Defensive approach",
+    "detail": "Defenses are trying to restrict what the Colts can do and copy what has worked against them. Cooter said the offense has had its moments but not enough of them against that."
+   },
+   {
+    "topic": "Distractions",
+    "detail": "He felt coaches and players could have focused better last week amid the Downs trade-request news and other distractions."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "JAX:campanile-udinski-on-maintaining-standard-during-short-week-ravens-prep-press-conference",
+  "team": "JAX",
+  "url": "https://www.jaguars.com/video/campanile-udinski-on-maintaining-standard-during-short-week-ravens-prep-press-conference",
+  "title": "Campanile & Udinski on Maintaining Standard During Short Week, Ravens Prep | Press Conference",
+  "date": "2026-11-03",
+  "duration": 797,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/jaguars/lltmij7wbwkpxf45jivx.jpg",
+  "kind": "day_after",
+  "after_week": 8,
+  "coach": "Grant Udinski",
+  "role": "oc",
+  "words": 3041,
+  "model": "claude-sonnet-5-5",
+  "headline": "Udinski praised Bhayshul Tuten after a career-best game and Trevor Lawrence's week-to-week consistency, but Tuten is listed DNP with an ankle injury on a short week before Thursday night's game against Baltimore.",
+  "summary": "Udinski spoke after a short turnaround ahead of Thursday night's game against the Ravens. He said the bye week after London let the staff get ahead on this opponent and do a self-scout. He added that a short week means leaning on the reps banked all season, with the same standard of execution. He credited Trevor Lawrence's consistency to his preparation habits: film study, game-plan study, walkthroughs and play-calling, all done at a high level every day. He called Bhayshul Tuten's big Sunday the product of a rookie who kept working, and said Tuten is 'still just scratching the surface'. He admitted the staff 'maybe' hadn't always given Tuten opportunities. He also praised the rest of the running back room (Ameer Abdullah, LeQuint Allen Jr., Chris Rodriguez Jr.) and said he's confident they'll make plays when given the chance. On Lawrence's two rushing touchdowns, he said Lawrence recognized a look the team had prepared for all week and checked into a specific run, with all 11 players understanding why. He said live execution of screens builds confidence, because defenders end up in many more positions on screens than on runs. He did not discuss injuries or the Ravens' defense in detail.",
+  "injuries": [
+   {
+    "player": "Bhayshul Tuten",
+    "status": "unclear",
+    "detail": "The injury report lists him DNP with an ankle injury. Udinski didn't address his health while praising his breakout game.",
+    "player_id": "00-0040719"
+   },
+   {
+    "player": "Eric Murray",
+    "status": "unclear",
+    "detail": "The defensive coordinator's segment treated him as lost for the defense. No severity or timeline was given, and Udinski didn't address it.",
+    "player_id": ""
+   },
+   {
+    "player": "DaVon Hamilton",
+    "status": "unclear",
+    "detail": "The defensive coordinator's segment treated him as lost for the defense. No severity or timeline was given, and Udinski didn't address it.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Bhayshul Tuten",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Tuten has more to give and will make plays in the run and pass game when given opportunities.",
+    "note": "He just had one of the biggest games of his career and the OC openly said the staff hadn't always given him chances, so his role could grow if the ankle allows.",
+    "quote": "he's still just scratching the surface",
+    "player_id": "00-0040719",
+    "t": 630,
+    "t_exact": true
+   },
+   {
+    "player": "Trevor Lawrence",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Lawrence's consistency comes from his preparation and is expected to carry on.",
+    "note": "The OC attributes his steadier play to repeatable daily habits, which supports a stable QB floor.",
+    "quote": "that contributes in a large part to his consistency that you see on Sunday",
+    "player_id": "00-0036971",
+    "t": 603,
+    "t_exact": true
+   },
+   {
+    "player": "Trevor Lawrence",
+    "topic": "scheme",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Lawrence will keep checking into specific runs based on the front or coverage he sees.",
+    "note": "His pre-snap checks produced two rushing touchdowns, which suggests continued goal-line and rushing involvement for him.",
+    "quote": "",
+    "player_id": "00-0036971",
+    "t": 660,
+    "t_exact": false
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Short-week preparation",
+    "detail": "The bye after London let the staff get ahead on Baltimore and other opponents and do a self-scout. The short week relies on banked reps, and Udinski said the standard of execution has to stay the same."
+   },
+   {
+    "topic": "Screen game",
+    "detail": "The screen game has lacked production. Udinski said full-speed live execution of the screens that hit builds confidence, because screens need more feel as defenders end up in more positions than on runs."
+   },
+   {
+    "topic": "Running back room",
+    "detail": "Udinski praised the whole group (Tuten, Abdullah, Allen Jr., Rodriguez Jr.) for their work and improvement. He said he's confident they will make plays whenever they get the opportunity."
+   }
+  ],
+  "opponent": "Baltimore Ravens"
+ },
+ {
+  "id": "MIN:wes-phillips-on-offense-s-execution-offensive-line-s-performance-being-more-explosive-offensively",
+  "team": "MIN",
+  "url": "https://www.vikings.com/video/wes-phillips-on-offense-s-execution-offensive-line-s-performance-being-more-explosive-offensively",
+  "title": "Wes Phillips on Offense's Execution, Offensive Line's Performance, Being More Explosive Offensively",
+  "date": "2026-11-03",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/vikings/hib24uoiavfp9duz5ghm.jpg",
+  "kind": "day_after",
+  "after_week": 8,
+  "coach": "Wes Phillips",
+  "role": "oc",
+  "words": 1396,
+  "model": "claude-sonnet-5-5",
+  "headline": "Phillips says DeeJay Dallas got early-down work vs. Detroit to spread carries off Aaron Jones, with Jordan Mason still expected to be an impact back; Kyler Murray's misses are described as play-by-play fixes.",
+  "summary": "Phillips opened by saying the offensive line has made real progress this season, especially in play-action pass protection, while still having some breakdowns on certain drop-backs and pressure looks. He pushed back on the idea that the offense is too complex, saying the problems are about execution and all 11 players being on the same page rather than mental errors or busts. He said the fix is continued individual coaching and clarity on the intent of plays, plus players making plays when chances come. On the run game, he said efficiency has come and gone and depends partly on the opponent, but overall consistency has to improve. Asked about Jordan Mason's usage, he said the team used different groupings and personnel, including DeeJay Dallas on some early downs, and wanted to spread the workload given how much Aaron Jones has carried recently. On Kyler Murray, he declined to name one overarching problem, instead pointing to footwork and eye placement on a play-by-play basis, and noted Murray made good plays and used his legs for some big gains. He closed by saying he's confident in the players, sees chances for more explosive plays, and noted the team is limiting penalties and turnovers, so a bit more run efficiency and a few explosives could change games.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Jordan Mason",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Mason will remain part of the rotation and can have an impact, though his Week 8 workload was reduced by personnel groupings.",
+    "note": "His snaps were cut by game-specific groupings and a plan to spread the work, so his volume is not guaranteed, but the coach still sees him as an impact player.",
+    "quote": "I think Jordan can be an impact for us.",
+    "player_id": "00-0037525",
+    "t": 271,
+    "t_exact": false
+   },
+   {
+    "player": "DeeJay Dallas",
+    "topic": "role",
+    "signal": "up",
+    "tone": "neutral",
+    "claim": "Dallas filled a particular early-down role in Week 8 that he hadn't had as much before.",
+    "note": "A small expansion in early-down snaps could take some touches from Mason or Jones, though it was tied to specific roles in that game.",
+    "quote": "you saw DJ Dallas in there for, uh, some early down plays",
+    "player_id": "00-0036425",
+    "t": 299,
+    "t_exact": true
+   },
+   {
+    "player": "Aaron Jones",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "The team wants to spread out the backfield work after Jones's heavy recent workload.",
+    "note": "Phillips cited Jones's heavy recent load as a reason to spread carries, which could trim his volume.",
+    "quote": "especially, you know, all the work that, uh, Aaron Jones has gotten",
+    "player_id": "00-0033293",
+    "t": 323,
+    "t_exact": true
+   },
+   {
+    "player": "Kyler Murray",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "The coaches see Murray's misses as play-by-play footwork and eye-placement issues, not one systemic problem, and expect improvement.",
+    "note": "There is no single fix named, so his accuracy and decision-making inconsistency may continue, though his legs are still producing big plays.",
+    "quote": "I don't think there's some overarching, hey, this is the fix",
+    "player_id": "00-0035228",
+    "t": 404,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive line",
+    "detail": "Phillips praised the line's growth, especially in play-action pass protection, and credited the line coaches. He acknowledged occasional breakdowns on certain drop-backs and pressure looks, and said run-game efficiency still needs to improve."
+   },
+   {
+    "topic": "Execution vs. complexity",
+    "detail": "He rejected the idea that the offense is too complex, saying the issue is all 11 players executing together rather than mental errors. The team is not looking to simplify the game plan."
+   },
+   {
+    "topic": "Run game and explosives",
+    "detail": "Run efficiency has been inconsistent and depends on the opponent. Phillips believes a bit more run efficiency and a few explosive plays would change outcomes, and noted the team is limiting penalties and turnovers."
+   },
+   {
+    "topic": "Week 8 loss",
+    "detail": "Phillips called the loss to the Lions a stinging divisional road defeat and said the team will pursue every avenue to improve."
+   }
+  ],
+  "opponent": "Bills"
+ },
+ {
+  "id": "PHI:sean-mannion-press-conference-november-3-2026-eagles-giants",
+  "team": "PHI",
+  "url": "https://www.philadelphiaeagles.com/video/sean-mannion-press-conference-november-3-2026-eagles-giants",
+  "title": "Sean Mannion Press Conference: November 3, 2026",
+  "date": "2026-11-03",
+  "duration": 966,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/eagles/b1e752d11lxqitgnsm3o.jpg",
+  "kind": "day_after",
+  "after_week": 8,
+  "coach": "Sean Mannion",
+  "role": "oc",
+  "words": 3628,
+  "model": "claude-sonnet-5-5",
+  "headline": "Mannion says Saquon Barkley is improving but still being managed within games, while Elijah Mitchell and rookie TE Eli Stowers are now active parts of the offense.",
+  "summary": "Mannion spent most of the session on the offense's operational problems after the Washington game: slow lineups, communication miscues, an unblocked rusher and a critical offsides penalty. He said Tanner McKee is trending upward, and that decision making is the main area to keep improving. On Saquon Barkley, he called him a warrior who has dealt with bumps and bruises, and said the staff is managing his snaps in games and during the week. He said Barkley is getting better physically and that the team should find its rhythm with him. Grant Calcaterra is back from injury and trusted as a versatile blocker who lines up in many spots. Elijah Mitchell was praised for his blitz pickups and effective runs, and he already knows the system. Rookie TE Eli Stowers is returning from injury, is mentally sharp, and should grow with more reps. The Giants' front is described as disruptive, so the team is focused on cleaning up protection communication for this division game.",
+  "injuries": [
+   {
+    "player": "Saquon Barkley",
+    "status": "limited",
+    "detail": "Dealing with bumps and bruises and physical issues over the last couple of weeks. Mannion says he is getting better and better, but the staff is managing his snaps in games and during the week.",
+    "player_id": "00-0034844"
+   },
+   {
+    "player": "Grant Calcaterra",
+    "status": "returning",
+    "detail": "Mannion described him as coming back from injury and said he had a nice week of practice.",
+    "player_id": "00-0037086"
+   },
+   {
+    "player": "Eli Stowers",
+    "status": "returning",
+    "detail": "Worked hard to get healthy and practiced in his return-to-play window. He has now gotten into games.",
+    "player_id": "00-0041483"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Tanner McKee",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "McKee's decision making will keep improving with more practice reps and game work.",
+    "note": "The OC is publicly supportive but says there is still room to grow in decision making, so QB consistency is not yet settled.",
+    "quote": "I'm confident he'll continue to, to trend upward",
+    "player_id": "00-0038400",
+    "t": 32,
+    "t_exact": true
+   },
+   {
+    "player": "Saquon Barkley",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Barkley's snaps will continue to be managed in games and throughout the week while he gets healthier.",
+    "note": "He is dealing with bumps and bruises and a managed snap count, which caps his volume and adds risk even though he is trending better.",
+    "quote": "we just try to manage him within the game",
+    "player_id": "00-0034844",
+    "t": 335,
+    "t_exact": true
+   },
+   {
+    "player": "Grant Calcaterra",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Calcaterra will keep being used as a versatile, multi-position blocker and flexible piece.",
+    "note": "He is trusted in blocking roles such as lead blocker and bootleg front-side blocker, which points to a blocking-heavy role rather than a big target share.",
+    "quote": "Grant's a flexible piece. He's someone we really value.",
+    "player_id": "00-0037086",
+    "t": 163,
+    "t_exact": true
+   },
+   {
+    "player": "Elijah Mitchell",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Mitchell will keep playing a role in the backfield, with trust in pass protection and running.",
+    "note": "A trusted veteran who knows the system and has stepped in seamlessly, so he could take snaps in the RB rotation, especially with Barkley managed.",
+    "quote": "was able to make some great blitz pickups for us",
+    "player_id": "00-0036567",
+    "t": 796,
+    "t_exact": true
+   },
+   {
+    "player": "Eli Stowers",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Stowers will keep growing and see more game time as he gets more practice and game reps.",
+    "note": "The rookie TE is back from injury and getting into games, so he is a developing stash with a slowly rising role.",
+    "quote": "I'm optimistic that Eli will be kind of on that similar trajectory",
+    "player_id": "00-0041483",
+    "t": 866,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Giants defense",
+    "detail": "Mannion highlighted a talented, disruptive front and good second-level and coverage players. He called it a heightened division game and said they are still building the plan."
+   },
+   {
+    "topic": "Operation and communication",
+    "detail": "The offense needs to line up faster and communicate more clearly after Washington miscues, including an offsides penalty on a silent count and an unblocked rusher. Mannion said the center or quarterback handles communication depending on the play, and called these corrections a point of emphasis."
+   },
+   {
+    "topic": "Pass protection and OL coaching",
+    "detail": "Mannion praised new OL coach Chris Cooper as a teacher of fundamentals and said the staff diagnoses each miscue as a call, communication or technique issue. He took responsibility for the protection plan."
+   },
+   {
+    "topic": "Working with Nick Sirianni",
+    "detail": "Mannion described Sirianni as supportive and a valuable resource, with healthy back-and-forth as they sharpen the plan each week."
+   }
+  ],
+  "opponent": "New York Giants"
+ }
+]

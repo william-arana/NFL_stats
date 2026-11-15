@@ -1,0 +1,259 @@
+[
+ {
+  "id": "GB:adam-stenavich-christian-watson-and-matthew-golden-feed-off-each-other-nov-10-2026",
+  "team": "GB",
+  "url": "https://www.packers.com/video/adam-stenavich-christian-watson-and-matthew-golden-feed-off-each-other-nov-10-2026",
+  "title": "Adam Stenavich: Christian Watson and Matthew Golden 'feed off each other'",
+  "date": "2026-11-10",
+  "duration": 773,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/packers/d1bxkntxesbr5qbopwte.jpg",
+  "kind": "day_after",
+  "after_week": 9,
+  "coach": "Adam Stenavich",
+  "role": "oc",
+  "words": 2565,
+  "model": "claude-sonnet-5-5",
+  "headline": "Kaleb Johnson is back in the RB mix after running hard in his first game action since being scratched, Golden and Watson are both treated as No. 1 receivers, and Minnesota's soft-shell, pressure defense may limit deep shots next week.",
+  "summary": "Stenavich praised Kaleb Johnson's hard running and said his pass protection has improved, including a good blitz pickup. He added that Johnson has the juice and vision to hit big runs when holes open. On the offensive line he said he likes the group and is optimistic about getting Sean Rhyan back soon. He described Aaron Banks, Kevin Zeitler and Laken Tomlinson as competing for two guard spots this week, and he praised Zeitler's relief work after Banks went down. He called Matthew Golden and Christian Watson 'two number ones' who feed off each other, and said Watson's selfless attitude sets the tone for the room. He called Jordan Love calm against the blitz and singled out the deep sideline throw to Watson against New England. Looking to Minnesota, he expects Brian Flores' defense to bring pressure while playing soft coverage, which means fewer deep opportunities, so protecting up front and taking what is given is the focus. He explained Tucker Kraft's one-catch game as coverage taking away his reads, not a reduced role, and called Savion Williams a versatile weapon who keeps developing.",
+  "injuries": [
+   {
+    "player": "Aaron Banks",
+    "status": "limited",
+    "detail": "Went down in the game and had his groin wrapped. He was the planned left guard and is now in a three-man competition for two guard spots this week. The injury report lists a limited knee.",
+    "player_id": "00-0036551"
+   },
+   {
+    "player": "Kevin Zeitler",
+    "status": "limited",
+    "detail": "Stepped in for Banks and played well. He is listed limited with an ankle issue but is being counted among the healthy vets at guard.",
+    "player_id": "00-0029592"
+   },
+   {
+    "player": "Sean Rhyan",
+    "status": "returning",
+    "detail": "Stenavich hopes to get him back 'at some point soon' for more interior physicality. He did not practice (ankle).",
+    "player_id": "00-0037076"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Kaleb Johnson",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Johnson, a healthy scratch the week before, is improving in pass protection and stays in the RB rotation as a big-play runner.",
+    "note": "His hard running and chunk-play ability, plus better pass pro, make him a more likely rotation piece, though his workload is unclear.",
+    "quote": "Just run hard, run angry.",
+    "player_id": "00-0040142",
+    "t": 23,
+    "t_exact": true
+   },
+   {
+    "player": "Matthew Golden",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Golden is a co-No. 1 receiver, and the offense will keep trying to get both him and Watson the ball.",
+    "note": "He is a top-five league receiver who beat a top corner (Christian Gonzalez), so his target share should stay strong.",
+    "quote": "they kind of feed off each other",
+    "player_id": "00-0040667",
+    "t": 328,
+    "t_exact": true
+   },
+   {
+    "player": "Christian Watson",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Watson remains a featured receiver and deep threat with Love.",
+    "note": "He is a top-five league receiver and the target of Love's best throw last week, so he is a high-end WR option.",
+    "quote": "I feel like we got two number ones for sure.",
+    "player_id": "00-0038124",
+    "t": 755,
+    "t_exact": true
+   },
+   {
+    "player": "Tucker Kraft",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Kraft's one-catch game was due to coverage, not game plan; he was still the primary read on several plays.",
+    "note": "The role is intact, and Minnesota's soft coverage behind pressure could create more short-area chances, but target volume can vary week to week.",
+    "quote": "there was a few where he was the primary receiver and just got covered",
+    "player_id": "00-0038996",
+    "t": 602,
+    "t_exact": true
+   },
+   {
+    "player": "Savion Williams",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Williams will keep getting snaps in a versatile role as the staff continues to develop him.",
+    "note": "The coach calls him a weapon who improves weekly, but he is a depth/stash option for now (groin listed limited).",
+    "quote": "that has a lot of versatility",
+    "player_id": "00-0040009",
+    "t": 709,
+    "t_exact": true
+   },
+   {
+    "player": "Kevin Zeitler",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Zeitler is in a three-for-two competition at guard this week with Banks and Tomlinson.",
+    "note": "The guard rotation affects run-blocking and pass protection for the RBs and Love.",
+    "quote": "I like what I've seen from Zeitler in there.",
+    "player_id": "00-0029592",
+    "t": 140,
+    "t_exact": true
+   },
+   {
+    "player": "Aaron Banks",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Banks was the planned left guard but must win back his spot this week after leaving the game.",
+    "note": "His health and snaps are uncertain, which could affect the interior line.",
+    "quote": "I'm kind of interested to see how it plays out this week with banks, Zeitler",
+    "player_id": "00-0036551",
+    "t": 127,
+    "t_exact": true
+   },
+   {
+    "player": "Sean Rhyan",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Rhyan will return to the lineup 'soon.'",
+    "note": "His return would add interior physicality, but he did not practice (ankle), so the timeline is unconfirmed.",
+    "quote": "It'll be good to get Sean back at some point soon.",
+    "player_id": "00-0037076",
+    "t": 119,
+    "t_exact": true
+   },
+   {
+    "player": "Jordan Love",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Love will keep handling blitzes calmly and hitting downfield throws.",
+    "note": "His poise against pressure supports his fantasy floor against Minnesota's aggressive defense.",
+    "quote": "he's calm. He doesn't get rattled.",
+    "player_id": "00-0036264",
+    "t": 467,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Minnesota defense",
+    "detail": "Brian Flores' unit is aggressive and brings pressure while playing soft coverage to keep a lid on deep passes. Stenavich expects fewer downfield chances than against New England, so protecting up front and taking whatever the defense gives is the priority."
+   },
+   {
+    "topic": "Offensive line and trade deadline",
+    "detail": "Stenavich likes the current group and sees no need for outside help. He credited the pass-protection addition of an interior veteran and expects the guard competition and Rhyan's return to settle the line."
+   },
+   {
+    "topic": "Game-day tempo",
+    "detail": "Love sometimes hurries the offense to the line on his own, and sometimes the staff or LaFleur calls for it after a possible challenge, to deny opponents a look at replays."
+   }
+  ],
+  "opponent": "Minnesota Vikings"
+ },
+ {
+  "id": "IND:jim-bob-cooter-on-seth-mcgowan-s-growth-next-steps-for-tyler-warren-colts-vs-dolphins-week-10",
+  "team": "IND",
+  "url": "https://www.colts.com/video/jim-bob-cooter-on-seth-mcgowan-s-growth-next-steps-for-tyler-warren-colts-vs-dolphins-week-10",
+  "title": "Jim Bob Cooter on Seth McGowan’s growth, next steps for Tyler Warren | Colts vs. Dolphins, Week 10",
+  "date": "2026-11-10",
+  "duration": 755,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/colts/qkhxnajnkkl8vyrtxasc.jpg",
+  "kind": "day_after",
+  "after_week": 9,
+  "coach": "Jim Bob Cooter",
+  "role": "oc",
+  "words": 2441,
+  "model": "claude-sonnet-5-5",
+  "headline": "Cooter praises rookie RB Seth McGowan's growth (especially pass protection) and says Josh Downs will bounce back from drops, but gave no hard role or snap changes.",
+  "summary": "Jim Bob Cooter spent most of the session on young players. He said rookie RB Seth McGowan is on a good trajectory: he runs hard and runs where he is supposed to, and he is improving in pass protection. Cooter also said McGowan is still being coached on the details of the position. On Tyler Warren, he said the tight end is in a growth phase and is being moved around in many different route schemes. Warren is sometimes the primary target and sometimes the second or third read, and his development is described as a career-long process. Rookie guard Jalen Farmer has been playing the last couple of weeks against strong interior defenders. Cooter called the challenges real and expects ups and downs, but he likes how Farmer works. On Josh Downs, who dropped two third-down passes Sunday, Cooter said the season is not written yet and he expects a bounce-back, citing Downs's strength against man coverage. He admitted the offense as a whole has had ups and downs. He also said Jonathan Taylor, whom I'm reading as the \"JT\" asked about, has handled the surrounding noise with no change in preparation. The session closed with a light question about his sideline demeanor.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Seth McGowan",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "McGowan will keep getting carries and improving as a rookie RB, especially in pass protection.",
+    "note": "He has earned trust through growth, including a goal-line touchdown Sunday, but no specific workload increase was promised.",
+    "quote": "Seth is on a, on a good trajectory right now",
+    "player_id": "00-0041125",
+    "t": 86,
+    "t_exact": true
+   },
+   {
+    "player": "Tyler Warren",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Warren will be targeted on many different routes and schemes, as a primary, secondary or third read.",
+    "note": "Target volume may vary week to week because he is not always the primary read, and Cooter said his season has not been perfect.",
+    "quote": "Sometimes he's the primary target, sometimes he's secondary or even third or wherever.",
+    "player_id": "00-0040128",
+    "t": 143,
+    "t_exact": true
+   },
+   {
+    "player": "Jalen Farmer",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "",
+    "note": "The rookie guard has been starting inside and faces ups and downs against top interior linemen, which could affect the run game and QB pressure.",
+    "quote": "we're betting on the future with farm",
+    "player_id": "00-0041517",
+    "t": 510,
+    "t_exact": true
+   },
+   {
+    "player": "Josh Downs",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Downs will bounce back from his recent drops and keep getting open against man coverage.",
+    "note": "Cooter shows no loss of confidence after the drops, but also acknowledged a down stretch in production.",
+    "quote": "the story is not written yet on Josh downs season",
+    "player_id": "00-0038997",
+    "t": 598,
+    "t_exact": true
+   },
+   {
+    "player": "Jonathan Taylor",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "",
+    "note": "Cooter said outside noise has not affected Taylor's preparation. I'm reading \"JT\" as Taylor because Cooter mentioned ball handling with the quarterbacks, but this is an inference.",
+    "quote": "blink as far as his preparation, his work process, his attention to detail",
+    "player_id": "00-0036223",
+    "t": 691,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offense overall",
+    "detail": "Cooter acknowledged the offense has had ups and downs and said the group is looking to improve going forward."
+   },
+   {
+    "topic": "Run game / McGowan details",
+    "detail": "He said McGowan trusts his footwork and the timing of run plays, which is meshing with the blocking schemes more often than not."
+   },
+   {
+    "topic": "Sideline demeanor",
+    "detail": "Cooter joked that he is the most animated he is anywhere on the sideline, mixing a calm demeanor with gestures aimed at getting calls."
+   }
+  ],
+  "opponent": "Dolphins"
+ }
+]
