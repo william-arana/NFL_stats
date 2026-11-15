@@ -129,6 +129,17 @@ def play_mult(site, week, S):
     for pid, v in (status.get("p") or {}).items():  # Sleeper IR / PUP
         if v.get("s") in ("IR", "PUP"):
             out[pid] = (MULT["out"], f"Sleeper {v['s']}")
+    try:  # backup QBs don't start: 0 (notes repo docs/backtests/qb-starter)
+        j = json.loads((site / "players.json").read_text())
+        Pq = pd.DataFrame({c: j["data"][c] for c in ("player_id", "position", "team", "week", "attempts")})
+        lab = site.parent / "lab" / "injuries.csv.gz"
+        Iq = pd.read_csv(lab, usecols=["season", "week", "gsis_id", "report_status", "practice_status"]) if lab.exists() else None
+        if Iq is not None and "season" in meta:
+            Iq = Iq[Iq.season == meta["season"]]
+        for pid, why in qb_backups(Pq, Iq, week).items():
+            out[pid] = (0.0, why)
+    except Exception as e:  # never break the projection over this
+        print(f"qb_backups skipped: {e}")
     for pid, v in (meta.get("injuries") or {}).items():  # official report wins
         if len(v) > 2 and v[2] != week:
             continue
@@ -138,6 +149,38 @@ def play_mult(site, week, S):
         elif s == "questionable":
             out[pid] = (MULT["q"], "report: Questionable")
     return out
+
+
+def qb_backups(P, I, week):
+    """{gsis_id: reason} for QBs who won't start in `week` (projected 0). Box scores + injury report only, so it backtests.
+    Starter of a team's last game keeps the job, except: the season's regular starter (most starts) who lost it to injury
+    (on an injury report after his last start) gets it back once this week's report has him practicing Full/Limited and not Out/Doubtful. Benched starters stay benched."""
+    q = P[(P.week < week) & (P.position == "QB")].copy()
+    if q.empty:
+        return {}
+    q["attempts"] = q.attempts.fillna(0)
+    st = q.sort_values("attempts", ascending=False).drop_duplicates(["team", "week"])  # starter = most attempts that game
+    st = st[st.attempts >= 5]
+    inj = I[I.week <= week] if I is not None and len(I) else pd.DataFrame(columns=["week", "gsis_id", "report_status"])
+    wk = inj[inj.week == week]
+    out_now = set(wk[wk.report_status.isin(["Out", "Doubtful"])].gsis_id)
+    # back from injury = on this week's report, practicing Full/Limited, not ruled out (IR players aren't on the report)
+    back = set(wk[wk.practice_status.str.startswith(("Full", "Limited"), na=False) & ~wk.report_status.isin(["Out", "Doubtful"])].gsis_id) \
+        if "practice_status" in wk else set()
+    starters = {}
+    for team, g in st.sort_values("week").groupby("team"):
+        last = g.player_id.iloc[-1]
+        reg = g.player_id.value_counts().idxmax()
+        qb1 = last
+        if reg != last and reg in back:
+            lw = g[g.player_id == reg].week.max()
+            if ((inj.gsis_id == reg) & (inj.week > lw)).any():  # he was hurt after his last start, now not ruled out
+                qb1 = reg
+        if qb1 in out_now and last not in out_now:
+            qb1 = last
+        starters[team] = qb1
+    cur = q.sort_values("week").groupby("player_id").team.last()  # each QB's latest team
+    return {pid: f"backup QB ({starters[t]} starts)" for pid, t in cur.items() if t in starters and pid != starters[t]}
 
 
 def ours_v01(P, K, S, week, T=None, site=None):
