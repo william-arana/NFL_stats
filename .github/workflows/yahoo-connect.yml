@@ -42,7 +42,12 @@ jobs:
           YAHOO_ACCOUNT: ${{ inputs.account }}
         run: pip install requests -q && python scripts/yahoo_connect.py
       - run: pip install -r requirements.txt
-      - run: python scripts/update_yahoo.py
+      # Save the token even if the league pull fails (e.g. 403 before Yahoo turns access on);
+      # the code is already spent, so losing the token means signing in again.
+      - name: Pull the league (can fail until Yahoo turns on access)
+        id: pull
+        continue-on-error: true
+        run: python scripts/update_yahoo.py
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
@@ -52,3 +57,6 @@ jobs:
             git commit -m "Connect Yahoo league ($(date -u +%Y-%m-%dT%H:%MZ))"
             git pull --rebase && git push
           fi
+      - name: Report the league pull
+        if: steps.pull.outcome == 'failure'
+        run: echo "::warning::Token saved, but the league pull failed (see the step above). A 403 'not authorized' means Yahoo hasn't turned on access yet." && exit 1
