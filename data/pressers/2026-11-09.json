@@ -5125,6 +5125,84 @@
   "opponent": "Detroit Lions"
  },
  {
+  "id": "TB:todd-bowles-we-have-to-capitalize-press-conference",
+  "team": "TB",
+  "url": "https://www.buccaneers.com/video/todd-bowles-we-have-to-capitalize-press-conference",
+  "title": "Todd Bowles: We Have To Capitalize | Press Conference",
+  "date": "2026-11-09",
+  "duration": 271,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/buccaneers/ywzosjkqqt546szvcwsq.jpg",
+  "kind": "postgame",
+  "after_week": 9,
+  "coach": "Todd Bowles",
+  "words": 950,
+  "model": "claude-sonnet-5-5",
+  "headline": "Bucs lost to the Bears despite forcing five turnovers; Bowles says the offense must throw and catch more than lean on the run, and he singled out Rueben Bain's rise. A bye week is next.",
+  "summary": "Bowles was frustrated that Tampa Bay lost after taking the ball away five times. He said the team failed to turn those turnovers into points, couldn't stop giving the ball back, and has to improve on third down on both sides of the ball. He admitted a coverage bust on the tight end after the Bucs tied the game, and said Baker Mayfield had his mind made up on the pick six and should have thrown elsewhere. He called the first two drives antsy and said the team was on its heels early, then settled down. He said the offense can't win by running alone and needs to throw and catch, citing early dropped balls, and he thought Chicago won field position and special teams. He defended the two first-half field goals inside the ten as an attempt to get points before the half, which led to a 17-13 game. He blamed the false starts on a lack of discipline, not communication. He praised Rueben Bain for playing faster and more physically, but said the whole defense needs to clean up containment on the outside. He said the team is only focused on itself in the division race, and the bye week should help a sore roster.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Baker Mayfield",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Mayfield threw a pick six that Bowles attributes to a forced decision, not a systemic problem, and Bowles expects him to protect the ball going forward.",
+    "note": "Bowles' mild criticism points to a one-off decision error, so there is no sign of a role change, but turnover risk is worth monitoring.",
+    "quote": "Probably should have thrown it somewhere else.",
+    "player_id": "00-0034855",
+    "t": 45,
+    "t_exact": true
+   },
+   {
+    "player": "Bucky Irving",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "The Bucs can't rely on the run alone to win and need more passing-game contributions from everyone around Irving.",
+    "note": "Irving is still the offensive engine, but Bowles wants more passing production, which could shift the offense toward the pass game.",
+    "quote": "We're not going to be able to run the ball and win ball games.",
+    "player_id": "00-0039361",
+    "t": 115,
+    "t_exact": true
+   },
+   {
+    "player": "Rueben Bain",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Bain is playing faster and more physically and is making a growing impact on defense.",
+    "note": "It's a positive sign for his development and pass-rush production, though containment on the edge remains an issue.",
+    "quote": "he's playing more physical, he's playing faster and he's making his impact.",
+    "player_id": "",
+    "t": 231,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Turnovers and execution",
+    "detail": "Tampa Bay forced five turnovers but didn't cash them in. Bowles stressed capitalizing on takeaways, not giving the ball back, and being better on third down."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Bowles admitted a bust that freed the Bears' tight end after the Bucs tied the game. He also said the defense started slowly and needs better containment on the outside."
+   },
+   {
+    "topic": "Penalties",
+    "detail": "Bowles said the false starts weren't a communication problem; the team just has to be more disciplined."
+   },
+   {
+    "topic": "Special teams and field position",
+    "detail": "Bowles said Chicago won the field position battle and special teams, starting drives in good spots after returns."
+   },
+   {
+    "topic": "Standings and bye",
+    "detail": "Bowles said the Bucs are focused only on themselves in the NFC South race. He said they get a week off, that many players are sore, and that they need to regroup and finish the season strong."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "TEN:robert-saleh-press-conference-tennessee-titans-x3242",
   "team": "TEN",
   "url": "https://www.tennesseetitans.com/video/robert-saleh-press-conference-tennessee-titans-x3242",
