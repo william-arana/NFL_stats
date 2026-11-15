@@ -114,7 +114,7 @@ function draw(){
     $('#art').innerHTML=`<div class="kicker">${a.kind==='recap'?'Recap':'Preview'} · Week ${a.week}</div><h2 class="hl">${esc(a.headline||'')}</h2><p class="dek">${esc(a.dek||'')}</p>
       <div class="byline">${a.writer==='claude'?'Written by Claude from this week\'s data':'Auto-generated from this week\'s data'} · ${when.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})} · ${esc(a.league)} · ${esc(a.my_team)}</div>
       ${(a.sections||[]).filter(s=>s.md&&s.md.trim()).map(s=>`<section><h3>${esc(s.title)}</h3>${linkify(md(s.md),a.links)}</section>`).join('')}
-      <p class="foot-note">"Our projection" is NFL_stats' own weekly projection, built only from data available before kickoff (season and last-3 averages, Vegas implied totals, expected points, snap and touch-share trends; D/ST from the opponent's Vegas total). Fantasy points use your league's scoring from Sleeper.</p>`;
+      <p class="foot-note">"Our projection" is NFL_stats' own weekly projection, built only from data available before kickoff (season and last-3 averages, Vegas implied totals, expected points, snap and touch-share trends; D/ST from the opponent's Vegas total), lowered when a player may not play (injury report, IR, or the head coach saying he's out or unclear). Fantasy points use your league's scoring from Sleeper.</p>`;
   });
 }
 $('#pick').onchange=e=>{const [s,w]=e.target.value.split('-').map(Number);CUR=IDX.find(a=>a.season===s&&a.week===w&&a.kind===CUR.kind)||IDX.find(a=>a.season===s&&a.week===w);draw()};

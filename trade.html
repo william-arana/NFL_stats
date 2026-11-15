@@ -270,7 +270,7 @@ function loadLg(lg){if(!lg||lg.provider==='yahoo'||LGS[lg.id])return;const id=lg
 function applyLg(x){if(!lgOn()||x.none)return x;const o=LGS[LG.id];const W=o.pts[x.k]||{};const lw=D.META.last_completed_week;
   const v=Object.values(W),rec=Object.entries(W).filter(([w])=>+w>lw-3).map(([,p])=>p);const m=mean(v);
   return {...x,weeks:W,g:v.length,fpg:m,l3:mean(rec),best:v.length?Math.max(...v):null,sd:v.length>1?Math.sqrt(mean(v.map(p=>(p-m)**2))):null,rank:o.rank[x.k]||null,ros:num(m)?m*x.left:null}}
-const PROJ_TIP='NFL_stats projection v0 for next week in PPR points: season and last-3 averages, Vegas implied total, expected points, snap and touch-share trends, target share. Built only from games before kickoff.';
+const PROJ_TIP='NFL_stats projection v0.1 for next week in PPR points: season and last-3 averages, Vegas implied total, expected points, snap and touch-share trends, target share, then lowered when he may not play (injury report, IR, or the head coach saying out / unclear). Built only from data before kickoff.';
 function lgNote(){if(!lgOn())return '';const o=LGS[LG.id];const t=o.nEx+o.nCalc;return `<span>${esc(o.name)} scoring: ${t?Math.round(100*o.nEx/t):0}% of player-weeks are Sleeper's own league points (anyone rostered that week); the rest are scored here from the box score with your league's rules (no 2-pt conversions or return TDs).</span>`}
 const scLabel=()=>lgOn()?LGS[LG.id].name+' (Sleeper)':C.SCORING[C.scoring()].label;
 
@@ -360,7 +360,7 @@ function compareTable(all,A,B){
   return `<section class="box"><div class="box-h"><h2>Side by side</h2><span class="hint">Shading ranks each column among these players: darker = higher</span></div>
     <div class="tablewrap"><table data-cols="trade-side" data-sort="local"><thead><tr><th class="l stick">Player</th><th class="l">Wk ${nw}</th><th class="l">Bye</th>${cols.map(([k,l,,,tip,off])=>`<th${off?' data-def-off="1"':''}>${gl(k,l,tip||undefined)}</th>`).join('')}<th class="l">Rostered by</th></tr></thead>
     <tbody>${grp(A,'a')}${grp(B,'b')}</tbody></table></div>
-    <div class="foot">${lgNote()}<span>Proj = our projection v0 for next week (PPR), built only from data before kickoff. L3 = last 3 weeks. xFP = expected PPR points from usage (targets, carries, where on the field). ROS pts = points per game × games left through Week ${LAST_WEEK}; it doesn't adjust for matchups, so check ROS SoS alongside it.</span><span>ROS SoS: 1st = easiest remaining schedule. Players use PPR points allowed to their position; D/ST uses opponents' points scored per game.</span></div></section>`;
+    <div class="foot">${lgNote()}<span>Proj = our projection v0.1 for next week (PPR), built only from data before kickoff and lowered when he may not play. L3 = last 3 weeks. xFP = expected PPR points from usage (targets, carries, where on the field). ROS pts = points per game × games left through Week ${LAST_WEEK}; it doesn't adjust for matchups, so check ROS SoS alongside it.</span><span>ROS SoS: 1st = easiest remaining schedule. Players use PPR points allowed to their position; D/ST uses opponents' points scored per game.</span></div></section>`;
 }
 function gridTable(all){
   const lw=D.META.last_completed_week,nw=D.META.next_week;const past=[],fut=[];for(let w=1;w<=lw;w++)past.push(w);for(let w=nw;w<=LAST_WEEK;w++)fut.push(w);
