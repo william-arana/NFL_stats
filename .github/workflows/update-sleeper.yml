@@ -29,8 +29,10 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - run: python scripts/update_sleeper.py
-      - name: Yahoo leagues
-        if: ${{ hashFiles('data/private/yahoo_token_*.enc') != '' }}
+      # Paused: Yahoo's agreement is personal use only (no showing, sharing or storing Yahoo
+      # league data), so Yahoo leagues stay off the public site until there's a private setup.
+      - name: Yahoo leagues (paused)
+        if: ${{ false }}
         env:
           YAHOO_CLIENT_ID: ${{ secrets.YAHOO_CLIENT_ID }}
           YAHOO_CLIENT_SECRET: ${{ secrets.YAHOO_CLIENT_SECRET }}

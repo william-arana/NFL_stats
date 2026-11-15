@@ -16,7 +16,7 @@ A personal, non-commercial hobby site, shared with a small group of friends and 
 **Principles**
 - **Non-commercial.** No ads, no paid features, no data resale.
 - **Open data, credited.** Stats come from [nflverse](https://github.com/nflverse) (CC-BY 4.0) and FTN charting via nflverse (CC-BY-SA 4.0), always credited on the site. FTN-derived stats always stay free.
-- **Read-only league access.** Fantasy league data (Sleeper; Yahoo once Yahoo approves API access) is only read, never changed. Each person connects only their own leagues. Yahoo data is used under the [Yahoo Fantasy Sports API Terms of Use](https://legal.yahoo.com/us/en/yahoo/terms/product-atos/fantasysportsapi/index.html).
+- **Read-only league access.** Fantasy league data (Sleeper; Yahoo once Yahoo approves API access) is only read, never changed. Each person connects only their own leagues.
 - **Not official.** Not affiliated with or endorsed by the NFL, its teams, Sleeper, Yahoo or ESPN. No league or team logos, no official headshots.
 - **Small and simple.** A static site (HTML + vanilla JS) on GitHub Pages; data refreshed by scheduled GitHub Actions.
 

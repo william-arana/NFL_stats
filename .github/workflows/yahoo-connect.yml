@@ -2,7 +2,7 @@ name: Connect Yahoo league
 
 # One-time (or when the connection breaks): paste the code a league member got from Yahoo's "Agree" page.
 # The code works once and expires in ~10 minutes. Saves that person's encrypted token to data/private/yahoo_token_<account>.enc,
-# then pulls the Yahoo league right away.
+# then checks access. League data is not saved (Yahoo's personal use agreement).
 on:
   workflow_dispatch:
     inputs:
@@ -42,21 +42,22 @@ jobs:
           YAHOO_ACCOUNT: ${{ inputs.account }}
         run: pip install requests -q && python scripts/yahoo_connect.py
       - run: pip install -r requirements.txt
-      # Save the token even if the league pull fails (e.g. 403 before Yahoo turns access on);
-      # the code is already spent, so losing the token means signing in again.
-      - name: Pull the league (can fail until Yahoo turns on access)
+      # Access check only: nothing from Yahoo is written to the repo (personal use agreement).
+      - name: Check Yahoo access (no league data saved)
         id: pull
         continue-on-error: true
-        run: python scripts/update_yahoo.py
+        env:
+          YAHOO_ACCOUNT: ${{ inputs.account }}
+        run: cd scripts && python -c "import os, yahoo_common as y; print('Yahoo access OK, NFL game key', y.nfl_game_key(y.access_token(os.environ['YAHOO_ACCOUNT'])))"
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
-          git add data/private data/site/leagues.json
+          git add data/private
           if git diff --cached --quiet; then echo "No changes"; else
             git commit -m "Connect Yahoo league ($(date -u +%Y-%m-%dT%H:%MZ))"
             git pull --rebase && git push
           fi
       - name: Report the league pull
         if: steps.pull.outcome == 'failure'
-        run: echo "::warning::Token saved, but the league pull failed (see the step above). A 403 'not authorized' means Yahoo hasn't turned on access yet." && exit 1
+        run: echo "::warning::Token saved, but the access check failed (see the step above). A 403 'not authorized' means Yahoo hasn't turned on access yet." && exit 1
