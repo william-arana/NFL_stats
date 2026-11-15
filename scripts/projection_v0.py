@@ -126,18 +126,24 @@ def play_mult(site, week, S):
             out[pid] = (MULT["coach_out"], f"coach: {st} ({who} {d})")
         elif st in ("unclear", "questionable"):
             out[pid] = (MULT["coach_unclear"], f"coach: {st} ({who} {d})")
-    for pid, v in (status.get("p") or {}).items():  # Sleeper IR / PUP
+    for pid, v in (status.get("p") or {}).items():  # Sleeper IR / PUP, or no NFL team (released)
         if v.get("s") in ("IR", "PUP"):
             out[pid] = (MULT["out"], f"Sleeper {v['s']}")
+        elif v.get("s") == "FA":
+            out[pid] = (0.0, "released (no NFL team on Sleeper)")
     try:  # backup QBs don't start: 0 (notes repo docs/backtests/qb-starter)
         j = json.loads((site / "players.json").read_text())
-        Pq = pd.DataFrame({c: j["data"][c] for c in ("player_id", "position", "team", "week", "attempts")})
+        Pq = pd.DataFrame({c: j["data"][c] for c in ("player_id", "position", "team", "week", "attempts", "offense_pct")})
         lab = site.parent / "lab" / "injuries.csv.gz"
         Iq = pd.read_csv(lab, usecols=["season", "week", "gsis_id", "report_status", "practice_status"]) if lab.exists() else None
         if Iq is not None and "season" in meta:
             Iq = Iq[Iq.season == meta["season"]]
         for pid, why in qb_backups(Pq, Iq, week).items():
             out[pid] = (0.0, why)
+        res = status.get("p") or {}  # IR/PUP aren't on the weekly report: those are hurt, handled below
+        for pid in lost_role(Pq, S, Iq, week):
+            if pid not in res:
+                out[pid] = (0.0, "no offensive snaps in his team's last 2 games")
     except Exception as e:  # never break the projection over this
         print(f"qb_backups skipped: {e}")
     for pid, v in (meta.get("injuries") or {}).items():  # official report wins
@@ -183,6 +189,22 @@ def qb_backups(P, I, week):
     return {pid: f"backup QB ({starters[t]} starts)" for pid, t in cur.items() if t in starters and pid != starters[t]}
 
 
+def lost_role(P, S, I, week, k=2):
+    """Players with no offensive snaps in each of their team's last k games before `week` who weren't on any injury report
+    in weeks week-3..week (so not hurt, just out of the rotation, e.g. Emanuel Wilson once Charbonnet + Price returned).
+    Backtest 2026 wks 3-9: 50 player-weeks averaged 0.25 PPR (1 scored 5+); setting them to 0 cut the miss 5.45 -> 5.21."""
+    tg = pd.concat([S[["week", "home_team"]].rename(columns={"home_team": "team"}), S[["week", "away_team"]].rename(columns={"away_team": "team"})])
+    last = tg[tg.week < week].sort_values("week").groupby("team").tail(k)
+    prev = P[(P.week < week) & P.position.isin(["QB", "RB", "WR", "TE"])].sort_values("week")
+    if prev.empty:
+        return set()
+    team = prev.groupby("player_id").team.last()
+    played = prev[prev.offense_pct.fillna(0) > 0].groupby("player_id").week.agg(set)
+    tw = last.groupby("team").week.agg(set)
+    hurt = set(I[(I.week >= week - 3) & (I.week <= week)].gsis_id) if I is not None and len(I) else set()
+    return {pid for pid, t in team.items() if t in tw and len(tw[t]) == k and not (played.get(pid, set()) & tw[t]) and pid not in hurt}
+
+
 def ours_v01(P, K, S, week, T=None, site=None):
     """v0 x play_mult. Same columns as ours() plus `avail` (multiplier) and `why`."""
     o = ours(P, K, S, week, T)
@@ -193,3 +215,49 @@ def ours_v01(P, K, S, week, T=None, site=None):
     o["why"] = [m.get(k, (1.0, ""))[1] for k in o.key]
     o["ours_ppr"] = (o.ours_ppr * o.avail).round(2)
     return o
+
+
+# ---------- ROS v0 (notes repo docs/backtests/ros) ----------
+# Rest-of-season PPR through week 18 = this week's v0.1 + v0's per-game number for every later team game x the share of
+# team games a fantasy-relevant player actually plays (2022-24). An estimated implied total per future game added nothing
+# (hurt QBs), so later games use this week's number. Backtest: beats season avg x games left for RB/WR/TE in 2025 and 2026
+# (rank corr +0.05 to +0.13), ties for QBs. Sleeper IR/PUP or a hurt regular QB1: skips 3 more weeks; out for the season,
+# backup QB, released, or no offensive snaps in his team's last 2 games (not hurt): 0.
+ROS_LAST_WEEK = 18
+GAMES_PLAYED = {"QB": 0.764, "RB": 0.783, "WR": 0.799, "TE": 0.794}
+
+
+def ros(P, K, S, week, T=None, site=None):
+    """{gsis_id: rest-of-season PPR, weeks week..18} for QB/RB/WR/TE."""
+    v0 = ours(P, K, S, week, T)
+    if v0.empty:
+        return {}
+    v1 = ours_v01(P, K, S, week, T, site).set_index("key").ours_ppr
+    st = {}
+    if site is not None and (Path(site) / "status.json").exists():
+        st = json.loads((Path(site) / "status.json").read_text()).get("p") or {}
+    m = play_mult(site, week, S) if site is not None else {}
+    pos = P[P.week < week].sort_values("week").groupby("player_id")[["position", "team"]].last()
+    fut = S[(S.week > week) & (S.week <= ROS_LAST_WEEK)]
+    left = pd.concat([fut.home_team, fut.away_team]).value_counts()
+    # each team's regular starting QB (most starts this season): hurt, not benched, so he comes back later
+    q = P[(P.week < week) & (P.position == "QB")].fillna({"attempts": 0}).sort_values("attempts", ascending=False).drop_duplicates(["team", "week"])
+    q = q[q.attempts >= 5]
+    reg = set(q.groupby("team").player_id.agg(lambda x: x.value_counts().idxmax())) if len(q) else set()
+    out = {}
+    for r in v0.itertuples():
+        if r.key not in pos.index or pos.position[r.key] not in GAMES_PLAYED:
+            continue
+        p, team = pos.position[r.key], pos.team[r.key]
+        why = m.get(r.key, (1.0, ""))[1]
+        s = st.get(r.key) or {}
+        hurt_qb1 = why.startswith("backup QB") and r.key in reg
+        gone = why.startswith(("released", "no offensive snaps")) or (why.startswith("backup QB") and not hurt_qb1)
+        if s.get("season") or gone:
+            out[r.key] = 0.0
+            continue
+        n = int(left.get(team, 0))
+        if s.get("s") in ("IR", "PUP") or hurt_qb1:  # injured regular QB1: back after ~3 more weeks
+            n = max(0, n - 3)
+        out[r.key] = round(float(v1.get(r.key, r.ours_ppr)) + GAMES_PLAYED[p] * r.ours_ppr * n, 1)
+    return out

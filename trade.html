@@ -31,11 +31,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
-<link rel="stylesheet" href="assets/site.css?v=1.77">
-<script src="assets/site.js?v=1.77" defer></script>
-<script src="assets/cards.js?v=1.77" defer></script>
-<script src="assets/glossary.js?v=1.77" defer></script>
-<script src="assets/tables.js?v=1.77" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=1.78">
+<script src="assets/site.js?v=1.78" defer></script>
+<script src="assets/cards.js?v=1.78" defer></script>
+<script src="assets/glossary.js?v=1.78" defer></script>
+<script src="assets/tables.js?v=1.78" defer></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -173,7 +173,7 @@ const num=v=>typeof v==='number'&&isFinite(v);
 const mean=a=>{const b=a.filter(num);return b.length?b.reduce((x,y)=>x+y,0)/b.length:null};
 const ord=n=>n+(['th','st','nd','rd'][(n%100>10&&n%100<14)?0:Math.min(n%10,4)%4]||'th');
 const f1=v=>num(v)?v.toFixed(1):'–',pct=v=>num(v)?Math.round(v*100)+'%':'–';
-const LAST_WEEK=17; // fantasy regular season + playoffs run through Week 17
+const LAST_WEEK=18; // rest of season = through Week 18 (William, 11/14)
 let C,D,ROST=null,LG=null;
 const st={a:[],b:[],ta:null,tb:null,hot:null};
 const NAMES={};
@@ -214,10 +214,10 @@ function entry(k){
   if(isDef(k)){const t=k.slice(4);const s=C.defSummary(t);const lw=D.META.last_completed_week;
     const x={k,def:true,name:t+' D/ST',pos:'DEF',team:t,g:s.g,fpg:s.dst,l3:s.l3,xfp3:null,snap3:null,opps:null,tgt:null,best:s.best,sd:s.sd,rank:s.rk.dst,
       weeks:Object.fromEntries(s.rows.map(r=>[r.week,r.dst_pts])),extra:`${f1(s.sk)} sacks · ${f1(s.tk)} takeaways / g`};
-    Object.assign(x,fut0(x));x.ros=num(x.fpg)?x.fpg*x.left:null;x.proj=projOf(k);return applyLg(x)}
+    Object.assign(x,fut0(x));x.ros=rosOf(k,x);x.proj=projOf(k);return applyLg(x)}
   if(C.kickers().has(k)){const s=C.kickerSummary(k);const x={k,name:s.name,pos:'K',team:s.team,g:s.g,fpg:s.fpg,l3:s.l3,best:s.best,sd:s.sd,rank:s.rank,
     weeks:Object.fromEntries(s.logs.map(l=>[l.week,l.k_pts])),inj:D.INJ[k],extra:`${s.logs.reduce((a,r)=>a+(r.fg_made||0),0)}/${s.logs.reduce((a,r)=>a+(r.fg_att||0),0)} FG`};
-    Object.assign(x,fut0(x));x.ros=num(x.fpg)?x.fpg*x.left:null;x.proj=projOf(k);return applyLg(x)}
+    Object.assign(x,fut0(x));x.ros=rosOf(k,x);x.proj=projOf(k);return applyLg(x)}
   const s=C.playerSummary(k);
   if(!s){const n=NAMES[k]||{};return {k,none:true,name:n.name||'Player '+k,pos:n.pos||'',team:n.team||'',fut:[],left:null,weeks:{}}}
   const x={k,name:s.name,pos:s.pos,team:s.team,g:s.g,fpg:s.fpg,l3:s.l3,xfp3:s.xfp3,snap3:s.snap3,opps:s.opps,tgt:s.tgt,best:s.best,sd:s.sd,rank:s.rank,
@@ -225,13 +225,15 @@ function entry(k){
   {const PG=(...ks)=>s.g?s.logs.reduce((a,l)=>a+ks.reduce((b,c)=>b+(num(l[c])?l[c]:0),0),0)/s.g:null;  // per-game box score
     Object.assign(x,{carg:PG('carries'),tgtg:PG('targets'),recg:PG('receptions'),ryg:PG('rushing_yards'),reyg:PG('receiving_yards'),
       tdg:PG('rushing_tds','receiving_tds','passing_tds'),pyg:PG('passing_yards'),rzg:PG('rz_tgt','rz_car'),xfpg:s.xfpg,snap:s.snap})}
-  Object.assign(x,fut0(x));x.ros=num(x.fpg)?x.fpg*x.left:null;x.proj=projOf(k);return applyLg(x);
+  Object.assign(x,fut0(x));x.ros=rosOf(k,x);x.proj=projOf(k);return applyLg(x);
 }
 const owner=k=>{if(!ROST)return null;const m=ROST.map.get(k);return m?m:{status:'fa',team:'Free agent'}};
 
 /* ---------- our projection (data/site/proj.json, built by scripts/build_site_projection.py) ---------- */
 let PROJ=null;fetch('data/site/proj.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(j=>{if(j){PROJ=j;draw()}}).catch(()=>{});
 const projOf=k=>PROJ&&PROJ.p?PROJ.p[k]:null;
+// ROS: our rest-of-season PPR (proj.json r) when it's for this week + PPR scoring; otherwise FP/game x games left
+const rosOf=(k,x)=>PROJ&&PROJ.r&&num(PROJ.r[k])&&PROJ.week===D.META.next_week&&sk()==='fantasy_points_ppr'?PROJ.r[k]:num(x.fpg)?x.fpg*x.left:null;
 
 /* ---------- league scoring: the selected Sleeper league's own rules ----------
    Exact points come from Sleeper's weekly matchups (every rostered player that week, the league's own scoring).
@@ -270,7 +272,7 @@ function loadLg(lg){if(!lg||lg.provider==='yahoo'||LGS[lg.id])return;const id=lg
 function applyLg(x){if(!lgOn()||x.none)return x;const o=LGS[LG.id];const W=o.pts[x.k]||{};const lw=D.META.last_completed_week;
   const v=Object.values(W),rec=Object.entries(W).filter(([w])=>+w>lw-3).map(([,p])=>p);const m=mean(v);
   return {...x,weeks:W,g:v.length,fpg:m,l3:mean(rec),best:v.length?Math.max(...v):null,sd:v.length>1?Math.sqrt(mean(v.map(p=>(p-m)**2))):null,rank:o.rank[x.k]||null,ros:num(m)?m*x.left:null}}
-const PROJ_TIP='NFL_stats projection v0.1 for next week in PPR points: season and last-3 averages, Vegas implied total, expected points, snap and touch-share trends, target share, then lowered when he may not play (injury report, IR, or the head coach saying out / unclear). Built only from data before kickoff.';
+const PROJ_TIP='NFL_stats projection v0.1 for next week in PPR points: season and last-3 averages, Vegas implied total, expected points, snap and touch-share trends, target share, then lowered when he may not play (injury report, IR, the head coach saying out / unclear, a backup QB, released, or no offensive snaps in his team\'s last 2 games). Built only from data before kickoff.';
 function lgNote(){if(!lgOn())return '';const o=LGS[LG.id];const t=o.nEx+o.nCalc;return `<span>${esc(o.name)} scoring: ${t?Math.round(100*o.nEx/t):0}% of player-weeks are Sleeper's own league points (anyone rostered that week); the rest are scored here from the box score with your league's rules (no 2-pt conversions or return TDs).</span>`}
 const scLabel=()=>lgOn()?LGS[LG.id].name+' (Sleeper)':C.SCORING[C.scoring()].label;
 
@@ -327,7 +329,7 @@ function draw(){
         <div><span>${gl('l3','Last 3 weeks / game')}</span>${diff('l3')}<small>A ${f1(S(A,'l3'))} · B ${f1(S(B,'l3'))}</small></div>
         <div><span>${gl('proj','Our projection'+(PROJ?' Wk '+PROJ.week:''),PROJ_TIP)}</span>${diff('proj')}<small>A ${f1(S(A,'proj'))} · B ${f1(S(B,'proj'))} · PPR</small></div>
         <div><span>${gl('xfp3','Expected pts L3 (xFP)')}</span>${diff('xfp3')}<small>usage-based, PPR</small></div>
-        <div><span>${gl('ros','Rest of season')}</span>${diff('ros',0)}<small>FP/g × games left through Wk ${LAST_WEEK}</small></div>
+        <div><span>${gl('ros','Rest of season')}</span>${diff('ros',0)}<small>${PROJ&&PROJ.r&&PROJ.week===D.META.next_week&&!lgOn()&&sk()==='fantasy_points_ppr'?'Our ROS, PPR':'FP/g × games left'} through Wk ${LAST_WEEK}</small></div>
       </div></section>`;
   }
   if(all.length){

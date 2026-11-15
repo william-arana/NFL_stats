@@ -285,7 +285,7 @@ WITH_RE = re.compile(r"\bwith ((?:[A-Z][\w'.-]+ ?){1,3})(?:\([^)]*\) ?)?(?:,? wh
 
 def about_him(before: str, last: str) -> bool:
     """The out-for-the-season phrase is about this player, not a teammate tagged just before it
-    ("...with Ricky Pearsall (knee) out for the season", "joins Pearsall (knee), who is out for the season")."""
+    ("...with Ricky Pearsall (knee) out for the season", "joins Pearsall (knee), who is out for the season, {len(released)} released")."""
     tags = OTHER_RE.findall(before)
     if tags and norm(tags[-1]) != last:
         return False
@@ -317,8 +317,15 @@ def build_status(sp: dict) -> None:
         smap = json.loads((SITE / "sleeper_map.json").read_text())["map"]
     except Exception:  # noqa: BLE001
         smap = {}
+    try:  # players with a stat line this season: if Sleeper has no NFL team for one, he was released
+        seen = set(json.loads((SITE / "players.json").read_text())["data"]["player_id"])
+    except Exception:  # noqa: BLE001
+        seen = set()
+    released = {}
     for sid, p in (sp or {}).items():
         g = smap.get(sid) or (p.get("gsis_id") or "").strip()
+        if g in seen and not p.get("team") and (p.get("position") in ("QB", "RB", "WR", "TE", "K")):
+            released[g] = {"s": "FA"}
         st = p.get("injury_status") or ""
         if not g or st not in RESERVE | {"Out"}:
             continue
@@ -334,8 +341,10 @@ def build_status(sp: dict) -> None:
                 pass
         if st in RESERVE or rec.get("season"):
             out[g] = rec
+    for g, rec in released.items():  # "FA" = no NFL team on Sleeper (released); projections set him to 0
+        out.setdefault(g, rec)
     (SITE / "status.json").write_text(json.dumps({"updated_utc": now(), "p": out}, separators=(",", ":"), ensure_ascii=False))
-    print(f"[pnews] status: {len(out)} players flagged, {sum(1 for r in out.values() if r.get('season'))} out for the season")
+    print(f"[pnews] status: {len(out)} players flagged, {sum(1 for r in out.values() if r.get('season'))} out for the season, {len(released)} released")
 
 
 if __name__ == "__main__":
