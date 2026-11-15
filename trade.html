@@ -7,23 +7,23 @@
 <!-- link previews -->
 <meta name="description" content="Compare players and defenses side by side for a fantasy trade: points, usage, schedule and news.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="NFL_stats">
-<meta property="og:title" content="Trade Analyzer · NFL_stats">
+<meta property="og:site_name" content="GameDay_stats">
+<meta property="og:title" content="Trade Analyzer · GameDay_stats">
 <meta property="og:description" content="Compare players and defenses side by side for a fantasy trade: points, usage, schedule and news.">
-<meta property="og:url" content="https://william-arana.github.io/NFL_stats/trade.html">
-<meta property="og:image" content="https://william-arana.github.io/NFL_stats/assets/og.jpg">
+<meta property="og:url" content="https://thegameday.zone/trade.html">
+<meta property="og:image" content="https://thegameday.zone/assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="NFL_stats logo on a navy football field">
+<meta property="og:image:alt" content="GameDay_stats logo on a navy football field">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://william-arana.github.io/NFL_stats/assets/og.jpg">
+<meta name="twitter:image" content="https://thegameday.zone/assets/og.jpg">
 <meta name="theme-color" content="#0f1b33">
 <!-- /link previews -->
 <!-- app icon -->
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="apple-mobile-web-app-title" content="NFL_stats">
+<meta name="apple-mobile-web-app-title" content="GameDay_stats">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -151,7 +151,7 @@ td.wkdiv,th.wkdiv{border-left:2px solid var(--ink-3)}
 </head>
 <body>
 <header class="sitenav"><div class="wrap">
-  <a class="brand" href="./" title="Home">NFL<span>_</span>stats</a>
+  <a class="brand" href="./" title="Home">GameDay<span>_</span>stats</a>
   <nav aria-label="Site"><a href="./">Home</a><a href="stats.html">Stats</a><a href="waivers.html">Waivers</a><a href="trade.html" aria-current="page">Compare</a><a href="pressers.html">Pressers</a><a href="lab.html">Lab</a><a href="guide.html">Guide</a></nav>
   <span class="upd" id="upd"></span>
   <div class="navtools" id="navtools"></div>
@@ -272,7 +272,7 @@ function loadLg(lg){if(!lg||lg.provider==='yahoo'||LGS[lg.id])return;const id=lg
 function applyLg(x){if(!lgOn()||x.none)return x;const o=LGS[LG.id];const W=o.pts[x.k]||{};const lw=D.META.last_completed_week;
   const v=Object.values(W),rec=Object.entries(W).filter(([w])=>+w>lw-3).map(([,p])=>p);const m=mean(v);
   return {...x,weeks:W,g:v.length,fpg:m,l3:mean(rec),best:v.length?Math.max(...v):null,sd:v.length>1?Math.sqrt(mean(v.map(p=>(p-m)**2))):null,rank:o.rank[x.k]||null,ros:num(m)?m*x.left:null}}
-const PROJ_TIP='NFL_stats projection v0.1 for next week in PPR points: season and last-3 averages, Vegas implied total, expected points, snap and touch-share trends, target share, then lowered when he may not play (injury report, IR, the head coach saying out / unclear, a backup QB, released, or no offensive snaps in his team\'s last 2 games). Built only from data before kickoff.';
+const PROJ_TIP='GameDay_stats projection v0.1 for next week in PPR points: season and last-3 averages, Vegas implied total, expected points, snap and touch-share trends, target share, then lowered when he may not play (injury report, IR, the head coach saying out / unclear, a backup QB, released, or no offensive snaps in his team\'s last 2 games). Built only from data before kickoff.';
 function lgNote(){if(!lgOn())return '';const o=LGS[LG.id];const t=o.nEx+o.nCalc;return `<span>${esc(o.name)} scoring: ${t?Math.round(100*o.nEx/t):0}% of player-weeks are Sleeper's own league points (anyone rostered that week); the rest are scored here from the box score with your league's rules (no 2-pt conversions or return TDs).</span>`}
 const scLabel=()=>lgOn()?LGS[LG.id].name+' (Sleeper)':C.SCORING[C.scoring()].label;
 

@@ -1,4 +1,4 @@
-"""Weekly head-coach press-conference digest for the NFL_stats Pressers page.
+"""Weekly head-coach press-conference digest for the GameDay_stats Pressers page.
 
 For each team site (all 32 run the same NFL club platform):
   1. Read its video sitemap and keep press conferences / media sessions from the last few days.

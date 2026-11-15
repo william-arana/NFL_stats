@@ -30,7 +30,7 @@ import requests
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "data" / "site"
 OUT = SITE / "news"
-UA = {"User-Agent": "Mozilla/5.0 (NFL_stats personal dashboard; +https://william-arana.github.io/NFL_stats/)"}
+UA = {"User-Agent": "Mozilla/5.0 (GameDay_stats personal dashboard; +https://thegameday.zone/)"}
 TOP_SCORERS = 320      # also archive the top N fantasy scorers, rostered or not
 KEEP = 200             # max items kept per player
 TEAM_FIX = {"LAR": "LA", "JAC": "JAX", "WSH": "WAS"}
