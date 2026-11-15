@@ -311,6 +311,9 @@ def parse(msg, R=None):
     stop = msg.get("stop_reason") or "?"
     if R is not None:
         R[stop] = R.get(stop, 0) + 1
+        for blk in msg.get("content", []):  # which kinds of output the tokens went to (text vs thinking)
+            k = "block_" + str(blk.get("type"))
+            R[k] = R.get(k, 0) + 1
     txt = "".join(b.get("text", "") for b in msg.get("content", []) if b.get("type") == "text").strip()
     txt = re.sub(r"^```(?:json)?|```$", "", txt).strip()
     try:

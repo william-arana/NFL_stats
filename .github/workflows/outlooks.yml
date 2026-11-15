@@ -48,6 +48,11 @@ jobs:
           if [ "$FACTS_ONLY" = "true" ]; then args="$args --facts-only"
           elif [ -z "$ANTHROPIC_API_KEY" ]; then echo "::error::ANTHROPIC_API_KEY secret not set"; exit 1; fi
           python scripts/build_outlooks.py $args
+      - name: Print outputs (test runs)
+        if: ${{ inputs.commit == 'false' }}
+        run: |
+          cat data/outlooks/2026_w*.json
+          for f in data/site/outlooks/*.json; do echo "== $f"; cat "$f"; echo; done
       - name: Upload outputs (test runs)
         if: ${{ inputs.commit == 'false' }}
         uses: actions/upload-artifact@v4
