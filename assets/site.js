@@ -175,7 +175,7 @@
   function verFoot(){if(document.getElementById('ver')||document.querySelector('.verfoot'))return;
     const me=document.querySelector('script[src*="assets/site.js"]');const v=(me&&(me.src.match(/[?&]v=([^&]+)/)||[])[1])||'?';
     const f=document.createElement('footer');f.className='verfoot';
-    f.innerHTML=`<div class="wrap"><span>GameDay_stats · data from <a href="https://github.com/nflverse" target="_blank" rel="noopener">nflverse</a> and Sleeper</span><span class="vf-r"><span class="vf-msg"></span><button type="button" class="vf-chk">Check for updates</button><b title="Site version: 1.&lt;pull request number&gt; of the last change">v${v}</b></span></div>`;
+    f.innerHTML=`<div class="wrap"><span>GameDay_stats · Data: <a href="https://github.com/nflverse" target="_blank" rel="noopener">nflverse</a> (CC-BY 4.0) · FTN Data via nflverse (CC-BY-SA 4.0) · expected points: <a href="https://github.com/ffverse/ffopportunity" target="_blank" rel="noopener">ffopportunity</a> (CC-BY-SA 4.0) · game lines: nfldata · player status: Sleeper · not affiliated with the NFL, its teams, Sleeper or ESPN</span><span class="vf-r"><span class="vf-msg"></span><button type="button" class="vf-chk">Check for updates</button><b title="Site version: 1.&lt;pull request number&gt; of the last change">v${v}</b></span></div>`;
     document.body.appendChild(f);const msg=f.querySelector('.vf-msg');
     f.querySelector('.vf-chk').onclick=()=>{msg.textContent='Checking…';
       fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(j=>{
