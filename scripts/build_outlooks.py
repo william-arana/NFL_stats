@@ -23,7 +23,7 @@ SITE = ROOT / "data" / "site"
 OUT_CARD = SITE / "outlooks"
 OUT_CLAIMS = ROOT / "data" / "outlooks"
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from projection_v0 import play_mult  # noqa: E402
+from projection_v0 import moved_teams, play_mult  # noqa: E402
 
 MODEL = os.environ.get("OUTLOOK_MODEL", "claude-sonnet-5-5")
 API = "https://api.anthropic.com/v1"
@@ -31,6 +31,7 @@ LEAGUE = "67FFL"
 TOP_N = 300
 POS = ("QB", "RB", "WR", "TE")
 LINES_MAX, WORDS_MAX = 3, 32
+MAX_TOKENS = 1500  # was 700: 8 of 20 replies came back cut off in the 11/14 test
 
 # claim metric -> how to read it from next week's box score (players.json). value units as written in the claim.
 CLAIM_METRICS = {
@@ -41,6 +42,10 @@ CLAIM_METRICS = {
     "pass_td": ("passing_tds", "passing TDs", 1), "rz_opps": (("rz_car", "rz_tgt"), "red zone carries + targets", 1),
     "ppr": ("fantasy_points_ppr", "PPR points", 1),
 }
+# a claim's line has to sit near his last-3 average: within 10% or this many units, whichever is bigger.
+# (test run 11/14: Cooks <= 4 targets at 2.3 a game, Hooper <= 3 at 1.3 = gimmes that would inflate the hit rate)
+CLAIM_BAND, CLAIM_FLOOR = 0.10, {"snap_pct": 5, "targets": 1, "carries": 2, "opps": 2, "receptions": 1, "rec_yds": 10,
+                                 "rush_yds": 10, "pass_att": 3, "pass_yds": 20, "pass_td": 0.5, "rz_opps": 1, "ppr": 2}
 
 SYSTEM = f"""You write short fantasy football outlooks for one player at a time, for a stats site.
 
@@ -49,6 +54,8 @@ contracts, draft history, reputations, team news or anything not in the list, ev
 
 Write {LINES_MAX - 1} or {LINES_MAX} lines (each at most {WORDS_MAX - 4} words, plain sentences, no hype, no emojis):
 - What his role and production look like right now (usage trend first, points second).
+- Plain words a fantasy player would use. Compare recent vs season only where it changed; don't repeat the same
+  "last 3 vs season" pattern in every line. Aim for about 20 words a line.
 - What matters for the coming week (matchup, availability, coach comments) when the facts have it.
 - Each line cites the fact ids it uses. Every number you write must appear exactly as written in a fact the line cites
   (same rounding: write 74%, not 0.74 or 75%). Don't compute new numbers (no differences, sums or percentages of your own).
@@ -58,7 +65,8 @@ Write {LINES_MAX - 1} or {LINES_MAX} lines (each at most {WORDS_MAX - 4} words, 
 Then one checkable claim about his NEXT game (the week in the facts), gradable from the box score:
 - metric: one of {", ".join(CLAIM_METRICS)} (snap_pct in percent, e.g. 60)
 - op: ">=" or "<="
-- value: a number. Pick a line close to his recent level that you think is more likely true than not, not a gimme.
+- value: a number within 10% of his last-3-game average for that metric (the check rejects anything further away),
+  on the side you think is more likely true. Not a gimme.
 - f: the fact ids it rests on.
 If he has a bye, is out, or the facts say he likely won't play, use "claim": null.
 
@@ -109,17 +117,20 @@ def dvp(P):
     return {(t, p): int(r) for t, p, r in zip(a.opponent_team, a.position, a.rk)}
 
 
-def build_facts(pid, P, S, meta, proj, status, mult, ranks, dv, pos_rank_ros):
+def build_facts(pid, P, S, meta, proj, status, mult, ranks, dv, pos_rank_ros, moved=None, names=None):
     W, L = meta["next_week"], meta["last_completed_week"]
     g = P[(P.player_id == pid) & (P.week <= L)].sort_values("week")
     if g.empty:
         return None
-    name, pos, team = g.player_display_name.iloc[-1], g.position.iloc[-1], g.team.iloc[-1]
+    name, pos, was = g.player_display_name.iloc[-1], g.position.iloc[-1], g.team.iloc[-1]
+    team = (moved or {}).get(pid, was)  # traded / signed elsewhere since his last game (status.json "moved")
     facts = []
     add = lambda t, src: facts.append({"id": f"F{len(facts) + 1}", "t": t, "src": src})  # noqa: E731
     l3 = g.tail(3)
-    team_games = len(set(P[(P.team == team) & (P.week <= L)].week))
-    add(f"{name}, {pos}, {team}. Played {len(g)} of {team}'s {team_games} games (wks 1–{L}).", "players.json")
+    team_games = len(set(P[(P.team == was) & (P.week <= L)].week))
+    add(f"{name}, {pos}, {team}. Played {len(g)} of {was}'s {team_games} games (wks 1–{L}).", "players.json")
+    if team != was:
+        add(f"Moved from {was} to {team} (Sleeper roster); no games for {team} yet.", "status.json moved (Sleeper)")
     # projections (ours)
     p = (proj.get("p") or {}).get(pid)
     if p is not None:
@@ -131,7 +142,9 @@ def build_facts(pid, P, S, meta, proj, status, mult, ranks, dv, pos_rank_ros):
         add(f"Our rest-of-season projection (Wk {W}–18): {f1(r)} PPR" + (f", {ordn(rk)} among {pos}s." if rk else "."), "proj.json r (ROS v0)")
     m = mult.get(pid)
     if m and m[0] < 1:
-        add(f"Availability: our Wk {W} projection is cut to {pct(m[0])} of normal ({m[1]}).", "projection_v0.play_mult")
+        why = re.sub(r"00-\d{7}", lambda x: (names or {}).get(x.group(0), "another QB"), m[1])  # "backup QB (<id> starts)" -> name
+        add(f"Availability: our Wk {W} projection has him at 0 ({why})." if m[0] == 0 else
+            f"Availability: our Wk {W} projection gives him a {pct(m[0])} chance to play ({why}).", "projection_v0.play_mult")
     st = (status.get("p") or {}).get(pid) or {}
     if st.get("season"):
         add("Listed as out for the season.", "status.json")
@@ -205,7 +218,12 @@ def build_facts(pid, P, S, meta, proj, status, mult, ranks, dv, pos_rank_ros):
                 rows.append((v[0], v[2] or "coach", sig, topic, claim or note))
         for d, coach, sig, topic, txt in sorted(rows, reverse=True)[:3]:
             add(f"Coach {coach} ({d}, {topic or 'comment'}, signal {sig}): {txt}", "presser_signals (our summary)")
-    return {"id": pid, "name": name, "pos": pos, "team": team, "week": W, "facts": facts}
+    l3c = {}  # last-3 average per claim metric, in claim units (for the claim band check)
+    for k, (col, _, mul) in CLAIM_METRICS.items():
+        cols = list(col) if isinstance(col, tuple) else [col]
+        if all(c in l3 for c in cols) and l3[cols].notna().any().any():
+            l3c[k] = round(float(l3[cols].fillna(0).sum(axis=1).mean()) * mul, 2)
+    return {"id": pid, "name": name, "pos": pos, "team": team, "week": W, "facts": facts, "l3": l3c}
 
 
 # ---------- check a reply ----------
@@ -246,6 +264,12 @@ def check(reply, F):
             return None, f"bad claim {c}"
         if m == "snap_pct" and not 0 < v <= 100:
             return None, f"bad snap % claim {v}"
+        avg = (F.get("l3") or {}).get(m)
+        if avg is not None:
+            band = max(CLAIM_BAND * avg, CLAIM_FLOOR.get(m, 0))
+            if abs(v - avg) > band:
+                return None, (f"claim value {v} is too far from his last-3 average {avg:g} {m}: "
+                              f"pick a value between {max(0, avg - band):.1f} and {avg + band:.1f}")
         claim = {"metric": m, "op": op, "value": v, "f": [i for i in (c.get("f") or []) if i in fx]}
         claim["t"] = claim_text(F, claim)
     return {"lines": out, "claim": claim}, None
@@ -270,16 +294,32 @@ def params(F, note=""):
     msg = f"Player: {F['name']} ({F['pos']}, {F['team']}). Coming week: Wk {F['week']}.\nFacts:\n" + \
           "\n".join(f"{f['id']}: {f['t']}" for f in F["facts"])
     if note:
-        msg += f"\n\nYour last reply was rejected: {note}. Fix that and reply with JSON only."
-    return {"model": MODEL, "max_tokens": 700,
+        msg += f"\n\nYour last reply was rejected: {note}. Fix that and reply with JSON only, short lines."
+    return {"model": MODEL, "max_tokens": MAX_TOKENS,
             "system": [{"type": "text", "text": SYSTEM, "cache_control": {"type": "ephemeral"}}],
             "messages": [{"role": "user", "content": msg}]}
 
 
-def parse(msg):
+class ReplyError(ValueError):
+    """Claude answered, but not with usable JSON (raw text kept for the run file)."""
+    def __init__(self, why, raw):
+        super().__init__(why)
+        self.raw = raw
+
+
+def parse(msg, R=None):
+    stop = msg.get("stop_reason") or "?"
+    if R is not None:
+        R[stop] = R.get(stop, 0) + 1
+        for blk in msg.get("content", []):  # which kinds of output the tokens went to (text vs thinking)
+            k = "block_" + str(blk.get("type"))
+            R[k] = R.get(k, 0) + 1
     txt = "".join(b.get("text", "") for b in msg.get("content", []) if b.get("type") == "text").strip()
     txt = re.sub(r"^```(?:json)?|```$", "", txt).strip()
-    return json.loads(txt[txt.index("{"): txt.rindex("}") + 1])
+    try:
+        return json.loads(txt[txt.index("{"): txt.rindex("}") + 1])
+    except ValueError as e:
+        raise ReplyError(f"bad JSON (stop: {stop}, {len(txt)} chars): {e}", txt[:2000]) from None
 
 
 def usage_add(U, msg):
@@ -288,16 +328,17 @@ def usage_add(U, msg):
             U[k] = U.get(k, 0) + v
 
 
-def direct(F, note, U):
+def direct(F, note, U, R):
     import requests
     r = requests.post(f"{API}/messages", timeout=180, headers=headers(), json=params(F, note))
     r.raise_for_status()
     m = r.json()
     usage_add(U, m)
-    return parse(m)
+    U["direct_calls"] = U.get("direct_calls", 0) + 1
+    return parse(m, R)
 
 
-def run_batch(FS, U, wait_min):
+def run_batch(FS, U, R, wait_min):
     """{pid: reply dict}. Half price; whatever isn't back within wait_min comes back missing (caller goes direct)."""
     import requests
     out = {}
@@ -329,10 +370,11 @@ def run_batch(FS, U, wait_min):
                 continue
             m = row["result"]["message"]
             usage_add(U, m)
+            U["batch_calls"] = U.get("batch_calls", 0) + 1
             try:
-                out[row["custom_id"].replace("_", "-")] = parse(m)
-            except ValueError:
-                pass
+                out[row["custom_id"].replace("_", "-")] = parse(m, R)
+            except ReplyError as e:  # retried direct with the reason
+                out[row["custom_id"].replace("_", "-")] = {"_err": str(e), "_raw": e.raw}
     return out
 
 
@@ -360,9 +402,12 @@ def main():
     ranks, ros_ranks = rank(proj.get("p") or {}), rank(proj.get("r") or {})
     dv = dvp(P[P.week <= meta["last_completed_week"]])
     ids, rost = players_for(meta, P, proj)
-    if a.limit:
-        ids = ids[:a.limit]
-    FS = [F for F in (build_facts(i, P, S, meta, proj, status, mult, ranks, dv, ros_ranks) for i in ids) if F]
+    if a.limit:  # test runs: the top N by this week's projection (not the first N by id)
+        pp = proj.get("p") or {}
+        ids = sorted(ids, key=lambda k: -(pp.get(k) or 0))[:a.limit]
+    moved = moved_teams(SITE)
+    names = P.sort_values("week").groupby("player_id").player_display_name.last().to_dict()
+    FS = [F for F in (build_facts(i, P, S, meta, proj, status, mult, ranks, dv, ros_ranks, moved, names) for i in ids) if F]
     print(f"Wk {W}: {len(FS)} players ({len(rost)} rostered in {LEAGUE}), "
           f"{sum(len(F['facts']) for F in FS) / max(1, len(FS)):.1f} facts each", file=sys.stderr)
     OUT_CLAIMS.mkdir(parents=True, exist_ok=True)
@@ -370,31 +415,36 @@ def main():
         json.dump(FS, fh)
     if a.facts_only:
         return
-    U, replies = {}, {}
+    U, R, replies = {}, {}, {}
     if not a.direct:
-        replies = run_batch(FS, U, a.wait)
-    done, failed = {}, {}
+        replies = run_batch(FS, U, R, a.wait)
+    done, failed, raws = {}, {}, {}
     for F in FS:
-        rep, note = replies.get(F["id"]), "no reply"
-        for attempt in (1, 2):
+        rep, note, raw = replies.get(F["id"]), "", None
+        for attempt in (1, 2):  # batch reply (or a direct call if none came back), then one retry with the reason
             if rep is None or attempt == 2:
                 try:
-                    rep = direct(F, note if attempt == 2 else "", U)
+                    rep = direct(F, note if attempt == 2 else "", U, R)
+                except ReplyError as e:
+                    rep = {"_err": str(e), "_raw": e.raw}
                 except Exception as e:  # noqa: BLE001
-                    note = f"API error {e}"
-                    rep = None
-                    continue
+                    rep = {"_err": f"API error {e}"}
+            if "_err" in rep:
+                note, raw, rep = rep["_err"], rep.get("_raw"), None
+                continue
             ok, note = check(rep, F)
             if ok:
                 done[F["id"]] = ok
                 break
-            rep = None
+            raw, rep = json.dumps(rep)[:2000], None
         else:
             failed[F["id"]] = note
-    write(meta, FS, done, failed, U)
+            raws[F["id"]] = raw
+    U["stop_reasons"] = R
+    write(meta, FS, done, failed, U, raws)
 
 
-def write(meta, FS, done, failed, U):
+def write(meta, FS, done, failed, U, raws=None):
     W = meta["next_week"]
     asof = pd.Timestamp.now(tz="America/Los_Angeles").strftime("%Y-%m-%d")
     OUT_CARD.mkdir(parents=True, exist_ok=True)
@@ -415,7 +465,7 @@ def write(meta, FS, done, failed, U):
                            "facts": [fx[i] for i in o["claim"]["f"]]})
     (OUT_CLAIMS / f"{meta['season']}_w{W}.json").write_text(json.dumps(
         {"season": meta["season"], "week": W, "asof": asof, "model": MODEL, "players": len(FS), "written": len(done),
-         "failed": failed, "usage": U, "claims": claims}, indent=1))
+         "failed": failed, "usage": U, "claims": claims, "failed_raw": raws or {}}, indent=1))
     print(f"wrote {len(done)} outlooks, {len(claims)} claims; {len(failed)} failed; usage {U}", file=sys.stderr)
 
 

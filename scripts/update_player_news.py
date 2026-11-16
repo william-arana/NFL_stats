@@ -318,14 +318,24 @@ def build_status(sp: dict) -> None:
     except Exception:  # noqa: BLE001
         smap = {}
     try:  # players with a stat line this season: if Sleeper has no NFL team for one, he was released
-        seen = set(json.loads((SITE / "players.json").read_text())["data"]["player_id"])
+        d = json.loads((SITE / "players.json").read_text())["data"]
+        last_team: dict[str, tuple] = {}
+        for pid, tm, wk in zip(d["player_id"], d["team"], d["week"]):  # team of his latest game
+            if pid not in last_team or wk >= last_team[pid][1]:
+                last_team[pid] = (tm, wk)
+        seen = set(last_team)
     except Exception:  # noqa: BLE001
-        seen = set()
-    released = {}
+        last_team, seen = {}, set()
+    teams = {t for t, _ in last_team.values()}
+    released, moved = {}, {}
     for sid, p in (sp or {}).items():
         g = smap.get(sid) or (p.get("gsis_id") or "").strip()
         if g in seen and not p.get("team") and (p.get("position") in ("QB", "RB", "WR", "TE", "K")):
             released[g] = {"s": "FA"}
+        # traded / signed elsewhere: Sleeper's team differs from the team of his last game (e.g. Cousins LV -> MIN, 11/10)
+        new = TEAM_FIX.get(p.get("team") or "", p.get("team") or "")
+        if g in seen and new in teams and new != last_team[g][0] and p.get("position") in ("QB", "RB", "WR", "TE", "K"):
+            moved[g] = [last_team[g][0], new]
         st = p.get("injury_status") or ""
         if not g or st not in RESERVE | {"Out"}:
             continue
@@ -343,7 +353,8 @@ def build_status(sp: dict) -> None:
             out[g] = rec
     for g, rec in released.items():  # "FA" = no NFL team on Sleeper (released); projections set him to 0
         out.setdefault(g, rec)
-    (SITE / "status.json").write_text(json.dumps({"updated_utc": now(), "p": out}, separators=(",", ":"), ensure_ascii=False))
+    # "moved": {gsis_id: [team of his last game, current Sleeper team]}; projections + outlooks use the new team
+    (SITE / "status.json").write_text(json.dumps({"updated_utc": now(), "p": out, "moved": moved}, separators=(",", ":"), ensure_ascii=False))
     print(f"[pnews] status: {len(out)} players flagged, {sum(1 for r in out.values() if r.get('season'))} out for the season, {len(released)} released")
 
 
