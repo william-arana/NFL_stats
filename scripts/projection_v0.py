@@ -25,7 +25,15 @@ def k_context(g):
     return fav, dome
 
 
-def ours(P, K, S, week, T=None):
+def moved_teams(site):
+    """{gsis_id: current team} for players traded / signed elsewhere since their last game (status.json "moved", from Sleeper)."""
+    f = Path(site) / "status.json" if site is not None else None
+    if not f or not f.exists():
+        return {}
+    return {k: v[1] for k, v in (json.loads(f.read_text()).get("moved") or {}).items()}
+
+
+def ours(P, K, S, week, T=None, moved=None):
     """Our projection v0 (projections/model_v0.json): per-position linear model on the backtested signals
     (season avg, last 3, Vegas implied, xFP, snap % trend, share of team carries + targets, target share). K: implied + spread + dome + kicker avg."""
     if not MODEL.exists():
@@ -42,7 +50,7 @@ def ours(P, K, S, week, T=None):
     prev = prev.sort_values("week")
     out = []
     for pid, h in prev.groupby("player_id"):
-        l3 = h.tail(3); pos = h.position.iloc[-1]; team = h.team.iloc[-1]
+        l3 = h.tail(3); pos = h.position.iloc[-1]; team = (moved or {}).get(pid, h.team.iloc[-1])  # traded: new team's game
         if pos not in M["coef"] or team not in imp or pd.isna(imp[team]):
             continue
         f = {"ppr_avg": h.fantasy_points_ppr.mean(), "ppr_l3": l3.fantasy_points_ppr.mean(), "implied": imp[team],
@@ -56,7 +64,7 @@ def ours(P, K, S, week, T=None):
         c = M["coef"]["K"]
         fav, dome = k_context(g)
         for pid, h in K[K.week < week].sort_values("week").groupby("player_id"):
-            t = h.team.iloc[-1]
+            t = (moved or {}).get(pid, h.team.iloc[-1])
             if t in imp and not pd.isna(imp[t]):
                 v = c["Intercept"] + c["implied"] * imp[t] + c["k_avg"] * h.k_pts.mean()
                 v += c.get("fav_by", 0) * fav.get(t, 0) + c.get("dome", 0) * dome.get(t, 0)
@@ -138,7 +146,7 @@ def play_mult(site, week, S):
         Iq = pd.read_csv(lab, usecols=["season", "week", "gsis_id", "report_status", "practice_status"]) if lab.exists() else None
         if Iq is not None and "season" in meta:
             Iq = Iq[Iq.season == meta["season"]]
-        for pid, why in qb_backups(Pq, Iq, week).items():
+        for pid, why in qb_backups(Pq, Iq, week, moved_teams(site)).items():
             out[pid] = (0.0, why)
         res = status.get("p") or {}  # IR/PUP aren't on the weekly report: those are hurt, handled below
         for pid in lost_role(Pq, S, Iq, week):
@@ -157,7 +165,7 @@ def play_mult(site, week, S):
     return out
 
 
-def qb_backups(P, I, week):
+def qb_backups(P, I, week, moved=None):
     """{gsis_id: reason} for QBs who won't start in `week` (projected 0). Box scores + injury report only, so it backtests.
     Starter of a team's last game keeps the job, except: the season's regular starter (most starts) who lost it to injury
     (on an injury report after his last start) gets it back once this week's report has him practicing Full/Limited and not Out/Doubtful. Benched starters stay benched."""
@@ -186,6 +194,9 @@ def qb_backups(P, I, week):
             qb1 = last
         starters[team] = qb1
     cur = q.sort_values("week").groupby("player_id").team.last()  # each QB's latest team
+    for pid, t in (moved or {}).items():  # traded QB: backup on his new team unless he started its last game
+        if pid in cur.index:
+            cur[pid] = t
     return {pid: f"backup QB ({starters[t]} starts)" for pid, t in cur.items() if t in starters and pid != starters[t]}
 
 
@@ -207,7 +218,7 @@ def lost_role(P, S, I, week, k=2):
 
 def ours_v01(P, K, S, week, T=None, site=None):
     """v0 x play_mult. Same columns as ours() plus `avail` (multiplier) and `why`."""
-    o = ours(P, K, S, week, T)
+    o = ours(P, K, S, week, T, moved_teams(site))
     if site is None or o.empty:
         return o.assign(avail=1.0, why="")
     m = play_mult(site, week, S)
@@ -229,7 +240,8 @@ GAMES_PLAYED = {"QB": 0.764, "RB": 0.783, "WR": 0.799, "TE": 0.794}
 
 def ros(P, K, S, week, T=None, site=None):
     """{gsis_id: rest-of-season PPR, weeks week..18} for QB/RB/WR/TE."""
-    v0 = ours(P, K, S, week, T)
+    mv = moved_teams(site)
+    v0 = ours(P, K, S, week, T, mv)
     if v0.empty:
         return {}
     v1 = ours_v01(P, K, S, week, T, site).set_index("key").ours_ppr
@@ -248,10 +260,10 @@ def ros(P, K, S, week, T=None, site=None):
     for r in v0.itertuples():
         if r.key not in pos.index or pos.position[r.key] not in GAMES_PLAYED:
             continue
-        p, team = pos.position[r.key], pos.team[r.key]
+        p, team = pos.position[r.key], mv.get(r.key, pos.team[r.key])
         why = m.get(r.key, (1.0, ""))[1]
         s = st.get(r.key) or {}
-        hurt_qb1 = why.startswith("backup QB") and r.key in reg
+        hurt_qb1 = why.startswith("backup QB") and r.key in reg and r.key not in mv  # a traded QB isn't his new team's QB1
         gone = why.startswith(("released", "no offensive snaps")) or (why.startswith("backup QB") and not hurt_qb1)
         if s.get("season") or gone:
             out[r.key] = 0.0
