@@ -3,6 +3,8 @@ name: Update data
 # Tuesday = full refresh after Monday Night Football.
 # Monday morning = Sunday's games in before Monday Night Football.
 # Thursday + Sunday mornings = pick up new injury reports before games.
+# Saturday afternoon = Friday's final game statuses (Out/Doubtful) + IR moves, so the RB/WR depth bump
+#   (backup moving up when a starter is out) shows on Waivers with a day left to pick him up.
 # Times are UTC (15:17 UTC = 8:17 AM Pacific in daylight time, 7:17 AM in standard time).
 on:
   schedule:
@@ -10,6 +12,7 @@ on:
     - cron: "17 13 * * 2"   # Tue 5:17 AM PT (standard time); the recap starts when this finishes
     - cron: "17 15 * * 2"   # Tue 7:17 AM PT: second pass in case MNF stats weren't in yet
     - cron: "17 21 * * 4"   # Thu, before TNF
+    - cron: "47 21 * * 6"   # Sat 1:47 PM PT (standard time): Friday statuses + Saturday IR moves / elevations
     - cron: "17 15 * * 0"   # Sun, before early games
   workflow_dispatch:         # "Run workflow" button in the Actions tab
 

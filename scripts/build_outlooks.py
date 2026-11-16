@@ -31,6 +31,9 @@ LEAGUE = "67FFL"
 TOP_N = 300
 POS = ("QB", "RB", "WR", "TE")
 LINES_MAX, WORDS_MAX = 3, 32
+# "off" = thinking {"type": "between_tools"} (lowest setting on Sonnet 5.5; "disabled" is a 400 there).
+# "on" = no thinking field = the model's adaptive default. Most output tokens were thinking (11/15 test).
+THINKING = os.environ.get("OUTLOOK_THINKING", "on").strip().lower()
 MAX_TOKENS = 1500  # was 700: 8 of 20 replies came back cut off in the 11/14 test
 
 # claim metric -> how to read it from next week's box score (players.json). value units as written in the claim.
@@ -52,10 +55,14 @@ SYSTEM = f"""You write short fantasy football outlooks for one player at a time,
 You get a facts list. Each fact has an id (F1, F2, ...) and a text. Use ONLY these facts. No outside knowledge: no
 contracts, draft history, reputations, team news or anything not in the list, even if you know it.
 
-Write {LINES_MAX - 1} or {LINES_MAX} lines (each at most {WORDS_MAX - 4} words, plain sentences, no hype, no emojis):
+Write {LINES_MAX - 1} or {LINES_MAX} lines in total, never more. Each line is at most {WORDS_MAX - 4} words (count them), plain
+sentences, no hype, no emojis. The bullets below are what the lines cover, not one line each:
 - What his role and production look like right now (usage trend first, points second).
-- Plain words a fantasy player would use. Compare recent vs season only where it changed; don't repeat the same
-  "last 3 vs season" pattern in every line. Aim for about 20 words a line.
+- Plain words a fantasy player would use, like a friend in your league talking. Aim for about 20 words a line, one sentence or two short ones.
+- Each line says something different. Compare recent vs season in at most one line, and only where it changed.
+  Other angles: share of team targets or carries, snaps, red-zone or goal-line work, the matchup, the coach.
+- No stat jargon or made-up phrases ("cut to 75% of normal", "snap-heavy role", "volume profile"). Say what
+  happened: "played 74% of snaps", "saw 8 targets". No stacked adjectives.
 - What matters for the coming week (matchup, availability, coach comments) when the facts have it.
 - Each line cites the fact ids it uses. Every number you write must appear exactly as written in a fact the line cites
   (same rounding: write 74%, not 0.74 or 75%). Don't compute new numbers (no differences, sums or percentages of your own).
@@ -295,9 +302,12 @@ def params(F, note=""):
           "\n".join(f"{f['id']}: {f['t']}" for f in F["facts"])
     if note:
         msg += f"\n\nYour last reply was rejected: {note}. Fix that and reply with JSON only, short lines."
-    return {"model": MODEL, "max_tokens": MAX_TOKENS,
-            "system": [{"type": "text", "text": SYSTEM, "cache_control": {"type": "ephemeral"}}],
-            "messages": [{"role": "user", "content": msg}]}
+    p = {"model": MODEL, "max_tokens": MAX_TOKENS,
+         "system": [{"type": "text", "text": SYSTEM, "cache_control": {"type": "ephemeral"}}],
+         "messages": [{"role": "user", "content": msg}]}
+    if THINKING == "off":
+        p["thinking"] = {"type": "between_tools"}
+    return p
 
 
 class ReplyError(ValueError):
