@@ -1,4 +1,4 @@
-/* Shared nav tools for every NFL_stats page: theme toggle, league + team picker, Sleeper roster lookups,
+/* Shared nav tools for every GameDay_stats page: theme toggle, league + team picker, Sleeper roster lookups,
    and the little "open player" link menu. */
 (function(){
   const LS={get(k){try{return localStorage.getItem('nfls-'+k)}catch(e){return null}},set(k,v){try{localStorage.setItem('nfls-'+k,v)}catch(e){}}};

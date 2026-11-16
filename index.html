@@ -3,27 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>NFL_stats</title>
+<title>GameDay_stats</title>
 <!-- link previews -->
 <meta name="description" content="Fantasy war room: waiver board, league + NFL matchups, every nflverse stat and live headlines.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="NFL_stats">
-<meta property="og:title" content="NFL_stats">
+<meta property="og:site_name" content="GameDay_stats">
+<meta property="og:title" content="GameDay_stats">
 <meta property="og:description" content="Fantasy war room: waiver board, league + NFL matchups, every nflverse stat and live headlines.">
-<meta property="og:url" content="https://william-arana.github.io/NFL_stats/">
-<meta property="og:image" content="https://william-arana.github.io/NFL_stats/assets/og.jpg">
+<meta property="og:url" content="https://thegameday.zone/">
+<meta property="og:image" content="https://thegameday.zone/assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="NFL_stats logo on a navy football field">
+<meta property="og:image:alt" content="GameDay_stats logo on a navy football field">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://william-arana.github.io/NFL_stats/assets/og.jpg">
+<meta name="twitter:image" content="https://thegameday.zone/assets/og.jpg">
 <meta name="theme-color" content="#0f1b33">
 <!-- /link previews -->
 <!-- app icon -->
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="apple-mobile-web-app-title" content="NFL_stats">
+<meta name="apple-mobile-web-app-title" content="GameDay_stats">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -56,7 +56,7 @@
 .kicker .live{display:inline-flex;align-items:center;gap:6px;padding:2px 9px;border-radius:999px;background:rgba(198,52,44,.22);color:#ffd5d0}
 .kicker .live i{width:7px;height:7px;border-radius:50%;background:#ff6b5f;box-shadow:0 0 0 0 rgba(255,107,95,.7)}
 @media (prefers-reduced-motion:no-preference){.kicker .live i{animation:pulse 2s infinite}@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(255,107,95,0)}100%{box-shadow:0 0 0 0 rgba(255,107,95,0)}}}
-.hero h1{margin:0;font-family:var(--f-display);font-weight:800;font-size:clamp(46px,13vw,168px);line-height:.82;letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance}
+.hero h1{margin:0;font-family:var(--f-display);font-weight:800;font-size:clamp(46px,13vw,168px);line-height:.82;letter-spacing:-.01em;text-transform:none;text-wrap:balance;padding-bottom:.13em}
 .hero h1 span{color:var(--margin);margin-inline:.02em}
 .hero h1 em{font-style:normal;-webkit-text-stroke:2px var(--hero-ink);color:transparent}
 .hero p.lede{margin:0;max-width:60ch;color:var(--hero-dim);font-size:15.5px}
@@ -215,7 +215,7 @@ aside.rail{display:grid;gap:16px;min-width:0;position:sticky;top:12px}
 </head>
 <body>
 <header class="sitenav"><div class="wrap">
-  <a class="brand" href="./" title="Home">NFL<span>_</span>stats</a>
+  <a class="brand" href="./" title="Home">GameDay<span>_</span>stats</a>
   <nav aria-label="Site"><a href="./" aria-current="page">Home</a><a href="stats.html">Stats</a><a href="waivers.html">Waivers</a><a href="trade.html">Compare</a><a href="pressers.html">Pressers</a><a href="lab.html">Lab</a><a href="guide.html">Guide</a></nav>
   <span class="upd" id="upd"></span>
   <div class="navtools" id="navtools"></div>
@@ -223,7 +223,7 @@ aside.rail{display:grid;gap:16px;min-width:0;position:sticky;top:12px}
 
 <section class="hero"><div class="wrap hero-in">
   <div class="kicker"><span class="live"><i></i><span id="k-week">2026 season</span></span><span id="k-data">nflverse data</span></div>
-  <h1>NFL<span>_</span><em>stats</em></h1>
+  <h1>GameDay<span>_</span><em>stats</em></h1>
   <p class="lede">The waiver war room. Every stat nflverse publishes, your leagues' free agents, a SQL lab with an AI assist, and the day's headlines in one place.</p>
   <div class="hits" id="hits">
     <a class="hit" href="stats.html#schedule"><span class="lbl">Next kickoff</span><span class="val">…</span><span class="sub">Loading schedule</span></a>

@@ -21,7 +21,7 @@ from projection_v0 import ours, ours_v01  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 SITE, OUT = ROOT / "data" / "site", ROOT / "data" / "site" / "articles"
 API = "https://api.sleeper.app/v1"
-UA = {"User-Agent": "NFL_stats weekly articles (personal, non-commercial)"}
+UA = {"User-Agent": "GameDay_stats weekly articles (personal, non-commercial)"}
 SLOT_OK = {"QB": {"QB"}, "RB": {"RB"}, "WR": {"WR"}, "TE": {"TE"}, "K": {"K"}, "DEF": {"DEF"},
            "FLEX": {"RB", "WR", "TE"}, "SUPER_FLEX": {"QB", "RB", "WR", "TE"}, "REC_FLEX": {"WR", "TE"}, "WRRB_FLEX": {"WR", "RB"}}
 INJ_RE = re.compile(r"(left (sunday's|monday's|thursday's|saturday's|the) (game|contest|win|loss)|exited|was carted|carted off|won't return|will not return|did not return|didn't return|ruled out for the (rest|remainder)|questionable to return|doubtful to return|was evaluated for a concussion|entered the concussion protocol|went down with|was helped off|suffered an? [a-z ]{0,40}(injury|sprain|strain|tear|fracture|contusion) (in|during) (sunday's|monday's|thursday's|saturday's|the) (game|contest|win|loss|first|second|third|fourth))", re.I)
@@ -269,7 +269,7 @@ def recap_facts(week, args):
             "trade_deadline_week": 11, "my_week": mine, "hindsight": hindsight, "top_performers": top_performers(P, T, K, week, idx, owner_of),
             "injuries": injuries_on_field(P, week, S, idx, owner_of)[:12], "league_teams": [slim_team(t) for t in league_rows],
             "high_score": league_rows[0]["team"] if league_rows else None, "grading_last_preview": grading,
-            "projections_note": "ours = NFL_stats projection v0 computed only from games before this week (backfilled for weeks before 9)."}
+            "projections_note": "ours = GameDay_stats projection v0 computed only from games before this week (backfilled for weeks before 9)."}
 
 
 def slim_team(t):
@@ -380,7 +380,7 @@ def preview_facts(week, args):
             "my_unavailable": [slim_c(c) | {"bye": c["bye"], "injury": c["injury"], "status": c["status"]} for c in my_c if c["v"] is None and (c["bye"] or c["injury"] or c["status"])],
             "close_calls": close, "waiver_adds": waivers, "buy_low_on_your_roster": bs[:2], "sell_high_on_your_roster": bs[::-1][:2],
             "league_median_strength": {p: round(v, 1) for p, v in med.items()}, "around_the_league": teams,
-            "projections_note": "ours = NFL_stats projection v0 (backtested signals: season avg, last 3, Vegas implied, xFP, snap % and touch-share trends, target share; D/ST by opponent Vegas implied)."}
+            "projections_note": "ours = GameDay_stats projection v0 (backtested signals: season avg, last 3, Vegas implied, xFP, snap % and touch-share trends, target share; D/ST by opponent Vegas implied)."}
 
 
 def slim_c(c):

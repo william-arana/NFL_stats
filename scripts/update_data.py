@@ -1,4 +1,4 @@
-"""Weekly data refresh for the NFL_stats site and master workbook.
+"""Weekly data refresh for the GameDay_stats site and master workbook.
 
 Pulls the current season from nflverse and writes:
   data/latest/csv/*.csv      one file per dataset (Power Query / Google Sheets friendly)
@@ -356,7 +356,7 @@ def main() -> None:
 
     with xlsxwriter.Workbook(XLSX) as wb:
         about = wb.add_worksheet("About")
-        about.write(0, 0, f"NFL_stats master workbook — {season} season")
+        about.write(0, 0, f"GameDay_stats master workbook — {season} season")
         about.write(1, 0, f"Refreshed {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC from nflverse")
         about.write(3, 0, "Tab")
         about.write(3, 1, "Rows")
