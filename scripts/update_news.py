@@ -17,7 +17,7 @@ import requests
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "data" / "site" / "news.json"
-UA = {"User-Agent": "Mozilla/5.0 (NFL_stats personal dashboard; +https://william-arana.github.io/NFL_stats/)"}
+UA = {"User-Agent": "Mozilla/5.0 (GameDay_stats personal dashboard; +https://thegameday.zone/)"}
 MAX = 20
 
 

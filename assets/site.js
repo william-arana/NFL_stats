@@ -1,4 +1,4 @@
-/* Shared nav tools for every NFL_stats page: theme toggle, league + team picker, Sleeper roster lookups,
+/* Shared nav tools for every GameDay_stats page: theme toggle, league + team picker, Sleeper roster lookups,
    and the little "open player" link menu. */
 (function(){
   const LS={get(k){try{return localStorage.getItem('nfls-'+k)}catch(e){return null}},set(k,v){try{localStorage.setItem('nfls-'+k,v)}catch(e){}}};
@@ -175,7 +175,7 @@
   function verFoot(){if(document.getElementById('ver')||document.querySelector('.verfoot'))return;
     const me=document.querySelector('script[src*="assets/site.js"]');const v=(me&&(me.src.match(/[?&]v=([^&]+)/)||[])[1])||'?';
     const f=document.createElement('footer');f.className='verfoot';
-    f.innerHTML=`<div class="wrap"><span>NFL_stats · data from <a href="https://github.com/nflverse" target="_blank" rel="noopener">nflverse</a> and Sleeper</span><span class="vf-r"><span class="vf-msg"></span><button type="button" class="vf-chk">Check for updates</button><b title="Site version: 1.&lt;pull request number&gt; of the last change">v${v}</b></span></div>`;
+    f.innerHTML=`<div class="wrap"><span>GameDay_stats · data from <a href="https://github.com/nflverse" target="_blank" rel="noopener">nflverse</a> and Sleeper</span><span class="vf-r"><span class="vf-msg"></span><button type="button" class="vf-chk">Check for updates</button><b title="Site version: 1.&lt;pull request number&gt; of the last change">v${v}</b></span></div>`;
     document.body.appendChild(f);const msg=f.querySelector('.vf-msg');
     f.querySelector('.vf-chk').onclick=()=>{msg.textContent='Checking…';
       fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(j=>{
