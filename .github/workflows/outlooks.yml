@@ -16,6 +16,9 @@ on:
       facts_only:
         description: "true = build the facts file only (no Claude calls)"
         default: "false"
+      thinking:
+        description: "on = model default (adaptive), off = between_tools (cheaper)"
+        default: "on"
       commit:
         description: "false = don't commit; outputs go to a run artifact (tests)"
         default: "true"
@@ -42,6 +45,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           LIMIT: ${{ inputs.limit }}
           FACTS_ONLY: ${{ inputs.facts_only }}
+          OUTLOOK_THINKING: ${{ inputs.thinking || 'on' }}
         run: |
           args=""
           [ -n "$LIMIT" ] && args="$args --limit $LIMIT"
