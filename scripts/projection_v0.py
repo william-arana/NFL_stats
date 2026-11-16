@@ -217,15 +217,113 @@ def lost_role(P, S, I, week, k=2):
 
 
 def ours_v01(P, K, S, week, T=None, site=None):
-    """v0 x play_mult. Same columns as ours() plus `avail` (multiplier) and `why`."""
+    """(v0 + depth adjustment) x play_mult. Same columns as ours() plus `depth`, `depth_why`, `avail` (multiplier) and `why`."""
     o = ours(P, K, S, week, T, moved_teams(site))
     if site is None or o.empty:
-        return o.assign(avail=1.0, why="")
+        return o.assign(depth=0.0, depth_why="", avail=1.0, why="")
     m = play_mult(site, week, S)
+    try:  # v0.2 depth / vacated opportunity for RB/WR
+        site_ = Path(site)
+        meta = json.loads((site_ / "meta.json").read_text())
+        st = (json.loads((site_ / "status.json").read_text()) if (site_ / "status.json").exists() else {}).get("p") or {}
+        lab = site_.parent / "lab" / "injuries.csv.gz"
+        I = pd.read_csv(lab, usecols=["season", "week", "gsis_id", "report_status"]) if lab.exists() else None
+        rl = site_.parent / "lab" / "rosters.csv.gz"
+        R = pd.read_csv(rl, usecols=["season", "week", "team", "status", "gsis_id"]) if rl.exists() else None
+        if R is not None:
+            R = R[R.season == meta.get("season")]
+        dp = depth_adj(P, S, I, st, week, meta.get("season"), R)
+    except Exception as e:  # never break the projection over this
+        print(f"depth_adj skipped: {e}")
+        dp = {}
+    o["depth"] = [dp.get(k, (0.0, ""))[0] for k in o.key]
+    o["depth_why"] = [dp.get(k, (0.0, ""))[1] for k in o.key]
+    o["ours_ppr"] = o.ours_ppr + o.depth
     o["avail"] = [m.get(k, (1.0, ""))[0] for k in o.key]
     o["why"] = [m.get(k, (1.0, ""))[1] for k in o.key]
     o["ours_ppr"] = (o.ours_ppr * o.avail).round(2)
     return o
+
+
+# ---------- v0.2: depth / vacated opportunity (notes repo docs/backtests/depth-vacated, 2019-2026) ----------
+# When an RB/WR who played his team's last game is Out/Doubtful/IR/released this week, the RB/WRs he out-ranked (season share of
+# team carries + targets) get more work; when a regular comes back, the guys who filled in lose it. Fit on v0 misses of players who
+# played, 2019-2026 (23.6k RB/WR weeks), leave-one-season-out: team-share miss on 15%+ vacancies 8.4 -> 7.0 pts, points bias
+# +3.1 -> -0.1, weekly rank corr +0.010 (better 67% of weeks), waiver-tier top-5 picks per week 9.25 -> 9.84 PPR. "Back" = missed
+# his team's last game and is on this week's injury report but not Out/Doubtful. New signings / trades / practice-squad elevations
+# at the position did NOT take work away (coef ~0), so they aren't used. Game statuses come out Friday: the Saturday data run uses them.
+# Half of the fitted bump (William, 11/15): the full fit matches the AVERAGE backup, which a few boom games pull up, so it
+# overshot the typical one (15%+ vacancies: median miss 3.20 -> 4.11, typical player 1.9 pts too high). Half: typical miss about
+# even (signed median -0.4), best average miss (5.09 -> 4.88), waiver-tier top-5 picks 9.25 -> 9.67 PPR.
+DEPTH_SCALE = 0.5
+DEPTH = {pos: {k: round(v * DEPTH_SCALE, 3) for k, v in c.items()} for pos, c in {
+    "RB": {"vac_above": 10.241, "next_up": 1.336, "ret": -6.473},
+    "WR": {"vac_above": 14.785, "next_up": 0.0, "ret": -8.124}}.items()}
+
+
+def depth_adj(P, S, I, status, week, season=None, R=None):
+    """{gsis_id: (points to add, reason)} for RB/WRs in `week`. P = this season's player rows (player_id, position, team, week,
+    carries, targets). I = injury report rows (season, week, gsis_id, report_status) or None. status = Sleeper status.json `p`.
+    R = nflverse weekly roster rows (week, team, status, gsis_id) or None: IR/inactive/cut/practice squad, or now on another team, = out."""
+    p = P[(P.week < week) & P.position.isin(["QB", "RB", "WR", "TE"])].copy()
+    if p.empty:
+        return {}
+    for c in ("carries", "targets"):
+        p[c] = p[c].fillna(0)
+    p["opps"] = p.carries + p.targets
+    p["share"] = p.opps / p.groupby(["team", "week"]).opps.transform("sum").replace(0, float("nan"))
+    p = p[p.position.isin(["RB", "WR"])].sort_values("week")
+    last = p.groupby("player_id").tail(1).set_index("player_id")
+    agg = p.groupby("player_id").agg(share=("share", "mean"), gp=("share", "size"))
+    agg = agg.join(last[["team", "position"]])
+    agg = agg[agg.gp >= 2]
+    agg["share"] = agg.share.fillna(0)
+    tg = pd.concat([S[["week", "home_team"]].rename(columns={"home_team": "team"}), S[["week", "away_team"]].rename(columns={"away_team": "team"})])
+    prevwk = tg[tg.week < week].groupby("team").week.max().to_dict()
+    played = set(zip(p.player_id, p.week))
+    agg["played_prev"] = [(pid, prevwk.get(t)) in played for pid, t in zip(agg.index, agg.team)]
+    out, onrep = set(), set()
+    if I is not None and len(I):
+        i = I[I.week == week]
+        if season is not None and "season" in i:
+            i = i[i.season == season]
+        out |= set(i[i.report_status.isin(["Out", "Doubtful"])].gsis_id)
+        onrep = set(i[~i.report_status.isin(["Out", "Doubtful"])].gsis_id)
+    out |= {pid for pid, v in (status or {}).items() if v.get("s") in ("IR", "PUP", "FA")}
+    if R is not None and len(R):
+        r = R[R.week <= week]
+        if len(r):
+            r = r[r.week == r.week.max()].drop_duplicates("gsis_id").set_index("gsis_id")
+            gone = r.status.isin(["RES", "INA", "CUT", "RET", "TRD", "TRC", "EXE", "DEV"])
+            out |= set(r.index[gone])
+            moved = r.team.reindex(agg.index)
+            out |= set(agg.index[moved.notna() & (moved != agg.team)])
+    agg["out"] = agg.index.isin(out)
+    res = {}
+    for (team, pos), g in agg.groupby(["team", "position"]):
+        new_out = g[g.out & g.played_prev]
+        av = g[~g.out]
+        ret = av[~av.played_prev & av.index.isin(onrep)].share.sum()  # back from injury: on the report, not ruled out
+        if new_out.empty and ret == 0:
+            continue
+        top_out = new_out.share.max() if len(new_out) else 0.0
+        cand = av[av.share < top_out]
+        nxt = cand.share.idxmax() if len(cand) else None
+        c = DEPTH[pos]
+        for pid, r in av.iterrows():
+            above = new_out[new_out.share > r.share]
+            v_above = above.share.sum()
+            nu = 1.0 if (pid == nxt and v_above > 0) else 0.0
+            adj = c["vac_above"] * v_above + c["next_up"] * nu + c["ret"] * ret
+            if abs(adj) < 0.3:
+                continue
+            why = []
+            if v_above > 0:
+                why.append(f"{'next up: ' if nu else ''}{pos} ahead of him out ({round(v_above * 100)}% of team opps)")
+            if ret > 0:
+                why.append(f"{pos} back from absence ({round(ret * 100)}% of team opps)")
+            res[pid] = (round(adj, 2), "; ".join(why))
+    return res
 
 
 # ---------- ROS v0 (notes repo docs/backtests/ros) ----------
