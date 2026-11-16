@@ -252,6 +252,22 @@ function kStreamHTML(){
       ks.map((a,i)=>{const m=mineK(a.id),al=H(a.proj);return `<tr><td class="rank">${i+1}</td><td class="l stick">${PB(a,!m&&ROST?'name-fa':m?'name-mine':'')}${NFLS.plink(a.id,a.name)} <span class="pos">${a.team}</span>${ROST?NFLS.badge(m?'mine':'fa',LG,a.name):''}</td><td class="l">${OPPB(a.next.opp,a.next.at,'')}</td><td class="${al?'heat':''}" ${al?`style="--a:${al.toFixed(3)}"`:''}><span class="score">${a.proj.toFixed(1)}</span></td><td>${f1(a.ppg)}</td><td>${f1(a.l3)}</td><td>${a.fgm}/${a.fga}</td><td>${f1(a.impl)}</td><td>${num(a.fav)?(a.fav>0?'+':'')+a.fav.toFixed(1):'–'}</td><td>${a.ind?'Yes':''}</td></tr>`}).join('')}</tbody></table></div>
     <div class="foot"><span><b>Our proj</b> = 6.47 + 0.022 × team implied + 0.082 × points favored by + 0.84 if indoors + 0.071 × his season K pts/g (standard kicker scoring). Fit on 2018–2025. Kicker weeks are mostly luck (the best inputs explain ~4% of the swing), so a gap under ~1 point is a coin flip. Favorites and high implied totals mostly add extra points; field goal attempts stay ~2 a game either way.</span></div></section>`;
 }
+function qbStreamHTML(all){
+  /* QB streamers: implied team total is the strongest single input for waiver-tier QBs (backtest 2019–2026, notes repo) */
+  if(!PROJ||PROJ.week!==META.next_week)return '';
+  const nw=META.next_week,imp=[];for(const g of G)if(g.week===nw){if(num(g.home_implied))imp.push([g.home_team,g.home_implied]);if(num(g.away_implied))imp.push([g.away_team,g.away_implied])}
+  imp.sort((a,b)=>b[1]-a[1]);const irk=Object.fromEntries(imp.map(([t],i)=>[t,i+1]));
+  const mineQ=id=>ROST&&avOf(id)==='mine';
+  let qs=all.filter(a=>a.pos==='QB'&&a.next&&num(PROJ.p[a.id])&&PROJ.p[a.id]>=5&&(!ROST||avOf(a.id)==='fa'||mineQ(a.id))).map(a=>({...a,proj:PROJ.p[a.id],impl:a.next.implied,irk:irk[a.team]||null}));
+  const by=st.qbSort||'proj';qs.sort((a,b)=>(num(b[by])?b[by]:-1)-(num(a[by])?a[by]:-1));qs=qs.slice(0,12);
+  if(!qs.length)return '';
+  const H=heatFn(qs.map(a=>a.proj)),HI=heatFn(qs.map(a=>a.impl));
+  return `<section class="box"><div class="box-h"><h2>QB streamers</h2><span class="hint">${ROST?'Available QBs (plus yours) for':'All QBs for'} Week ${nw}, by ${by==='impl'?'team implied total':'our projection'}</span><span class="sp"></span>
+    <div class="seg" id="qb-sort"><button data-v="proj" aria-pressed="${by==='proj'}">Our proj</button><button data-v="impl" aria-pressed="${by==='impl'}">Implied</button></div></div>
+    <div class="tablewrap"><table data-cols="waivers-qbstream"><thead><tr><th class="rank">#</th><th class="l stick">QB</th><th class="l">Opponent</th><th>${gl('qb_proj','Our proj')}</th><th>${gl('team_implied_pts','Implied')}</th><th>${gl('implied_rank','Implied rank')}</th><th>${gl('ppr3','PPR L3')}</th><th>${gl('ppr','PPR season')}</th></tr></thead><tbody>${
+      qs.map((a,i)=>{const m=mineQ(a.id),al=H(a.proj),ai=HI(a.impl),top=a.irk&&a.irk<=5;return `<tr><td class="rank">${i+1}</td><td class="l stick">${PB(a,!m&&ROST?'name-fa':m?'name-mine':'')}${NFLS.plink(a.id,a.name)} <span class="pos">${a.team}</span>${ROST?NFLS.badge(m?'mine':'fa',LG,a.name):''}${a.inj?`<span class="inj" title="${esc(a.inj[1])}">${esc(a.inj[0].replace('Practice: ',''))}</span>`:''}</td><td class="l">${OPPB(a.next.opp,a.next.at,'QB')}${mrk(a.mrk)}</td><td class="${al?'heat':''}" ${al?`style="--a:${al.toFixed(3)}"`:''}><span class="score">${a.proj.toFixed(1)}</span></td><td class="${ai?'heat':''}" ${ai?`style="--a:${ai.toFixed(3)}"`:''}>${f1(a.impl)}</td><td>${a.irk?(top?'<b class="up">'+ord(a.irk)+'</b>':ord(a.irk)):'–'}</td><td>${f1(a.ppr3)}</td><td>${f1(a.ppr)}</td></tr>`}).join('')}</tbody></table></div>
+    <div class="foot"><span><b>Why implied matters for QBs:</b> in 2019–2026 (through Week 10), waiver-tier QBs (QB13–24 by points per game coming into the week) on one of the week's 5 highest-implied offenses averaged 17.9 PPR and finished as a top-12 QB 53% of the time, vs 12.5 PPR and 23% for the 10 lowest. Each extra point of team implied total was worth about +0.5 fantasy points, more than his own season average told you. The same test found no edge for waiver RBs or WRs (their role matters, not the game total), and only a small one for TEs. Bold rank = top 5 implied this week. Our proj already includes the implied total.</span></div></section>`;
+}
 function draw(){
   if(!P)return;
   const all=players();const dl=dstBoard();
@@ -291,12 +307,14 @@ function draw(){
     <div class="tablewrap"><table data-cols="waivers-dst"><thead><tr><th class="rank">#</th><th class="l stick">Defense</th><th class="l">Opponent</th><th>Matchup score</th><th>D/ST pts/g</th><th>Pressures/g</th><th>Opp prs alw</th><th>Sacks/g</th><th>Opp sk alw</th><th>Opp implied</th></tr></thead><tbody>${
       freeDefs.map((x,i)=>{const m=myDef.includes(x.team);return `<tr><td class="rank">${i+1}</td><td class="l stick"><button type="button" class="pname ${!m&&ROST?'name-fa':''}" data-card="d:${x.team}" aria-expanded="false">${x.team} D/ST</button>${NFLS.plink('DEF:'+x.team,x.team+' D/ST')}${ROST?NFLS.badge(m?'mine':'fa',LG,x.team+' D/ST'):''}</td><td class="l">${OPPB(x.opp,x.at,'')}</td><td><span class="score">${x.score.toFixed(2)}</span></td><td>${f1(x.dst)}</td><td>${f1(x.pr)}</td><td>${f1(x.opra)}</td><td>${f1(x.sk)}</td><td>${f1(x.oska)}</td><td>${f1(x.oi)}</td></tr>`}).join('')}</tbody></table></div>
     <div class="foot"><span>Matchup score = z(pressures) + z(opponent pressures allowed) + z(sacks) + z(opponent sacks allowed) − z(opponent Vegas implied points). Same as the Lab recipe.</span></div></section>
+  ${qbStreamHTML(all)}
   ${kStreamHTML()}`;
 
   {const kdOnly=st.pos==='K'||st.pos==='DEF';const box=$('#fa-box');
     if(box){const html=kdHTML(q,words,dl,kdOnly?st.pos:null);
       if(kdOnly){box.querySelectorAll(':scope > .tablewrap, :scope > .empty, :scope > .colbar, :scope > .foot').forEach(n=>n.remove());const h=box.querySelector('.box-h h2');if(h&&!q)h.textContent=st.pos==='K'?(st.showTaken?'All kickers':'Free agent kickers'):(st.showTaken?'All defenses':'Free agent defenses');box.insertAdjacentHTML('beforeend',html)}
       else if(html)box.insertAdjacentHTML('afterend',`<section class="box" id="kd-box"><div class="box-h"><h2>Kickers &amp; defenses</h2><span class="hint">matching “${esc(st.q.trim())}”</span></div>${html}</section>`)}}
+  {const qb=$('#qb-sort');if(qb)qb.onclick=e=>{const b=e.target.closest('button');if(!b)return;st.qbSort=b.dataset.v;draw()}}
   $('#w-pos').onclick=e=>{const b=e.target.closest('button');if(!b)return;st.pos=b.dataset.v;store.set('wpos',st.pos);draw()};
   $('#w-taken').onchange=e=>{st.showTaken=e.target.checked;draw()};
   {const qi=$('#w-q');let t;qi.oninput=e=>{clearTimeout(t);t=setTimeout(()=>{const pos=e.target.selectionStart;st.q=e.target.value;draw();const n=$('#w-q');n.focus();try{n.setSelectionRange(pos,pos)}catch(_){}},150)};
