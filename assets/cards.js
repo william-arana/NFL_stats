@@ -1,4 +1,4 @@
-/* Player + defense cards for every NFL_stats page.
+/* Player + defense cards for every GameDay_stats page.
    Click anything with data-card="p:<gsis_id>" (player) or data-card="d:<TEAM>" (defense), or a stats-board
    .opp[data-opp] button, and a card drops down from it: weekly fantasy points, season stats, game log and news.
    Pages that already loaded the season files can hand them over with NFLSCards.provide({P,T,G,META,DEF}),

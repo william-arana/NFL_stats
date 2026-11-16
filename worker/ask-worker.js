@@ -1,5 +1,5 @@
 /**
- * NFL_stats "Ask" Worker — a locked-down pass-through to the Claude API for the Lab's Ask box.
+ * GameDay_stats "Ask" Worker — a locked-down pass-through to the Claude API for the Lab's Ask box.
  * The instructions and answer parsing live in lab.html, so prompt changes never need a redeploy.
  *
  * Secrets (Settings → Variables and Secrets):
@@ -7,14 +7,14 @@
  *   PASSCODE           the phrase you type into the Lab once
  * Optional plain variables:
  *   MODEL              defaults to claude-haiku-5-5
- *   ALLOWED_ORIGINS    defaults to https://william-arana.github.io
+ *   ALLOWED_ORIGINS    defaults to https://thegameday.zone,https://william-arana.github.io
  *
  * Guards: only your site's origin, only with the passcode, capped prompt size and answer length.
  */
 export default {
   async fetch(request, env) {
     const origin = request.headers.get("Origin") || "";
-    const allowed = (env.ALLOWED_ORIGINS || "https://william-arana.github.io").split(",").map((s) => s.trim());
+    const allowed = (env.ALLOWED_ORIGINS || "https://thegameday.zone,https://william-arana.github.io").split(",").map((s) => s.trim());
     const cors = {
       "Access-Control-Allow-Origin": allowed.includes(origin) ? origin : allowed[0],
       "Access-Control-Allow-Methods": "POST, OPTIONS",

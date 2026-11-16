@@ -1,4 +1,4 @@
-/* Shared tokens + nav for every NFL_stats page.
+/* Shared tokens + nav for every GameDay_stats page.
    Layout: legal-pad scouting binder — ink-blue, red margin rule, circled marks like hand notes. */
 /* Light is the default; dark only when the toggle sets data-theme="dark". */
 :root{
@@ -31,7 +31,7 @@ input:focus-visible,button:focus-visible,select:focus-visible,a:focus-visible{ou
 /* site nav */
 .sitenav{background:var(--nav-bg);color:var(--nav-fg);padding-top:env(safe-area-inset-top,0px)}
 .sitenav .wrap{display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap;padding-block:8px}
-.sitenav .brand{font-family:var(--f-display);font-weight:800;font-size:20px;letter-spacing:.02em;text-transform:uppercase;color:var(--nav-fg);text-decoration:none;margin-right:6px}
+.sitenav .brand{font-family:var(--f-display);font-weight:800;font-size:20px;letter-spacing:.02em;text-transform:none;color:var(--nav-fg);text-decoration:none;margin-right:6px}
 .sitenav .brand span{color:var(--margin)}
 .sitenav nav{display:flex;gap:2px;flex-wrap:wrap}
 .sitenav nav a,.sitenav nav span{font:500 13px var(--f-body);color:color-mix(in srgb,var(--nav-fg) 75%,transparent);text-decoration:none;padding:5px 10px;border-radius:5px}

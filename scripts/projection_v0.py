@@ -1,4 +1,4 @@
-"""Projection v0 (NFL_stats' own weekly projection). Same code as the private projection log.
+"""Projection v0 (GameDay_stats' own weekly projection). Same code as the private projection log.
 Model: data/model/model_v0.json — per-position linear model on the backtested signals (season avg, last 3, Vegas implied,
 xFP, snap % trend, share of team carries + targets, target share), K = implied + spread + dome + kicker avg, D/ST = opponent implied +
 opponent sack rate + giveaways. Uses only weeks before `week`."""
