@@ -3800,5 +3800,148 @@
    }
   ],
   "opponent": ""
+ },
+ {
+  "id": "WAS:hc-dan-quinn-11-17-26",
+  "team": "WAS",
+  "url": "https://www.commanders.com/video/hc-dan-quinn-11-17-26",
+  "title": "HC Dan Quinn | 11/17/26",
+  "date": "2026-11-16",
+  "duration": 1311,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/commanders/fs0n136nzwlnodgiutlv.jpg",
+  "kind": "day_after",
+  "after_week": 10,
+  "coach": "Dan Quinn",
+  "words": 4349,
+  "model": "claude-sonnet-5-5",
+  "headline": "Jacory Croskey-Merritt is 'trending in the right area' toward a 21-day window return, with the decision due this week. Ben Sinnott had his best game as a Commander, and Quinn wants more downfield shots for Jayden Daniels.",
+  "summary": "Quinn opened by praising the complementary football in the Giants win, especially the fourth-quarter sequence of defensive stops and a two-minute touchdown drive. He said the team has been in about six close games in the first half and wants that margin to improve in the 'second season.' He expects the defense to keep improving in communication, disguises and tackling, but says it still gives up too many explosive passing plays. That matters with the Bengals, Chase and Higgins, and tight end Gesicki coming Monday. Quinn said some coverages that leave the middle of the field exposed may have to be shelved. On offense, he liked Daniels pushing the ball downfield despite two interceptions, and he called Ben Sinnott's game the best he has played in Washington. Injury news: Croskey-Merritt is trending well but no decision has been made on his 21-day window. Lucas Patrick is still in the concussion protocol, and Nick Allegretti drew praise for his pass protection at center. Leo Chenal is back in the building and recovering, but his future is 'too early to call.' Quinn also said he wants more snaps for Kain Medrano behind Sonny Styles and Frankie Luvu, and noted that Deatrich Wise Jr.'s workload depends on how opponents deploy offensively.",
+  "injuries": [
+   {
+    "player": "Jacory Croskey-Merritt",
+    "status": "returning",
+    "detail": "Trending in the right direction after a good rehab phase. The team hasn't decided whether to open his 21-day window this week and will huddle Tuesday morning.",
+    "player_id": "00-0040242"
+   },
+   {
+    "player": "Lucas Patrick",
+    "status": "out",
+    "detail": "Still in the concussion protocol. Quinn hopes to have an update by the next practice.",
+    "player_id": "00-0033082"
+   },
+   {
+    "player": "Leo Chenal",
+    "status": "unclear",
+    "detail": "Back in the building and doing well in the recovery phase. Quinn said it is too early to say what his career or return looks like.",
+    "player_id": ""
+   },
+   {
+    "player": "Tunstall",
+    "status": "unclear",
+    "detail": "Not on the supplied roster, so the name couldn't be confirmed. Had a good doctor visit and will move to the strength phase. Quinn said it is too early to project a return, though doctors are pleased.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Jacory Croskey-Merritt",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "May have his 21-day window opened this week; the decision hasn't been made.",
+    "note": "A return to the active roster would bring the RB back into the backfield mix, but the timing is still unconfirmed.",
+    "quote": "he's certainly trending in the right area",
+    "player_id": "00-0040242",
+    "t": 102,
+    "t_exact": true
+   },
+   {
+    "player": "Ben Sinnott",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will keep being used as a moving H-back, including on over routes, downfield throws and downfield blocking.",
+    "note": "Quinn called it his best game as a Commander and wants to build on it, so his TE role may grow.",
+    "quote": "this was the best game he's played as a commander",
+    "player_id": "00-0039912",
+    "t": 652,
+    "t_exact": true
+   },
+   {
+    "player": "Jayden Daniels",
+    "topic": "scheme",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "The offense will emphasize vertical shots down the field in the second half, and Daniels will keep making calls and checks against pressure.",
+    "note": "More deep attempts raise Daniels' ceiling and the upside of his receivers, though they carry interception risk.",
+    "quote": "the downfield portion is definitely something, um, that we're focusing in on",
+    "player_id": "00-0039910",
+    "t": 948,
+    "t_exact": true
+   },
+   {
+    "player": "Nick Allegretti",
+    "topic": "depth_chart",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Will keep starting at center while Lucas Patrick is in the concussion protocol.",
+    "note": "His pass-protection play against the Giants' pressure suggests the line should hold up while Patrick is out.",
+    "quote": "I thought we were square and strong into that",
+    "player_id": "00-0035149",
+    "t": 358,
+    "t_exact": true
+   },
+   {
+    "player": "Kain Medrano",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Quinn would like to give him more defensive snaps, including base packages with four down linemen and man coverage on third down.",
+    "note": "Styles and Luvu play nearly every snap, so Medrano's gain is modest, but it matters for IDP.",
+    "quote": "we'd like to get Cain some more",
+    "player_id": "",
+    "t": 1037,
+    "t_exact": true
+   },
+   {
+    "player": "Deatrich Wise Jr.",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "His snap count will depend on opponents' offensive looks; he plays inside on running downs.",
+    "note": "He played fewer snaps than usual against the Giants, so a run-heavy opponent could raise his usage.",
+    "quote": "he's square, he's tough, he's got very heavy hands",
+    "player_id": "",
+    "t": 1271,
+    "t_exact": true
+   },
+   {
+    "player": "Nick Cross",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Remains a significant piece of the defense near the line of scrimmage, blitzing and tackling.",
+    "note": "Quinn explained his hesitation on the 66-yard touchdown but praised his play overall, which is relevant for IDP.",
+    "quote": "He's brought a lot to us",
+    "player_id": "",
+    "t": 297,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Defense",
+    "detail": "Communication, disguises and tackling have improved, but explosive pass plays remain the last hurdle. Against the Bengals, Quinn expects some coverages that leave the middle of the field exposed, especially to the tight end, to be unplayable."
+   },
+   {
+    "topic": "Team mindset",
+    "detail": "Quinn wants the team to convert close games after going through about six one-score games in the first half, and said the belief shown in the game-winning drive can carry forward within a season."
+   },
+   {
+    "topic": "Defensive line depth",
+    "detail": "Quinn said losing two other defensive linemen has been significant, so Wise, Jer'Zhan Newton, Shy Tuttle and Tim Settle all matter."
+   }
+  ],
+  "opponent": "Cincinnati Bengals (Monday)"
  }
 ]
