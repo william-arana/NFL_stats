@@ -746,6 +746,183 @@
   "opponent": "San Francisco 49ers"
  },
  {
+  "id": "DAL:brian-schottenheimer-we-have-to-handle-our-business-press-conference-x0640",
+  "team": "DAL",
+  "url": "https://www.dallascowboys.com/video/brian-schottenheimer-we-have-to-handle-our-business-press-conference-x0640",
+  "title": "Brian Schottenheimer: “We Have to Handle Our Business” | Press Conference",
+  "date": "2026-11-13",
+  "duration": 715,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/cowboys/blwimbwq9wk2f7hmtphx.jpg",
+  "kind": "day_after",
+  "after_week": 9,
+  "coach": "Brian Schottenheimer",
+  "words": 2777,
+  "model": "claude-sonnet-5-5",
+  "headline": "Hunter Luepke is set for more snaps and touches vs. SF, while Joey Porter Jr. and George Pickens are trending toward playing but still unconfirmed.",
+  "summary": "Schottenheimer framed Sunday's game against the 7-1 49ers as a big challenge that requires good play in all three phases. Joey Porter Jr. missed the first two practices and was getting more work on Friday. The coach said he can play without practicing if he moves well. George Pickens moved well in the previous practice, and the staff wants to see more running and cutting before settling his Sunday status. Schottenheimer said he has primary and secondary personnel groupings ready in case a player is uncertain. He said Hunter Luepke should get more plays and probably more touches this week, and called him a weapon rather than just a fullback. Israel Abanikanda is the expected RB2 type, and the team just added Kendre Miller. Caleb Downs is now finally playing the nickel spots the team wanted, and the nickel will be tested by SF's motion-heavy looks. CeeDee Lamb is having some of his best practice weeks, though he is managing bumps. Tyler Booker drew praise for his pass-protection growth. Jalen Thompson is still on IR, but the coach called the timeline expected and hopes to see him back soon.",
+  "injuries": [
+   {
+    "player": "Joey Porter Jr.",
+    "status": "questionable",
+    "detail": "Missed the first two practices and was getting some work Friday. The coach said he can play without practicing if he moves well, but his status will depend on how he looks Friday.",
+    "player_id": ""
+   },
+   {
+    "player": "George Pickens",
+    "status": "questionable",
+    "detail": "Moved well in the previous practice. The staff wants to see more running and cutting before deciding on Sunday.",
+    "player_id": "00-0037247"
+   },
+   {
+    "player": "DeMarvion Overshown",
+    "status": "full",
+    "detail": "The coach said he is moving around well and has received the message about a rules mix-up. He is excited to get back out there.",
+    "player_id": ""
+   },
+   {
+    "player": "Jalen Thompson",
+    "status": "ir",
+    "detail": "No new setback. The coach called the timeline expected and hopes to see him back shortly.",
+    "player_id": ""
+   },
+   {
+    "player": "CeeDee Lamb",
+    "status": "unclear",
+    "detail": "The coach said he is dealing with some things, as most players are in mid-November, but he is practicing well and takes care of his body.",
+    "player_id": "00-0036358"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Hunter Luepke",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will get more snaps and probably more touches against the 49ers this week.",
+    "note": "A usage bump for a versatile fullback, tight end and single-back piece, though the touch volume is likely still small.",
+    "quote": "I would expect to see Hunter get more, more, more plays this week for sure",
+    "player_id": "00-0038738",
+    "t": 700,
+    "t_exact": true
+   },
+   {
+    "player": "Joey Porter Jr.",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Can play Sunday without practicing, depending on how he moves in Friday's practice.",
+    "note": "The coach is leaving the door open, but his status is not settled until after Friday's practice.",
+    "quote": "the answer to the question is yes",
+    "player_id": "",
+    "t": 567,
+    "t_exact": true
+   },
+   {
+    "player": "George Pickens",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "His Sunday availability depends on how he runs and cuts in Friday's practice.",
+    "note": "A positive sign for the WR1, but the coach did not commit to him playing.",
+    "quote": "George moved well yesterday",
+    "player_id": "00-0037247",
+    "t": 17,
+    "t_exact": true
+   },
+   {
+    "player": "Israel Abanikanda",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is the expected RB2-type option this week.",
+    "note": "A speed-oriented backup with the team's trust, but only a deep stash unless the RB situation changes.",
+    "quote": "he's a big man that can run really, really fast",
+    "player_id": "00-0038389",
+    "t": 610,
+    "t_exact": true
+   },
+   {
+    "player": "Caleb Downs",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Is now playing the nickel spots the team wanted him in and will be central against SF's motion-heavy offense.",
+    "note": "A good role fit for the IDP rookie, with more tackles and plays near the ball likely.",
+    "quote": "You're finally now seeing Caleb play in the spots that we really, really want him",
+    "player_id": "",
+    "t": 541,
+    "t_exact": true
+   },
+   {
+    "player": "CeeDee Lamb",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "Lamb is practicing very well and building timing with Dak Prescott, though he is managing some minor issues.",
+    "quote": "he's had probably two of the better weeks of practice that I've seen CD have",
+    "player_id": "00-0036358",
+    "t": 158,
+    "t_exact": true
+   },
+   {
+    "player": "Ryan Flournoy",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Can be moved around the receiver spots at any moment.",
+    "note": "His versatility makes him a likely fill-in if Pickens or another receiver is limited.",
+    "quote": "we can move him at any moment",
+    "player_id": "00-0039410",
+    "t": 313,
+    "t_exact": true
+   },
+   {
+    "player": "Jalen Thompson",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Is expected to return from IR in the near future.",
+    "note": "A possible IDP return for the defense, with no setback reported.",
+    "quote": "hopefully we'll see him back shortly",
+    "player_id": "",
+    "t": 582,
+    "t_exact": true
+   },
+   {
+    "player": "Tyler Booker",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "His pass protection is improving, which is good for the offensive line, but this has little direct fantasy impact.",
+    "quote": "watching him take the next step from a pass protection standpoint",
+    "player_id": "00-0040007",
+    "t": 434,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "scheme",
+    "detail": "Schottenheimer said SF wants to run the ball, pound it, and get it to the perimeter, with an elite front seven. Dallas must avoid turnovers and communication errors."
+   },
+   {
+    "topic": "scheme",
+    "detail": "SF uses five-receiver sets with heavy motion, so linebackers and the nickel need great eye discipline. He called out Kittle and McCaffrey as weapons."
+   },
+   {
+    "topic": "scheme",
+    "detail": "Dallas carries primary and secondary personnel groupings on the call sheet so it can adjust if a player's status is uncertain."
+   },
+   {
+    "topic": "trade_or_roster",
+    "detail": "The team recently added RB Kendre Miller, though the coach downplayed it as a competition."
+   }
+  ],
+  "opponent": "San Francisco 49ers"
+ },
+ {
   "id": "DET:campbell-on-lions-fans-playing-in-munich",
   "team": "DET",
   "url": "https://www.detroitlions.com/video/campbell-on-lions-fans-playing-in-munich",

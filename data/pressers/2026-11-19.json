@@ -1,0 +1,439 @@
+[
+ {
+  "id": "BAL:jesse-minter-on-marlon-humphrey-ravens-press-conferences",
+  "team": "BAL",
+  "url": "https://www.baltimoreravens.com/video/jesse-minter-on-marlon-humphrey-ravens-press-conferences",
+  "title": "Jesse Minter on Marlon Humphrey",
+  "date": "2026-11-19",
+  "duration": 144,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/ravens/fgywu7aor9uqlprc7adw.jpg",
+  "kind": "midweek",
+  "after_week": 10,
+  "coach": "Jesse Minter",
+  "words": 466,
+  "model": "claude-sonnet-5-5",
+  "headline": "Marlon Humphrey is deactivated for Week 11 and sent home for the week over a personal matter; Chidobe Awuzie and T.J. Tampa will take on more CB snaps.",
+  "summary": "Jesse Minter announced that, after internal talks with team leadership, Marlon Humphrey will be deactivated for this week's game. Humphrey was sent home and won't be at practice at all this week. Minter would not discuss the reason, calling the conversations personal and private. He did say Humphrey is very remorseful and understands that words carry weight, especially in this city, and that what was said doesn't reflect the team or organization. Minter confirmed the deactivation covers just the one game and said there will be some process of re-earning trust, which he will keep in house. He framed the decision as a team matter and as leadership when the team needs it most. To replace Humphrey, he said he has confidence in the cornerback room, and that Chidobe Awuzie (referred to as 'Cheeto') and T.J. Tampa will both see more snaps.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Marlon Humphrey",
+    "topic": "role",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Will be deactivated for the Week 11 game and will not practice this week; the deactivation is for one game.",
+    "note": "Humphrey is out for Week 11 for non-injury reasons, so any Ravens DB or defense exposure takes a hit.",
+    "quote": "we've decided to deactivate Marlon for this game this upcoming week",
+    "player_id": "",
+    "t": 5,
+    "t_exact": true
+   },
+   {
+    "player": "Chidobe Awuzie",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will increase his snap count at CB in Week 11 with Humphrey deactivated.",
+    "note": "Awuzie steps into a bigger CB role this week, which matters for IDP and matchup-based decisions.",
+    "quote": "So Cheeto and TJ Tampa will both increase their snap count.",
+    "player_id": "",
+    "t": 132,
+    "t_exact": true
+   },
+   {
+    "player": "T.J. Tampa",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will increase his snap count at CB in Week 11 with Humphrey deactivated.",
+    "note": "Tampa gets more defensive snaps this week, which helps IDP value.",
+    "quote": "So Cheeto and TJ Tampa will both increase their snap count.",
+    "player_id": "",
+    "t": 132,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Team discipline",
+    "detail": "Minter described the Humphrey decision as a leadership call made for the good of the team and organization. He said Humphrey is remorseful and that trust will need some re-earning, handled internally."
+   },
+   {
+    "topic": "Secondary depth",
+    "detail": "Minter expressed confidence in the CB room and named Awuzie and Tampa as the main beneficiaries of the extra snaps, with no other changes mentioned."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "CIN:zac-taylor-monday-night-football-commanders-week-11-2026-pregame-press-conference",
+  "team": "CIN",
+  "url": "https://www.bengals.com/video/zac-taylor-monday-night-football-commanders-week-11-2026-pregame-press-conference",
+  "title": "Zac Taylor Previews Monday Night Football Against Commanders | PRESS CONFERENCE",
+  "date": "2026-11-19",
+  "duration": 895,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bengals/uc8j9i2yrkmpd3fo1haz.jpg",
+  "kind": "first_practice",
+  "after_week": 10,
+  "coach": "Zac Taylor",
+  "words": 3360,
+  "model": "claude-sonnet-5-5",
+  "headline": "Bengals' passing offense is humming around a fast, accurate Joe Burrow, Dohnte Meyers' role is growing, and Dalton Risner is out today ahead of Monday night's game against Washington.",
+  "summary": "Zac Taylor opened by saying Dalton Risner is out at today's practice and will be taken day to day, and that Oren Burks is out for now with his timeline to be set later in the week. He was non-committal about the three players whose practice windows were opened last week, saying only \"we'll see.\" Tee Higgins was described as good. Taylor spent most of the session praising the offense, which controls the clock through efficient passing. He credited Joe Burrow's fast, high-level play and said Chase Brown, Samaje Perine, Drew Sample and the tight ends deserve credit for pass protection and for knowing when to leak out as receivers. He said Dohnte Meyers is comfortable in an expanded role and has taken over the return game, though the receiver room is deep and everyone has to fight for a role. He praised Jonathan Allen's production and leadership and said he isn't worried about Allen facing his old team. On Washington, he called them a well-coached, dangerous team that could easily be on a five-game winning streak. He highlighted Jayden Daniels' ability to make plays with his feet and arm, and a blitz-heavy defense under Joe Whitt Jr.'s successor-style Minnesota-rooted scheme that the Bengals must prepare carefully for. He also said the Bengals' defense is playing with strong communication and pride as a unit.",
+  "injuries": [
+   {
+    "player": "Dalton Risner",
+    "status": "out",
+    "detail": "Out at today's practice; Taylor will take him day to day this week.",
+    "player_id": "00-0035702"
+   },
+   {
+    "player": "Oren Burks",
+    "status": "out",
+    "detail": "Out for now; the team will see how long it lasts as the week goes on.",
+    "player_id": ""
+   },
+   {
+    "player": "Tee Higgins",
+    "status": "full",
+    "detail": "Taylor said he's doing good and is good, with no limitation mentioned.",
+    "player_id": "00-0036410"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Joe Burrow",
+    "topic": "scheme",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Burrow will keep playing fast and efficiently, taking what the defense gives him and leaning on a pass-heavy, clock-controlling approach.",
+    "note": "Burrow is playing at a high level and the offense is built around his quick, accurate decisions, which supports his fantasy floor.",
+    "quote": "Joe's playing at such a high level. He's playing very fast.",
+    "player_id": "00-0036442",
+    "t": 143,
+    "t_exact": true
+   },
+   {
+    "player": "Dohnte Meyers",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Meyers will keep an expanded role in the passing game and as the return man, though he must keep fighting for it in a deep receiver room.",
+    "note": "His role and confidence are growing, but a deep WR room caps how much he can be trusted in fantasy.",
+    "quote": "he's taken over the return game as well",
+    "player_id": "00-0040785",
+    "t": 198,
+    "t_exact": true
+   },
+   {
+    "player": "Chase Brown",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Brown will be used as a runner, receiver and pass protector against Washington's blitz-heavy front.",
+    "note": "Taylor trusts the backs in protection and as runners and receivers, which helps keep Brown on the field.",
+    "quote": "we have the best protecting backs in the NFL, you know and they're great runners.",
+    "player_id": "00-0038597",
+    "t": 390,
+    "t_exact": true
+   },
+   {
+    "player": "Samaje Perine",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Perine will keep a role as a protecting back and receiver.",
+    "note": "He is trusted in pass protection and the passing game, which helps his snap share, but this is not a clear boost.",
+    "quote": "he'll throw it to Drew Sample for five yards. Or he'll throw it to Samaje",
+    "player_id": "00-0033526",
+    "t": 325,
+    "t_exact": true
+   },
+   {
+    "player": "Drew Sample",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Sample will keep contributing as a pass protector and an occasional leak-out receiver.",
+    "note": "His value is mostly blocking, with only occasional short targets, so his fantasy impact is limited.",
+    "quote": "knowing when to leak out and expect the ball",
+    "player_id": "00-0035631",
+    "t": 167,
+    "t_exact": true
+   },
+   {
+    "player": "Tee Higgins",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Higgins is healthy and expected to be available this week.",
+    "note": "A clean bill of health for a top target in a high-efficiency passing offense is good news.",
+    "quote": "He's doing good. Yeah he's good.",
+    "player_id": "00-0036410",
+    "t": 66,
+    "t_exact": true
+   },
+   {
+    "player": "Jonathan Allen",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Allen will keep producing as a leader and impact player on the defensive line.",
+    "note": "Taylor says Allen is giving the production the team expected, which helps if you roster him in IDP.",
+    "quote": "he's a big impact on that D-line room, the defense, the whole team.",
+    "player_id": "",
+    "t": 677,
+    "t_exact": true
+   },
+   {
+    "player": "Dalton Risner",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Risner will miss today's practice and is day to day for the week.",
+    "note": "An offensive line absence could affect protection for Burrow if it lingers.",
+    "quote": "He'll be out today. We'll take him day to day this week.",
+    "player_id": "00-0035702",
+    "t": 8,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Opponent: Washington Commanders",
+    "detail": "Taylor called them a talented, well-coached team that has been in every game lately. They are strong in turnover margin and Jayden Daniels makes every play dangerous with his legs and arm. He expects a tough battle in a game with a similar mindset to the Bengals' recent prime-time win."
+   },
+   {
+    "topic": "Washington defense",
+    "detail": "The Commanders' defense is blitz-heavy with Minnesota roots and strong linebackers who direct the front, so Taylor says it takes a lot of work to prepare. He trusts his backs and the offensive line to handle the pressure."
+   },
+   {
+    "topic": "Offensive approach",
+    "detail": "Taylor says the offense is adaptive and will call plays on the fly. He is proud of short-yardage success, third-and-long conversions and the pass-protection group, and says the goal is simply to score on every drive."
+   },
+   {
+    "topic": "Other injuries",
+    "detail": "Taylor was non-committal about three players whose practice windows were opened last week, saying only 'we'll see.' He did not name them in this transcript."
+   },
+   {
+    "topic": "Defensive unit",
+    "detail": "Taylor says the defense is communicating well and playing with pride as a unit, which has shown in the last couple of games."
+   }
+  ],
+  "opponent": "Washington Commanders"
+ },
+ {
+  "id": "PIT:watch-mike-mccarthy-media-availability-nov-19",
+  "team": "PIT",
+  "url": "https://www.steelers.com/video/watch-mike-mccarthy-media-availability-nov-19",
+  "title": "WATCH: Mike McCarthy Media Availability (Nov. 19)",
+  "date": "2026-11-19",
+  "duration": 317,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/steelers/al8gdfxruvxqpj7mwzf4.jpg",
+  "kind": "midweek",
+  "after_week": 10,
+  "coach": "Mike McCarthy",
+  "words": 1230,
+  "model": "claude-sonnet-5-5",
+  "headline": "Michael Pittman is back from IR and taking practice reps, and McCarthy says DK Metcalf's usage needs fixing after the bye. Roman Wilson's availability is still open.",
+  "summary": "McCarthy said a player named Mason has begun his rehab and is in good spirits. He called reports that the player could return late in the season \"great\" but said it is too early to say. Michael Pittman was one of four players back from IR who practiced Wednesday. McCarthy said the team may have worked those players a bit too much and that Thursday's padded practice is the most important of the week. He said it would be great to have Roman Wilson, but his availability depends on how the week goes. McCarthy said he is still learning how to use DK Metcalf, that the staff can do a better job of utilizing him, and that this was a focus coming out of the bye. He added that he and the team believe better days are ahead for the passing game. He described the Eagles' defense as consistent under Vic Fangio, with corners that are more aggressive than in past years, especially in pressure. He called Saquon Barkley a dynamic player who can carry an offense as a runner, receiver and pass protector. He also said opening drives need work late in the week.",
+  "injuries": [
+   {
+    "player": "Michael Pittman",
+    "status": "returning",
+    "detail": "Back from IR and taking practice reps. The injury report lists him as limited with a foot issue. McCarthy said the returning group may have been overworked Wednesday and is now moving into padded practice.",
+    "player_id": "00-0036252"
+   },
+   {
+    "player": "Roman Wilson",
+    "status": "questionable",
+    "detail": "McCarthy said it would be great to have him out there but will see how the week goes. The injury report lists him as a full participant with a hand issue.",
+    "player_id": "00-0039739"
+   },
+   {
+    "player": "Mason (unclear whether Mason McCormick or Mason Rudolph)",
+    "status": "unclear",
+    "detail": "He has just started his rehab and is around the team. McCarthy said reports that it is not a worst-case scenario and he could return late this season are encouraging, but it is very early. The transcript does not make clear which Mason is meant.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Michael Pittman",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will continue to be integrated into the offense this week after returning from IR",
+    "note": "Pittman is practicing and taking reps, so he could be active soon, though the coach did not commit to a game-day role.",
+    "quote": "Michael was great to have him back.",
+    "player_id": "00-0036252",
+    "t": 41,
+    "t_exact": true
+   },
+   {
+    "player": "Roman Wilson",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Wilson's availability for the Eagles game will be decided by how the practice week goes",
+    "note": "McCarthy did not commit to Wilson playing. The reporter noted Wilson scored two TDs in the games he was available.",
+    "quote": "Roman, it'd be great to have, you know, have him out there.",
+    "player_id": "00-0039739",
+    "t": 86,
+    "t_exact": true
+   },
+   {
+    "player": "DK Metcalf",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "The staff will work to utilize Metcalf better coming out of the bye week",
+    "note": "McCarthy admitted the staff can improve how it uses Metcalf and said it is a bye-week focus, so his usage could improve.",
+    "quote": "there's some things that we can continue to do better how we're utilizing them",
+    "player_id": "00-0035640",
+    "t": 116,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Opening drives",
+    "detail": "McCarthy said the team spends time on opening drives near the end of the week and needs to do a better job."
+   },
+   {
+    "topic": "Eagles defense",
+    "detail": "The scheme has been consistent under Vic Fangio, but the corners are playing more aggressively than in past years, especially in pressure."
+   },
+   {
+    "topic": "Practice schedule",
+    "detail": "Wednesday was a mock-game-tempo practice for a team coming off a late night. Thursday's padded practice is the most important of the week."
+   },
+   {
+    "topic": "Passing game",
+    "detail": "McCarthy said the passing game has been affected by injuries and that the focus is on integrating the players now back healthy. He said there is a lot of football left."
+   }
+  ],
+  "opponent": "Philadelphia Eagles"
+ },
+ {
+  "id": "WAS:hc-dan-quinn-11-19-26",
+  "team": "WAS",
+  "url": "https://www.commanders.com/video/hc-dan-quinn-11-19-26",
+  "title": "HC Dan Quinn | 11/19/26",
+  "date": "2026-11-19",
+  "duration": 920,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/commanders/l3l9z1a7wmbo6qtfrhw8.jpg",
+  "kind": "first_practice",
+  "after_week": 10,
+  "coach": "Dan Quinn",
+  "words": 3212,
+  "model": "claude-sonnet-5-5",
+  "headline": "Washington has a full practice group for Monday night at Cincinnati except Stefon Diggs, who is on a scheduled rest day; Antonio Williams is set to be featured more.",
+  "summary": "Quinn said everyone was back on the field except Stefon Diggs, whose absence is a scheduled Wednesday rest and not an injury. Much of the session was about Cincinnati: Joe Burrow's ability to handle the blitz, and the challenge of covering Ja'Marr Chase and Tee Higgins, who win in different ways. Quinn stressed that Washington needs complementary football and said a \"how we win\" tape was put together for the team. On offense, he said the receiver group has gelled since the San Francisco game and that he wants to feature players in defined roles in the second half. He singled out Antonio Williams as someone to use on early downs and third downs. He praised Jayden Daniels' location accuracy, his work in and out of the pocket, and his competitiveness after throwing interceptions last game. Trey Amos has shaken off the rust after returning from injury, and Percy Butler is earning defensive work because of his speed and ball skills. Quinn did not rule out a player whose name was garbled in the captions for this week's game, and he was non-committal on Lucas Patrick's practice status.",
+  "injuries": [
+   {
+    "player": "Stefon Diggs",
+    "status": "full",
+    "detail": "Sat out today's practice as a scheduled in-season Wednesday rest day, not an injury.",
+    "player_id": "00-0031588"
+   },
+   {
+    "player": "Trey Amos",
+    "status": "full",
+    "detail": "Described as back healthy; the conditioning, movement and ball-finding have come together after a game or two of rust.",
+    "player_id": ""
+   },
+   {
+    "player": "Lucas Patrick",
+    "status": "unclear",
+    "detail": "Quinn said he is \"good to go\" but the caption also says \"not back to practicing today.\" That contradicts Quinn's opening that the full group was out there, so it is unclear whether he practiced.",
+    "player_id": "00-0033082"
+   },
+   {
+    "player": "Unclear (Terry McLaurin or Treylon Burks)",
+    "status": "unclear",
+    "detail": "Quinn said a receiver who battled through a foot injury is back much closer to full speed. The caption says \"Trey,\" but the question was about Terry McLaurin, so the player is not clear.",
+    "player_id": ""
+   },
+   {
+    "player": "Unclear (name garbled in captions)",
+    "status": "unclear",
+    "detail": "A player whose practice window just opened. Quinn is \"not ruling out this week's game\" and said the player looks strong and fit, with the football part to be judged over three days of practice. The reporter suggested Arizona as a more likely return.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Antonio Williams",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Williams will be featured more in the offense in the second half, on both early downs and third downs.",
+    "note": "Quinn explicitly wants to get him more touches after his touchdown against the Giants, which raises his target outlook.",
+    "quote": "Not only on third downs but on early downs too.",
+    "player_id": "00-0041040",
+    "t": 632,
+    "t_exact": true
+   },
+   {
+    "player": "Jayden Daniels",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Daniels will keep improving as he gets more games and reps back in the system.",
+    "note": "Quinn praised his accuracy and playmaking in and out of the pocket, a good sign for his fantasy floor and ceiling.",
+    "quote": "he's been excellent location accuracy, more games into the system",
+    "player_id": "00-0039910",
+    "t": 474,
+    "t_exact": true
+   },
+   {
+    "player": "Trey Amos",
+    "topic": "injury",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Amos has fully shaken off the rust from his injury and is playing at a better level.",
+    "note": "A healthy, improving corner matters for IDP and for Washington's matchup against Chase and Higgins.",
+    "quote": "",
+    "player_id": "",
+    "t": 302,
+    "t_exact": false
+   },
+   {
+    "player": "Percy Butler",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Butler is getting more defensive work, including matching up on third downs, because of his speed.",
+    "note": "More defensive snaps raise his IDP value beyond his special-teams role.",
+    "quote": "the ball skills of perk and just the play speed that he has",
+    "player_id": "",
+    "t": 753,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Bengals offense",
+    "detail": "Quinn said Cincinnati has been good against everything. He said disguise will matter against Burrow, and that Chase (after the catch) and Higgins (catch radius) are a tough tandem. He added that off-schedule plays with Burrow are the hardest to defend."
+   },
+   {
+    "topic": "Game plan",
+    "detail": "Quinn wants complementary football and said no single unit has to carry the team. Washington put together a Wednesday tape on how it wins."
+   },
+   {
+    "topic": "Receiver group",
+    "detail": "Quinn said the group has felt more gelled since the San Francisco game and is deep. He wants to see players featured in defined roles in the second half."
+   },
+   {
+    "topic": "Defensive improvement",
+    "detail": "Quinn credited takeaways, better tackling, fewer busted coverages, better communication and some critical late stops for the defense allowing fewer than 24 points in each of the last four games."
+   },
+   {
+    "topic": "Blitz frequency",
+    "detail": "Washington has seen more blitzes since Daniels' return. Quinn put it down to opponent schemes (the Rams, for example) and a league-wide trend, and said the offense needs to capitalize, as it did on the last play of the last game."
+   }
+  ],
+  "opponent": "Cincinnati Bengals (Monday night)"
+ }
+]
