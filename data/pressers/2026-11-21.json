@@ -1,0 +1,412 @@
+[
+ {
+  "id": "GB:matt-lafleur-wants-team-to-stay-focused-on-the-task-at-hand-coming-out-of-shortened-bye-nov-21-2026",
+  "team": "GB",
+  "url": "https://www.packers.com/video/matt-lafleur-wants-team-to-stay-focused-on-the-task-at-hand-coming-out-of-shortened-bye-nov-21-2026",
+  "title": "Matt LaFleur wants team to 'stay focused on the task at hand' coming out of shortened bye",
+  "date": "2026-11-21",
+  "duration": 550,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/packers/rwricvwnejmhkbr0yjkm.jpg",
+  "kind": "first_practice",
+  "after_week": 10,
+  "coach": "Matt LaFleur",
+  "words": 1743,
+  "model": "claude-sonnet-5-5",
+  "headline": "Josh Jacobs is unlikely to play Wednesday night at the Rams, Sean Rhyan is back at practice in a limited role, and Skyy Moore and Kevin Zeitler must prove themselves through the week.",
+  "summary": "LaFleur said the shortened bye was awkward: he gave the staff one day off and the players a couple, with more time off coming later. He thinks the extra time could help, and said it let the staff watch tape for self-scouting instead of just looking at numbers. On injuries, Micah is expected to be on the practice field, and his practice performance will decide whether he plays. LaFleur is not anticipating Josh Jacobs for Wednesday and said he would have to prove he can function. Sean Rhyan is back at practice in a limited role, and LaFleur called him the starter who could help the line. Skyy Moore and Kevin Zeitler are among a group who must prove themselves this week, and LaFleur said the extra days help them. He praised Kaleb Johnson's growth and said learning protections was the hard part after a stretch of fumbles and inactive games. LaFleur called the Rams defense very sound with few weaknesses, and said their offense, with Stafford and a deep tight end group, is still dangerous without Puka and Davante. He stressed focusing on the process and the task at hand rather than the big picture.",
+  "injuries": [
+   {
+    "player": "Micah",
+    "status": "questionable",
+    "detail": "The plan was for him to play this week; his practice performance will be the ultimate indicator. He is not on the supplied roster, so identity is unconfirmed.",
+    "player_id": ""
+   },
+   {
+    "player": "Josh Jacobs",
+    "status": "doubtful",
+    "detail": "LaFleur is not anticipating him for Wednesday and said he would have to prove he can function in order to play.",
+    "player_id": "00-0035700"
+   },
+   {
+    "player": "Sean Rhyan",
+    "status": "limited",
+    "detail": "Practiced Friday on a limited basis; has to get through the week and see where he is at the end.",
+    "player_id": "00-0037076"
+   },
+   {
+    "player": "Skyy Moore",
+    "status": "questionable",
+    "detail": "Has to go through the week to see whether he can make it; LaFleur is hopeful.",
+    "player_id": "00-0038090"
+   },
+   {
+    "player": "Kevin Zeitler",
+    "status": "questionable",
+    "detail": "Pushed to play last Sunday but was held out; must prove himself over the week, and the extra days help.",
+    "player_id": "00-0029592"
+   },
+   {
+    "player": "Jayden Reed",
+    "status": "out",
+    "detail": "Rehabbing; LaFleur does not anticipate his return, and said a return would be a bonus. Matched from the name 'Jaden'.",
+    "player_id": "00-0039146"
+   },
+   {
+    "player": "Luke Musgrave",
+    "status": "out",
+    "detail": "Rehabbing; LaFleur does not anticipate his return. He is not on the supplied roster.",
+    "player_id": ""
+   },
+   {
+    "player": "Collin Oliver",
+    "status": "ir",
+    "detail": "On IR since a preseason injury and still progressing. He is not on the supplied roster.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Josh Jacobs",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Will not play Wednesday night against the Rams unless he proves he can function in practice.",
+    "note": "The lead back is unlikely to play on the short week, so expect his backups to take the work.",
+    "quote": "I'm not anticipating that.",
+    "player_id": "00-0035700",
+    "t": 91,
+    "t_exact": true
+   },
+   {
+    "player": "Kaleb Johnson",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "He has been playing the last couple of games after being inactive and having fumble issues, and the coach praised his growth and ownership.",
+    "quote": "I think he's grown.",
+    "player_id": "00-0040142",
+    "t": 107,
+    "t_exact": true
+   },
+   {
+    "player": "Sean Rhyan",
+    "topic": "depth_chart",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Will practice in a limited role and is the starter if healthy.",
+    "note": "His return to the starting line would help an offense that is working on its blocking.",
+    "quote": "there's a reason he's the starter, right?",
+    "player_id": "00-0037076",
+    "t": 145,
+    "t_exact": true
+   },
+   {
+    "player": "Skyy Moore",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Needs to get through the week of practice to see whether he can play.",
+    "note": "The coach is hopeful but noncommittal, so his status hinges on practice participation.",
+    "quote": "I'm hopeful, but we'll see.",
+    "player_id": "00-0038090",
+    "t": 340,
+    "t_exact": true
+   },
+   {
+    "player": "Kevin Zeitler",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Must prove he can function in practice this week to be available.",
+    "note": "His availability affects the interior offensive line.",
+    "quote": "we got a lot of guys in that boat",
+    "player_id": "00-0029592",
+    "t": 352,
+    "t_exact": true
+   },
+   {
+    "player": "Jayden Reed",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Will not return this week.",
+    "note": "The coach does not expect him back anytime soon, so don't count on him.",
+    "quote": "if they were able to come back, it would be a bonus to us.",
+    "player_id": "00-0039146",
+    "t": 388,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Shortened bye",
+    "detail": "The team had no real bye. The staff got one day off and the players a couple, with more days coming later. The extra time allowed deeper tape study for self-scouting."
+   },
+   {
+    "topic": "Rams defense",
+    "detail": "LaFleur called it very sound and well coordinated under Chris Shula (whom he calls 'Schuler'). It has strong front-line players, plays man and soft zone well, and has few weaknesses."
+   },
+   {
+    "topic": "Rams offense",
+    "detail": "He called Sean McVay as good as anyone, and said the team runs the ball well and has Matthew Stafford at quarterback. He said their tight end group is as complete as you can find, even without Puka and Davante."
+   },
+   {
+    "topic": "Offensive line and practice",
+    "detail": "The team added more competitive offense-versus-defense periods, giving a better read on the line and the Wednesday group."
+   },
+   {
+    "topic": "Team message",
+    "detail": "LaFleur wants the team to stay focused on the day-to-day process and not look past a road prime-time game, noting seven games remain and the Rams were a preseason Super Bowl pick."
+   }
+  ],
+  "opponent": "Los Angeles Rams"
+ },
+ {
+  "id": "LA:sean-mcvay-matthew-stafford-on-the-rams-bye-week-run-game-success-facing-the-packers-press-conference",
+  "team": "LA",
+  "url": "https://www.therams.com/video/sean-mcvay-matthew-stafford-on-the-rams-bye-week-run-game-success-facing-the-packers-press-conference",
+  "title": "Sean McVay & Matthew Stafford on the Rams' bye week, valuing adaptability, facing the Packers & more",
+  "date": "2026-11-21",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/rams/ana8uknlfjnzjgddndux.jpg",
+  "kind": "midweek",
+  "after_week": 10,
+  "coach": "Sean McVay",
+  "words": 3165,
+  "model": "claude-sonnet-5-5",
+  "headline": "Puka Nacua is out for some time after surgery, so Mumpfield, Daniels and Xavier Smith get WR work, while Kyren Williams (toe) and Blake Corum share the field in two-back sets.",
+  "summary": "McVay opened with Wednesday's injury report. Four players did not practice (Steve Avila, Coleman Shelton and Terrance Ferguson with hamstrings, Kamren Curl with a toe). Kyren Williams and Myles Garrett were limited, and McVay said Kobie Turner is expected to practice. He said the Rams' offense has to stay flexible this season because of the skill-position players they are missing, and last week's Cardinals game showed that. The Rams used a lot of 13 personnel and two-back sets with Blake Corum and Kyren Williams together, and they threw on every snap from 20 personnel, though he joked they may run it more this week. He praised the young receivers who got chances and said the staff will lean into what each does best. He also said an interior lineman filled in well while the line shuffled, but the player is not clear from the captions. The Rams face the Packers on a Wednesday-night game after a bye, a compressed turnaround where they cannot ease back in. Stafford, speaking separately, said the Rams will miss Puka Nacua for some time after surgery. He also said the team's next-man-up approach and getting many players involved is what makes the offense hard to defend.",
+  "injuries": [
+   {
+    "player": "Puka Nacua",
+    "status": "out",
+    "detail": "Had surgery; Stafford said the Rams will miss him for some time, and the question put to him cited a few months. McVay's own comment on it is not in the transcript.",
+    "player_id": "00-0039075"
+   },
+   {
+    "player": "Joe Cardona",
+    "status": "limited",
+    "detail": "Ankle; making great progress and expected to be ready to go.",
+    "player_id": ""
+   },
+   {
+    "player": "Myles Garrett",
+    "status": "limited",
+    "detail": "Knee; McVay called the limited work standard operating procedure.",
+    "player_id": ""
+   },
+   {
+    "player": "Kyren Williams",
+    "status": "limited",
+    "detail": "Some soreness in his toe; limited Wednesday.",
+    "player_id": "00-0037840"
+   },
+   {
+    "player": "Steve Avila",
+    "status": "out",
+    "detail": "Hamstring; did not practice Wednesday.",
+    "player_id": "00-0039058"
+   },
+   {
+    "player": "Coleman Shelton",
+    "status": "out",
+    "detail": "Hamstring; did not practice Wednesday.",
+    "player_id": "00-0034114"
+   },
+   {
+    "player": "Terrance Ferguson",
+    "status": "out",
+    "detail": "Hamstring; did not practice Wednesday.",
+    "player_id": "00-0040737"
+   },
+   {
+    "player": "Kamren Curl",
+    "status": "out",
+    "detail": "Toe; did not practice Wednesday. McVay called soft-tissue injuries tricky and said they would see where players are next week.",
+    "player_id": ""
+   },
+   {
+    "player": "Kobie Turner",
+    "status": "returning",
+    "detail": "McVay expects him to practice, barring anything unforeseen.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Puka Nacua",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Nacua will miss time following surgery.",
+    "note": "The team's top receiver is out for a significant stretch, which opens targets for the other receivers and backs.",
+    "quote": "we're going to miss some time with Puka",
+    "player_id": "00-0039075",
+    "t": 591,
+    "t_exact": true
+   },
+   {
+    "player": "Blake Corum",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Corum will again share the field with Kyren Williams in two-back sets.",
+    "note": "Two-back looks raise Corum's snap share, although last week's 20 personnel snaps were all passes.",
+    "quote": "a chance to have Blake and Kyron on the field at the same time",
+    "player_id": "00-0039738",
+    "t": 196,
+    "t_exact": true
+   },
+   {
+    "player": "Kyren Williams",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Williams is limited with a toe issue but is expected to keep playing in two-back sets.",
+    "note": "Check his practice participation later in the week; he is limited now and the toe is a mild concern.",
+    "quote": "Kyron had a little soreness in his toe.",
+    "player_id": "00-0037840",
+    "t": 14,
+    "t_exact": true
+   },
+   {
+    "player": "Konata Mumpfield",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Mumpfield will keep a meaningful receiver role after a strong game.",
+    "note": "With Nacua out and a thin WR group, Mumpfield is a candidate for volume as a deep-league flex.",
+    "quote": "showed a lot of really cool stuff",
+    "player_id": "00-0040590",
+    "t": 362,
+    "t_exact": true
+   },
+   {
+    "player": "CJ Daniels",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Daniels will continue to get extended offensive snaps.",
+    "note": "He got his first extended action and is in the mix for WR snaps.",
+    "quote": "It was great for CJ Daniels to get his first extended action.",
+    "player_id": "00-0041399",
+    "t": 368,
+    "t_exact": true
+   },
+   {
+    "player": "Xavier Smith",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Smith will stay in the receiver rotation.",
+    "note": "McVay singled out his plays, so he may see steady snaps in a depleted WR room.",
+    "quote": "awesome for X-Man to be able to make plays",
+    "player_id": "00-0038359",
+    "t": 372,
+    "t_exact": true
+   },
+   {
+    "player": "Brennan Presley",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Presley is one of the five active receivers and returns kicks.",
+    "note": "He mainly has special-teams value; his offensive role was not described.",
+    "quote": "Brennan Presley back there returning kicks.",
+    "player_id": "00-0040597",
+    "t": 374,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Schedule",
+    "detail": "Wednesday-night game against the Packers after a bye, so the Rams have no bonus Monday to work back in. McVay said it feels closest to a Thursday game, with the focus needed right away."
+   },
+   {
+    "topic": "Scheme",
+    "detail": "McVay said the offense needs flexibility given the missing skill players. Last week featured plenty of 13 personnel and two-back sets, and the 20 personnel snaps were all passes. He said they might run it more this week, and that week-to-week adjustments continue."
+   },
+   {
+    "topic": "Offensive line",
+    "detail": "McVay praised an interior lineman, not identifiable from the captions, for handling fronts and pressures while the line shuffled. He credited learning from Coleman Shelton. Avila, Shelton and Ferguson are all down with hamstrings, so the line is thin."
+   },
+   {
+    "topic": "Stafford on adaptability",
+    "detail": "Stafford said the season has been next man up, with many moving parts on offense, defense and special teams. He said the offense is hard to defend when many players catch passes, including running backs like Ronnie Rivers."
+   }
+  ],
+  "opponent": "Green Bay Packers"
+ },
+ {
+  "id": "NO:bears-vs-saints-preview-kellen-moore",
+  "team": "NO",
+  "url": "https://www.neworleanssaints.com/video/bears-vs-saints-preview-kellen-moore",
+  "title": "Exclusive: Kellen Moore previews Week 11 at Bears",
+  "date": "2026-11-21",
+  "duration": 110,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/saints/havpxfqq74nkym3kl5ml.jpg",
+  "kind": "final_practice",
+  "after_week": 10,
+  "coach": "Kellen Moore",
+  "words": 489,
+  "model": "claude-sonnet-5-5",
+  "headline": "Moore offered no new injury or role news; Tyson and Olave both stay involved in a deep receiver room, and the offensive line will be reshuffled again against Chicago's pass rush.",
+  "summary": "Moore previewed the Week 11 game at Chicago, calling it a potentially explosive game in which turnover margin will be the key indicator. He said the Saints must protect the football, create and limit explosive plays, and treat the matchup as a fun one against a Bears team playing good football. Reflecting on the two recent home games (a split), he said the margins are tight, with turnovers and end-of-game situational football deciding games that came down to the final play. On the offensive line, which has been reshuffled because of injuries, he said the group will spend a full week together and be prepared, and that communication between the line, quarterback and backs on protection is crucial against a team that pressures the quarterback well. Asked how he manages the workload of Jordyn Tyson and Chris Olave, he praised both and the receiver room, mentioning another receiver, apparently Bailey, and said opportunities will present themselves rather than committing to a set split. On defense, he called Caleb Williams a really good quarterback who can make explosive plays from the pocket and be just as dangerous outside it, so controlling him is the key. No specific injury updates were given.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Jordyn Tyson",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Tyson and Chris Olave will both keep getting opportunities, with no fixed target split",
+    "note": "Moore gave no indication Tyson's big game will change the pecking order; targets will flow based on the game, so expect both to stay in lineups.",
+    "quote": "we'll let the opportunities present themselves",
+    "player_id": "00-0041029",
+    "t": 80,
+    "t_exact": true
+   },
+   {
+    "player": "Chris Olave",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Olave will continue to get opportunities alongside Tyson in a deep receiver room",
+    "note": "Moore praised him but made no commitment, so no change to his role is signaled despite Tyson's rise.",
+    "quote": "they're both tremendous players",
+    "player_id": "00-0037239",
+    "t": 72,
+    "t_exact": true
+   },
+   {
+    "player": "Tyler Shough",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Shough will need to be aligned with a reshuffled offensive line on protections against a Bears pass rush that pressures quarterbacks",
+    "note": "Offensive line injuries and shuffling plus a strong Bears pass rush create sack and pressure risk for Shough.",
+    "quote": "communication is the biggest part of this thing",
+    "player_id": "00-0040743",
+    "t": 57,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Game keys",
+    "detail": "Moore stressed turnover margin, protecting the ball, and winning the explosive-play battle in what he expects to be a high-scoring, explosive game."
+   },
+   {
+    "topic": "Offensive line",
+    "detail": "Injuries have forced line changes; the group will get a full week together and must communicate on protections against a Bears defense that pressures the quarterback."
+   },
+   {
+    "topic": "Bears quarterback",
+    "detail": "Caleb Williams is a threat from the pocket and when he scrambles, so the Saints defense must control his explosive plays."
+   }
+  ],
+  "opponent": "Chicago Bears"
+ }
+]
