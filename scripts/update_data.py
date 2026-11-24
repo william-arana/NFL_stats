@@ -556,6 +556,13 @@ def main() -> None:
             if f.exists():
                 keep_ids.update(json.loads(f.read_text())["data"].get("player_id", []))
         (SITE_DIR / "ids.json").write_text(json.dumps({g: str(e).split(".")[0] for g, e in ids.iter_rows() if g in keep_ids}, separators=(",", ":")))
+        # Yahoo player id -> gsis id (nflverse's public id map, not Yahoo data), for the private Yahoo page
+        try:
+            yids = nfl.load_ff_playerids().select("yahoo_id", "gsis_id").drop_nulls()
+            (SITE_DIR / "yahoo_ids.json").write_text(json.dumps(
+                {str(y).split(".")[0]: g for y, g in yids.iter_rows() if g in keep_ids}, separators=(",", ":")))
+        except Exception as e:  # noqa: BLE001
+            log(f"yahoo_ids: FAILED ({e})")
     log(f"site data: {pw.height} player-weeks, {t.height} team-weeks, {sch.height} games, through week {last_week}")
 
 
