@@ -1,0 +1,54 @@
+name: Check Yahoo access
+
+# One tap, no code needed: uses the saved sign-in (data/private/yahoo_token_<account>.enc)
+# to see whether Yahoo answers. Nothing from Yahoo is saved (personal use agreement);
+# only a rotated refresh token is committed, if Yahoo sends one.
+on:
+  workflow_dispatch:
+    inputs:
+      account:
+        description: "Whose saved Yahoo sign-in"
+        required: true
+        default: william
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      YAHOO_CLIENT_ID: ${{ secrets.YAHOO_CLIENT_ID }}
+      YAHOO_CLIENT_SECRET: ${{ secrets.YAHOO_CLIENT_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Check Yahoo access (no league data saved)
+        env:
+          YAHOO_ACCOUNT: ${{ inputs.account }}
+        run: |
+          cd scripts && python - <<'PY'
+          import os, yahoo_common as y
+          t = y.access_token(os.environ["YAHOO_ACCOUNT"])
+          print("Yahoo access OK, NFL game key", y.nfl_game_key(t))
+          print("Leagues found:", len(y.my_leagues(t)))
+          PY
+      - name: Save a rotated sign-in
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add data/private
+          if git diff --cached --quiet; then echo "No changes"; else
+            git commit -m "Yahoo sign-in refreshed ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git pull --rebase && git push
+          fi
