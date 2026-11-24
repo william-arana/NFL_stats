@@ -336,8 +336,11 @@ ROS_LAST_WEEK = 18
 GAMES_PLAYED = {"QB": 0.764, "RB": 0.783, "WR": 0.799, "TE": 0.794}
 
 
-def ros(P, K, S, week, T=None, site=None):
-    """{gsis_id: rest-of-season PPR, weeks week..18} for QB/RB/WR/TE."""
+def ros_weeks(P, K, S, week, T=None, site=None):
+    """{key: [(week, PPR), ...]} for weeks week..18, the week-by-week split of ROS (QB/RB/WR/TE) plus kickers.
+    This week = v0.1; each later game = v0 per game x games-played rate (no matchup read: flat except byes/injury);
+    bye = 0; IR/PUP or a hurt regular QB1 = 0 for his team's next 3 games. Kickers: later games = K model with the team's
+    season-average implied total, 0 points favored, and the game's roof (home stadium)."""
     mv = moved_teams(site)
     v0 = ours(P, K, S, week, T, mv)
     if v0.empty:
@@ -349,7 +352,11 @@ def ros(P, K, S, week, T=None, site=None):
     m = play_mult(site, week, S) if site is not None else {}
     pos = P[P.week < week].sort_values("week").groupby("player_id")[["position", "team"]].last()
     fut = S[(S.week > week) & (S.week <= ROS_LAST_WEEK)]
-    left = pd.concat([fut.home_team, fut.away_team]).value_counts()
+    games = {}  # team -> sorted later weeks it plays
+    for r in fut.itertuples():
+        games.setdefault(r.home_team, []).append(r.week)
+        games.setdefault(r.away_team, []).append(r.week)
+    weeks = list(range(week, ROS_LAST_WEEK + 1))
     # each team's regular starting QB (most starts this season): hurt, not benched, so he comes back later
     q = P[(P.week < week) & (P.position == "QB")].fillna({"attempts": 0}).sort_values("attempts", ascending=False).drop_duplicates(["team", "week"])
     q = q[q.attempts >= 5]
@@ -364,10 +371,45 @@ def ros(P, K, S, week, T=None, site=None):
         hurt_qb1 = why.startswith("backup QB") and r.key in reg and r.key not in mv  # a traded QB isn't his new team's QB1
         gone = why.startswith(("released", "no offensive snaps")) or (why.startswith("backup QB") and not hurt_qb1)
         if s.get("season") or gone:
-            out[r.key] = 0.0
+            out[r.key] = [(w, 0.0) for w in weeks]
             continue
-        n = int(left.get(team, 0))
-        if s.get("s") in ("IR", "PUP") or hurt_qb1:  # injured regular QB1: back after ~3 more weeks
-            n = max(0, n - 3)
-        out[r.key] = round(float(v1.get(r.key, r.ours_ppr)) + GAMES_PLAYED[p] * r.ours_ppr * n, 1)
+        skip = 3 if (s.get("s") in ("IR", "PUP") or hurt_qb1) else 0  # injured regular QB1: back after ~3 more weeks
+        later = sorted(games.get(team, []))
+        per = GAMES_PLAYED[p] * r.ours_ppr
+        row = [(week, float(v1.get(r.key, r.ours_ppr)))]
+        for w in weeks[1:]:
+            row.append((w, per if (w in later and later.index(w) >= skip) else 0.0))
+        out[r.key] = row
+    # kickers
+    M = json.loads(MODEL.read_text()) if MODEL.exists() else {}
+    c = (M.get("coef") or {}).get("K")
+    if c and not K.empty:
+        done = S[S.week <= week]
+        imp = pd.concat([done[["home_team", "home_implied"]].set_axis(["team", "imp"], axis=1),
+                         done[["away_team", "away_implied"]].set_axis(["team", "imp"], axis=1)]).dropna().groupby("team").imp.mean()
+        dome = {}
+        for g in fut.itertuples():
+            _, d = k_context(fut[fut.week == g.week])
+            dome[(g.week, g.home_team)] = d.get(g.home_team, 0.0)
+            dome[(g.week, g.away_team)] = d.get(g.away_team, 0.0)
+        for pid, h in K[K.week < week].sort_values("week").groupby("player_id"):
+            if pid not in v1.index:
+                continue
+            t = mv.get(pid, h.team.iloc[-1])
+            base = c["Intercept"] + c["k_avg"] * h.k_pts.mean() + c["implied"] * float(imp.get(t, imp.mean() if len(imp) else 22.0))
+            row = [(week, float(v1[pid]))]
+            for w in weeks[1:]:
+                row.append((w, base + c.get("dome", 0) * dome.get((w, t), 0.0) if (w, t) in dome else 0.0))
+            out[pid] = row
     return out
+
+
+def ros(P, K, S, week, T=None, site=None):
+    """{gsis_id: rest-of-season PPR, weeks week..18} for QB/RB/WR/TE (sum of ros_weeks)."""
+    return {k: round(sum(v for _, v in row), 1) for k, row in ros_weeks(P, K, S, week, T, site).items()
+            if k in _skill_keys(P, week)}
+
+
+def _skill_keys(P, week):
+    pos = P[P.week < week].sort_values("week").groupby("player_id").position.last()
+    return set(pos[pos.isin(list(GAMES_PLAYED))].index)
