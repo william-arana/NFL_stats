@@ -6,7 +6,10 @@
   "main": "worker.js",
   "account_id": "f14148211fa2069ec1af4ef3fab68b96",
   "compatibility_date": "2025-09-01",
-  "workers_dev": true,
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [{ "pattern": "nflyahoo.thegameday.zone", "custom_domain": true }],
+  "observability": { "enabled": true },
   "rules": [{ "type": "Text", "globs": ["**/*.html"], "fallthrough": true }],
   "kv_namespaces": [{ "binding": "YAHOO_KV", "id": "9dc7187a886f4002a444dfbe91ad360b" }],
   "vars": {
