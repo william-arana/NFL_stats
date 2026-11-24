@@ -269,7 +269,69 @@ def recap_facts(week, args):
             "trade_deadline_week": 11, "my_week": mine, "hindsight": hindsight, "top_performers": top_performers(P, T, K, week, idx, owner_of),
             "injuries": injuries_on_field(P, week, S, idx, owner_of)[:12], "league_teams": [slim_team(t) for t in league_rows],
             "high_score": league_rows[0]["team"] if league_rows else None, "grading_last_preview": grading,
+            "your_trades": my_trades(week, lg, smap, idx, P, args),
             "projections_note": "ours = GameDay_stats projection v0 computed only from games before this week (backfilled for weeks before 9)."}
+
+
+def my_trades(week, lg, smap, idx, P, args, days=8):
+    """William's completed trades from the last `days` days (Sleeper transactions for this week and next),
+    with each player's numbers and the roster after the trade, so the recap can weigh it."""
+    if args.fixture:
+        return []
+    me, seen, out = lg["my_roster_id"], set(), []
+    cutoff = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=days)).timestamp() * 1000
+    pj = J("proj.json") if (SITE / "proj.json").exists() else {}
+    nxt = pj.get("p", {}) if pj.get("week") == week + 1 else {}
+    ros_p = pj.get("r", {})
+    names = {r["roster_id"]: r["team_name"] for r in lg["rosters"]}
+    txs = []
+    for w in (week, week + 1):
+        try:
+            txs += sleeper(f"/league/{lg['id']}/transactions/{w}") or []
+        except Exception as e:  # noqa: BLE001  never fail the recap over this
+            print(f"transactions {w}: {e}", file=sys.stderr)
+    for t in txs:
+        if t.get("type") != "trade" or t.get("status") != "complete" or me not in (t.get("roster_ids") or []):
+            continue
+        if t["transaction_id"] in seen or (t.get("status_updated") or 0) < cutoff:
+            continue
+        seen.add(t["transaction_id"])
+        adds = t.get("adds") or {}
+
+        def info(sid):
+            k = to_key(sid, smap) or "sl:" + str(sid)
+            name, pos, team = idx.get(k, (str(sid), None, None))
+            h = P[(P.player_id == k) & (P.week <= week)].sort_values("week")
+            l3 = h.tail(3)
+            return {"player": name, "key": k, "pos": pos, "team": team, "games": int(len(h)),
+                    "ppr_per_g": rnd(h.fantasy_points_ppr.mean()) if len(h) else None,
+                    "last3_ppr": rnd(l3.fantasy_points_ppr.mean()) if len(h) else None,
+                    "xfp_last3": rnd(l3.xfp.mean()) if len(h) else None,
+                    "snap_pct_last3": pct(l3.offense_pct.mean()) if len(h) else None,
+                    "ours_next_week": nxt.get(k), "ros_pts": ros_p.get(k)}
+        got = [info(sid) for sid, rid in adds.items() if rid == me]
+        gave = [info(sid) for sid, rid in (t.get("drops") or {}).items() if rid == me]
+        partner = next((r for r in t["roster_ids"] if r != me), None)
+        # roster after: snapshot with the trade applied (no-op if the snapshot already has it)
+        mine = next(r for r in lg["rosters"] if r["roster_id"] == me)
+        after = (set(mine["players"]) - {g["key"] for g in gave}) | {g["key"] for g in got}
+        by_pos = {}
+        for k in after:
+            p = idx.get(k, (None, None, None))[1]
+            if p:
+                by_pos.setdefault(p, []).append({"player": idx[k][0], "key": k, "ros_pts": ros_p.get(k)})
+        for v in by_pos.values():
+            v.sort(key=lambda c: -(c["ros_pts"] or 0))
+        tot = lambda xs, f: round(sum(x[f] or 0 for x in xs), 1)  # noqa: E731
+        out.append({"partner": names.get(partner, f"Team {partner}"), "week_processed": t.get("leg"),
+                    "you_got": got, "you_gave": gave,
+                    "ros_pts_got": tot(got, "ros_pts"), "ros_pts_gave": tot(gave, "ros_pts"),
+                    "ppr_per_g_got": tot(got, "ppr_per_g"), "ppr_per_g_gave": tot(gave, "ppr_per_g"),
+                    "players_in": len(got), "players_out": len(gave),
+                    "no_ros_number": [x["player"] for x in got + gave if x["ros_pts"] is None],  # left out of the ROS totals
+                    "roster_after_by_pos": {p: v for p, v in by_pos.items() if p in ("QB", "RB", "WR", "TE")},
+                    "no_qb_left": not by_pos.get("QB"), "ros_through_week": pj.get("ros_through")})
+    return out
 
 
 def slim_team(t):
@@ -390,7 +452,8 @@ def slim_c(c):
 # ---------------------------------------------------------------- writing
 SECTIONS = {
     "recap": [("my_week", "Your week"), ("hindsight", "Could you have known?"), ("top_performers", "Top performers"),
-              ("injuries", "Injuries on the field"), ("around_league", "Around the league"), ("grading", "Grading last week's preview")],
+              ("trade", "Your trade"), ("injuries", "Injuries on the field"), ("around_league", "Around the league"),
+              ("grading", "Grading last week's preview")],
     "preview": [("my_lineup", "Your best lineup"), ("close_calls", "Close calls"), ("waivers", "Waiver adds and streamers"),
                 ("buy_sell", "Buy low, sell high"), ("around_league", "Around the league: needs and trade fits")],
 }
@@ -403,6 +466,7 @@ Rules:
 - In "Could you have known?", be honest: say whether a pre-game signal (our projection, snap % trend, xFP, target share, Vegas implied) pointed the right way, or whether it was variance nobody could see.
 - Injuries: only report what the news facts say. A news sentence filed under one player can be about a teammate (e.g. 'Jaylen Wright exited… which could mean more work for Gordon'): report the player the sentence says got hurt, and frame the filed player as the one who gains. Say who is next up when given. Skip items that only say a player returned or was fine unless they left the game first.
 - Trade fits: frame as ideas worth a look, mention the trade deadline week.
+- "Your trade" (facts: your_trades): weigh what William gave vs got with the numbers given (PPR per game, last 3, xFP, our next-week projection, ROS pts through ros_through_week). Say plainly who wins on ROS points and per-game points, what it does to his lineup by position (roster_after_by_pos), and that a 4-for-3 opens a roster spot. If no_qb_left is true, lead with it: he has no QB and must add one before his next game. Honest, not cheerleading. Players in no_ros_number have no ROS projection yet (left out of the totals): say so, don't treat them as zero. Skip if your_trades is empty.
 - Style: sharp, conversational, data-first, like a smart friend who did the homework. Short paragraphs and bullets. Bold key numbers sparingly. No hype words, no emojis, no tables.
 - Skip a section (empty md) if its facts are empty.
 Output format (plain text, no JSON, no code fences):
@@ -459,6 +523,11 @@ def template_write(f, kind):
             for h in f["hindsight"]) or "Your lineup was the best possible lineup."))
         tp = f["top_performers"]
         S.append(("top_performers", "Top performers", "\n".join(f"- **{p}:** " + ", ".join(f"{x['player']} {x.get('ppr', x.get('pts'))}" for x in tp.get(p, [])) for p in ("QB", "RB", "WR", "TE", "K", "DEF"))))
+        S.append(("trade", "Your trade", "\n\n".join(
+            ("**No QB left on the roster: add one before the next game.**\n\n" if t["no_qb_left"] else "")
+            + f"With {t['partner']}. Got: " + ", ".join(f"{x['player']} ({x['pos']}, {x['ppr_per_g']} PPR/g, ROS {x['ros_pts']})" for x in t["you_got"])
+            + ". Gave: " + ", ".join(f"{x['player']} ({x['pos']}, {x['ppr_per_g']} PPR/g, ROS {x['ros_pts']})" for x in t["you_gave"])
+            + f". ROS points: {t['ros_pts_got']} in vs {t['ros_pts_gave']} out." for t in f.get("your_trades") or [])))
         S.append(("injuries", "Injuries on the field", "\n".join(f"- **{i['player']}** ({i['pos']}, {i['team']}): {i['news'][-1]['what_happened']}" + (f". Next up: {i['next_up']['player']}." if i.get('next_up') else "") for i in f["injuries"]) or ""))
         S.append(("around_league", "Around the league", "\n".join(f"- **{t['team']}** {t['result'] or ''} {t['points']}–{t['opp_points']} vs {t['opponent']}. MVP {t['mvp']['player'] if t['mvp'] else '–'}; {t['left_on_bench']} left on the bench." for t in f["league_teams"])))
         g = f.get("grading_last_preview")
