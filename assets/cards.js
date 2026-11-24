@@ -472,7 +472,7 @@
   const cardState=()=>history.state&&history.state.nflsCard?history.state:null;
   const depth=()=>{const s=cardState();return s?s.nflsDepth||0:0};
   const validKey=k=>typeof k==='string'&&/^[pdgo]:[A-Za-z0-9_-]+$/.test(k);
-  function urlFor(key){const u=new URL(location.href);if(key)u.searchParams.set('card',key);else u.searchParams.delete('card');return u.pathname+u.search+u.hash}
+  function urlFor(key){const u=new URL(location.href);if(key)u.searchParams.set('card',key);else u.searchParams.delete('card');return u.href}  // full URL: a page with <base href> elsewhere (the private Yahoo page) would otherwise resolve it to another origin
   function writeState(mode,d){const top=stack[stack.length-1];history[mode]({nflsCard:stack.map(x=>({key:x.key,pos:x.pos||''})),nflsDepth:d},'',urlFor(top&&top.key))}
   function closeLocal(){tabs=[];ti=0;if(el){el.remove();el=null;document.documentElement.classList.remove('side-open')}if(shade){shade.remove();shade=null}if(anchor){anchor.setAttribute('aria-expanded','false');anchor=null}stack=[]}
   /* close = go back past every card entry we added, so Back afterwards leaves the page normally */
