@@ -36,7 +36,9 @@
         if(l.provider==='yahoo'){if(!s)return null;l={...l,name:l.name||s.name||'Yahoo league',teams:s.teams,my_roster_id:s.my_roster_id,viewers:s.viewers,url:s.url}}const name=rid=>{const r=s&&s.rosters.find(x=>x.roster_id===rid);return r?r.team_name.trim():null};
         const viewers=(l.viewers&&l.viewers.length?l.viewers:[{roster_id:l.my_roster_id}]).map(v=>({roster_id:v.roster_id,label:v.label||name(v.roster_id)||('Team '+v.roster_id)}));
         return {...l,viewers}}).filter(Boolean);
-      leagueCfg={snapshot:snap,leagues};
+      /* private pages behind a login (e.g. the Yahoo team page): just a link in the picker, no data here */
+      const links=cfg.leagues.filter(l=>l.private_url).map(l=>({url:l.private_url,label:`${l.viewer_team||l.name||'My team'} · ${l.provider==='yahoo'?'Yahoo':'Private'} ↗`}));
+      leagueCfg={snapshot:snap,leagues,links};
       const opts=allOptions();if(!sel||!opts.some(o=>o.value===sel)){const legacy=sel&&opts.find(o=>o.value.split('|')[0]===sel);const d=legacy||opts.find(o=>o.def)||opts[0];sel=d?d.value:'none'}
       return leagueCfg;
     });
@@ -78,9 +80,9 @@
       document.addEventListener('click',e=>{if(!menu.hidden&&!e.target.closest('.setwrap')){menu.hidden=true;btn.setAttribute('aria-expanded','false')}});
       document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.hidden){menu.hidden=true;btn.setAttribute('aria-expanded','false');btn.focus()}})}
     loadLeagues().then(()=>{const s=document.getElementById('league-sel');const opts=allOptions();const groups=[...new Set(opts.map(o=>o.group))];
-      s.innerHTML=groups.map(g=>`<optgroup label="${esc(g)}">${opts.filter(o=>o.group===g).map(o=>`<option value="${o.value}">${esc(o.label)}</option>`).join('')}</optgroup>`).join('')+'<option value="none">No league</option>';
+      s.innerHTML=groups.map(g=>`<optgroup label="${esc(g)}">${opts.filter(o=>o.group===g).map(o=>`<option value="${o.value}">${esc(o.label)}</option>`).join('')}</optgroup>`).join('')+(leagueCfg.links.length?`<optgroup label="Private (login)">${leagueCfg.links.map(k=>`<option value="go:${esc(k.url)}">${esc(k.label)}</option>`).join('')}</optgroup>`:'')+'<option value="none">No league</option>';
       s.value=sel;
-      s.onchange=()=>{sel=s.value;LS.set('league',sel);listeners.forEach(f=>f(getLeague()))};
+      s.onchange=()=>{if(s.value.startsWith('go:')){const u=s.value.slice(3);s.value=sel;location.href=u;return}sel=s.value;LS.set('league',sel);listeners.forEach(f=>f(getLeague()))};
       listeners.forEach(f=>f(getLeague()));
     });
   }
