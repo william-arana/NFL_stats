@@ -37,6 +37,7 @@
 <script src="assets/cards.js?v=1.97" defer></script>
 <script src="assets/glossary.js?v=1.97" defer></script>
 <script src="assets/tables.js?v=1.97" defer></script>
+<script src="assets/signals.js?v=1.97"></script>
 <style>
 header.top{padding-block:22px 14px;border-bottom:2px solid var(--margin)}
 h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:.95;margin:0 0 8px;text-transform:uppercase}
@@ -119,7 +120,7 @@ const mean=a=>{const b=a.filter(num);return b.length?b.reduce((x,y)=>x+y,0)/b.le
 const ord=n=>n+(['th','st','nd','rd'][(n%100>10&&n%100<14)?0:Math.min(n%10,4)%4]||'th');
 const store={get(k,d){try{const v=localStorage.getItem('nfls-'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('nfls-'+k,JSON.stringify(v))}catch(e){}}};
 let P,T,G,META,INJ,ROST=null,LG=null;
-const st={pos:store.get('wpos','ALL'),showTaken:false,sort:'proj',dir:-1,q:''};
+const st={pos:store.get('wpos','ALL'),showTaken:false,sort:'proj',dir:-1,q:'',sig:new Set()};
 const gl=(k,l)=>window.NFLSGloss?NFLSGloss.label(k,l):esc(l);
 /* search matches name, team or position; a search also looks through rostered players and anyone who hasn't played lately */
 const norm=t=>String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[.'’-]/g,'');
@@ -144,36 +145,15 @@ let _dvp;function dvp(){if(_dvp)return _dvp;const games={},pts={};for(const r of
   const out={};for(const t in pts){out[t]={};for(const p of ['QB','RB','WR','TE'])out[t][p]={v:pts[t][p]/games[t].size}}
   for(const p of ['QB','RB','WR','TE']){const vs=Object.values(out).map(o=>o[p].v);const m=mean(vs),sd=Math.sqrt(mean(vs.map(v=>(v-m)**2)))||1;Object.keys(out).sort((a,b)=>out[b][p].v-out[a][p].v).forEach((t,i)=>{out[t][p].rk=i+1;out[t][p].z=(out[t][p].v-m)/sd})}
   return _dvp=out}
-/* A game counts if he played ≥10% of snaps and didn't leave early hurt.
-   Early exit = under half his usual (median) snap share AND he then missed his team's next game,
-   or it's his latest game and he's on this week's injury report. */
-function qualify(a){
-  const lw=META.last_completed_week,logs=[...a.logs].sort((x,y)=>x.week-y.week);
-  const real=logs.filter(l=>num(l.offense_pct)&&l.offense_pct>=0.10);
-  const v=real.map(l=>l.offense_pct).sort((x,y)=>x-y);const med=v.length?v[Math.floor((v.length-1)/2)]:0;
-  const played=new Set(real.map(l=>l.week));
-  const teamNext=(team,wk)=>{let n=null;for(const g of G)if((g.home_team===team||g.away_team===team)&&g.week>wk&&g.week<=lw&&(n==null||g.week<n))n=g.week;return n};
-  return real.filter(l=>{
-    if(l.offense_pct>=0.5*med)return true;
-    const nw=teamNext(l.team,l.week);
-    if(nw!=null)return played.has(nw);
-    return !(a.inj&&/out|ir|doubtful|questionable|limited|did not/i.test(a.inj[0]));
-  });
-}
 function players(){
   const lw=META.last_completed_week,by=new Map();
   for(const r of P){let a=by.get(r.player_id);if(!a){a={id:r.player_id,name:r.player_display_name,pos:r.position,team:r.team,logs:[]};by.set(r.player_id,a)}a.team=r.team;a.logs.push(r)}
   const out=[];
   for(const a of by.values()){
     a.g=a.logs.length;a.g3=a.logs.filter(l=>l.week>lw-3).length;
-    // games that count: ≥10% of snaps and not an early exit (see qualify()); L3 = his last 3 of those in the last 6 weeks
-    const q=qualify(a),rec=q.filter(l=>l.week>lw-6).slice(-3),bef=q.filter(l=>!rec.includes(l));a.q3=rec.length;
-    a.ppr3=mean(rec.map(l=>l.fantasy_points_ppr));a.xfp3=mean(rec.map(l=>l.xfp));a.snap3=mean(rec.map(l=>l.offense_pct));a.snapB=mean(bef.map(l=>l.offense_pct));
-    a.opp3=mean(rec.map(l=>(l.carries||0)+(l.targets||0)));a.oppB=mean(bef.map(l=>(l.carries||0)+(l.targets||0)));a.tgt3=mean(rec.map(l=>l.target_share));
+    // games that count: ≥10% of snaps and not an early exit; L3 = his last 3 of those in the last 6 weeks (assets/signals.js)
+    Object.assign(a,NFLSSignals.usage(a.logs,META,G,INJ[a.id]||null));
     a.ppr=mean(a.logs.map(l=>l.fantasy_points_ppr));
-    if(rec.length<2){a.ppr3=a.xfp3=null} // one game isn't enough to rank him
-    const okD=rec.length>=2&&bef.length>=2; // trends need 2+ real games on both sides
-    a.snapD=okD&&num(a.snap3)&&num(a.snapB)?a.snap3-a.snapB:null;a.oppD=okD&&num(a.opp3)&&num(a.oppB)?a.opp3-a.oppB:null;
     const n=nextOpp(a.team);a.next=n;const d=n&&dvp()[n.opp];a.mz=d&&d[a.pos]?d[a.pos].z:null;a.mrk=d&&d[a.pos]?d[a.pos].rk:null;
     a.inj=INJ[a.id]||null;
     a.idle=a.g3===0; // hasn't played in the last 3 weeks: only shown when searched for
@@ -278,9 +258,12 @@ function draw(){
      that rank is into the league's starting spots (teams x QB1/RB2/WR3/TE1): QB8 and WR27 in a 12-team league both = 0.67 */
   const SLOTS={QB:1,RB:2,WR:3,TE:1},nT=(LG&&LG.teams)||12;
   for(const pos of ['QB','RB','WR','TE']){const g=all.filter(a=>a.pos===pos&&num(a.proj)).sort((a,b)=>b.proj-a.proj);g.forEach((a,i)=>{a.prk=i+1;a.prel=-(i+1)/(nT*SLOTS[pos])})}
+  const irk=NFLSSignals.impliedRanks(G,META.next_week);all.forEach(a=>{a.sig=NFLSSignals.tags(a,{PROJ,META,irk})});
   const q=norm(st.q).trim();const words=q.split(/\s+/).filter(Boolean);
   const hit=a=>{const nw=norm(a.name).split(/\s+/),tm=a.team.toLowerCase(),ps=a.pos.toLowerCase();return words.every(w=>w===tm||w===ps||nw.some(x=>x.startsWith(w))||(w.length>3&&norm(a.name).replace(/\s+/g,' ').includes(w)))};
-  const pool=q?all.filter(hit).filter(a=>st.pos==='ALL'||a.pos===st.pos):all.filter(a=>!a.idle).filter(a=>st.showTaken||avOf(a.id)==='fa').filter(a=>st.pos==='ALL'||a.pos===st.pos);
+  const pool0=q?all.filter(hit).filter(a=>st.pos==='ALL'||a.pos===st.pos):all.filter(a=>!a.idle).filter(a=>st.showTaken||avOf(a.id)==='fa').filter(a=>st.pos==='ALL'||a.pos===st.pos);
+  const sigN=Object.fromEntries(NFLSSignals.DEFS.map(d=>[d.k,pool0.filter(a=>a.sig.includes(d.k)).length]));
+  const pool=st.sig.size?pool0.filter(a=>[...st.sig].every(k=>a.sig.includes(k))):pool0;
   const k=st.sort==='proj'&&st.pos==='ALL'?'prel':st.sort;pool.sort((a,b)=>{const x=a[k],y=b[k];if(!num(x)&&!num(y))return 0;if(!num(x))return 1;if(!num(y))return -1;return st.dir*(x-y)});
   const top=pool.slice(0,60);const H={proj:heatFn(pool.map(a=>a.proj)),ros:heatFn(pool.map(a=>a.ros)),...Object.fromEntries(WK.map(w=>['w'+w,heatFn(pool.map(a=>a['w'+w]))])),xfp3:heatFn(pool.map(a=>a.xfp3)),ppr3:heatFn(pool.map(a=>a.ppr3)),snap3:heatFn(pool.map(a=>a.snap3)),opp3:heatFn(pool.map(a=>a.opp3))};
   const cell=(a,k,txt)=>{const al=H[k]?H[k](a[k]):0;return `<td class="${al?'heat':''}" ${al?`style="--a:${al.toFixed(3)}"`:''}>${txt}</td>`};
@@ -300,12 +283,14 @@ function draw(){
     <input type="search" class="wsrch" id="w-q" placeholder="Search any player or team" value="${esc(st.q)}" autocomplete="off" aria-label="Search players">
     <div class="seg" id="w-pos">${['ALL','QB','RB','WR','TE','K','DEF'].map(p=>`<button data-v="${p}" aria-pressed="${st.pos===p}">${p==='ALL'?'All':p}</button>`).join('')}</div>
     <label class="chk" for="w-taken" ${q?'hidden':''}><input type="checkbox" id="w-taken" ${st.showTaken?'checked':''}>Include rostered</label></div>
+  ${st.pos==='K'||st.pos==='DEF'?'':NFLSSignals.chipsHTML(st.sig,sigN)}
   ${top.length?`<div class="tablewrap"><table id="w-tbl" data-cols="waivers-fa"><thead><tr><th class="rank">#</th><th class="l stick">Player</th><th class="l">Team</th><th class="l">Wk ${META.next_week}</th>${cols.map(([k,l])=>`<th data-k="${k}" ${st.sort===k?`aria-sort="${st.dir<0?'descending':'ascending'}"`:''}${/^w\d+$/.test(k)?` title="Our number for ${l}: his per-game projection x how often players at his position play. Same every week except byes (bye) and injuries (0 while Out/IR)"`:''}>${/^w\d+$/.test(k)?l:gl(k==='ppr'?'ppr':k==='proj'?'our_proj':k,l)}</th>`).join('')}<th class="l">Why</th></tr></thead><tbody>${
-    top.map((a,i)=>{const s=avOf(a.id);const own=q&&ROST&&s==='taken'?(ROST.map.get(a.id)||{}).team:'';return `<tr><td class="rank">${i+1}</td><td class="l stick">${PB(a,s==='fa'&&ROST?'name-fa':'')}${NFLS.plink(a.id,a.name)} <span class="pos">${a.pos}</span>${ROST?NFLS.badge(s,LG,a.name):''}${a.inj?`<span class="inj" title="${esc(a.inj[1])}">${esc(a.inj[0].replace('Practice: ',''))}</span>`:''}${own?`<span class="pos" title="Rostered by"> · ${esc(own)}</span>`:''}${a.idle?'<span class="pos"> · no games last 3 wks</span>':''}</td>
+    top.map((a,i)=>{const s=avOf(a.id);const own=q&&ROST&&s==='taken'?(ROST.map.get(a.id)||{}).team:'';return `<tr><td class="rank">${i+1}</td><td class="l stick">${PB(a,s==='fa'&&ROST?'name-fa':'')}${NFLS.plink(a.id,a.name)} <span class="pos">${a.pos}</span>${ROST?NFLS.badge(s,LG,a.name):''}${a.inj?`<span class="inj" title="${esc(a.inj[1])}">${esc(a.inj[0].replace('Practice: ',''))}</span>`:''}${own?`<span class="pos" title="Rostered by"> · ${esc(own)}</span>`:''}${a.idle?'<span class="pos"> · no games last 3 wks</span>':''}${a.sig.map(k=>`<span class="sigtag" title="${esc(NFLSSignals.DEFS.find(d=>d.k===k).title)}">${esc(NFLSSignals.DEFS.find(d=>d.k===k).label)}</span>`).join('')}</td>
       <td class="l"><button type="button" class="opp" data-card="o:${a.team}" title="${a.team} offense card">${a.team}</button></td><td class="l">${a.next?OPPB(a.next.opp,a.next.at,a.pos)+mrk(a.mrk):'<span class="pos">bye</span>'}</td>
       ${cell(a,'proj',`<span class="score">${f1(a.proj)}</span>${a.prk?`<small class="prk" title="${a.pos}${a.prk}: ${ord(a.prk)}-highest ${a.pos} projection this week">${a.pos}${a.prk}</small>`:''}`)}${WK.map(w=>wkCell(a,w,H['w'+w])).join('')}${cell(a,'xfp3',f1(a.xfp3))}${cell(a,'ppr3',f1(a.ppr3))}${cell(a,'snap3',pct(a.snap3))}<td>${sgn(a.snapD,0,100)}</td>${cell(a,'opp3',f1(a.opp3))}<td>${sgn(a.oppD,1)}</td><td>${pct(a.tgt3)}</td><td>${f1(a.ppr)}</td>${cell(a,'ros',num(a.ros)?Math.round(a.ros):'–')}
-      <td class="l"><div class="why">${why(a)}</div></td></tr>`}).join('')}</tbody></table></div>`:`<div class="empty">${q?`No player matches “${esc(st.q.trim())}”${st.pos!=='ALL'?' at '+st.pos+' (switch to All)':''}.`:'No free agents at this position played in the last 3 weeks.'}</div>`}
+      <td class="l"><div class="why">${why(a)}</div></td></tr>`}).join('')}</tbody></table></div>`:`<div class="empty">${q?`No player matches “${esc(st.q.trim())}”${st.pos!=='ALL'?' at '+st.pos+' (switch to All)':''}.`:st.sig.size?'No free agents here match every signal you picked. Tap Clear or drop one.':'No free agents at this position played in the last 3 weeks.'}</div>`}
   <div class="foot"><span><b>Proj</b> = our Week ${META.next_week} PPR projection (usage, expected points, Vegas implied total, chance he plays). Sorted by it unless you tap another column; on <b>All</b> it's sorted by rank within the position (the small RB12-style tag) compared with how many start at that position in your league (1 QB, 2 RB, 3 WR, 1 TE per team), so QBs' bigger point totals don't crowd out everyone else. <b>Wk ${META.next_week+1}–${WEND}</b> = our number for each later week: his per-game projection × how often players at his position actually play. There's no matchup read for later weeks yet (estimated future Vegas totals didn't help in our backtest), so it's the same number every week except <b>bye</b> and <b>0</b> while he's Out/IR (back after ~3 games). <b>ROS</b> = all of it through Week 18. L3 = his last 3 games that count (≥10% of snaps, not an early injury exit, within the last 6 weeks); needs 2+ of them, and the Δ columns compare against 2+ earlier games that count. <b>Depth</b> tag = points our projection adds when an RB/WR ahead of him is Out/IR/released (more work for the backups), or takes off when a regular returns (backtest 2019–2026). Updated Saturday afternoon with Friday's final injury statuses.</span>
+    <span><b>Signals</b> (chips above the table; stack them to narrow the list, the number = how many in this list have it): only ones that held up in our backtests. Role up and Buy low = RB/WR/TE, Depth bump = RB/WR, High implied = QBs on a top-8 implied offense. Soft matchups aren't one of them: they didn't predict.</span>
     <span>L3 = last 3 weeks. Δ = last 3 weeks vs. earlier in the season. Green rank next to the opponent = top-8 most PPR allowed to that position.</span></div></section>
 
   <section class="box"><div class="box-h"><h2>D/ST streamers</h2><span class="hint">${ROST?'Available defenses (plus yours) for':'All defenses for'} Week ${META.next_week}</span></div>
@@ -320,6 +305,7 @@ function draw(){
       if(kdOnly){box.querySelectorAll(':scope > .tablewrap, :scope > .empty, :scope > .colbar, :scope > .foot').forEach(n=>n.remove());const h=box.querySelector('.box-h h2');if(h&&!q)h.textContent=st.pos==='K'?(st.showTaken?'All kickers':'Free agent kickers'):(st.showTaken?'All defenses':'Free agent defenses');box.insertAdjacentHTML('beforeend',html)}
       else if(html)box.insertAdjacentHTML('afterend',`<section class="box" id="kd-box"><div class="box-h"><h2>Kickers &amp; defenses</h2><span class="hint">matching “${esc(st.q.trim())}”</span></div>${html}</section>`)}}
   {const qb=$('#qb-sort');if(qb)qb.onclick=e=>{const b=e.target.closest('button');if(!b)return;st.qbSort=b.dataset.v;draw()}}
+  {const sc=document.querySelector('#fa-box .sigchips');if(sc)sc.onclick=e=>{const b=e.target.closest('button');if(!b)return;const k=b.dataset.sig;if(!k)st.sig.clear();else if(st.sig.has(k))st.sig.delete(k);else st.sig.add(k);draw()}}
   $('#w-pos').onclick=e=>{const b=e.target.closest('button');if(!b)return;st.pos=b.dataset.v;store.set('wpos',st.pos);draw()};
   $('#w-taken').onchange=e=>{st.showTaken=e.target.checked;draw()};
   {const qi=$('#w-q');let t;qi.oninput=e=>{clearTimeout(t);t=setTimeout(()=>{const pos=e.target.selectionStart;st.q=e.target.value;draw();const n=$('#w-q');n.focus();try{n.setSelectionRange(pos,pos)}catch(_){}},150)};

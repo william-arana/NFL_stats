@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="assets/site.css?v={{V}}">
 <script src="assets/cards.js?v={{V}}" defer></script>
 <script src="assets/glossary.js?v={{V}}" defer></script>
+<script src="assets/signals.js?v={{V}}"></script>
 <style>
 .top{padding-block:20px 12px;border-bottom:2px solid var(--margin)}
 .eyebrow{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
@@ -80,7 +81,8 @@ footer.credit b{color:var(--ink)}
   <section class="sec"><h2>Roster</h2><div class="box tw" id="roster"><div class="hint">Loading…</div></div>
     <p class="hint">Proj = our next-week PPR projection; ROS = our rest-of-season points. Both are GameDay_stats numbers from nflverse data, not Yahoo's.</p></section>
   <section class="sec"><h2>Free agents</h2><div class="box" id="fa"><div class="hint">Loading…</div></div>
-    <p class="hint">Players nobody has in your league (free agents + waivers), from Yahoo's top 25 at each position, ranked by our projection. "Upgrade" = his ROS minus your worst starter's at that spot. Positions are ordered by the biggest upgrade.</p></section>
+    <p class="hint">Players nobody has in your league (free agents + waivers), from Yahoo's top 25 at each position, ranked by our projection. "Upgrade" = his ROS minus your worst starter's at that spot. Positions are ordered by the biggest upgrade.
+    <b>Signals</b> (stack them to narrow the list) are GameDay_stats numbers from nflverse data, only ones that held up in our backtests: Role up and Buy low for RB/WR/TE, Depth bump for RB/WR, High implied for QBs. Soft matchups aren't one: they didn't predict.</p></section>
   <section class="sec"><h2>Standings</h2><div class="box tw" id="standings"><div class="hint">Loading…</div></div></section>
 
   <footer class="credit">
@@ -114,7 +116,9 @@ footer.credit b{color:var(--ink)}
   });
   const site = n => fetch('data/site/' + n, { cache: 'no-cache' }).then(r => r.ok ? r.json() : {}).catch(() => ({}));
 
-  let P = {}, YID = {};
+  let P = {}, YID = {}, LOGS = new Map(), META = null, G = [], INJ = {}, IRK = {};
+  const rowsOf = j => { const out = []; if (!j || !j.cols) return out; for (let i = 0; i < j.rows; i++) { const r = {}; for (const c of j.cols) r[c] = j.data[c][i]; out.push(r) } return out };
+  const sigOn = new Set();
   const key = p => p.pos === 'DEF' ? 'DEF:' + p.team : YID[p.yid] || null;
   const proj = p => { const k = key(p); return k && P.p ? P.p[k] ?? null : null };
   const ros = p => { const k = key(p); return k && P.r ? P.r[k] ?? null : null };
@@ -188,27 +192,43 @@ footer.credit b{color:var(--ink)}
     const st = t.players.filter(p => STARTER(p.slot));
     const worst = pos => { const v = st.filter(p => p.pos === pos || p.elig.includes(pos)).map(p => ros(p) ?? proj(p) ?? 0); return v.length ? Math.min(...v) : 0 };
     const res = await Promise.all(POS.map(pos => api('/api/fa?pos=' + pos).then(j => ({ pos, list: j.players || [] })).catch(() => ({ pos, list: [], failed: true }))));
+    const sigOf = p => {
+      const k = key(p); if (!k || p.pos === 'DEF' || p.pos === 'K' || !META) return [];
+      const a = { id: k, pos: p.pos, team: p.team, ...NFLSSignals.usage(LOGS.get(k) || [], META, G, INJ[k] || null) };
+      return NFLSSignals.tags(a, { PROJ: P, META, irk: IRK });
+    };
     const lists = res.map(r => {
-      const list = r.list.map(p => ({ ...p, pr: proj(p), rs: ros(p) })).sort((a, b) => (b.pr ?? -1) - (a.pr ?? -1)).slice(0, 12);
-      const best = Math.max(0, ...list.map(p => p.rs ?? 0));
-      return { ...r, list, up: best - worst(r.pos) };
+      const w = worst(r.pos);
+      const all = r.list.map(p => { const x = { ...p, pr: proj(p), rs: ros(p) }; x.sig = sigOf(p); if (x.rs != null && x.rs - w > 0) x.sig.push('upg'); return x })
+        .sort((a, b) => (b.pr ?? -1) - (a.pr ?? -1));
+      const best = Math.max(0, ...all.slice(0, 12).map(p => p.rs ?? 0));
+      return { ...r, all, up: best - w };
     }).sort((a, b) => b.up - a.up);
+    const UPG = [{ k: 'upg', label: 'Upgrade', title: "His ROS beats your worst starter's at that spot." }];
+    const label = k => (NFLSSignals.DEFS.find(d => d.k === k) || UPG[0]).label;
     let cur = lists[0].pos;
     const draw = () => {
-      const L = lists.find(x => x.pos === cur), w = worst(cur);
+      const L0 = lists.find(x => x.pos === cur), w = worst(cur);
+      const counts = Object.fromEntries([...NFLSSignals.DEFS, ...UPG].map(d => [d.k, L0.all.filter(p => p.sig.includes(d.k)).length]));
+      const L = { ...L0, list: (sigOn.size ? L0.all.filter(p => [...sigOn].every(k => p.sig.includes(k))) : L0.all).slice(0, 12) };
       $('fa').innerHTML = `<div class="tabs">${lists.map(x => `<button type="button" data-pos="${x.pos}" aria-pressed="${x.pos === cur}">${x.pos}${x.up > 0 ? `<small>+${Math.round(x.up)}</small>` : ''}</button>`).join('')}</div>` +
-        (L.failed ? '<div class="hint">Couldn\'t load this position from Yahoo.</div>' : !L.list.length ? '<div class="hint">No available players.</div>' :
+        (cur === 'K' || cur === 'DEF' ? '' : NFLSSignals.chipsHTML(sigOn, counts, UPG)) +
+        (L0.failed ? '<div class="hint">Couldn\'t load this position from Yahoo.</div>' : !L.list.length ? `<div class="hint">${sigOn.size ? 'No one in Yahoo\'s top 25 here matches every signal you picked. Tap Clear or drop one.' : 'No available players.'}</div>` :
         `<div class="tw"><table><thead><tr><th>Player</th><th>Team</th><th class="n">Proj</th><th class="n">ROS</th><th class="n">Upgrade</th></tr></thead><tbody>${
           L.list.map(p => { const u = p.rs == null ? null : p.rs - w;
-            return `<tr><td>${nameBtn(p)}${statusTag(p, t.week)}${p.yid && !key(p) ? ' <span class="hint">(no nflverse id)</span>' : ''}</td><td>${esc(p.team)}</td><td class="n">${f1(p.pr)}</td><td class="n">${f1(p.rs)}</td>
+            return `<tr><td>${nameBtn(p)}${statusTag(p, t.week)}${p.sig.filter(k => k !== 'upg').map(k => `<span class="sigtag">${esc(label(k))}</span>`).join('')}${p.yid && !key(p) ? ' <span class="hint">(no nflverse id)</span>' : ''}</td><td>${esc(p.team)}</td><td class="n">${f1(p.pr)}</td><td class="n">${f1(p.rs)}</td>
               <td class="n">${u == null ? '–' : u > 0 ? `<span class="tag good">+${f1(u)}</span>` : f1(u)}</td></tr>` }).join('')}</tbody></table></div>`);
       $('fa').querySelectorAll('.tabs button').forEach(b => b.onclick = () => { cur = b.dataset.pos; draw() });
+      const sc = $('fa').querySelector('.sigchips'); if (sc) sc.onclick = e => { const b = e.target.closest('button'); if (!b) return; const k = b.dataset.sig; if (!k) sigOn.clear(); else if (sigOn.has(k)) sigOn.delete(k); else sigOn.add(k); draw() };
     };
     draw();
   }
 
   (async () => {
-    [P, YID] = await Promise.all([site('proj.json'), site('yahoo_ids.json')]);
+    let pl, sc;
+    [P, YID, pl, sc, META] = await Promise.all([site('proj.json'), site('yahoo_ids.json'), site('players.json'), site('schedule.json'), site('meta.json')]);
+    for (const r of rowsOf(pl)) { let a = LOGS.get(r.player_id); if (!a) LOGS.set(r.player_id, a = []); a.push(r) }
+    G = rowsOf(sc); INJ = (META && META.injuries) || {}; if (!META || !META.next_week) META = null; else IRK = NFLSSignals.impliedRanks(G, META.next_week);
     let t;
     try { t = await api('/api/team') } catch (e) { showError(e); return }
     $('sub').textContent = `${t.team} · ${t.league} · Week ${t.week}` + (P.week && P.week !== t.week ? ` (our projections are for week ${P.week})` : '');
