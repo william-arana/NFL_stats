@@ -21,13 +21,17 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - uses: cloudflare/wrangler-action@v3
+      - uses: actions/setup-node@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          workingDirectory: worker/yahoo
-          secrets: |
-            YAHOO_CLIENT_ID
-            YAHOO_CLIENT_SECRET
+          node-version: "22"
+      - name: Deploy + set secrets
+        working-directory: worker/yahoo
         env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           YAHOO_CLIENT_ID: ${{ secrets.YAHOO_CLIENT_ID }}
           YAHOO_CLIENT_SECRET: ${{ secrets.YAHOO_CLIENT_SECRET }}
+        run: |
+          npx --yes wrangler@4 deploy
+          node -e 'process.stdout.write(JSON.stringify({YAHOO_CLIENT_ID:process.env.YAHOO_CLIENT_ID,YAHOO_CLIENT_SECRET:process.env.YAHOO_CLIENT_SECRET}))' > /tmp/s.json
+          npx --yes wrangler@4 secret bulk /tmp/s.json
+          rm -f /tmp/s.json
