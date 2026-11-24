@@ -1,10 +1,11 @@
 """Writes data/site/proj.json: our projection v0.2 (scripts/projection_v0.py: (v0 + RB/WR depth adjustment) x chance he plays) for next week, PPR, for the site
-(Compare's "Our proj" column) and `r` = rest-of-season PPR through week 18 (Compare ROS pts, Waivers ROS). Uses only the site's own data files; no Sleeper/ESPN numbers.
+(Compare's "Our proj" column) and `r` = rest-of-season PPR through week 18 (Compare ROS pts, Waivers ROS),
+`w` = the same split by week from `w0` (Waivers' week columns; kickers too). Uses only the site's own data files; no Sleeper/ESPN numbers.
 Run after scripts/update_data.py (update-data workflow)."""
 import json
 from pathlib import Path
 import pandas as pd
-from projection_v0 import ours_v01, ros, ROS_LAST_WEEK
+from projection_v0 import ours_v01, ros, ros_weeks, ROS_LAST_WEEK
 
 SITE = Path(__file__).resolve().parents[1] / "data" / "site"
 
@@ -23,9 +24,11 @@ def main():
     p = {r.key: round(float(r.ours_ppr), 1) for r in o.itertuples() if pd.notna(r.ours_ppr)}
     # depth / vacated opportunity: points added or removed + reason, for the Waivers "Why" tags
     dp = {r.key: [round(float(r.depth), 1), r.depth_why] for r in o.itertuples() if "depth" in o and abs(r.depth) >= 0.3 and r.avail > 0}
-    r = ros(P, K, S, week, T, SITE)  # rest of season, weeks week..ROS_LAST_WEEK
+    W = ros_weeks(P, K, S, week, T, SITE)  # week-by-week split of ROS (+ kickers): Waivers' Wk columns
+    r = ros(P, K, S, week, T, SITE)  # rest of season, weeks week..ROS_LAST_WEEK (= sum of W for QB/RB/WR/TE)
+    w = {k: [round(float(v), 1) for _, v in row] for k, row in W.items()}
     out = {"season": meta["season"], "week": week, "model": "v0.2", "scoring": "PPR", "updated_utc": meta.get("updated_utc"), "p": p, "dp": dp,
-           "ros_through": ROS_LAST_WEEK, "r": r}
+           "ros_through": ROS_LAST_WEEK, "r": r, "w0": week, "w": w}
     (SITE / "proj.json").write_text(json.dumps(out, separators=(",", ":")))
     print(f"proj.json: week {week}, {len(p)} players/defenses, ROS for {len(r)}, depth adjustments {len(dp)}")
 
