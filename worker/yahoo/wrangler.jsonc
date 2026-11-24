@@ -1,0 +1,18 @@
+// Private "My Yahoo team" Worker. Deployed by .github/workflows/deploy-yahoo-worker.yml on every push to
+// main that touches worker/yahoo/. Cloudflare Access (policy "William only") sits in front of it.
+// Secrets are never stored here: the workflow sets YAHOO_CLIENT_ID and YAHOO_CLIENT_SECRET from the repo secrets.
+{
+  "name": "gameday-yahoo",
+  "main": "worker.js",
+  "account_id": "f14148211fa2069ec1af4ef3fab68b96",
+  "compatibility_date": "2025-09-01",
+  "workers_dev": true,
+  "rules": [{ "type": "Text", "globs": ["**/*.html"], "fallthrough": true }],
+  "kv_namespaces": [{ "binding": "YAHOO_KV", "id": "9dc7187a886f4002a444dfbe91ad360b" }],
+  "vars": {
+    "ACCESS_TEAM": "thegameday",
+    "ACCESS_AUD": "cd1b765a69865b31bcd2b04417cdc589f3b124f6e4119f962a851258c94e3909",
+    "YAHOO_LEAGUE_ID": "1548944",
+    "SITE": "https://thegameday.zone"
+  }
+}

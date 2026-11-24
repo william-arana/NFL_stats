@@ -102,6 +102,7 @@ Load it to a sheet. Each Tuesday, hit **Data → Refresh All**. Google Sheets: `
 | `data/catalog.json` | Catalog behind the Guide |
 | `scripts/update_data.py` | Weekly data pull → CSVs, master.xlsx, site JSON (incl. `kickers.json`, `def_week.json`, `oline.json` for the Defenders / O-line / Kickers tabs) |
 | `scripts/build_catalog.py`, `fetch_live_columns.py`, `page_template.html` | Rebuild the Guide catalog |
+| `worker/yahoo/` | Private, login-only "My Yahoo team" page (Cloudflare Worker); deployed by `deploy-yahoo-worker.yml` |
 
 Run locally: `pip install -r requirements.txt && python scripts/update_data.py`, then `python -m http.server` and open http://localhost:8000.
 

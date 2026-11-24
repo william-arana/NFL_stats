@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>My Yahoo team · GameDay_stats</title>
+<!-- Relative URLs (site.css, cards.js, data/site/*.json) load from the public site; Yahoo calls go to this Worker. -->
+<base href="{{SITE}}/">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png?v={{V}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>try{if(localStorage.getItem("nfls-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<link rel="stylesheet" href="assets/site.css?v={{V}}">
+<script src="assets/cards.js?v={{V}}" defer></script>
+<script src="assets/glossary.js?v={{V}}" defer></script>
+<style>
+.top{padding-block:20px 12px;border-bottom:2px solid var(--margin)}
+.eyebrow{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,6vw,46px);line-height:.95;margin:6px 0 6px;text-transform:uppercase}
+h1 span{color:var(--blue)}
+h2{font-family:var(--f-display);font-weight:700;font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 8px}
+.lede{color:var(--ink-2);margin:0;max-width:70ch}
+.sec{padding-block:18px 4px}
+.box{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;box-shadow:var(--shadow);padding:12px 14px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.mu{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;text-align:center}
+.mu .side b{display:block;font-family:var(--f-display);font-size:36px;line-height:1;font-variant-numeric:tabular-nums}
+.mu .side .nm{font-weight:600;overflow-wrap:anywhere}
+.mu .side.mine .nm{color:var(--blue)}
+.mu .side small{color:var(--ink-3);font-family:var(--f-mono);font-size:11.5px}
+.mu .vs{font:500 12px var(--f-mono);color:var(--ink-3)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:left;white-space:nowrap}
+th{background:var(--head);font:600 11px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+tbody tr:nth-child(even)>td{background:var(--stripe)}
+td.n,th.n{text-align:right}
+tr.bench td{color:var(--ink-2)}
+tr.mine td{font-weight:600;background:var(--blue-soft)!important}
+.tw{overflow-x:auto}
+.slot{font:600 11px var(--f-mono);color:var(--ink-3)}
+.tag{display:inline-block;font:600 10.5px var(--f-mono);padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:1px}
+.tag.bad{background:var(--margin-soft);color:var(--margin)}
+.tag.warn{background:var(--gold-soft);color:var(--gold)}
+.tag.good{background:var(--good-soft);color:var(--good)}
+.flags{margin:0;padding-left:18px}
+.flags li{margin:4px 0}
+.flags .ok{color:var(--good)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tabs button{font:500 13px var(--f-body);padding:6px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.tabs button small{font-family:var(--f-mono);font-size:10.5px;margin-left:4px;opacity:.8}
+.hint{color:var(--ink-3);font-size:12.5px}
+.err{background:var(--margin-soft);color:var(--ink);border:1px solid var(--margin);border-radius:8px;padding:12px 14px}
+.pname{all:unset;cursor:pointer;color:var(--ink);font-weight:500}
+.pname:hover,.pname:focus-visible{color:var(--blue);text-decoration:underline}
+footer.credit{margin:28px 0 24px;padding-top:12px;border-top:1px solid var(--rule);color:var(--ink-2);font-size:12.5px;display:flex;flex-wrap:wrap;gap:6px 18px}
+footer.credit b{color:var(--ink)}
+</style>
+</head>
+<body>
+<header class="sitenav"><div class="wrap">
+  <a class="brand" href="./">GameDay<span>_</span>stats</a>
+  <nav aria-label="Site"><a href="./">Home</a><a href="stats.html">Stats</a><a href="waivers.html">Waivers</a><a href="trade.html">Compare</a><a href="pressers.html">Pressers</a><a href="lab.html">Lab</a><a href="guide.html">Guide</a></nav>
+  <div class="navtools"><button class="theme" id="theme" type="button">Dark</button></div>
+</div></header>
+<header class="top"><div class="wrap">
+  <div class="eyebrow">Private · only you · live from Yahoo, nothing saved</div>
+  <h1>My <span>Yahoo</span> team</h1>
+  <p class="lede" id="sub">Loading…</p>
+</div></header>
+
+<main class="wrap" id="main">
+  <div id="msg"></div>
+  <section class="sec grid2">
+    <div class="box" id="matchup"><h2>Matchup</h2><div class="hint">Loading…</div></div>
+    <div class="box" id="check"><h2>Lineup check</h2><div class="hint">Loading…</div></div>
+  </section>
+  <section class="sec"><h2>Roster</h2><div class="box tw" id="roster"><div class="hint">Loading…</div></div>
+    <p class="hint">Proj = our next-week PPR projection; ROS = our rest-of-season points. Both are GameDay_stats numbers from nflverse data, not Yahoo's.</p></section>
+  <section class="sec"><h2>Free agents</h2><div class="box" id="fa"><div class="hint">Loading…</div></div>
+    <p class="hint">Players nobody has in your league (free agents + waivers), from Yahoo's top 25 at each position, ranked by our projection. "Upgrade" = his ROS minus your worst starter's at that spot. Positions are ordered by the biggest upgrade.</p></section>
+  <section class="sec"><h2>Standings</h2><div class="box tw" id="standings"><div class="hint">Loading…</div></div></section>
+
+  <footer class="credit">
+    <span><b>Fantasy data provided by <a href="https://sports.yahoo.com/fantasy/" target="_blank" rel="noopener">Yahoo Fantasy</a></b></span>
+    <span>Projections: GameDay_stats · Data: <a href="https://nflverse.nflverse.com/" target="_blank" rel="noopener">nflverse</a></span>
+    <span id="fetched"></span>
+  </footer>
+</main>
+
+<script>
+(function(){
+  /* Yahoo data lives only in this page's memory. Never written to localStorage, never sent to any AI feature. */
+  const W = location.origin;   // this Worker (the <base> points relative URLs at the public site)
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const f1 = v => v == null ? '–' : (Math.round(v * 10) / 10).toFixed(1);
+  const $ = id => document.getElementById(id);
+  const STARTER = s => s && !['BN','IR','IR+'].includes(s);
+  const POS = ['QB','RB','WR','TE','K','DEF'];
+  const OUT = new Set(['O','IR','PUP-R','PUP-P','NFI-R','NFI-A','SUSP','NA','COVID-19']);
+
+  const th = $('theme');
+  const setT = () => th.textContent = document.documentElement.dataset.theme === 'dark' ? 'Light' : 'Dark';
+  th.onclick = () => { const d = document.documentElement.dataset.theme === 'dark'; if (d) delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = 'dark';
+    try { localStorage.setItem('nfls-theme', d ? 'light' : 'dark') } catch (e) {} setT() };
+  setT();
+
+  const api = p => fetch(W + p, { cache: 'no-store', credentials: 'same-origin' }).then(async r => {
+    const j = await r.json().catch(() => ({ error: 'bad_response' }));
+    if (!r.ok) { const e = new Error(j.error || r.status); e.info = j; throw e }
+    return j;
+  });
+  const site = n => fetch('data/site/' + n, { cache: 'no-cache' }).then(r => r.ok ? r.json() : {}).catch(() => ({}));
+
+  let P = {}, YID = {};
+  const key = p => p.pos === 'DEF' ? 'DEF:' + p.team : YID[p.yid] || null;
+  const proj = p => { const k = key(p); return k && P.p ? P.p[k] ?? null : null };
+  const ros = p => { const k = key(p); return k && P.r ? P.r[k] ?? null : null };
+  const nameBtn = p => {
+    const k = key(p);
+    if (!k || !window.NFLSCards) return esc(p.name);
+    return p.pos === 'DEF' ? NFLSCards.dbtn(p.team, p.name) : NFLSCards.pbtn(k, p.name);
+  };
+  const statusTag = (p, week) => {
+    let t = '';
+    if (p.bye && p.bye === week) t += '<span class="tag bad">BYE</span>';
+    if (p.status) t += `<span class="tag ${OUT.has(p.status) || p.status === 'D' ? 'bad' : 'warn'}">${esc(p.status)}</span>`;
+    return t;
+  };
+
+  function showError(e) {
+    const code = e.info && e.info.error;
+    let m = 'Something went wrong: ' + esc((e.info && e.info.detail) || e.message);
+    if (code === 'not_connected') m = 'Yahoo isn\'t connected to this page yet. <a href="' + W + '/connect"><b>Connect Yahoo</b></a> (one time).';
+    if (code === 'yahoo_403') m = 'Yahoo answered 403 (app not authorized). Access may have been switched off; check the Yahoo developer email.';
+    $('msg').innerHTML = `<div class="err">${m}</div>`;
+    for (const id of ['matchup','check','roster','fa','standings']) { const h = $(id).querySelector('.hint'); if (h) h.textContent = '—' }
+    $('sub').textContent = 'Not loaded.';
+  }
+
+  function renderMatchup(m) {
+    if (!m || !m.sides || m.sides.length < 2) { $('matchup').innerHTML = '<h2>Matchup</h2><div class="hint">No matchup this week.</div>'; return }
+    const [a, b] = m.sides[0].mine ? m.sides : [m.sides[1], m.sides[0]];
+    const side = s => `<div class="side ${s.mine ? 'mine' : ''}"><div class="nm">${esc(s.name)}</div><b>${f1(s.points)}</b>
+      <small>Yahoo proj ${f1(s.projected)}${s.win_probability != null ? ' · ' + Math.round(s.win_probability * 100) + '% win' : ''}</small></div>`;
+    $('matchup').innerHTML = `<h2>Week ${m.week} matchup</h2><div class="mu">${side(a)}<div class="vs">vs</div>${side(b)}</div>`;
+  }
+
+  function renderRoster(t) {
+    const order = s => s === 'BN' ? 90 : s === 'IR' || s === 'IR+' ? 95 : ['QB','WR','RB','TE','W/R/T','W/R','W/T','Q/W/R/T','K','DEF'].indexOf(s) + 1 || 50;
+    const ps = [...t.players].sort((a, b) => order(a.slot) - order(b.slot));
+    $('roster').innerHTML = `<table><thead><tr><th>Slot</th><th>Player</th><th>Pos</th><th>Team</th><th class="n">Proj</th><th class="n">ROS</th></tr></thead><tbody>${
+      ps.map(p => `<tr class="${STARTER(p.slot) ? '' : 'bench'}"><td class="slot">${esc(p.slot || '')}</td><td>${nameBtn(p)}${statusTag(p, t.week)}</td>
+        <td>${esc(p.pos)}</td><td>${esc(p.team)}</td><td class="n">${f1(proj(p))}</td><td class="n">${f1(ros(p))}</td></tr>`).join('')}</tbody></table>`;
+  }
+
+  function renderCheck(t) {
+    const st = t.players.filter(p => STARTER(p.slot)), bn = t.players.filter(p => p.slot === 'BN');
+    const out = [];
+    for (const p of st) {
+      if (p.bye && p.bye === t.week) out.push(`<b>${esc(p.name)}</b> is on bye.`);
+      else if (OUT.has(p.status) || p.status === 'D') out.push(`<b>${esc(p.name)}</b> is ${esc(p.status)}.`);
+      else if (p.status === 'Q') out.push(`<b>${esc(p.name)}</b> is questionable. Check before kickoff.`);
+    }
+    // a bench player who fits the starter's slot and projects 1.5+ points higher
+    const fits = (b, slot) => b.elig.includes(slot);
+    const used = new Set();
+    for (const s of st) {
+      const sp = proj(s) ?? 0;
+      const better = bn.filter(b => !used.has(b.yid) && fits(b, s.slot) && !(b.bye === t.week) && !OUT.has(b.status) && (proj(b) ?? -1) >= sp + 1.5)
+        .sort((x, y) => proj(y) - proj(x))[0];
+      if (better) { used.add(better.yid); out.push(`Start <b>${esc(better.name)}</b> (${f1(proj(better))}) over <b>${esc(s.name)}</b> (${f1(sp)}) at ${esc(s.slot)}.`) }
+    }
+    $('check').innerHTML = `<h2>Lineup check</h2>` + (out.length ? `<ul class="flags">${out.map(x => `<li>${x}</li>`).join('')}</ul>`
+      : '<p class="flags ok">✓ No byes, no one ruled out, and no bench player projects 1.5+ points higher than a starter.</p>');
+  }
+
+  function renderStandings(rows) {
+    if (!rows.length) { $('standings').innerHTML = '<div class="hint">Standings unavailable.</div>'; return }
+    rows = [...rows].sort((a, b) => (a.rank || 99) - (b.rank || 99));
+    $('standings').innerHTML = `<table><thead><tr><th>#</th><th>Team</th><th>Record</th><th class="n">PF</th><th class="n">PA</th></tr></thead><tbody>${
+      rows.map(r => `<tr class="${r.mine ? 'mine' : ''}"><td>${r.rank ?? ''}</td><td>${esc(r.name)}</td><td>${r.w}-${r.l}${r.t ? '-' + r.t : ''}</td><td class="n">${f1(r.pf)}</td><td class="n">${f1(r.pa)}</td></tr>`).join('')}</tbody></table>`;
+  }
+
+  async function renderFA(t) {
+    const st = t.players.filter(p => STARTER(p.slot));
+    const worst = pos => { const v = st.filter(p => p.pos === pos || p.elig.includes(pos)).map(p => ros(p) ?? proj(p) ?? 0); return v.length ? Math.min(...v) : 0 };
+    const res = await Promise.all(POS.map(pos => api('/api/fa?pos=' + pos).then(j => ({ pos, list: j.players || [] })).catch(() => ({ pos, list: [], failed: true }))));
+    const lists = res.map(r => {
+      const list = r.list.map(p => ({ ...p, pr: proj(p), rs: ros(p) })).sort((a, b) => (b.pr ?? -1) - (a.pr ?? -1)).slice(0, 12);
+      const best = Math.max(0, ...list.map(p => p.rs ?? 0));
+      return { ...r, list, up: best - worst(r.pos) };
+    }).sort((a, b) => b.up - a.up);
+    let cur = lists[0].pos;
+    const draw = () => {
+      const L = lists.find(x => x.pos === cur), w = worst(cur);
+      $('fa').innerHTML = `<div class="tabs">${lists.map(x => `<button type="button" data-pos="${x.pos}" aria-pressed="${x.pos === cur}">${x.pos}${x.up > 0 ? `<small>+${Math.round(x.up)}</small>` : ''}</button>`).join('')}</div>` +
+        (L.failed ? '<div class="hint">Couldn\'t load this position from Yahoo.</div>' : !L.list.length ? '<div class="hint">No available players.</div>' :
+        `<div class="tw"><table><thead><tr><th>Player</th><th>Team</th><th class="n">Proj</th><th class="n">ROS</th><th class="n">Upgrade</th></tr></thead><tbody>${
+          L.list.map(p => { const u = p.rs == null ? null : p.rs - w;
+            return `<tr><td>${nameBtn(p)}${statusTag(p, t.week)}${p.yid && !key(p) ? ' <span class="hint">(no nflverse id)</span>' : ''}</td><td>${esc(p.team)}</td><td class="n">${f1(p.pr)}</td><td class="n">${f1(p.rs)}</td>
+              <td class="n">${u == null ? '–' : u > 0 ? `<span class="tag good">+${f1(u)}</span>` : f1(u)}</td></tr>` }).join('')}</tbody></table></div>`);
+      $('fa').querySelectorAll('.tabs button').forEach(b => b.onclick = () => { cur = b.dataset.pos; draw() });
+    };
+    draw();
+  }
+
+  (async () => {
+    [P, YID] = await Promise.all([site('proj.json'), site('yahoo_ids.json')]);
+    let t;
+    try { t = await api('/api/team') } catch (e) { showError(e); return }
+    $('sub').textContent = `${t.team} · ${t.league} · Week ${t.week}` + (P.week && P.week !== t.week ? ` (our projections are for week ${P.week})` : '');
+    $('fetched').textContent = 'Fetched ' + new Date(t.fetched_utc).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) + '. Reload for fresh numbers.';
+    renderMatchup(t.matchup); renderCheck(t); renderRoster(t); renderStandings(t.standings || []);
+    renderFA(t).catch(e => { $('fa').innerHTML = '<div class="hint">Free agents unavailable.</div>' });
+  })();
+})();
+</script>
+</body>
+</html>

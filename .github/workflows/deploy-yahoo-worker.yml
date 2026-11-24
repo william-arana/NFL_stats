@@ -1,0 +1,33 @@
+name: Deploy Yahoo Worker
+
+# Deploys worker/yahoo (the private "My Yahoo team" page) to Cloudflare.
+# Needs repo secrets: CLOUDFLARE_API_TOKEN (Workers edit), YAHOO_CLIENT_ID, YAHOO_CLIENT_SECRET.
+on:
+  push:
+    branches: [main]
+    paths: ["worker/yahoo/**", ".github/workflows/deploy-yahoo-worker.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-yahoo-worker
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: worker/yahoo
+          secrets: |
+            YAHOO_CLIENT_ID
+            YAHOO_CLIENT_SECRET
+        env:
+          YAHOO_CLIENT_ID: ${{ secrets.YAHOO_CLIENT_ID }}
+          YAHOO_CLIENT_SECRET: ${{ secrets.YAHOO_CLIENT_SECRET }}
