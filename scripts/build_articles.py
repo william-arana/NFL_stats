@@ -26,6 +26,9 @@ SLOT_OK = {"QB": {"QB"}, "RB": {"RB"}, "WR": {"WR"}, "TE": {"TE"}, "K": {"K"}, "
            "FLEX": {"RB", "WR", "TE"}, "SUPER_FLEX": {"QB", "RB", "WR", "TE"}, "REC_FLEX": {"WR", "TE"}, "WRRB_FLEX": {"WR", "RB"}}
 INJ_RE = re.compile(r"(left (sunday's|monday's|thursday's|saturday's|the) (game|contest|win|loss)|exited|was carted|carted off|won't return|will not return|did not return|didn't return|ruled out for the (rest|remainder)|questionable to return|doubtful to return|was evaluated for a concussion|entered the concussion protocol|went down with|was helped off|suffered an? [a-z ]{0,40}(injury|sprain|strain|tear|fracture|contusion) (in|during) (sunday's|monday's|thursday's|saturday's|the) (game|contest|win|loss|first|second|third|fourth))", re.I)
 NOT_INJ = re.compile(r"(off the (week \d+ )?injury report|not worried|expected to be (ok|fine)|no injury)", re.I)
+# William's own notes for the rundown (pending waiver claims, plans). From the repo variable RUNDOWN_NOTES so they stay
+# out of the public repo; the article itself only names players once the moves have gone through (see SYSTEM).
+NOTES = os.environ.get("RUNDOWN_NOTES", "").strip()
 MODEL_ID = os.environ.get("ARTICLE_MODEL", "claude-sonnet-5-5")
 
 
@@ -270,6 +273,7 @@ def recap_facts(week, args):
             "injuries": injuries_on_field(P, week, S, idx, owner_of)[:12], "league_teams": [slim_team(t) for t in league_rows],
             "high_score": league_rows[0]["team"] if league_rows else None, "grading_last_preview": grading,
             "your_trades": my_trades(week, lg, smap, idx, P, args),
+            "williams_notes": NOTES or None,
             "projections_note": "ours = GameDay_stats projection v0 computed only from games before this week (backfilled for weeks before 9)."}
 
 
@@ -440,6 +444,7 @@ def preview_facts(week, args):
             "my_best_lineup": [None if not cc else {"slot": s, **slim_c(cc), "bye": cc["bye"], "injury": cc["injury"]} for s, cc in my_best],
             "my_projected_total": round(sum(cc["v"] for _, cc in my_best if cc and cc["v"]), 1),
             "my_unavailable": [slim_c(c) | {"bye": c["bye"], "injury": c["injury"], "status": c["status"]} for c in my_c if c["v"] is None and (c["bye"] or c["injury"] or c["status"])],
+            "williams_notes": NOTES or None,
             "close_calls": close, "waiver_adds": waivers, "buy_low_on_your_roster": bs[:2], "sell_high_on_your_roster": bs[::-1][:2],
             "league_median_strength": {p: round(v, 1) for p, v in med.items()}, "around_the_league": teams,
             "projections_note": "ours = GameDay_stats projection v0 (backtested signals: season avg, last 3, Vegas implied, xFP, snap % and touch-share trends, target share; D/ST by opponent Vegas implied)."}
@@ -468,6 +473,7 @@ Rules:
 - Trade fits: frame as ideas worth a look, mention the trade deadline week.
 - "Your trade" (facts: your_trades): weigh what William gave vs got with the numbers given (PPR per game, last 3, xFP, our next-week projection, ROS pts through ros_through_week). Say plainly who wins on ROS points and per-game points, what it does to his lineup by position (roster_after_by_pos), and that a 4-for-3 opens a roster spot. If no_qb_left is true, lead with it: he has no QB and must add one before his next game. Honest, not cheerleading. Players in no_ros_number have no ROS projection yet (left out of the totals): say so, don't treat them as zero. Skip if your_trades is empty.
 - Style: sharp, conversational, data-first, like a smart friend who did the homework. Short paragraphs and bullets. Bold key numbers sparingly. No hype words, no emojis, no tables.
+- williams_notes = William's own stated plans (e.g. waiver claims in, with the time they run). Use them where they change the advice (e.g. a claim in for a QB answers "no QB left"). The page is public and leaguemates can read it: while a claim is still pending, refer to it by position only ("a claim is in for a QB, runs Wed 12:05 AM"), never by player name. Once the roster facts show the player on his team, it went through: name him normally. If the claim's run time has passed and the player isn't on his roster, say the claim didn't go through and what that leaves open. Ignore notes about past weeks.
 - Skip a section (empty md) if its facts are empty.
 Output format (plain text, no JSON, no code fences):
 HEADLINE: <max 12 words>

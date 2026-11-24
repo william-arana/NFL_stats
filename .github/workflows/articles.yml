@@ -47,6 +47,7 @@ jobs:
       - name: Build
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          RUNDOWN_NOTES: ${{ vars.RUNDOWN_NOTES }}
           EVENT: ${{ github.event_name }}
           SCHED: ${{ github.event.schedule }}
           KIND: ${{ inputs.kind }}
