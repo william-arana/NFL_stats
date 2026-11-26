@@ -1,0 +1,64 @@
+[
+ {
+  "id": "PIT:watch-mike-mccarthy-media-availability-nov-25",
+  "team": "PIT",
+  "url": "https://www.steelers.com/video/watch-mike-mccarthy-media-availability-nov-25",
+  "title": "WATCH: Mike McCarthy Media Availability (Nov. 25)",
+  "date": "2026-11-26",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/steelers/wotbc4sc2sti3g9qtioo.jpg",
+  "kind": "final_practice",
+  "after_week": 11,
+  "coach": "Mike McCarthy",
+  "words": 2206,
+  "model": "claude-sonnet-5-5",
+  "headline": "Mason Rudolph is Pittsburgh's starting QB against Denver after McCarthy benched and then released Aaron Rodgers; the passing-game outlook is now uncertain.",
+  "summary": "McCarthy opened by saying the team is focused on beating Denver and wouldn't discuss private conversations. He said he benched Rodgers after a week-long process in which Rodgers made an ultimatum that McCarthy called outside his job description. He confirmed Rodgers was then released and said it was his own decision, with full backing from ownership. He denied Rodgers' claim that he held a grudge from their Green Bay days, said he disagreed with the allegations about his preparation, and described a candid player council meeting. He acknowledged he should have had more dialogue with the veterans earlier and may make changes down the line. On the quarterback room, McCarthy said he feels good about Mason Rudolph, who has been the number two, had a good practice, and was chosen over the two young QBs because of the rotation and how camp finished. He said the offense is going through \"gymnastics of changes\" in how it will play, so expect adjustments to the game plan on a short week. He did not discuss any other skill players' roles.",
+  "injuries": [],
+  "signals": [
+   {
+    "player": "Mason Rudolph",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Rudolph will start at quarterback for Pittsburgh against Denver.",
+    "note": "Rudolph steps into the starting job on a short week with the offense adjusting its approach, which makes the passing-game outlook for Pittsburgh's skill players uncertain.",
+    "quote": "Yeah I feel really good about Mason.",
+    "player_id": "00-0034771",
+    "t": 496,
+    "t_exact": true
+   },
+   {
+    "player": "Aaron Rodgers",
+    "topic": "trade_or_roster",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Rodgers has been benched and released and will not play for Pittsburgh again.",
+    "note": "Rodgers is off the roster, so he has no value on this team and Pittsburgh's pass offense moves to Rudolph.",
+    "quote": "it was my decision to bench him.",
+    "player_id": "00-0023459",
+    "t": 51,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Locker room / team culture",
+    "detail": "McCarthy held a player council meeting, called it direct and honest, and said he came away with a sense of urgency. He admitted he should have had more dialogue with veterans earlier and said some changes may come, though not immediately."
+   },
+   {
+    "topic": "Offensive approach",
+    "detail": "With Rudolph in, McCarthy said the team is going through \"gymnastics of changes\" in how it will play compared with before. Expect some game-plan adjustments on a short week."
+   },
+   {
+    "topic": "QB depth",
+    "detail": "McCarthy said the two young QBs are doing a good job, but Rudolph was the clear choice as the number two based on the rotation and how camp finished."
+   },
+   {
+    "topic": "Ownership",
+    "detail": "McCarthy said the decision was his and that ownership has supported him 100%."
+   }
+  ],
+  "opponent": "Denver Broncos"
+ }
+]
