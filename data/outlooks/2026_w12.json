@@ -1,0 +1,4952 @@
+{
+ "season": 2026,
+ "week": 12,
+ "asof": "2026-11-25",
+ "model": "claude-sonnet-5-5",
+ "players": 314,
+ "written": 314,
+ "failed": {},
+ "usage": {
+  "input_tokens": 224091,
+  "cache_creation_input_tokens": 1692,
+  "cache_read_input_tokens": 269874,
+  "output_tokens": 346953,
+  "batch_calls": 314,
+  "direct_calls": 7,
+  "stop_reasons": {
+   "end_turn": 315,
+   "block_thinking": 307,
+   "block_text": 321,
+   "max_tokens": 6
+  }
+ },
+ "claims": [
+  {
+   "id": "00-0026300",
+   "name": "Josh Johnson",
+   "pos": "QB",
+   "team": "ARI",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 29,
+   "t": "At least 29 pass attempts in Wk 12.",
+   "f": [
+    "F5",
+    "F14",
+    "F15"
+   ],
+   "facts": [
+    "Pass attempts per game: 31.0 over his last 1 game (wk 11), 31.0 season.",
+    "Wk 12: vs WAS, ARI implied team total 17.5 points (Vegas); WAS allows the 7th-most PPR points per game to QBs.",
+    "Coach Mike LaFleur (2026-11-25, role, signal up): Josh Johnson is being prepared to start at QB against Washington."
+   ]
+  },
+  {
+   "id": "00-0026498",
+   "name": "Matthew Stafford",
+   "pos": "QB",
+   "team": "LA",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 30,
+   "t": "At least 30 pass attempts in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Pass attempts per game: 31.3 over his last 3 games (wks 8, 9, 10), 37.2 season."
+   ]
+  },
+  {
+   "id": "00-0029604",
+   "name": "Kirk Cousins",
+   "pos": "QB",
+   "team": "MIN",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 33,
+   "t": "At least 33 pass attempts in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Pass attempts per game: 33.7 over his last 3 games (wks 9, 10, 11), 34.9 season.",
+    "Wk 12: vs ATL, MIN implied team total 24.8 points (Vegas); ATL allows the 6th-most PPR points per game to QBs."
+   ]
+  },
+  {
+   "id": "00-0030279",
+   "name": "Keenan Allen",
+   "pos": "WR",
+   "team": "SF",
+   "metric": "targets",
+   "op": ">=",
+   "value": 6,
+   "t": "At least 6 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 6.3 over his last 3 games (wks 9, 10, 11), 6.9 season.",
+    "Wk 12: vs SEA, SF implied team total 24.8 points (Vegas); SEA allows the 32nd-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0030506",
+   "name": "Travis Kelce",
+   "pos": "TE",
+   "team": "KC",
+   "metric": "targets",
+   "op": "<=",
+   "value": 5,
+   "t": "At most 5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 5.0 over his last 3 games (wks 9, 10, 11), 5.7 season."
+   ]
+  },
+  {
+   "id": "00-0030565",
+   "name": "Geno Smith",
+   "pos": "QB",
+   "team": "NYJ",
+   "metric": "pass_att",
+   "op": "<=",
+   "value": 25,
+   "t": "At most 25 pass attempts in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Pass attempts per game: 24.7 over his last 3 games (wks 9, 10, 11), 28.5 season.",
+    "Wk 12: at MIA, NYJ implied team total 22.0 points (Vegas); MIA allows the 19th-most PPR points per game to QBs."
+   ]
+  },
+  {
+   "id": "00-0031408",
+   "name": "Mike Evans",
+   "pos": "WR",
+   "team": "SF",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 50,
+   "t": "At most 50% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F14"
+   ],
+   "facts": [
+    "Snap %: 49% over his last 3 games (wks 5, 6, 11), 52% season.",
+    "Coach Kyle Shanahan (2026-11-25, usage, signal watch): Evans will keep being managed for the rest of the year, with no Wednesday practices and snaps limited in games."
+   ]
+  },
+  {
+   "id": "00-0031588",
+   "name": "Stefon Diggs",
+   "pos": "WR",
+   "team": "WAS",
+   "metric": "targets",
+   "op": ">=",
+   "value": 7,
+   "t": "At least 7 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 7.0 over his last 3 games (wks 9, 10, 11), 7.2 season."
+   ]
+  },
+  {
+   "id": "00-0031610",
+   "name": "Darren Waller",
+   "pos": "TE",
+   "team": "CAR",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 50,
+   "t": "At least 50% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 53% over his last 3 games (wks 9, 10, 11), 50% season."
+   ]
+  },
+  {
+   "id": "00-0032385",
+   "name": "Sterling Shepard",
+   "pos": "WR",
+   "team": "NYJ",
+   "metric": "targets",
+   "op": "<=",
+   "value": 1.3,
+   "t": "At most 1.3 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 1.3 over his last 3 games (wks 3, 4, 11), 1.3 season.",
+    "Coach Aaron Glenn (2026-11-25, usage, signal watch): His active status for the Dolphins game is undecided and will be settled by the end of the week, with special teams value weighing against him."
+   ]
+  },
+  {
+   "id": "00-0032398",
+   "name": "Chris Moore",
+   "pos": "WR",
+   "team": "BAL",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 3.3,
+   "t": "At most 3.3 PPR points in Wk 12.",
+   "f": [
+    "F10",
+    "F2"
+   ],
+   "facts": [
+    "PPR points per game: 3.0 over his last 3 games (wks 2, 3, 10), 3.8 season.",
+    "Our Wk 12 projection: 3.3 PPR, 118th among WRs."
+   ]
+  },
+  {
+   "id": "00-0032464",
+   "name": "Kalif Raymond",
+   "pos": "WR",
+   "team": "CHI",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 65,
+   "t": "At least 65% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 69% over his last 3 games (wks 8, 9, 11), 64% season."
+   ]
+  },
+  {
+   "id": "00-0032764",
+   "name": "Derrick Henry",
+   "pos": "RB",
+   "team": "BAL",
+   "metric": "carries",
+   "op": "<=",
+   "value": 13,
+   "t": "At most 13 carries in Wk 12.",
+   "f": [
+    "F6"
+   ],
+   "facts": [
+    "Carries per game: 13.3 over his last 3 games (wks 9, 10, 11), 18.0 season."
+   ]
+  },
+  {
+   "id": "00-0032775",
+   "name": "Demarcus Robinson",
+   "pos": "WR",
+   "team": "SF",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 50,
+   "t": "At most 50% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F14",
+    "F15"
+   ],
+   "facts": [
+    "Snap %: 48% over his last 3 games (wks 1, 2, 9), 48% season.",
+    "Coach Kyle Shanahan (2026-11-06, role, signal up): Robinson will most likely be activated for Sunday's game.",
+    "Coach Kyle Shanahan (2026-11-04, injury, signal up): Robinson is close to returning and is practicing in a limited role."
+   ]
+  },
+  {
+   "id": "00-0032951",
+   "name": "Laquon Treadwell",
+   "pos": "WR",
+   "team": "IND",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 75,
+   "t": "At least 75% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 83% over his last 3 games (wks 9, 10, 11), 76% season."
+   ]
+  },
+  {
+   "id": "00-0033077",
+   "name": "Dak Prescott",
+   "pos": "QB",
+   "team": "DAL",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 38,
+   "t": "At least 38 pass attempts in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Pass attempts per game: 39.3 over his last 3 games (wks 9, 10, 11), 38.2 season."
+   ]
+  },
+  {
+   "id": "00-0033090",
+   "name": "Hunter Henry",
+   "pos": "TE",
+   "team": "NE",
+   "metric": "targets",
+   "op": "<=",
+   "value": 3,
+   "t": "At most 3 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F6"
+   ],
+   "facts": [
+    "Targets per game: 3.0 over his last 3 games (wks 8, 9, 10), 4.0 season.",
+    "Target share: 12% over his last 3 games (wks 8, 9, 10), 14% season."
+   ]
+  },
+  {
+   "id": "00-0033106",
+   "name": "Jared Goff",
+   "pos": "QB",
+   "team": "DET",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 27,
+   "t": "At least 27 pass attempts in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Pass attempts per game: 28.0 over his last 3 games (wks 9, 10, 11), 33.2 season.",
+    "Wk 12: vs CHI, DET implied team total 26.5 points (Vegas); CHI allows the 14th-most PPR points per game to QBs."
+   ]
+  },
+  {
+   "id": "00-0033110",
+   "name": "Tyler Higbee",
+   "pos": "TE",
+   "team": "LA",
+   "metric": "targets",
+   "op": "<=",
+   "value": 4,
+   "t": "At most 4 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 3.7 over his last 3 games (wks 8, 9, 10), 4.8 season."
+   ]
+  },
+  {
+   "id": "00-0033119",
+   "name": "Jacoby Brissett",
+   "pos": "QB",
+   "team": "BAL",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 34,
+   "t": "At least 34 pass attempts in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Pass attempts per game: 36.3 over his last 3 games (wks 8, 10, 11), 39.1 season."
+   ]
+  },
+  {
+   "id": "00-0033280",
+   "name": "Christian McCaffrey",
+   "pos": "RB",
+   "team": "SF",
+   "metric": "carries",
+   "op": ">=",
+   "value": 13,
+   "t": "At least 13 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 14.3 over his last 3 games (wks 9, 10, 11), 12.7 season."
+   ]
+  },
+  {
+   "id": "00-0033288",
+   "name": "George Kittle",
+   "pos": "TE",
+   "team": "SF",
+   "metric": "targets",
+   "op": ">=",
+   "value": 6,
+   "t": "At least 6 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 6.3 over his last 3 games (wks 9, 10, 11), 6.5 season.",
+    "Wk 12: vs SEA, SF implied team total 24.8 points (Vegas); SEA allows the 26th-most PPR points per game to TEs."
+   ]
+  },
+  {
+   "id": "00-0033293",
+   "name": "Aaron Jones",
+   "pos": "RB",
+   "team": "MIN",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 41,
+   "t": "At most 41% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 39% over his last 3 games (wks 9, 10, 11), 55% season."
+   ]
+  },
+  {
+   "id": "00-0033375",
+   "name": "Tim Patrick",
+   "pos": "WR",
+   "team": "NYJ",
+   "metric": "targets",
+   "op": ">=",
+   "value": 2.3,
+   "t": "At least 2.3 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 2.3 over his last 3 games (wks 5, 6, 11), 2.3 season.",
+    "Coach Aaron Glenn (2026-11-20, depth_chart, signal up): Will step up in the receiver rotation with Cooper and Williams out."
+   ]
+  },
+  {
+   "id": "00-0033526",
+   "name": "Samaje Perine",
+   "pos": "RB",
+   "team": "CIN",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 38,
+   "t": "At least 38% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F16"
+   ],
+   "facts": [
+    "Snap %: 40% over his last 3 games (wks 9, 10, 11), 36% season.",
+    "Coach Zac Taylor (2026-11-19, usage, signal watch): Perine will keep a role as a protecting back and receiver."
+   ]
+  },
+  {
+   "id": "00-0033537",
+   "name": "Deshaun Watson",
+   "pos": "QB",
+   "team": "CLE",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 36,
+   "t": "At least 36 pass attempts in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Pass attempts per game: 38.3 over his last 3 games (wks 7, 8, 10), 32.1 season.",
+    "Wk 12: vs LV, CLE implied team total 23.0 points (Vegas); LV allows the 5th-most PPR points per game to QBs."
+   ]
+  },
+  {
+   "id": "00-0033555",
+   "name": "Mack Hollins",
+   "pos": "WR",
+   "team": "NE",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5,
+   "t": "At least 5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 5.3 over his last 3 games (wks 4, 9, 10), 5.3 season."
+   ]
+  },
+  {
+   "id": "00-0033699",
+   "name": "Austin Ekeler",
+   "pos": "RB",
+   "team": "WAS",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 38,
+   "t": "At least 38% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 41% over his last 3 games (wks 9, 10, 11), 29% season."
+   ]
+  },
+  {
+   "id": "00-0033854",
+   "name": "Dare Ogunbowale",
+   "pos": "RB",
+   "team": "HOU",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 12,
+   "t": "At most 12% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 11% over his last 3 games (wks 6, 9, 10), 11% season."
+   ]
+  },
+  {
+   "id": "00-0033873",
+   "name": "Patrick Mahomes",
+   "pos": "QB",
+   "team": "KC",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 33,
+   "t": "At least 33 pass attempts in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Pass attempts per game: 35.0 over his last 3 games (wks 9, 10, 11), 33.7 season."
+   ]
+  },
+  {
+   "id": "00-0033881",
+   "name": "Evan Engram",
+   "pos": "TE",
+   "team": "DEN",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 50,
+   "t": "At most 50% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 48% over his last 3 games (wks 8, 9, 11), 52% season."
+   ]
+  },
+  {
+   "id": "00-0033885",
+   "name": "David Njoku",
+   "pos": "TE",
+   "team": "LAC",
+   "metric": "targets",
+   "op": "<=",
+   "value": 4,
+   "t": "At most 4 targets in Wk 12.",
+   "f": [
+    "F6",
+    "F4",
+    "F15"
+   ],
+   "facts": [
+    "Targets per game: 4.0 over his last 3 games (wks 1, 2, 11), 4.0 season.",
+    "Availability: our Wk 12 projection gives him a 75% chance to play (coach: unclear (Jim Harbaugh 2026-11-25)).",
+    "Coach Jim Harbaugh (2026-11-25, injury, signal down): Did not practice this week."
+   ]
+  },
+  {
+   "id": "00-0033906",
+   "name": "Alvin Kamara",
+   "pos": "RB",
+   "team": "NO",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 30,
+   "t": "At most 30% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 28% over his last 3 games (wks 9, 10, 11), 33% season."
+   ]
+  },
+  {
+   "id": "00-0033908",
+   "name": "Cooper Kupp",
+   "pos": "WR",
+   "team": "SEA",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 8.5,
+   "t": "At most 8.5 PPR points in Wk 12.",
+   "f": [
+    "F10",
+    "F2"
+   ],
+   "facts": [
+    "PPR points per game: 8.1 over his last 3 games (wks 8, 9, 10), 6.8 season.",
+    "Our Wk 12 projection: 6.5 PPR, 76th among WRs."
+   ]
+  },
+  {
+   "id": "00-0033921",
+   "name": "Chris Godwin Jr.",
+   "pos": "WR",
+   "team": "TB",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 85,
+   "t": "At least 85% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 87% over his last 3 games (wks 8, 9, 11), 84% season."
+   ]
+  },
+  {
+   "id": "00-0034348",
+   "name": "Courtland Sutton",
+   "pos": "WR",
+   "team": "DEN",
+   "metric": "targets",
+   "op": "<=",
+   "value": 5,
+   "t": "At most 5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 5.0 over his last 3 games (wks 8, 9, 11), 4.8 season.",
+    "Coach Sean Payton (2026-11-24, usage, signal watch): Payton praised Sutton's unselfishness but said coverage dictates who gets the ball. His target share can be uneven even when he is a main option."
+   ]
+  },
+  {
+   "id": "00-0034351",
+   "name": "Dallas Goedert",
+   "pos": "TE",
+   "team": "PHI",
+   "metric": "targets",
+   "op": "<=",
+   "value": 4,
+   "t": "At most 4 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 3.7 over his last 3 games (wks 8, 9, 11), 5.2 season."
+   ]
+  },
+  {
+   "id": "00-0034383",
+   "name": "Dalton Schultz",
+   "pos": "TE",
+   "team": "HOU",
+   "metric": "rec_yds",
+   "op": "<=",
+   "value": 23,
+   "t": "At most 23 receiving yards in Wk 12.",
+   "f": [
+    "F8"
+   ],
+   "facts": [
+    "Receiving yards per game: 21.3 over his last 3 games (wks 9, 10, 11), 38.6 season."
+   ]
+  },
+  {
+   "id": "00-0034753",
+   "name": "Mark Andrews",
+   "pos": "TE",
+   "team": "BAL",
+   "metric": "targets",
+   "op": ">=",
+   "value": 4,
+   "t": "At least 4 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 4.3 over his last 3 games (wks 9, 10, 11), 4.9 season."
+   ]
+  },
+  {
+   "id": "00-0034827",
+   "name": "DJ Moore",
+   "pos": "WR",
+   "team": "BUF",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 60,
+   "t": "At least 60% of snaps in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Snap %: 64% over his last 3 games (wks 9, 10, 11), 58% season."
+   ]
+  },
+  {
+   "id": "00-0034829",
+   "name": "Mike Gesicki",
+   "pos": "TE",
+   "team": "CIN",
+   "metric": "targets",
+   "op": ">=",
+   "value": 3,
+   "t": "At least 3 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 3.3 over his last 3 games (wks 9, 10, 11), 3.8 season."
+   ]
+  },
+  {
+   "id": "00-0034837",
+   "name": "Calvin Ridley",
+   "pos": "WR",
+   "team": "TEN",
+   "metric": "targets",
+   "op": "<=",
+   "value": 4,
+   "t": "At most 4 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F2",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 3.7 over his last 3 games (wks 6, 8, 11), 2.7 season.",
+    "Our Wk 12 projection: 4.3 PPR, 102nd among WRs.",
+    "Wk 12: at JAX, TEN implied team total 16.5 points (Vegas); JAX allows the 18th-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0034844",
+   "name": "Saquon Barkley",
+   "pos": "RB",
+   "team": "PHI",
+   "metric": "carries",
+   "op": ">=",
+   "value": 13,
+   "t": "At least 13 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 14.3 over his last 3 games (wks 8, 9, 11), 10.8 season."
+   ]
+  },
+  {
+   "id": "00-0034855",
+   "name": "Baker Mayfield",
+   "pos": "QB",
+   "team": "TB",
+   "metric": "pass_att",
+   "op": "<=",
+   "value": 24,
+   "t": "At most 24 pass attempts in Wk 12.",
+   "f": [
+    "F6"
+   ],
+   "facts": [
+    "Pass attempts per game: 22.7 over his last 3 games (wks 8, 9, 11), 25.0 season."
+   ]
+  },
+  {
+   "id": "00-0034857",
+   "name": "Josh Allen",
+   "pos": "QB",
+   "team": "BUF",
+   "metric": "pass_att",
+   "op": "<=",
+   "value": 31,
+   "t": "At most 31 pass attempts in Wk 12.",
+   "f": [
+    "F5",
+    "F16"
+   ],
+   "facts": [
+    "Pass attempts per game: 32.3 over his last 3 games (wks 9, 10, 11), 30.2 season.",
+    "Coach Joe Brady (2026-11-22, usage, signal down): Buffalo should not throw 45 times in a game it is leading, so pass volume should come down in similar game scripts."
+   ]
+  },
+  {
+   "id": "00-0034960",
+   "name": "Jakobi Meyers",
+   "pos": "WR",
+   "team": "JAX",
+   "metric": "targets",
+   "op": ">=",
+   "value": 7,
+   "t": "At least 7 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 7.3 over his last 3 games (wks 9, 10, 11), 5.3 season.",
+    "Wk 12: vs TEN, JAX implied team total 31.0 points (Vegas); TEN allows the 1st-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0034975",
+   "name": "Justice Hill",
+   "pos": "RB",
+   "team": "BAL",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 52,
+   "t": "At most 52% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F16"
+   ],
+   "facts": [
+    "Snap %: 52% over his last 3 games (wks 9, 10, 11), 46% season.",
+    "Coach Jesse Minter (2026-11-25, usage, signal watch): Hill will continue as the change-of-pace back behind Henry."
+   ]
+  },
+  {
+   "id": "00-0034981",
+   "name": "Foster Moreau",
+   "pos": "TE",
+   "team": "HOU",
+   "metric": "targets",
+   "op": "<=",
+   "value": 2,
+   "t": "At most 2 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 2.0 over his last 3 games (wks 5, 6, 11), 2.1 season."
+   ]
+  },
+  {
+   "id": "00-0035021",
+   "name": "Ashton Dulin",
+   "pos": "WR",
+   "team": "IND",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 27,
+   "t": "At least 27% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 29% over his last 3 games (wks 9, 10, 11), 25% season."
+   ]
+  },
+  {
+   "id": "00-0035208",
+   "name": "Olamide Zaccheaus",
+   "pos": "WR",
+   "team": "ATL",
+   "metric": "targets",
+   "op": "<=",
+   "value": 3,
+   "t": "At most 3 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 3.0 over his last 3 games (wks 8, 9, 10), 2.2 season."
+   ]
+  },
+  {
+   "id": "00-0035229",
+   "name": "T.J. Hockenson",
+   "pos": "TE",
+   "team": "MIN",
+   "metric": "targets",
+   "op": ">=",
+   "value": 6,
+   "t": "At least 6 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 6.3 over his last 3 games (wks 8, 9, 11), 5.7 season."
+   ]
+  },
+  {
+   "id": "00-0035250",
+   "name": "Devin Singletary",
+   "pos": "RB",
+   "team": "NYG",
+   "metric": "carries",
+   "op": "<=",
+   "value": 8,
+   "t": "At most 8 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 7.7 over his last 3 games (wks 9, 10, 11), 5.9 season."
+   ]
+  },
+  {
+   "id": "00-0035261",
+   "name": "Tony Pollard",
+   "pos": "RB",
+   "team": "TEN",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 75,
+   "t": "At least 75% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F17"
+   ],
+   "facts": [
+    "Snap %: 78% over his last 3 games (wks 8, 10, 11), 65% season.",
+    "Coach Robert Saleh (2026-11-09, usage, signal up): Pollard has been stepping up in the backfield with Spears banged up."
+   ]
+  },
+  {
+   "id": "00-0035537",
+   "name": "Ty Johnson",
+   "pos": "RB",
+   "team": "BUF",
+   "metric": "receptions",
+   "op": "<=",
+   "value": 3.5,
+   "t": "At most 3.5 catches in Wk 12.",
+   "f": [
+    "F8"
+   ],
+   "facts": [
+    "Catches per game: 3.3 over his last 3 games (wks 9, 10, 11), 3.1 season."
+   ]
+  },
+  {
+   "id": "00-0035631",
+   "name": "Drew Sample",
+   "pos": "TE",
+   "team": "CIN",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 54,
+   "t": "At least 54% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 56% over his last 3 games (wks 7, 10, 11), 56% season."
+   ]
+  },
+  {
+   "id": "00-0035640",
+   "name": "DK Metcalf",
+   "pos": "WR",
+   "team": "PIT",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5,
+   "t": "At least 5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F15"
+   ],
+   "facts": [
+    "Targets per game: 5.3 over his last 3 games (wks 8, 10, 11), 7.4 season.",
+    "Coach Mike McCarthy (2026-11-19, usage, signal up): The staff will work to utilize Metcalf better coming out of the bye week"
+   ]
+  },
+  {
+   "id": "00-0035644",
+   "name": "Noah Fant",
+   "pos": "TE",
+   "team": "NO",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 50,
+   "t": "At least 50% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 53% over his last 3 games (wks 9, 10, 11), 52% season."
+   ]
+  },
+  {
+   "id": "00-0035685",
+   "name": "David Montgomery",
+   "pos": "RB",
+   "team": "HOU",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 50,
+   "t": "At most 50% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F16"
+   ],
+   "facts": [
+    "Snap %: 48% over his last 3 games (wks 4, 5, 11), 51% season.",
+    "Coach DeMeco Ryans (2026-11-17, injury, signal up): Montgomery is progressing and is on track to be available Thursday night vs. the Colts."
+   ]
+  },
+  {
+   "id": "00-0035689",
+   "name": "Dawson Knox",
+   "pos": "TE",
+   "team": "BUF",
+   "metric": "targets",
+   "op": ">=",
+   "value": 3.5,
+   "t": "At least 3.5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 3.7 over his last 3 games (wks 9, 10, 11), 2.3 season."
+   ]
+  },
+  {
+   "id": "00-0035704",
+   "name": "Drew Lock",
+   "pos": "QB",
+   "team": "SEA",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 23,
+   "t": "At least 23 pass attempts in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Pass attempts per game: 23.7 over his last 3 games (wks 2, 9, 10), 23.2 season."
+   ]
+  },
+  {
+   "id": "00-0035719",
+   "name": "Deebo Samuel Sr.",
+   "pos": "WR",
+   "team": "SF",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 52,
+   "t": "At least 52% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F16"
+   ],
+   "facts": [
+    "Snap %: 54% over his last 3 games (wks 5, 10, 11), 58% season.",
+    "Coach Kyle Shanahan (2026-11-13, injury, signal up): Deebo is healthy after his first week back and is still working his way back into the offense."
+   ]
+  },
+  {
+   "id": "00-0036020",
+   "name": "Salvon Ahmed",
+   "pos": "RB",
+   "team": "CHI",
+   "metric": "carries",
+   "op": ">=",
+   "value": 5,
+   "t": "At least 5 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F16"
+   ],
+   "facts": [
+    "Carries per game: 5.5 over his last 2 games (wks 9, 11), 5.5 season.",
+    "Coach Ben Johnson (2026-11-24, role, signal up): Ahmed has earned a bigger opportunity after his recent snaps in the backfield"
+   ]
+  },
+  {
+   "id": "00-0036139",
+   "name": "Rico Dowdle",
+   "pos": "RB",
+   "team": "PIT",
+   "metric": "carries",
+   "op": "<=",
+   "value": 8,
+   "t": "At most 8 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F15"
+   ],
+   "facts": [
+    "Carries per game: 8.3 over his last 3 games (wks 8, 10, 11), 8.0 season.",
+    "Wk 12: vs DEN, PIT implied team total 17.8 points (Vegas); DEN allows the 9th-most PPR points per game to RBs."
+   ]
+  },
+  {
+   "id": "00-0036223",
+   "name": "Jonathan Taylor",
+   "pos": "RB",
+   "team": "IND",
+   "metric": "carries",
+   "op": ">=",
+   "value": 13,
+   "t": "At least 13 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F16"
+   ],
+   "facts": [
+    "Carries per game: 13.3 over his last 3 games (wks 9, 10, 11), 17.1 season.",
+    "Coach Shane Steichen (2026-11-25, scheme, signal up): The game plan will be built around Taylor and Richardson both as run threats, and Taylor should absorb work with McGowan down."
+   ]
+  },
+  {
+   "id": "00-0036244",
+   "name": "Colby Parkinson",
+   "pos": "TE",
+   "team": "LA",
+   "metric": "targets",
+   "op": ">=",
+   "value": 4,
+   "t": "At least 4 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 4.0 over his last 3 games (wks 7, 9, 10), 3.1 season.",
+    "Wk 12: vs GB, LA implied team total 23.0 points (Vegas); GB allows the 30th-most PPR points per game to TEs."
+   ]
+  },
+  {
+   "id": "00-0036259",
+   "name": "Jauan Jennings",
+   "pos": "WR",
+   "team": "MIN",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 60,
+   "t": "At least 60% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 63% over his last 3 games (wks 7, 8, 11), 69% season."
+   ]
+  },
+  {
+   "id": "00-0036264",
+   "name": "Jordan Love",
+   "pos": "QB",
+   "team": "GB",
+   "metric": "pass_att",
+   "op": "<=",
+   "value": 32,
+   "t": "At most 32 pass attempts in Wk 12.",
+   "f": [
+    "F5",
+    "F14",
+    "F15"
+   ],
+   "facts": [
+    "Pass attempts per game: 32.3 over his last 3 games (wks 8, 9, 10), 36.8 season.",
+    "Wk 12: at LA, GB implied team total 20.5 points (Vegas); LA allows the 25th-most PPR points per game to QBs.",
+    "Coach Matt LaFleur (2026-11-16, scheme, signal watch): The Packers will aim to get the ball out quicker and may use more tempo to protect Love."
+   ]
+  },
+  {
+   "id": "00-0036271",
+   "name": "Quez Watkins",
+   "pos": "WR",
+   "team": "IND",
+   "metric": "targets",
+   "op": "<=",
+   "value": 3,
+   "t": "At most 3 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 3.0 over his last 1 game (wk 11), 3.0 season."
+   ]
+  },
+  {
+   "id": "00-0036275",
+   "name": "D'Andre Swift",
+   "pos": "RB",
+   "team": "CHI",
+   "metric": "carries",
+   "op": ">=",
+   "value": 16,
+   "t": "At least 16 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 17.3 over his last 3 games (wks 8, 9, 11), 16.8 season."
+   ]
+  },
+  {
+   "id": "00-0036309",
+   "name": "Darnell Mooney",
+   "pos": "WR",
+   "team": "NYG",
+   "metric": "targets",
+   "op": "<=",
+   "value": 5,
+   "t": "At most 5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 4.7 over his last 3 games (wks 9, 10, 11), 3.6 season."
+   ]
+  },
+  {
+   "id": "00-0036322",
+   "name": "Justin Jefferson",
+   "pos": "WR",
+   "team": "MIN",
+   "metric": "targets",
+   "op": ">=",
+   "value": 10,
+   "t": "At least 10 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 11.0 over his last 3 games (wks 9, 10, 11), 8.1 season."
+   ]
+  },
+  {
+   "id": "00-0036355",
+   "name": "Justin Herbert",
+   "pos": "QB",
+   "team": "LAC",
+   "metric": "pass_att",
+   "op": "<=",
+   "value": 22,
+   "t": "At most 22 pass attempts in Wk 12.",
+   "f": [
+    "F6",
+    "F15"
+   ],
+   "facts": [
+    "Pass attempts per game: 20.7 over his last 3 games (wks 9, 10, 11), 27.4 season.",
+    "Wk 12: vs NE, LAC implied team total 18.5 points (Vegas); NE allows the 12th-most PPR points per game to QBs."
+   ]
+  },
+  {
+   "id": "00-0036358",
+   "name": "CeeDee Lamb",
+   "pos": "WR",
+   "team": "DAL",
+   "metric": "targets",
+   "op": ">=",
+   "value": 13,
+   "t": "At least 13 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 13.7 over his last 3 games (wks 9, 10, 11), 12.1 season."
+   ]
+  },
+  {
+   "id": "00-0036407",
+   "name": "Jerry Jeudy",
+   "pos": "WR",
+   "team": "CLE",
+   "metric": "targets",
+   "op": "<=",
+   "value": 3,
+   "t": "At most 3 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 3.0 over his last 3 games (wks 8, 9, 10), 3.6 season."
+   ]
+  },
+  {
+   "id": "00-0036410",
+   "name": "Tee Higgins",
+   "pos": "WR",
+   "team": "CIN",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5,
+   "t": "At least 5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 5.0 over his last 3 games (wks 9, 10, 11), 7.6 season.",
+    "Wk 12: vs NO, CIN implied team total 30.2 points (Vegas); NO allows the 25th-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0036415",
+   "name": "Van Jefferson",
+   "pos": "WR",
+   "team": "WAS",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 5.6,
+   "t": "At most 5.6 PPR points in Wk 12.",
+   "f": [
+    "F10",
+    "F2"
+   ],
+   "facts": [
+    "PPR points per game: 5.6 over his last 3 games (wks 8, 9, 11), 5.6 season.",
+    "Our Wk 12 projection: 5.5 PPR, 88th among WRs."
+   ]
+  },
+  {
+   "id": "00-0036422",
+   "name": "Adam Trautman",
+   "pos": "TE",
+   "team": "DEN",
+   "metric": "targets",
+   "op": "<=",
+   "value": 2,
+   "t": "At most 2 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 2.0 over his last 3 games (wks 8, 9, 11), 1.8 season."
+   ]
+  },
+  {
+   "id": "00-0036442",
+   "name": "Joe Burrow",
+   "pos": "QB",
+   "team": "CIN",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 36,
+   "t": "At least 36 pass attempts in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Pass attempts per game: 37.7 over his last 3 games (wks 9, 10, 11), 38.0 season."
+   ]
+  },
+  {
+   "id": "00-0036550",
+   "name": "Rashod Bateman",
+   "pos": "WR",
+   "team": "BAL",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 75,
+   "t": "At least 75% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 81% over his last 3 games (wks 9, 10, 11), 74% season."
+   ]
+  },
+  {
+   "id": "00-0036554",
+   "name": "Nico Collins",
+   "pos": "WR",
+   "team": "HOU",
+   "metric": "targets",
+   "op": ">=",
+   "value": 7.5,
+   "t": "At least 7.5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 8.3 over his last 3 games (wks 9, 10, 11), 7.5 season."
+   ]
+  },
+  {
+   "id": "00-0036555",
+   "name": "Chuba Hubbard",
+   "pos": "RB",
+   "team": "CAR",
+   "metric": "carries",
+   "op": ">=",
+   "value": 21,
+   "t": "At least 21 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 23.3 over his last 3 games (wks 9, 10, 11), 18.8 season."
+   ]
+  },
+  {
+   "id": "00-0036567",
+   "name": "Elijah Mitchell",
+   "pos": "RB",
+   "team": "PHI",
+   "metric": "receptions",
+   "op": ">=",
+   "value": 3,
+   "t": "At least 3 catches in Wk 12.",
+   "f": [
+    "F8"
+   ],
+   "facts": [
+    "Catches per game: 3.3 over his last 3 games (wks 7, 8, 9), 3.3 season."
+   ]
+  },
+  {
+   "id": "00-0036613",
+   "name": "Jaylen Waddle",
+   "pos": "WR",
+   "team": "DEN",
+   "metric": "targets",
+   "op": "<=",
+   "value": 4.5,
+   "t": "At most 4.5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 4.3 over his last 3 games (wks 8, 9, 11), 5.8 season."
+   ]
+  },
+  {
+   "id": "00-0036637",
+   "name": "Noah Gray",
+   "pos": "TE",
+   "team": "KC",
+   "metric": "targets",
+   "op": "<=",
+   "value": 3,
+   "t": "At most 3 targets in Wk 12.",
+   "f": [
+    "F6"
+   ],
+   "facts": [
+    "Targets per game: 3.0 over his last 3 games (wks 9, 10, 11), 2.5 season."
+   ]
+  },
+  {
+   "id": "00-0036646",
+   "name": "Simi Fehoko",
+   "pos": "WR",
+   "team": "ARI",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 68,
+   "t": "At least 68% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 72% over his last 3 games (wks 9, 10, 11), 32% season."
+   ]
+  },
+  {
+   "id": "00-0036754",
+   "name": "Brock Wright",
+   "pos": "TE",
+   "team": "DET",
+   "metric": "rec_yds",
+   "op": "<=",
+   "value": 21,
+   "t": "At most 21 receiving yards in Wk 12.",
+   "f": [
+    "F8"
+   ],
+   "facts": [
+    "Receiving yards per game: 21.3 over his last 3 games (wks 5, 10, 11), 12.0 season."
+   ]
+  },
+  {
+   "id": "00-0036849",
+   "name": "Tutu Atwell",
+   "pos": "WR",
+   "team": "LA",
+   "metric": "targets",
+   "op": ">=",
+   "value": 4,
+   "t": "At least 4 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 3.7 over his last 3 games (wks 8, 9, 10), 2.5 season.",
+    "Coach Sean McVay (2026-11-23, role, signal up): Will be a key part of the WR group with Puka and Ferguson out."
+   ]
+  },
+  {
+   "id": "00-0036875",
+   "name": "Rhamondre Stevenson",
+   "pos": "RB",
+   "team": "NE",
+   "metric": "carries",
+   "op": "<=",
+   "value": 10,
+   "t": "At most 10 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F15",
+    "F16"
+   ],
+   "facts": [
+    "Carries per game: 10.3 over his last 3 games (wks 8, 9, 10), 10.8 season.",
+    "Wk 12: at LAC, NE implied team total 17.0 points (Vegas); LAC allows the 11th-most PPR points per game to RBs.",
+    "Coach Mike Vrabel (2026-11-13, injury, signal watch): Stevenson is trying to play through his injury on Sunday."
+   ]
+  },
+  {
+   "id": "00-0036894",
+   "name": "Pat Freiermuth",
+   "pos": "TE",
+   "team": "PIT",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 55,
+   "t": "At least 55% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 55% over his last 3 games (wks 8, 10, 11), 63% season."
+   ]
+  },
+  {
+   "id": "00-0036900",
+   "name": "Ja'Marr Chase",
+   "pos": "WR",
+   "team": "CIN",
+   "metric": "targets",
+   "op": ">=",
+   "value": 11,
+   "t": "At least 11 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 11.7 over his last 3 games (wks 9, 10, 11), 9.6 season."
+   ]
+  },
+  {
+   "id": "00-0036906",
+   "name": "Khalil Herbert",
+   "pos": "RB",
+   "team": "ATL",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 22,
+   "t": "At most 22% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 22% over his last 3 games (wks 8, 9, 10), 20% season."
+   ]
+  },
+  {
+   "id": "00-0036912",
+   "name": "DeVonta Smith",
+   "pos": "WR",
+   "team": "PHI",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 80,
+   "t": "At least 80% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 82% over his last 3 games (wks 3, 6, 11), 86% season."
+   ]
+  },
+  {
+   "id": "00-0036919",
+   "name": "Kenny Gainwell",
+   "pos": "RB",
+   "team": "TB",
+   "metric": "carries",
+   "op": ">=",
+   "value": 11,
+   "t": "At least 11 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F16"
+   ],
+   "facts": [
+    "Carries per game: 11.3 over his last 3 games (wks 8, 9, 11), 6.7 season.",
+    "Coach Todd Bowles (2026-11-04, usage, signal up): Gainwell will keep getting a growing share of backfield touches alongside Bucky Irving in a 1A/1B split."
+   ]
+  },
+  {
+   "id": "00-0036963",
+   "name": "Amon-Ra St. Brown",
+   "pos": "WR",
+   "team": "DET",
+   "metric": "targets",
+   "op": ">=",
+   "value": 6.5,
+   "t": "At least 6.5 targets in Wk 12.",
+   "f": [
+    "F6"
+   ],
+   "facts": [
+    "Targets per game: 7.0 over his last 3 games (wks 9, 10, 11), 9.7 season."
+   ]
+  },
+  {
+   "id": "00-0036970",
+   "name": "Kyle Pitts",
+   "pos": "TE",
+   "team": "ATL",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5,
+   "t": "At least 5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 5.0 over his last 3 games (wks 8, 9, 10), 4.2 season."
+   ]
+  },
+  {
+   "id": "00-0036971",
+   "name": "Trevor Lawrence",
+   "pos": "QB",
+   "team": "JAX",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 34,
+   "t": "At least 34 pass attempts in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Pass attempts per game: 36.0 over his last 3 games (wks 9, 10, 11), 30.6 season."
+   ]
+  },
+  {
+   "id": "00-0036973",
+   "name": "Travis Etienne",
+   "pos": "RB",
+   "team": "NO",
+   "metric": "carries",
+   "op": ">=",
+   "value": 11,
+   "t": "At least 11 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F18"
+   ],
+   "facts": [
+    "Carries per game: 11.7 over his last 3 games (wks 3, 10, 11), 10.4 season.",
+    "Coach Kellen Moore (2026-11-16, role, signal up): Etienne will continue as a featured back in the run game now that he is healthy."
+   ]
+  },
+  {
+   "id": "00-0036997",
+   "name": "Javonte Williams",
+   "pos": "RB",
+   "team": "DAL",
+   "metric": "carries",
+   "op": ">=",
+   "value": 17,
+   "t": "At least 17 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 18.0 over his last 3 games (wks 9, 10, 11), 17.1 season."
+   ]
+  },
+  {
+   "id": "00-0037005",
+   "name": "Tommy Tremble",
+   "pos": "TE",
+   "team": "CAR",
+   "metric": "receptions",
+   "op": "<=",
+   "value": 3,
+   "t": "At most 3 catches in Wk 12.",
+   "f": [
+    "F7"
+   ],
+   "facts": [
+    "Catches per game: 3.0 over his last 3 games (wks 9, 10, 11), 2.6 season."
+   ]
+  },
+  {
+   "id": "00-0037157",
+   "name": "Bam Knight",
+   "pos": "RB",
+   "team": "ARI",
+   "metric": "carries",
+   "op": "<=",
+   "value": 5,
+   "t": "At most 5 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 5.0 over his last 3 games (wks 8, 10, 11), 5.7 season."
+   ]
+  },
+  {
+   "id": "00-0037228",
+   "name": "Jaylen Warren",
+   "pos": "RB",
+   "team": "PIT",
+   "metric": "carries",
+   "op": ">=",
+   "value": 11,
+   "t": "At least 11 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F16"
+   ],
+   "facts": [
+    "Carries per game: 11.0 over his last 3 games (wks 8, 10, 11), 13.5 season.",
+    "Coach Mike McCarthy (2026-11-23, usage, signal up): The Steelers will increase run attempts against Denver."
+   ]
+  },
+  {
+   "id": "00-0037238",
+   "name": "Drake London",
+   "pos": "WR",
+   "team": "ATL",
+   "metric": "targets",
+   "op": ">=",
+   "value": 7,
+   "t": "At least 7 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 7.7 over his last 3 games (wks 8, 9, 10), 7.9 season.",
+    "Wk 12: at MIN, ATL implied team total 17.8 points (Vegas); MIN allows the 28th-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0037239",
+   "name": "Chris Olave",
+   "pos": "WR",
+   "team": "NO",
+   "metric": "targets",
+   "op": ">=",
+   "value": 10,
+   "t": "At least 10 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 10.3 over his last 3 games (wks 9, 10, 11), 10.2 season."
+   ]
+  },
+  {
+   "id": "00-0037240",
+   "name": "Jameson Williams",
+   "pos": "WR",
+   "team": "DET",
+   "metric": "rec_yds",
+   "op": ">=",
+   "value": 56,
+   "t": "At least 56 receiving yards in Wk 12.",
+   "f": [
+    "F8"
+   ],
+   "facts": [
+    "Receiving yards per game: 58.0 over his last 3 games (wks 9, 10, 11), 61.1 season."
+   ]
+  },
+  {
+   "id": "00-0037247",
+   "name": "George Pickens",
+   "pos": "WR",
+   "team": "DAL",
+   "metric": "targets",
+   "op": ">=",
+   "value": 10,
+   "t": "At least 10 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 10.7 over his last 3 games (wks 8, 10, 11), 9.0 season."
+   ]
+  },
+  {
+   "id": "00-0037248",
+   "name": "James Cook",
+   "pos": "RB",
+   "team": "BUF",
+   "metric": "carries",
+   "op": ">=",
+   "value": 22,
+   "t": "At least 22 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 23.7 over his last 3 games (wks 9, 10, 11), 20.9 season."
+   ]
+  },
+  {
+   "id": "00-0037252",
+   "name": "Greg Dulcich",
+   "pos": "TE",
+   "team": "MIA",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 60,
+   "t": "At least 60% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 62% over his last 3 games (wks 9, 10, 11), 67% season."
+   ]
+  },
+  {
+   "id": "00-0037256",
+   "name": "Rachaad White",
+   "pos": "RB",
+   "team": "WAS",
+   "metric": "carries",
+   "op": "<=",
+   "value": 6,
+   "t": "At most 6 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 6.0 over his last 3 games (wks 9, 10, 11), 7.2 season."
+   ]
+  },
+  {
+   "id": "00-0037261",
+   "name": "Khalil Shakir",
+   "pos": "WR",
+   "team": "BUF",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5,
+   "t": "At least 5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 5.3 over his last 3 games (wks 9, 10, 11), 5.4 season.",
+    "Coach Joe Brady (2026-11-24, usage, signal up): Brady wants to get Shakir more involved in the offense."
+   ]
+  },
+  {
+   "id": "00-0037263",
+   "name": "Tyler Allgeier",
+   "pos": "RB",
+   "team": "ARI",
+   "metric": "carries",
+   "op": ">=",
+   "value": 9,
+   "t": "At least 9 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F16"
+   ],
+   "facts": [
+    "Carries per game: 9.7 over his last 3 games (wks 9, 10, 11), 9.2 season.",
+    "Coach Mike LaFleur (2026-11-04, usage, signal up): Allgeier will remain the primary running back this week with Love on IR and Bam Knight out of practice."
+   ]
+  },
+  {
+   "id": "00-0037282",
+   "name": "James Mitchell",
+   "pos": "TE",
+   "team": "DAL",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 30,
+   "t": "At least 30% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F15"
+   ],
+   "facts": [
+    "Snap %: 32% over his last 2 games (wks 8, 11), 32% season.",
+    "Coach Brian Schottenheimer (2026-11-11, role, signal up): Will keep a larger TE role on offense and special teams while Ferguson is out, competing with Trigg for snaps."
+   ]
+  },
+  {
+   "id": "00-0037291",
+   "name": "Jalen Nailor",
+   "pos": "WR",
+   "team": "LV",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 75,
+   "t": "At least 75% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 81% over his last 3 games (wks 9, 10, 11), 67% season."
+   ]
+  },
+  {
+   "id": "00-0037410",
+   "name": "Jashaun Corbin",
+   "pos": "RB",
+   "team": "DAL",
+   "metric": "carries",
+   "op": "<=",
+   "value": 5,
+   "t": "At most 5 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F16"
+   ],
+   "facts": [
+    "Carries per game: 5.0 over his last 1 game (wk 11), 5.0 season.",
+    "Coach Brian Schottenheimer (2026-11-24, depth_chart, signal up): Will more than likely be the backup running back this week."
+   ]
+  },
+  {
+   "id": "00-0037525",
+   "name": "Jordan Mason",
+   "pos": "RB",
+   "team": "MIN",
+   "metric": "carries",
+   "op": ">=",
+   "value": 11,
+   "t": "At least 11 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 11.0 over his last 3 games (wks 9, 10, 11), 11.8 season."
+   ]
+  },
+  {
+   "id": "00-0037545",
+   "name": "Rashid Shaheed",
+   "pos": "WR",
+   "team": "SEA",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 44,
+   "t": "At most 44% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 41% over his last 3 games (wks 6, 7, 10), 50% season."
+   ]
+  },
+  {
+   "id": "00-0037557",
+   "name": "Ronnie Rivers",
+   "pos": "RB",
+   "team": "LA",
+   "metric": "carries",
+   "op": "<=",
+   "value": 7,
+   "t": "At most 7 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 6.7 over his last 3 games (wks 1, 9, 10), 6.7 season."
+   ]
+  },
+  {
+   "id": "00-0037614",
+   "name": "John Metchie III",
+   "pos": "WR",
+   "team": "CAR",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 32,
+   "t": "At most 32% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 31% over his last 3 games (wks 9, 10, 11), 36% season."
+   ]
+  },
+  {
+   "id": "00-0037740",
+   "name": "Garrett Wilson",
+   "pos": "WR",
+   "team": "NYJ",
+   "metric": "targets",
+   "op": ">=",
+   "value": 10,
+   "t": "At least 10 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F6"
+   ],
+   "facts": [
+    "Targets per game: 10.3 over his last 3 games (wks 8, 10, 11), 8.2 season.",
+    "Target share: 33% over his last 3 games (wks 8, 10, 11), 28% season."
+   ]
+  },
+  {
+   "id": "00-0037741",
+   "name": "Jahan Dotson",
+   "pos": "WR",
+   "team": "ATL",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 70,
+   "t": "At least 70% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 76% over his last 3 games (wks 8, 9, 10), 70% season."
+   ]
+  },
+  {
+   "id": "00-0037742",
+   "name": "Treylon Burks",
+   "pos": "WR",
+   "team": "WAS",
+   "metric": "targets",
+   "op": "<=",
+   "value": 4,
+   "t": "At most 4 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 3.7 over his last 3 games (wks 8, 10, 11), 3.5 season."
+   ]
+  },
+  {
+   "id": "00-0037744",
+   "name": "Trey McBride",
+   "pos": "TE",
+   "team": "ARI",
+   "metric": "rec_yds",
+   "op": ">=",
+   "value": 46,
+   "t": "At least 46 receiving yards in Wk 12.",
+   "f": [
+    "F8",
+    "F13"
+   ],
+   "facts": [
+    "Receiving yards per game: 48.3 over his last 3 games (wks 9, 10, 11), 62.6 season.",
+    "Wk 12: vs WAS, ARI implied team total 17.5 points (Vegas); WAS allows the 2nd-most PPR points per game to TEs."
+   ]
+  },
+  {
+   "id": "00-0037801",
+   "name": "KaVontae Turpin",
+   "pos": "WR",
+   "team": "DAL",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 12,
+   "t": "At most 12% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 11% over his last 3 games (wks 6, 10, 11), 15% season."
+   ]
+  },
+  {
+   "id": "00-0037805",
+   "name": "Jeremy Ruckert",
+   "pos": "TE",
+   "team": "NYJ",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 5,
+   "t": "At most 5 PPR points in Wk 12.",
+   "f": [
+    "F10",
+    "F2"
+   ],
+   "facts": [
+    "PPR points per game: 5.0 over his last 3 games (wks 3, 7, 10), 3.8 season.",
+    "Our Wk 12 projection: 3.1 PPR, 61st among TEs."
+   ]
+  },
+  {
+   "id": "00-0037809",
+   "name": "Chig Okonkwo",
+   "pos": "TE",
+   "team": "WAS",
+   "metric": "targets",
+   "op": ">=",
+   "value": 6,
+   "t": "At least 6 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 6.7 over his last 3 games (wks 9, 10, 11), 5.5 season."
+   ]
+  },
+  {
+   "id": "00-0037834",
+   "name": "Brock Purdy",
+   "pos": "QB",
+   "team": "SF",
+   "metric": "pass_yds",
+   "op": ">=",
+   "value": 270,
+   "t": "At least 270 passing yards in Wk 12.",
+   "f": [
+    "F7",
+    "F15"
+   ],
+   "facts": [
+    "Passing yards per game: 292.0 over his last 3 games (wks 9, 10, 11), 262.4 season.",
+    "Wk 12: vs SEA, SF implied team total 24.8 points (Vegas); SEA allows the 31st-most PPR points per game to QBs."
+   ]
+  },
+  {
+   "id": "00-0037838",
+   "name": "Isaiah Likely",
+   "pos": "TE",
+   "team": "NYG",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 76,
+   "t": "At least 76% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 80% over his last 3 games (wks 9, 10, 11), 76% season."
+   ]
+  },
+  {
+   "id": "00-0037840",
+   "name": "Kyren Williams",
+   "pos": "RB",
+   "team": "LA",
+   "metric": "carries",
+   "op": ">=",
+   "value": 13,
+   "t": "At least 13 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F16"
+   ],
+   "facts": [
+    "Carries per game: 14.3 over his last 3 games (wks 8, 9, 10), 13.9 season.",
+    "Coach Sean McVay (2026-11-21, usage, signal watch): Williams is limited with a toe issue but is expected to keep playing in two-back sets."
+   ]
+  },
+  {
+   "id": "00-0038041",
+   "name": "Jake Ferguson",
+   "pos": "TE",
+   "team": "DAL",
+   "metric": "targets",
+   "op": "<=",
+   "value": 2,
+   "t": "At most 2 targets in Wk 12.",
+   "f": [
+    "F6"
+   ],
+   "facts": [
+    "Targets per game: 2.0 over his last 3 games (wks 6, 7, 9), 3.4 season."
+   ]
+  },
+  {
+   "id": "00-0038046",
+   "name": "Charlie Kolar",
+   "pos": "TE",
+   "team": "LAC",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 58,
+   "t": "At least 58% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 62% over his last 3 games (wks 9, 10, 11), 64% season."
+   ]
+  },
+  {
+   "id": "00-0038098",
+   "name": "Pierre Strong",
+   "pos": "RB",
+   "team": "GB",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 37,
+   "t": "At least 37% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F16"
+   ],
+   "facts": [
+    "Snap %: 38% over his last 3 games (wks 6, 8, 9), 38% season.",
+    "Coach Matt LaFleur (2026-11-09, role, signal watch): Strong stepped in alongside Johnson after Jacobs went down and could share the backfield if Jacobs is out."
+   ]
+  },
+  {
+   "id": "00-0038115",
+   "name": "Daniel Bellinger",
+   "pos": "TE",
+   "team": "TEN",
+   "metric": "receptions",
+   "op": "<=",
+   "value": 2,
+   "t": "At most 2 catches in Wk 12.",
+   "f": [
+    "F7",
+    "F2"
+   ],
+   "facts": [
+    "Catches per game: 2.0 over his last 3 games (wks 8, 10, 11), 1.2 season.",
+    "Our Wk 12 projection: 2.9 PPR, 63rd among TEs."
+   ]
+  },
+  {
+   "id": "00-0038120",
+   "name": "Breece Hall",
+   "pos": "RB",
+   "team": "NYJ",
+   "metric": "carries",
+   "op": ">=",
+   "value": 14,
+   "t": "At least 14 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 15.3 over his last 3 games (wks 9, 10, 11), 16.2 season."
+   ]
+  },
+  {
+   "id": "00-0038124",
+   "name": "Christian Watson",
+   "pos": "WR",
+   "team": "GB",
+   "metric": "targets",
+   "op": ">=",
+   "value": 7,
+   "t": "At least 7 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 7.7 over his last 3 games (wks 8, 9, 10), 7.9 season."
+   ]
+  },
+  {
+   "id": "00-0038129",
+   "name": "Cade Otton",
+   "pos": "TE",
+   "team": "TB",
+   "metric": "targets",
+   "op": ">=",
+   "value": 4,
+   "t": "At least 4 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 4.0 over his last 3 games (wks 7, 9, 11), 4.6 season.",
+    "Coach Todd Bowles (2026-11-09, usage, signal up): Otton will keep getting heavy targets as defenses double the outside receivers."
+   ]
+  },
+  {
+   "id": "00-0038359",
+   "name": "Xavier Smith",
+   "pos": "WR",
+   "team": "LA",
+   "metric": "targets",
+   "op": ">=",
+   "value": 1,
+   "t": "At least 1 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 1.0 over his last 3 games (wks 2, 3, 10), 0.8 season.",
+    "Coach Sean McVay (2026-11-23, role, signal up): Will get expanded receiver opportunities with Puka out."
+   ]
+  },
+  {
+   "id": "00-0038389",
+   "name": "Israel Abanikanda",
+   "pos": "RB",
+   "team": "DAL",
+   "metric": "carries",
+   "op": ">=",
+   "value": 2,
+   "t": "At least 2 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F16"
+   ],
+   "facts": [
+    "Carries per game: 2.0 over his last 1 game (wk 10), 2.0 season.",
+    "Coach Brian Schottenheimer (2026-11-13, depth_chart, signal up): Is the expected RB2-type option this week."
+   ]
+  },
+  {
+   "id": "00-0038394",
+   "name": "Will Mallory",
+   "pos": "TE",
+   "team": "IND",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 43,
+   "t": "At least 43% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F14"
+   ],
+   "facts": [
+    "Snap %: 43% over his last 2 games (wks 6, 7), 43% season.",
+    "Coach Shane Steichen (2026-11-13, usage, signal up): Will get more opportunities at tight end this week with Warren and Alie-Cox out."
+   ]
+  },
+  {
+   "id": "00-0038454",
+   "name": "Keaton Mitchell",
+   "pos": "RB",
+   "team": "LAC",
+   "metric": "carries",
+   "op": "<=",
+   "value": 3.5,
+   "t": "At most 3.5 carries in Wk 12.",
+   "f": [
+    "F6",
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 3.3 over his last 3 games (wks 9, 10, 11), 4.9 season.",
+    "Snap %: 17% over his last 3 games (wks 9, 10, 11), 27% season."
+   ]
+  },
+  {
+   "id": "00-0038476",
+   "name": "Tommy DeVito",
+   "pos": "QB",
+   "team": "NE",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 11,
+   "t": "At least 11 pass attempts in Wk 12.",
+   "f": [
+    "F5",
+    "F16"
+   ],
+   "facts": [
+    "Pass attempts per game: 10.7 over his last 3 games (wks 3, 9, 10), 10.7 season.",
+    "Coach Mike Vrabel (2026-11-23, depth_chart, signal up): Tommy DeVito will start at QB for the Patriots against the Chargers while Drake Maye is out."
+   ]
+  },
+  {
+   "id": "00-0038542",
+   "name": "Bijan Robinson",
+   "pos": "RB",
+   "team": "ATL",
+   "metric": "carries",
+   "op": ">=",
+   "value": 17,
+   "t": "At least 17 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 18.0 over his last 3 games (wks 8, 9, 10), 18.5 season."
+   ]
+  },
+  {
+   "id": "00-0038543",
+   "name": "Jaxon Smith-Njigba",
+   "pos": "WR",
+   "team": "SEA",
+   "metric": "targets",
+   "op": ">=",
+   "value": 10,
+   "t": "At least 10 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F6",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 10.3 over his last 3 games (wks 8, 9, 10), 10.9 season.",
+    "Target share: 42% over his last 3 games (wks 8, 9, 10), 38% season.",
+    "Coach Mike Macdonald (2026-11-16, usage, signal up): Smith-Njigba will keep being used at every level of the offense: run game, quick game, intermediate and extended plays."
+   ]
+  },
+  {
+   "id": "00-0038544",
+   "name": "Quentin Johnston",
+   "pos": "WR",
+   "team": "LAC",
+   "metric": "rec_yds",
+   "op": ">=",
+   "value": 26,
+   "t": "At least 26 receiving yards in Wk 12.",
+   "f": [
+    "F8",
+    "F13"
+   ],
+   "facts": [
+    "Receiving yards per game: 24.3 over his last 3 games (wks 9, 10, 11), 30.6 season.",
+    "Wk 12: vs NE, LAC implied team total 18.5 points (Vegas); NE allows the 2nd-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0038547",
+   "name": "Luke Schoonmaker",
+   "pos": "TE",
+   "team": "DAL",
+   "metric": "rec_yds",
+   "op": "<=",
+   "value": 9,
+   "t": "At most 9 receiving yards in Wk 12.",
+   "f": [
+    "F8"
+   ],
+   "facts": [
+    "Receiving yards per game: 9.0 over his last 3 games (wks 5, 10, 11), 9.6 season."
+   ]
+  },
+  {
+   "id": "00-0038558",
+   "name": "Darnell Washington",
+   "pos": "TE",
+   "team": "PIT",
+   "metric": "rec_yds",
+   "op": "<=",
+   "value": 40,
+   "t": "At most 40 receiving yards in Wk 12.",
+   "f": [
+    "F8",
+    "F2"
+   ],
+   "facts": [
+    "Receiving yards per game: 40.3 over his last 3 games (wks 8, 10, 11), 28.1 season.",
+    "Our Wk 12 projection: 5.5 PPR, 40th among TEs."
+   ]
+  },
+  {
+   "id": "00-0038563",
+   "name": "Tre Tucker",
+   "pos": "WR",
+   "team": "LV",
+   "metric": "targets",
+   "op": ">=",
+   "value": 6.5,
+   "t": "At least 6.5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 6.7 over his last 3 games (wks 9, 10, 11), 6.2 season.",
+    "Coach Klint Kubiak (2026-11-16, usage, signal up): Tucker will be more involved in the offense going forward."
+   ]
+  },
+  {
+   "id": "00-0038597",
+   "name": "Chase Brown",
+   "pos": "RB",
+   "team": "CIN",
+   "metric": "receptions",
+   "op": ">=",
+   "value": 5,
+   "t": "At least 5 catches in Wk 12.",
+   "f": [
+    "F8",
+    "F15"
+   ],
+   "facts": [
+    "Catches per game: 5.3 over his last 3 games (wks 9, 10, 11), 5.2 season.",
+    "Wk 12: vs NO, CIN implied team total 30.2 points (Vegas); NO allows the 2nd-most PPR points per game to RBs."
+   ]
+  },
+  {
+   "id": "00-0038606",
+   "name": "Parker Washington",
+   "pos": "WR",
+   "team": "JAX",
+   "metric": "targets",
+   "op": ">=",
+   "value": 10,
+   "t": "At least 10 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 11.0 over his last 3 games (wks 9, 10, 11), 8.1 season.",
+    "Wk 12: vs TEN, JAX implied team total 31.0 points (Vegas); TEN allows the 1st-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0038608",
+   "name": "Kayshon Boutte",
+   "pos": "WR",
+   "team": "HOU",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 50,
+   "t": "At least 50% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 52% over his last 3 games (wks 9, 10, 11), 54% season."
+   ]
+  },
+  {
+   "id": "00-0038611",
+   "name": "Chris Rodriguez Jr.",
+   "pos": "RB",
+   "team": "JAX",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 30,
+   "t": "At least 30% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F16"
+   ],
+   "facts": [
+    "Snap %: 32% over his last 3 games (wks 9, 10, 11), 27% season.",
+    "Coach Liam Coen (2026-11-04, usage, signal watch): He was a checkdown target and short-yardage runner, and Tuten's injury could mean more touches."
+   ]
+  },
+  {
+   "id": "00-0038618",
+   "name": "Xavier Hutchinson",
+   "pos": "WR",
+   "team": "HOU",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 75,
+   "t": "At least 75% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 80% over his last 3 games (wks 9, 10, 11), 61% season."
+   ]
+  },
+  {
+   "id": "00-0038621",
+   "name": "DeMario Douglas",
+   "pos": "WR",
+   "team": "NE",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 60,
+   "t": "At least 60% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 66% over his last 3 games (wks 8, 9, 10), 58% season."
+   ]
+  },
+  {
+   "id": "00-0038685",
+   "name": "Chris Brooks",
+   "pos": "RB",
+   "team": "GB",
+   "metric": "carries",
+   "op": "<=",
+   "value": 2,
+   "t": "At most 2 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 2.0 over his last 3 games (wks 3, 4, 10), 3.4 season."
+   ]
+  },
+  {
+   "id": "00-0038705",
+   "name": "Emari Demercado",
+   "pos": "RB",
+   "team": "HOU",
+   "metric": "carries",
+   "op": "<=",
+   "value": 6,
+   "t": "At most 6 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 6.0 over his last 3 games (wks 9, 10, 11), 4.6 season."
+   ]
+  },
+  {
+   "id": "00-0038738",
+   "name": "Hunter Luepke",
+   "pos": "RB",
+   "team": "DAL",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 25,
+   "t": "At least 25% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 27% over his last 3 games (wks 8, 10, 11), 21% season."
+   ]
+  },
+  {
+   "id": "00-0038935",
+   "name": "Brenton Strange",
+   "pos": "TE",
+   "team": "JAX",
+   "metric": "targets",
+   "op": ">=",
+   "value": 2.7,
+   "t": "At least 2.7 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 2.7 over his last 3 games (wks 9, 10, 11), 4.3 season.",
+    "Coach Liam Coen (2026-11-25, role, signal up): Strange will be moved around between the core and the backfield and be a big part of the game plan against Tennessee."
+   ]
+  },
+  {
+   "id": "00-0038976",
+   "name": "Marvin Mims Jr.",
+   "pos": "WR",
+   "team": "DEN",
+   "metric": "rec_yds",
+   "op": "<=",
+   "value": 16,
+   "t": "At most 16 receiving yards in Wk 12.",
+   "f": [
+    "F8"
+   ],
+   "facts": [
+    "Receiving yards per game: 15.3 over his last 3 games (wks 8, 9, 11), 16.0 season."
+   ]
+  },
+  {
+   "id": "00-0038977",
+   "name": "Tank Dell",
+   "pos": "WR",
+   "team": "HOU",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 45,
+   "t": "At least 45% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 47% over his last 3 games (wks 9, 10, 11), 41% season."
+   ]
+  },
+  {
+   "id": "00-0038996",
+   "name": "Tucker Kraft",
+   "pos": "TE",
+   "team": "GB",
+   "metric": "rec_yds",
+   "op": "<=",
+   "value": 26,
+   "t": "At most 26 receiving yards in Wk 12.",
+   "f": [
+    "F8"
+   ],
+   "facts": [
+    "Receiving yards per game: 24.3 over his last 3 games (wks 8, 9, 10), 37.0 season."
+   ]
+  },
+  {
+   "id": "00-0038997",
+   "name": "Josh Downs",
+   "pos": "WR",
+   "team": "KC",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5,
+   "t": "At least 5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 5.3 over his last 3 games (wks 9, 10, 11), 6.1 season.",
+    "Coach Andy Reid (2026-11-24, role, signal up): Downs' role in the offense keeps growing, with more added again this week."
+   ]
+  },
+  {
+   "id": "00-0039041",
+   "name": "Elijah Higgins",
+   "pos": "TE",
+   "team": "ARI",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 50,
+   "t": "At least 50% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 52% over his last 3 games (wks 8, 9, 11), 45% season."
+   ]
+  },
+  {
+   "id": "00-0039062",
+   "name": "Jonathan Mingo",
+   "pos": "WR",
+   "team": "DAL",
+   "metric": "rec_yds",
+   "op": "<=",
+   "value": 8,
+   "t": "At most 8 receiving yards in Wk 12.",
+   "f": [
+    "F8"
+   ],
+   "facts": [
+    "Receiving yards per game: 7.7 over his last 3 games (wks 7, 8, 9), 7.6 season."
+   ]
+  },
+  {
+   "id": "00-0039064",
+   "name": "Zay Flowers",
+   "pos": "WR",
+   "team": "BAL",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 75,
+   "t": "At least 75% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 81% over his last 3 games (wks 9, 10, 11), 71% season."
+   ]
+  },
+  {
+   "id": "00-0039065",
+   "name": "Sam LaPorta",
+   "pos": "TE",
+   "team": "DET",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5,
+   "t": "At least 5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 5.0 over his last 3 games (wks 9, 10, 11), 5.9 season.",
+    "Wk 12: vs CHI, DET implied team total 26.5 points (Vegas); CHI allows the 24th-most PPR points per game to TEs."
+   ]
+  },
+  {
+   "id": "00-0039066",
+   "name": "Michael Mayer",
+   "pos": "TE",
+   "team": "LV",
+   "metric": "targets",
+   "op": ">=",
+   "value": 3,
+   "t": "At least 3 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 3.3 over his last 3 games (wks 9, 10, 11), 4.8 season."
+   ]
+  },
+  {
+   "id": "00-0039067",
+   "name": "Rashee Rice",
+   "pos": "WR",
+   "team": "KC",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 11,
+   "t": "At most 11 PPR points in Wk 12.",
+   "f": [
+    "F10",
+    "F2"
+   ],
+   "facts": [
+    "PPR points per game: 11.5 over his last 3 games (wks 9, 10, 11), 13.0 season.",
+    "Our Wk 12 projection: 10.0 PPR, 38th among WRs."
+   ]
+  },
+  {
+   "id": "00-0039074",
+   "name": "Davis Allen",
+   "pos": "TE",
+   "team": "LA",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 65,
+   "t": "At least 65% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 70% over his last 3 games (wks 7, 8, 10), 51% season."
+   ]
+  },
+  {
+   "id": "00-0039139",
+   "name": "Jahmyr Gibbs",
+   "pos": "RB",
+   "team": "DET",
+   "metric": "carries",
+   "op": ">=",
+   "value": 20,
+   "t": "At least 20 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 21.7 over his last 3 games (wks 9, 10, 11), 22.2 season."
+   ]
+  },
+  {
+   "id": "00-0039150",
+   "name": "Bryce Young",
+   "pos": "QB",
+   "team": "CAR",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 32,
+   "t": "At least 32 pass attempts in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Pass attempts per game: 33.0 over his last 3 games (wks 9, 10, 11), 36.8 season.",
+    "Wk 12: at TB, CAR implied team total 20.2 points (Vegas); TB allows the 29th-most PPR points per game to QBs."
+   ]
+  },
+  {
+   "id": "00-0039163",
+   "name": "C.J. Stroud",
+   "pos": "QB",
+   "team": "HOU",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 32,
+   "t": "At least 32 pass attempts in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Pass attempts per game: 33.3 over his last 3 games (wks 9, 10, 11), 34.7 season."
+   ]
+  },
+  {
+   "id": "00-0039165",
+   "name": "Zach Charbonnet",
+   "pos": "RB",
+   "team": "SEA",
+   "metric": "carries",
+   "op": ">=",
+   "value": 13,
+   "t": "At least 13 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F17"
+   ],
+   "facts": [
+    "Carries per game: 14.0 over his last 3 games (wks 8, 9, 10), 14.0 season.",
+    "Coach Mike Macdonald (2026-11-11, injury, signal up): Charbonnet is getting healthier at halfback, which helps Seattle use others elsewhere."
+   ]
+  },
+  {
+   "id": "00-0039337",
+   "name": "Malik Nabers",
+   "pos": "WR",
+   "team": "NYG",
+   "metric": "targets",
+   "op": ">=",
+   "value": 8.5,
+   "t": "At least 8.5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 9.0 over his last 3 games (wks 9, 10, 11), 9.7 season."
+   ]
+  },
+  {
+   "id": "00-0039338",
+   "name": "Brock Bowers",
+   "pos": "TE",
+   "team": "LV",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 70,
+   "t": "At most 70% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F14"
+   ],
+   "facts": [
+    "Snap %: 68% over his last 3 games (wks 8, 9, 10), 77% season.",
+    "Coach Klint Kubiak (2026-11-25, injury, signal up): Bowers will play Sunday night against Cleveland."
+   ]
+  },
+  {
+   "id": "00-0039342",
+   "name": "Xavier Legette",
+   "pos": "WR",
+   "team": "CAR",
+   "metric": "targets",
+   "op": "<=",
+   "value": 3,
+   "t": "At most 3 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 3.0 over his last 2 games (wks 1, 2), 3.0 season.",
+    "Coach Dave Canales (2026-11-23, role, signal down): Legette is playing on special teams coverage units, with no mention of an offensive role."
+   ]
+  },
+  {
+   "id": "00-0039361",
+   "name": "Bucky Irving",
+   "pos": "RB",
+   "team": "TB",
+   "metric": "carries",
+   "op": ">=",
+   "value": 20,
+   "t": "At least 20 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F15"
+   ],
+   "facts": [
+    "Carries per game: 21.7 over his last 3 games (wks 8, 9, 11), 18.5 season.",
+    "Wk 12: vs CAR, TB implied team total 23.2 points (Vegas); CAR allows the 1st-most PPR points per game to RBs."
+   ]
+  },
+  {
+   "id": "00-0039364",
+   "name": "Sione Vaki",
+   "pos": "RB",
+   "team": "DET",
+   "metric": "carries",
+   "op": "<=",
+   "value": 3.5,
+   "t": "At most 3.5 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 3.3 over his last 3 games (wks 9, 10, 11), 3.7 season."
+   ]
+  },
+  {
+   "id": "00-0039391",
+   "name": "Kimani Vidal",
+   "pos": "RB",
+   "team": "LAC",
+   "metric": "carries",
+   "op": "<=",
+   "value": 5,
+   "t": "At most 5 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F15",
+    "F16"
+   ],
+   "facts": [
+    "Carries per game: 5.3 over his last 3 games (wks 9, 10, 11), 5.0 season.",
+    "Wk 12: vs NE, LAC implied team total 18.5 points (Vegas); NE allows the 15th-most PPR points per game to RBs.",
+    "Coach Jim Harbaugh (2026-11-18, role, signal watch): Vidal is valued for special teams and pass protection, so he likely stays a change-of-pace back behind Hampton rather than a lead option."
+   ]
+  },
+  {
+   "id": "00-0039398",
+   "name": "Joe Milton III",
+   "pos": "QB",
+   "team": "PHI",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 26,
+   "t": "At least 26 pass attempts in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Pass attempts per game: 27.5 over his last 2 games (wks 9, 11), 27.5 season."
+   ]
+  },
+  {
+   "id": "00-0039410",
+   "name": "Ryan Flournoy",
+   "pos": "WR",
+   "team": "DAL",
+   "metric": "targets",
+   "op": ">=",
+   "value": 4,
+   "t": "At least 4 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 3.7 over his last 3 games (wks 9, 10, 11), 5.0 season.",
+    "Wk 12: vs PHI, DAL implied team total 28.0 points (Vegas); PHI allows the 3rd-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0039424",
+   "name": "Devaughn Vele",
+   "pos": "WR",
+   "team": "NO",
+   "metric": "targets",
+   "op": ">=",
+   "value": 4,
+   "t": "At least 4 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 4.3 over his last 3 games (wks 9, 10, 11), 6.1 season."
+   ]
+  },
+  {
+   "id": "00-0039491",
+   "name": "Jalen Coker",
+   "pos": "WR",
+   "team": "CAR",
+   "metric": "targets",
+   "op": "<=",
+   "value": 5,
+   "t": "At most 5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 5.3 over his last 3 games (wks 9, 10, 11), 6.7 season."
+   ]
+  },
+  {
+   "id": "00-0039530",
+   "name": "Brevyn Spann-Ford",
+   "pos": "TE",
+   "team": "DAL",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 62,
+   "t": "At least 62% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 68% over his last 3 games (wks 9, 10, 11), 51% season."
+   ]
+  },
+  {
+   "id": "00-0039732",
+   "name": "Bo Nix",
+   "pos": "QB",
+   "team": "DEN",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 33,
+   "t": "At least 33 pass attempts in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Pass attempts per game: 34.7 over his last 3 games (wks 8, 9, 11), 32.2 season."
+   ]
+  },
+  {
+   "id": "00-0039738",
+   "name": "Blake Corum",
+   "pos": "RB",
+   "team": "LA",
+   "metric": "carries",
+   "op": ">=",
+   "value": 12,
+   "t": "At least 12 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 13.0 over his last 3 games (wks 8, 9, 10), 10.3 season."
+   ]
+  },
+  {
+   "id": "00-0039739",
+   "name": "Roman Wilson",
+   "pos": "WR",
+   "team": "PIT",
+   "metric": "targets",
+   "op": "<=",
+   "value": 4.5,
+   "t": "At most 4.5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 4.3 over his last 3 games (wks 4, 5, 11), 5.2 season."
+   ]
+  },
+  {
+   "id": "00-0039746",
+   "name": "Will Shipley",
+   "pos": "RB",
+   "team": "PHI",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 4,
+   "t": "At most 4 PPR points in Wk 12.",
+   "f": [
+    "F12",
+    "F2"
+   ],
+   "facts": [
+    "PPR points per game: 3.8 over his last 3 games (wks 4, 5, 11), 3.4 season.",
+    "Our Wk 12 projection: 4.5 PPR, 63rd among RBs."
+   ]
+  },
+  {
+   "id": "00-0039792",
+   "name": "Devontez Walker",
+   "pos": "WR",
+   "team": "BAL",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 6.5,
+   "t": "At most 6.5 PPR points in Wk 12.",
+   "f": [
+    "F10",
+    "F2"
+   ],
+   "facts": [
+    "PPR points per game: 6.4 over his last 3 games (wks 5, 6, 11), 4.6 season.",
+    "Our Wk 12 projection: 3.7 PPR, 112th among WRs."
+   ]
+  },
+  {
+   "id": "00-0039793",
+   "name": "AJ Barner",
+   "pos": "TE",
+   "team": "SEA",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 80,
+   "t": "At least 80% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 84% over his last 3 games (wks 8, 9, 10), 87% season."
+   ]
+  },
+  {
+   "id": "00-0039794",
+   "name": "Braelon Allen",
+   "pos": "RB",
+   "team": "NYJ",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 50,
+   "t": "At most 50% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 48% over his last 3 games (wks 9, 10, 11), 63% season."
+   ]
+  },
+  {
+   "id": "00-0039811",
+   "name": "MarShawn Lloyd",
+   "pos": "RB",
+   "team": "GB",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 27,
+   "t": "At most 27% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 26% over his last 3 games (wks 7, 8, 10), 34% season."
+   ]
+  },
+  {
+   "id": "00-0039816",
+   "name": "Anthony Gould",
+   "pos": "WR",
+   "team": "IND",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 4.3,
+   "t": "At most 4.3 PPR points in Wk 12.",
+   "f": [
+    "F10",
+    "F2"
+   ],
+   "facts": [
+    "PPR points per game: 4.7 over his last 3 games (wks 9, 10, 11), 1.8 season.",
+    "Our Wk 12 projection: 3.6 PPR, 115th among WRs."
+   ]
+  },
+  {
+   "id": "00-0039847",
+   "name": "Theo Johnson",
+   "pos": "TE",
+   "team": "NYG",
+   "metric": "targets",
+   "op": "<=",
+   "value": 2.5,
+   "t": "At most 2.5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F6"
+   ],
+   "facts": [
+    "Targets per game: 2.3 over his last 3 games (wks 5, 10, 11), 2.2 season.",
+    "Target share: 6% over his last 3 games (wks 5, 10, 11), 6% season."
+   ]
+  },
+  {
+   "id": "00-0039849",
+   "name": "Marvin Harrison Jr.",
+   "pos": "WR",
+   "team": "HOU",
+   "metric": "targets",
+   "op": "<=",
+   "value": 4,
+   "t": "At most 4 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F2"
+   ],
+   "facts": [
+    "Targets per game: 3.7 over his last 3 games (wks 6, 7, 9), 3.4 season.",
+    "Our Wk 12 projection: 4.2 PPR, 105th among WRs."
+   ]
+  },
+  {
+   "id": "00-0039868",
+   "name": "Troy Franklin",
+   "pos": "WR",
+   "team": "DEN",
+   "metric": "targets",
+   "op": "<=",
+   "value": 2.7,
+   "t": "At most 2.7 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F15"
+   ],
+   "facts": [
+    "Targets per game: 2.7 over his last 3 games (wks 8, 9, 11), 1.9 season.",
+    "Coach Sean Payton (2026-11-06, usage, signal watch): Franklin will keep a role in a deep WR group, with snaps likely to shrink when Bryant returns."
+   ]
+  },
+  {
+   "id": "00-0039875",
+   "name": "Ray Davis",
+   "pos": "RB",
+   "team": "BUF",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 16,
+   "t": "At most 16% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 16% over his last 3 games (wks 9, 10, 11), 14% season."
+   ]
+  },
+  {
+   "id": "00-0039880",
+   "name": "Malik Washington",
+   "pos": "WR",
+   "team": "MIA",
+   "metric": "targets",
+   "op": ">=",
+   "value": 4,
+   "t": "At least 4 targets in Wk 12.",
+   "f": [
+    "F6",
+    "F16"
+   ],
+   "facts": [
+    "Targets per game: 4.0 over his last 3 games (wks 9, 10, 11), 5.7 season.",
+    "Coach Jeff Hafley (2026-11-16, role, signal watch): Washington will get more opportunities as the veteran in the WR group."
+   ]
+  },
+  {
+   "id": "00-0039890",
+   "name": "Adonai Mitchell",
+   "pos": "WR",
+   "team": "NYJ",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5.5,
+   "t": "At least 5.5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F4",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 6.0 over his last 3 games (wks 9, 10, 11), 6.4 season.",
+    "Snap %: 79% over his last 3 games (wks 9, 10, 11), 71% season.",
+    "Wk 12: at MIA, NYJ implied team total 22.0 points (Vegas); MIA allows the 29th-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0039893",
+   "name": "Brian Thomas Jr.",
+   "pos": "WR",
+   "team": "JAX",
+   "metric": "targets",
+   "op": ">=",
+   "value": 3,
+   "t": "At least 3 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 3.0 over his last 3 games (wks 8, 10, 11), 3.1 season.",
+    "Wk 12: vs TEN, JAX implied team total 31.0 points (Vegas); TEN allows the 1st-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0039894",
+   "name": "Xavier Worthy",
+   "pos": "WR",
+   "team": "KC",
+   "metric": "rec_yds",
+   "op": "<=",
+   "value": 30,
+   "t": "At most 30 receiving yards in Wk 12.",
+   "f": [
+    "F8",
+    "F2"
+   ],
+   "facts": [
+    "Receiving yards per game: 28.7 over his last 3 games (wks 9, 10, 11), 31.6 season.",
+    "Our Wk 12 projection: 8.2 PPR, 57th among WRs."
+   ]
+  },
+  {
+   "id": "00-0039901",
+   "name": "Keon Coleman",
+   "pos": "WR",
+   "team": "BUF",
+   "metric": "targets",
+   "op": ">=",
+   "value": 4,
+   "t": "At least 4 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 4.3 over his last 3 games (wks 9, 10, 11), 4.0 season."
+   ]
+  },
+  {
+   "id": "00-0039910",
+   "name": "Jayden Daniels",
+   "pos": "QB",
+   "team": "WAS",
+   "metric": "pass_yds",
+   "op": ">=",
+   "value": 250,
+   "t": "At least 250 passing yards in Wk 12.",
+   "f": [
+    "F6",
+    "F14"
+   ],
+   "facts": [
+    "Passing yards per game: 270.7 over his last 3 games (wks 9, 10, 11), 223.5 season.",
+    "Wk 12: at ARI, WAS implied team total 25.0 points (Vegas); ARI allows the 1st-most PPR points per game to QBs."
+   ]
+  },
+  {
+   "id": "00-0039912",
+   "name": "Ben Sinnott",
+   "pos": "TE",
+   "team": "WAS",
+   "metric": "rec_yds",
+   "op": "<=",
+   "value": 15,
+   "t": "At most 15 receiving yards in Wk 12.",
+   "f": [
+    "F8"
+   ],
+   "facts": [
+    "Receiving yards per game: 14.0 over his last 3 games (wks 3, 5, 10), 12.0 season."
+   ]
+  },
+  {
+   "id": "00-0039915",
+   "name": "Ladd McConkey",
+   "pos": "WR",
+   "team": "LAC",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5,
+   "t": "At least 5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 5.0 over his last 3 games (wks 6, 8, 11), 4.6 season.",
+    "Wk 12: vs NE, LAC implied team total 18.5 points (Vegas); NE allows the 2nd-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0039917",
+   "name": "Michael Penix Jr.",
+   "pos": "QB",
+   "team": "ATL",
+   "metric": "rush_yds",
+   "op": "<=",
+   "value": 30,
+   "t": "At most 30 rushing yards in Wk 12.",
+   "f": [
+    "F10"
+   ],
+   "facts": [
+    "Rushing yards per game: 30.0 over his last 3 games (wks 8, 9, 10), 11.8 season."
+   ]
+  },
+  {
+   "id": "00-0039918",
+   "name": "Caleb Williams",
+   "pos": "QB",
+   "team": "CHI",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 30,
+   "t": "At least 30 pass attempts in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Pass attempts per game: 31.3 over his last 3 games (wks 8, 9, 11), 31.1 season."
+   ]
+  },
+  {
+   "id": "00-0039919",
+   "name": "Rome Odunze",
+   "pos": "WR",
+   "team": "CHI",
+   "metric": "receptions",
+   "op": ">=",
+   "value": 4,
+   "t": "At least 4 catches in Wk 12.",
+   "f": [
+    "F7",
+    "F13"
+   ],
+   "facts": [
+    "Catches per game: 4.0 over his last 3 games (wks 8, 9, 11), 3.6 season.",
+    "Wk 12: at DET, CHI implied team total 29.0 points (Vegas); DET allows the 11th-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0039923",
+   "name": "J.J. McCarthy",
+   "pos": "QB",
+   "team": "NYG",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 29,
+   "t": "At least 29 pass attempts in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Pass attempts per game: 31.0 over his last 3 games (wks 9, 10, 11), 23.7 season."
+   ]
+  },
+  {
+   "id": "00-0040009",
+   "name": "Savion Williams",
+   "pos": "WR",
+   "team": "GB",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 45,
+   "t": "At least 45% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 46% over his last 3 games (wks 8, 9, 10), 50% season."
+   ]
+  },
+  {
+   "id": "00-0040014",
+   "name": "Kyle McCord",
+   "pos": "QB",
+   "team": "MIA",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 30,
+   "t": "At least 30 pass attempts in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Pass attempts per game: 32.5 over his last 2 games (wks 10, 11), 32.5 season.",
+    "Wk 12: vs NYJ, MIA implied team total 18.5 points (Vegas); NYJ allows the 8th-most PPR points per game to QBs."
+   ]
+  },
+  {
+   "id": "00-0040024",
+   "name": "Darius Cooper",
+   "pos": "WR",
+   "team": "PHI",
+   "metric": "targets",
+   "op": ">=",
+   "value": 6,
+   "t": "At least 6 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 6.3 over his last 3 games (wks 8, 9, 11), 3.7 season.",
+    "Wk 12: at DAL, PHI implied team total 19.5 points (Vegas); DAL allows the 4th-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0040122",
+   "name": "Ashton Jeanty",
+   "pos": "RB",
+   "team": "LV",
+   "metric": "targets",
+   "op": ">=",
+   "value": 6,
+   "t": "At least 6 targets in Wk 12.",
+   "f": [
+    "F6"
+   ],
+   "facts": [
+    "Targets per game: 6.3 over his last 3 games (wks 9, 10, 11), 6.1 season."
+   ]
+  },
+  {
+   "id": "00-0040124",
+   "name": "Tetairoa McMillan",
+   "pos": "WR",
+   "team": "CAR",
+   "metric": "targets",
+   "op": ">=",
+   "value": 7,
+   "t": "At least 7 targets in Wk 12.",
+   "f": [
+    "F6"
+   ],
+   "facts": [
+    "Targets per game: 7.3 over his last 3 games (wks 9, 10, 11), 8.7 season."
+   ]
+  },
+  {
+   "id": "00-0040126",
+   "name": "Colston Loveland",
+   "pos": "TE",
+   "team": "CHI",
+   "metric": "rec_yds",
+   "op": ">=",
+   "value": 45,
+   "t": "At least 45 receiving yards in Wk 12.",
+   "f": [
+    "F8",
+    "F13"
+   ],
+   "facts": [
+    "Receiving yards per game: 49.3 over his last 3 games (wks 8, 9, 11), 39.2 season.",
+    "Wk 12: at DET, CHI implied team total 29.0 points (Vegas); DET allows the 1st-most PPR points per game to TEs."
+   ]
+  },
+  {
+   "id": "00-0040128",
+   "name": "Tyler Warren",
+   "pos": "TE",
+   "team": "IND",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5,
+   "t": "At least 5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 5.0 over his last 3 games (wks 9, 10, 11), 6.8 season.",
+    "Coach Shane Steichen (2026-11-17, usage, signal up): Colts coaches will try to scheme Warren more open and get him more touches, using crossing routes, middle-of-the-field targets and flat routes."
+   ]
+  },
+  {
+   "id": "00-0040129",
+   "name": "Emeka Egbuka",
+   "pos": "WR",
+   "team": "TB",
+   "metric": "targets",
+   "op": ">=",
+   "value": 8,
+   "t": "At least 8 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 8.7 over his last 3 games (wks 6, 9, 11), 7.4 season."
+   ]
+  },
+  {
+   "id": "00-0040131",
+   "name": "Kyle Williams",
+   "pos": "WR",
+   "team": "NE",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 4.0,
+   "t": "At most 4 PPR points in Wk 12.",
+   "f": [
+    "F2",
+    "F10"
+   ],
+   "facts": [
+    "Our Wk 12 projection: 3.7 PPR, 112th among WRs.",
+    "PPR points per game: 3.8 over his last 3 games (wks 8, 9, 10), 3.8 season."
+   ]
+  },
+  {
+   "id": "00-0040134",
+   "name": "Pat Bryant",
+   "pos": "WR",
+   "team": "DEN",
+   "metric": "targets",
+   "op": "<=",
+   "value": 4,
+   "t": "At most 4 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 4.0 over his last 3 games (wks 4, 9, 11), 3.5 season."
+   ]
+  },
+  {
+   "id": "00-0040142",
+   "name": "Kaleb Johnson",
+   "pos": "RB",
+   "team": "GB",
+   "metric": "carries",
+   "op": "<=",
+   "value": 8,
+   "t": "At most 8 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 8.3 over his last 3 games (wks 6, 9, 10), 6.5 season."
+   ]
+  },
+  {
+   "id": "00-0040154",
+   "name": "Tai Felton",
+   "pos": "WR",
+   "team": "MIN",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5.5,
+   "t": "At least 5.5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 6.0 over his last 3 games (wks 7, 10, 11), 4.0 season.",
+    "Wk 12: vs ATL, MIN implied team total 24.8 points (Vegas); ATL allows the 6th-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0040162",
+   "name": "Dylan Sampson",
+   "pos": "RB",
+   "team": "CLE",
+   "metric": "receptions",
+   "op": ">=",
+   "value": 4,
+   "t": "At least 4 catches in Wk 12.",
+   "f": [
+    "F8",
+    "F6",
+    "F15"
+   ],
+   "facts": [
+    "Catches per game: 4.3 over his last 3 games (wks 8, 9, 10), 3.2 season.",
+    "Targets per game: 6.7 over his last 3 games (wks 8, 9, 10), 4.6 season.",
+    "Wk 12: vs LV, CLE implied team total 23.0 points (Vegas); LV allows the 4th-most PPR points per game to RBs."
+   ]
+  },
+  {
+   "id": "00-0040170",
+   "name": "Elic Ayomanor",
+   "pos": "WR",
+   "team": "TEN",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5.5,
+   "t": "At least 5.5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 6.0 over his last 3 games (wks 8, 10, 11), 3.9 season."
+   ]
+  },
+  {
+   "id": "00-0040172",
+   "name": "Jordan Watkins",
+   "pos": "WR",
+   "team": "SF",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 62,
+   "t": "At least 62% of snaps in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Snap %: 66% over his last 3 games (wks 9, 10, 11), 63% season."
+   ]
+  },
+  {
+   "id": "00-0040187",
+   "name": "Mitchell Evans",
+   "pos": "TE",
+   "team": "CAR",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 6.5,
+   "t": "At most 6.5 PPR points in Wk 12.",
+   "f": [
+    "F10",
+    "F2"
+   ],
+   "facts": [
+    "PPR points per game: 6.5 over his last 3 games (wks 9, 10, 11), 4.2 season.",
+    "Our Wk 12 projection: 3.9 PPR, 56th among TEs."
+   ]
+  },
+  {
+   "id": "00-0040189",
+   "name": "Oronde Gadsden II",
+   "pos": "TE",
+   "team": "LAC",
+   "metric": "targets",
+   "op": "<=",
+   "value": 3,
+   "t": "At most 3 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 3.0 over his last 3 games (wks 8, 9, 10), 3.3 season.",
+    "Wk 12: vs NE, LAC implied team total 18.5 points (Vegas); NE allows the 29th-most PPR points per game to TEs."
+   ]
+  },
+  {
+   "id": "00-0040198",
+   "name": "Ollie Gordon II",
+   "pos": "RB",
+   "team": "MIA",
+   "metric": "carries",
+   "op": ">=",
+   "value": 15,
+   "t": "At least 15 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 15.7 over his last 3 games (wks 9, 10, 11), 15.3 season."
+   ]
+  },
+  {
+   "id": "00-0040208",
+   "name": "Tahj Brooks",
+   "pos": "RB",
+   "team": "CIN",
+   "metric": "carries",
+   "op": "<=",
+   "value": 1,
+   "t": "At most 1 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 1.0 over his last 3 games (wks 9, 10, 11), 0.8 season."
+   ]
+  },
+  {
+   "id": "00-0040215",
+   "name": "Gavin Bartholomew",
+   "pos": "TE",
+   "team": "MIN",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 39,
+   "t": "At most 39% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F14"
+   ],
+   "facts": [
+    "Snap %: 39% over his last 3 games (wks 7, 10, 11), 40% season.",
+    "Coach Kevin O'Connell (2026-11-20, depth_chart, signal watch): He has been a productive fill-in at tight end, including after the catch, but Hockenson's return likely trims his workload."
+   ]
+  },
+  {
+   "id": "00-0040236",
+   "name": "Kyle Monangai",
+   "pos": "RB",
+   "team": "CHI",
+   "metric": "carries",
+   "op": ">=",
+   "value": 15,
+   "t": "At least 15 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F15"
+   ],
+   "facts": [
+    "Carries per game: 16.0 over his last 3 games (wks 3, 4, 11), 13.6 season.",
+    "Wk 12: at DET, CHI implied team total 29.0 points (Vegas); DET allows the 26th-most PPR points per game to RBs."
+   ]
+  },
+  {
+   "id": "00-0040237",
+   "name": "Tez Johnson",
+   "pos": "WR",
+   "team": "TB",
+   "metric": "rec_yds",
+   "op": "<=",
+   "value": 33,
+   "t": "At most 33 receiving yards in Wk 12.",
+   "f": [
+    "F8"
+   ],
+   "facts": [
+    "Receiving yards per game: 31.0 over his last 3 games (wks 8, 9, 11), 27.1 season."
+   ]
+  },
+  {
+   "id": "00-0040238",
+   "name": "LeQuint Allen Jr.",
+   "pos": "RB",
+   "team": "JAX",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 15,
+   "t": "At most 15% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 14% over his last 3 games (wks 9, 10, 11), 14% season."
+   ]
+  },
+  {
+   "id": "00-0040242",
+   "name": "Jacory Croskey-Merritt",
+   "pos": "RB",
+   "team": "WAS",
+   "metric": "carries",
+   "op": ">=",
+   "value": 10,
+   "t": "At least 10 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 11.0 over his last 3 games (wks 4, 5, 11), 13.3 season."
+   ]
+  },
+  {
+   "id": "00-0040506",
+   "name": "Myles Price",
+   "pos": "WR",
+   "team": "MIN",
+   "metric": "targets",
+   "op": ">=",
+   "value": 3,
+   "t": "At least 3 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 3.3 over his last 3 games (wks 9, 10, 11), 1.7 season."
+   ]
+  },
+  {
+   "id": "00-0040509",
+   "name": "Ben Yurosek",
+   "pos": "TE",
+   "team": "MIN",
+   "metric": "snap_pct",
+   "op": "<=",
+   "value": 40,
+   "t": "At most 40% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F14"
+   ],
+   "facts": [
+    "Snap %: 41% over his last 3 games (wks 8, 9, 10), 44% season.",
+    "Coach Kevin O'Connell (2026-11-20, depth_chart, signal watch): He has been steady in the tight end rotation, but snaps could shrink with Hockenson back (and possibly Oliver)."
+   ]
+  },
+  {
+   "id": "00-0040556",
+   "name": "Corey Kiner",
+   "pos": "RB",
+   "team": "NE",
+   "metric": "carries",
+   "op": ">=",
+   "value": 7.5,
+   "t": "At least 7.5 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F17"
+   ],
+   "facts": [
+    "Carries per game: 8.3 over his last 3 games (wks 8, 9, 10), 6.0 season.",
+    "Coach Mike Vrabel (2026-11-06, role, signal up): Kiner's role in the offense and on kick returns will continue to grow with Henderson out."
+   ]
+  },
+  {
+   "id": "00-0040563",
+   "name": "Efton Chism III",
+   "pos": "WR",
+   "team": "NE",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 7,
+   "t": "At most 7 PPR points in Wk 12.",
+   "f": [
+    "F10",
+    "F2"
+   ],
+   "facts": [
+    "PPR points per game: 7.5 over his last 3 games (wks 8, 9, 10), 5.6 season.",
+    "Our Wk 12 projection: 5.5 PPR, 88th among WRs."
+   ]
+  },
+  {
+   "id": "00-0040583",
+   "name": "Woody Marks",
+   "pos": "RB",
+   "team": "HOU",
+   "metric": "carries",
+   "op": "<=",
+   "value": 16,
+   "t": "At most 16 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F16"
+   ],
+   "facts": [
+    "Carries per game: 16.3 over his last 3 games (wks 7, 9, 10), 11.9 season.",
+    "Coach DeMeco Ryans (2026-11-25, injury, signal watch): Marks is on his way back from a concussion, but no return timeline was given."
+   ]
+  },
+  {
+   "id": "00-0040584",
+   "name": "Gunnar Helm",
+   "pos": "TE",
+   "team": "TEN",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 8,
+   "t": "At most 8 PPR points in Wk 12.",
+   "f": [
+    "F10",
+    "F2",
+    "F13"
+   ],
+   "facts": [
+    "PPR points per game: 8.1 over his last 3 games (wks 8, 10, 11), 5.2 season.",
+    "Our Wk 12 projection: 6.4 PPR, 33rd among TEs.",
+    "Wk 12: at JAX, TEN implied team total 16.5 points (Vegas); JAX allows the 28th-most PPR points per game to TEs."
+   ]
+  },
+  {
+   "id": "00-0040590",
+   "name": "Konata Mumpfield",
+   "pos": "WR",
+   "team": "LA",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 50,
+   "t": "At least 50% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F14"
+   ],
+   "facts": [
+    "Snap %: 52% over his last 3 games (wks 8, 9, 10), 49% season.",
+    "Coach Sean McVay (2026-11-23, role, signal up): Will get expanded receiver opportunities with Puka out."
+   ]
+  },
+  {
+   "id": "00-0040618",
+   "name": "Max Hurleman",
+   "pos": "WR",
+   "team": "PIT",
+   "metric": "targets",
+   "op": "<=",
+   "value": 7,
+   "t": "At most 7 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 7.0 over his last 1 game (wk 11), 7.0 season."
+   ]
+  },
+  {
+   "id": "00-0040648",
+   "name": "Tory Horton",
+   "pos": "WR",
+   "team": "SEA",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 53,
+   "t": "At least 53% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 58% over his last 3 games (wks 7, 8, 9), 43% season."
+   ]
+  },
+  {
+   "id": "00-0040663",
+   "name": "Harold Fannin Jr.",
+   "pos": "TE",
+   "team": "CLE",
+   "metric": "targets",
+   "op": ">=",
+   "value": 7,
+   "t": "At least 7 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 7.7 over his last 3 games (wks 8, 9, 10), 6.2 season.",
+    "Wk 12: vs LV, CLE implied team total 23.0 points (Vegas); LV allows the 5th-most PPR points per game to TEs."
+   ]
+  },
+  {
+   "id": "00-0040666",
+   "name": "Omarion Hampton",
+   "pos": "RB",
+   "team": "LAC",
+   "metric": "carries",
+   "op": ">=",
+   "value": 15,
+   "t": "At least 15 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F17"
+   ],
+   "facts": [
+    "Carries per game: 16.3 over his last 3 games (wks 9, 10, 11), 13.8 season.",
+    "Coach Jim Harbaugh (2026-11-20, usage, signal up): Hampton remains the featured runner behind a run-focused offense that is getting good line and receiver blocking."
+   ]
+  },
+  {
+   "id": "00-0040667",
+   "name": "Matthew Golden",
+   "pos": "WR",
+   "team": "GB",
+   "metric": "targets",
+   "op": ">=",
+   "value": 10,
+   "t": "At least 10 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 10.7 over his last 3 games (wks 8, 9, 10), 10.1 season."
+   ]
+  },
+  {
+   "id": "00-0040669",
+   "name": "Isaac TeSlaa",
+   "pos": "WR",
+   "team": "DET",
+   "metric": "targets",
+   "op": ">=",
+   "value": 3,
+   "t": "At least 3 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 3.3 over his last 3 games (wks 9, 10, 11), 3.4 season."
+   ]
+  },
+  {
+   "id": "00-0040676",
+   "name": "Cam Ward",
+   "pos": "QB",
+   "team": "TEN",
+   "metric": "pass_yds",
+   "op": "<=",
+   "value": 250,
+   "t": "At most 250 passing yards in Wk 12.",
+   "f": [
+    "F6",
+    "F14"
+   ],
+   "facts": [
+    "Passing yards per game: 261.0 over his last 3 games (wks 8, 10, 11), 196.2 season.",
+    "Wk 12: at JAX, TEN implied team total 16.5 points (Vegas); JAX allows the 26th-most PPR points per game to QBs."
+   ]
+  },
+  {
+   "id": "00-0040705",
+   "name": "Chimere Dike",
+   "pos": "WR",
+   "team": "TEN",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 80,
+   "t": "At least 80% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 85% over his last 3 games (wks 8, 10, 11), 34% season."
+   ]
+  },
+  {
+   "id": "00-0040715",
+   "name": "Cam Skattebo",
+   "pos": "RB",
+   "team": "NYG",
+   "metric": "carries",
+   "op": ">=",
+   "value": 15,
+   "t": "At least 15 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 16.3 over his last 3 games (wks 7, 10, 11), 16.2 season."
+   ]
+  },
+  {
+   "id": "00-0040719",
+   "name": "Bhayshul Tuten",
+   "pos": "RB",
+   "team": "JAX",
+   "metric": "carries",
+   "op": "<=",
+   "value": 16,
+   "t": "At most 16 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F16",
+    "F17"
+   ],
+   "facts": [
+    "Carries per game: 16.0 over his last 3 games (wks 9, 10, 11), 15.8 season.",
+    "Coach Liam Coen (2026-11-25, injury, signal watch): Tuten's workload is being managed this week as he works back to full health.",
+    "Coach Liam Coen (2026-11-23, injury, signal down): Tuten will be limited in practice this week and could be rested depending on how the ankle looks Wednesday and Thursday."
+   ]
+  },
+  {
+   "id": "00-0040727",
+   "name": "Tre Harris",
+   "pos": "WR",
+   "team": "LAC",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5,
+   "t": "At least 5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F6",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 4.7 over his last 3 games (wks 9, 10, 11), 4.7 season.",
+    "Target share: 21% over his last 3 games (wks 9, 10, 11), 18% season.",
+    "Wk 12: vs NE, LAC implied team total 18.5 points (Vegas); NE allows the 2nd-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0040729",
+   "name": "Jack Bech",
+   "pos": "WR",
+   "team": "LV",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5.5,
+   "t": "At least 5.5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F6"
+   ],
+   "facts": [
+    "Targets per game: 6.0 over his last 3 games (wks 9, 10, 11), 4.8 season.",
+    "Target share: 19% over his last 3 games (wks 9, 10, 11), 15% season."
+   ]
+  },
+  {
+   "id": "00-0040735",
+   "name": "Luther Burden III",
+   "pos": "WR",
+   "team": "CHI",
+   "metric": "targets",
+   "op": ">=",
+   "value": 7,
+   "t": "At least 7 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 7.3 over his last 3 games (wks 8, 9, 11), 6.9 season."
+   ]
+  },
+  {
+   "id": "00-0040736",
+   "name": "Mason Taylor",
+   "pos": "TE",
+   "team": "NYJ",
+   "metric": "targets",
+   "op": ">=",
+   "value": 2.7,
+   "t": "At least 2.7 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 2.7 over his last 3 games (wks 9, 10, 11), 3.9 season.",
+    "Coach Aaron Glenn (2026-11-20, role, signal up): Will play some receiver spots with Cooper and Williams out."
+   ]
+  },
+  {
+   "id": "00-0040743",
+   "name": "Tyler Shough",
+   "pos": "QB",
+   "team": "NO",
+   "metric": "pass_att",
+   "op": ">=",
+   "value": 36,
+   "t": "At least 36 pass attempts in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Pass attempts per game: 37.3 over his last 3 games (wks 9, 10, 11), 38.5 season.",
+    "Wk 12: at CIN, NO implied team total 20.2 points (Vegas); CIN allows the 16th-most PPR points per game to QBs."
+   ]
+  },
+  {
+   "id": "00-0040784",
+   "name": "Quinshon Judkins",
+   "pos": "RB",
+   "team": "CLE",
+   "metric": "carries",
+   "op": ">=",
+   "value": 11,
+   "t": "At least 11 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F15"
+   ],
+   "facts": [
+    "Carries per game: 12.0 over his last 3 games (wks 8, 9, 10), 14.0 season.",
+    "Wk 12: vs LV, CLE implied team total 23.0 points (Vegas); LV allows the 4th-most PPR points per game to RBs."
+   ]
+  },
+  {
+   "id": "00-0040785",
+   "name": "Dohnte Meyers",
+   "pos": "WR",
+   "team": "CIN",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 38,
+   "t": "At least 38% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F14"
+   ],
+   "facts": [
+    "Snap %: 40% over his last 3 games (wks 9, 10, 11), 42% season.",
+    "Coach Zac Taylor (2026-11-19, role, signal up): Meyers will keep an expanded role in the passing game and as the return man, though he must keep fighting for it in a deep receiver room."
+   ]
+  },
+  {
+   "id": "00-0040867",
+   "name": "Makai Lemon",
+   "pos": "WR",
+   "team": "PHI",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 85,
+   "t": "At least 85% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 90% over his last 3 games (wks 8, 9, 11), 79% season."
+   ]
+  },
+  {
+   "id": "00-0040870",
+   "name": "Ja'Kobi Lane",
+   "pos": "WR",
+   "team": "BAL",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 60,
+   "t": "At least 60% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 62% over his last 3 games (wks 8, 9, 10), 58% season."
+   ]
+  },
+  {
+   "id": "00-0040878",
+   "name": "Mike Washington Jr.",
+   "pos": "RB",
+   "team": "LV",
+   "metric": "carries",
+   "op": "<=",
+   "value": 8,
+   "t": "At most 8 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F15"
+   ],
+   "facts": [
+    "Carries per game: 7.7 over his last 3 games (wks 9, 10, 11), 8.0 season.",
+    "Wk 12: at CLE, LV implied team total 18.5 points (Vegas); CLE allows the 21st-most PPR points per game to RBs."
+   ]
+  },
+  {
+   "id": "00-0040879",
+   "name": "Matthew Hibner",
+   "pos": "TE",
+   "team": "BAL",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 48,
+   "t": "At least 48% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 50% over his last 3 games (wks 8, 9, 11), 47% season."
+   ]
+  },
+  {
+   "id": "00-0040890",
+   "name": "Cyrus Allen",
+   "pos": "WR",
+   "team": "KC",
+   "metric": "targets",
+   "op": "<=",
+   "value": 3,
+   "t": "At most 3 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 3.0 over his last 3 games (wks 9, 10, 11), 2.2 season."
+   ]
+  },
+  {
+   "id": "00-0041013",
+   "name": "Emmett Johnson",
+   "pos": "RB",
+   "team": "KC",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 62,
+   "t": "At least 62% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 67% over his last 3 games (wks 9, 10, 11), 38% season."
+   ]
+  },
+  {
+   "id": "00-0041029",
+   "name": "Jordyn Tyson",
+   "pos": "WR",
+   "team": "NO",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 44,
+   "t": "At least 44% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F15"
+   ],
+   "facts": [
+    "Snap %: 48% over his last 3 games (wks 9, 10, 11), 48% season.",
+    "Coach Kellen Moore (2026-11-22, usage, signal watch): Tyson's stretch of about 12 missed snaps came from personnel sequencing and tempo, not a punishment or workload limit."
+   ]
+  },
+  {
+   "id": "00-0041032",
+   "name": "Kenyon Sadiq",
+   "pos": "TE",
+   "team": "NYJ",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 50,
+   "t": "At least 50% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F14"
+   ],
+   "facts": [
+    "Snap %: 52% over his last 3 games (wks 9, 10, 11), 45% season.",
+    "Coach Aaron Glenn (2026-11-20, role, signal up): Will play in receiver-type spots, allowing 12 personnel with 11 personnel concepts."
+   ]
+  },
+  {
+   "id": "00-0041037",
+   "name": "Denzel Boston",
+   "pos": "WR",
+   "team": "CLE",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 85,
+   "t": "At least 85% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 87% over his last 3 games (wks 8, 9, 10), 90% season."
+   ]
+  },
+  {
+   "id": "00-0041040",
+   "name": "Antonio Williams",
+   "pos": "WR",
+   "team": "WAS",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 80,
+   "t": "At least 80% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 85% over his last 3 games (wks 9, 10, 11), 67% season."
+   ]
+  },
+  {
+   "id": "00-0041042",
+   "name": "Malachi Fields",
+   "pos": "WR",
+   "team": "NYG",
+   "metric": "targets",
+   "op": ">=",
+   "value": 4.5,
+   "t": "At least 4.5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 4.7 over his last 3 games (wks 9, 10, 11), 4.4 season."
+   ]
+  },
+  {
+   "id": "00-0041048",
+   "name": "Ted Hurst III",
+   "pos": "WR",
+   "team": "TB",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 35,
+   "t": "At least 35% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F14"
+   ],
+   "facts": [
+    "Snap %: 36% over his last 3 games (wks 8, 9, 11), 53% season.",
+    "Coach Todd Bowles (2026-11-22, role, signal up): Hurst will be more involved earlier in games going forward."
+   ]
+  },
+  {
+   "id": "00-0041051",
+   "name": "Zavion Thomas",
+   "pos": "WR",
+   "team": "CHI",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 4.8,
+   "t": "At most 4.8 PPR points in Wk 12.",
+   "f": [
+    "F10",
+    "F2"
+   ],
+   "facts": [
+    "PPR points per game: 4.8 over his last 3 games (wks 8, 9, 11), 2.7 season.",
+    "Our Wk 12 projection: 4.2 PPR, 105th among WRs."
+   ]
+  },
+  {
+   "id": "00-0041052",
+   "name": "Kaelon Black",
+   "pos": "RB",
+   "team": "SF",
+   "metric": "carries",
+   "op": "<=",
+   "value": 9,
+   "t": "At most 9 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F16"
+   ],
+   "facts": [
+    "Carries per game: 9.3 over his last 3 games (wks 9, 10, 11), 8.5 season.",
+    "Coach Kyle Shanahan (2026-11-25, role, signal up): Black will keep a complementary role behind McCaffrey by design."
+   ]
+  },
+  {
+   "id": "00-0041069",
+   "name": "Colbie Young",
+   "pos": "WR",
+   "team": "CIN",
+   "metric": "ppr",
+   "op": "<=",
+   "value": 3.7,
+   "t": "At most 3.7 PPR points in Wk 12.",
+   "f": [
+    "F10",
+    "F2"
+   ],
+   "facts": [
+    "PPR points per game: 3.4 over his last 3 games (wks 2, 3, 11), 3.4 season.",
+    "Our Wk 12 projection: 3.3 PPR, 118th among WRs."
+   ]
+  },
+  {
+   "id": "00-0041070",
+   "name": "Reggie Virgil",
+   "pos": "WR",
+   "team": "ARI",
+   "metric": "targets",
+   "op": "<=",
+   "value": 4,
+   "t": "At most 4 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 3.7 over his last 3 games (wks 5, 8, 9), 3.7 season."
+   ]
+  },
+  {
+   "id": "00-0041084",
+   "name": "Tanner Koziol",
+   "pos": "TE",
+   "team": "JAX",
+   "metric": "rec_yds",
+   "op": "<=",
+   "value": 11,
+   "t": "At most 11 receiving yards in Wk 12.",
+   "f": [
+    "F8"
+   ],
+   "facts": [
+    "Receiving yards per game: 10.3 over his last 3 games (wks 8, 9, 10), 10.3 season."
+   ]
+  },
+  {
+   "id": "00-0041100",
+   "name": "Josh Cameron",
+   "pos": "WR",
+   "team": "JAX",
+   "metric": "targets",
+   "op": ">=",
+   "value": 3.5,
+   "t": "At least 3.5 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 3.7 over his last 3 games (wks 9, 10, 11), 2.4 season.",
+    "Wk 12: vs TEN, JAX implied team total 31.0 points (Vegas); TEN allows the 1st-most PPR points per game to WRs."
+   ]
+  },
+  {
+   "id": "00-0041116",
+   "name": "Jack Endries",
+   "pos": "TE",
+   "team": "CIN",
+   "metric": "receptions",
+   "op": "<=",
+   "value": 2,
+   "t": "At most 2 catches in Wk 12.",
+   "f": [
+    "F7"
+   ],
+   "facts": [
+    "Catches per game: 2.0 over his last 3 games (wks 9, 10, 11), 1.8 season."
+   ]
+  },
+  {
+   "id": "00-0041326",
+   "name": "CJ Donaldson",
+   "pos": "RB",
+   "team": "NO",
+   "metric": "carries",
+   "op": "<=",
+   "value": 4,
+   "t": "At most 4 carries in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Carries per game: 3.7 over his last 3 games (wks 5, 6, 11), 2.6 season."
+   ]
+  },
+  {
+   "id": "00-0041368",
+   "name": "Harrison Wallace III",
+   "pos": "WR",
+   "team": "ARI",
+   "metric": "targets",
+   "op": ">=",
+   "value": 4,
+   "t": "At least 4 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 4.0 over his last 2 games (wks 10, 11), 4.0 season.",
+    "Coach Mike LaFleur (2026-11-22, role, signal up): Wallace will keep building his role and the offense will continue to showcase him."
+   ]
+  },
+  {
+   "id": "00-0041395",
+   "name": "Eli Raridon",
+   "pos": "TE",
+   "team": "NE",
+   "metric": "targets",
+   "op": "<=",
+   "value": 4,
+   "t": "At most 4 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F13"
+   ],
+   "facts": [
+    "Targets per game: 3.7 over his last 3 games (wks 8, 9, 10), 3.0 season.",
+    "Wk 12: at LAC, NE implied team total 17.0 points (Vegas); LAC allows the 23rd-most PPR points per game to TEs."
+   ]
+  },
+  {
+   "id": "00-0041399",
+   "name": "CJ Daniels",
+   "pos": "WR",
+   "team": "LA",
+   "metric": "targets",
+   "op": ">=",
+   "value": 2,
+   "t": "At least 2 targets in Wk 12.",
+   "f": [
+    "F5",
+    "F14"
+   ],
+   "facts": [
+    "Targets per game: 2.0 over his last 1 game (wk 10), 2.0 season.",
+    "Coach Sean McVay (2026-11-23, role, signal up): Will get expanded receiver opportunities with Puka out."
+   ]
+  },
+  {
+   "id": "00-0041436",
+   "name": "DJ Herman",
+   "pos": "RB",
+   "team": "MIA",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 40,
+   "t": "At least 40% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 44% over his last 3 games (wks 3, 10, 11), 40% season."
+   ]
+  },
+  {
+   "id": "00-0041438",
+   "name": "Carnell Tate",
+   "pos": "WR",
+   "team": "TEN",
+   "metric": "targets",
+   "op": ">=",
+   "value": 6,
+   "t": "At least 6 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 6.3 over his last 3 games (wks 6, 7, 11), 7.0 season."
+   ]
+  },
+  {
+   "id": "00-0041472",
+   "name": "Marlin Klein",
+   "pos": "TE",
+   "team": "HOU",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 18,
+   "t": "At least 18% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F14"
+   ],
+   "facts": [
+    "Snap %: 18% over his last 2 games (wks 1, 11), 18% season.",
+    "Coach DeMeco Ryans (2026-11-23, role, signal up): Klein will keep getting more tight end reps after being activated and scoring his first TD."
+   ]
+  },
+  {
+   "id": "00-0041489",
+   "name": "Germie Bernard",
+   "pos": "WR",
+   "team": "PIT",
+   "metric": "targets",
+   "op": ">=",
+   "value": 5.5,
+   "t": "At least 5.5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 6.0 over his last 3 games (wks 8, 10, 11), 6.1 season."
+   ]
+  },
+  {
+   "id": "00-0041496",
+   "name": "Jonah Coleman",
+   "pos": "RB",
+   "team": "DEN",
+   "metric": "carries",
+   "op": "<=",
+   "value": 17,
+   "t": "At most 17 carries in Wk 12.",
+   "f": [
+    "F5",
+    "F17"
+   ],
+   "facts": [
+    "Carries per game: 17.3 over his last 3 games (wks 8, 9, 11), 11.8 season.",
+    "Coach Sean Payton (2026-11-23, usage, signal watch): Coleman's workload will be managed on the short week, with other backs sharing the load."
+   ]
+  },
+  {
+   "id": "00-0041503",
+   "name": "Nate Boerkircher",
+   "pos": "TE",
+   "team": "JAX",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 48,
+   "t": "At least 48% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 51% over his last 3 games (wks 8, 9, 10), 50% season."
+   ]
+  },
+  {
+   "id": "00-0041512",
+   "name": "Jadarian Price",
+   "pos": "RB",
+   "team": "SEA",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 35,
+   "t": "At least 35% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F17"
+   ],
+   "facts": [
+    "Snap %: 37% over his last 3 games (wks 8, 9, 10), 37% season.",
+    "Coach Mike Macdonald (2026-11-04, usage, signal up): Price's snap constraints are lessened this week compared with last week."
+   ]
+  },
+  {
+   "id": "00-0041523",
+   "name": "Caleb Douglas",
+   "pos": "WR",
+   "team": "MIA",
+   "metric": "targets",
+   "op": ">=",
+   "value": 8,
+   "t": "At least 8 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 8.7 over his last 3 games (wks 9, 10, 11), 6.4 season."
+   ]
+  },
+  {
+   "id": "00-0041525",
+   "name": "Chris Bell",
+   "pos": "WR",
+   "team": "MIA",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 60,
+   "t": "At least 60% of snaps in Wk 12.",
+   "f": [
+    "F4",
+    "F14"
+   ],
+   "facts": [
+    "Snap %: 65% over his last 3 games (wks 8, 9, 11), 62% season.",
+    "Coach Jeff Hafley (2026-11-23, other, signal watch): Coaches will work on his catching fundamentals with no expected role change."
+   ]
+  },
+  {
+   "id": "00-0041529",
+   "name": "Kevin Coleman Jr.",
+   "pos": "WR",
+   "team": "MIA",
+   "metric": "targets",
+   "op": "<=",
+   "value": 2.5,
+   "t": "At most 2.5 targets in Wk 12.",
+   "f": [
+    "F5"
+   ],
+   "facts": [
+    "Targets per game: 2.3 over his last 3 games (wks 9, 10, 11), 3.1 season."
+   ]
+  },
+  {
+   "id": "00-0041547",
+   "name": "KC Concepcion",
+   "pos": "WR",
+   "team": "CLE",
+   "metric": "snap_pct",
+   "op": ">=",
+   "value": 80,
+   "t": "At least 80% of snaps in Wk 12.",
+   "f": [
+    "F4"
+   ],
+   "facts": [
+    "Snap %: 85% over his last 3 games (wks 8, 9, 10), 74% season."
+   ]
+  },
+  {
+   "id": "00-0041558",
+   "name": "Sam Roush",
+   "pos": "TE",
+   "team": "CHI",
+   "metric": "rec_yds",
+   "op": "<=",
+   "value": 14,
+   "t": "At most 14 receiving yards in Wk 12.",
+   "f": [
+    "F8"
+   ],
+   "facts": [
+    "Receiving yards per game: 14.0 over his last 3 games (wks 6, 9, 11), 10.7 season."
+   ]
+  },
+  {
+   "id": "00-0041562",
+   "name": "Fernando Mendoza",
+   "pos": "QB",
+   "team": "LV",
+   "metric": "pass_yds",
+   "op": "<=",
+   "value": 150,
+   "t": "At most 150 passing yards in Wk 12.",
+   "f": [
+    "F6",
+    "F14"
+   ],
+   "facts": [
+    "Passing yards per game: 152.7 over his last 3 games (wks 5, 10, 11), 152.7 season.",
+    "Wk 12: at CLE, LV implied team total 18.5 points (Vegas); CLE allows the 23rd-most PPR points per game to QBs."
+   ]
+  }
+ ],
+ "failed_raw": {}
+}
