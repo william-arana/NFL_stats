@@ -1,5 +1,435 @@
 [
  {
+  "id": "CHI:ben-johnson-on-bears-thanksgiving-victory-vs-lions-we-needed-that-press-conference",
+  "team": "CHI",
+  "url": "https://www.chicagobears.com/video/ben-johnson-on-bears-thanksgiving-victory-vs-lions-we-needed-that-press-conference",
+  "title": "Ben Johnson on Bears' Thanksgiving victory vs. Lions: 'We needed that' | Press Conference",
+  "date": "2026-11-26",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/bears/ww82udc7kevvgdjaiyce.jpg",
+  "kind": "postgame",
+  "after_week": 12,
+  "coach": "Ben Johnson",
+  "words": 2622,
+  "model": "claude-sonnet-5-5",
+  "headline": "Bears beat Detroit 39-35 to go 9-2, but Colston Loveland (knee) and Caleb Williams (seen by trainers, coach says he was smiling) are the health items to monitor. Sam Roush's role may be growing, and Rome Odunze came through in the clutch.",
+  "summary": "Ben Johnson opened by saying Colston Loveland has a knee issue that is being checked and that Caleb Williams went to see the trainers after the game. Johnson doesn't yet know the extent of either, though Williams came into his office smiling, so he hopes it is nothing. He praised the team's resolve, poise and professionalism in a comeback win on a short week, and said the game plan was not scaled back. On the winning drive, Johnson said Rome Odunze was not even the primary read, but Williams worked through the play with a clean pocket and Odunze made a toe-tap catch in the corner. Johnson admitted he felt Odunze had not been involved enough in the first half. He lauded Sam Roush for continuing to improve, saying he caught about five passes and is becoming a security blanket, and that his role might grow. He also praised Stephen Carlson as dependable. On defense, he highlighted Dillon Thieneman's interception and T.J. Edwards' fourth-down tackle on Gibbs as huge plays. He explained that the staff prepared an aggressive fourth-down plan with Williams, and the team went 2-for-3 on fourth down. On the chaotic safety sequence in the first half, he said pressure got through even with max protection.",
+  "injuries": [
+   {
+    "player": "Colston Loveland",
+    "status": "unclear",
+    "detail": "Has a knee issue and is being checked out. Johnson said he doesn't know yet whether it's nothing and the team will find out.",
+    "player_id": "00-0040126"
+   },
+   {
+    "player": "Caleb Williams",
+    "status": "unclear",
+    "detail": "Went to see the trainers after the game. Johnson doesn't know what it entails, but Williams came into his office smiling and Johnson hopes it is nothing.",
+    "player_id": "00-0039918"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Colston Loveland",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Knee injury is being evaluated, with severity unknown.",
+    "note": "Loveland's availability for next week is uncertain, so monitor the injury reports.",
+    "quote": "Don't don't know yet. Yeah, yeah, we'll find out.",
+    "player_id": "00-0040126",
+    "t": 707,
+    "t_exact": true
+   },
+   {
+    "player": "Caleb Williams",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Williams was seen by trainers after the game, and the extent is unknown, but Johnson hopes it is nothing.",
+    "note": "The QB's status deserves monitoring, but the coach's tone was upbeat.",
+    "quote": "",
+    "player_id": "00-0039918",
+    "t": 0,
+    "t_exact": false
+   },
+   {
+    "player": "Rome Odunze",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Odunze should get more involved after being underused in the first half.",
+    "note": "Johnson admitted he didn't get Odunze enough involvement early, and Odunze delivered the clutch game-winning catch.",
+    "quote": "I didn't feel like we got involved enough in the first half.",
+    "player_id": "00-0039919",
+    "t": 158,
+    "t_exact": true
+   },
+   {
+    "player": "Sam Roush",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Roush may get a bigger role going forward as a receiver and blocker.",
+    "note": "He had about five catches and is becoming a security blanket for Williams, which gives him some TE streaming appeal.",
+    "quote": "we'll see if he needs to have a bigger role here going forward.",
+    "player_id": "00-0041558",
+    "t": 322,
+    "t_exact": true
+   },
+   {
+    "player": "Stephen Carlson",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Carlson was used in a big game and is dependable, which could lead to more TE usage if Loveland is out.",
+    "note": "If Loveland misses time, Carlson and Roush are the TEs to watch.",
+    "quote": "He's dependable. He does everything right.",
+    "player_id": "00-0035039",
+    "t": 333,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Fourth-down aggressiveness",
+    "detail": "The Bears went 2-for-3 on fourth down. Johnson said they spent significant time on the fourth-down plan in the quarterback meeting, including plays not initially on the sheet, and respect for Detroit's offense motivated the aggression."
+   },
+   {
+    "topic": "Defense late",
+    "detail": "Johnson credited Dillon Thieneman's interception and T.J. Edwards' fourth-down tackle on Gibbs as huge plays that kept the game within one score."
+   },
+   {
+    "topic": "Short-week preparation",
+    "detail": "Johnson said the game plan was not scaled back for the short week, and the offense had no pre-snap penalties (no false starts)."
+   },
+   {
+    "topic": "Protection issues",
+    "detail": "A first-half safety came from a chaotic sequence: a sack, then pressure even though the Bears used max protection, producing a nine-point swing."
+   }
+  ],
+  "opponent": "Detroit Lions (game just played; next opponent not discussed)"
+ },
+ {
+  "id": "DET:campbell-on-week-12-performance",
+  "team": "DET",
+  "url": "https://www.detroitlions.com/video/campbell-on-week-12-performance",
+  "title": "Campbell on Week 12 performance",
+  "date": "2026-11-26",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/lions/vvpq7jdqoaozzx1bxwf5.jpg",
+  "kind": "postgame",
+  "after_week": 12,
+  "coach": "Dan Campbell",
+  "words": 1780,
+  "model": "claude-sonnet-5-5",
+  "headline": "Lions lose a close Thanksgiving game to the Bears on self-inflicted errors. Campbell raved about Jahmyr Gibbs and the O-line, with no injury news on skill players.",
+  "summary": "Campbell credited the Bears and said the loss stung, but he told the players to enjoy the holiday and move on. He blamed the loss on self-inflicted mistakes: two taunting penalties, other penalties that killed offensive drives, and blown assignments and miscommunications that he said hadn't shown up in about six weeks. One taunting penalty forced a go-for-two instead of a field goal, which changed the end-of-game math. He defended the late fourth-down attempt, saying he believed the offense would convert and that it also kept Chicago from getting four downs. He also defended the safety decision, saying he thought the team could net nine points instead of seven, and it worked. Detroit's early big plays included a fumble forced by Brian Branch and Derrick Moore and a safety just before halftime. Campbell praised Jahmyr Gibbs as special and electric, and said the offensive line, tight ends and receivers blocked physically. He declined to explain Juice Scruggs' false starts, saying he has an idea but won't share it. He closed with an emotional tribute to Martha Firestone Ford after her passing.",
+  "injuries": [
+   {
+    "player": "Unclear (pass rusher with 6.5 sacks)",
+    "status": "unclear",
+    "detail": "A reporter asked about a player who has stepped up over four games while others were out. Campbell said only that he keeps improving with more reps, and the name was not clear from the transcript.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Jahmyr Gibbs",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "Gibbs is again the engine of the offense, and the physical run blocking suggests the ground game stays strong.",
+    "quote": "Gibbs is special, man. He finds a crease. He goes",
+    "player_id": "00-0039139",
+    "t": 306,
+    "t_exact": true
+   },
+   {
+    "player": "Juice Scruggs",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "",
+    "note": "False starts were an issue, and Campbell wouldn't explain them, so watch whether Scruggs keeps his spot on the line.",
+    "quote": "I'm not going to share it",
+    "player_id": "00-0038936",
+    "t": 407,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Discipline and penalties",
+    "detail": "Two taunting penalties and other drive-killing penalties hurt Detroit. Campbell said the team has been good at composure recently and needs to lock back in."
+   },
+   {
+    "topic": "Fourth-down decision",
+    "detail": "Campbell said he believed the offense would convert late in the game, and the attempt also kept Chicago from getting four downs. He doesn't regret it, though he wishes they had made it."
+   },
+   {
+    "topic": "Safety decision before halftime",
+    "detail": "He believed the team could net nine points instead of seven on that sequence, and it worked."
+   },
+   {
+    "topic": "Short week and communication",
+    "detail": "Campbell said the short week can limit what the team installs, but he mostly blamed blown assignments and miscommunication that cost the team at critical moments."
+   },
+   {
+    "topic": "Martha Firestone Ford",
+    "detail": "Campbell paid tribute to Martha Firestone Ford, calling her a sweetheart who loved the team and the players, and extended condolences to the Ford family."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "GB:matt-lafleur-we-re-going-to-take-it-one-day-at-a-time-week-12-2026",
+  "team": "GB",
+  "url": "https://www.packers.com/video/matt-lafleur-we-re-going-to-take-it-one-day-at-a-time-week-12-2026",
+  "title": "Matt LaFleur: 'We're going to take it one day at a time'",
+  "date": "2026-11-26",
+  "duration": 588,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/packers/xfvpnbtpaqpt24zyp879.jpg",
+  "kind": "postgame",
+  "after_week": 12,
+  "coach": "Matt LaFleur",
+  "words": 1987,
+  "model": "claude-sonnet-5-5",
+  "headline": "Christian Watson left with a hit and his concussion-protocol status is unknown. The Packers say they are pass-heavy but lost 26-13 on turnovers, penalties and run defense.",
+  "summary": "LaFleur called the 26-13 loss to the Rams very disappointing and blamed the turnover battle and a defense that couldn't stop the run. He described the offense as pass-heavy, with a few runs mixed in to keep the defense honest, and said the offensive line protected decently for most of the night. Christian Watson left after a hit. LaFleur hadn't seen a replay and didn't know where Watson stands in the protocol, though he said Watson seemed to be in a good place. He said Watson is hard to replace because of his speed, size and ability to line up all over the formation. LaFleur explained the interception as a miscommunication: Matthew Golden was rerouted by a walked-up outside linebacker, while Jordan Love expected him to cross the safety's face. He said Tucker Kraft was often kept in to block against the Rams' stunts and pressure packages. He defended going for the field goal before the half, saying points would be at a premium, though he admitted hindsight says he should have gone for it on fourth down. The offense converted only 2 of 8 third downs, went three-and-out repeatedly in the second half, and had a costly false start. LaFleur said the team is effectively in a one-game season at this point and that the offensive line's problems are a season-long theme he hasn't fixed.",
+  "injuries": [
+   {
+    "player": "Christian Watson",
+    "status": "unclear",
+    "detail": "Took a hit and left the game. LaFleur said he seems to be in a good place but didn't know where he is in the concussion protocol and hadn't seen the hit.",
+    "player_id": "00-0038124"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Christian Watson",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "Watson's availability depends on his protocol progress, which LaFleur could not confirm.",
+    "note": "His absence hurt the offense a lot, so his availability this week is a key fantasy question.",
+    "quote": "where he's at in terms of the protocol, I, I don't know",
+    "player_id": "00-0038124",
+    "t": 67,
+    "t_exact": true
+   },
+   {
+    "player": "Jordan Love",
+    "topic": "scheme",
+    "signal": "up",
+    "tone": "neutral",
+    "claim": "The offense will keep leaning on the pass, with only a few runs to keep the defense honest.",
+    "note": "A pass-heavy approach supports Love's volume and the pass-catchers, but turnovers, including the interception, are a risk.",
+    "quote": "a pass heavy offense",
+    "player_id": "00-0036264",
+    "t": 30,
+    "t_exact": true
+   },
+   {
+    "player": "Matthew Golden",
+    "topic": "other",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "",
+    "note": "LaFleur blamed the interception on a route miscommunication between Golden and Love, not on one player's mistake. They need to get on the same page.",
+    "quote": "M.G. got rerouted by they had a walked outside linebacker",
+    "player_id": "00-0040667",
+    "t": 276,
+    "t_exact": true
+   },
+   {
+    "player": "Tucker Kraft",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "Kraft will keep being used in pass protection against strong defensive fronts.",
+    "note": "Blocking duty against stunt-heavy fronts can cut into his routes and receiving production.",
+    "quote": "we needed to keep him in and, and protection",
+    "player_id": "00-0038996",
+    "t": 361,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Turnovers and run defense",
+    "detail": "LaFleur said losing the turnover battle and failing to stop the Rams' run game was a recipe for disaster. A turnover two plays after Green Bay's interception was especially costly."
+   },
+   {
+    "topic": "Offensive line",
+    "detail": "He thought pass protection was decent overall, with some problems in the fourth quarter. Asked what the line is missing, he said it has been a consistent problem all season and is not fixed."
+   },
+   {
+    "topic": "Fourth-down decisions",
+    "detail": "LaFleur kicked a field goal before the half after a fourth-and-one look and said he would go for it in hindsight. He said there was real discussion about going for it on fourth-and-one from his own 20 in the fourth quarter."
+   },
+   {
+    "topic": "Third downs and penalties",
+    "detail": "Green Bay was 2 for 8 on third down and had a critical false start on second-and-five. LaFleur said such errors also show up in practice and make it hard to win."
+   },
+   {
+    "topic": "Rams kickoffs",
+    "detail": "The Rams' kicker's kickoffs were very hard to field even though the Packers had a plan for them."
+   },
+   {
+    "topic": "Season outlook",
+    "detail": "With six games left and the Packers about two games out of a playoff spot, LaFleur said they are in a one-game-season mindset and will take it one day at a time, starting in practice."
+   }
+  ],
+  "opponent": ""
+ },
+ {
+  "id": "LA:sean-mcvay-matthew-stafford-myles-garrett-blake-corum-reflect-on-week-12-win-over-the-packers-press-conference",
+  "team": "LA",
+  "url": "https://www.therams.com/video/sean-mcvay-matthew-stafford-myles-garrett-blake-corum-reflect-on-week-12-win-over-the-packers-press-conference",
+  "title": "Sean McVay, Matthew Stafford, Myles Garrett & Blake Corum reflect on Week 12 win over the Packers",
+  "date": "2026-11-26",
+  "duration": 1478,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/rams/fn4htmtt0ugchl66qyyj.jpg",
+  "kind": "day_after",
+  "after_week": 12,
+  "coach": "Sean McVay",
+  "words": 5567,
+  "model": "claude-sonnet-5-5",
+  "headline": "Rams lean on the run in a 26-13 win: Blake Corum carried 32 times for 184 yards as the lead back, Konata Mumpfield stepped up on third downs with Puka Nacua and Davante Adams out, and O-line and tight end depth was tested.",
+  "summary": "McVay was pleased with the Rams' fifth straight win, which moved them to 7-4. The offense had to make up personnel groups on the fly after injuries on the offensive line and at tight end. Backups David Quessenberry, Keagen Trost and Justin Dedich all played, and Colby Parkinson moved between several positions. Once the Rams took control, they leaned on the run, and McVay called the 45 carries a 'body blows' approach that wears defenses down. He singled out Blake Corum (32 carries, 184 yards) and said Kyren Williams also did a great job. He praised Konata Mumpfield for winning individual matchups on third downs. McVay said he is hopeful the players who went down will be okay but gave no specifics. He did say he hopes Jaylen Watson is okay, and he discussed an ejection that came down from New York. Stafford said the offense will do whatever the week requires, running one week and throwing more another. He confirmed the plan was to lean on what was working, and he praised Mumpfield and the backs. The defense was described as strong in the run game and at creating negative plays and turnovers. McVay gave no specifics on next week's opponent beyond calling it a 'great challenge'.",
+  "injuries": [
+   {
+    "player": "Jaylen Watson",
+    "status": "unclear",
+    "detail": "McVay said he hopes Watson is okay after the game, with no diagnosis or timeline.",
+    "player_id": ""
+   },
+   {
+    "player": "Kamren Kinchens",
+    "status": "unclear",
+    "detail": "McVay said 'Kitch is hurt' and discussed an ejection upheld by New York. 'Kitch' is probably Kinchens, but that is not certain, and no details were given.",
+    "player_id": ""
+   },
+   {
+    "player": "Puka Nacua",
+    "status": "out",
+    "detail": "A reporter's question to Stafford said the team was without Puka again. Stafford did not dispute it. It was not stated by McVay.",
+    "player_id": "00-0039075"
+   },
+   {
+    "player": "Davante Adams",
+    "status": "out",
+    "detail": "The same question to Stafford said Adams was also out. Stafford did not dispute it.",
+    "player_id": "00-0031381"
+   },
+   {
+    "player": "Terrance Ferguson",
+    "status": "out",
+    "detail": "Listed out (ankle) on the injury report, and referenced in the question to Stafford about who was missing.",
+    "player_id": "00-0040737"
+   },
+   {
+    "player": "Steve Avila",
+    "status": "out",
+    "detail": "Listed out (hamstring) on the injury report. McVay mentioned O-line injuries and backups filling in generally, not Avila by name.",
+    "player_id": "00-0039058"
+   },
+   {
+    "player": "Coleman Shelton",
+    "status": "out",
+    "detail": "Listed out (hamstring) on the injury report, contributing to the O-line shuffling.",
+    "player_id": "00-0034114"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Blake Corum",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Corum was the lead back in a run-heavy game plan, carrying 32 times for 184 yards.",
+    "note": "A career-type workload in a game built around the run makes Corum a strong rushing-volume option while the offense is thin at receiver and tight end.",
+    "quote": "32 for 184. He's a total stud.",
+    "player_id": "00-0039738",
+    "t": 84,
+    "t_exact": true
+   },
+   {
+    "player": "Kyren Williams",
+    "topic": "usage",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "",
+    "note": "McVay praised him, but Corum clearly carried the heavier workload, so the split is worth monitoring.",
+    "quote": "I thought Kyron did a great job.",
+    "player_id": "00-0037840",
+    "t": 89,
+    "t_exact": true
+   },
+   {
+    "player": "Konata Mumpfield",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Mumpfield is a go-to receiver on third downs and has been for the last couple of weeks.",
+    "note": "With Puka Nacua and Davante Adams reportedly out, he is picking up consistent targets in key situations, and Stafford also praised him.",
+    "quote": "he made some big third downs for us winning some individual ISOs",
+    "player_id": "00-0040590",
+    "t": 96,
+    "t_exact": true
+   },
+   {
+    "player": "Colby Parkinson",
+    "topic": "role",
+    "signal": "watch",
+    "tone": "positive",
+    "claim": "Parkinson will play multiple positions while tight end and offensive depth is thin.",
+    "note": "His versatile role could mean more snaps and involvement while other tight ends are out or limited.",
+    "quote": "Colby Parkinson's playing a bunch of different positions.",
+    "player_id": "00-0036244",
+    "t": 44,
+    "t_exact": true
+   },
+   {
+    "player": "Matthew Stafford",
+    "topic": "scheme",
+    "signal": "watch",
+    "tone": "neutral",
+    "claim": "The offense will run or throw depending on the opponent and game flow, so passing volume can vary week to week.",
+    "note": "The run-heavy approach caps Stafford's volume in games like this, but the team says it can lean on the pass when needed.",
+    "quote": "Some some weeks it's handing the ball off a bunch of times.",
+    "player_id": "00-0026498",
+    "t": 532,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Offensive line and tight end depth",
+    "detail": "McVay said the team had to make up personnel groups on the fly. David Quessenberry, Keagen Trost and Justin Dedich all played, and Parkinson played multiple positions. He said he hopes the players who went down will be okay."
+   },
+   {
+    "topic": "Run game identity",
+    "detail": "McVay said the team took control, established the run and 'leaned on' opponents, calling the 45 carries 'body blows' that wear defenses down. He said the offense must be able to do both, run and pass, but the games have dictated the run approach."
+   },
+   {
+    "topic": "Defense and special teams",
+    "detail": "McVay called the defense outstanding, with big turnovers and early-down efficiency, and said special teams are trending in the right direction. Garrett said they emphasized stopping the Packers' run game and want to be the 'gold standard'."
+   },
+   {
+    "topic": "Ejection and Watson",
+    "detail": "McVay said the ejection call came from New York, that it was not the player's intention and that he was bummed for him. He said he hopes Watson is okay."
+   },
+   {
+    "topic": "Team trajectory",
+    "detail": "The Rams are 7-4 and have won five straight after a 2-4 start. McVay downplayed playoff percentages and said he is focused on stacking days and building skills."
+   }
+  ],
+  "opponent": ""
+ },
+ {
   "id": "PIT:watch-mike-mccarthy-media-availability-nov-25",
   "team": "PIT",
   "url": "https://www.steelers.com/video/watch-mike-mccarthy-media-availability-nov-25",

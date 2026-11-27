@@ -2537,5 +2537,92 @@
    }
   ],
   "opponent": "Houston Texans"
+ },
+ {
+  "id": "WAS:hc-dan-quinn-11-25-26",
+  "team": "WAS",
+  "url": "https://www.commanders.com/video/hc-dan-quinn-11-25-26",
+  "title": "HC Dan Quinn | 11/25/26",
+  "date": "2026-11-25",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/commanders/ad2qtr26wyc9wv5uqixd.jpg",
+  "kind": "day_after",
+  "after_week": 11,
+  "coach": "Dan Quinn",
+  "words": 3520,
+  "model": "claude-sonnet-5-5",
+  "headline": "Washington is set to sign WR Brandon Aiyuk (expected Thursday) but Quinn has no timeline for his role, and CB Amik Robertson is held out again ahead of Arizona.",
+  "summary": "Quinn said the team has turned the page to Arizona and will fly out Friday night after practice. Brandon Aiyuk worked out and met with the team, and Quinn said the plan is to move forward and hopefully sign him tomorrow. Quinn praised his health, strength and explosiveness, but said Aiyuk is coming off a knee injury and hasn't played in two years. He has no timeline for when Aiyuk contributes, and said practice reps will show how quickly he gets up to speed. He pointed to learning the terminology as the first hurdle. Quinn said the team's late-game and end-of-half work has improved because of better time-management communication and not burning early timeouts. He singled out Jayden Daniels' third-and-9 scramble conversion as the key play in that drive. On injuries, Amik Robertson will be held out of practice again and isn't there yet. Rasul Douglas played almost every snap Monday and impressed Quinn. The defense is still focused on takeaways after missing chances at interceptions. Quinn is prioritizing fewer explosive plays, fewer penalties and better third-down and red-zone defense over raw yardage.",
+  "injuries": [
+   {
+    "player": "Amik Robertson",
+    "status": "out",
+    "detail": "Held out of practice again; Quinn said he is not there yet and will be given as much time as possible, with the next couple of days telling.",
+    "player_id": ""
+   },
+   {
+    "player": "Stefon Diggs",
+    "status": "unclear",
+    "detail": "Listed as DNP for a personal matter, not an injury. Quinn didn't address his availability, only denying that Diggs tackled a teammate on purpose on Monday's final pass.",
+    "player_id": "00-0031588"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Amik Robertson",
+    "topic": "injury",
+    "signal": "down",
+    "tone": "negative",
+    "claim": "Will be held out of practice again today and is not yet ready to return.",
+    "note": "A continued absence hurts the Washington secondary's depth and makes his Arizona availability uncertain.",
+    "quote": "We're going to hold him today.",
+    "player_id": "",
+    "t": 580,
+    "t_exact": true
+   },
+   {
+    "player": "Rasul Douglas",
+    "topic": "usage",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Played close to every defensive snap Monday night after previously getting only some reps.",
+    "note": "Quinn trusts him as a primary corner, so he's a steady defensive piece for IDP and matchup purposes.",
+    "quote": "going from some reps to just about all the reps",
+    "player_id": "",
+    "t": 611,
+    "t_exact": true
+   },
+   {
+    "player": "Jayden Daniels",
+    "topic": "other",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "Quinn credited his scramble conversion and his clock management for the improved two-minute offense.",
+    "quote": "the conversion that Jaden had on a third down and nine scramble was the one",
+    "player_id": "00-0039910",
+    "t": 475,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Brandon Aiyuk signing",
+    "detail": "Aiyuk (not on the listed roster) worked out and met with the team, and Quinn expects him to sign tomorrow. Quinn said he looked healthy, strong and explosive. Quinn described him as a contested-catch, aggressive-hands receiver and has no timeline for his on-field contribution, so this is a watch item rather than an immediate fantasy boost."
+   },
+   {
+    "topic": "Receiver depth",
+    "detail": "Quinn called the receiver group deep and said more injured receivers are hopefully returning before too long, without naming any."
+   },
+   {
+    "topic": "Two-minute and clock management",
+    "detail": "Quinn is happy with the end-of-half and end-of-game execution of the last two weeks. The keys are communication on when to hurry or slow down and keeping timeouts in the pocket. The team will keep rehearsing it in practice."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Takeaways are the top priority after the defense finished Monday at zero and missed some interception chances. Quinn focuses on limiting explosives, penalties, third downs and red-zone scoring rather than total yards. Corners Rasul Douglas and Fabian Moreau were credited with experience and awareness, and a 'Mike' (likely Mike Sainristil) made a good stop on the first third down."
+   }
+  ],
+  "opponent": "Arizona Cardinals"
  }
 ]

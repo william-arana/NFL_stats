@@ -1,0 +1,136 @@
+[
+ {
+  "id": "DAL:brian-schottenheimer-postgame-week-12-phivsdal-x7803",
+  "team": "DAL",
+  "url": "https://www.dallascowboys.com/video/brian-schottenheimer-postgame-week-12-phivsdal-x7803",
+  "title": "Brian Schottenheimer: Postgame Week 12 #PHIvsDAL",
+  "date": "2026-11-27",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/cowboys/mjn1gg5cnvjatlj6cixm.jpg",
+  "kind": "postgame",
+  "after_week": 12,
+  "coach": "Brian Schottenheimer",
+  "words": 2162,
+  "model": "claude-sonnet-5-5",
+  "headline": "Cowboys blew a 21-point lead in a 39-38 loss to the Eagles and fell to 5-7. Schottenheimer gave no fantasy-relevant role or injury news, but he defended trusting Dak Prescott on a failed fourth-and-2 in the second half.",
+  "summary": "Schottenheimer was asked almost entirely about the collapse and his job status, and he offered few specifics on players. He said all three phases had chances to put the game away and failed, and he cited a blocked punt and big plays allowed. He defended going for it on fourth-and-2 because he trusted Dak Prescott and the offense, and said he would make the call again. He said the offense moved the ball up and down the field in the first half but was not good enough in the second. He credited Joe Milton with extending plays and throwing the ball deep, and said Dallas let him escape and did not plaster in coverage. He called the five sacks a positive but said the defense needs to get the quarterback down more. He took responsibility as head coach, said he is not worried about his job status, and said the team has solutions and 11 days to work on scheme and personnel adjustments before the trip to Seattle. He said Dallas will believe in the kicker despite a missed 40-yarder, and a closing remark apparently confirmed that someone had back spasms, but the player was not clear in the transcript.",
+  "injuries": [
+   {
+    "player": "unclear",
+    "status": "unclear",
+    "detail": "At the very end the coach confirmed someone had back spasms, but the question was not captured and the player cannot be identified.",
+    "player_id": ""
+   }
+  ],
+  "signals": [
+   {
+    "player": "Dak Prescott",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "Prescott and the offense remain the preferred option on key short-yardage and fourth-down situations.",
+    "note": "The coach's trust in Prescott on fourth down suggests an aggressive offense that keeps the ball in his hands in late-game situations.",
+    "quote": "I wanted the ball in Dak's hands.",
+    "player_id": "00-0033077",
+    "t": 136,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Game collapse",
+    "detail": "Dallas lost a 21-point lead; the coach blamed all three phases, including a blocked punt and big plays allowed."
+   },
+   {
+    "topic": "Defense",
+    "detail": "Joe Milton extended plays and Dallas failed to plaster in coverage. The five sacks were a positive, but the coach wants more pressure and better coverage. Dallas has already changed its defensive play caller and personnel."
+   },
+   {
+    "topic": "Fourth-down decision",
+    "detail": "The coach went for it on fourth-and-2 because he trusted the offense and said he would make the same call again. He said Dallas has used quarterback sneaks before and that Prescott has a good feel for them."
+   },
+   {
+    "topic": "Kicking",
+    "detail": "After a missed 40-yarder, the coach wants to review the whole operation on film but says the team believes in its kicker."
+   },
+   {
+    "topic": "Coach status",
+    "detail": "Dallas is 5-7 and the coach says he is not worried about his job. He believes in the locker room and has 11 days to look for solutions."
+   }
+  ],
+  "opponent": "Seattle Seahawks"
+ },
+ {
+  "id": "PHI:nick-sirianni-press-conference-november-26-2026-week-12-eagles-cowboys-thanksgiving-football",
+  "team": "PHI",
+  "url": "https://www.philadelphiaeagles.com/video/nick-sirianni-press-conference-november-26-2026-week-12-eagles-cowboys-thanksgiving-football",
+  "title": "Nick Sirianni Press Conference: November 26, 2026",
+  "date": "2026-11-27",
+  "duration": 0,
+  "thumb": "https://static.clubs.nfl.com/image/upload/w_250,h_250,c_pad,q_auto,b_rgb:2196f3,f_jpg/eagles/lvqaulsjw1yftu6txhei.jpg",
+  "kind": "day_after",
+  "after_week": 12,
+  "coach": "Nick Sirianni",
+  "words": 1707,
+  "model": "claude-sonnet-5-5",
+  "headline": "Joe Milton III played an outstanding game in the 39-38 Thanksgiving win over Dallas, but DeVonta Smith was hurting after the game, so watch his status.",
+  "summary": "Sirianni was exhausted and thrilled after the 39-38 Thanksgiving win over the Cowboys, praising how hard the team fought until time ran out. He called Joe Milton III's game outstanding. He said Milton was composed, moved on from mistakes (including an interception) and made the defense pay when it brought extra rushers. He highlighted Milton's unique arm strength and his ability to layer throws against Cover 2, including a long completion to DeVonta Smith. Sirianni said the offense was not limited with other quarterbacks, but that Milton's arm is a unique trait. Smith showed toughness by finishing the game while visibly hurting, to the point that he asked Sirianni to put him down after being picked up. Sirianni defended his decision to go for two when down 14 and said he sticks to his process rather than the outcome. Jake Elliott kicked the game-winner, which Sirianni didn't watch, and the team's \"keep swimming\" message about fighting through adversity framed the win.",
+  "injuries": [
+   {
+    "player": "DeVonta Smith",
+    "status": "unclear",
+    "detail": "Smith was visibly hurting after the game and asked Sirianni to put him down when picked up, though he returned and finished the game. He was a full practice participant with a hamstring listing this week, and the coach gave no update on his availability.",
+    "player_id": "00-0036912"
+   }
+  ],
+  "signals": [
+   {
+    "player": "Joe Milton III",
+    "topic": "role",
+    "signal": "up",
+    "tone": "positive",
+    "claim": "",
+    "note": "Sirianni raved about Milton's composure and arm talent, and said the offense can stretch the field and layer throws with him at QB.",
+    "quote": "",
+    "player_id": "00-0039398",
+    "t": 32,
+    "t_exact": false
+   },
+   {
+    "player": "DeVonta Smith",
+    "topic": "injury",
+    "signal": "watch",
+    "tone": "hedged",
+    "claim": "",
+    "note": "Smith was hurting after the game despite finishing it, so check his practice participation and status this week.",
+    "quote": "He's extremely tough.",
+    "player_id": "00-0036912",
+    "t": 165,
+    "t_exact": true
+   }
+  ],
+  "topics": [
+   {
+    "topic": "Two-point decision",
+    "detail": "Sirianni stood by his decision to go for two when down 14, even though it failed. He said he judges decisions by process and not outcome."
+   },
+   {
+    "topic": "Game-winning field goal",
+    "detail": "Jake Elliott kicked the winning field goal. Sirianni didn't watch it, calling that a possible superstition, and said he has a lot of confidence in Elliott."
+   },
+   {
+    "topic": "Passing game",
+    "detail": "Milton completed a roughly 57-yard throw to Smith (64 in the air). He also threw a layered Cover 2 pass to a receiver named Elijah on the sideline, which Sirianni praised."
+   },
+   {
+    "topic": "Team message",
+    "detail": "Sirianni used the \"keep swimming\" story to stress fighting through adversity, saying the team is still fighting this season."
+   },
+   {
+    "topic": "Unclear player praise",
+    "detail": "Sirianni praised a player he called \"Ty\" for making a couple of huge plays after working hard in practice. Which roster player he meant is unclear."
+   }
+  ],
+  "opponent": ""
+ }
+]
